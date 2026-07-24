@@ -1,0 +1,870 @@
+openapi: 3.0.0
+info:
+  title: Macrometa API Reference Activity Metrics Query API
+  version: 0.17.17
+  description: API reference for the Macrometa Global Data Network.
+  license:
+    name: Macrometa License, Version 2.0
+servers:
+- url: https://api-play.paas.macrometa.io
+  description: GDN API
+host: api-play.paas.macrometa.io
+security:
+- ApiKeyAuth: []
+- BearerAuth: []
+tags:
+- name: Query
+paths:
+  /_fabric/{fabric}/_api/cursor:
+    post:
+      description: "Queries are executed on the server and the results are returned to the client.\n\n If the resulting queries returned a number of documents less than the *batchSize* (attribute set in query), then all documents are returned in the *result* JSON attribute.\n\n If there are more documents than the defined *batchSize*, then the *hasMore* JSON attribute is set to *true* and the *id* JSON attribute contains the cursor ID. The cursor ID is then used in subsequent calls to the cursor API to retrieve all documents. This is repeated until the *hasMore* JSON attribute is set to false. The cursor ID will cease to exist after the seconds specified in the *ttl* attribute.\n\n In the event that a search view is used in the query and this search view has been paused due to resource constraints, the *x-gdn-view* header is set with the list of all paused views."
+      operationId: createQueryCursor
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/api_cursor'
+        required: true
+      responses:
+        '201':
+          description: Successfully created the cursor.
+          headers:
+            x-gdn-view:
+              description: List of paused search views used by query.
+              schema:
+                type: string
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api_cursor_rc_201'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api_cursor_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified fabric or collection.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api_cursor_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Create cursor from C8QL query
+      tags:
+      - Query
+  /_fabric/{fabric}/_api/cursor/sql:
+    post:
+      description: 'To more efficiently batch communication, results of SQL queries are returned as cursors. Each REST API call returns a portion of the documents in a batch and indicates if this is the final batch. Batches are sent until the batch with the final indicator.
+
+
+        Depending on the query, the total number of documents in the result set might not be known in advance.
+
+
+        In order to free resources, delete the cursor as soon as it is no longer needed.'
+      operationId: createSqlQueryCursor
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/sql_api_cursor'
+        required: true
+      responses:
+        '201':
+          description: Successfully created the cursor.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api_cursor_rc_201'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api_cursor_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified fabric or collection.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api_cursor_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Create cursor from SQL query.
+      tags:
+      - Query
+  /_fabric/{fabric}/_api/cursor/{cursor-identifier}:
+    delete:
+      description: 'Remove the cursor and free the resources associated with it. The cursor is automatically removed on the server when the client has retrieved all documents from it. The client can also explicitly remove the cursor at any earlier time using a HTTP DELETE request. The cursor *ID* must be included as part of the URL.
+
+
+        **Note**: The server automatically removes abandoned cursors after a period of time specified by the *ttl* attribute when the cursor was created.'
+      operationId: deleteQueryCursor
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: The id of the cursor.
+        in: path
+        name: cursor-identifier
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        '202':
+          description: Successfully removed the cursor.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    description: HTTP response code.
+                    type: integer
+                    example: 202
+                  error:
+                    description: Flag if there is an error in response. *False* for this response.
+                    type: boolean
+                    example: false
+                  id:
+                    description: Id of cursor
+                    type: string
+                    example: '11177234'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find the specified cursor.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api_cursor_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Remove cursor
+      tags:
+      - Query
+    put:
+      description: 'If the cursor has not been deleted, fetch an object with the following attributes:
+
+
+        - *id*: the *cursor-identifier*
+
+        - *result*: a list of documents for the current batch
+
+        - *hasMore*: *false* if this was the last batch
+
+        - *count*: if present the total number of elements
+
+
+        If *hasMore* returns *true*, the next call might still return no documents. If *hasMore* is *false*, the cursor is exhausted. Once the *hasMore* attribute has a value of *false*, the client can stop.'
+      operationId: modifyQueryCursor
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: The name of the cursor.
+        in: path
+        name: cursor-identifier
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        '200':
+          description: Successfully fetched JSON object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api_cursor_rc_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified cursor.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Read next batch from cursor
+      tags:
+      - Query
+  /_fabric/{fabric}/_api/query:
+    post:
+      description: This endpoint is for query validation only. To query the database, see `/api/cursor`.
+      operationId: parseQuery
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/api_query_properties'
+        required: true
+      responses:
+        '200':
+          description: 'Successfull fetched *collections* attributes with an array of collections used in the query and *bindVars* attribute with names of the bind parameters found in the query (if any).
+
+
+            If the query is parsed successfully, the *ast* attribute of the returned JSON contain the abstract syntax tree representation of the query. The format of the *ast* is subject to change in future versions of database, but it can be used to inspect how database interprets a given query. Note that the abstract syntax tree is returned without any optimizations applied to it.'
+          content:
+            application/json:
+              schema:
+                example:
+                  code: 200
+                  error: false
+                  parsed: true
+                  collections:
+                  - testCollection
+                  bindVars: []
+                  ast:
+                  - type: root
+                    subNodes:
+                    - type: for
+                      subNodes:
+                      - type: variable
+                        name: u
+                        id: 0
+                      - type: collection
+                        name: testCollection
+                      - type: no-op
+                    - type: return
+                      subNodes:
+                      - type: reference
+                        name: u
+                        id: 0
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing, malformed data or the query contains a parse error. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Parse an C8QL query
+      tags:
+      - Query
+  /_fabric/{fabric}/_api/query/explain:
+    post:
+      description: 'To explain how an C8QL query would run on the server, the query string can be sent to the server via a HTTP POST request. The server validates the query and creates an execution plan for it. The execution plan is returned, but the query does not run.
+
+
+        The execution plan that is returned by the server can be used to estimate the probable performance of the query. Though the actual performance depends on many different factors, the execution plan normally can provide some rough estimates on the amount of work the server needs to do in order to run the query.
+
+
+        By default, the explain operation returns the optimal plan as chosen by the query optimizer. The optimal plan is the plan with the lowest total estimated cost. The response object contains the plan as a *plan* attribute. If the option *allPlans* is specified in the request, the result contains all plans created by the optimizer. The plans are returned in the attribute *plans*.
+
+
+        The result also contains an attribute *warnings*, that is an array of warnings that occurred during optimization or execution of plan creation. Additionally, the result contains a *stats* attribute with optimizer statistics. If *allPlans* is set to *false*, the result contains an attribute *cacheable* that states whether the query results can be cached on the server if the query result cache were used. The *cacheable* attribute is not present when *allPlans* is set to *true*.
+
+
+        Each plan in the result is a JSON object with the following attributes:
+
+        - *nodes*: the array of execution nodes of the plan.
+
+        - *estimatedCost*: the total estimated cost for the plan. If there are multiple plans, the optimizer chooses the plan with the lowest total cost.
+
+        - *collections*: an array of collections used in the query
+
+        - *rules*: an array of rules the optimizer applied.
+
+        - *variables*: array of variables used in the query.'
+      operationId: explainQuery
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/api_explain'
+        required: true
+      responses:
+        '200':
+          description: Successfully fetched the optimal execution plan in the *plan* attribute. If option *allPlans* is set in the request, an array of plans is returned in the *allPlans* attribute instead.
+          content:
+            application/json:
+              schema:
+                example:
+                  code: 200
+                  error: false
+                  plans:
+                  - nodes:
+                    - type: SingletonNode
+                      dependencies: []
+                      id: 1
+                      estimatedCost: 1
+                      estimatedNrItems: 1
+                    - type: EnumerateCollectionNode
+                      dependencies:
+                      - 1
+                      id: 2
+                      estimatedCost: 9
+                      estimatedNrItems: 7
+                      random: false
+                      indexHint:
+                        forced: false
+                        type: none
+                      outVariable:
+                        id: 0
+                        name: u
+                      projections: []
+                      producesResult: true
+                      database: _system
+                      collection: testCollection
+                      satellite: false
+                    - type: ReturnNode
+                      dependencies:
+                      - 2
+                      id: 3
+                      estimatedCost: 16
+                      estimatedNrItems: 7
+                      inVariable:
+                        id: 0
+                        name: u
+                      count: true
+                    rules: []
+                    collections:
+                    - name: testCollection
+                      type: read
+                    variables:
+                    - id: 0
+                      name: u
+                    estimatedCost: 16
+                    estimatedNrItems: 7
+                    initialize: true
+                    isModificationQuery: false
+                  warnings: []
+                  stats:
+                    rulesExecuted: 35
+                    rulesSkipped: 1
+                    plansCreated: 1
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing, malformed data or the query contains a parse error. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to validate query due to non-existing collection being accessed by the query.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Explain an C8QL query
+      tags:
+      - Query
+components:
+  schemas:
+    api_cursor:
+      properties:
+        batchSize:
+          description: Sets the batch size of queries. This batch size decides how many results are returned as part of query output. If this option is not specified, default value is used. Maximum allowed for this parameter is *1000*.
+          format: int64
+          type: integer
+          default: 100
+        bindVars:
+          additionalProperties: {}
+          description: Key/value pairs representing the bind parameters.
+          type: object
+        count:
+          description: Indicates whether the number of documents in the result set should be returned in the "count" attribute of the result. Calculating the "count" attribute might have a performance impact for some queries in the future so this option is turned off by default, and "count" is only returned when requested.
+          type: boolean
+          example: false
+        options:
+          $ref: '#/components/schemas/api_cursor_opts'
+        query:
+          description: Contains the query string to be run.
+          type: string
+          example: for u in testCollection return u
+        ttl:
+          description: The amount of time for which the cursor is valid. The maximum value which can be specified, can be determined using *GET /_api/limits/default* API
+          format: int64
+          type: integer
+          default: 30
+      required:
+      - query
+      type: object
+    api_cursor_rc_201:
+      type: object
+      properties:
+        code:
+          description: HTTP response code.
+          format: integer
+          type: integer
+          example: 201
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        count:
+          description: The total number of result documents available (only available if the query is run with the *count* attribute set)
+          format: int64
+          type: integer
+          example: 1
+        extra:
+          description: (Optional) A JSON object with extra information about the query result contained in the *stats* sub-attribute. For data-modification queries, the *extra.stats* sub-attribute contains the number of modified documents. If the *ignoreErrors* query option is specified, *extra.stats* also includes the number of documents that could not be modified due to an error.
+          type: object
+          example:
+            stats:
+              writesExecuted: 0
+              writesIgnored: 0
+              scannedFull: 7
+              scannedIndex: 0
+              filtered: 0
+              httpRequests: 0
+              executionTime: 0.0006868839263916016
+              peakMemoryUsage: 18396
+            warnings: []
+        hasMore:
+          description: '*True* indicates there are more results available for the cursor on the server. *False* indicates there are no more results available.'
+          type: boolean
+          example: false
+        id:
+          description: (Optional) ID of temporary cursor created on the server.
+          type: string
+          example: '11176313'
+        cached:
+          description: A boolean flag indicating whether the query result is served from the query cache or not. If the query result is served from the query cache, the extra return attribute does not contain any stats sub-attribute and no profile sub-attribute.
+          type: boolean
+          example: false
+        result:
+          description: An array of result documents (might be empty if query has no results).
+          type: array
+          example:
+          - _id: xxx/8753330
+            _key: '8753330'
+            _rev: _dpDmoaa--_
+            item1: data2
+          items: {}
+      required:
+      - error
+    api_cursor_rc_404:
+      properties:
+        code:
+          description: HTTP response code.
+          format: int64
+          type: integer
+          example: 404
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A descriptive error message
+          type: string
+          example: error message
+        errorNum:
+          description: The server error number.
+          format: int64
+          type: integer
+          example: 58322
+      required:
+      - error
+      type: object
+    error_example_rc_404:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 404
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
+      type: object
+    api_cursor_rc_400:
+      description: The JSON representation is malformed.
+      properties:
+        code:
+          description: HTTP response code.
+          format: int64
+          type: integer
+          example: 400
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A descriptive error message. If the query specification is complete, the server processes the query. If an error occurs during query processing, the server returns a *HTTP 400* error with details in the response body.
+          type: string
+          example: error message
+        errorNum:
+          description: The server error number.
+          format: int64
+          type: integer
+          example: 58322
+      required:
+      - error
+      type: object
+    explain_options:
+      description: Options for the query.
+      properties:
+        allPlans:
+          description: If set to *true*, all possible execution are returned. The default is *false*, meaning only the optimal plan is be returned.
+          type: boolean
+        maxNumberOfPlans:
+          description: An optional maximum number of plans that the optimizer is allowed to generate. Setting this attribute to a low value allows to put a cap on the amount of work the optimizer does.
+          format: int64
+          type: integer
+        optimizer.rules:
+          description: An array of to-be-included or to-be-excluded optimizer rules can be put into this attribute, telling the optimizer to include or exclude specific rules. To disable a rule, prefix its name with a `-`, to enable a rule, prefix it with a `+`. There is also a pseudo-rule `all`, which matches all optimizer rules.
+          format: string
+          items:
+            type: string
+          type: array
+      type: object
+    api_query_properties:
+      properties:
+        query:
+          description: To validate a query string without executing it, the query string can be passed to the server via an HTTP POST request.
+          type: string
+          example: for u in testCollection return u
+      required:
+      - query
+      type: object
+    api_explain:
+      properties:
+        bindVars:
+          description: Key/value pairs representing the bind parameters.
+          items:
+            type: object
+          type: array
+        options:
+          $ref: '#/components/schemas/explain_options'
+        query:
+          description: The query which you want explained. If the query references any bind variables, these must also be passed in the attribute *bindVars*. Additional options for the query can be passed in the *options* attribute.
+          type: string
+      required:
+      - query
+      type: object
+      example: for u in testCollection return u
+    headers:
+      x-gdn-region:
+        description: The federation's region hostname that served the request.
+        type: string
+      x-gdn-requestid:
+        description: A unique request ID for each API request.
+        type: string
+    error_example_rc_400:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 400
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 102020
+      required:
+      - error
+      type: object
+    api_cursor_rc_200:
+      type: object
+      properties:
+        code:
+          description: HTTP response code.
+          format: integer
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        count:
+          description: Total number of result documents available if the *count* attribute was used.
+          format: int64
+          type: integer
+          example: 1
+        extra:
+          description: (Optional) A JSON object with extra information about the query result contained in the *stats* sub-attribute. For data-modification queries, the *extra.stats* sub-attribute contains the number of modified documents. If the *ignoreErrors* query option was specified, *extra.stats* also includes the number of documents that could not be modified due to an error.
+          type: object
+          example:
+            stats:
+              writesExecuted: 0
+              writesIgnored: 0
+              scannedFull: 7
+              scannedIndex: 0
+              filtered: 0
+              httpRequests: 0
+              executionTime: 0.0006868839263916016
+              peakMemoryUsage: 18396
+            warnings: []
+        hasMore:
+          description: '*True* indicates there are more results available for the cursor on the server. *False* indicates there are no more results available.'
+          type: boolean
+          example: false
+        id:
+          description: (Optional) ID of temporary cursor created on the server.
+          type: string
+          example: '11176313'
+        cached:
+          description: '*True* indicates results are cached. *False* indicates results are not cached.'
+          type: boolean
+          example: false
+        result:
+          description: An array of result documents (might be empty if query has no results).
+          type: array
+          example:
+          - _id: xxx/8753330
+            _key: '8753330'
+            _rev: _dpDmoaa--_
+            item1: data2
+          items: {}
+      required:
+      - error
+    sql_api_cursor:
+      properties:
+        batchSize:
+          description: Sets the batch size of queries. This batch size decides how many results are returned as part of query output.
+          format: int64
+          type: integer
+          default: 100
+          maximum: 1000
+        bindVars:
+          description: Key/value pairs representing the bind parameters.
+          type: object
+        count:
+          description: Indicates whether the number of documents in the result set should be returned in the "count" attribute of the result. Calculating the "count" attribute might have a performance impact for some queries in the future, so this option is turned off by default, and "count" is only returned when requested.
+          type: boolean
+          example: false
+          default: false
+        query:
+          description: Query to run.
+          type: string
+          example: SELECT name FROM users
+        ttl:
+          description: The cursor is automatically removed from the server after the specified amount of time. This is useful to ensure garbage collection of cursors that are not fully fetched by clients.
+          format: int64
+          type: integer
+          default: 30
+      required:
+      - query
+      type: object
+    api_cursor_opts:
+      description: Key/value object with extra options for the query.
+      properties:
+        failOnWarning:
+          description: When set to *true*, the query throws an exception and abort instead of producing a warning. This option should be used during development to catch potential issues early. When the attribute is set to *false*, warnings are not propagated to exceptions and are returned with the query result.
+          type: boolean
+        fullCount:
+          description: 'If set to *true* and the query contains a *LIMIT* clause, the result has an *extra* attribute with the sub-attributes *stats* and *fullCount*, `{ ... , "extra": { "stats": { "fullCount": 123 } } }`. The *fullCount* attribute contains the number of documents in the result before the last top-level LIMIT in the query is applied. It can be used to count the number of documents that match certain filter criteria, but only return a subset of them, in one go. It is thus similar to MySQL''s *SQL_CALC_FOUND_ROWS* hint. Note that setting the option disables a few LIMIT optimizations and may lead to more documents being processed and thus make queries run longer. Note that the *fullCount* attribute may only be present in the result if the query has a top-level LIMIT clause and the LIMIT clause is actually used in the query.'
+          type: boolean
+        intermediateCommitCount:
+          description: Maximum number of operations after which an intermediate commit is performed automatically. **Note:** Use this option cautiously. The transactions are commited after every specific record count. In case of error, already commited records are not rolled back.
+          format: int64
+          type: integer
+        intermediateCommitSize:
+          description: Maximum total size of operations after which an intermediate commit is performed automatically. **Note:** Use this option cautiously. The transactions are commited after every specific query memory size. In case of error, already commited records are not rolled back.
+          format: int64
+          type: integer
+        maxTransactionSize:
+          description: Transaction size limit in bytes.
+          format: int64
+          type: integer
+        maxWarningCount:
+          description: Limits the maximum number of warnings returned by a query.
+          format: int64
+          type: integer
+          default: 10
+        profile:
+          description: If set to *true* or *1*, the additional query profiling information is returned in the sub-attribute *profile* of the *extra* return attribute, if the query result is not served from the query cache. If set to *2* the query includes execution stats per query plan node in sub-attribute *stats.nodes* of the *extra* return attribute. Additionally the query plan is returned in the sub-attribute *extra.plan*.
+          type: integer
+        skipInaccessibleCollections:
+          description: C8QL queries (especially graph traversals) treat collections to which a user has no access rights as if these collections were empty. Instead of returning a forbidden access error, your query runs normally.
+          type: boolean
+        stream:
+          description: 'Specify *true* and the query runs as a **stream**. The query result is not stored on the server, but calculated on the fly. *Warnnig*: long-running queries need to hold the collection locks for as long as the query cursor exists. When set to *false* a query is run right away in its entirety. In that case query results are either returned right away (if the result set is small enough), or stored on the database instance and accessible via the cursor API (with respect to the `ttl`).
+
+
+            It is advisable to *only* use this option on short-running queries or without exclusive locks. Query statistics, warnings and profiling data is only available after the query is finished.'
+          type: boolean
+          default: false
+        optimizer.rules:
+          description: An array of to-be-included or to-be-excluded optimizer rules can be put into this attribute, telling the optimizer to include or exclude specific rules. To disable a rule, prefix its name with a `-`, to enable a rule, prefix it with a `+`. There is also a pseudo-rule `all`, which matches all optimizer rules.
+          format: string
+          items:
+            type: string
+          type: array
+      type: object
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Provide an API Key to the `Authorization` header, prefixed with "apikey".
+
+
+        Example: `Authorization: apikey <key>`'
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Provide a JSON Web Token (JWT) to the `Authorization` header, prefixed with "bearer".
+
+
+        Example: `Authorization: bearer <jwt>`'

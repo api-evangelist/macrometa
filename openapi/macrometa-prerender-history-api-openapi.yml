@@ -1,0 +1,329 @@
+openapi: 3.0.0
+info:
+  title: Macrometa API Reference Activity Metrics Prerender History API
+  version: 0.17.17
+  description: API reference for the Macrometa Global Data Network.
+  license:
+    name: Macrometa License, Version 2.0
+servers:
+- url: https://api-play.paas.macrometa.io
+  description: GDN API
+host: api-play.paas.macrometa.io
+security:
+- ApiKeyAuth: []
+- BearerAuth: []
+tags:
+- name: Prerender History
+paths:
+  /api/prerender/v1/history/render:
+    get:
+      summary: Get render history data
+      tags:
+      - Prerender History
+      description: Returns historical data for web metrics, with time-range filtering and optional response code criteria. This endpoint requires the from and to query parameters, indicating the time range as epoch seconds. Optional filters include responseCode for HTTP status, and pagination controls through limit and offset. Data can be optionally scoped to a specific origin if the origin path parameter is included. The response comprises an array of historical records, detailing bytes sent, response time, device type, and response codes. Authentication is handled via the customerId header.
+      parameters:
+      - schema:
+          type: number
+        in: query
+        name: from
+        required: true
+        description: Timestamp (in seconds) used as the initial time for filtering.
+      - schema:
+          type: number
+        in: query
+        name: to
+        required: true
+        description: Timestamp (in seconds) used as the final time for filtering.
+      - schema:
+          type:
+          - number
+          - string
+        in: query
+        name: responseCode
+        required: false
+        description: Response code for filtering. It can be a specific response code or a range value, e.g., 200-310.
+      - schema:
+          type: string
+        in: query
+        name: responseTime
+        required: false
+        description: Response time range in seconds for filtering, e.g., 2-10.
+      - schema:
+          type: number
+          minimum: 1
+          default: 100
+          maximum: 100
+        in: query
+        name: limit
+        required: false
+        description: Limit for results.
+      - schema:
+          type: number
+          default: 0
+        in: query
+        name: offset
+        required: false
+        description: Offset for results.
+      - schema:
+          type: string
+        in: header
+        name: x-photoniq-customerid
+        required: true
+        description: Customer unique identifier.
+      responses:
+        '200':
+          description: Render history fetched successfully.
+          content:
+            application/json:
+              schema:
+                type: array
+                description: Render history fetched successfully.
+                items:
+                  type: object
+                  properties:
+                    timestamp:
+                      type: number
+                      description: The time at which the event occurred, represented as a Unix timestamp.
+                    origin:
+                      type: string
+                      format: uri
+                      description: The URL of the origin server from which the request was sent.
+                    path:
+                      type: string
+                      description: The specific path on the server accessed by the request.
+                    bytesSent:
+                      type: number
+                      description: The total number of bytes sent in the response.
+                    responseTime:
+                      type: number
+                      description: The time taken to receive a response from the server, measured in milliseconds.
+                    isMobile:
+                      type: boolean
+                      description: Indicates whether the request was made from a mobile device.
+                    responseCode:
+                      type: number
+                      description: The HTTP status code returned by the server in response to the request.
+                example:
+                - timestamp: 1672543000
+                  origin: https://www.origin.com
+                  path: /terms
+                  bytesSent: 362414
+                  responseTime: 1000
+                  isMobile: false
+                  responseCode: 200
+                - timestamp: 1672542000
+                  origin: https://www.origin.com
+                  path: /terms
+                  bytesSent: 362056
+                  responseTime: 1500
+                  isMobile: false
+                  responseCode: 200
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Bad request.
+                properties:
+                  status:
+                    type: string
+                    description: Error status.
+                  message:
+                    type: string
+                    description: Error message.
+                required:
+                - status
+                - message
+                example:
+                  status: ERROR
+                  message: Header x-photoniq-customerid is required.
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Internal server error.
+                properties:
+                  status:
+                    type: string
+                    description: Error status.
+                  message:
+                    type: string
+                    description: Error message.
+                required:
+                - status
+                - message
+                example:
+                  status: ERROR
+                  message: Internal server error.
+  /api/prerender/v1/history/render/{origin}:
+    get:
+      summary: Get render history data by origin
+      tags:
+      - Prerender History
+      description: Returns historical data for web metrics, with time-range filtering and optional response code criteria. This endpoint requires the from and to query parameters, indicating the time range as epoch seconds. Optional filters include responseCode for HTTP status, and pagination controls through limit and offset. Data can be optionally scoped to a specific origin if the origin path parameter is included. The response comprises an array of historical records, detailing bytes sent, response time, device type, and response codes. Authentication is handled via the customerId header.
+      parameters:
+      - schema:
+          type: number
+        in: query
+        name: from
+        required: true
+        description: Timestamp (in seconds) used as the initial time for filtering.
+      - schema:
+          type: number
+        in: query
+        name: to
+        required: true
+        description: Timestamp (in seconds) used as the final time for filtering.
+      - schema:
+          type:
+          - number
+          - string
+        in: query
+        name: responseCode
+        required: false
+        description: Response code for filtering. It can be a specific response code or a range value, e.g., 200-310.
+      - schema:
+          type: string
+        in: query
+        name: responseTime
+        required: false
+        description: Response time range in seconds for filtering, e.g., 2-10.
+      - schema:
+          type: number
+          minimum: 1
+          default: 100
+          maximum: 100
+        in: query
+        name: limit
+        required: false
+        description: Limit for results.
+      - schema:
+          type: number
+          default: 0
+        in: query
+        name: offset
+        required: false
+        description: Offset for results.
+      - schema:
+          type: string
+          minLength: 1
+        example: www.origin.com
+        in: path
+        name: origin
+        required: true
+        description: Origin hostname.
+      - schema:
+          type: string
+        in: header
+        name: x-photoniq-customerid
+        required: true
+        description: Customer unique identifier.
+      responses:
+        '200':
+          description: Render history fetched successfully.
+          content:
+            application/json:
+              schema:
+                type: array
+                description: Render history fetched successfully.
+                items:
+                  type: object
+                  properties:
+                    timestamp:
+                      type: number
+                      description: The time at which the event occurred, represented as a Unix timestamp.
+                    origin:
+                      type: string
+                      format: uri
+                      description: The URL of the origin server from which the request was sent.
+                    path:
+                      type: string
+                      description: The specific path on the server accessed by the request.
+                    bytesSent:
+                      type: number
+                      description: The total number of bytes sent in the response.
+                    responseTime:
+                      type: number
+                      description: The time taken to receive a response from the server, measured in milliseconds.
+                    isMobile:
+                      type: boolean
+                      description: Indicates whether the request was made from a mobile device.
+                    responseCode:
+                      type: number
+                      description: The HTTP status code returned by the server in response to the request.
+                example:
+                - timestamp: 1672543000
+                  origin: https://www.origin.com
+                  path: /terms
+                  bytesSent: 362414
+                  responseTime: 1000
+                  isMobile: false
+                  responseCode: 200
+                - timestamp: 1672542000
+                  origin: https://www.origin.com
+                  path: /terms
+                  bytesSent: 362056
+                  responseTime: 1500
+                  isMobile: false
+                  responseCode: 200
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Bad request.
+                properties:
+                  status:
+                    type: string
+                    description: Error status.
+                  message:
+                    type: string
+                    description: Error message.
+                required:
+                - status
+                - message
+                example:
+                  status: ERROR
+                  message: Header x-photoniq-customerid is required.
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Internal server error.
+                properties:
+                  status:
+                    type: string
+                    description: Error status.
+                  message:
+                    type: string
+                    description: Error message.
+                required:
+                - status
+                - message
+                example:
+                  status: ERROR
+                  message: Internal server error.
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Provide an API Key to the `Authorization` header, prefixed with "apikey".
+
+
+        Example: `Authorization: apikey <key>`'
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Provide a JSON Web Token (JWT) to the `Authorization` header, prefixed with "bearer".
+
+
+        Example: `Authorization: bearer <jwt>`'

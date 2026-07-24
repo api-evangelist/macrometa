@@ -1,0 +1,704 @@
+openapi: 3.0.0
+info:
+  title: Macrometa API Reference Activity Metrics Prefetch API
+  version: 0.17.17
+  description: API reference for the Macrometa Global Data Network.
+  license:
+    name: Macrometa License, Version 2.0
+servers:
+- url: https://api-play.paas.macrometa.io
+  description: GDN API
+host: api-play.paas.macrometa.io
+security:
+- ApiKeyAuth: []
+- BearerAuth: []
+tags:
+- name: Prefetch
+paths:
+  /api/prerender/v1/origins/{origin}/prefetch/configs:
+    get:
+      summary: Get prefetch configuration
+      tags:
+      - Prefetch
+      description: Returns the prefetch configuration associated with the origin.
+      parameters:
+      - schema:
+          type: string
+          minLength: 1
+        example: www.origin.com
+        in: path
+        name: origin
+        required: true
+        description: Origin hostname.
+      - schema:
+          type: string
+        in: header
+        name: x-photoniq-customerid
+        required: true
+        description: Customer unique identifier.
+      responses:
+        '200':
+          description: Prefetch configuration fetched successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _key:
+                    type: string
+                    description: Prefetch configuration unique identifier.
+                  origin:
+                    type: string
+                    format: uri
+                    description: Origin base URL.
+                  cronSchedule:
+                    type: string
+                    description: Cron expression for scheduling.
+                  isRenderForMobile:
+                    type: boolean
+                    description: Whether rendering should be tailored for mobile devices.
+                  createdAt:
+                    type: string
+                    format: date-time
+                    description: Date when the prefetch configuration was created.
+                  updatedAt:
+                    type: string
+                    format: date-time
+                    description: Date when the prefetch configuration was updated.
+                required:
+                - _key
+                - origin
+                - cronSchedule
+                - isRenderForMobile
+                - createdAt
+                description: Prefetch configuration fetched successfully.
+                example:
+                  _key: www_origin_com
+                  origin: https://www.origin.com
+                  cronSchedule: 0 0 * * *
+                  isRenderForMobile: false
+                  createdAt: '2023-01-01T00:00:00.000Z'
+                  updatedAt: '2023-02-02T00:00:00.000Z'
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Bad request.
+                properties:
+                  status:
+                    type: string
+                    description: Error status.
+                  message:
+                    type: string
+                    description: Error message.
+                required:
+                - status
+                - message
+                example:
+                  status: ERROR
+                  message: Header x-photoniq-customerid is required.
+        '404':
+          description: Not found.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Not found.
+                properties:
+                  status:
+                    type: string
+                    description: Error status.
+                  message:
+                    type: string
+                    description: Error message.
+                required:
+                - status
+                - message
+                example:
+                  status: ERROR
+                  message: Not found.
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Internal server error.
+                properties:
+                  status:
+                    type: string
+                    description: Error status.
+                  message:
+                    type: string
+                    description: Error message.
+                required:
+                - status
+                - message
+                example:
+                  status: ERROR
+                  message: Internal server error.
+    post:
+      summary: Create prefetch configuration
+      tags:
+      - Prefetch
+      description: Creates a prefetch configuration associated with the origin.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                cronSchedule:
+                  type: string
+                  description: Cron expression for scheduling.
+                isRenderForMobile:
+                  type: boolean
+                  description: Whether rendering should be tailored for mobile devices.
+              required:
+              - cronSchedule
+              - isRenderForMobile
+            example:
+              cronSchedule: 0 0 * * *
+              isRenderForMobile: false
+        required: true
+      parameters:
+      - schema:
+          type: string
+          minLength: 1
+        example: www.origin.com
+        in: path
+        name: origin
+        required: true
+        description: Origin hostname.
+      - schema:
+          type: string
+        in: header
+        name: x-photoniq-customerid
+        required: true
+        description: Customer unique identifier.
+      responses:
+        '200':
+          description: Prefetch configuration created successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Prefetch configuration created successfully.
+                properties:
+                  _key:
+                    type: string
+                    description: Prefetch configuration unique identifier.
+                required:
+                - _key
+                example:
+                  _key: www_origin_com
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Bad request.
+                properties:
+                  status:
+                    type: string
+                    description: Error status.
+                  message:
+                    type: string
+                    description: Error message.
+                required:
+                - status
+                - message
+                example:
+                  status: ERROR
+                  message: Header x-photoniq-customerid is required.
+        '409':
+          description: Conflict.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Conflict.
+                properties:
+                  status:
+                    type: string
+                    description: Error status.
+                  message:
+                    type: string
+                    description: Error message.
+                required:
+                - status
+                - message
+                example:
+                  status: ERROR
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Internal server error.
+                properties:
+                  status:
+                    type: string
+                    description: Error status.
+                  message:
+                    type: string
+                    description: Error message.
+                required:
+                - status
+                - message
+                example:
+                  status: ERROR
+                  message: Internal server error.
+    patch:
+      summary: Update prefetch configuration
+      tags:
+      - Prefetch
+      description: Updates the prefetch configuration associated with the origin.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                cronSchedule:
+                  type: string
+                  description: Cron expression for scheduling.
+                isRenderForMobile:
+                  type: boolean
+                  description: Whether rendering should be tailored for mobile devices.
+            example:
+              cronSchedule: 0 0 * * *
+              isRenderForMobile: false
+      parameters:
+      - schema:
+          type: string
+          minLength: 1
+        example: www.origin.com
+        in: path
+        name: origin
+        required: true
+        description: Origin hostname.
+      - schema:
+          type: string
+        in: header
+        name: x-photoniq-customerid
+        required: true
+        description: Customer unique identifier.
+      responses:
+        '200':
+          description: Prefetch configuration updated successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Prefetch configuration updated successfully.
+                properties:
+                  _key:
+                    type: string
+                    description: Prefetch configuration unique identifier.
+                required:
+                - _key
+                example:
+                  _key: www_origin_com
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Bad request.
+                properties:
+                  status:
+                    type: string
+                    description: Error status.
+                  message:
+                    type: string
+                    description: Error message.
+                required:
+                - status
+                - message
+                example:
+                  status: ERROR
+                  message: Header x-photoniq-customerid is required.
+        '404':
+          description: Not found.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Not found.
+                properties:
+                  status:
+                    type: string
+                    description: Error status.
+                  message:
+                    type: string
+                    description: Error message.
+                required:
+                - status
+                - message
+                example:
+                  status: ERROR
+                  message: Not found.
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Internal server error.
+                properties:
+                  status:
+                    type: string
+                    description: Error status.
+                  message:
+                    type: string
+                    description: Error message.
+                required:
+                - status
+                - message
+                example:
+                  status: ERROR
+                  message: Internal server error.
+    delete:
+      summary: Delete prefetch configuration
+      tags:
+      - Prefetch
+      description: Deletes the prefetch configuration associated with the origin.
+      parameters:
+      - schema:
+          type: string
+          minLength: 1
+        example: www.origin.com
+        in: path
+        name: origin
+        required: true
+        description: Origin hostname.
+      - schema:
+          type: string
+        in: header
+        name: x-photoniq-customerid
+        required: true
+        description: Customer unique identifier.
+      responses:
+        '200':
+          description: Prefetch configuration deleted successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Prefetch configuration deleted successfully.
+                properties:
+                  _key:
+                    type: string
+                    description: Prefetch configuration unique identifier.
+                required:
+                - _key
+                example:
+                  _key: www_origin_com
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Bad request.
+                properties:
+                  status:
+                    type: string
+                    description: Error status.
+                  message:
+                    type: string
+                    description: Error message.
+                required:
+                - status
+                - message
+                example:
+                  status: ERROR
+                  message: Header x-photoniq-customerid is required.
+        '404':
+          description: Not found.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Not found.
+                properties:
+                  status:
+                    type: string
+                    description: Error status.
+                  message:
+                    type: string
+                    description: Error message.
+                required:
+                - status
+                - message
+                example:
+                  status: ERROR
+                  message: Not found.
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Internal server error.
+                properties:
+                  status:
+                    type: string
+                    description: Error status.
+                  message:
+                    type: string
+                    description: Error message.
+                required:
+                - status
+                - message
+                example:
+                  status: ERROR
+                  message: Internal server error.
+  /api/prerender/v1/origins/{origin}/prefetch/triggers:
+    post:
+      summary: Trigger prefetching process
+      tags:
+      - Prefetch
+      description: Starts prefetching all sitemap URLs associated with the origin.
+      parameters:
+      - schema:
+          type: string
+          minLength: 1
+        example: www.origin.com
+        in: path
+        name: origin
+        required: true
+        description: Origin hostname.
+      - schema:
+          type: string
+        in: header
+        name: x-photoniq-customerid
+        required: true
+        description: Customer unique identifier.
+      responses:
+        '200':
+          description: Prefetch trigger created successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Prefetch trigger created successfully.
+                properties:
+                  _key:
+                    type: string
+                    description: Prefetch trigger unique identifier.
+                required:
+                - _key
+                example:
+                  _key: -A5HO1NwgFrTMp5xv8KRWnk
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Bad request.
+                properties:
+                  status:
+                    type: string
+                    description: Error status.
+                  message:
+                    type: string
+                    description: Error message.
+                required:
+                - status
+                - message
+                example:
+                  status: ERROR
+                  message: Header x-photoniq-customerid is required.
+        '409':
+          description: Conflict.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Conflict.
+                properties:
+                  status:
+                    type: string
+                    description: Error status.
+                  message:
+                    type: string
+                    description: Error message.
+                required:
+                - status
+                - message
+                example:
+                  status: ERROR
+                  message: There is already a queued or in-progress trigger
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Internal server error.
+                properties:
+                  status:
+                    type: string
+                    description: Error status.
+                  message:
+                    type: string
+                    description: Error message.
+                required:
+                - status
+                - message
+                example:
+                  status: ERROR
+                  message: Internal server error.
+  /api/prerender/v1/origins/{origin}/prefetch/urls:
+    get:
+      summary: Get prefetch URLs
+      tags:
+      - Prefetch
+      description: Returns the latest prefetch URLs associated with the origin.
+      parameters:
+      - schema:
+          type: number
+          default: 0
+        in: query
+        name: offset
+        required: false
+        description: Pagination offset.
+      - schema:
+          type: number
+          minimum: 1
+          default: 1000
+          maximum: 1000
+        in: query
+        name: limit
+        required: false
+        description: Pagination limit.
+      - schema:
+          type: string
+          minLength: 1
+        example: www.origin.com
+        in: path
+        name: origin
+        required: true
+        description: Origin hostname.
+      - schema:
+          type: string
+        in: header
+        name: x-photoniq-customerid
+        required: true
+        description: Customer unique identifier.
+      responses:
+        '200':
+          description: Prefetch URLs fetched successfully.
+          content:
+            application/json:
+              schema:
+                type: array
+                description: Prefetch URLs fetched successfully.
+                items:
+                  type: object
+                  properties:
+                    url:
+                      type: string
+                      format: uri
+                      description: Origin URL.
+                    isMobile:
+                      type: boolean
+                      description: Whether rendering was tailored for mobile devices.
+                    status:
+                      type: string
+                      enum:
+                      - queued
+                      - retrying
+                      - completed
+                      - failed
+                      description: URL status.
+                    createdAt:
+                      type: number
+                      description: Timestamp of when the prefetch URL was created.
+                    updatedAt:
+                      type:
+                      - 'null'
+                      - number
+                      description: Timestamp of when the prefetch URL was updated.
+                  required:
+                  - url
+                  - isMobile
+                  - status
+                  - createdAt
+                example:
+                - url: https://www.origin.com/terms
+                  isMobile: false
+                  status: queued
+                  createdAt: 1672542000
+                  updatedAt: 1675306800
+                - url: https://www.origin.com/privacy
+                  isMobile: false
+                  status: completed
+                  createdAt: 1672542000
+                  updatedAt: 1675306800
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Bad request.
+                properties:
+                  status:
+                    type: string
+                    description: Error status.
+                  message:
+                    type: string
+                    description: Error message.
+                required:
+                - status
+                - message
+                example:
+                  status: ERROR
+                  message: Header x-photoniq-customerid is required.
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Internal server error.
+                properties:
+                  status:
+                    type: string
+                    description: Error status.
+                  message:
+                    type: string
+                    description: Error message.
+                required:
+                - status
+                - message
+                example:
+                  status: ERROR
+                  message: Internal server error.
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Provide an API Key to the `Authorization` header, prefixed with "apikey".
+
+
+        Example: `Authorization: apikey <key>`'
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Provide a JSON Web Token (JWT) to the `Authorization` header, prefixed with "bearer".
+
+
+        Example: `Authorization: bearer <jwt>`'

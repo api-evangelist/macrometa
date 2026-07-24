@@ -1,0 +1,117 @@
+openapi: 3.0.0
+info:
+  title: Macrometa API Reference Activity Metrics Settings API
+  version: 0.17.17
+  description: API reference for the Macrometa Global Data Network.
+  license:
+    name: Macrometa License, Version 2.0
+servers:
+- url: https://api-play.paas.macrometa.io
+  description: GDN API
+host: api-play.paas.macrometa.io
+security:
+- ApiKeyAuth: []
+- BearerAuth: []
+tags:
+- name: Settings
+  description: Settings endpoints allows users to configure a component to integrate various third-party tags into their system. It accepts configuration settings for different types of tags, such as analytics, advertising, social media, and so on.
+paths:
+  /api/est/v1/components/settings:
+    post:
+      tags:
+      - Settings
+      description: Create PhotonIQ EST component setting.
+      responses:
+        '200':
+          description: Returns created PhotonIQ EST component setting.
+        '500':
+          description: Error creating PhotonIQ EST component setting.
+    get:
+      tags:
+      - Settings
+      description: Get all PhotonIQ EST component settings.
+      responses:
+        '200':
+          description: Returns all PhotonIQ EST component settings.
+        '404':
+          description: Error PhotonIQ EST component settings not found.
+        '500':
+          description: Error getting all PhotonIQ EST component settings.
+    delete:
+      tags:
+      - Settings
+      description: Delete all PhotonIQ EST component settings.
+      responses:
+        '200':
+          description: All PhotonIQ EST component settings deleted successfully.
+        '500':
+          description: Error deleting all PhotonIQ EST component settings.
+  /api/est/v1/components/settings/{component}:
+    get:
+      tags:
+      - Settings
+      description: Get PhotonIQ EST component setting.
+      parameters:
+      - in: path
+        name: component
+        required: true
+        schema:
+          type: string
+        description: Name of the component.
+      responses:
+        '200':
+          description: Returns PhotonIQ EST component setting.
+        '404':
+          description: Error PhotonIQ EST component setting not found.
+        '500':
+          description: Error getting PhotonIQ EST component setting.
+    patch:
+      tags:
+      - Settings
+      description: Update PhotonIQ EST component setting.
+      parameters:
+      - in: path
+        name: component
+        required: true
+        schema:
+          type: string
+        description: Name of the component.
+      responses:
+        '200':
+          description: Returns updated PhotonIQ EST component setting.
+        '500':
+          description: Error updating PhotonIQ EST component setting.
+    delete:
+      tags:
+      - Settings
+      description: Delete PhotonIQ EST component setting.
+      parameters:
+      - in: path
+        name: component
+        required: true
+        schema:
+          type: string
+        description: Name of the component.
+      responses:
+        '200':
+          description: PhotonIQ EST component setting deleted successfully.
+        '500':
+          description: Error deleting PhotonIQ EST component setting.
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Provide an API Key to the `Authorization` header, prefixed with "apikey".
+
+
+        Example: `Authorization: apikey <key>`'
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Provide a JSON Web Token (JWT) to the `Authorization` header, prefixed with "bearer".
+
+
+        Example: `Authorization: bearer <jwt>`'

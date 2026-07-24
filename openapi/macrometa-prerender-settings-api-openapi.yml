@@ -1,0 +1,312 @@
+openapi: 3.0.0
+info:
+  title: Macrometa API Reference Activity Metrics Prerender Settings API
+  version: 0.17.17
+  description: API reference for the Macrometa Global Data Network.
+  license:
+    name: Macrometa License, Version 2.0
+servers:
+- url: https://api-play.paas.macrometa.io
+  description: GDN API
+host: api-play.paas.macrometa.io
+security:
+- ApiKeyAuth: []
+- BearerAuth: []
+tags:
+- name: Prerender Settings
+paths:
+  /api/prerender/v1/origins/{origin}/settings:
+    get:
+      summary: Get prerender settings
+      tags:
+      - Prerender Settings
+      description: Returns the prerender settings associated with the origin.
+      parameters:
+      - schema:
+          type: string
+          minLength: 1
+        example: www.origin.com
+        in: path
+        name: origin
+        required: true
+        description: Origin hostname.
+      - schema:
+          type: string
+        in: header
+        name: x-photoniq-customerid
+        required: true
+        description: Customer unique identifier.
+      responses:
+        '200':
+          description: Settings fetched successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _key:
+                    type: string
+                    description: Settings unique identifier.
+                  origin:
+                    type: string
+                    format: uri
+                    description: Origin base URL.
+                  injectInlineCSS:
+                    type: boolean
+                    description: Whether to inject CSS into the HTML.
+                  addRequestHeader:
+                    type: boolean
+                    description: Whether to add x-photoniq-prerender-request header to each request made during page rendering.
+                  blockRequestTypes:
+                    type: array
+                    items:
+                      type: string
+                    description: List of resource types that should be blocked, e.g., fonts, stylesheets.
+                  urlBlockList:
+                    type: array
+                    items:
+                      type: string
+                    description: List of URLs that should be blocked, e.g., https://googleads.g.doubleclick.net/pagead.
+                  created:
+                    type: string
+                    format: date-time
+                    description: Date when the prerender settings was created.
+                  lastUpdated:
+                    type: string
+                    format: date-time
+                    description: Date when the prerender settings was updated.
+                required:
+                - _key
+                - origin
+                - injectInlineCSS
+                - addRequestHeader
+                - blockRequestTypes
+                - urlBlockList
+                - created
+                description: Settings fetched successfully.
+                example:
+                  _key: www_origin_com
+                  origin: https://www.origin.com
+                  injectInlineCSS: false
+                  addRequestHeader: true
+                  blockRequestTypes:
+                  - fonts
+                  - stylesheet
+                  urlBlockList:
+                  - https://googleads.g.doubleclick.net/pagead/
+                  - https://www.googletagmanager.com/gtag/
+                  - https://bat.bing.com/p/action/
+                  - https://bat.bing.com/bat.js
+                  - https://connect.facebook.net/en_US/fbevents.js
+                  - https://maps.googleapis.com/maps-api-v3/api/js/
+                  created: '2023-01-01T00:00:00.000Z'
+                  lastUpdated: '2023-02-02T00:00:00.000Z'
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Bad request.
+                properties:
+                  status:
+                    type: string
+                    description: Error status.
+                  message:
+                    type: string
+                    description: Error message.
+                required:
+                - status
+                - message
+                example:
+                  status: ERROR
+                  message: Header x-photoniq-customerid is required.
+        '404':
+          description: Not found.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Not found.
+                properties:
+                  status:
+                    type: string
+                    description: Error status.
+                  message:
+                    type: string
+                    description: Error message.
+                required:
+                - status
+                - message
+                example:
+                  status: ERROR
+                  message: Not found.
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Internal server error.
+                properties:
+                  status:
+                    type: string
+                    description: Error status.
+                  message:
+                    type: string
+                    description: Error message.
+                required:
+                - status
+                - message
+                example:
+                  status: ERROR
+                  message: Internal server error.
+    patch:
+      summary: Update prerender settings
+      tags:
+      - Prerender Settings
+      description: Updates the prerender settings associated with the origin.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                injectInlineCSS:
+                  type: boolean
+                  description: Whether to inject CSS into the HTML.
+                addRequestHeader:
+                  type: boolean
+                  description: Whether to add x-photoniq-prerender-request header to each request made during page rendering.
+                blockRequestTypes:
+                  type: array
+                  items:
+                    type: string
+                  description: List of resource types that should be blocked, e.g., fonts, stylesheets.
+                urlBlockList:
+                  type: array
+                  items:
+                    type: string
+                  description: List of URLs that should be blocked, e.g., https://googleads.g.doubleclick.net/pagead.
+            example:
+              injectInlineCSS: false
+              addRequestHeader: true
+              blockRequestTypes:
+              - fonts
+              - stylesheet
+              urlBlockList:
+              - https://googleads.g.doubleclick.net/pagead/
+              - https://www.googletagmanager.com/gtag/
+              - https://bat.bing.com/p/action/
+              - https://bat.bing.com/bat.js
+              - https://connect.facebook.net/en_US/fbevents.js
+              - https://maps.googleapis.com/maps-api-v3/api/js/
+      parameters:
+      - schema:
+          type: string
+          minLength: 1
+        example: www.origin.com
+        in: path
+        name: origin
+        required: true
+        description: Origin hostname.
+      - schema:
+          type: string
+        in: header
+        name: x-photoniq-customerid
+        required: true
+        description: Customer unique identifier.
+      responses:
+        '200':
+          description: Settings updated successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Settings updated successfully.
+                properties:
+                  _key:
+                    type: string
+                    description: Settings unique identifier.
+                required:
+                - _key
+                example:
+                  _key: www_origin_com
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Bad request.
+                properties:
+                  status:
+                    type: string
+                    description: Error status.
+                  message:
+                    type: string
+                    description: Error message.
+                required:
+                - status
+                - message
+                example:
+                  status: ERROR
+                  message: Header x-photoniq-customerid is required.
+        '404':
+          description: Not found.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Not found.
+                properties:
+                  status:
+                    type: string
+                    description: Error status.
+                  message:
+                    type: string
+                    description: Error message.
+                required:
+                - status
+                - message
+                example:
+                  status: ERROR
+                  message: Not found.
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Internal server error.
+                properties:
+                  status:
+                    type: string
+                    description: Error status.
+                  message:
+                    type: string
+                    description: Error message.
+                required:
+                - status
+                - message
+                example:
+                  status: ERROR
+                  message: Internal server error.
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Provide an API Key to the `Authorization` header, prefixed with "apikey".
+
+
+        Example: `Authorization: apikey <key>`'
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Provide a JSON Web Token (JWT) to the `Authorization` header, prefixed with "bearer".
+
+
+        Example: `Authorization: bearer <jwt>`'

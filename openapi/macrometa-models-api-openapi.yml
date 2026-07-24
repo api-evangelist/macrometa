@@ -1,0 +1,80 @@
+openapi: 3.0.0
+info:
+  title: Macrometa API Reference Activity Metrics Models API
+  version: 0.17.17
+  description: API reference for the Macrometa Global Data Network.
+  license:
+    name: Macrometa License, Version 2.0
+servers:
+- url: https://api-play.paas.macrometa.io
+  description: GDN API
+host: api-play.paas.macrometa.io
+security:
+- ApiKeyAuth: []
+- BearerAuth: []
+tags:
+- name: Models
+paths:
+  /api/hss/v1/models:
+    get:
+      tags:
+      - Models
+      summary: Get models
+      operationId: getModels
+      responses:
+        '200':
+          description: Successfully returned list of models.
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Model'
+                type: array
+                title: Response Getmodels
+      security:
+      - APIKeyHeader: []
+components:
+  schemas:
+    Model:
+      properties:
+        name:
+          type: string
+          title: Name
+          description: The name of the model.
+          examples:
+          - sentence-transformers/all-MiniLM-L6-v2
+        type:
+          type: string
+          title: Type
+          description: The type of the model.
+          examples:
+          - sentence-transformers
+        dimensions:
+          type: integer
+          title: Dimensions
+          description: The dimensions of the model.
+          examples:
+          - 384
+      type: object
+      required:
+      - name
+      - type
+      - dimensions
+      title: Model
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Provide an API Key to the `Authorization` header, prefixed with "apikey".
+
+
+        Example: `Authorization: apikey <key>`'
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Provide a JSON Web Token (JWT) to the `Authorization` header, prefixed with "bearer".
+
+
+        Example: `Authorization: bearer <jwt>`'

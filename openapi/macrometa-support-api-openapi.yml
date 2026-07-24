@@ -1,0 +1,134 @@
+openapi: 3.0.0
+info:
+  title: Macrometa API Reference Activity Metrics Support API
+  version: 0.17.17
+  description: API reference for the Macrometa Global Data Network.
+  license:
+    name: Macrometa License, Version 2.0
+servers:
+- url: https://api-play.paas.macrometa.io
+  description: GDN API
+host: api-play.paas.macrometa.io
+security:
+- ApiKeyAuth: []
+- BearerAuth: []
+tags:
+- name: Support
+paths:
+  /_api/trigger/zendesk:
+    post:
+      description: Create a new support ticket.
+      operationId: zendeskAPI
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/post_zendesk_api'
+        required: true
+      responses:
+        '201':
+          description: Successfully created a support ticket.
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/support_trigger_zendesk_post_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Create a support ticket
+      tags:
+      - Support
+components:
+  schemas:
+    headers:
+      x-gdn-requestid:
+        description: A unique request ID for each API request.
+        type: string
+      x-gdn-region:
+        description: The federation's region hostname that served the request.
+        type: string
+    support_trigger_zendesk_post_rc_400:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 400
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        message:
+          description: A message created for this error.
+          type: string
+          example: Invalid input API request paramaters
+        requestId:
+          description: The requestId generated for the support ticket request.
+          type: string
+          example: b0d08ea6-efa3-472c-a5f3-5b91558113e8/2
+        serverId:
+          description: The serverId generated for the support ticket request.
+          type: string
+          example: C8Apid 0.1.39
+    post_zendesk_api:
+      properties:
+        operation:
+          type: string
+          description: "The type of support ticket to be created.\nThe following values for *operation* are valid (The default is *Generic*):\n - **Generic**: Generic support request.\n - **AddRegionToTenant**: Add a new region to the existing tenant.\n - **RemoveRegionFromTenant**: Remove a region from the existing tenant.\n - **AddRegionToFabric**: Add a new region to the specified fabric.\n - **RemoveRegionFromFabric**: Remove a region from the specified fabric."
+          example: Generic
+        subject:
+          type: string
+          description: The subject of the support ticket.
+          example: Enable Stream worker
+        body:
+          type: string
+          description: Add body to describe request/problem you are facing.
+          example: Can you please enable Stream worker feature for my tenant?
+        parameters:
+          type: object
+          properties:
+            name:
+              type: string
+              description: The name of the tenant.
+              example: Demo
+            email:
+              type: string
+              description: The email of the tenant.
+              example: demo@gmail.com
+            datacenter:
+              type: string
+              description: The name of the data center.
+              example: gdn-us-west
+            fabric:
+              type: string
+              description: The name of the fabric.
+              example: _system
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Provide an API Key to the `Authorization` header, prefixed with "apikey".
+
+
+        Example: `Authorization: apikey <key>`'
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Provide a JSON Web Token (JWT) to the `Authorization` header, prefixed with "bearer".
+
+
+        Example: `Authorization: bearer <jwt>`'

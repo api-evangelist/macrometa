@@ -1,0 +1,3220 @@
+openapi: 3.0.0
+info:
+  title: Macrometa API Reference Activity Metrics Graphs API
+  version: 0.17.17
+  description: API reference for the Macrometa Global Data Network.
+  license:
+    name: Macrometa License, Version 2.0
+servers:
+- url: https://api-play.paas.macrometa.io
+  description: GDN API
+host: api-play.paas.macrometa.io
+security:
+- ApiKeyAuth: []
+- BearerAuth: []
+tags:
+- name: Graphs
+paths:
+  /_fabric/{fabric}/_api/graph:
+    get:
+      description: Lists all graphs stored in this GeoFabric.
+      operationId: ListAllGraphs
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      responses:
+        '200':
+          description: Successfully fetched graphs.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/graph_list_http_examples_rc_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: List all graphs
+      tags:
+      - Graphs
+    post:
+      description: 'To create a graph, you must name the graph and define its edges.
+
+
+        **Note**: Requires *Administrator* permissions to access the GeoFabric and *Read Only* access on every collection used within this graph.'
+      operationId: CreateAGraph
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/graph_create_http_examples'
+        required: true
+      responses:
+        '201':
+          description: Successfully created the graph when *waitForSync* is enabled.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/graph_create_http_examples_rc_201'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '202':
+          description: Successfully created the graph when *waitForSync* is disabled.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/graph_create_http_examples_rc_202'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '409':
+          description: Failed to store graph. Verify that a graph with this name does not already exist. Also, verify that the edge definitions are not used with a different signature by another graph.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_409'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Create a graph
+      tags:
+      - Graphs
+  /_fabric/{fabric}/_api/graph/{graph}:
+    delete:
+      description: 'Remove an existing graph object by name. Optionally all collections not used by other graphs can be removed as well.
+
+
+        **Note**: Requires *administrator* permissions.'
+      operationId: DropAGraph
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: The name of the graph.
+        in: path
+        name: graph
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: Remove collections of this graph. Collections are only removed if they are not used in other graphs.
+        in: query
+        name: dropCollections
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '201':
+          description: Successfully removed the graph when *waitForSync* is enabled.
+          content:
+            application/json:
+              schema:
+                example:
+                  code: 201
+                  error: false
+                  removed: true
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '202':
+          description: Successfully removed the graph when *waitForSync* is disabled.
+          content:
+            application/json:
+              schema:
+                example:
+                  code: 202
+                  error: false
+                  removed: true
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified graph.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Remove a graph
+      tags:
+      - Graphs
+    get:
+      description: Fetch information for a graph. Returns the edge definitions and orphan collections.
+      operationId: GetAGraph
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: The name of the graph.
+        in: path
+        name: graph
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        '200':
+          description: Successfully fetched the graph data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/graph_get_http_examples_rc_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find the specified graph.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Get a graph
+      tags:
+      - Graphs
+  /_fabric/{fabric}/_api/graph/{graph}/edge:
+    get:
+      description: Fetch all edge collections within this graph.
+      operationId: ListEdgedefinitions
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: The name of the graph.
+        in: path
+        name: graph
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        '200':
+          description: Successfully fetched edge definitions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/graph_list_edge_http_examples_rc_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed because you do not have administrator permissions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find the specified graph.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: List edge definitions
+      tags:
+      - Graphs
+    post:
+      description: 'Adds an additional edge definition to the graph.
+
+
+        This edge definition has to contain a *collection* and an array of each *from* and *to* vertex collections. An edge definition can only be added if this definition is either not used in any other graph, or it is used with exactly the same definition. It is not possible to store a definition "e" from "v1" to "v2" in the one graph, and "e" from "v2" to "v1" in the other graph.
+
+
+        **Note**: Requires *administrator* permissions.'
+      operationId: AddEdgedefinition
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: The name of the graph.
+        in: path
+        name: graph
+        required: true
+        schema:
+          type: string
+          format: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/graph_edge_definition_add_http_examples'
+        required: true
+      responses:
+        '201':
+          description: Successfully added edge when *waitForSync* is enabled.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/graph_edge_definition_add_http_examples_rc_201'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '202':
+          description: Successfully added edge when *waitForSync* is disabled.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/graph_edge_definition_add_http_examples_rc_202'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing, malformed data, or if the definition is used in another graph with a different signature. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find the specified graph.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Add edge definition
+      tags:
+      - Graphs
+  /_fabric/{fabric}/_api/graph/{graph}/edge/{edgeCollection}:
+    post:
+      description: 'Create a new edge in the collection.
+
+
+        **Note:** Requires *Read Only* permissions on the GeoFabric and *Write* access on the collection.'
+      operationId: CreateAnEdge
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: The name of the graph.
+        in: path
+        name: graph
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: The name of the edge collection the edge belongs to.
+        in: path
+        name: edgeCollection
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: If set to *true*, the response contains the complete new version of the document.
+        in: query
+        name: returnNew
+        required: false
+        schema:
+          type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/graph_edge_create_http_examples'
+        required: true
+      responses:
+        '201':
+          description: Successfully created the edge when *waitForSync* is enabled.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/graph_edge_create_http_examples_rc_201'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '202':
+          description: Successfully created the edge when *waitForSync* is disabled.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/graph_edge_create_http_examples_rc_202'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find graph, edge collection, `_from` or `_to`.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Create an edge
+      tags:
+      - Graphs
+    put:
+      description: 'Change a specified edge definition.
+
+
+        This modifies all occurrences of this definition in all graphs known to your GeoFabric.
+
+
+        **Note**: Requires *administrator* permissions.'
+      operationId: ReplaceAnEdgedefinition
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: The name of the graph.
+        in: path
+        name: graph
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: The name of the edge collection the edge belongs to.
+        in: path
+        name: edgeCollection
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: If set to *true*, also removes the collection. Collection is only removed if it is not used in other graphs.
+        in: query
+        name: dropCollections
+        required: false
+        schema:
+          type: boolean
+          default: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/graph_edge_definition_modify_http_examples'
+        required: true
+      responses:
+        '201':
+          description: Successfully replaced edge when *waitForSync* is enabled.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/graph_edge_definition_modify_http_examples_rc_201'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '202':
+          description: Successfully replaced edge when *waitForSync* is disabled.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/graph_edge_definition_modify_http_examples_rc_202'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified graph.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Replace an edge definition
+      tags:
+      - Graphs
+    delete:
+      description: 'Remove one edge definition from the graph. This only removes the edge collection, the vertex collections can still be used in your queries.
+
+
+        **Note**: Requires *administrator* permissions.'
+      operationId: RemoveAnEdgedefinitionFromTheGraph
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: The name of the graph.
+        in: path
+        name: graph
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: The name of the edge collection the edge belongs to.
+        in: path
+        name: edgeCollection
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: Set *true* to remove the collection. Collection is only removed if it is not used in other graphs.
+        in: query
+        name: dropCollections
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '201':
+          description: Successfully removed edge definition when *waitForSync* is enabled.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/graph_edge_definition_remove_http_examples_rc_201'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '202':
+          description: Successfully removed edge definition when *waitForSync* is disabled.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/graph_edge_definition_remove_http_examples_rc_202'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified graph or edge definition.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Remove an edge definition
+      tags:
+      - Graphs
+  /_fabric/{fabric}/_api/graph/{graph}/edge/{collection}/{edge}:
+    delete:
+      description: 'Remove an edge from the collection.
+
+
+        **Note:** Requires *Read Only* permissions on the GeoFabric and *Write* access on the collection.'
+      operationId: RemoveAnEdge
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: The name of the graph.
+        in: path
+        name: graph
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: The name of the edge collection the edge belongs to.
+        in: path
+        name: collection
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: The *_key* attribute of the edge.
+        in: path
+        name: edge
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: If set to *true*, the removed document is returned in the response object.
+        in: query
+        name: returnOld
+        required: false
+        schema:
+          type: boolean
+      - description: If the *If-Match* header is given, it must contain exactly one ETag. The document is updated, if it has the same revision as the given ETag. Otherwise a HTTP 412 is returned. As an alternative you can supply the ETag in a query parameter *rev*.
+        in: header
+        name: if-match
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successfully removed the edge.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/graph_edge_delete_http_examples_rc_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '202':
+          description: Successfully removed the edge when *waitForSync* is disabled.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/graph_edge_delete_http_examples_rc_202'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find graph, collection, or edge.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '412':
+          description: Failed to remove document due to different version if a *If-Match* header or *rev* attribute is given.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_412'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Remove an edge
+      tags:
+      - Graphs
+    get:
+      description: 'Fetch an edge from the given collection.
+
+
+        **Note**: Requires *Read Only* permissions to access the GeoFabric and *Read Only* access on the collection.'
+      operationId: GetAnEdge
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: The name of the graph.
+        in: path
+        name: graph
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: The name of the edge collection the edge belongs to.
+        in: path
+        name: collection
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: The *_key* attribute of the edge.
+        in: path
+        name: edge
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: Must contain a revision. If this is set a document is only returned if it has exactly this revision. Also see *if-match* header as an alternative to this.
+        in: query
+        name: rev
+        required: false
+        schema:
+          type: string
+      - description: If the *If-Match* header is given, it must contain exactly one ETag. The document is returned if it does *not* have the same revision as the provided ETag. Otherwise a HTTP 412 is returned. As an alternative you can supply the ETag in a query parameter *rev*.
+        in: header
+        name: if-match
+        schema:
+          type: string
+      - description: If the *If-None-Match* header is given, it must contain exactly one ETag. The document is returned if it does *not* have the same revision as the provided ETag. Otherwise a HTTP 304 is returned.
+        in: header
+        name: if-none-match
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successfully fetched edge.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/graph_edge_get_http_examples_rc_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '304':
+          description: If the *If-None-Match* header was used, the document has the same revision since the last time the edge was fetched.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/redirect_example_rc_304'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find graph, collection, or vertex.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '412':
+          description: Failed to return document due to different version if a *If-Match* header or *rev* attribute is given.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_412'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Get an edge
+      tags:
+      - Graphs
+    patch:
+      description: 'Update the data of the specific edge in the collection.
+
+
+        **Note:** Requires *Read Only* permissions on the GeoFabric and *Write* access on the collection.'
+      operationId: ModifyAnEdge
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: The name of the graph.
+        in: path
+        name: graph
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: The name of the edge collection the edge belongs to.
+        in: path
+        name: collection
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: The *_key* attribute of the vertex.
+        in: path
+        name: edge
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: If set to *false*, null attributes are deleted from the document.
+        in: query
+        name: keepNull
+        required: false
+        schema:
+          type: boolean
+          default: true
+      - description: If set to *true*, the deleted document is returned in the response object.
+        in: query
+        name: returnOld
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - description: If set to *true*, the new document is returned in the response object.
+        in: query
+        name: returnNew
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - description: If the *If-Match* header is given, it must contain exactly one ETag. The document is only updated if it has the same revision as the provided ETag. Otherwise a HTTP 412 is returned. As an alternative you can supply the ETag in a query parameter *rev*.
+        in: header
+        name: if-match
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                data: 1234
+        description: The body has to contain a JSON object containing exactly the attributes that should be overwritten, all other attributes remain unchanged.
+        required: true
+      responses:
+        '200':
+          description: Successfully updated edge when *waitForSync* is enabled.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/graph_edge_modify_http_examples_rc_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '202':
+          description: Successfully updated edge when *waitForSync* is disabled.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/graph_edge_modify_http_examples_rc_202'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find graph, collection, vertex, `_from` or `_to`.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '412':
+          description: Failed to return document due to different version if a *If-Match* header or *rev* is given.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_412'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Modify an edge
+      tags:
+      - Graphs
+    put:
+      description: 'Replaces the data of an edge in the collection.
+
+
+        **Note:** Requires *Read Only* permissions on the GeoFabric and *Write* access on the collection.'
+      operationId: ReplaceAnEdge
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: The name of the graph.
+        in: path
+        name: graph
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: The name of the edge collection the edge belongs to.
+        in: path
+        name: collection
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: The *_key* attribute of the vertex.
+        in: path
+        name: edge
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: If set to *false*, null attributes are deleted from the document.
+        in: query
+        name: keepNull
+        required: false
+        schema:
+          type: boolean
+          default: true
+      - description: If set to *true*, the deleted document is returned in the response object.
+        in: query
+        name: returnOld
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - description: If set to *true*, the new document is returned in the response object.
+        in: query
+        name: returnNew
+        required: false
+        schema:
+          type: boolean
+          default: true
+      - description: If the *If-Match* header is given, it must contain exactly one ETag. The document is only updated if it has the same revision as the provided ETag. Otherwise a HTTP 412 is returned. As an alternative you can supply the ETag in a query parameter *rev*.
+        in: header
+        name: if-match
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/graph_edge_replace_http_examples'
+        required: true
+      responses:
+        '201':
+          description: Successfully replaced edge when *waitForSync* is enabled.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/graph_edge_replace_http_examples_rc_201'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '202':
+          description: Successfully replaced edge when *waitForSync* is disabled.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/graph_edge_replace_http_examples_rc_202'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find graph, collection, vertex, `_from` or `_to`.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '412':
+          description: Failed to return document due to different version if a *If-Match* header or *rev* attribute is given.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_412'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Replace an edge
+      tags:
+      - Graphs
+  /_fabric/{fabric}/_api/graph/{graph}/vertex:
+    get:
+      description: Fetch all vertex collections within this graph.
+      operationId: ListVertexCollections
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: The name of the graph.
+        in: path
+        name: graph
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        '200':
+          description: Successfully fetched array of vertex collections.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/graph_list_vertex_http_examples_rc_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified graph.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: List vertex collections
+      tags:
+      - Graphs
+    post:
+      description: 'Adds a vertex collection to the set of orphan collections of the graph. If the collection does not exist, it is created.
+
+
+        **Note:** Requires *Administrator* permissions to access the GeoFabric and *Read Only* access on every collection used within this graph.'
+      operationId: AddVertexCollection
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: The name of the graph.
+        in: path
+        name: graph
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        '201':
+          description: Successfully created the vertex collection when *waitForSync* is enabled.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/graph_vertex_collection_add_http_examples_rc_201'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '202':
+          description: Successfully created the vertex collection when *waitForSync* is disabled.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/graph_vertex_collection_add_http_examples_rc_202'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified graph.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Add vertex collection
+      tags:
+      - Graphs
+  /_fabric/{fabric}/_api/graph/{graph}/vertex/{collection}:
+    delete:
+      description: 'Remove a vertex collection from the graph and optionally  the collection, if it is not used in any other graph. It only removes vertex collections that are no longer part of edge definitions.
+
+
+        **Note**: Requires *administrator* permissions.'
+      operationId: RemoveVertexCollection
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: The name of the graph.
+        in: path
+        name: graph
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: The name of the vertex collection.
+        in: path
+        name: collection
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: Set *true* to remove the collection. Collection is only removed if it is not used in other graphs.
+        in: query
+        name: dropCollection
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: Successfully removed vertex collection when *waitForSync* is enabled.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/graph_vertex_collection_remove_http_examples_rc_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '202':
+          description: Successfully removed vertex collection when *waitForSync* is disabled.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/graph_vertex_collection_remove_http_examples_rc_202'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed because the vertex collection is still used in an edge definition.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified graph.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Remove vertex collection
+      tags:
+      - Graphs
+    post:
+      description: 'Adds a vertex to the given collection.
+
+
+        **Note:** Requires *Read Only* permissions to access the GeoFabric and *Write* permissions to access the collection.'
+      operationId: CreateAVertex
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: The name of the graph.
+        in: path
+        name: graph
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: The name of the vertex collection the vertex should be inserted into.
+        in: path
+        name: collection
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: If set to *true*, the response contains the complete new document.
+        in: query
+        name: returnNew
+        required: false
+        schema:
+          type: boolean
+          default: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                collection: demo1
+        description: The body has to be the JSON object to be stored.
+        required: true
+      responses:
+        '201':
+          description: Successfuly added the vertex when *waitForSync* is enabled.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/graph_vertex_create_http_examples_rc_201'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '202':
+          description: Successfuly added the vertex when *waitForSync* is disabled.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/graph_vertex_create_http_examples_rc_202'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified graph or collection.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Create a vertex
+      tags:
+      - Graphs
+  /_fabric/{fabric}/_api/graph/{graph}/vertex/{collection}/{vertex}:
+    delete:
+      description: 'Remove a vertex from the collection.
+
+
+        **Note:** Requires *Read Only* permissions to access the GeoFabric and *Write* permissions to access the collection.'
+      operationId: RemoveAVertex
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: The name of the graph.
+        in: path
+        name: graph
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: The name of the vertex collection the vertex belongs to.
+        in: path
+        name: collection
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: The *_key* attribute of the vertex.
+        in: path
+        name: vertex
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: If set to *true*, the deleted document is returned in the response object.
+        in: query
+        name: returnOld
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - description: If the *If-Match* header is given, it must contain exactly one ETag. The document is only updated if it has the same revision as the provided ETag. Otherwise a HTTP 412 is returned. As an alternative you can supply the ETag in a query parameter *rev*.
+        in: header
+        name: if-match
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successfully removed vertex when *waitForSync* is enabled.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/graph_vertex_delete_http_examples_rc_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '202':
+          description: Successfully removed vertex when *waitForSync* is disabled.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/graph_vertex_delete_http_examples_rc_202'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified graph, collection, or vertex.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '412':
+          description: Failed to return document due to different version if a *If-Match* header or *rev* attribute is given.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_412'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Remove a vertex
+      tags:
+      - Graphs
+    get:
+      description: 'Fetch a vertex from the given collection.
+
+
+        **Note:** Requires *Read Only* permissions to access the GeoFabric and *Read Only* permissions to access the collection.'
+      operationId: GetAVertex
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: The name of the graph.
+        in: path
+        name: graph
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: The name of the vertex collection the vertex belongs to.
+        in: path
+        name: collection
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: The *_key* attribute of the vertex.
+        in: path
+        name: vertex
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: Must contain a revision. If this is set a document is only returned if it has exactly this revision. Also see *if-match* header as an alternative to this.
+        in: query
+        name: rev
+        required: false
+        schema:
+          type: string
+          default: false
+      - description: If the *If-Match* header is given, it must contain exactly one ETag. The document is returned if it has the same revision as the provided ETag. Otherwise a HTTP 412 is returned. As an alternative you can supply the ETag in a query parameter *rev*.
+        in: header
+        name: if-match
+        schema:
+          type: string
+      - description: If the *If-None-Match* header is given, it must contain exactly one ETag. The document is returned if it does *not* have the same revision as the provided ETag. Otherwise a HTTP 304 is returned.
+        in: header
+        name: if-none-match
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successfully fetched the vertex.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/graph_vertex_get_http_examples_rc_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '304':
+          description: Document has the same revision as specified in the *If-None-Match* header. There is no update since the last time the vertex was fetched.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/graph_vertex_get_http_examples_rc_304'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified graph, collection, or vertex.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '412':
+          description: Failed to return document due to different version if a *If-Match* header or *rev* attribute is given.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_412'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Get a vertex
+      tags:
+      - Graphs
+    patch:
+      description: 'Update the data of the specific vertex in the collection.
+
+
+        **Note:** Requires *Read Only* permissions to access the GeoFabric and *Write* permissions to access the collection.'
+      operationId: UpdateAVertex
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: The name of the graph.
+        in: path
+        name: graph
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: The name of the vertex collection the vertex belongs to.
+        in: path
+        name: collection
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: The *_key* attribute of the vertex.
+        in: path
+        name: vertex
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: If set to *false*, null attributes are deleted from the document.
+        in: query
+        name: keepNull
+        required: false
+        schema:
+          type: boolean
+          default: true
+      - description: If set to *true*, the deleted document is returned in the response object.
+        in: query
+        name: returnOld
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - description: If set to *true*, the new document is returned in the response object.
+        in: query
+        name: returnNew
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - description: If the *If-Match* header is given, it must contain exactly one ETag. The document is only updated if it has the same revision as the provided ETag. Otherwise a HTTP 412 is returned. As an alternative you can supply the ETag in a query parameter *rev*.
+        in: header
+        name: if-match
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                data: demo1
+        description: The body has to contain a JSON object containing exactly the attributes that should be overwritten, all other attributes remain unchanged.
+        required: true
+      responses:
+        '200':
+          description: Successfully updated the vertex when *waitForSync* is enabled.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/graph_vertex_modify_http_examples_rc_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '202':
+          description: Successfully updated the vertex when *waitForSync* is disabled.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/graph_vertex_modify_http_examples_rc_202'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified graph, collection, or vertex.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '412':
+          description: Failed to return document due to different version if a *If-Match* header or rev is given.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_412'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Update a vertex
+      tags:
+      - Graphs
+    put:
+      description: 'Replaces the data of a vertex in a collection.
+
+
+        **Note:** Requires *Read Only* permissions to access the GeoFabric and *Write* permissions to access the collection.'
+      operationId: ReplaceAVertex
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: The name of the graph.
+        in: path
+        name: graph
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: The name of the vertex collection the vertex belongs to.
+        in: path
+        name: collection
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: The *_key* attribute of the vertex.
+        in: path
+        name: vertex
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: If set to *false*, null attributes are deleted from the document.
+        in: query
+        name: keepNull
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - description: If set to *true*, the deleted document is returned in the response object.
+        in: query
+        name: returnOld
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - description: If set to *true*, the new document is returned in the response object.
+        in: query
+        name: returnNew
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - description: If the *If-Match* header is given, it must contain exactly one ETag. The document is only updated if it has the same revision as the provided ETag. Otherwise a HTTP 412 is returned. As an alternative you can supply the ETag in a query parameter *rev*.
+        in: header
+        name: if-match
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                data: demo1
+        description: The body has to be the JSON object to be stored.
+        required: true
+      responses:
+        '200':
+          description: Successfully replace vertex when *waitForSync* is enabled.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/graph_vertex_replace_http_examples_rc_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '202':
+          description: Successfully replaced vertex when *waitForSync* is disabled.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/graph_vertex_replace_http_examples_rc_202'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified graph, collection, or vertex.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '412':
+          description: Failed to return document due to different version if a *If-Match* header or a *rev* attribute is given.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_412'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Replace a vertex
+      tags:
+      - Graphs
+  /_fabric/{fabric}/_api/edges/{collection-id}:
+    get:
+      description: Fetch an array of edges starting or ending in the vertex identified by *vertex*.
+      operationId: ReadIn-OrOutboundEdges
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: The id of the collection.
+        in: path
+        name: collection-id
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: The id of the start vertex.
+        in: query
+        name: vertex
+        required: true
+        schema:
+          type: string
+      - description: Select *in* or *out* direction for edges. If not set, all edges are returned.
+        in: query
+        name: direction
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successfully fetched the edges.
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified edge collection.
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Read in- or outbound edges
+      tags:
+      - Graphs
+components:
+  schemas:
+    graph_vertex_replace_http_examples_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        new:
+          $ref: '#/components/schemas/example_id_key_rev'
+        old:
+          $ref: '#/components/schemas/example_old_id_key_rev'
+        vertex:
+          $ref: '#/components/schemas/example_id_key_rev'
+      required:
+      - error
+      type: object
+    graph_edge_definition_modify_http_examples_rc_202:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 202
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        graph:
+          $ref: '#/components/schemas/graph_representation'
+      required:
+      - error
+      type: object
+    example_old_id_key_rev:
+      properties:
+        _id:
+          description: ID of the collection.
+          type: string
+          example: test/foo
+        _key:
+          description: _key details of collection.
+          type: string
+          example: foo
+        _rev:
+          description: _rev details of collection.
+          type: string
+          example: _zPad4Hxd--_
+      type: object
+    example_id_key_rev:
+      properties:
+        _id:
+          description: ID of the collection.
+          type: string
+          example: test/foo
+        _key:
+          description: _key details of collection.
+          type: string
+          example: foo
+        _rev:
+          description: _rev details of collection.
+          type: string
+          example: _dPRuHxe--_
+      type: object
+    graph_create_http_examples_rc_201:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 201
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        graph:
+          $ref: '#/components/schemas/graph_representation'
+      required:
+      - error
+      type: object
+    graph_list:
+      properties:
+        graph:
+          $ref: '#/components/schemas/graph_representation'
+      type: object
+    graph_vertex_replace_http_examples_rc_202:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 202
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        new:
+          $ref: '#/components/schemas/example_id_key_rev'
+        old:
+          $ref: '#/components/schemas/example_old_id_key_rev'
+        vertex:
+          $ref: '#/components/schemas/example_id_key_rev'
+      required:
+      - error
+      type: object
+    graph_vertex_get_http_examples_rc_304:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 304
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Database error number for the error that occurred.
+          type: integer
+          example: 581
+      required:
+      - error
+      type: object
+    graph_edge_create_http_examples_rc_202:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 202
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        edge:
+          $ref: '#/components/schemas/edge_representation'
+        new:
+          $ref: '#/components/schemas/edge_representation_new'
+      required:
+      - error
+      type: object
+    headers:
+      x-gdn-region:
+        description: The federation's region hostname that served the request.
+        type: string
+      x-gdn-requestid:
+        description: A unique request ID for each API request.
+        type: string
+    graph_representation:
+      description: The information about the newly created graph.
+      properties:
+        _id:
+          description: The internal id value of this graph.
+          type: string
+          example: _graphs/graph1
+        _key:
+          description: The key of this graph.
+          type: string
+          example: graph1
+        _rev:
+          description: The revision of this graph. Can be used to make sure to not override concurrent modifications to this graph.
+          type: string
+          example: _drxzsai--_
+        edgedefinitions:
+          description: An array of definitions for the relations of the graph.
+          format: graph_edge_definition
+          items:
+            $ref: '#/components/schemas/graph_edge_definition'
+          type: array
+        name:
+          description: The name of the graph.
+          type: string
+          example: graph1
+        orphanCollections:
+          description: An array of additional vertex collections. Documents within these collections do not have edges within this graph.
+          format: string
+          items:
+            type: string
+            example: emptyNode
+          type: array
+      type: object
+    redirect_example_rc_304:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 304
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 102020
+      required:
+      - error
+      type: object
+    graph_list_edge_http_examples_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+        collections:
+          description: The list of all vertex collections within this graph. Includes collections in edge definitions as well as orphans.
+          items:
+            type: string
+            example: edgeCollectionTest
+          type: array
+      required:
+      - error
+      type: object
+    edge_representation:
+      description: The edge document.
+      properties:
+        _id:
+          description: The _id value of the stored data.
+          type: string
+          example: edgeColltest020905135194uxprm/7050517
+        _key:
+          description: The _key-value of the stored data.
+          type: string
+          example: '7050517'
+        _rev:
+          description: The _rev value of the stored data.
+          type: string
+          example: _dsRmNZG--
+        _from:
+          description: The _from value of the stored data.
+          type: string
+          example: colltest020905135195vdbps/bbbb
+        _to:
+          description: The _to value of the stored data.
+          type: string
+          example: colltest020905135195vdbps/cccc
+      type: object
+    graph_vertex_modify_http_examples_rc_202:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 202
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        new:
+          $ref: '#/components/schemas/example_id_key_rev'
+        old:
+          $ref: '#/components/schemas/example_old_id_key_rev'
+        vertex:
+          $ref: '#/components/schemas/example_id_key_rev'
+      required:
+      - error
+      type: object
+    graph_vertex_delete_http_examples_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        old:
+          $ref: '#/components/schemas/example_id_key_rev'
+        removed:
+          description: '*True* if the remove was successful.'
+          type: boolean
+          example: true
+      required:
+      - error
+      type: object
+    graph_vertex_get_http_examples_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        vertex:
+          $ref: '#/components/schemas/example_id_key_rev'
+      required:
+      - error
+      type: object
+    graph_vertex_collection_remove_http_examples_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        graph:
+          $ref: '#/components/schemas/graph_representation'
+      required:
+      - error
+      type: object
+    error_example_rc_412:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 412
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
+      type: object
+    edge_representation_new:
+      description: The edge document.
+      properties:
+        _id:
+          description: The _id value of the stored data.
+          type: string
+          example: edgeColltest020905135194uxprm/7050517
+        _key:
+          description: The _key-value of the stored data.
+          type: string
+          example: '7050517'
+        _rev:
+          description: The _rev value of the stored data.
+          type: string
+          example: _dsRmNZG--
+        _from:
+          description: The _from value of the stored data.
+          type: string
+          example: colltest020905135195vdbps/bbbb
+        _to:
+          description: The _to value of the stored data.
+          type: string
+          example: colltest020905135195vdbps/eeee
+      type: object
+    graph_edge_delete_http_examples_rc_202:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 202
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        old:
+          $ref: '#/components/schemas/edge_representation'
+        removed:
+          description: Is set to *true* if the remove was successful.
+          type: boolean
+          example: true
+      required:
+      - error
+      type: object
+    graph_vertex_collection_remove_http_examples_rc_202:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 202
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        graph:
+          $ref: '#/components/schemas/graph_representation'
+      required:
+      - error
+      type: object
+    graph_edge_delete_http_examples_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        old:
+          $ref: '#/components/schemas/edge_representation'
+        removed:
+          description: Is set to *true* if the remove was successful.
+          type: boolean
+          example: true
+      required:
+      - error
+      type: object
+    graph_edge_definition_add_http_examples_rc_202:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 202
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        graph:
+          $ref: '#/components/schemas/graph_representation'
+      required:
+      - error
+      type: object
+    graph_vertex_modify_http_examples_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        new:
+          $ref: '#/components/schemas/example_id_key_rev'
+        old:
+          $ref: '#/components/schemas/example_old_id_key_rev'
+        vertex:
+          $ref: '#/components/schemas/example_id_key_rev'
+      required:
+      - error
+      type: object
+    error_example_rc_404:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 404
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
+      type: object
+    graph_edge_definition_add_http_examples_rc_201:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 201
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        graph:
+          $ref: '#/components/schemas/graph_representation'
+      required:
+      - error
+      type: object
+    graph_edge_definition_modify_http_examples:
+      properties:
+        collection:
+          description: The name of the edge collection to be used.
+          type: string
+          example: edgeCollectionTest
+        from:
+          description: One or many vertex collections that can contain source vertices.
+          items:
+            type: string
+            example: sourceVertex
+          type: array
+        to:
+          description: One or many vertex collections that can contain target vertices.
+          items:
+            type: string
+            example: destinationVertex
+          type: array
+      required:
+      - collection
+      type: object
+    graph_edge_replace_http_examples:
+      properties:
+        _from:
+          description: The source vertex of this edge. Has to be valid within the used edge definition.
+          type: string
+          example: sourceVertex
+        _to:
+          description: The target vertex of this edge. Has to be valid within the used edge definition.
+          type: string
+          example: destinationVertex
+      required:
+      - _from
+      type: object
+    graph_vertex_create_http_examples_rc_201:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 201
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        new:
+          $ref: '#/components/schemas/example_id_key_rev'
+        vertex:
+          $ref: '#/components/schemas/example_id_key_rev'
+      required:
+      - error
+      type: object
+    graph_get_http_examples_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        graph:
+          $ref: '#/components/schemas/graph_representation'
+      required:
+      - error
+      type: object
+    graph_vertex_collection_add_http_examples_rc_202:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 202
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        graph:
+          $ref: '#/components/schemas/graph_representation'
+      required:
+      - error
+      type: object
+    graph_edge_modify_http_examples_rc_202:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 202
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        edge:
+          $ref: '#/components/schemas/edge_representation'
+        new:
+          $ref: '#/components/schemas/edge_representation_new'
+        old:
+          $ref: '#/components/schemas/edge_representation'
+      required:
+      - error
+      type: object
+    graph_edge_definition_remove_http_examples_rc_201:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 201
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        graph:
+          $ref: '#/components/schemas/graph_representation'
+      required:
+      - error
+      type: object
+    error_example_rc_400:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 400
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 102020
+      required:
+      - error
+      type: object
+    graph_create_http_examples:
+      properties:
+        edgeDefinitions:
+          description: 'An array of definitions for the relations of the graph. Each has the following type:'
+          items:
+            $ref: '#/components/schemas/graph_edge_definition'
+          type: array
+        name:
+          description: Name of the graph.
+          type: string
+          example: exampleGraph
+        options:
+          $ref: '#/components/schemas/api_gharial_create_opts'
+      required:
+      - name
+      type: object
+    graph_edge_create_http_examples:
+      properties:
+        _from:
+          description: The source vertex of this edge. Has to be valid within the used edge definition.
+          type: string
+          example: sourceVertex
+        _to:
+          description: The target vertex of this edge. Has to be valid within the used edge definition.
+          type: string
+          example: destinationVertex
+      required:
+      - _from
+      type: object
+    error_example_rc_409:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 409
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
+      type: object
+    graph_edge_definition_add_http_examples:
+      properties:
+        collection:
+          description: The name of the edge collection to be used.
+          type: string
+          example: edgeCollectionTest
+        from:
+          description: One or many vertex collections that can contain source vertices.
+          items:
+            type: string
+            example: sourceVertex
+          type: array
+        to:
+          description: One or many vertex collections that can contain target vertices.
+          items:
+            type: string
+            example: destinationVertex
+          type: array
+      required:
+      - collection
+      type: object
+    error_example_rc_401:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 401
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: '102020'
+      required:
+      - error
+      type: object
+    graph_edge_definition_remove_http_examples_rc_202:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 202
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        graph:
+          $ref: '#/components/schemas/graph_representation'
+      required:
+      - error
+      type: object
+    graph_list_http_examples_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        graphs:
+          items:
+            $ref: '#/components/schemas/graph_list'
+          type: array
+      required:
+      - error
+      type: object
+    graph_edge_modify_http_examples_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        edge:
+          $ref: '#/components/schemas/edge_representation'
+        new:
+          $ref: '#/components/schemas/edge_representation_new'
+        old:
+          $ref: '#/components/schemas/edge_representation'
+      required:
+      - error
+      type: object
+    graph_edge_replace_http_examples_rc_201:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 201
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        edge:
+          $ref: '#/components/schemas/edge_representation'
+        new:
+          $ref: '#/components/schemas/edge_representation_new'
+        old:
+          $ref: '#/components/schemas/edge_representation'
+      required:
+      - error
+      type: object
+    error_example_rc_403:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 403
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
+      type: object
+    graph_edge_replace_http_examples_rc_202:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 202
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        edge:
+          $ref: '#/components/schemas/edge_representation'
+        new:
+          $ref: '#/components/schemas/edge_representation_new'
+        old:
+          $ref: '#/components/schemas/edge_representation'
+      required:
+      - error
+      type: object
+    graph_edge_definition:
+      description: An array of definitions for the relations of the graph.
+      properties:
+        collection:
+          description: Name of the edge collection, where the edge are stored in.
+          type: string
+          example: edgeName
+        from:
+          description: 'List of vertex collection names.
+
+            Edges in collection can only be inserted if their _from is in any of the collections here.'
+          format: string
+          items:
+            type: string
+            example: sourceNode
+          type: array
+        to:
+          description: 'List of vertex collection names.
+
+            Edges in collection can only be inserted if their _to is in any of the collections here.'
+          format: string
+          items:
+            type: string
+            example: destinationNode
+          type: array
+      type: object
+    graph_vertex_collection_add_http_examples_rc_201:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 201
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        graph:
+          $ref: '#/components/schemas/graph_representation'
+      required:
+      - error
+      type: object
+    graph_create_http_examples_rc_202:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 202
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        graph:
+          $ref: '#/components/schemas/graph_representation'
+      required:
+      - error
+      type: object
+    api_gharial_create_opts:
+      description: 'A JSON object to define options for creating collections within this graph.
+
+        It can contain the following attributes:'
+      type: object
+    graph_list_vertex_http_examples_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        collections:
+          description: The list of all vertex collections within this graph. Includes collections in edge definitions as well as orphans.
+          items:
+            type: string
+            example: vertex1
+          type: array
+      required:
+      - error
+      type: object
+    graph_edge_definition_modify_http_examples_rc_201:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 201
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        graph:
+          $ref: '#/components/schemas/graph_representation'
+      required:
+      - error
+      type: object
+    graph_edge_get_http_examples_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        edge:
+          $ref: '#/components/schemas/edge_representation'
+      required:
+      - error
+      type: object
+    graph_edge_create_http_examples_rc_201:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 201
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+        edge:
+          $ref: '#/components/schemas/edge_representation'
+        new:
+          $ref: '#/components/schemas/edge_representation_new'
+      required:
+      - error
+      type: object
+    graph_vertex_delete_http_examples_rc_202:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 202
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        old:
+          $ref: '#/components/schemas/example_id_key_rev'
+        removed:
+          description: '*True* if the remove was successful.'
+          type: boolean
+          example: true
+      required:
+      - error
+      type: object
+    graph_vertex_create_http_examples_rc_202:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 202
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        new:
+          $ref: '#/components/schemas/example_id_key_rev'
+        vertex:
+          $ref: '#/components/schemas/example_id_key_rev'
+      required:
+      - error
+      type: object
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Provide an API Key to the `Authorization` header, prefixed with "apikey".
+
+
+        Example: `Authorization: apikey <key>`'
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Provide a JSON Web Token (JWT) to the `Authorization` header, prefixed with "bearer".
+
+
+        Example: `Authorization: bearer <jwt>`'

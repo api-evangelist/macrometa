@@ -1,0 +1,306 @@
+openapi: 3.0.0
+info:
+  title: Macrometa API Reference Activity Metrics Embeddings API
+  version: 0.17.17
+  description: API reference for the Macrometa Global Data Network.
+  license:
+    name: Macrometa License, Version 2.0
+servers:
+- url: https://api-play.paas.macrometa.io
+  description: GDN API
+host: api-play.paas.macrometa.io
+security:
+- ApiKeyAuth: []
+- BearerAuth: []
+tags:
+- name: Embeddings
+paths:
+  /api/hss/v1/embeddings/text:
+    post:
+      tags:
+      - Embeddings
+      summary: Get text embeddings
+      operationId: get_text_embeddings_api_hss_v1_embeddings_text_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TextEmbeddingRequest'
+        required: true
+      responses:
+        '200':
+          description: Successfully returned embeddings.
+          content:
+            application/json:
+              schema:
+                items:
+                  items:
+                    type: number
+                  type: array
+                type: array
+                title: Response getTextEmbeddings
+              example:
+              - - 1.1
+                - 2.2
+              - - 4.99
+                - 8.14
+        '400':
+          description: 'Error: Bad request.'
+          content:
+            application/json:
+              example:
+                detail: Invalid model name.
+        '401':
+          description: 'Error: Unauthorized.'
+          content:
+            application/json:
+              example:
+                detail: Unauthorized.
+        '422':
+          description: 'Error: Unprocessable entity.'
+          content:
+            application/json:
+              example:
+                detail:
+                - type: json_invalid
+                  loc:
+                  - body
+                  - 72
+                  msg: JSON decode error
+                  input: {}
+                  ctx:
+                    error: Expecting ',' delimiter
+        '500':
+          description: 'Error: Internal server error.'
+          content:
+            application/json:
+              example:
+                message: Unable to load module.
+      security:
+      - APIKeyHeader: []
+  /api/hss/v1/embeddings/image:
+    post:
+      tags:
+      - Embeddings
+      summary: Get image embeddings
+      operationId: get_image_embeddings_api_hss_v1_embeddings_image_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImageEmbeddingRequest'
+        required: true
+      responses:
+        '200':
+          description: Successfully returned embeddings.
+          content:
+            application/json:
+              schema:
+                items:
+                  items:
+                    type: number
+                  type: array
+                type: array
+                title: Response getImageEmbeddings
+              example:
+              - - 1.1
+                - 2.2
+              - - 4.99
+                - 8.14
+        '400':
+          description: 'Error: Bad request.'
+          content:
+            application/json:
+              example:
+                detail: Invalid model name.
+        '401':
+          description: 'Error: Unauthorized.'
+          content:
+            application/json:
+              example:
+                detail: Unauthorized.
+        '422':
+          description: 'Error: Unprocessable entity.'
+          content:
+            application/json:
+              example:
+                detail:
+                - type: json_invalid
+                  loc:
+                  - body
+                  - 72
+                  msg: JSON decode error
+                  input: {}
+                  ctx:
+                    error: Expecting ',' delimiter
+        '500':
+          description: 'Error: Internal server error.'
+          content:
+            application/json:
+              example:
+                message: Unable to load module.
+      security:
+      - APIKeyHeader: []
+  /api/hss/v1/embeddings/multimodal:
+    post:
+      tags:
+      - Embeddings
+      summary: Get multimodal embeddings
+      operationId: get_multimodal_embeddings_api_hss_v1_embeddings_multimodal_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MultiModalEmbeddingRequest'
+        required: true
+      responses:
+        '200':
+          description: Successfully returned embeddings.
+          content:
+            application/json:
+              schema:
+                items:
+                  items:
+                    type: number
+                  type: array
+                type: array
+                title: Response getMultimodelEmbeddings
+              example:
+              - - 1.1
+                - 2.2
+              - - 4.99
+                - 8.14
+        '400':
+          description: 'Error: Bad request.'
+          content:
+            application/json:
+              example:
+                detail: Invalid model name.
+        '401':
+          description: 'Error: Unauthorized.'
+          content:
+            application/json:
+              example:
+                detail: Unauthorized.
+        '422':
+          description: 'Error: Unprocessable entity.'
+          content:
+            application/json:
+              example:
+                detail:
+                - type: json_invalid
+                  loc:
+                  - body
+                  - 72
+                  msg: JSON decode error
+                  input: {}
+                  ctx:
+                    error: Expecting ',' delimiter
+        '500':
+          description: 'Error: Internal server error.'
+          content:
+            application/json:
+              example:
+                message: Unable to load module.
+      security:
+      - APIKeyHeader: []
+components:
+  schemas:
+    MultiModalRequestData:
+      properties:
+        text:
+          type: string
+          title: Text
+          description: The text string for which to generate embedding.
+          examples:
+          - two sleeping cats
+        image_url:
+          type: string
+          title: Image Url
+          description: The url of image for which to generate embedding.
+          examples:
+          - http://images.cocodataset.org/val2017/000000039769.jpg
+      type: object
+      required:
+      - text
+      - image_url
+      title: MultiModalRequestData
+    TextEmbeddingRequest:
+      properties:
+        strings:
+          items:
+            type: string
+          type: array
+          title: Strings
+          description: The text strings for which to generate embeddings.
+          examples:
+          - - did you see
+            - a man wearing a red hat
+        model_name:
+          type: string
+          title: Model Name
+          description: The name of the model to use for generating embeddings.
+          examples:
+          - sentence-transformers/all-MiniLM-L6-v2
+      type: object
+      required:
+      - strings
+      - model_name
+      title: TextEmbeddingRequest
+    MultiModalEmbeddingRequest:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/MultiModalRequestData'
+          type: array
+          title: Data
+          description: Multi model input definition.
+        model_name:
+          type: string
+          title: Model Name
+          description: The name of the model to use for generating embeddings.
+          examples:
+          - open_clip/ViT-L-14/laion2b_s32b_b82k
+      type: object
+      required:
+      - data
+      - model_name
+      title: MultiModalEmbeddingRequest
+    ImageEmbeddingRequest:
+      properties:
+        urls:
+          items:
+            type: string
+          type: array
+          title: Urls
+          description: The urls of images for which to generate embeddings.
+          examples:
+          - - http://images.cocodataset.org/val2017/000000039769.jpg
+        model_name:
+          type: string
+          title: Model Name
+          description: The name of the model to use for generating embeddings.
+          examples:
+          - laion/CLIP-ViT-B-32-laion2B-s34B-b79K
+      type: object
+      required:
+      - urls
+      - model_name
+      title: ImageEmbeddingRequest
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Provide an API Key to the `Authorization` header, prefixed with "apikey".
+
+
+        Example: `Authorization: apikey <key>`'
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Provide a JSON Web Token (JWT) to the `Authorization` header, prefixed with "bearer".
+
+
+        Example: `Authorization: bearer <jwt>`'

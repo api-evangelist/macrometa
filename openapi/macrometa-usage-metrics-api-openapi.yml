@@ -1,0 +1,289 @@
+openapi: 3.0.0
+info:
+  title: Macrometa API Reference Activity Metrics Usage Metrics API
+  version: 0.17.17
+  description: API reference for the Macrometa Global Data Network.
+  license:
+    name: Macrometa License, Version 2.0
+servers:
+- url: https://api-play.paas.macrometa.io
+  description: GDN API
+host: api-play.paas.macrometa.io
+security:
+- ApiKeyAuth: []
+- BearerAuth: []
+tags:
+- name: Usage Metrics
+  description: All the PhotonIQ EST usage metrics endpoints.
+paths:
+  /api/est/v1/usage/hourly:
+    get:
+      tags:
+      - Usage Metrics
+      description: Get hourly usage metrics based on start and end date-time parameters.
+      parameters:
+      - in: header
+        name: X-PhotonIQ-CustomerID
+        schema:
+          type: string
+        required: true
+        description: PhotonIQ EST customer ID.
+      - in: query
+        name: from
+        schema:
+          type: string
+          format: date-time
+        required: true
+        description: The UTC start date and time when usage information is retrieved (e.g. 2022-01-01T00:00:00Z).
+      - in: query
+        name: to
+        schema:
+          type: string
+          format: date-time
+        description: The UTC end date and time when usage information is retrieved (e.g. 2022-01-01T00:00:00Z).
+        required: true
+      - in: query
+        name: sortBy
+        schema:
+          type: string
+          enum:
+          - Request
+          - Bytes
+          - Timestamp
+          default: Timestamp
+        description: Sort by arrtibute.
+        required: false
+      - in: query
+        name: sortOrder
+        schema:
+          type: string
+          enum:
+          - ASC
+          - DESC
+          default: ASC
+        description: Sort order.
+        required: false
+      - in: query
+        name: aggregate
+        schema:
+          type: boolean
+          enum:
+          - true
+          - false
+          default: false
+        description: If the *aggregate* flag is true, then the result are consolidated and returned as an aggregated summary for the specified from and to period.  If the aggregate flag is false or not provided, then only separate records for the same time period is returned.
+        required: false
+      - in: query
+        name: limit
+        schema:
+          type: number
+          default: 20
+        description: The *limit* parameter determines the number of usage records to be returned.'
+      - in: query
+        name: offset
+        schema:
+          type: number
+          default: 0
+        description: The *offset* from which data is to be returned from total queried records.
+      responses:
+        '200':
+          description: Usage metrics retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsageMetrics'
+        '400':
+          description: Invalid date parameters
+        '500':
+          description: Internal server error
+  /api/est/v1/usage/daily:
+    get:
+      tags:
+      - Usage Metrics
+      description: Get daily usage metrics based on start and end date-time parameters.
+      parameters:
+      - in: header
+        name: X-PhotonIQ-CustomerID
+        schema:
+          type: string
+        required: true
+        description: PhotonIQ EST customer ID.
+      - in: query
+        name: from
+        schema:
+          type: string
+          format: date-time
+        required: true
+        description: The UTC start date and time when usage information is retrieved (e.g. 2022-01-01T00:00:00Z).
+      - in: query
+        name: to
+        schema:
+          type: string
+          format: date-time
+        description: The UTC end date and time when usage information is retrieved (e.g. 2022-01-01T00:00:00Z).
+        required: true
+      - in: query
+        name: sortBy
+        schema:
+          type: string
+          enum:
+          - Request
+          - Bytes
+          - Timestamp
+          default: Timestamp
+        description: Sort by arrtibute.
+        required: false
+      - in: query
+        name: sortOrder
+        schema:
+          type: string
+          enum:
+          - ASC
+          - DESC
+          default: ASC
+        description: Sort order.
+        required: false
+      - in: query
+        name: aggregate
+        schema:
+          type: boolean
+          enum:
+          - true
+          - false
+          default: false
+        description: If the *aggregate* flag is true, then the result are consolidated and returned as an aggregated summary for the specified from and to period.  If the aggregate flag is false or not provided, then only separate records for the same time period is returned.
+        required: false
+      - in: query
+        name: limit
+        schema:
+          type: number
+          default: 20
+        description: The *limit* parameter determines the number of usage records to be returned.'
+      - in: query
+        name: offset
+        schema:
+          type: number
+          default: 0
+        description: The *offset* from where data to be returned from total queried records.
+      responses:
+        '200':
+          description: Usage metrics retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsageMetrics'
+        '400':
+          description: Invalid date parameters
+        '500':
+          description: Internal server error
+  /api/est/v1/usage/monthly:
+    get:
+      tags:
+      - Usage Metrics
+      description: Get monthly usage metrics based on start and end date-time parameters.
+      parameters:
+      - in: header
+        name: X-PhotonIQ-CustomerID
+        schema:
+          type: string
+        required: true
+        description: PhotonIQ EST customer ID.
+      - in: query
+        name: from
+        schema:
+          type: string
+          format: date-time
+        required: true
+        description: The UTC start date and time when usage information is retrieved (e.g. 2022-01-01T00:00:00Z).
+      - in: query
+        name: to
+        schema:
+          type: string
+          format: date-time
+        description: The UTC end date and time when usage information is retrieved (e.g. 2022-01-01T00:00:00Z).
+        required: true
+      - in: query
+        name: sortBy
+        schema:
+          type: string
+          enum:
+          - Request
+          - Bytes
+          - Timestamp
+          default: Timestamp
+        description: Sort by arrtibute
+        required: false
+      - in: query
+        name: sortOrder
+        schema:
+          type: string
+          enum:
+          - ASC
+          - DESC
+          default: ASC
+        description: Sort order
+        required: false
+      - in: query
+        name: aggregate
+        schema:
+          type: boolean
+          enum:
+          - true
+          - false
+          default: false
+        description: If the *aggregate* flag is true, then the result are consolidated and returned as an aggregated summary for the specified from and to period.  If the aggregate flag is false or not provided, then only separate records for the same time period is returned.
+        required: false
+      - in: query
+        name: limit
+        schema:
+          type: number
+          default: 20
+        description: The *limit* parameter determines the number of usage records to be returned.'
+      - in: query
+        name: offset
+        schema:
+          type: number
+          default: 0
+        description: The *offset* from which data is to be returned from total queried records.
+      responses:
+        '200':
+          description: Usage metrics retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsageMetrics'
+        '400':
+          description: Invalid date parameters
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    UsageMetrics:
+      type: object
+      properties:
+        customerId:
+          type: string
+          description: ID of the customer.
+        usedRequests:
+          type: number
+          description: Number of requests made by the customer.
+        usedBytes:
+          type: number
+          description: Number of bytes used.
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Provide an API Key to the `Authorization` header, prefixed with "apikey".
+
+
+        Example: `Authorization: apikey <key>`'
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Provide a JSON Web Token (JWT) to the `Authorization` header, prefixed with "bearer".
+
+
+        Example: `Authorization: bearer <jwt>`'

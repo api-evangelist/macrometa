@@ -1,0 +1,484 @@
+openapi: 3.0.0
+info:
+  title: Macrometa API Reference Activity Metrics Import Export API
+  version: 0.17.17
+  description: API reference for the Macrometa Global Data Network.
+  license:
+    name: Macrometa License, Version 2.0
+servers:
+- url: https://api-play.paas.macrometa.io
+  description: GDN API
+host: api-play.paas.macrometa.io
+security:
+- ApiKeyAuth: []
+- BearerAuth: []
+tags:
+- name: Import Export
+paths:
+  /_fabric/{fabric}/_api/export:
+    post:
+      description: 'Run the **query** and return list of result documents. **Query** cannot contain the following keywords: **INSERT**, **UPDATE**, **REPLACE**, **REMOVE** and **UPSERT**.'
+      operationId: ExportQueryData
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/api_export'
+        required: true
+      responses:
+        '200':
+          description: Successfully exported data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/export_http_examples_rc_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed to validate because you do not have access to the GeoFabric.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find collection.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Export data
+      tags:
+      - Import Export
+  /_fabric/{fabric}/_api/export/{collection}:
+    get:
+      description: Fetch a list of documents in the specified collection. If offset, limit and order are not specified their default values are applied.
+      operationId: ExportCollectionData
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      - in: path
+        name: collection
+        required: true
+        description: The name of the collection.
+        schema:
+          type: string
+          format: string
+      - description: This option can be used to simulate paging.
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: string
+          default: 0
+      - description: 'This option can be used to simulate paging. Limit the result. **Maximum: 1000**.'
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: string
+          minimum: 1
+          maximum: 1000
+          default: 20
+      - description: Order the results asc or desc.
+        in: query
+        name: order
+        required: false
+        schema:
+          type: string
+          default: asc
+      responses:
+        '200':
+          description: Successfully fetched list of documents.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/export_http_examples_rc_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed to validate because you do not have access to the GeoFabric.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Export collection data
+      tags:
+      - Import Export
+  /_fabric/{fabric}/_api/import/{collection}:
+    post:
+      description: Create documents in the collection identified by collection parameter.
+      operationId: ImportCollectionData
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      - in: path
+        name: collection
+        required: true
+        description: The name of the collection.
+        schema:
+          type: string
+          format: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/api_import'
+        required: true
+      responses:
+        '200':
+          description: 'Successfully imported data.
+
+
+            If there are any errors, an additional header *X-C8-Error-Codes* is set, that contains a map of the error codes that occurred together with their multiplicities, as in: 1205:10,1210:17 which means that in 10 cases the error 1205 "illegal document handle" and in 17 cases the error 1210 "unique constraint violated" has happened. The response body has additional failed document details in *details* object.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/import_http_examples_rc_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed to validate because you do not have access to the GeoFabric.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Import collection data
+      tags:
+      - Import Export
+components:
+  schemas:
+    error_example_rc_404:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 404
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
+      type: object
+    error_example_rc_403:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 403
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
+      type: object
+    api_export:
+      properties:
+        bindVars:
+          additionalProperties: {}
+          description: Key-value pairs representing the bind parameters. Optional if bind parameters are not used in query.
+          type: object
+          example: {}
+        query:
+          description: 'C8QL query. Default: returns all documents.'
+          format: string
+          type: string
+          default: for u in testCollection return u
+      type: object
+    export_http_examples_rc_200:
+      type: object
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          type: array
+          items:
+            type: object
+            properties:
+              _key:
+                type: string
+                example: '1634556'
+              name:
+                type: string
+                example: test1
+    api_import:
+      properties:
+        data:
+          description: An array of JSON documents. Each document is interpreted separately. If the `primaryKey` property (see below) is not set or equals `auto`, then the `_key` attribute values of the documents must be strings. The maximum number of documents that can be imported is limited by the `Max Documents Imported Per API Call` limit.
+          type: array
+          items:
+            type: object
+            example:
+              _key: '1634556'
+              name: test1
+        details:
+          description: If *true* extra information for errors and unprocessed documents are returned in the result.
+          format: boolean
+          type: boolean
+          default: false
+        primaryKey:
+          description: 'If used, this attribute becomes the *_key* for the new document. If the values in the attribute are not strings, they are convert to strings before import. Any existing *_key* value is renamed to *old_key*. Use the following naming convention: https://macrometa.dev/documents/naming-conventions/#document-keys'
+          format: string
+          type: string
+          default: name
+        replace:
+          description: If *true*, existing document having same *_key* in the colletion, shall be replaced.
+          format: boolean
+          type: boolean
+          default: false
+      type: object
+    headers:
+      x-gdn-region:
+        description: The federation's region hostname that served the request.
+        type: string
+      x-gdn-requestid:
+        description: A unique request ID for each API request.
+        type: string
+    error_example_rc_400:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 400
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 102020
+      required:
+      - error
+      type: object
+    import_http_examples_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          properties:
+            created:
+              description: Number of records created.
+              type: integer
+              example: 3
+            errors:
+              description: Number of records with errors.
+              type: integer
+              example: 0
+            unprocessed:
+              description: Number of records not processed.
+              type: integer
+              example: 0
+    error_example_rc_401:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 401
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: '102020'
+      required:
+      - error
+      type: object
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Provide an API Key to the `Authorization` header, prefixed with "apikey".
+
+
+        Example: `Authorization: apikey <key>`'
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Provide a JSON Web Token (JWT) to the `Authorization` header, prefixed with "bearer".
+
+
+        Example: `Authorization: bearer <jwt>`'

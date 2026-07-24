@@ -1,0 +1,140 @@
+openapi: 3.0.0
+info:
+  title: Macrometa API Reference Activity Metrics Triggers API
+  version: 0.17.17
+  description: API reference for the Macrometa Global Data Network.
+  license:
+    name: Macrometa License, Version 2.0
+servers:
+- url: https://api-play.paas.macrometa.io
+  description: GDN API
+host: api-play.paas.macrometa.io
+security:
+- ApiKeyAuth: []
+- BearerAuth: []
+tags:
+- name: Triggers
+  description: 'This endpoint is designed for configuring triggers for a specific component. Triggers are essential for initiating actions within a component, as they define the specific conditions  under which these actions are executed. Each trigger consists of one or more rules, known as Trigger Rules, which collectively determine when an action should be started. In the  configuration process, you can define various types of Trigger Rules, each tailored to different conditions and scenarios. This flexibility allows for precise control over component behavior,  enabling actions to be executed in response to defined events or states. It is crucial to accurately set up triggers to ensure the proper functioning of the component within your website''s  architecture. By using this endpoint, you can create, modify, or delete trigger configurations, thereby customizing how and when your component reacts to specific conditions or user interactions. '
+paths:
+  /api/est/v1/trigger:
+    post:
+      tags:
+      - Triggers
+      description: Create PhotonIQ EST trigger.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                ruleType:
+                  type: string
+                variableName:
+                  type: string
+                matchOperation:
+                  type: string
+                matchValue:
+                  type: string
+      responses:
+        '200':
+          description: Returns created PhotonIQ EST trigger.
+        '500':
+          description: Error creating PhotonIQ EST trigger.
+    get:
+      tags:
+      - Triggers
+      description: Get all PhotonIQ EST triggers.
+      responses:
+        '200':
+          description: Returns PhotonIQ EST trigger.
+        '500':
+          description: Error getting PhotonIQ EST trigger.
+  /api/est/v1/trigger/{name}:
+    get:
+      tags:
+      - Triggers
+      description: Get PhotonIQ EST trigger.
+      parameters:
+      - in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        description: Trigger name
+      responses:
+        '200':
+          description: Returns PhotonIQ EST trigger.
+        '500':
+          description: Error getting PhotonIQ EST trigger.
+    patch:
+      tags:
+      - Triggers
+      description: Update PhotonIQ EST trigger.
+      parameters:
+      - in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        description: Trigger name.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                ruleType:
+                  type: string
+                variableName:
+                  type: string
+                matchOperation:
+                  type: string
+                matchValue:
+                  type: string
+      responses:
+        '200':
+          description: Returns updated PhotonIQ EST trigger.
+        '404':
+          description: Error Trigger not found
+        '500':
+          description: Error updating PhotonIQ EST trigger.
+    delete:
+      tags:
+      - Triggers
+      description: Delete PhotonIQ EST trigger.
+      parameters:
+      - in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        description: Trigger name.
+      responses:
+        '200':
+          description: PhotonIQ EST service trigger deleted successfully.
+        '500':
+          description: Error deleting PhotonIQ EST trigger.
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Provide an API Key to the `Authorization` header, prefixed with "apikey".
+
+
+        Example: `Authorization: apikey <key>`'
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Provide a JSON Web Token (JWT) to the `Authorization` header, prefixed with "bearer".
+
+
+        Example: `Authorization: bearer <jwt>`'

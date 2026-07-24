@@ -1,0 +1,245 @@
+openapi: 3.0.0
+info:
+  title: Macrometa API Reference Activity Metrics Redis API
+  version: 0.17.17
+  description: API reference for the Macrometa Global Data Network.
+  license:
+    name: Macrometa License, Version 2.0
+servers:
+- url: https://api-play.paas.macrometa.io
+  description: GDN API
+host: api-play.paas.macrometa.io
+security:
+- ApiKeyAuth: []
+- BearerAuth: []
+tags:
+- name: Redis
+paths:
+  /_fabric/{fabric}/_api/redis/{collection}:
+    post:
+      description: "This API provides a REST API to access Redis databases. The REST API follows the same convention that the Redis Protocol uses.\n\n Using an HTTP POST request, the redis command and its parameters can be set the in the request body. The command can also be in the url suffix with the parameter set in the request body. The parameter suffixes can vary in number, depending upon the command. For example http://api.macrometa.io/_fabric/myfabric/_api/redis/SET/foo/bar.\n\n Currently supported Redis commands :\n\n * **String:** - **APPEND**  - **DECR**  - **DECRBY**  - **GET**  - **GETDEL**  - **GETEX**  - **GETRANGE** - **GETSET**  - **INCR**  - **INCRBY**  - **INCRBYFLOAT**  - **MGET**  - **MSET**  - **MSETNX** - **PSETEX**  - **SET** - **SETBIT** - **SETEX**  - **SETNX** - **SETRANGE**  - **STRLEN**  - **BITCOUNT** - **BITOP** - **BITPOS** - **GETBIT**\n\n * **Hash:** - **HDEL**  - **HEXISTS**  - **HGET** - **HGETALL**  - **HINCRBY**  - **HINCRBYFLOAT**  - **HKEYS** - **HLEN**  - **HMGET**  - **HMSET**  - **HSCAN** - **HSET**  - **HSETNX**  - **HSTRLEN**  - **HRANDFIELD** - **HVALS**\n\n * **List:** - **LINDEX** - **LINSERT** - **LLEN** - **LMOVE** - **LPOP** - **LPOS** - **LPUSH** - **LPUSHX** - **LRANGE** - **LREM** - **LSET** - **LTRIM** - **RPOP** - **RPOPLPUSH** - **RPUSH** - **RPUSHX**\n\n *  **Set:** - **SADD** - **SCARD** - **SDIFF** - **SDIFFSTORE** - **SINTER** - **SINTERSTORE** - **SISMEMBER** - **SMEMBERS** - **SMISMEMBER** - **SMOVE** - **SPOP** - **SRANDMEMBER** - **SREM** - **SSCAN** - **SUNION** - **SUNIONSTORE**\n\n * **SortedSet:** - **ZADD** - **ZCARD** - **ZCOUNT** - **ZDIFF** - **ZDIFFSTORE** - **ZINCRBY** - **ZINTER** - **ZINTERSTORE** - **ZLEXCOUNT** - **ZMSCORE** - **ZPOPMAX** - **ZPOPMIN** - **ZRANDMEMBER** - **ZRANGE** - **ZRANGEBYLEX** - **ZRANGEBYSCORE** - **ZRANGESTORE** - **ZRANK** - **ZREM** - **ZREMRANGEBYLEX** - **ZREMRANGEBYRANK** - **ZREMRANGEBYSCORE** - **ZREVRANGE** - **ZREVRANGEBYLEX** - **ZREVRANGEBYSCORE** - **ZREVRANK** - **ZSCAN** - **ZSCORE** - **ZUNION** - **ZUNIONSTORE**\n\n * **Generic:** - **COPY** - **DEL** - **EXISTS** - **EXPIRE** - **EXPIREAT** - **PERSIST** - **PEXPIRE** - **PEXPIREAT** - **PTTL** - **RANDOMKEY** - **RENAME** - **RENAMENX** - **SCAN** - **TTL** - **TYPE** - **UNLINK**\n\n * **Server:** - **ECHO** - **PING** - **PIPELINE** - **DBSIZE** - **FLUSHDB** - **TIME**\n\n"
+      operationId: RedisPost
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      - in: path
+        name: collection
+        required: true
+        description: The name of the Redis collection.
+        schema:
+          type: string
+          format: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items: {}
+              example:
+              - SET
+              - foo
+              - bar
+        description: The body depends on the command to be executed.
+      responses:
+        '200':
+          description: Successfully returned after execution.
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    description: HTTP response code.
+                    type: integer
+                    example: 200
+                  result:
+                    description: Result depending upon Redis command. It can be a string, number or an array.
+                    type: array
+                    items: {}
+                    example: OK
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to invalid command parameters. Verify that all parameters are correct.
+          content:
+            application/json:
+              schema:
+                properties:
+                  error:
+                    description: Error message if there is an error in response.
+                    type: string
+                    example: Invalid cmd params.
+                  code:
+                    description: HTTP response code.
+                    type: integer
+                    example: 400
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed because you do not have execute permissions.
+          content:
+            application/json:
+              schema:
+                properties:
+                  error:
+                    description: Flag if there is an error in response. *True* for this response.
+                    type: boolean
+                    example: true
+                  errorMessage:
+                    description: Error message if there is an error in response.
+                    type: string
+                    example: not authorized to execute this request
+                  code:
+                    description: HTTP response code.
+                    type: integer
+                    example: 401
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Redis-like API interface
+      tags:
+      - Redis
+  /_fabric/{fabric}/_api/redis/{collection}/{command}:
+    get:
+      description: "This API provides a REST API to access Redis databases. The REST API follows the same convention that the Redis Protocol uses. \n\n Give the command name and parameters in the same order as the Redis protocol, separating commands with a '/'. The parameter suffixes can vary in number, depending upon the command. For example http://api.macrometa.io/_fabric/myfabric/_api/redis/SET/foo/bar. Query params can also be used along with suffixes, for example http://api.macrometa.io/_fabric/myfabric/_api/redis/SET/foo/bar?ex=100.\n\n Currently supported Redis commands :\n\n * **String:** - **APPEND**  - **DECR**  - **DECRBY**  - **GET**  - **GETDEL**  - **GETEX**  - **GETRANGE** - **GETSET**  - **INCR**  - **INCRBY**  - **INCRBYFLOAT**  - **MGET**  - **MSET**  - **MSETNX** - **PSETEX**  - **SET** - **SETBIT** - **SETEX**  - **SETNX** - **SETRANGE**  - **STRLEN**  - **BITCOUNT** - **BITOP** - **BITPOS** - **GETBIT**\n\n * **Hash:** - **HDEL**  - **HEXISTS**  - **HGET** - **HGETALL**  - **HINCRBY**  - **HINCRBYFLOAT**  - **HKEYS** - **HLEN**  - **HMGET**  - **HMSET**  - **HSCAN** - **HSET**  - **HSETNX**  - **HSTRLEN**  - **HRANDFIELD** - **HVALS**\n\n * **List:** - **LINDEX** - **LINSERT** - **LLEN** - **LMOVE** - **LPOP** - **LPOS** - **LPUSH** - **LPUSHX** - **LRANGE** - **LREM** - **LSET** - **LTRIM** - **RPOP** - **RPOPLPUSH** - **RPUSH** - **RPUSHX**\n\n *  **Set:** - **SADD** - **SCARD** - **SDIFF** - **SDIFFSTORE** - **SINTER** - **SINTERSTORE** - **SISMEMBER** - **SMEMBERS** - **SMISMEMBER** - **SMOVE** - **SPOP** - **SRANDMEMBER** - **SREM** - **SSCAN** - **SUNION** - **SUNIONSTORE**\n\n * **SortedSet:** - **ZADD** - **ZCARD** - **ZCOUNT** - **ZDIFF** - **ZDIFFSTORE** - **ZINCRBY** - **ZINTER** - **ZINTERSTORE** - **ZLEXCOUNT** - **ZMSCORE** - **ZPOPMAX** - **ZPOPMIN** - **ZRANDMEMBER** - **ZRANGE** - **ZRANGEBYLEX** - **ZRANGEBYSCORE** - **ZRANGESTORE** - **ZRANK** - **ZREM** - **ZREMRANGEBYLEX** - **ZREMRANGEBYRANK** - **ZREMRANGEBYSCORE** - **ZREVRANGE** - **ZREVRANGEBYLEX** - **ZREVRANGEBYSCORE** - **ZREVRANK** - **ZSCAN** - **ZSCORE** - **ZUNION** - **ZUNIONSTORE**\n\n * **Generic:** - **COPY** - **DEL** - **EXISTS** - **EXPIRE** - **EXPIREAT** - **PERSIST** - **PEXPIRE** - **PEXPIREAT** - **PTTL** - **RANDOMKEY** - **RENAME** - **RENAMENX** - **SCAN** - **TTL** - **TYPE** - **UNLINK**\n\n * **Server:** - **ECHO** - **PING** - **PIPELINE** - **DBSIZE** - **FLUSHDB** - **TIME**\n\n"
+      operationId: RedisGet
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      - in: path
+        name: collection
+        required: true
+        description: The name of the collection.
+        schema:
+          type: string
+          format: string
+      - in: path
+        name: command
+        required: true
+        description: The name of the redis command.
+        schema:
+          type: string
+          format: string
+      responses:
+        '200':
+          description: Successfully returned after execution.
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    description: HTTP response code.
+                    type: integer
+                    example: 200
+                  result:
+                    description: Result depending upon Redis command. It can be a string, number or an array.
+                    type: array
+                    items: {}
+                    example: OK
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to invalid command parameters. Verify that all parameters are correct.
+          content:
+            application/json:
+              schema:
+                properties:
+                  error:
+                    description: Error message if there is an error in response.
+                    type: string
+                    example: Invalid cmd params.
+                  code:
+                    description: HTTP response code.
+                    type: integer
+                    example: 400
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed because you do not have execute permissions.
+          content:
+            application/json:
+              schema:
+                properties:
+                  error:
+                    description: Flag if there is an error in response. *True* for this response.
+                    type: boolean
+                    example: true
+                  errorMessage:
+                    description: Error message if there is an error in response.
+                    type: string
+                    example: not authorized to execute this request
+                  code:
+                    description: HTTP response code.
+                    type: integer
+                    example: 401
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Redis-like API interface
+      tags:
+      - Redis
+components:
+  schemas:
+    headers:
+      x-gdn-requestid:
+        description: A unique request ID for each API request.
+        type: string
+      x-gdn-region:
+        description: The federation's region hostname that served the request.
+        type: string
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Provide an API Key to the `Authorization` header, prefixed with "apikey".
+
+
+        Example: `Authorization: apikey <key>`'
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Provide a JSON Web Token (JWT) to the `Authorization` header, prefixed with "bearer".
+
+
+        Example: `Authorization: bearer <jwt>`'

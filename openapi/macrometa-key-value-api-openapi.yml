@@ -1,0 +1,1136 @@
+openapi: 3.0.0
+info:
+  title: Macrometa API Reference Activity Metrics Key Value API
+  version: 0.17.17
+  description: API reference for the Macrometa Global Data Network.
+  license:
+    name: Macrometa License, Version 2.0
+servers:
+- url: https://api-play.paas.macrometa.io
+  description: GDN API
+host: api-play.paas.macrometa.io
+security:
+- ApiKeyAuth: []
+- BearerAuth: []
+tags:
+- name: Key Value
+paths:
+  /_fabric/{fabric}/_api/kv/{collection}/count:
+    get:
+      description: Get number of key-value pairs in collection.
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      - in: path
+        name: collection
+        required: true
+        description: The name of the key-value collection.
+        schema:
+          type: string
+          format: string
+      - in: query
+        name: groupID
+        required: false
+        description: Get count of key-value pairs belonging to this groupID.
+        schema:
+          type: string
+          format: string
+      responses:
+        '200':
+          description: Successfully fetched number of key-value pairs.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/kv_examples_rc_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified fabric or collection.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Get number of key-value pairs in collection
+      tags:
+      - Key Value
+  /_fabric/{fabric}/_api/kv/{collection}/keys:
+    get:
+      description: Fetch keys from key-value collection.
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      - in: path
+        name: collection
+        required: true
+        description: The name of the key-value collection.
+        schema:
+          type: string
+          format: string
+      - in: query
+        name: groupID
+        required: false
+        description: Get keys belonging to this groupID.
+        schema:
+          type: string
+          format: string
+      - description: This option simulates paging.
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: string
+          default: 0
+      - description: This option limits results while simulating paging.
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: string
+          maximum: 100
+          default: 20
+      - description: Order the results ascending (asc) or descending (desc).
+        in: query
+        name: order
+        required: false
+        schema:
+          type: string
+          default: asc
+      responses:
+        '200':
+          description: Successfully fetched the key-value keys.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/kv_array_rc_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified fabric or collection.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Gets keys from key-value collection
+      tags:
+      - Key Value
+  /_fabric/{fabric}/_api/kv:
+    get:
+      description: Fetch all key-value collections.
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      responses:
+        '200':
+          description: Successfully fetched all key-value collection with expiration details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/keys_array_rc_200_1'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified fabric.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Lists all key-value collections
+      tags:
+      - Key Value
+  /_fabric/{fabric}/_api/kv/{collection}:
+    post:
+      description: Create key-value collection.
+      operationId: CreateNamespace
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      - in: path
+        name: collection
+        required: true
+        description: The name of the key-value collection.
+        schema:
+          type: string
+          format: string
+      - description: Enable TTL support.
+        in: query
+        name: expiration
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - description: Enable KV group support.
+        in: query
+        name: group
+        required: false
+        schema:
+          type: boolean
+          default: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                stream:
+                  description: Flag for on-demand stream collection
+                  type: boolean
+                  example: false
+                enableShards:
+                  description: Enabling sharding for the collection
+                  type: boolean
+                  example: false
+                waitForSync:
+                  description: '*True* if all data must be synced to storage before operation returns.'
+                  type: boolean
+                  example: true
+                cacheEnabled:
+                  description: '*True* if collection has cache enabled'
+                  type: boolean
+                  default: false
+                blobs:
+                  description: '*True* if collection is a blob-only collection.'
+                  type: boolean
+                  default: false
+                shardKeys:
+                  type: array
+                  items:
+                    description: Array of shard keys
+                    type: string
+                    example: key1
+        description: "A JSON object with these optional properties:\n\n - **stream**: *True* if creating a stream with this collection.\n - **enableShards**: *True* if enabling sharding\n - **waitForSync**: *True* if all data must be synced to storage before operation returns.\n - **shardKeys**: an array of shard keys\n - **blobs**: *True* if this is a blob-only collection."
+        required: true
+      responses:
+        '200':
+          description: Successfully created key-value collection.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/kv_collection_examples_rc_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified fabric or collection.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '409':
+          description: Failed because collection already exists.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_409'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '429':
+          description: Collection count exceeds the maximum number of collections per fabric.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_429'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Create key-value collection
+      tags:
+      - Key Value
+    delete:
+      description: Remove key-value collection.
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      - in: path
+        name: collection
+        required: true
+        description: The name of the key-value collection.
+        schema:
+          type: string
+          format: string
+      responses:
+        '200':
+          description: Successfully removed the collection.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/kv_collection_examples_rc_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified collection.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Remove key-value collection
+      tags:
+      - Key Value
+  /_fabric/{fabric}/_api/kv/{collection}/value/{key}:
+    get:
+      description: 'Fetch value from key-value collection.
+
+
+        Note that you should only specify multipart/form-data as the response content type when you are retrieving from a blob collection.'
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      - in: path
+        name: collection
+        required: true
+        description: The name of the key-value collection.
+        schema:
+          type: string
+          format: string
+      - in: path
+        name: key
+        required: true
+        description: The key.
+        schema:
+          type: string
+          format: string
+      responses:
+        '200':
+          description: Successfully fetched the key-value pair.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/kv_key_examples_rc_200'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/key_blob'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified key-value pair.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Get value from key-value collection
+      tags:
+      - Key Value
+    delete:
+      description: Remove key-value pair.
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      - in: path
+        name: collection
+        required: true
+        description: The name of the key-value collection.
+        schema:
+          type: string
+          format: string
+      - in: path
+        name: key
+        required: true
+        description: The key.
+        schema:
+          type: string
+          format: string
+      responses:
+        '202':
+          description: Successfully removed key-value pair.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/examples_id_key_rev'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified key-value pair.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Remove key-value pair
+      tags:
+      - Key Value
+  /_fabric/{fabric}/_api/kv/{collection}/values:
+    post:
+      description: 'Fetch key-value pairs from collection. Optional list of keys.
+
+
+        **Note:** Max limit is 100 keys per request.
+
+
+        Note that you should specify multipart/form-data as the response content type when you are retrieving from a blob collection.'
+      operationId: GetValues
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      - in: path
+        name: collection
+        required: true
+        description: The name of the key-value collection.
+        schema:
+          type: string
+          format: string
+      - in: query
+        name: groupID
+        required: false
+        description: Get key-value pairs belonging to this groupID.
+        schema:
+          type: string
+          format: string
+      - description: This option can be used to simulate paging.
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: string
+          default: 0
+      - description: This option can be used to simulate paging. Limit the result.
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: string
+          maximum: 100
+          default: 20
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/keys_array'
+        description: An optional JSON array of keys.
+      responses:
+        '200':
+          description: Successfully fetched an array of key-value pairs from collection. If no keys are found and empty array is returned.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/kv_get_values_examples_rc_200'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/key_blob_array'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified key-value pair.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Get key-value pairs from collection
+      tags:
+      - Key Value
+    delete:
+      description: 'Remove key-value pairs. Requires a list of keys.
+
+
+        **Note:** Max limit is 1000 keys per request.'
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      - in: path
+        name: collection
+        required: true
+        description: The name of the key-value collection.
+        schema:
+          type: string
+          format: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/keys_array'
+        description: A JSON array of keys.
+        required: true
+      responses:
+        '202':
+          description: Successfully removed key-value pairs.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    _id:
+                      description: ID of the collection.
+                      type: string
+                      example: test/foo
+                    _key:
+                      description: _key details of collection.
+                      type: string
+                      example: foo
+                    _rev:
+                      description: _rev details of collection.
+                      type: string
+                      example: _dPRuHxe--_
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified fabric, collection or key-value pair.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Remove key-value pairs.
+      tags:
+      - Key Value
+  /_fabric/{fabric}/_api/kv/{collection}/value:
+    put:
+      description: 'Set one or more key-value pairs in key-value collection.
+
+
+        If the input is an array of objects, then key-value pairs are created in a batch.
+
+
+        If the key does not exist, then the key-value pairs are created. Otherwise, the entry for the key is updated.
+
+
+        Specify expiration in UTC timestamp.
+
+
+        Note that you can use this API for both normal (text) and blob KV collections. When setting blob data in a blob collection, specify the multipart/form-data as the content type for the request body, and provide multi-part data in the request body.'
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      - in: path
+        name: collection
+        required: true
+        description: The name of the key-value collection
+        schema:
+          type: string
+          format: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/key_value_array'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/key_blob'
+        description: 'An object of a single document or of an array of documents.
+
+
+          If you are working with text (json) KV collections, please select "application/json" as the type of the request body. Here, you can set the following fields:
+
+          * "_key" - if it is not set, then it is generated by the system
+
+          * "value" - string or JSON object. Required.
+
+          * "expireAt" - UNIX timestamp, indicating when the value expires (-1 means no expiration)
+
+
+          If you are working with blob collections, please select "multipart/form-data" as the type of the request body. Here, you can set following fields:
+
+
+          * "meta" - This is a JSON that can specify a _key and expireAt values for the KV pair. If a _key is not provided, then it is generated by the system. "expireAt" is UNIX timestamp, showing when the value expires (-1 means no expiration). If both are to be set to defaults, please specify an empty ("{}") JSON value.
+
+          * "value" - corresponds to the file to be uploaded as the blob value for this KV pair.'
+        required: true
+      responses:
+        '202':
+          description: Successfully updated key-value pair.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties:
+                    _id:
+                      description: ID of the collection.
+                      type: string
+                      example: test/foo
+                    _key:
+                      description: _key details of collection.
+                      type: string
+                      example: foo
+                    _rev:
+                      description: updated _rev details of collection.
+                      type: string
+                      example: _dPSbTGC---
+                    _oldrev:
+                      description: prvious _rev details of collection.
+                      type: string
+                      example: _dPRuHxe--_
+                  type: object
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified collection.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Set one or more key-value pairs in key-value collection
+      tags:
+      - Key Value
+  /_fabric/{fabric}/_api/kv/{collection}/truncate:
+    put:
+      description: Remove all key-value pairs in a collection.
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      - in: path
+        name: collection
+        required: true
+        description: The name of the key-value collection.
+        schema:
+          type: string
+          format: string
+      - in: query
+        name: groupID
+        required: false
+        description: Truncate the key-value pairs belonging to this group ID.
+        schema:
+          type: string
+          format: string
+      responses:
+        '200':
+          description: Successfully removed all key-value entries.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/kv_collection_examples_rc_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified fabric or collection.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Remove all key-value pairs in a collection
+      tags:
+      - Key Value
+components:
+  schemas:
+    keys_array_rc_200_1:
+      type: object
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          description: An array of keys. If there are no results, the array is returned as empty.
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                description: Name of the collection.
+                type: string
+                example: testCollection
+              expiration:
+                description: Expiration details of a collection.
+                type: string
+                example: true
+    kv_array_rc_200:
+      type: object
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          description: An array of keys. If there are no results, the array is returned as empty.
+          type: array
+          items:
+            type: string
+            example: data
+    error_example_rc_429:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 429
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
+      type: object
+    error_example_rc_404:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 404
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
+      type: object
+    key_blob:
+      properties:
+        meta:
+          properties:
+            _key:
+              description: Key for the KV pair. If it is not set, then it is generated by the system
+              type: string
+              example: foo
+            expireAt:
+              description: UNIX timestamp, indicating when the value expires (-1 means no expiration).
+              type: integer
+              default: -1
+          type: object
+        value:
+          description: File to be uploaded as the value of the blob.
+          type: string
+          format: binary
+      required:
+      - meta
+      - value
+      type: object
+    key_value_array:
+      items:
+        $ref: '#/components/schemas/key_value'
+      type: array
+    kv_get_values_examples_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: 'false'
+        result:
+          description: An array of key-value pairs from collection. If no keys are found and empty array is returned.
+          type: array
+          items:
+            type: object
+            properties:
+              _key:
+                type: string
+                example: foo
+              value:
+                type: string
+                example: bar
+              expireAt:
+                type: number
+                example: 1637859600
+      required:
+      - error
+      type: object
+    keys_array:
+      items:
+        type: string
+        format: string
+        example: foo
+      type: array
+    key_value:
+      properties:
+        _key:
+          description: Key
+          type: string
+          example: foo
+        value:
+          description: Value
+          type: string
+          example: bar
+        groupID:
+          description: Group ID
+          type: string
+          example: group-1
+        expireAt:
+          description: Expiry time in UTC timestamp format.
+          type: integer
+          default: -1
+      required:
+      - _key
+      - value
+      type: object
+    headers:
+      x-gdn-region:
+        description: The federation's region hostname that served the request.
+        type: string
+      x-gdn-requestid:
+        description: A unique request ID for each API request.
+        type: string
+    kv_examples_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        name:
+          description: It shows name of the collection.
+          type: string
+          example: testCollection
+        count:
+          description: It gives kv count.
+          type: integer
+          example: 5
+      required:
+      - error
+      type: object
+    examples_id_key_rev:
+      properties:
+        _id:
+          description: ID of the collection.
+          type: string
+          example: test/foo
+        _key:
+          description: _key details of collection.
+          type: string
+          example: foo
+        _rev:
+          description: _rev details of collection.
+          type: string
+          example: _dPRuHxe--_
+      type: object
+    error_example_rc_400:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 400
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 102020
+      required:
+      - error
+      type: object
+    kv_collection_examples_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        name:
+          description: It shows name of the collection.
+          type: string
+          example: testCollection
+      required:
+      - error
+      type: object
+    error_example_rc_409:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 409
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
+      type: object
+    key_blob_array:
+      items:
+        $ref: '#/components/schemas/key_blob'
+      type: array
+    kv_key_examples_rc_200:
+      properties:
+        _id:
+          description: ID of the collection.
+          type: string
+          example: test/foo
+        _key:
+          description: _key details of collection.
+          type: string
+          example: foo
+        _rev:
+          description: _rev details of collection.
+          type: string
+          example: _dPRuHxe--_
+        expireAt:
+          description: Expiration details of collection.n
+          type: integer
+          example: 1638291600
+        value:
+          description: Value of the collection.
+          type: string
+          example: bar
+      type: object
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Provide an API Key to the `Authorization` header, prefixed with "apikey".
+
+
+        Example: `Authorization: apikey <key>`'
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Provide a JSON Web Token (JWT) to the `Authorization` header, prefixed with "bearer".
+
+
+        Example: `Authorization: bearer <jwt>`'

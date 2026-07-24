@@ -1,0 +1,160 @@
+openapi: 3.0.0
+info:
+  title: Macrometa API Reference Activity Metrics Error Metrics API
+  version: 0.17.17
+  description: API reference for the Macrometa Global Data Network.
+  license:
+    name: Macrometa License, Version 2.0
+servers:
+- url: https://api-play.paas.macrometa.io
+  description: GDN API
+host: api-play.paas.macrometa.io
+security:
+- ApiKeyAuth: []
+- BearerAuth: []
+tags:
+- name: Error Metrics
+  description: All the PhotonIQ EST error metrics endpoints.
+paths:
+  /api/est/v1/error/hourly:
+    get:
+      tags:
+      - Error Metrics
+      description: Get hourly error metrics based on start and end date-time parameters.
+      parameters:
+      - in: header
+        name: X-PhotonIQ-CustomerID
+        schema:
+          type: string
+        required: true
+        description: PhotonIQ EST customer ID.
+      - in: query
+        name: from
+        schema:
+          type: string
+          format: date-time
+        required: true
+        description: The UTC start date and time when error information is retrieved (e.g. 2022-01-01T00:00:00Z).
+      - in: query
+        name: to
+        schema:
+          type: string
+          format: date-time
+        description: The UTC end date and time when error information is retrieved (e.g. 2022-01-01T00:00:00Z).
+        required: true
+      responses:
+        '200':
+          description: Error metrics retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMetrics'
+        '400':
+          description: Invalid date parameters
+        '500':
+          description: Internal server error
+  /api/est/v1/error/daily:
+    get:
+      tags:
+      - Error Metrics
+      description: Get daily error metrics based on start and end date-time parameters.
+      parameters:
+      - in: header
+        name: X-PhotonIQ-CustomerID
+        schema:
+          type: string
+        required: true
+        description: PhotonIQ EST customer ID.
+      - in: query
+        name: from
+        schema:
+          type: string
+          format: date-time
+        required: true
+        description: The UTC start date and time when error information is retrieved (e.g. 2022-01-01T00:00:00Z).
+      - in: query
+        name: to
+        schema:
+          type: string
+          format: date-time
+        description: The UTC end date and time when error information is retrieved (e.g. 2022-01-01T00:00:00Z).
+        required: true
+      responses:
+        '200':
+          description: Error metrics retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMetrics'
+        '400':
+          description: Invalid date parameters
+        '500':
+          description: Internal server error.
+  /api/est/v1/error/monthly:
+    get:
+      tags:
+      - Error Metrics
+      description: Get monthly error metrics based on start and end date-time parameters.
+      parameters:
+      - in: header
+        name: X-PhotonIQ-CustomerID
+        schema:
+          type: string
+        required: true
+        description: PhotonIQ EST customer ID.
+      - in: query
+        name: from
+        schema:
+          type: string
+          format: date-time
+        required: true
+        description: The UTC start date and time when error information is retrieved (e.g. 2022-01-01T00:00:00Z).
+      - in: query
+        name: to
+        schema:
+          type: string
+          format: date-time
+        description: The UTC end date and time when error information is retrieved (e.g. 2022-01-01T00:00:00Z).
+        required: true
+      responses:
+        '200':
+          description: Error metrics retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMetrics'
+        '400':
+          description: Invalid date parameters.
+        '500':
+          description: Internal server error.
+components:
+  schemas:
+    ErrorMetrics:
+      type: object
+      properties:
+        customerId:
+          type: string
+          description: ID of the customer.
+        errorName:
+          type: string
+          description: Name of the error occured.
+        count:
+          type: number
+          description: Number of errors.
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Provide an API Key to the `Authorization` header, prefixed with "apikey".
+
+
+        Example: `Authorization: apikey <key>`'
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Provide a JSON Web Token (JWT) to the `Authorization` header, prefixed with "bearer".
+
+
+        Example: `Authorization: bearer <jwt>`'

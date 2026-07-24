@@ -1,0 +1,116 @@
+openapi: 3.0.0
+info:
+  title: Macrometa API Reference Activity Metrics Waiting room status API
+  version: 0.17.17
+  description: API reference for the Macrometa Global Data Network.
+  license:
+    name: Macrometa License, Version 2.0
+servers:
+- url: https://api-play.paas.macrometa.io
+  description: GDN API
+host: api-play.paas.macrometa.io
+security:
+- ApiKeyAuth: []
+- BearerAuth: []
+tags:
+- name: Waiting room status
+paths:
+  /api/vwr/v1/requests/status/{request_id}:
+    get:
+      summary: Position in waiting room
+      description: Get the user's current position in waiting room.
+      tags:
+      - Waiting room status
+      security:
+      - APIKeyAuth: []
+      parameters:
+      - in: path
+        name: request_id
+        required: true
+        schema:
+          type: string
+        description: The unique request ID of a user.
+      - in: query
+        name: waitingroom
+        required: true
+        schema:
+          type: string
+        description: The waitingroom_key of the waiting room.
+      - in: query
+        name: sid
+        required: true
+        schema:
+          type: integer
+        description: The user's position ID in the waiting room.
+      - in: query
+        name: created_at
+        required: true
+        schema:
+          type: integer
+        description: The creation Unix timestamp, in seconds, when the user first time entered the waiting room.
+      - in: query
+        name: client_version
+        required: true
+        schema:
+          type: string
+        description: The version of the EdgeWorker.
+      responses:
+        '200':
+          description: Successfully fetched the user's position status.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetStatusResponse'
+        '400':
+          description: Bad request.
+        '401':
+          description: Authorization failure due to invalid authentication credentials.
+        '500':
+          description: Internal server error.
+components:
+  schemas:
+    GetStatusResponse:
+      type: object
+      properties:
+        avg_waiting_time:
+          type: number
+          format: float
+          description: The average time, in milliseconds, that users spend in the virtual waiting room before being granted access to the origin service.
+          example: 19871.8
+        backoff_interval:
+          type: integer
+          description: Indicates the interval in seconds after which the EdgeWorker sends the status API call to the VWRs server.
+          example: 1
+        position:
+          type: integer
+          description: The user's current position in the waiting room.
+          example: 99359
+        queue_depth:
+          type: integer
+          description: Total number of users present in the waiting room.
+          example: 99359
+        rate_limit:
+          type: integer
+          description: The rate limit for the waiting room. The maximum users per second allowed to reach the origin.
+          example: 5
+        waiting_room_interval:
+          type: integer
+          description: The time interval in seconds when the waiting room status page is reloaded.
+          example: 1
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Provide an API Key to the `Authorization` header, prefixed with "apikey".
+
+
+        Example: `Authorization: apikey <key>`'
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Provide a JSON Web Token (JWT) to the `Authorization` header, prefixed with "bearer".
+
+
+        Example: `Authorization: bearer <jwt>`'

@@ -1,0 +1,1640 @@
+openapi: 3.0.0
+info:
+  title: Macrometa API Reference Activity Metrics Connections API
+  version: 0.17.17
+  description: API reference for the Macrometa Global Data Network.
+  license:
+    name: Macrometa License, Version 2.0
+servers:
+- url: https://api-play.paas.macrometa.io
+  description: GDN API
+host: api-play.paas.macrometa.io
+security:
+- ApiKeyAuth: []
+- BearerAuth: []
+tags:
+- name: Connections
+paths:
+  /_fabric/{fabric}/_api/connections:
+    parameters:
+    - $ref: '#/components/parameters/Fabric'
+    post:
+      description: Create a connection using a connector to an external data source.
+      summary: Create a connection
+      tags:
+      - Connections
+      operationId: createConnection
+      requestBody:
+        $ref: '#/components/requestBodies/Connection'
+      responses:
+        '200':
+          description: Successfully created the connection.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectionResponse'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed to authenticate the request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+    get:
+      description: 'Get the list of existing connections.
+
+        To get complete information about a connection, use [getConnection API]](#/Collections/getConnection) with the connection name.'
+      summary: List all connections
+      tags:
+      - Connections
+      operationId: getConnections
+      parameters:
+      - $ref: '#/components/parameters/ConnectionType'
+      responses:
+        '200':
+          description: Successfully fetched the connections.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectionsResponse'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed to authenticate the request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find the connections.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+  /_fabric/{fabric}/_api/connections/validate:
+    post:
+      description: Validate a connection to an external data source.
+      summary: Validate a connection
+      tags:
+      - Connections
+      operationId: validateConnection
+      parameters:
+      - $ref: '#/components/parameters/Fabric'
+      requestBody:
+        $ref: '#/components/requestBodies/Connection'
+      responses:
+        '200':
+          description: Successfully validated the connection.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationResponse'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed to authenticate the request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+  /_fabric/{fabric}/_api/connections/{connection-name}:
+    parameters:
+    - $ref: '#/components/parameters/Fabric'
+    - $ref: '#/components/parameters/Connection'
+    get:
+      description: Get information about a specific connection to an external data source.
+      summary: Get connection details
+      tags:
+      - Connections
+      operationId: getConnection
+      responses:
+        '200':
+          description: Successfully fetched the connection.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectionResponse'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed to authenticate the request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find the connection.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+    delete:
+      description: Delete a connection to an external data source.
+      summary: Delete a connection
+      tags:
+      - Connections
+      operationId: deleteConnection
+      parameters:
+      - name: isInternal
+        description: Setting this parameter to `true` allows internal connections to be deleted.
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: Successfully deleted the connection.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeletedResponse'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed to authenticate the request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find the connection.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+    put:
+      description: Update a connection. Note that if the connection is already in use, then it will not be updated in the workflows.
+      summary: Update connection details
+      tags:
+      - Connections
+      operationId: updateConnection
+      requestBody:
+        $ref: '#/components/requestBodies/Connection'
+      responses:
+        '200':
+          description: Successfully updated the connection.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectionResponse'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed to authenticate the request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find the connection.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+  /_api/connections/metrics:
+    get:
+      description: Retrieve connections metrics.
+      summary: Retrieve metrics
+      tags:
+      - Connections
+      operationId: getMetrics
+      parameters:
+      - name: start
+        description: A Unix timestamp. Use this parameter to filter metrics generated after the specified date and time. Must be used together with `end` parameter.
+        in: query
+        required: true
+        schema:
+          type: string
+        example: '1689592893735'
+      - name: end
+        description: A Unix timestamp. Use this parameter to filter metrics generated before the specified date and time. Must be used together with `start` parameter.
+        in: query
+        required: true
+        schema:
+          type: string
+        example: '1689592893735'
+      - name: step
+        description: Metric results step duration.
+        in: query
+        schema:
+          type: string
+        example: 24h
+      responses:
+        '200':
+          description: Successfully fetched the metrics for connections.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricsResponse'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed to authenticate the request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+  /_api/connectors:
+    get:
+      description: Get available connectors.
+      summary: Get available connectors
+      tags:
+      - Connections
+      operationId: getConnectors
+      responses:
+        '200':
+          description: Successfully fetched the connector list.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorEntitiesResponse'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed to authenticate the request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+  /_api/connectors/{connector-name}:
+    get:
+      description: 'Obtain comprehensive information about the connector,
+
+        including the configuration details necessary for setting up an connection using this connector.'
+      summary: Get connector details
+      tags:
+      - Connections
+      operationId: getConnector
+      parameters:
+      - $ref: '#/components/parameters/Connector'
+      - name: type
+        in: query
+        required: false
+        description: "Specifies which type of connector to retrieve, \nNo value returns both source and target connectors."
+        schema:
+          type: string
+          enum:
+          - source
+          - target
+      responses:
+        '200':
+          description: Succesfully fetched the connector.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorEntityResponse'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed to authenticate the request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find the connector.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+  /_api/connectors/{connector-name}/sample:
+    post:
+      description: 'Retrieve sample data from the data source by supplying the connector configuration.
+
+        The response includes both the schema and sample data.'
+      summary: Retrieve sample data from the data source
+      tags:
+      - Connections
+      operationId: retrieveSample
+      requestBody:
+        description: Connector configuration.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConnectorSampleRequest'
+      parameters:
+      - $ref: '#/components/parameters/Connector'
+      responses:
+        '200':
+          description: Successfully retrieved the connnector sample.
+          content:
+            application/json:
+              schema:
+                title: ConnectorSampleResponse
+                allOf:
+                - $ref: '#/components/schemas/ResponseBase'
+                - properties:
+                    result:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/ConnectorSample'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed to authenticate the request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find the connector.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+  /_api/connectors/{connector-name}/schema:
+    post:
+      description: Retrieve schema for the connector by supplying the connector configurations.
+      summary: Retrieve schema from the data source
+      tags:
+      - Connections
+      operationId: retrieveSchema
+      requestBody:
+        description: Connector configuration.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConnectorSampleRequest'
+      parameters:
+      - $ref: '#/components/parameters/Connector'
+      responses:
+        '200':
+          description: Successfully retrieved connector schema.
+          content:
+            application/json:
+              schema:
+                title: ConnectorSchemaResponse
+                allOf:
+                - $ref: '#/components/schemas/ResponseBase'
+                - properties:
+                    result:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/ConnectorSchema'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed to authenticate the request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find the connector.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+  /_api/transformations/sample:
+    post:
+      description: 'Generate a sample transformation query based on the schema of the specific data source.
+
+        This API serves as the initial step in creating a data transformation process.
+
+        Use this API''s generated sample transformation query to construct your transformation logic.'
+      summary: Generate a transformation query sample
+      tags:
+      - Connections
+      operationId: getSampleTransformation
+      requestBody:
+        description: Schema of the data source.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConnectorSchema'
+      responses:
+        '200':
+          description: Successfully fetched the sample transformation query.
+          content:
+            application/json:
+              schema:
+                title: SampleTransformationResponse
+                allOf:
+                - $ref: '#/components/schemas/ResponseBase'
+                - properties:
+                    query:
+                      description: Transformation query.
+                      type: string
+                    inputSchema:
+                      $ref: '#/components/schemas/ConnectorSchema'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed to authenticate the request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+  /_api/transformations/validate:
+    post:
+      description: Validate the provided transformation query and the parameters.
+      summary: Validate transformation
+      tags:
+      - Connections
+      operationId: validateTransformation
+      requestBody:
+        description: Details of transformation to validate.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              title: TransformationValidationRequest
+              properties:
+                collection:
+                  description: Name of the GDN collection.
+                  type: string
+                type:
+                  description: Connection type (source or target).
+                  type: string
+                query:
+                  description: Transformation query.
+                  type: string
+                inputSchema:
+                  description: Schema of the input data to the transformation.
+                  $ref: '#/components/schemas/ConnectorSchema'
+      responses:
+        '200':
+          description: Successfully validated the transformation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransformationValidationResponse'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed to authenticate the request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+  /_api/transformations/preview:
+    post:
+      description: 'Generate a preview of the data after the transformation. The preview is generated based on a sample data set from the data source.
+
+        You can use [get connector sample API](#/Connections/retrieveSample) to retrieve a sample dataset from the data source.'
+      summary: Generate transformed data preview
+      tags:
+      - Connections
+      operationId: previewTransformation
+      requestBody:
+        description: Parameters required to generate a transformation preview.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              title: TransformationPreviewRequest
+              properties:
+                query:
+                  description: Transformation query.
+                  type: string
+                inputSchema:
+                  $ref: '#/components/schemas/ConnectorSchema'
+                outputSchema:
+                  $ref: '#/components/schemas/ConnectorSchema'
+                data:
+                  description: Sample dataset from the data source.
+                  type: array
+                  items:
+                    type: object
+      responses:
+        '200':
+          description: Successfully generated the transformation preview.
+          content:
+            application/json:
+              schema:
+                title: TransformationPreviewResponse
+                allOf:
+                - $ref: '#/components/schemas/ResponseBase'
+                - properties:
+                    result:
+                      $ref: '#/components/schemas/ConnectorSample'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed to authenticate the request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+  /api/hss/v1/connections:
+    get:
+      tags:
+      - Connections
+      summary: Get the list of available connections.
+      operationId: get_connections_api_hss_v1_connections_get
+      responses:
+        '200':
+          description: Successfully returned connections.
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ConnectionDTO'
+                type: array
+                title: Response getConnections
+        '401':
+          description: 'Error: Unauthorized.'
+          content:
+            application/json:
+              example:
+                detail: Unauthorized.
+      security:
+      - APIKeyHeader: []
+    put:
+      tags:
+      - Connections
+      summary: Updates a connection
+      operationId: update_connection_api_hss_v1_connections_put
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConnectionDTO'
+        required: true
+      responses:
+        '200':
+          description: Successfully updated connection.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectionDTO'
+        '400':
+          description: 'Error: Bad request.'
+          content:
+            application/json:
+              example:
+                detail: Invalid connector name.
+        '401':
+          description: 'Error: Unauthorized.'
+          content:
+            application/json:
+              example:
+                detail: Unauthorized.
+        '404':
+          description: 'Error: Not Found.'
+          content:
+            application/json:
+              example:
+                detail: Connection not found.
+        '422':
+          description: 'Error: Unprocessable entity.'
+          content:
+            application/json:
+              example:
+                detail:
+                - type: json_invalid
+                  loc:
+                  - body
+                  - 72
+                  msg: JSON decode error
+                  input: {}
+                  ctx:
+                    error: Expecting ',' delimiter
+        '500':
+          description: 'Error: Internal server error.'
+          content:
+            application/json:
+              example:
+                message: Unable to load connector.
+      security:
+      - APIKeyHeader: []
+    post:
+      tags:
+      - Connections
+      summary: Creates a connection
+      description: 'Connections define the location of documents to be indexed.
+
+        They use _connectors_ to access documents and maintain the credentials needed to access that location.'
+      operationId: create_connection_api_hss_v1_connections_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConnectionDTO'
+        required: true
+      responses:
+        '200':
+          description: Successfully created connection.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectionDTO'
+        '400':
+          description: 'Error: Bad request.'
+          content:
+            application/json:
+              example:
+                detail: Invalid connector name.
+        '401':
+          description: 'Error: Unauthorized.'
+          content:
+            application/json:
+              example:
+                detail: Unauthorized.
+        '409':
+          description: 'Error: Conflict.'
+          content:
+            application/json:
+              example:
+                detail: Connection already exists.
+        '422':
+          description: 'Error: Unprocessable entity.'
+          content:
+            application/json:
+              example:
+                detail:
+                - type: json_invalid
+                  loc:
+                  - body
+                  - 72
+                  msg: JSON decode error
+                  input: {}
+                  ctx:
+                    error: Expecting ',' delimiter
+        '500':
+          description: 'Error: Internal server error.'
+          content:
+            application/json:
+              example:
+                message: Unable to load connector.
+      security:
+      - APIKeyHeader: []
+  /api/hss/v1/connections/{connection_name}:
+    get:
+      tags:
+      - Connections
+      summary: Get details of a connection including its configurations
+      operationId: get_connection_api_hss_v1_connections__connection_name__get
+      security:
+      - APIKeyHeader: []
+      parameters:
+      - name: connection_name
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Connection Name
+      responses:
+        '200':
+          description: Successfully returned connection.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectionDTO'
+        '400':
+          description: 'Error: Bad request.'
+          content:
+            application/json:
+              example:
+                detail: Invalid connection name.
+        '401':
+          description: 'Error: Unauthorized.'
+          content:
+            application/json:
+              example:
+                detail: Unauthorized.
+        '404':
+          description: 'Error: Not Found.'
+          content:
+            application/json:
+              example:
+                detail: Connection `S3 Connection` not found.
+        '500':
+          description: 'Error: Internal server error.'
+          content:
+            application/json:
+              example:
+                message: Unable to find connection.
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - Connections
+      summary: Deletes a connection
+      operationId: delete_connection_api_hss_v1_connections__connection_name__delete
+      security:
+      - APIKeyHeader: []
+      parameters:
+      - name: connection_name
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Connection Name
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '204':
+          description: Successfully deleted connection.
+        '401':
+          description: 'Error: Unauthorized.'
+          content:
+            application/json:
+              example:
+                detail: Unauthorized.
+        '403':
+          description: 'Error: Forbidden.'
+          content:
+            application/json:
+              example:
+                detail: Index is actively using connection.
+        '404':
+          description: 'Error: Not Found.'
+          content:
+            application/json:
+              example:
+                detail: Connection not found.
+        '500':
+          description: 'Error: Internal server error.'
+          content:
+            application/json:
+              example:
+                message: Unable to load connector.
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/hss/v1/connections/validate:
+    post:
+      tags:
+      - Connections
+      summary: Validates a connection
+      operationId: validate_connection_api_hss_v1_connections_validate_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConnectionDTO'
+        required: true
+      responses:
+        '200':
+          description: Successfully validated connection.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectionValidateResponse'
+        '400':
+          description: 'Error: Bad request.'
+          content:
+            application/json:
+              example:
+                detail: Invalid connector name.
+        '401':
+          description: 'Error: Unauthorized.'
+          content:
+            application/json:
+              example:
+                detail: Unauthorized.
+        '422':
+          description: 'Error: Unprocessable entity.'
+          content:
+            application/json:
+              example:
+                detail:
+                - type: json_invalid
+                  loc:
+                  - body
+                  - 72
+                  msg: JSON decode error
+                  input: {}
+                  ctx:
+                    error: Expecting ',' delimiter
+        '500':
+          description: 'Error: Internal server error.'
+          content:
+            application/json:
+              example:
+                message: Unable to load connector.
+      security:
+      - APIKeyHeader: []
+components:
+  schemas:
+    ConnectorConfig:
+      type: object
+      description: A config of a connector.
+      properties:
+        name:
+          title: Name
+          type: string
+          description: The name of the config.
+        displayName:
+          title: Display Name
+          type: string
+          description: Name that can be used by GUI clients to display the config.
+        type:
+          title: Type
+          type: string
+          description: "The data type of the config.\nsupported types:\n  * string\n  * integer\n  * boolean\n  * date_iso8601\n  * email\n  * password\n  * oauth\n  * options\n  * file\n  * array\n  * object\n  * hidden"
+        isMandatory:
+          title: Is Mandatory
+          type: boolean
+          description: Indicates whether the configuration is mandatory for the connector.
+          default: true
+        isDynamic:
+          title: Is Dynamic
+          type: boolean
+          description: 'Specifies whether the configuration is dynamic.
+
+            Dynamic configurations can be modified after the initial configuration has been set up.'
+          default: false
+        description:
+          title: Description
+          type: string
+          description: Provides a description of the configuration, explaining its purpose and functionality.
+        defaultValue:
+          title: Default Value
+          type: string
+          description: Default value for the configuration.
+        placeholderValue:
+          title: Placeholder Value
+          type: string
+          description: Serves as a placeholder for the configuration value. In GUI clients, this value can be displayed as a placeholder within input fields.
+    ConnectionBase:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the connection.
+          example: ToPostgres
+        type:
+          type: string
+          description: Connection type.
+          example: dataConnector
+        connector:
+          type: object
+          description: Connector configured by this connection definition.
+          $ref: '#/components/schemas/ConnectorBase'
+        isEditable:
+          type: boolean
+          description: Indicates whether this connection is editable or not.
+          default: false
+          example: false
+        isInternal:
+          type: boolean
+          description: Specifies whether this connection is internal or not.
+          default: false
+          example: false
+    ResponseBase:
+      type: object
+      properties:
+        error:
+          type: boolean
+          default: false
+        code:
+          type: integer
+          default: 200
+      required:
+      - error
+    ConnectorEntityResponse:
+      allOf:
+      - $ref: '#/components/schemas/ResponseBase'
+      - type: object
+        properties:
+          result:
+            type: array
+            items:
+              $ref: '#/components/schemas/ConnectorEntity'
+    ConnectorSampleRequest:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Connector type. source or target.
+          example: source
+        config:
+          type: object
+          description: Contains the connector configurations. Key-value pairs should be provided to configure the connection to the respective data source or target.
+          example:
+            host: db.postgres.com
+            port: 5432
+            username: postgres
+            password: password
+          additionalProperties: true
+    headers:
+      x-gdn-region:
+        description: The federation's region hostname that served the request.
+        type: string
+      x-gdn-requestid:
+        description: A unique request ID for each API request.
+        type: string
+    ConnectionValidateResponse:
+      properties:
+        status:
+          type: boolean
+          title: Status
+          description: Whether connection is valid.
+          default: false
+        reason:
+          type: string
+          title: Reason
+          description: Reason if invalid.
+          default: ''
+      type: object
+      title: ConnectionValidateResponse
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValidationResponse:
+      allOf:
+      - $ref: '#/components/schemas/ResponseBase'
+      - type: object
+        properties:
+          reason:
+            type: string
+            description: If invalid, reason for marking resource as invalid.
+            example: Incorrect username/password
+    MetricsResponse:
+      allOf:
+      - $ref: '#/components/schemas/ResponseBase'
+      - type: object
+        properties:
+          data:
+            type: array
+            items:
+              type: object
+              description: Result for the metrics query.
+              title: MetricSeries
+              properties:
+                metric:
+                  type: string
+                  description: Metric name.
+                data:
+                  type: array
+                  items:
+                    type: object
+                    description: Metric values.
+                    title: Metric
+                    properties:
+                      timestamp:
+                        type: integer
+                      value:
+                        type: string
+    ConnectorEntity:
+      allOf:
+      - $ref: '#/components/schemas/ConnectorBase'
+      type: object
+      properties:
+        logo:
+          type: string
+          description: The mime type and base64 logo image associated with the connector.
+          example: data:image/png;base64,iVBORw0KGgoAAAA...
+        reservedKeys:
+          type: array
+          items:
+            type: string
+          description: The reserved keys of the connector.
+          example:
+          - _key
+          - _id
+          - _rev
+        config:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConnectorConfig'
+    SchemaAttribute:
+      type: object
+      description: Model to encapsulate properties of a schema attribute from a connector.
+      properties:
+        name:
+          type: string
+          description: Name of the attribute.
+          example: Name
+        type:
+          type: string
+          description: Type of the attribute.
+          example: string
+    error_example_rc_404:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 404
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
+      type: object
+    DeletedResponse:
+      allOf:
+      - $ref: '#/components/schemas/ResponseBase'
+      - type: object
+        properties:
+          id:
+            type: string
+            example: '123'
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    ConnectionResponse:
+      allOf:
+      - $ref: '#/components/schemas/ResponseBase'
+      - type: object
+        properties:
+          result:
+            type: object
+            $ref: '#/components/schemas/Connection'
+    error_example_rc_400:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 400
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 102020
+      required:
+      - error
+      type: object
+    ConnectorSample:
+      type: object
+      description: Model to encapsulate properties of a sample from a connector.
+      properties:
+        schema:
+          $ref: '#/components/schemas/ConnectorSchema'
+          description: Schema of the stream.
+        data:
+          description: Sample records for the connector.
+          type: array
+          items:
+            type: object
+    ConnectorEntitiesResponse:
+      allOf:
+      - $ref: '#/components/schemas/ResponseBase'
+      - type: object
+        properties:
+          result:
+            type: array
+            items:
+              $ref: '#/components/schemas/ConnectorBase'
+    error_example_rc_401:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 401
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: '102020'
+      required:
+      - error
+      type: object
+    TransformationValidationResponse:
+      allOf:
+      - $ref: '#/components/schemas/ValidationResponse'
+      - type: object
+        properties:
+          outputSchema:
+            $ref: '#/components/schemas/ConnectorSchema'
+            description: Schema of the data, after the transformatio.
+          transformation:
+            type: string
+            description: Funtional stream worker created to execute the query provided in the input.
+          transformationName:
+            type: string
+            description: 'Name of the stream worker for the transformation.
+
+              This stream worker is created as a system stream worker.'
+          temporaryCollection:
+            type: string
+            description: 'Name of the temporary collection to be used with the transformation.
+
+              This collection is created as a system collection.'
+    ConnectorSchema:
+      type: object
+      description: Model to encapsulate properties of a schema from a connector.
+      properties:
+        name:
+          type: string
+          description: Name of the schema.
+        attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/SchemaAttribute'
+          description: Attributes of the schema.
+    ConnectionDTO:
+      properties:
+        name:
+          type: string
+          title: Name
+          description: The name of the connection.
+          examples:
+          - S3Connection
+        connector:
+          type: string
+          title: Connector
+          description: The id of the Connector.
+          examples:
+          - s3
+        config:
+          type: object
+          title: Config
+          description: Connection configurations for the Connector.
+      type: object
+      required:
+      - name
+      - connector
+      - config
+      title: ConnectionDTO
+    ConnectorBase:
+      type: object
+      description: Lightweight connector definition.
+      properties:
+        name:
+          type: string
+          example: macrometa-source-oracle
+          description: Name of the connector. This is used as the ID of the connector.
+        displayName:
+          type: string
+          example: OracleDB
+          description: Name that can be used by GUI clients to display the connector.
+        description:
+          type: string
+          example: Source for loading data from a GDN collection.
+        type:
+          type: string
+          example: source
+          description: Specifies whether the connector serves as a source or a target.
+        version:
+          type: string
+          description: Version of the connector.
+          example: 1.0.0
+    Connection:
+      allOf:
+      - $ref: '#/components/schemas/ConnectionBase'
+      - type: object
+        properties:
+          metadata:
+            description: Contains the metadata of the connection. Configurations for the connector, which are set up through this connection, must be provided as key-value pairs.
+            example:
+              host: 127.0.0.1
+              port: '5432'
+              user: postgres
+              password: abcdef
+            type: object
+            additionalProperties:
+              type: object
+    ConnectionsResponse:
+      allOf:
+      - $ref: '#/components/schemas/ResponseBase'
+      - type: object
+        properties:
+          result:
+            type: array
+            items:
+              $ref: '#/components/schemas/ConnectionBase'
+  requestBodies:
+    Connection:
+      description: Connection definition.
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Connection'
+  parameters:
+    Connector:
+      name: connector-name
+      in: path
+      required: true
+      description: Name of the connector.
+      example: postgres
+      schema:
+        type: string
+    Connection:
+      name: connection-name
+      in: path
+      required: true
+      description: Name of the connection.
+      schema:
+        type: string
+    Fabric:
+      name: fabric
+      in: path
+      required: true
+      description: Fabric name of the resource.
+      schema:
+        type: string
+    ConnectionType:
+      name: type
+      description: Connection type.
+      in: query
+      schema:
+        type: string
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Provide an API Key to the `Authorization` header, prefixed with "apikey".
+
+
+        Example: `Authorization: apikey <key>`'
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Provide a JSON Web Token (JWT) to the `Authorization` header, prefixed with "bearer".
+
+
+        Example: `Authorization: bearer <jwt>`'

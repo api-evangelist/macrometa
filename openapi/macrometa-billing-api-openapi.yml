@@ -1,0 +1,981 @@
+openapi: 3.0.0
+info:
+  title: Macrometa API Reference Activity Metrics Billing API
+  version: 0.17.17
+  description: API reference for the Macrometa Global Data Network.
+  license:
+    name: Macrometa License, Version 2.0
+servers:
+- url: https://api-play.paas.macrometa.io
+  description: GDN API
+host: api-play.paas.macrometa.io
+security:
+- ApiKeyAuth: []
+- BearerAuth: []
+tags:
+- name: Billing
+paths:
+  /_api/billing/account:
+    get:
+      description: "Get account details (plan, contact and payment settings) for given tenant.\n\n **Note**: this API is not applicable for system tenants."
+      operationId: GetBillingAccount
+      parameters:
+      - description: Tenant name. *If not set it uses the tenant invoking the request.*
+        in: header
+        name: tenant
+        schema:
+          type: string
+          format: string
+      responses:
+        '200':
+          description: Successfully fetched account details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response_Billing_Account_Get'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response_Billing_Code_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed because you do not have administrator permissions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Get account details
+      tags:
+      - Billing
+  /_api/billing/contact:
+    put:
+      description: 'Update contact details for given tenant name.
+
+
+        **Note**:
+
+        - This API is not applicable for system tenants.
+
+        - Updates the Stripe account.'
+      operationId: UpdateContactDetails
+      parameters:
+      - description: Tenant name. *If not set it uses the tenant invoking the request.*
+        in: header
+        name: tenant
+        schema:
+          type: string
+          format: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Contact_Update'
+        required: true
+      responses:
+        '200':
+          description: Successfully updated contact details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response_Billing_Code_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response_Billing_Code_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed because you do not have administrator permissions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '409':
+          description: Failed becasue billing plan already exists.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_409'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Update contact details
+      tags:
+      - Billing
+  /_api/billing/payments:
+    get:
+      description: 'Fetch all payments details of the tenant for specified number of previous months.
+
+
+        **Note**: This API is not applicable for system tenants.'
+      operationId: GetPayments
+      parameters:
+      - description: Tenant name. *If not set it uses the tenant invoking the request.*
+        in: header
+        name: tenant
+        schema:
+          type: string
+          format: string
+      - description: Number of previous months for which payment details are required.
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+          format: integer
+          default: 10
+      responses:
+        '200':
+          description: 'Successfully fetched payment details.
+
+
+            Example - https://stripe.com/docs/api/payment_intents/list
+
+
+            **Note**: the example here is an excerpt please follow the link above for a complete example.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/stripe_200_intent_list'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response_Billing_Code_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed because you do not have administrator permissions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Get payment details of the previous months for the given tenant.
+      tags:
+      - Billing
+  /_api/billing/invoices:
+    get:
+      description: 'Fetch all invoice details of the tenant for specified number of previous months.
+
+
+        **Note**: this API is not applicable for system tenants.'
+      operationId: GetBillingInvoices
+      parameters:
+      - description: Tenant name. *If not set it uses the tenant invoking the request.*
+        in: header
+        name: tenant
+        schema:
+          type: string
+          format: string
+      - description: Number of previous months for which invoices are required.
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+          format: integer
+          default: 3
+      responses:
+        '200':
+          description: 'Successfully fetched invoice details.
+
+
+            Example - https://stripe.com/docs/api/invoices/list
+
+
+            **Note**: the example here is an excerpt please follow the link above for a complete example.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/stripe_200_invoice_list'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response_Billing_Code_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed because you do not have administrator permissions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Get invoices for the previous months
+      tags:
+      - Billing
+  /_api/billing/invoice/current:
+    get:
+      description: 'Fetch invoice of the tenant for the current month.
+
+
+        **Note**: this API is not applicable for system tenants.'
+      operationId: GetCurrentMonthInvoice
+      parameters:
+      - description: Tenant name. *If not set it uses the tenant invoking the request.*
+        in: header
+        name: tenant
+        schema:
+          type: string
+          format: string
+      responses:
+        '200':
+          description: 'Successfully fetched invoice details.
+
+
+            Example - https://stripe.com/docs/api/invoices/upcoming
+
+
+            **Note**: the example here is an excerpt please follow the link above for a complete example.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/stripe_200_invoice_upcoming'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response_Billing_Code_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed because you do not have administrator permissions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Get invoice of the current month for the given tenant.
+      tags:
+      - Billing
+  /_api/billing/invoices/{year}/{month}:
+    get:
+      description: 'Fetch invoices for a tenant, in a specific month and year.
+
+
+        **Note**: This API is not applicable for system tenants.'
+      operationId: GetInvoiceForMonthYear
+      parameters:
+      - description: Tenant name. *If not set it uses the tenant invoking the request.*
+        in: header
+        name: tenant
+        schema:
+          type: string
+          format: string
+      - description: Year in 'YYYY' format.
+        in: path
+        name: year
+        required: true
+        schema:
+          type: integer
+          format: integer
+      - description: Month. Valid values:[1..12]
+        in: path
+        name: month
+        required: true
+        schema:
+          type: integer
+          format: integer
+      responses:
+        '200':
+          description: 'Successfully fetched invoice details.
+
+
+            Example - https://stripe.com/docs/api/invoices/retrieve
+
+
+            **Note**: the example here is an excerpt please follow the link above for a complete example.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/stripe_200_invoice_month_year'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response_Billing_Code_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed because you do not have administrator permissions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Get invoice of specific year and month for the tenant
+      tags:
+      - Billing
+  /_api/billing/usage:
+    get:
+      description: 'Fetch usage of a tenant in a specific date range. If no query parameters are specified, usage from start date of the month to current date is returned.
+
+
+        **Note**: This API is not applicable for system tenants.'
+      operationId: GetAccountUsage
+      parameters:
+      - description: Tenant name. *If not set it uses the tenant invoking the request.*
+        in: header
+        name: tenant
+        schema:
+          type: string
+          format: string
+      - description: Start date in 'YYYY-MM-DD' format.
+        in: query
+        name: startDate
+        required: false
+        schema:
+          type: string
+          format: string
+      - description: End date in 'YYYY-MM-DD' format.
+        in: query
+        name: endDate
+        required: false
+        schema:
+          type: string
+          format: string
+      responses:
+        '200':
+          description: Successfully fetched usage of tenant.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response_Usage_Get'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response_Billing_Code_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed because you do not have administrator permissions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Get usage of the tenant
+      tags:
+      - Billing
+  /_api/billing/region/{region}/usage:
+    get:
+      description: 'Fetch usage of a tenant in specific date range for a specific region. If no query parameters are specified, usage from start date of the month to current date is returned.
+
+
+        **Note**: This API is not applicable for system tenants.'
+      operationId: GetAccountUsageOfSpecificRegion
+      parameters:
+      - description: Tenant name. *If not set it uses the tenant invoking the request.*
+        in: header
+        name: tenant
+        schema:
+          type: string
+          format: string
+      - description: Name of the region.
+        in: path
+        name: region
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: Start date in 'YYYY-MM-DD' format.
+        in: query
+        name: startDate
+        required: false
+        schema:
+          type: string
+          format: string
+      - description: End date in 'YYYY-MM-DD' format.
+        in: query
+        name: endDate
+        required: false
+        schema:
+          type: string
+          format: string
+      responses:
+        '200':
+          description: Successfully fetched usage of tenant.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response_Usage_Get'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response_Billing_Code_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed because you do not have administrator permissions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Get usage of the tenant for specific region
+      tags:
+      - Billing
+components:
+  schemas:
+    stripe_200_invoice_list:
+      properties:
+        object:
+          type: string
+          example: list
+        url:
+          type: string
+          example: /v1/payment_intents
+        has_more:
+          type: boolean
+          example: false
+        data:
+          type: array
+          items:
+            properties:
+              id:
+                type: string
+                example: pi_1DpxME2eZvKYlo2CdLPnXZPO
+              object:
+                type: string
+                example: invoice
+              account_country:
+                type: string
+                example: US
+              account_name:
+                type: string
+                example: Stripe.com
+              account_tax_ids:
+                type: object
+                example: null
+              amount_due:
+                type: integer
+                example: 498
+              amount_paid:
+                type: integer
+                example: 0
+              amount_remaining:
+                type: integer
+                example: 498
+    Response_Billing_Code_400:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 400
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+        message:
+          description: Message from server
+          type: string
+    error_example_rc_409:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 409
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
+      type: object
+    error_example_rc_403:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 403
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
+      type: object
+    Response_Usage_Get:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        data:
+          description: Message from server
+          type: array
+          items:
+            type: object
+            properties:
+              _key:
+                type: string
+                example: key
+              tenant:
+                type: string
+                example: tenant1
+              from:
+                description: The date from where usage is tracked
+                type: integer
+                example: '2022-12-01'
+              to:
+                description: The date to which usage is tracked
+                type: integer
+                example: '2022-12-31'
+              region:
+                type: string
+                example: region1
+              records:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    type:
+                      type: integer
+                    value:
+                      type: string
+    stripe_200_intent_list:
+      properties:
+        object:
+          type: string
+          example: list
+        url:
+          type: string
+          example: /v1/payment_intents
+        has_more:
+          type: boolean
+          example: false
+        data:
+          type: array
+          items:
+            properties:
+              id:
+                type: string
+                example: pi_1DpxME2eZvKYlo2CdLPnXZPO
+              object:
+                type: string
+                example: payment_intent
+              amount:
+                type: integer
+                example: 1099
+    headers:
+      x-gdn-region:
+        description: The federation's region hostname that served the request.
+        type: string
+      x-gdn-requestid:
+        description: A unique request ID for each API request.
+        type: string
+    Response_Billing_Account_Get:
+      properties:
+        code:
+          type: number
+          example: '200'
+        error:
+          type: boolean
+          example: false
+        data:
+          type: object
+          properties:
+            created_at:
+              type: string
+              example: Timestamp when account was created.
+            plan:
+              type: object
+              properties:
+                attribution:
+                  description: Attribution of the plan
+                  type: string
+                  example: Macrometa
+                name:
+                  description: Name of the plan
+                  type: string
+                  example: PlanName
+                subscription:
+                  description: List of the subscription ID of the plan
+                  type: object
+                target:
+                  description: Target where billing data is uploaded. E.g. Stripe, AWS S3.
+                  type: string
+                  example: Macrometa
+            subscription_id:
+              description: If target is Stripe, subscription ID is returned by Stripe. If not, it's empty
+              type: string
+              example: sub_<subscription_id>
+            customer_id:
+              description: If target is Stripe, customer ID is returned by Stripe. If not, it's empty
+              type: string
+              example: cus_<customer_id>
+            contact:
+              type: object
+              properties:
+                firstname:
+                  type: string
+                  example: First name of the user.
+                lastname:
+                  type: string
+                  example: Last name of the user.
+                email:
+                  type: string
+                  example: Email address of the user.
+                phone:
+                  type: string
+                  example: Phone number of the user.
+                line1:
+                  type: string
+                  example: Address line 1.
+                line2:
+                  type: string
+                  example: Address line 2.
+                city:
+                  type: string
+                  example: Address city.
+                state:
+                  type: string
+                  example: Address state.
+                country:
+                  type: string
+                  example: Address country.
+                zipcode:
+                  type: string
+                  example: Address zip code.
+    stripe_200_invoice_upcoming:
+      properties:
+        object:
+          type: string
+          example: invoice
+        account_country:
+          type: string
+          example: US
+        account_name:
+          type: string
+          example: Stripe.com
+        account_tax_ids:
+          type: object
+          example: null
+        amount_due:
+          type: integer
+          example: 40298
+        amount_paid:
+          type: integer
+          example: 0
+        amount_remaining:
+          type: integer
+          example: 40298
+    stripe_200_invoice_month_year:
+      properties:
+        id:
+          type: string
+          example: ID
+        object:
+          type: string
+          example: invoice
+        account_country:
+          type: string
+          example: US
+        account_name:
+          type: string
+          example: Stripe.com
+        account_tax_ids:
+          type: object
+          example: null
+        amount_due:
+          type: integer
+          example: 40298
+        amount_paid:
+          type: integer
+          example: 0
+        amount_remaining:
+          type: integer
+          example: 40298
+    Contact_Update:
+      properties:
+        firstname:
+          description: First Name
+          type: string
+          example: John
+        lastname:
+          description: Last Name
+          type: string
+          example: Doe
+        email:
+          description: Email address
+          type: string
+          example: john@acme.com
+        phone:
+          description: Phone number
+          type: string
+          example: 404-555-8726
+        line1:
+          description: Address line 1
+          type: string
+          example: 1388 Villa Drive
+        line2:
+          description: Address line 2
+          type: string
+          example: Suite 240C
+        city:
+          description: City
+          type: string
+          example: South Bend
+        state:
+          description: State
+          type: string
+          example: IN
+        country:
+          description: Two-letter country code (ISO 3166-1 alpha-2).
+          type: string
+          example: US
+        zipcode:
+          description: Zip code
+          type: string
+          example: '46601'
+      type: object
+    error_example_rc_401:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 401
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: '102020'
+      required:
+      - error
+      type: object
+    Response_Billing_Code_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        message:
+          description: Message from server
+          type: string
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Provide an API Key to the `Authorization` header, prefixed with "apikey".
+
+
+        Example: `Authorization: apikey <key>`'
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Provide a JSON Web Token (JWT) to the `Authorization` header, prefixed with "bearer".
+
+
+        Example: `Authorization: bearer <jwt>`'

@@ -1,0 +1,1255 @@
+openapi: 3.0.0
+info:
+  title: Macrometa API Reference Activity Metrics Synthetic Interactions API
+  version: 0.17.17
+  description: API reference for the Macrometa Global Data Network.
+  license:
+    name: Macrometa License, Version 2.0
+servers:
+- url: https://api-play.paas.macrometa.io
+  description: GDN API
+host: api-play.paas.macrometa.io
+security:
+- ApiKeyAuth: []
+- BearerAuth: []
+tags:
+- name: Synthetic Interactions
+paths:
+  /api/prerender/v1/origins/{origin}/interactions:
+    get:
+      summary: Get synthetic interactions
+      tags:
+      - Synthetic Interactions
+      description: Returns the synthetic interactions associated with the origin.
+      parameters:
+      - schema:
+          type: string
+          minLength: 1
+        example: www.origin.com
+        in: path
+        name: origin
+        required: true
+        description: Origin hostname.
+      - schema:
+          type: string
+        in: header
+        name: x-photoniq-customerid
+        required: true
+        description: Customer unique identifier.
+      responses:
+        '200':
+          description: Interactions fetched successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  scroll:
+                    type: object
+                    properties:
+                      _key:
+                        type: string
+                        description: Interaction unique identifier.
+                      origin:
+                        type: string
+                        format: uri
+                        description: Origin base URL.
+                      created:
+                        type: string
+                        format: date-time
+                        description: Date when the interaction was created.
+                      lastUpdated:
+                        type: string
+                        format: date-time
+                        description: Date when the interaction was updated.
+                      config:
+                        type: object
+                        properties:
+                          isActive:
+                            type: boolean
+                            description: Whether the interaction is active.
+                          steps:
+                            type: integer
+                            description: Number of scrolls down to be performed.
+                          valueInPx:
+                            type: integer
+                            description: Number of pixels to be scrolled.
+                          delayBetween:
+                            type: integer
+                            description: Waiting time (in milliseconds) between scrolls.
+                          specific:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                isActive:
+                                  type: boolean
+                                  description: Whether the specific interaction is active.
+                                urlPaths:
+                                  type: array
+                                  items:
+                                    type: string
+                                    description: Origin path.
+                                  description: Origin paths where the specific interaction is evaluated to be executed based on the operation attribute.
+                                operation:
+                                  type: string
+                                  enum:
+                                  - ==
+                                  - '!='
+                                  description: Operator applied against the urlPaths list.
+                              required:
+                              - isActive
+                              - urlPaths
+                              - operation
+                        required:
+                        - isActive
+                        - steps
+                        - valueInPx
+                        - delayBetween
+                        - specific
+                    required:
+                    - _key
+                    - origin
+                    - config
+                  click:
+                    type: object
+                    properties:
+                      _key:
+                        type: string
+                        description: Interaction unique identifier.
+                      origin:
+                        type: string
+                        format: uri
+                        description: Origin base URL.
+                      created:
+                        type: string
+                        format: date-time
+                        description: Date when the interaction was created.
+                      lastUpdated:
+                        type: string
+                        format: date-time
+                        description: Date when the interaction was updated.
+                      config:
+                        type: object
+                        properties:
+                          isActive:
+                            type: boolean
+                            description: Whether the interaction is active.
+                          global:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                isActive:
+                                  type: boolean
+                                  description: Whether the global interaction is active.
+                                htmlSelector:
+                                  type: string
+                                  description: HTML selector where the interaction is executed.
+                                waitAfterInteraction:
+                                  type: integer
+                                  description: Waiting time (in milliseconds) after the interaction is executed.
+                                executionSequence:
+                                  type: integer
+                                  description: Interaction execution order.
+                              required:
+                              - isActive
+                              - htmlSelector
+                              - executionSequence
+                          specific:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                isActive:
+                                  type: boolean
+                                  description: Whether the specific interaction is active.
+                                htmlSelector:
+                                  type: string
+                                  description: HTML selector where the interaction is executed.
+                                waitAfterInteraction:
+                                  type: integer
+                                  description: Waiting time (in milliseconds) after the interaction is executed.
+                                executionSequence:
+                                  type: integer
+                                  description: Interaction execution order.
+                                urlPaths:
+                                  type: array
+                                  items:
+                                    type: string
+                                    description: Origin path.
+                                  description: Origin paths where the specific interaction is evaluated to be executed based on the operation attribute.
+                                operation:
+                                  type: string
+                                  enum:
+                                  - ==
+                                  - '!='
+                                  description: Operator applied against the urlPaths list.
+                              required:
+                              - isActive
+                              - htmlSelector
+                              - executionSequence
+                              - urlPaths
+                              - operation
+                        required:
+                        - isActive
+                        - global
+                        - specific
+                    required:
+                    - _key
+                    - origin
+                    - config
+                  hover:
+                    type: object
+                    properties:
+                      _key:
+                        type: string
+                        description: Interaction unique identifier.
+                      origin:
+                        type: string
+                        format: uri
+                        description: Origin base URL.
+                      created:
+                        type: string
+                        format: date-time
+                        description: Date when the interaction was created.
+                      lastUpdated:
+                        type: string
+                        format: date-time
+                        description: Date when the interaction was updated.
+                      config:
+                        type: object
+                        properties:
+                          isActive:
+                            type: boolean
+                            description: Whether the interaction is active.
+                          global:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                isActive:
+                                  type: boolean
+                                  description: Whether the global interaction is active.
+                                htmlSelector:
+                                  type: string
+                                  description: HTML selector where the interaction is executed.
+                                waitAfterInteraction:
+                                  type: integer
+                                  description: Waiting time (in milliseconds) after the interaction is executed.
+                                executionSequence:
+                                  type: integer
+                                  description: Interaction execution order.
+                              required:
+                              - isActive
+                              - htmlSelector
+                              - executionSequence
+                          specific:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                isActive:
+                                  type: boolean
+                                  description: Whether the specific interaction is active.
+                                htmlSelector:
+                                  type: string
+                                  description: HTML selector where the interaction is executed.
+                                waitAfterInteraction:
+                                  type: integer
+                                  description: Waiting time (in milliseconds) after the interaction is executed.
+                                executionSequence:
+                                  type: integer
+                                  description: Interaction execution order.
+                                urlPaths:
+                                  type: array
+                                  items:
+                                    type: string
+                                    description: Origin path.
+                                  description: Origin paths where the specific interaction is evaluated to be executed based on the operation attribute.
+                                operation:
+                                  type: string
+                                  enum:
+                                  - ==
+                                  - '!='
+                                  description: Operator applied against the urlPaths list.
+                              required:
+                              - isActive
+                              - htmlSelector
+                              - executionSequence
+                              - urlPaths
+                              - operation
+                        required:
+                        - isActive
+                        - global
+                        - specific
+                    required:
+                    - _key
+                    - origin
+                    - config
+                description: Interactions fetched successfully.
+                example:
+                  scroll:
+                    _key: -xessvEdKI9qNn7fpR7czTV
+                    origin: https://www.origin.com
+                    config:
+                      isActive: true
+                      steps: 4
+                      valueInPx: 5000
+                      delayBetween: 300
+                      specific: []
+                  click:
+                    _key: -A5HO1NwgFrTMp5xv8KRWnk
+                    origin: https://www.origin.com
+                    config:
+                      isActive: true
+                      global: []
+                      specific:
+                      - isActive: true
+                        htmlSelector: '#tab'
+                        waitAfterInteraction: 150
+                        executionSequence: 0
+                        urlPaths:
+                        - ^/.*$
+                        operation: ==
+                  hover:
+                    _key: -6txvJI2HHJHwRYqeGr8OHV
+                    origin: https://www.origin.com
+                    config:
+                      isActive: true
+                      global:
+                      - isActive: true
+                        htmlSelector: .item
+                        waitAfterInteraction: 50
+                        executionSequence: 0
+                      specific: []
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Bad request.
+                properties:
+                  status:
+                    type: string
+                    description: Error status.
+                  message:
+                    type: string
+                    description: Error message.
+                required:
+                - status
+                - message
+                example:
+                  status: ERROR
+                  message: Header x-photoniq-customerid is required.
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Internal server error.
+                properties:
+                  status:
+                    type: string
+                    description: Error status.
+                  message:
+                    type: string
+                    description: Error message.
+                required:
+                - status
+                - message
+                example:
+                  status: ERROR
+                  message: Internal server error.
+  /api/prerender/v1/origins/{origin}/interactions/{type}:
+    get:
+      summary: Get synthetic interaction
+      tags:
+      - Synthetic Interactions
+      description: Returns a synthetic interaction associated with the origin.
+      parameters:
+      - schema:
+          type: string
+          minLength: 1
+        example: www.origin.com
+        in: path
+        name: origin
+        required: true
+        description: Origin hostname.
+      - schema:
+          type: string
+          enum:
+          - hover
+          - click
+          - scroll
+        in: path
+        name: type
+        required: true
+        description: Interaction type.
+      - schema:
+          type: string
+        in: header
+        name: x-photoniq-customerid
+        required: true
+        description: Customer unique identifier.
+      responses:
+        '200':
+          description: Interaction fetched successfully.
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - type: object
+                  properties:
+                    _key:
+                      type: string
+                      description: Interaction unique identifier.
+                    origin:
+                      type: string
+                      format: uri
+                      description: Origin base URL.
+                    created:
+                      type: string
+                      format: date-time
+                      description: Date when the interaction was created.
+                    lastUpdated:
+                      type: string
+                      format: date-time
+                      description: Date when the interaction was updated.
+                    config:
+                      type: object
+                      properties:
+                        isActive:
+                          type: boolean
+                          description: Whether the interaction is active.
+                        steps:
+                          type: integer
+                          description: Number of scrolls down to be performed.
+                        valueInPx:
+                          type: integer
+                          description: Number of pixels to be scrolled.
+                        delayBetween:
+                          type: integer
+                          description: Waiting time (in milliseconds) between scrolls.
+                        specific:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              isActive:
+                                type: boolean
+                                description: Whether the specific interaction is active.
+                              urlPaths:
+                                type: array
+                                items:
+                                  type: string
+                                  description: Origin path.
+                                description: Origin paths where the specific interaction is evaluated to be executed based on the operation attribute.
+                              operation:
+                                type: string
+                                enum:
+                                - ==
+                                - '!='
+                                description: Operator applied against the urlPaths list.
+                            required:
+                            - isActive
+                            - urlPaths
+                            - operation
+                      required:
+                      - isActive
+                      - steps
+                      - valueInPx
+                      - delayBetween
+                      - specific
+                  required:
+                  - _key
+                  - origin
+                  - config
+                - type: object
+                  properties:
+                    _key:
+                      type: string
+                      description: Interaction unique identifier.
+                    origin:
+                      type: string
+                      format: uri
+                      description: Origin base URL.
+                    created:
+                      type: string
+                      format: date-time
+                      description: Date when the interaction was created.
+                    lastUpdated:
+                      type: string
+                      format: date-time
+                      description: Date when the interaction was updated.
+                    config:
+                      type: object
+                      properties:
+                        isActive:
+                          type: boolean
+                          description: Whether the interaction is active.
+                        global:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              isActive:
+                                type: boolean
+                                description: Whether the global interaction is active.
+                              htmlSelector:
+                                type: string
+                                description: HTML selector where the interaction is executed.
+                              waitAfterInteraction:
+                                type: integer
+                                description: Waiting time (in milliseconds) after the interaction is executed.
+                              executionSequence:
+                                type: integer
+                                description: Interaction execution order.
+                            required:
+                            - isActive
+                            - htmlSelector
+                            - executionSequence
+                        specific:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              isActive:
+                                type: boolean
+                                description: Whether the specific interaction is active.
+                              htmlSelector:
+                                type: string
+                                description: HTML selector where the interaction is executed.
+                              waitAfterInteraction:
+                                type: integer
+                                description: Waiting time (in milliseconds) after the interaction is executed.
+                              executionSequence:
+                                type: integer
+                                description: Interaction execution order.
+                              urlPaths:
+                                type: array
+                                items:
+                                  type: string
+                                  description: Origin path.
+                                description: Origin paths where the specific interaction is evaluated to be executed based on the operation attribute.
+                              operation:
+                                type: string
+                                enum:
+                                - ==
+                                - '!='
+                                description: Operator applied against the urlPaths list.
+                            required:
+                            - isActive
+                            - htmlSelector
+                            - executionSequence
+                            - urlPaths
+                            - operation
+                      required:
+                      - isActive
+                      - global
+                      - specific
+                  required:
+                  - _key
+                  - origin
+                  - config
+                description: Interaction fetched successfully.
+                example:
+                  _key: -A5HO1NwgFrTMp5xv8KRWnk
+                  origin: https://www.origin.com
+                  config:
+                    isActive: true
+                    global: []
+                    specific:
+                    - isActive: true
+                      htmlSelector: '#tab'
+                      waitAfterInteraction: 150
+                      executionSequence: 0
+                      urlPaths:
+                      - ^/.*$
+                      operation: ==
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Bad request.
+                properties:
+                  status:
+                    type: string
+                    description: Error status.
+                  message:
+                    type: string
+                    description: Error message.
+                required:
+                - status
+                - message
+                example:
+                  status: ERROR
+                  message: Header x-photoniq-customerid is required.
+        '404':
+          description: Not found.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Not found.
+                properties:
+                  status:
+                    type: string
+                    description: Error status.
+                  message:
+                    type: string
+                    description: Error message.
+                required:
+                - status
+                - message
+                example:
+                  status: ERROR
+                  message: Not found.
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Internal server error.
+                properties:
+                  status:
+                    type: string
+                    description: Error status.
+                  message:
+                    type: string
+                    description: Error message.
+                required:
+                - status
+                - message
+                example:
+                  status: ERROR
+                  message: Internal server error.
+    post:
+      summary: Create synthetic interaction
+      tags:
+      - Synthetic Interactions
+      description: Creates a synthetic interaction associated with the origin.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              oneOf:
+              - type: object
+                properties:
+                  config:
+                    type: object
+                    properties:
+                      isActive:
+                        type: boolean
+                        description: Whether the interaction is active.
+                      steps:
+                        type: integer
+                        description: Number of scrolls down to be performed.
+                      valueInPx:
+                        type: integer
+                        description: Number of pixels to be scrolled.
+                      delayBetween:
+                        type: integer
+                        description: Waiting time (in milliseconds) between scrolls.
+                      specific:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            isActive:
+                              type: boolean
+                              description: Whether the specific interaction is active.
+                            urlPaths:
+                              type: array
+                              items:
+                                type: string
+                                description: Origin path.
+                              description: Origin paths where the specific interaction is evaluated to be executed based on the operation attribute.
+                            operation:
+                              type: string
+                              enum:
+                              - ==
+                              - '!='
+                              description: Operator applied against the urlPaths list.
+                          required:
+                          - isActive
+                          - urlPaths
+                          - operation
+                    required:
+                    - isActive
+                    - steps
+                    - valueInPx
+                    - delayBetween
+                    - specific
+                required:
+                - config
+              - type: object
+                properties:
+                  config:
+                    type: object
+                    properties:
+                      isActive:
+                        type: boolean
+                        description: Whether the interaction is active.
+                      global:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            isActive:
+                              type: boolean
+                              description: Whether the global interaction is active.
+                            htmlSelector:
+                              type: string
+                              description: HTML selector where the interaction is executed.
+                            waitAfterInteraction:
+                              type: integer
+                              description: Waiting time (in milliseconds) after the interaction is executed.
+                            executionSequence:
+                              type: integer
+                              description: Interaction execution order.
+                          required:
+                          - isActive
+                          - htmlSelector
+                          - executionSequence
+                      specific:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            isActive:
+                              type: boolean
+                              description: Whether the specific interaction is active.
+                            htmlSelector:
+                              type: string
+                              description: HTML selector where the interaction is executed.
+                            waitAfterInteraction:
+                              type: integer
+                              description: Waiting time (in milliseconds) after the interaction is executed.
+                            executionSequence:
+                              type: integer
+                              description: Interaction execution order.
+                            urlPaths:
+                              type: array
+                              items:
+                                type: string
+                                description: Origin path.
+                              description: Origin paths where the specific interaction is evaluated to be executed based on the operation attribute.
+                            operation:
+                              type: string
+                              enum:
+                              - ==
+                              - '!='
+                              description: Operator applied against the urlPaths list.
+                          required:
+                          - isActive
+                          - htmlSelector
+                          - executionSequence
+                          - urlPaths
+                          - operation
+                    required:
+                    - isActive
+                    - global
+                    - specific
+                required:
+                - config
+            examples:
+              example1:
+                value:
+                  config:
+                    isActive: true
+                    steps: 4
+                    valueInPx: 5000
+                    delayBetween: 300
+                    specific: []
+              example2:
+                value:
+                  config:
+                    isActive: true
+                    global: []
+                    specific:
+                    - isActive: true
+                      htmlSelector: '#tab'
+                      waitAfterInteraction: 150
+                      executionSequence: 0
+                      urlPaths:
+                      - ^/.*$
+                      operation: ==
+      parameters:
+      - schema:
+          type: string
+          minLength: 1
+        example: www.origin.com
+        in: path
+        name: origin
+        required: true
+        description: Origin hostname.
+      - schema:
+          type: string
+          enum:
+          - hover
+          - click
+          - scroll
+        in: path
+        name: type
+        required: true
+        description: Interaction type.
+      - schema:
+          type: string
+        in: header
+        name: x-photoniq-customerid
+        required: true
+        description: Customer unique identifier.
+      responses:
+        '200':
+          description: Interaction created successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Interaction created successfully.
+                properties:
+                  _key:
+                    type: string
+                    description: Interaction unique identifier.
+                required:
+                - _key
+                example:
+                  _key: -A5HO1NwgFrTMp5xv8KRWnk
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Bad request.
+                properties:
+                  status:
+                    type: string
+                    description: Error status.
+                  message:
+                    type: string
+                    description: Error message.
+                required:
+                - status
+                - message
+                example:
+                  status: ERROR
+                  message: Header x-photoniq-customerid is required.
+        '409':
+          description: Conflict.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Conflict.
+                properties:
+                  status:
+                    type: string
+                    description: Error status.
+                  message:
+                    type: string
+                    description: Error message.
+                required:
+                - status
+                - message
+                example:
+                  status: ERROR
+                  message: Interaction already exists
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Internal server error.
+                properties:
+                  status:
+                    type: string
+                    description: Error status.
+                  message:
+                    type: string
+                    description: Error message.
+                required:
+                - status
+                - message
+                example:
+                  status: ERROR
+                  message: Internal server error.
+    patch:
+      summary: Update synthetic interaction
+      tags:
+      - Synthetic Interactions
+      description: Updates a synthetic interaction associated with the origin.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              oneOf:
+              - type: object
+                properties:
+                  config:
+                    type: object
+                    properties:
+                      isActive:
+                        type: boolean
+                        description: Whether the interaction is active.
+                      steps:
+                        type: integer
+                        description: Number of scrolls down to be performed.
+                      valueInPx:
+                        type: integer
+                        description: Number of pixels to be scrolled.
+                      delayBetween:
+                        type: integer
+                        description: Waiting time (in milliseconds) between scrolls.
+                      specific:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            isActive:
+                              type: boolean
+                              description: Whether the specific interaction is active.
+                            urlPaths:
+                              type: array
+                              items:
+                                type: string
+                                description: Origin path.
+                              description: Origin paths where the specific interaction is evaluated to be executed based on the operation attribute.
+                            operation:
+                              type: string
+                              enum:
+                              - ==
+                              - '!='
+                              description: Operator applied against the urlPaths list.
+                          required:
+                          - isActive
+                          - urlPaths
+                          - operation
+                    required:
+                    - isActive
+                    - steps
+                    - valueInPx
+                    - delayBetween
+                    - specific
+              - type: object
+                properties:
+                  config:
+                    type: object
+                    properties:
+                      isActive:
+                        type: boolean
+                        description: Whether the interaction is active.
+                      global:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            isActive:
+                              type: boolean
+                              description: Whether the global interaction is active.
+                            htmlSelector:
+                              type: string
+                              description: HTML selector where the interaction is executed.
+                            waitAfterInteraction:
+                              type: integer
+                              description: Waiting time (in milliseconds) after the interaction is executed.
+                            executionSequence:
+                              type: integer
+                              description: Interaction execution order.
+                          required:
+                          - isActive
+                          - htmlSelector
+                          - executionSequence
+                      specific:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            isActive:
+                              type: boolean
+                              description: Whether the specific interaction is active.
+                            htmlSelector:
+                              type: string
+                              description: HTML selector where the interaction is executed.
+                            waitAfterInteraction:
+                              type: integer
+                              description: Waiting time (in milliseconds) after the interaction is executed.
+                            executionSequence:
+                              type: integer
+                              description: Interaction execution order.
+                            urlPaths:
+                              type: array
+                              items:
+                                type: string
+                                description: Origin path.
+                              description: Origin paths where the specific interaction is evaluated to be executed based on the operation attribute.
+                            operation:
+                              type: string
+                              enum:
+                              - ==
+                              - '!='
+                              description: Operator applied against the urlPaths list.
+                          required:
+                          - isActive
+                          - htmlSelector
+                          - executionSequence
+                          - urlPaths
+                          - operation
+                    required:
+                    - isActive
+                    - global
+                    - specific
+            examples:
+              example1:
+                value:
+                  config:
+                    isActive: true
+                    steps: 4
+                    valueInPx: 5000
+                    delayBetween: 300
+                    specific: []
+              example2:
+                value:
+                  config:
+                    isActive: true
+                    global: []
+                    specific:
+                    - isActive: true
+                      htmlSelector: '#tab'
+                      waitAfterInteraction: 150
+                      executionSequence: 0
+                      urlPaths:
+                      - ^/.*$
+                      operation: ==
+      parameters:
+      - schema:
+          type: string
+          minLength: 1
+        example: www.origin.com
+        in: path
+        name: origin
+        required: true
+        description: Origin hostname.
+      - schema:
+          type: string
+          enum:
+          - hover
+          - click
+          - scroll
+        in: path
+        name: type
+        required: true
+        description: Interaction type.
+      - schema:
+          type: string
+        in: header
+        name: x-photoniq-customerid
+        required: true
+        description: Customer unique identifier.
+      responses:
+        '200':
+          description: Interaction updated successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Interaction updated successfully.
+                properties:
+                  _key:
+                    type: string
+                    description: Interaction unique identifier.
+                required:
+                - _key
+                example:
+                  _key: -A5HO1NwgFrTMp5xv8KRWnk
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Bad request.
+                properties:
+                  status:
+                    type: string
+                    description: Error status.
+                  message:
+                    type: string
+                    description: Error message.
+                required:
+                - status
+                - message
+                example:
+                  status: ERROR
+                  message: Header x-photoniq-customerid is required.
+        '404':
+          description: Not found.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Not found.
+                properties:
+                  status:
+                    type: string
+                    description: Error status.
+                  message:
+                    type: string
+                    description: Error message.
+                required:
+                - status
+                - message
+                example:
+                  status: ERROR
+                  message: Not found.
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Internal server error.
+                properties:
+                  status:
+                    type: string
+                    description: Error status.
+                  message:
+                    type: string
+                    description: Error message.
+                required:
+                - status
+                - message
+                example:
+                  status: ERROR
+                  message: Internal server error.
+    delete:
+      summary: Delete synthetic interaction
+      tags:
+      - Synthetic Interactions
+      description: Deletes a synthetic interaction associated with the origin.
+      parameters:
+      - schema:
+          type: string
+          minLength: 1
+        example: www.origin.com
+        in: path
+        name: origin
+        required: true
+        description: Origin hostname.
+      - schema:
+          type: string
+          enum:
+          - hover
+          - click
+          - scroll
+        in: path
+        name: type
+        required: true
+        description: Interaction type.
+      - schema:
+          type: string
+        in: header
+        name: x-photoniq-customerid
+        required: true
+        description: Customer unique identifier.
+      responses:
+        '200':
+          description: Interaction deleted successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Interaction deleted successfully.
+                properties:
+                  _key:
+                    type: string
+                    description: Interaction unique identifier.
+                required:
+                - _key
+                example:
+                  _key: -A5HO1NwgFrTMp5xv8KRWnk
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Bad request.
+                properties:
+                  status:
+                    type: string
+                    description: Error status.
+                  message:
+                    type: string
+                    description: Error message.
+                required:
+                - status
+                - message
+                example:
+                  status: ERROR
+                  message: Header x-photoniq-customerid is required.
+        '404':
+          description: Not found.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Not found.
+                properties:
+                  status:
+                    type: string
+                    description: Error status.
+                  message:
+                    type: string
+                    description: Error message.
+                required:
+                - status
+                - message
+                example:
+                  status: ERROR
+                  message: Not found.
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Internal server error.
+                properties:
+                  status:
+                    type: string
+                    description: Error status.
+                  message:
+                    type: string
+                    description: Error message.
+                required:
+                - status
+                - message
+                example:
+                  status: ERROR
+                  message: Internal server error.
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Provide an API Key to the `Authorization` header, prefixed with "apikey".
+
+
+        Example: `Authorization: apikey <key>`'
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Provide a JSON Web Token (JWT) to the `Authorization` header, prefixed with "bearer".
+
+
+        Example: `Authorization: bearer <jwt>`'

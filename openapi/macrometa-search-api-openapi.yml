@@ -1,0 +1,1797 @@
+openapi: 3.0.0
+info:
+  title: Macrometa API Reference Activity Metrics Search API
+  version: 0.17.17
+  description: API reference for the Macrometa Global Data Network.
+  license:
+    name: Macrometa License, Version 2.0
+servers:
+- url: https://api-play.paas.macrometa.io
+  description: GDN API
+host: api-play.paas.macrometa.io
+security:
+- ApiKeyAuth: []
+- BearerAuth: []
+tags:
+- name: Search
+paths:
+  /_fabric/{fabric}/_api/search:
+    post:
+      description: "Search a collection for string matches.\n\nThe specified search query is ran for the collection. If there are too many results, the cursor *id* can be used to obtain the remaining results.\n\n **Note**: This API is applicable for collections with search capability enabled. For user created views, use C8QL query to run search operation."
+      operationId: SearchView
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/api_search_view_search'
+        description: Collection in which to search.
+        required: true
+      responses:
+        '200':
+          description: Successfully fetched search results.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api_search_get_view_http_examples_rc_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified collection.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Search in collection
+      tags:
+      - Search
+  /_fabric/{fabric}/_api/search/collection/{collection-name}:
+    post:
+      description: Enable or disable search capability of a collection. The collection is created if it does not exist. Search capability is enabled only for one field per collection.
+      operationId: SearchViewUpdate
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      - in: path
+        name: collection-name
+        required: true
+        description: Collection for which to set search capability.
+        schema:
+          type: string
+      - in: query
+        name: enable
+        required: true
+        description: '*True* enables search. *False* disables search.'
+        schema:
+          type: boolean
+          default: true
+      - in: query
+        name: field
+        required: false
+        description: The field for which you want to enable search. Required if *enable* is set to *true*.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successfully set search capablitiy.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/example_operation_success_rc_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified collection.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Set Search Capability
+      tags:
+      - Search
+  /_fabric/{fabric}/_api/search/view/{view-name}:
+    delete:
+      description: Remove the search view identified by *view-name*.
+      operationId: deleteView
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: The name of the search view to remove.
+        in: path
+        name: view-name
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        '200':
+          description: Successfully removed search view.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/example_operation_success_rc_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified collection.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Remove search view
+      tags:
+      - Search
+    get:
+      description: Fetch information about a search view.
+      operationId: getViews:Properties
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: The name of the search view.
+        in: path
+        name: view-name
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        '200':
+          description: Successfully fetched search view.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/search_get_view_rc_200_example'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified collection.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Get the information about search view
+      tags:
+      - Search
+  /_fabric/{fabric}/_api/search/view/{view-name}/properties:
+    get:
+      description: Fetch an object containing the definition of the search view identified by *view-name*.
+      operationId: getView
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: The name of the search view.
+        in: path
+        name: view-name
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        '200':
+          description: Successfully fetched search view properties.
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - $ref: '#/components/schemas/search_get_semantic_view_properties_rc_200_example'
+                - $ref: '#/components/schemas/search_get_view_properties_rc_200_example'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified collection.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Read properties of search view
+      tags:
+      - Search
+    put:
+      description: Changes the properties of search view.
+      operationId: modifyViewPut
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: The name of the search view.
+        in: path
+        name: view-name
+        required: true
+        schema:
+          type: string
+          format: string
+      requestBody:
+        $ref: '#/components/requestBodies/post_api_view_iresearch'
+      responses:
+        '201':
+          description: Successfully updated search view.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api_search_post_view_http_examples_rc_201'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified collection.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Change properties of search view
+      tags:
+      - Search
+  /_fabric/{fabric}/_api/search/view/{view-name}/rename:
+    put:
+      description: 'Renames a search view.
+
+
+        **Note**: This method is not available in a cluster.'
+      operationId: modifyView:rename
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: The name of the search view to rename.
+        in: path
+        name: view-name
+        required: true
+        schema:
+          type: string
+          format: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/rename_view'
+        required: true
+      responses:
+        '200':
+          description: Successfully renamed search view.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/example_operation_success_rc_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified collection.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Rename search view
+      tags:
+      - Search
+  /_fabric/{fabric}/_api/search/view:
+    get:
+      description: Fetch an array of all search view descriptions.
+      operationId: getViews:AllViews
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      responses:
+        '200':
+          description: Successfully found search views descriptions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api_search_get_views_http_examples_rc_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified collection.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: List all search views.
+      tags:
+      - Search
+    post:
+      description: 'Create a search view. Search view is updated with collection data changes every 10 seconds.
+
+
+        **Note**: Search view can''t be created with the links. Use PUT/PATCH for links management.'
+      operationId: createView
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      requestBody:
+        $ref: '#/components/requestBodies/post_api_view_search'
+      responses:
+        '201':
+          description: Successfully created search view.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api_search_post_view_http_examples_rc_201'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified collection.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '409':
+          description: Successfully found existing search view with same name.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_409'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Create search view
+      tags:
+      - Search
+  /_fabric/{fabric}/_api/search/analyzer:
+    get:
+      description: Fetch an array of all anlyzer descriptions.
+      operationId: RestAnalyzerHandler:List
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      responses:
+        '200':
+          description: Successfully fetched analyzer descriptions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api_search_get_analyzers_http_examples_rc_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified collection.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: List all analyzers
+      tags:
+      - Search
+  /_fabric/{fabric}/_api/search/analyzer/{analyzer-name}:
+    get:
+      description: Fetch the information about analyzer.
+      operationId: RestAnalyzerHandler:GetDefinition
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: The name of the analyzer to retrieve.
+        in: path
+        name: analyzer-name
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        '200':
+          description: Successfully fetched analyzer.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api_search_get_analyzer_det_http_examples_rc_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified analyzer.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Return the analyzer definition
+      tags:
+      - Search
+  /api/hss/v1/index/{index_name}/search:
+    post:
+      tags:
+      - Search
+      summary: Search
+      description: Perform a search on an index.
+      operationId: search_api_hss_v1_index__index_name__search_post
+      security:
+      - APIKeyHeader: []
+      parameters:
+      - name: index_name
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Name of the index to search
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchQuery'
+      responses:
+        '200':
+          description: Successfully created index.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SearchQuery'
+                title: Response createIndex
+        '400':
+          description: 'Error: Bad request.'
+          content:
+            application/json:
+              example:
+                detail: Invalid query.
+        '401':
+          description: 'Error: Unauthorized.'
+          content:
+            application/json:
+              example:
+                detail: Unauthorized.
+        '404':
+          description: 'Error: Not Found.'
+          content:
+            application/json:
+              example:
+                detail: Index not found.
+        '500':
+          description: 'Error: Internal server error.'
+          content:
+            application/json:
+              example:
+                message: Unable to search the index.
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/hss/v1/index/{index_name}/search/suggestions:
+    get:
+      tags:
+      - Search
+      summary: Get suggestions
+      description: Get search suggestions for the current user.
+      operationId: get_suggestions_api_hss_v1_index__index_name__search_suggestions_get
+      security:
+      - APIKeyHeader: []
+      parameters:
+      - name: index_name
+        in: path
+        required: true
+        schema:
+          type: string
+          description: The name of the index.
+          title: Index Name
+        description: The name of the index.
+      responses:
+        '200':
+          description: Successfully returned suggestions.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                title: Response getSuggestions
+        '401':
+          description: 'Error: Unauthorized.'
+          content:
+            application/json:
+              example:
+                detail: Unauthorized.
+        '500':
+          description: 'Error: Internal server error.'
+          content:
+            application/json:
+              example:
+                message: Unable to fetch suggestions.
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    post_api_view_link_semantic_props:
+      description: 'The link properties. If specified, *properties* should be a JSON object containing the following attributes:'
+      properties:
+        '[collection-name]':
+          $ref: '#/components/schemas/post_api_view_semantic_fields'
+      type: object
+    api_search_get_analyzer_det_http_examples_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        name:
+          description: The name of analyzer.
+          type: string
+          example: text_pt
+        type:
+          description: The type of analyzer.
+          type: string
+          example: text
+        properties:
+          description: The properties of analyzer.
+          properties:
+            locale:
+              description: The locale for analyzer.
+              type: string
+              example: pt.utf-8
+            case:
+              description: The character casing for analyzer.
+              type: string
+              example: upper
+            stopwords:
+              description: The array of specified words to omit from the result.
+              example: []
+            accent:
+              description: '*True* to preserve accented characters'
+              type: boolean
+              default: true
+            stemming:
+              description: '*True* to stem returned words'
+              type: boolean
+              default: true
+          type: object
+        features:
+          description: The array of properties of analyzer.
+          example:
+          - position
+          - norm
+      type: object
+    headers:
+      x-gdn-region:
+        description: The federation's region hostname that served the request.
+        type: string
+      x-gdn-requestid:
+        description: A unique request ID for each API request.
+        type: string
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    api_search_post_view_http_examples_rc_201:
+      properties:
+        globallyUniqueId:
+          description: Gloable Unique identifier of the search view.
+          type: string
+          example: h83A7584E8AA9/81730851
+        id:
+          description: Unique identifier of the search view.
+          type: string
+          example: '81730851'
+        name:
+          description: The name of the search view. This field is immutable.
+          type: string
+          example: new_collection_view
+        primarySort:
+          description: Specify default sorting order. This field is immutable.
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                description: The name of the field.
+                type: string
+                example: attribute1
+              direction:
+                description: The sorting direction.
+                type: string
+                example: asc
+            default: {}
+          default: []
+        links:
+          $ref: '#/components/schemas/post_api_view_links'
+        type:
+          description: The type of the search view. must be equal to *search*.
+          type: string
+          default: search
+    search_get_semantic_view_properties_rc_200_example:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          description: Semantic search view information
+          type: object
+          properties:
+            globallyUniqueId:
+              description: Global Unique identifier of the semantic search view.
+              type: string
+              example: h83A7584E8AA9/81730851
+            id:
+              description: Unique identifier of the semantic search view.
+              type: string
+              example: '81730851'
+            name:
+              description: The name of the semantic search view. This field is immutable.
+              type: string
+              example: new_collection_view
+            links:
+              $ref: '#/components/schemas/post_api_view_link_semantic_props'
+            type:
+              description: The type of the search view. Must be equal to *semantic_search*.
+              type: string
+              default: semantic_search
+    post_api_view_semantic:
+      properties:
+        name:
+          description: The name of the semantic search view. This field is immutable.
+          type: string
+          example: new_collection_view
+        links:
+          $ref: '#/components/schemas/post_api_view_link_semantic_props'
+        type:
+          description: The type of the search view. Must be equal to *semantic_search*.
+          type: string
+          default: semantic_search
+      required:
+      - name
+      - type
+      type: object
+    FilterCondition:
+      type: string
+      enum:
+      - AND
+      - OR
+      title: FilterCondition
+    SearchQuery:
+      properties:
+        query:
+          type: string
+          title: Query
+        boost:
+          type: string
+          title: Boost
+          description: Query to boost the results by. Results for `query` will be ranked to have more weight towards `boost`.
+          examples:
+          - books
+        bury:
+          type: string
+          title: Bury
+          description: Query to bury the results by. Results for `query` will be ranked to have less weight towards `bury`.
+          examples:
+          - white paper
+        language:
+          type: string
+          maxLength: 2
+          minLength: 2
+          title: Language
+          description: 'The language of the search query. Supported languages: en, es, de, sv, ru, zh, no, nl, it, fr, fi, pt'
+          default: en
+          examples:
+          - en
+          - fr
+          - it
+        filters:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/SearchFilter'
+            type: array
+          - type: 'null'
+          title: Filters
+          description: List of filters to apply to the search query.
+        projection:
+          items:
+            type: string
+          type: array
+          title: Projection
+          description: List of fields in the document to return as part of search results.
+          default: []
+          examples:
+          - - title
+            - content
+        distinct_results:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Distinct Results
+          description: Chunked indexes will return multiple results for a single document. Setting this to `true` returns one result per document.
+          default: true
+          examples:
+          - true
+          - false
+        limit:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Limit
+          description: Maximum number of documents to be returned.
+          default: 10
+          examples:
+          - 10
+          - 20
+        offset:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Offset
+          description: Number of documents to skip (used for pagination).
+          default: 0
+          examples:
+          - 0
+          - 20
+      type: object
+      title: SearchQuery
+    SearchFilter:
+      properties:
+        field:
+          type: string
+          title: Field
+          description: The field to filter on.
+          examples:
+          - doc_name
+        operator:
+          allOf:
+          - $ref: '#/components/schemas/FilterOperation'
+          description: "The operator to use for filtering. Supported operators:  \n* == equality\n* != inequality\n* < less than\n* <= less or equal\n* \\> greater than\n* \\>= greater or equal\n* IN test if a value is contained in an array\n* NOT IN test if a value is not contained in an array\n* LIKE tests if a string value matches a wild card pattern. Allowed wild card characters are '%' and '_'. This operator is case sensitive.\n* =~ tests if a string value matches a regular expression\n* !~ tests if a string value does not match a regular expression\n    "
+          examples:
+          - ==
+          - '!='
+        value:
+          anyOf:
+          - type: string
+          - type: integer
+          - type: boolean
+          - type: number
+          - type: object
+          - items: {}
+            type: array
+          title: Value
+          description: The value to filter on.
+          examples:
+          - s3_bucket_config.json
+          - 5
+          - true
+        condition:
+          anyOf:
+          - $ref: '#/components/schemas/FilterCondition'
+          - type: 'null'
+          description: The logical operator to use for combining this filter with another filter.
+      type: object
+      required:
+      - field
+      - operator
+      - value
+      title: SearchFilter
+    search_get_view_properties_rc_200_example:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          description: Search view information
+          type: object
+          properties:
+            globallyUniqueId:
+              description: Global unique identifier (GUID) of the semantic search view.
+              type: string
+              example: h83A7584E8AA9/81730851
+            id:
+              description: Unique identifier of the search view.
+              type: string
+              example: '81730851'
+            name:
+              description: The name of the search view. This field is immutable.
+              type: string
+              example: new_collection_view
+            primarySort:
+              description: Specify default sorting order. This field is immutable.
+              type: array
+              items:
+                type: object
+                properties:
+                  field:
+                    description: The name of the field.
+                    type: string
+                    example: attribute1
+                  direction:
+                    description: The sorting direction.
+                    type: string
+                    example: asc
+                default: {}
+              default: []
+            links:
+              $ref: '#/components/schemas/post_api_view_links'
+            type:
+              description: The type of the search view. Must be equal to *search*.
+              type: string
+              default: search
+    api_search_view_search:
+      properties:
+        collection:
+          type: string
+          example: my_collection
+          description: Collection in which to search.
+        search:
+          type: string
+          example: filter doc.URL== @URL Return doc
+          description: C8QL search query, specifying search criteria for the documents in the collection.
+        bindVars:
+          type: object
+          example:
+            URL: https://www.macrometa.com/
+          description: Bind variables for the search query.
+        ttl:
+          type: integer
+          example: 60
+          description: How long search results should be preserved by the server (in seconds).
+      required:
+      - collection
+      - search
+      type: object
+    post_api_view_iresearch:
+      properties:
+        name:
+          description: The name of the search view. This field is immutable.
+          type: string
+          example: new_collection_view
+        primarySort:
+          description: Specify default sorting order. This field is immutable.
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                description: The name of the field.
+                type: string
+                example: attribute1
+              direction:
+                description: The sorting direction.
+                type: string
+                example: asc
+            default: {}
+          default: []
+        links:
+          $ref: '#/components/schemas/post_api_view_links'
+        type:
+          description: The type of the search view. Must be equal to *search*.
+          type: string
+          default: search
+      required:
+      - name
+      - type
+      type: object
+    post_api_view_fields:
+      description: A list of link properties that are applied at each document level with each key specifying a document attribute.
+      properties:
+        '[field-name]':
+          description: 'This is a recursive structure for the specific attribute path, potentially containing any of the following attributes: *analyzers*, *includeAllFields*, *trackListPositions*, *storeValues*. Any attributes not specified are inherited from the parent.'
+          items:
+            type: object
+          type: object
+      type: object
+      default: {}
+    post_api_view_semantic_field_def:
+      description: A list of link properties that are applied at each document level with each key specifying a document attribute
+      properties:
+        '[field-name]':
+          type: object
+          properties:
+            size:
+              description: The size of the vector.
+              type: integer
+              example: 4
+            distanceType:
+              description: The measure of distance employed to assess the degree of similarity. Acceptable options include "L2" (Euclidean distance), "IP" (inner product), and "COSINE" (cosine similarity).
+              type: string
+              enum:
+              - L2
+              - IP
+              - COSINE
+              example: L2
+            indexConfig:
+              type: object
+              properties:
+                type:
+                  description: The type of the index.
+                  type: string
+                  enum:
+                  - hnsw
+                  - ivf
+                  - flat
+                  example: hnsw
+                maxSize:
+                  description: The maximum number of documents to add to this view. (Applies only to HNSW.)
+                  type: integer
+                  example: 100000
+                nLinks:
+                  description: The links for an element. (Applies only to HNSW.)
+                  type: integer
+                  example: 8
+                efConstruction:
+                  description: The expansion factor at construction time. (Applies only to HNSW.)
+                  type: integer
+                  example: 8
+                efSearch:
+                  description: The expansion factor at search time. (Applies only to HNSW.)
+                  type: integer
+                  example: 8
+                nProbe:
+                  description: The number of probes at query time. (Applies only to IVF.)
+                  type: integer
+                  example: 8
+                sample:
+                  description: Sample percentage used for training the index (from 0 to 1). (Applies only to IVF.)
+                  type: number
+                  format: float
+                  example: 0.1
+              required:
+              - type
+            quantizationConfig:
+              type: object
+              properties:
+                type:
+                  description: The type of the quantizer. Valid values are "NONE" (no quantization), "PQ" (Product Quantizer), and "SQ" (Scalar Quantizer).
+                  type: string
+                  enum:
+                  - none
+                  - pq
+                  - sq
+                  example: none
+                bits:
+                  description: The number of output bits after quantization. (Applies to only to PQ and SQ quantizers.)
+                  type: integer
+                  example: 8
+              required:
+              - type
+          required:
+          - size
+          - distanceType
+          - indexConfig
+      required:
+      - '[field-name]'
+      type: object
+    error_example_rc_404:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 404
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
+      type: object
+    api_search_get_views_http_examples_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          $ref: '#/components/schemas/api_search_post_view_http_examples_rc_201'
+    FilterOperation:
+      type: string
+      enum:
+      - ==
+      - '!='
+      - <
+      - <=
+      - '>'
+      - '>='
+      - IN
+      - NOT_IN
+      - LIKE
+      - =~
+      - '!~'
+      title: FilterOperation
+    api_search_get_view_http_examples_rc_200:
+      type: object
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        hasMore:
+          description: '*True* if more results available for the cursor on the server'
+          type: boolean
+          example: false
+        count:
+          description: Number of matching documents.
+          type: number
+          example: 1
+        cached:
+          description: '*True* if indicating whether the query result was served from the query cache or not'
+          type: boolean
+          example: false
+        result:
+          description: The array of matching documents.
+          type: array
+          example:
+          - URL: https://www.macrometa.com/
+            _id: server_list/62487646
+            _key: '62487646'
+            _rev: _dcf-QQO--_
+          items: {}
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    error_example_rc_400:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 400
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 102020
+      required:
+      - error
+      type: object
+    error_example_rc_409:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 409
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
+      type: object
+    example_operation_success_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          description: Return *true* flag if operation is successfully completed.
+          type: boolean
+          example: true
+    post_api_view_link_props:
+      description: 'The link properties. If specified, *properties* should be a JSON object containing the following attributes:'
+      properties:
+        analyzers:
+          description: The list of analyzers to be used for indexing of string values.
+          format: string
+          items:
+            type: string
+            default: identity
+          type: array
+        fields:
+          $ref: '#/components/schemas/post_api_view_fields'
+        includeAllFields:
+          description: The flag determines whether or not to index all fields on a particular level of depth.
+          type: boolean
+          default: false
+        storeValues:
+          description: 'How should the search view track the attribute values, this setting allows for additional value retrieval optimizations, one of:
+
+            - *none*: Do not store values by the search view
+
+            - *id*: Store only information about value presence, to allow use of the EXISTS() function.'
+          type: string
+          default: none
+        trackListPositions:
+          description: The flag determines whether or not values in a lists should be treated separate.
+          type: boolean
+          default: false
+      type: object
+    api_search_get_analyzers_http_examples_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          items:
+            $ref: '#/components/schemas/api_search_get_analyzer_http_examples_rc_200'
+          type: array
+      type: object
+    post_api_view_links:
+      description: The set of collection names associated with the properties.
+      properties:
+        '[collection-name]':
+          $ref: '#/components/schemas/post_api_view_link_props'
+      type: object
+    error_example_rc_403:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 403
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
+      type: object
+    rename_view:
+      properties:
+        name:
+          description: The new name of the search view.
+          type: string
+          example: new_view_name
+      type: object
+    post_api_view_semantic_fields:
+      description: 'The link properties. If specified, *properties* should be a JSON object containing the following attributes:'
+      properties:
+        fields:
+          $ref: '#/components/schemas/post_api_view_semantic_field_def'
+      type: object
+    api_search_get_analyzer_http_examples_rc_200:
+      properties:
+        name:
+          description: The name of analyzer.
+          type: string
+          example: text_pt
+        type:
+          description: The type of analyzer.
+          type: string
+          example: text
+        properties:
+          description: The properties of analyzer.
+          properties:
+            locale:
+              description: The locale for analyzer.
+              type: string
+              example: pt.utf-8
+            case:
+              description: The character casing for analyzer.
+              type: string
+              example: upper
+            stopwords:
+              description: The array of specified words to omit from the result.
+              example: []
+            accent:
+              description: '*True* to preserve accented characters'
+              type: boolean
+              default: true
+            stemming:
+              description: '*True* to stem returned words'
+              type: boolean
+              default: true
+          type: object
+        features:
+          description: The array of properties of analyzer.
+          type: array
+          example:
+          - position
+          - norm
+          items: {}
+      type: object
+    search_get_view_rc_200_example:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          description: Search view information
+          type: object
+          properties:
+            globallyUniqueId:
+              description: Unique identifier of the collection
+              type: string
+              example: h83A7584E8AA9/81730851
+            id:
+              description: Unique identifier of the search view
+              type: string
+              example: '81730851'
+            name:
+              description: Name of the search view
+              type: string
+              example: c8search_view_server_list
+            type:
+              description: '*search* as type of search view'
+              type: string
+              example: search
+  requestBodies:
+    post_api_view_search:
+      content:
+        application/json:
+          schema:
+            oneOf:
+            - $ref: '#/components/schemas/post_api_view_semantic'
+            - $ref: '#/components/schemas/post_api_view_iresearch'
+      required: true
+    post_api_view_iresearch:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/post_api_view_iresearch'
+      required: true
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Provide an API Key to the `Authorization` header, prefixed with "apikey".
+
+
+        Example: `Authorization: apikey <key>`'
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Provide a JSON Web Token (JWT) to the `Authorization` header, prefixed with "bearer".
+
+
+        Example: `Authorization: bearer <jwt>`'

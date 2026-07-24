@@ -1,0 +1,1813 @@
+openapi: 3.0.0
+info:
+  title: Macrometa API Reference Activity Metrics Indexes API
+  version: 0.17.17
+  description: API reference for the Macrometa Global Data Network.
+  license:
+    name: Macrometa License, Version 2.0
+servers:
+- url: https://api-play.paas.macrometa.io
+  description: GDN API
+host: api-play.paas.macrometa.io
+security:
+- ApiKeyAuth: []
+- BearerAuth: []
+tags:
+- name: Indexes
+paths:
+  /_fabric/{fabric}/_api/index:
+    get:
+      description: Fetch the list of all indexes of a collection.
+      operationId: getIndexes
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: The collection name.
+        in: query
+        name: collection
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successfully fetched indexes.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api_index_get_http_examples_rc_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified collection.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: List all indexes of a collection
+      tags:
+      - Indexes
+  /_fabric/{fabric}/_api/index/fulltext:
+    post:
+      description: Create full-text index, if it does not already exist.
+      operationId: createIndex:fulltext
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: The collection name.
+        in: query
+        name: collection
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/api_index_fulltext_body'
+        required: true
+      responses:
+        '200':
+          description: Successfully fetched existing index.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api_index_post_fulltext_http_examples_rc_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '201':
+          description: Successfully created index.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api_index_post_fulltext_http_examples_rc_201'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified collection.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Create fulltext index
+      tags:
+      - Indexes
+  /_fabric/{fabric}/_api/index/general:
+    post:
+      description: 'Create a new index.
+
+
+        **Note**: Indexing the system attribute _id is not supported for user-defined indexes. Manually creating an index using _id as an index attribute fails with an error.'
+      operationId: createIndex:general
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: The collection name.
+        in: query
+        name: collection
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/api_index_general_body'
+        required: true
+      responses:
+        '200':
+          description: Successfully fetched existing index.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api_index_post_fulltext_http_examples_rc_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '201':
+          description: Successfully created index.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api_index_post_fulltext_http_examples_rc_201'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified collection.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Create index
+      tags:
+      - Indexes
+  /_fabric/{fabric}/_api/index/geo:
+    post:
+      description: 'Create a geo index.
+
+
+        **Note**: Geo indexes are always sparse, meaning that documents that do not contain the index attributes or have non-numeric values in the index attributes are not indexed.'
+      operationId: createIndex:geo
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: The collection name.
+        in: query
+        name: collection
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/api_index_geo'
+        required: true
+      responses:
+        '200':
+          description: Successfully fetched existing geo index.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api_index_post_geo_http_examples_rc_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '201':
+          description: Successfully created geo index.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api_index_post_geo_http_examples_rc_201'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified collection.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Create geo-spatial index
+      tags:
+      - Indexes
+  /_fabric/{fabric}/_api/index/hash:
+    post:
+      description: 'Create a hash index.
+
+
+        **Note**:
+
+        - In a sparse index all documents are excluded from the index that do not contain at least one of the specified index attributes (i.e. *fields*) or that have a value of *null* in any of the specified index attributes. Such documents are not indexed and are not taken into account for uniqueness checks if the *unique* flag is set.
+
+        - In a non-sparse index, these documents are indexed (for non-present indexed attributes, a value of *null* is used) and are taken into account for uniqueness checks if the *unique* flag is set.
+
+        - Unique indexes on non-shard keys are not supported in a cluster.'
+      operationId: createIndex:hash
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: The collection name.
+        in: query
+        name: collection
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/api_index_hash'
+        required: true
+      responses:
+        '200':
+          description: Successfully fetched existing hash index.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api_index_post_hash_http_examples_rc_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '201':
+          description: Successfully created hash index.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api_index_post_hash_http_examples_rc_201'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified collection.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Create hash index
+      tags:
+      - Indexes
+  /_fabric/{fabric}/_api/index/persistent:
+    post:
+      description: "Create a hash index.\n\n **Note**:\n- In a sparse index all documents are excluded from the index that do not contain at least one of the specified index attributes (i.e. *fields*) or that have a value of *null* in any of the specified index attributes. Such documents are not indexed and are not taken into account for uniqueness checks if the unique flag is set.\n- In a non-sparse index, these documents are indexed (for non-present indexed attributes, a value of *null* is used) and are taken into account for uniqueness checks if the *unique* flag is set.\n- Unique indexes on non-shard keys are not supported in a cluster."
+      operationId: createIndex:persistent
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: The collection name.
+        in: query
+        name: collection
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/api_index_persistent'
+        required: true
+      responses:
+        '200':
+          description: Successfully fetched existing persistent index.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api_index_post_persistent_http_examples_rc_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '201':
+          description: Successfully created persistent index.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api_index_post_persistent_http_examples_rc_201'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified collection.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Create a persistent index
+      tags:
+      - Indexes
+  /_fabric/{fabric}/_api/index/skiplist:
+    post:
+      description: 'Create a hash index.
+
+
+        **Note**:
+
+        - In a sparse index all documents are excluded from the index that do not contain at least one of the specified index attributes (i.e. *fields*) or that have a value of *null* in any of the specified index attributes. Such documents are not indexed and are not taken into account for uniqueness checks if the *unique* flag is set.
+
+        - In a non-sparse index, these documents are indexed (for non-present indexed attributes, a value of *null* is used) and are taken into account for uniqueness checks if the *unique* flag is set.
+
+        - Unique indexes on non-shard keys are not supported in a cluster.'
+      operationId: createIndex:skiplist
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: The collection name.
+        in: query
+        name: collection
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/api_index_skiplist'
+        required: true
+      responses:
+        '200':
+          description: Successfully fetched existing skiplist index.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api_index_post_skiplist_http_examples_rc_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '201':
+          description: Successfully created skiplist index.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api_index_post_skiplist_http_examples_rc_201'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified collection.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Create skip list
+      tags:
+      - Indexes
+  /_fabric/{fabric}/_api/index/ttl:
+    post:
+      description: Create a hash index.
+      operationId: createIndex:ttl
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: The collection name.
+        in: query
+        name: collection
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/api_index_ttl'
+        required: true
+      responses:
+        '200':
+          description: Successfully fetched existing ttl index.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api_index_post_ttl_http_examples_rc_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '201':
+          description: Successfully created ttl index.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api_index_post_ttl_http_examples_rc_201'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified collection.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Create TTL index
+      tags:
+      - Indexes
+  /_fabric/{fabric}/_api/index/{collection}/{indexName}:
+    delete:
+      description: Remove an index.
+      operationId: dropIndex
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: The collection name.
+        in: path
+        name: collection
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: The name of the index.
+        in: path
+        name: indexName
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        '200':
+          description: Successfully removed index.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api_collection_ttl_http_examples_rc_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified index.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Remove index
+      tags:
+      - Indexes
+    get:
+      description: Fetch the information about index.
+      operationId: getIndexes:handle
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: The collection name.
+        in: path
+        name: collection
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: The name of the index.
+        in: path
+        name: indexName
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        '200':
+          description: Successfully fetched index information.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api_index_post_fulltext_http_examples_rc_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified collection.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Read index
+      tags:
+      - Indexes
+components:
+  schemas:
+    api_index_hash:
+      properties:
+        deduplicate:
+          description: If *false*, the deduplication of array values is turned off.
+          format: boolean
+          type: boolean
+        fields:
+          description: An array of attribute paths.
+          items:
+            type: string
+            example: _key
+          type: array
+        sparse:
+          description: '*True* to create a sparse index.'
+          type: boolean
+          example: true
+        type:
+          description: Must be equal to *"hash"*.
+          type: string
+          example: hash
+        unique:
+          description: '*True* to create a unique index.'
+          type: boolean
+          example: true
+      required:
+      - type
+      type: object
+    api_index_post_geo_http_examples_rc_201:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        geoJson:
+          description: If a geo-spatial index on a *location* is constructed and *geoJson* is *true*, the order within the array is longitude followed by latitude. This corresponds to the format described in http://geojson.org/geojson-spec.html#positions.
+          type: boolean
+          example: true
+        fields:
+          description: HTTP response code.
+          type: array
+          items:
+            type: string
+            example: _key
+        maxNumCoverCells:
+          description: The maximum number of cover cells.
+          type: integer
+          example: 8
+        worstIndexedLevel:
+          description: The worst indexed level.
+          type: integer
+          example: 4
+        id:
+          description: Index identifier.
+          type: string
+          example: '61862387'
+        name:
+          description: Name of the index.
+          type: string
+          example: idx_1723573111790501888
+        selectivityEstimate:
+          description: The selectivity estimate of index.
+          type: number
+          example: 1
+        sparse:
+          description: '*True* if index is sparse type.'
+          type: boolean
+          example: true
+        type:
+          description: Index type.
+          type: string
+          example: fulltext
+        unique:
+          description: '*True* if index is unique.'
+          type: boolean
+          example: true
+    api_index_post_fulltext_http_examples_rc_201:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 201
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        fields:
+          description: HTTP response code.
+          type: array
+          items:
+            type: string
+            example: _key
+        id:
+          description: Index identifier.
+          type: string
+          example: '61862387'
+        name:
+          description: Name of the index.
+          type: string
+          example: idx_1723573111790501888
+        selectivityEstimate:
+          description: The selectivity estimate of index.
+          type: number
+          example: 1
+        sparse:
+          description: '*True* if index is sparse type.'
+          type: boolean
+          example: false
+        type:
+          description: Index type.
+          type: string
+          example: fulltext
+        unique:
+          description: '*True* if index is unique.'
+          type: boolean
+          example: true
+        isNewlyCreated:
+          description: '*True* if index is newly created.'
+          type: boolean
+          example: true
+    api_index_post_skiplist_http_examples_rc_201:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        fields:
+          description: HTTP response code.
+          type: array
+          items:
+            type: string
+            example: _key
+        id:
+          description: Index identifier.
+          type: string
+          example: '61862387'
+        name:
+          description: Name of the index.
+          type: string
+          example: idx_1723573111790501888
+        selectivityEstimate:
+          description: The selectivity estimate of index.
+          type: number
+          example: 1
+        sparse:
+          description: '*True* if index is sparse type.'
+          type: boolean
+          example: false
+        type:
+          description: Index type.
+          type: string
+          example: skiplist
+        unique:
+          description: '*True* if index is unique.'
+          type: boolean
+          example: true
+    headers:
+      x-gdn-region:
+        description: The federation's region hostname that served the request.
+        type: string
+      x-gdn-requestid:
+        description: A unique request ID for each API request.
+        type: string
+    api_index_post_hash_http_examples_rc_201:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        fields:
+          description: HTTP response code.
+          type: array
+          items:
+            type: string
+            example: _key
+        id:
+          description: Index identifier.
+          type: string
+          example: '61862387'
+        name:
+          description: Name of the index.
+          type: string
+          example: idx_1723573111790501888
+        selectivityEstimate:
+          description: The selectivity estimate of index.
+          type: number
+          example: 1
+        sparse:
+          description: '*True* if index is sparse type.'
+          type: boolean
+          example: false
+        type:
+          description: Index type.
+          type: string
+          example: hash
+        unique:
+          description: '*True* If the index is unique.'
+          type: boolean
+          example: true
+    api_index_post_hash_http_examples_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        fields:
+          description: HTTP response code.
+          type: array
+          items:
+            type: string
+            example: _key
+        id:
+          description: Index identifier.
+          type: string
+          example: '61862387'
+        name:
+          description: Name of the index.
+          type: string
+          example: idx_1723573111790501888
+        selectivityEstimate:
+          description: The selectivity estimate of index.
+          type: number
+          example: 1
+        sparse:
+          description: '*True* if index is sparse type.'
+          type: boolean
+          example: false
+        type:
+          description: Index type.
+          type: string
+          example: hash
+        unique:
+          description: '*True* if index is unique.'
+          type: boolean
+          example: true
+    api_index_http_200_help:
+      properties:
+        fields:
+          description: HTTP response code.
+          type: array
+          items:
+            type: string
+            example: _key
+        id:
+          description: Index identifier.
+          type: string
+          example: '61862387'
+        name:
+          description: Name of the index.
+          type: string
+          example: idx_1723573111790501888
+        selectivityEstimate:
+          description: The selectivity estimate of index.
+          type: number
+          example: 1
+        sparse:
+          description: '*True* if the index is sparse type.'
+          type: boolean
+          example: false
+        type:
+          description: Index type.
+          type: string
+          example: fulltext
+        unique:
+          description: '*True* if the index is unique.'
+          type: boolean
+          example: true
+    api_index_geo:
+      properties:
+        fields:
+          description: 'An array with one or two attribute paths.
+
+
+            If it is an array with one attribute path *location*, a geo-spatial index on all documents is created using *location* as path to the coordinates. The value of the attribute must be an array with at least two double values. The array must contain the latitude (first value) and the longitude (second value). All documents, that do not have the attribute path or with value that are not suitable, are ignored.
+
+
+            If it is an array with two attribute paths *latitude* and *longitude*, a geo-spatial index on all documents is created using *latitude* and *longitude* as paths the latitude and the longitude. The value of the attribute *latitude* and of the attribute *longitude* must a double.
+
+
+            Note: All documents, that do not have the attribute paths or which values are not suitable, are ignored. If it is an array with two attribute paths *latitude* and *longitude*, a geo-spatial index on all documents is created using *latitude* and *longitude* as paths the latitude and the longitude. The value of the attribute *latitude* and *longitude* must be a double. All documents that do not have the attribute paths or which values are not suitable are ignored.'
+          items:
+            type: string
+          type: array
+        geoJson:
+          description: If a geo-spatial index on a *location* is constructed and *geoJson* is *true*, the order within the array is longitude followed by latitude. This corresponds to the format described in http://geojson.org/geojson-spec.html#positions.
+          type: string
+        type:
+          description: Must be equal to *"geo"*.
+          type: string
+      required:
+      - type
+      type: object
+    api_index_ttl:
+      properties:
+        expireAfter:
+          description: The time (in seconds) after a document's creation after which the documents count as "expired".
+          type: number
+          example: 3600
+        fields:
+          description: An array with exactly one attribute path.
+          items:
+            type: string
+            example: _key
+          type: array
+        type:
+          description: Must be equal to *"ttl"*.
+          type: string
+          example: ttl
+      required:
+      - type
+      type: object
+    api_index_get_http_examples_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        indexes:
+          description: The array of indexes.
+          type: array
+          items:
+            $ref: '#/components/schemas/api_index_http_200_help'
+        identifiers:
+          description: The object of indexes with index id as key.
+          type: object
+          properties:
+            global_demo/0:
+              $ref: '#/components/schemas/api_index_http_200_help'
+      type: object
+    api_index_persistent:
+      properties:
+        fields:
+          description: An array of attribute paths.
+          items:
+            type: string
+            example: _key
+          type: array
+        sparse:
+          description: '*True* to create a sparse index.'
+          type: boolean
+          example: true
+        type:
+          description: Must be equal to *"persistent"*.
+          type: string
+          example: persistent
+        unique:
+          description: '*True* to create a unique index.'
+          type: boolean
+          example: true
+        deduplicate:
+          description: Controls whether inserting duplicate index values from the same document into a unique array index leads to a unique constraint error or not.
+          type: boolean
+          default: true
+      required:
+      - type
+      type: object
+    error_example_rc_404:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 404
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
+      type: object
+    api_index_post_persistent_http_examples_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        geoJson:
+          description: If a geo-spatial index on a *location* is constructed and *geoJson* is *true*, the order within the array is longitude followed by latitude. This corresponds to the format described in http://geojson.org/geojson-spec.html#positions.
+          type: boolean
+          example: true
+        fields:
+          description: HTTP response code.
+          type: array
+          items:
+            type: string
+            example: _key
+        maxNumCoverCells:
+          description: The maximum number of cover cells.
+          type: integer
+          example: 8
+        worstIndexedLevel:
+          description: The worst indexed level.
+          type: integer
+          example: 4
+        id:
+          description: Index identifier.
+          type: string
+          example: '61862387'
+        name:
+          description: Name of the index.
+          type: string
+          example: idx_1723573111790501888
+        selectivityEstimate:
+          description: The selectivity estimate of index.
+          type: number
+          example: 1
+        sparse:
+          description: '*True* if index is sparse type.'
+          type: boolean
+          example: true
+        type:
+          description: Index type.
+          type: string
+          example: persistent
+        unique:
+          description: '*True* if index is unique.'
+          type: boolean
+          example: true
+    api_index_fulltext_body:
+      properties:
+        fields:
+          description: An array of attribute names. Currently, the array is limited to exactly one attribute.
+          items:
+            type: string
+            example: _key
+          type: array
+        minLength:
+          description: Minimum character length of words to index. Will default to a server-defined value if unspecified. It is thus recommended to set this value explicitly when creating the index.
+          type: integer
+        type:
+          description: Must be equal to *"fulltext"*.
+          type: string
+          example: fulltext
+      required:
+      - fields
+      - type
+      type: object
+    error_example_rc_400:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 400
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 102020
+      required:
+      - error
+      type: object
+    api_index_post_persistent_http_examples_rc_201:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        geoJson:
+          description: If a geo-spatial index on a *location* is constructed and *geoJson* is *true*, the order within the array is longitude followed by latitude. This corresponds to the format described in http://geojson.org/geojson-spec.html#positions.
+          type: boolean
+          example: true
+        fields:
+          description: HTTP response code.
+          type: array
+          items:
+            type: string
+            example: _key
+        maxNumCoverCells:
+          description: The maximum number of cover cells.
+          type: integer
+          example: 8
+        worstIndexedLevel:
+          description: The worst indexed level.
+          type: integer
+          example: 4
+        id:
+          description: Index identifier.
+          type: string
+          example: '61862387'
+        name:
+          description: Name of the index.
+          type: string
+          example: idx_1723573111790501888
+        selectivityEstimate:
+          description: The selectivity estimate of index.
+          type: number
+          example: 1
+        sparse:
+          description: '*True* if index is sparse type.'
+          type: boolean
+          example: true
+        type:
+          description: Index type.
+          type: string
+          example: persistent
+        unique:
+          description: '*True* if index is unique.'
+          type: boolean
+          example: true
+    api_index_post_ttl_http_examples_rc_201:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        fields:
+          description: HTTP response code.
+          type: array
+          items:
+            type: string
+            example: _key
+        id:
+          description: Index identifier.
+          type: string
+          example: '61862387'
+        name:
+          description: Name of the index.
+          type: string
+          example: idx_1723573111790501888
+        selectivityEstimate:
+          description: The selectivity estimate of index.
+          type: number
+          example: 1
+        sparse:
+          description: '*True* if index is sparse type.'
+          type: boolean
+          example: false
+        type:
+          description: Index type.
+          type: string
+          example: ttl
+        unique:
+          description: '*True* if index is unique.'
+          type: boolean
+          example: true
+        expireAfter:
+          description: Index expiry time
+          type: number
+          example: 600
+    api_index_skiplist:
+      properties:
+        deduplicate:
+          description: If *false*, the deduplication of array values is turned off.
+          type: boolean
+          example: false
+        fields:
+          description: An array of attribute paths.
+          items:
+            type: string
+            example: _key
+          type: array
+        sparse:
+          description: '*True* to create a sparse index.'
+          type: boolean
+          example: true
+        type:
+          description: Must be equal to *"skiplist"*.
+          type: string
+          example: skiplist
+        unique:
+          description: '*True* to create a unique index.'
+          type: boolean
+          example: true
+      required:
+      - type
+      type: object
+    api_collection_ttl_http_examples_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        id:
+          description: Removed collection identifier.
+          type: string
+          example: '61862387'
+    api_index_post_fulltext_http_examples_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        fields:
+          description: Array of fields on which index is created.
+          type: array
+          items:
+            type: string
+            example: _key
+        id:
+          description: Index identifier.
+          type: string
+          example: '61862387'
+        name:
+          description: Name of the index.
+          type: string
+          example: idx_1723573111790501888
+        selectivityEstimate:
+          description: The selectivity estimate of index.
+          type: number
+          example: 1
+        sparse:
+          description: '*True* if index is sparse type.'
+          type: boolean
+          example: false
+        type:
+          description: Index type.
+          type: string
+          example: fulltext
+        unique:
+          description: '*True* if index is unique.'
+          type: boolean
+          example: true
+        expireAfter:
+          description: Index expiry time.
+          type: number
+          example: 3600
+    api_index_post_skiplist_http_examples_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        fields:
+          description: HTTP response code.
+          type: array
+          items:
+            type: string
+            example: _key
+        id:
+          description: Index identifier.
+          type: string
+          example: '61862387'
+        name:
+          description: Name of the index.
+          type: string
+          example: idx_1723573111790501888
+        selectivityEstimate:
+          description: The selectivity estimate of index.
+          type: number
+          example: 1
+        sparse:
+          description: '*True* if index is sparse type.'
+          type: boolean
+          example: false
+        type:
+          description: Index type.
+          type: string
+          example: skiplist
+        unique:
+          description: '*True* if index is unique.'
+          type: boolean
+          example: true
+    error_example_rc_403:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 403
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
+      type: object
+    api_index_post_geo_http_examples_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        geoJson:
+          description: If a geo-spatial index on a *location* is constructed and *geoJson* is *true*, the order within the array is longitude followed by latitude. This corresponds to the format described in http://geojson.org/geojson-spec.html#positions.
+          type: boolean
+          example: true
+        fields:
+          description: HTTP response code.
+          type: array
+          items:
+            type: string
+            example: _key
+        maxNumCoverCells:
+          description: The maximum number of cover cells.
+          type: integer
+          example: 8
+        worstIndexedLevel:
+          description: The worst indexed level.
+          type: integer
+          example: 4
+        id:
+          description: Index identifier.
+          type: string
+          example: '61862387'
+        name:
+          description: Name of the index.
+          type: string
+          example: idx_1723573111790501888
+        selectivityEstimate:
+          description: The selectivity estimate of index.
+          type: number
+          example: 1
+        sparse:
+          description: '*True* if index is sparse type.'
+          type: boolean
+          example: true
+        type:
+          description: Index type.
+          type: string
+          example: fulltext
+        unique:
+          description: '*True* if index is unique.'
+          type: boolean
+          example: true
+    api_index_post_ttl_http_examples_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        fields:
+          description: HTTP response code.
+          type: array
+          items:
+            type: string
+            example: _key
+        id:
+          description: Index identifier.
+          type: string
+          example: '61862387'
+        name:
+          description: Name of the index.
+          type: string
+          example: idx_1723573111790501888
+        selectivityEstimate:
+          description: The selectivity estimate of index.
+          type: number
+          example: 1
+        sparse:
+          description: '*True* if index is sparse type.'
+          type: boolean
+          example: false
+        type:
+          description: Index type.
+          type: string
+          example: ttl
+        unique:
+          description: '*True* if index is unique.'
+          type: boolean
+          example: true
+        expireAfter:
+          description: Index expiry time
+          type: number
+          example: 600
+    api_index_general_body:
+      properties:
+        fields:
+          description: An array of attribute names. Currently, the array is limited to exactly one attribute.
+          items:
+            type: string
+            example: _key
+          type: array
+        name:
+          description: Name of index.
+          type: string
+          example: idx_1723573111790501888
+        type:
+          description: Must be equal to *"fulltext"*.
+          type: string
+          example: fulltext
+        sparse:
+          description: '*True* if index is sparse type.
+
+
+            **Note**: Hash, skiplist and persistent indexes can optionally be created in a sparse variant. Sparse indexes do not index documents for which any of the index attributes is either not set or is null.'
+          example: false
+          type: boolean
+        unique:
+          description: '*True* if index is unique.
+
+
+            **Note**: Unique indexes on non-shard keys are not supported in a cluster. The following index types do not support uniqueness and using the *unique* attribute with these types may lead to an error:
+
+            - geo indexes
+
+            - fulltext indexes'
+          example: false
+          type: boolean
+        deduplicate:
+          description: '*True* it controls whether inserting duplicate index values from the same document into a unique array index leads to a unique constraint error or not.'
+          type: boolean
+          default: true
+      required:
+      - fields
+      - type
+      type: object
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Provide an API Key to the `Authorization` header, prefixed with "apikey".
+
+
+        Example: `Authorization: apikey <key>`'
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Provide a JSON Web Token (JWT) to the `Authorization` header, prefixed with "bearer".
+
+
+        Example: `Authorization: bearer <jwt>`'

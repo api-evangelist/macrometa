@@ -1,0 +1,753 @@
+openapi: 3.0.0
+info:
+  title: Macrometa API Reference Activity Metrics Data Centers API
+  version: 0.17.17
+  description: API reference for the Macrometa Global Data Network.
+  license:
+    name: Macrometa License, Version 2.0
+servers:
+- url: https://api-play.paas.macrometa.io
+  description: GDN API
+host: api-play.paas.macrometa.io
+security:
+- ApiKeyAuth: []
+- BearerAuth: []
+tags:
+- name: Data Centers
+paths:
+  /datacenter/all:
+    get:
+      description: Fetch data about all the data centers.
+      operationId: ReturnListOfAllEdgeLocations
+      responses:
+        '200':
+          description: Successfully fetched data centers.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/get_datacenter_response_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed because you do not have administrator permissions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Lists all data centers
+      tags:
+      - Data Centers
+  /datacenter/local:
+    get:
+      description: Fetch data for a local/regional the data center.
+      operationId: ListDetailsOfLocalEdgeLocation
+      responses:
+        '200':
+          description: Successfully fetched data center.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/get_regional_datacenter_response_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed because you do not have administrator permissions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Get a regional data center
+      tags:
+      - Data Centers
+  /datacenter/{dc-name}:
+    get:
+      description: Fetch data for data center, identified by *dc-name*.
+      operationId: ListDetailsOfSpecifiedEdgeLocation
+      parameters:
+      - description: The name of the data center.
+        in: path
+        name: dc-name
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        '200':
+          description: Successfully fetched data center.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/datacenter_get_rc_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified data center.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Get data center
+      tags:
+      - Data Centers
+  /datacenter/{location}/{status}:
+    put:
+      description: Changes the properties of a data center.
+      operationId: ChangeSpotCapabilityOfAnEdgeLocation
+      parameters:
+      - description: The name of the data center.
+        in: path
+        name: location
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: The on-spot capability of the data center.
+        in: path
+        name: status
+        required: true
+        schema:
+          type: boolean
+          format: boolean
+      responses:
+        '200':
+          description: Successfully changed data center on-spot capability.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: boolean
+                    example: true
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Set data center spot capability
+      tags:
+      - Data Centers
+  /datacenter/_tenant/{tenant-name}:
+    get:
+      description: Fetch data for all data centers for tenant identified by *tenant-name*.
+      operationId: ListEdgeLocation(akaDatacenter)DetailsForSpecifiedTenant
+      parameters:
+      - description: The name of the tenant
+        in: path
+        name: tenant-name
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        '200':
+          description: Successfully fetched data center.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/datacenter_get_rc_200_array'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed because you do not have administrator permissions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: List all available data centers.
+      tags:
+      - Data Centers
+  /_api/members:
+    get:
+      description: Fetch data for all the clusters in the federation.
+      operationId: ListOfFederationMembers
+      responses:
+        '200':
+          description: Successfully fetched clusters.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/datacenter_members_get_rc_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed because you do not have administrator permissions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: List all clusters
+      tags:
+      - Data Centers
+    post:
+      description: Update the clusters in federation.
+      operationId: JoinFederationOfClusters
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/federation_member_peerip'
+        description: A JSON Object with properties.
+        required: true
+      responses:
+        '202':
+          description: Successfully updated clusters in federation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/datacenter_members_post_rc_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed because you do not have administrator permissions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Update clusters in federation
+      tags:
+      - Data Centers
+  /_api/members/{member}:
+    delete:
+      description: Remove the cluster from federation, identified by *member*.
+      operationId: DeleteMemberFromFederation
+      parameters:
+      - description: The name of the cluster.
+        in: path
+        name: member
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        '202':
+          description: Successfully removed cluster from federation.
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed because you do not have administrator permissions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified data center.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Remove a cluster from federation
+      tags:
+      - Data Centers
+components:
+  schemas:
+    get_datacenter_response_200:
+      type: array
+      items:
+        $ref: '#/components/schemas/datacenter_response_fields'
+    federation_member_peerip:
+      properties:
+        peer:
+          description: Hostname of the peer cluster that needs to be added to the federation.
+          type: string
+          example: 192.168.251.192
+    error_example_rc_403:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 403
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
+      type: object
+    error_example_rc_404:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 404
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
+      type: object
+    datacenter_response_tags:
+      description: Tag values associated with data center.
+      properties:
+        api:
+          description: API URL for the data center.
+          type: string
+          example: api-gdn-us-west.paas.macrometa.io
+        url:
+          description: URL for the data center
+          type: string
+          example: gdn-us-west.paas.macrometa.io
+    datacenter_response_location_info:
+      description: Complete information about the location of data center.
+      properties:
+        city:
+          description: The city of the data center.
+          type: string
+          example: San Jose
+        countrycode:
+          description: The country code of the data center.
+          type: string
+          example: US
+        countryname:
+          description: The country name of the data center
+          type: string
+          example: United States
+        latitude:
+          description: The latitude of the data center.
+          type: string
+          example: 37.3388
+        longitude:
+          description: The latitude of the data center
+          type: string
+          example: -121.8916
+        url:
+          description: URL for the data center.
+          type: string
+          example: gdn-us-west.paas.macrometa.io
+    datacenter_members_post_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 202
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          type: boolean
+          example: true
+    headers:
+      x-gdn-region:
+        description: The federation's region hostname that served the request.
+        type: string
+      x-gdn-requestid:
+        description: A unique request ID for each API request.
+        type: string
+    get_regional_datacenter_response_200:
+      $ref: '#/components/schemas/datacenter_response_fields'
+    datacenter_members_get_rc_200:
+      type: array
+      items:
+        properties:
+          _key:
+            description: key for the data center.
+            type: string
+            example: gdn-us-west
+          host:
+            description: IP address of the data center.
+            type: string
+            example: 192.168.1.100
+          status:
+            description: If *0*, the data center is online else data center is having connectivity problem.
+            type: integer
+            example: 0
+          city:
+            description: The city of the data center.
+            type: string
+            example: San Jose
+          countrycode:
+            description: The Country code of the data center.
+            type: string
+            example: US
+          countryname:
+            description: The Country Name of the data center.
+            type: string
+            example: United States
+          latitude:
+            description: The latitude of the data center.
+            type: string
+            example: 37.3388
+          longitude:
+            description: The longitude of the data center.
+            type: string
+            example: -121.8916
+          url:
+            description: URL for the data center.
+            type: string
+            example: gdn-us-west.paas.macrometa.io
+    datacenter_get_rc_200_array:
+      items:
+        properties:
+          tenant:
+            description: Tenant name
+            type: string
+            example: _mm
+          dcInfo:
+            type: array
+            items:
+              properties:
+                _id:
+                  description: ID of the data center.
+                  type: string
+                  example: _clusters/gdn-us-west
+                _key:
+                  description: key associated with data center.
+                  type: string
+                  example: gdn-us-west
+                _rev:
+                  description: _rev value of the data center.
+                  type: string
+                  example: _c9VHcYC--_
+                host:
+                  description: Data center cluster IP.
+                  type: string
+                  example: 192.168.1.100
+                local:
+                  description: ' If *true*, the data center is a regional data center for the request else *false*.'
+                  type: boolean
+                  example: true
+                name:
+                  description: Name of the data center.
+                  type: string
+                  example: gdn-us-west
+                spot_region:
+                  description: If true, the data center is on-spot capable.
+                  type: boolean
+                  example: false
+                status:
+                  description: ' If *0*, the data center is online else data center is having connectivity problem.'
+                  type: integer
+                  example: 0
+                tags:
+                  $ref: '#/components/schemas/datacenter_response_tags'
+                locationInfo:
+                  description: Complete information about the location of data center.
+                  properties:
+                    _id:
+                      description: ID of the location info.
+                      type: string
+                      example: _members/gdn-us-west
+                    _key:
+                      description: key for the location info.
+                      type: string
+                      example: gdn-us-west
+                    _rev:
+                      description: The document revision.
+                      type: string
+                      example: _c9VHcYC--_
+                    city:
+                      description: The city of the data center.
+                      type: string
+                      example: San Jose
+                    countrycode:
+                      description: The country code of the data center.
+                      type: string
+                      example: US
+                    countryname:
+                      description: The country name of the data center
+                      type: string
+                      example: United States
+                    latitude:
+                      description: The latitude of the data center.
+                      type: string
+                      example: 37.3388
+                    longitude:
+                      description: The latitude of the data center
+                      type: string
+                      example: -121.8916
+                    host:
+                      description: Data center cluster IP.
+                      type: string
+                      example: 92.236.111.184
+                    status:
+                      description: ' If *0*, the data center is online else data center is having connectivity problem.'
+                      type: integer
+                      example: 0
+                    url:
+                      description: URL for the data center.
+                      type: string
+                      example: gdn-us-west.paas.macrometa.io
+      type: array
+    error_example_rc_400:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 400
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 102020
+      required:
+      - error
+      type: object
+    datacenter_response_fields:
+      properties:
+        _key:
+          description: key for the data center
+          type: string
+          example: gdn-us-west
+        host:
+          description: IP address of the data center.
+          type: string
+          example: 92.236.111.184
+        local:
+          description: If *true*, the data center is a regional data center for the request else *false*.
+          type: boolean
+          example: true
+        name:
+          description: Name of the data center.
+          type: string
+          example: gdn-us-west
+        spot_region:
+          description: If *true*, the data center is on-spot capable
+          type: boolean
+          example: false
+        status:
+          description: If *0*, the data center is online else data center is having connectivity problem.
+          type: integer
+          example: 0
+        tags:
+          $ref: '#/components/schemas/datacenter_response_tags'
+        locationInfo:
+          $ref: '#/components/schemas/datacenter_response_location_info'
+    error_example_rc_401:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 401
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: '102020'
+      required:
+      - error
+      type: object
+    datacenter_get_rc_200:
+      properties:
+        name:
+          description: Name of the data center.
+          type: string
+          example: gdn-us-west
+        local:
+          description: If *true*, the data center is a regional data center for the request else *false*.
+          type: boolean
+          example: true
+        status:
+          description: If *0*, the data center is online else data center is having connectivity problem.
+          type: integer
+          example: 0
+        tags:
+          $ref: '#/components/schemas/datacenter_response_tags'
+        locationInfo:
+          $ref: '#/components/schemas/datacenter_response_location_info'
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Provide an API Key to the `Authorization` header, prefixed with "apikey".
+
+
+        Example: `Authorization: apikey <key>`'
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Provide a JSON Web Token (JWT) to the `Authorization` header, prefixed with "bearer".
+
+
+        Example: `Authorization: bearer <jwt>`'

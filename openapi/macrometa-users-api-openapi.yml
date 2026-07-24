@@ -1,0 +1,3246 @@
+openapi: 3.0.0
+info:
+  title: Macrometa API Reference Activity Metrics Users API
+  version: 0.17.17
+  description: API reference for the Macrometa Global Data Network.
+  license:
+    name: Macrometa License, Version 2.0
+servers:
+- url: https://api-play.paas.macrometa.io
+  description: GDN API
+host: api-play.paas.macrometa.io
+security:
+- ApiKeyAuth: []
+- BearerAuth: []
+tags:
+- name: Users
+paths:
+  /_api/version:
+    get:
+      description: Fetch the server name and version number.
+      operationId: RestVersionHandler
+      responses:
+        '200':
+          description: Successfully fetched server name and version number.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/get_api_return_rc_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Return server version
+      tags:
+      - Users
+  /_api/user:
+    post:
+      description: 'Create a new user.
+
+
+        **Note**: Requires *administrator* permissions.'
+      operationId: CreateUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/user_create'
+        required: true
+      responses:
+        '201':
+          description: Successfully created user.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    description: HTTP response code.
+                    type: integer
+                    example: 201
+                  error:
+                    description: Flag if there is an error in response. *False* for this response.
+                    type: boolean
+                    example: false
+                  user:
+                    description: The id of the user.
+                    type: string
+                    example: Ugr0xjYMS9y0eN5gBxSSmg
+                  active:
+                    description: Account status
+                    type: boolean
+                    example: true
+                  email:
+                    description: The email of the user for whom we want the auth token.
+                    type: string
+                    example: joe@foo.com
+                  extra:
+                    description: A JSON object with extra data about the user.
+                    type: object
+                    example: {}
+                  tenant:
+                    description: The name of the tenant for whose user we want the auth token.
+                    type: string
+                    example: foo
+                  displayName:
+                    description: The name of the user for whom we want the auth token.
+                    type: string
+                    example: joe
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed to validate because you do not have access to the GeoFabric.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '409':
+          description: Failed because user already exists.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_409'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Create User
+      tags:
+      - Users
+  /_api/user/:
+    get:
+      description: Fetch data about all users.
+      operationId: ListAvailableUsers
+      responses:
+        '200':
+          description: Successfully fetched all users.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    description: HTTP response code.
+                    type: integer
+                    example: 200
+                  error:
+                    description: Flag if there is an error in response. *False* for this response.
+                    type: boolean
+                    example: false
+                  result:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        tenant:
+                          description: The name of the tenant.
+                          type: string
+                          example: _mm
+                        user:
+                          description: The id of the user.
+                          type: string
+                          example: Ugr0xjYMS9y0eN5gBxSSmg
+                        displayName:
+                          description: The username of the tenant.
+                          type: string
+                          example: test1
+                        email:
+                          description: The email of the user.
+                          type: string
+                          example: test@foo.com
+                        active:
+                          description: (Optional) If set to *true*, the user is active.
+                          type: boolean
+                          default: true
+                        apikey:
+                          description: Hash of API key.
+                          type: object
+                          properties:
+                            hash:
+                              description: Hash of API key.
+                              type: string
+                              example: 1467ad2eed8e823f5a5db74aacd716d2f87dc3dde2bced8799e3c07dcf1c88ee
+                            parent:
+                              description: Hash of API key.
+                              type: string
+                              example: ''
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed to validate because you do not have access to the GeoFabric.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: List available Users
+      tags:
+      - Users
+  /_api/user/{user}:
+    delete:
+      description: 'Remove an existing user.
+
+
+        **Note**: Requires *administrator* permissions.'
+      operationId: RemoveUser
+      parameters:
+      - description: The id of the user.
+        in: path
+        name: user
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        '202':
+          description: Successfully removed user.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    description: HTTP response code.
+                    type: integer
+                    example: 202
+                  error:
+                    description: Flag if there is an error in response. *False* for this response.
+                    type: boolean
+                    example: false
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed to validate because you do not have access to the GeoFabric.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Remove User
+      tags:
+      - Users
+    get:
+      description: 'Fetch data about the specified user.
+
+
+        **Note**: Requires *administrator* permissions to access other users data.'
+      operationId: FetchUser
+      parameters:
+      - description: The id of the user.
+        in: path
+        name: user
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        '200':
+          description: Successfully fetched data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api_key_http_examples_rc_200_0'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed to validate because you do not have access to the GeoFabric.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Fetch User
+      tags:
+      - Users
+    patch:
+      description: 'Update the data of an existing user.
+
+
+        **Note**: Requires *administrator* permissions if changing the email address.'
+      operationId: ModifyUser
+      parameters:
+      - description: The id of the user.
+        in: path
+        name: user
+        required: true
+        schema:
+          type: string
+          format: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/user_modify'
+        required: true
+      responses:
+        '200':
+          description: Successfully modified user.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api_key_http_examples_rc_200_0'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed to validate because you do not have access to the GeoFabric.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Modify User.
+      tags:
+      - Users
+  /_api/user/{user}/database:
+    get:
+      description: 'Fetch the list of GeoFabrics available.
+
+
+        The *result* object contains the GeoFabric names as object keys and the associated privileges for the GeoFabric as values.
+
+
+        In case *full* is specified, the result contains the permissions for the GeoFabric as well as the permissions for the collections and streams.
+
+
+        **Note**: Requires *administrator* permissions.'
+      operationId: ListTheAccessibleDatabasesForAUser
+      parameters:
+      - description: The id of the user for which you want to query the databases.
+        in: path
+        name: user
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: Return the full set of access levels for all GeoFabrics and all collections.
+        in: query
+        name: full
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: Successfully fetched list of GeoFabrics.
+          content:
+            application/json:
+              schema:
+                example:
+                  code: 200
+                  error: false
+                  result:
+                    test: rw
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed to validate because you do not have access to the GeoFabric.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: List the GeoFabrics available to user.
+      tags:
+      - Users
+  /_api/user/{user}/database/{geofabric}:
+    get:
+      description: Fetch the access level for a specific GeoFabric.
+      operationId: GetTheDatabaseAccessLevel
+      parameters:
+      - description: The id of the user for which you want to query the GeoFabric.
+        in: path
+        name: user
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: The name of the GeoFabric to query.
+        in: path
+        name: geofabric
+        required: true
+        schema:
+          type: string
+          format: string
+          default: _system
+      responses:
+        '200':
+          description: Successfully fetched GeoFabric access level.
+          content:
+            application/json:
+              schema:
+                example:
+                  code: 200
+                  error: false
+                  result: rw
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed to validate because you do not have access to the GeoFabric.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Get the GeoFabric access level.
+      tags:
+      - Users
+    delete:
+      description: 'Clear the access level for the GeoFabric *geoname* of user *user*. As consequence the default GeoFabric access level is used. If there is no defined default GeoFabric access level, it defaults to *No access*.
+
+
+        **Note**: Requires *administrator* permissions.'
+      operationId: ClearTheDatabaseAccessLevel
+      parameters:
+      - description: The id of the user.
+        in: path
+        name: user
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: The name of the database.
+        in: path
+        name: geofabric
+        required: true
+        schema:
+          type: string
+          format: string
+          default: _system
+      responses:
+        '202':
+          description: Successfully cleared GeoFabric access level.
+          content:
+            application/json:
+              schema:
+                example:
+                  code: 202
+                  error: false
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Clear the GeoFabric access level
+      tags:
+      - Users
+    put:
+      description: 'Set the access levels for the GeoFabric *geoname* of user *user*.
+
+
+        **Note**: Requires *administrator* permissions.'
+      operationId: SetTheDatabaseAccessLevel
+      parameters:
+      - description: The id of the user.
+        in: path
+        name: user
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: The name of the GeoFabric.
+        in: path
+        name: geofabric
+        required: true
+        schema:
+          type: string
+          format: string
+          default: _system
+      requestBody:
+        $ref: '#/components/requestBodies/user_grant_database'
+      responses:
+        '200':
+          description: Successfully set GeoFabric access level.
+          content:
+            application/json:
+              schema:
+                example:
+                  code: 200
+                  error: false
+                  testgeo: ro
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed to validate because you do not have access to the GeoFabric.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Set the GeoFabric access level
+      tags:
+      - Users
+  /_api/user/{user}/database/{geofabric}/collection:
+    get:
+      description: "Fetch the list of collections access level for a specific *user*\n\n If access level for collection is not set default(\"&#42;\") access level is used. If default(\"&#42;\") access level is also not set GeoFabric access level is used."
+      operationId: GetTheAllCollectionAccessLevel
+      parameters:
+      - description: The id of the user for which you want to query the GeoFabric.
+        in: path
+        name: user
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: The name of the GeoFabric to query.
+        in: path
+        name: geofabric
+        required: true
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: Return the full set of access levels for all collections.
+        in: query
+        name: full
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: Successfully fetched collections access level.
+          content:
+            application/json:
+              schema:
+                example:
+                  error: false
+                  code: 200
+                  result:
+                    testCollection: rw
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed to validate because you do not have access to the GeoFabric.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified fabric, user or collection
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Get the collections access level for specific user
+      tags:
+      - Users
+  /_api/user/{user}/database/{geofabric}/collection/{collection}:
+    get:
+      description: "Fetch the collection access level for a specific collection\n\n If access level for collection is not set default(\"&#42;\") access level is used. If default(\"&#42;\") access level is also not set GeoFabric access level is used."
+      operationId: GetTheSpecificCollectionAccessLevel
+      parameters:
+      - description: The id of the user for which you want to query the GeoFabric.
+        in: path
+        name: user
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: The name of the GeoFabric to query.
+        in: path
+        name: geofabric
+        required: true
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: The name of the collection.
+        in: path
+        name: collection
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        '200':
+          description: Successfully fetched collection access level.
+          content:
+            application/json:
+              schema:
+                example:
+                  code: 200
+                  error: false
+                  result: rw
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed to validate because you do not have access to the GeoFabric.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified fabric, user or collection
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Get the specific collection access level
+      tags:
+      - Users
+    delete:
+      description: 'Clear the collection access level for the collection *collection* in the GeoFabric *geofabric* of user *user*. As consequence the default collection access level is used. If there is no defined default collection access level, it defaults to *No access*.
+
+
+        **Note**: Requires *administrator* permissions.'
+      operationId: ClearTheCollectionAccessLevel
+      parameters:
+      - description: The id of the user.
+        in: path
+        name: user
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: The name of the database.
+        in: path
+        name: geofabric
+        required: true
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: The name of the collection.
+        in: path
+        name: collection
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        '202':
+          description: Successfully cleared collection access level.
+          content:
+            application/json:
+              schema:
+                example:
+                  code: 202
+                  error: false
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified fabric, user or collection
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Clear the collection access level.
+      tags:
+      - Users
+    put:
+      description: 'Set the collection access level for the *collection* in the GeoFabric *geoname* for user *user*.
+
+
+        If access level for collection is not set default("&#42;") access level is used. If default("&#42;") access level is also not set GeoFabric access level is used.
+
+
+        **Note**: Requires *administrator* permissions.'
+      operationId: SetTheCollectionAccessLevel
+      parameters:
+      - description: The id of the user.
+        in: path
+        name: user
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: The name of the database.
+        in: path
+        name: geofabric
+        required: true
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: The name of the collection.
+        in: path
+        name: collection
+        required: true
+        schema:
+          type: string
+          format: string
+          default: '*'
+      requestBody:
+        $ref: '#/components/requestBodies/user_grant_collection'
+      responses:
+        '200':
+          description: Successfully changed access permissions.
+          content:
+            application/json:
+              schema:
+                example:
+                  code: 200
+                  error: false
+                  _system/testCollection: ro
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed to validate because you do not have access to the GeoFabric.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified fabric, user or collection
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Set the collection access level
+      tags:
+      - Users
+  /_api/user/{user}/database/{geofabric}/stream:
+    get:
+      description: 'Fetch the list of streams available to the specified *user*.
+
+
+        The *result* object contains the stream names as object keys, and the associated privileges for the stream as values.
+
+
+        If access level for stream is not set default("&#42;") access level is used. If default("&#42;") access level is also not set GeoFabric access level is used.
+
+
+        **Note**: Requires *administrator* permissions.'
+      operationId: ListTheAccessibleStreamsForAUser
+      parameters:
+      - description: The name of the database.
+        in: path
+        name: geofabric
+        required: true
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: The id of the user for which you want to query the streams.
+        in: path
+        name: user
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: Return the full set of access levels for all streams. If set to *false*, return the read-only streams.
+        in: query
+        name: full
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: Successfully fetched stream access level.
+          content:
+            application/json:
+              schema:
+                example:
+                  code: 200
+                  error: false
+                  result: rw
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed to validate because you do not have access to the GeoFabric.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified fabric, user or collection
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: List the accessible streams
+      tags:
+      - Users
+  /_api/user/{user}/database/{geofabric}/stream/{stream}:
+    get:
+      description: Fetch the stream access level for a specific stream.
+      operationId: GetTheStreamAccessLevel
+      parameters:
+      - description: The id of the user for which you want to query the streams.
+        in: path
+        name: user
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: The name of the GeoFabric.
+        in: path
+        name: geofabric
+        required: true
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: The name of the stream to query.
+        in: path
+        name: stream
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        '200':
+          description: Successfully fetched the stream access level.
+          content:
+            application/json:
+              schema:
+                example:
+                  code: 200
+                  error: false
+                  result: ro
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed to validate because you do not have access to the GeoFabric.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified fabric, user or collection
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Get the stream access level
+      tags:
+      - Users
+    delete:
+      description: Clear the stream access level for the *stream* of user *user*. As consequence the default stream access level is used. If there is no defined default stream access level, it defaults to *No access*.
+      operationId: ClearTheStreamAccessLevel
+      parameters:
+      - description: The id of the user.
+        in: path
+        name: user
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: The name of the database.
+        in: path
+        name: geofabric
+        required: true
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: The name of the stream.
+        in: path
+        name: stream
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        '202':
+          description: Successfully cleared the stream access level.
+          content:
+            application/json:
+              schema:
+                example:
+                  code: 202
+                  error: false
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified fabric, user or collection
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Clear the stream access level.
+      tags:
+      - Users
+    put:
+      description: 'Set the stream access levels for the *stream* of API key with *keyid*.
+
+
+        If access level for stream is not set the default("&#42;") access level is used. If default("&#42;") access level is also not set the GeoFabric access level is used.
+
+
+        **Note**: Requires *administrator* permissions.'
+      operationId: SetTheStreamAccessLevel
+      parameters:
+      - description: The id of the user.
+        in: path
+        name: user
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: The name of the database.
+        in: path
+        name: geofabric
+        required: true
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: The name of the stream.
+        in: path
+        name: stream
+        required: true
+        schema:
+          type: string
+          format: string
+          default: '*'
+      requestBody:
+        $ref: '#/components/requestBodies/user_grant_database'
+      responses:
+        '200':
+          description: Successfully set stream access level.
+          content:
+            application/json:
+              schema:
+                example:
+                  code: 200
+                  error: false
+                  c8globals.testStream: ro
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed to validate because you do not have access to the GeoFabric.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified fabric, user or collection
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Set the stream access level
+      tags:
+      - Users
+  /_api/user/{user}/database/{geofabric}/restql:
+    get:
+      description: "Fetch the list of query worker access level for a specific *user*\n\n If access level for query worker is not set, then default(\"&#42;\") access level is used. If default(\"&#42;\") access level is also not set, then GeoFabric access level is used."
+      operationId: GetTheAllQueryWorkerAccessLevel
+      parameters:
+      - description: The ID of the user querying the GeoFabric.
+        in: path
+        name: user
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: The name of the GeoFabric to query.
+        in: path
+        name: geofabric
+        required: true
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: Return the full set of access levels for all query workers.
+        in: query
+        name: full
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: Successfully fetched query workers access level.
+          content:
+            application/json:
+              schema:
+                example:
+                  error: false
+                  code: 200
+                  result:
+                    testQueryWorker: rw
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed to validate because you do not have access to the GeoFabric.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified fabric, user, or query worker
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Get the query workers access level for a specific user
+      tags:
+      - Users
+  /_api/user/{user}/database/{geofabric}/restql/{query-worker}:
+    get:
+      description: "Fetch the access level for a specific query worker\n\n If access level for query worker is not set, then default(\"&#42;\") access level is used. If default(\"&#42;\") access level is also not set, then GeoFabric access level is used."
+      operationId: GetTheSpecificQueryWorkerAccessLevel
+      parameters:
+      - description: The ID of the user querying the GeoFabric.
+        in: path
+        name: user
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: The name of the GeoFabric to query.
+        in: path
+        name: geofabric
+        required: true
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: The name of the query worker.
+        in: path
+        name: query-worker
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        '200':
+          description: Successfully fetched query worker access level.
+          content:
+            application/json:
+              schema:
+                example:
+                  code: 200
+                  error: false
+                  result: rw
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed to validate because you do not have access to the GeoFabric.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified fabric, user, or query worker.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Get the specific query worker access level
+      tags:
+      - Users
+    delete:
+      description: 'Clear the access level for the query worker *query worker* in the GeoFabric *geofabric* of user *user*. After this runs, the default query worker access level is used. If there is no defined default query worker access level, it defaults to *No access*.
+
+
+        **Note**: Requires *administrator* permissions.'
+      operationId: ClearTheQueryWorkerAccessLevel
+      parameters:
+      - description: The ID of the user.
+        in: path
+        name: user
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: The name of the GeoFabric.
+        in: path
+        name: geofabric
+        required: true
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: The name of the query worker.
+        in: path
+        name: query-worker
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        '202':
+          description: Successfully cleared query worker access level.
+          content:
+            application/json:
+              schema:
+                example:
+                  code: 202
+                  error: false
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified fabric, user, or query worker
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Clear the query worker access level.
+      tags:
+      - Users
+    put:
+      description: 'Set the access level for the *query worker* in the GeoFabric *geofabric* for user *user*.
+
+
+        If access level for query worker is not set, then default("&#42;") access level is used. If default("&#42;") access level is also not set, then GeoFabric access level is used.
+
+
+        **Note**: Requires *administrator* permissions.'
+      operationId: SetTheQueryWorkerAccessLevel
+      parameters:
+      - description: The ID of the user querying the GeoFabric.
+        in: path
+        name: user
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: The name of the GeoFabric.
+        in: path
+        name: geofabric
+        required: true
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: The name of the query worker.
+        in: path
+        name: query-worker
+        required: true
+        schema:
+          type: string
+          format: string
+          default: '*'
+      requestBody:
+        $ref: '#/components/requestBodies/user_grant_queryworker'
+      responses:
+        '200':
+          description: Successfully changed access permissions.
+          content:
+            application/json:
+              schema:
+                example:
+                  code: 200
+                  error: false
+                  _system/testQueryWorker: ro
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed to validate because you do not have access to the GeoFabric.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified fabric, user, or query worker
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Set the query worker access level
+      tags:
+      - Users
+  /_api/user/{user}/database/{geofabric}/managedkey:
+    get:
+      description: "Fetch the list of managed keys access level for a specific *user*.\n\n If the access level for a managed key is not set, then the default(\"&#42;\") access level is used. If the default(\"&#42;\") access level is also not set, then the GeoFabric access level is used."
+      operationId: GetAllManagedKeyAccessLevel
+      parameters:
+      - description: The ID of the user querying the GeoFabric.
+        in: path
+        name: user
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: The name of the GeoFabric to query.
+        in: path
+        name: geofabric
+        required: true
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: Return the full set of access levels for all managed keys.
+        in: query
+        name: full
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: Successfully fetched managed keys access level.
+          content:
+            application/json:
+              schema:
+                example:
+                  error: false
+                  code: 200
+                  result:
+                    testManagedKey: rw
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed to validate because you do not have access to the GeoFabric.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified GeoFabric, user, or managed key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Get the managed keys access level for a specific user
+      tags:
+      - Users
+  /_api/user/{user}/database/{geofabric}/managedkey/{managed-key-name}:
+    get:
+      description: "Fetch the access level for a specific managed key.\n\n If the access level for the managed key is not set, then the default(\"&#42;\") access level is used. If the default(\"&#42;\") access level is also not set, then the GeoFabric access level is used."
+      operationId: GetSpecificManagedKeyAccessLevel
+      parameters:
+      - description: The ID of the user querying the GeoFabric.
+        in: path
+        name: user
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: The name of the GeoFabric to query.
+        in: path
+        name: geofabric
+        required: true
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: The name of the managed key.
+        in: path
+        name: managed-key-name
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        '200':
+          description: Successfully fetched managed key access level.
+          content:
+            application/json:
+              schema:
+                example:
+                  code: 200
+                  error: false
+                  result: rw
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed to validate because you do not have access to the GeoFabric.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified GeoFabric, user, or managed key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Get the specific managed key access level
+      tags:
+      - Users
+    delete:
+      description: 'Clear the access level for the *managed key name* in the GeoFabric *geofabric* of user *user*. After the access level is removed, the default managed key access level is used. If there is no defined default managed key access level, then the access level defaults to *No access*.
+
+
+        **Note**: Requires *administrator* permissions.'
+      operationId: ClearManagedKeyAccessLevel
+      parameters:
+      - description: The ID of the user.
+        in: path
+        name: user
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: The name of the GeoFabric.
+        in: path
+        name: geofabric
+        required: true
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: The name of the managed key.
+        in: path
+        name: managed-key-name
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        '202':
+          description: Successfully cleared managed key access level.
+          content:
+            application/json:
+              schema:
+                example:
+                  code: 202
+                  error: false
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified GeoFabric, user, or managed key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Clear the managed key access level
+      tags:
+      - Users
+    put:
+      description: 'Set the access level for the *managed key* in the GeoFabric *geofabric* for user *user*.
+
+
+        If the access level for the managed key is not set, then the default("&#42;") access level is used. If the default("&#42;") access level is also not set, then the GeoFabric access level is used.
+
+
+        **Note**: Requires *administrator* permissions.'
+      operationId: SetManagedKeyAccessLevel
+      parameters:
+      - description: The ID of the user querying the GeoFabric.
+        in: path
+        name: user
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: The name of the GeoFabric.
+        in: path
+        name: geofabric
+        required: true
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: The name of the managed key.
+        in: path
+        name: managed-key-name
+        required: true
+        schema:
+          type: string
+          format: string
+          default: '*'
+      requestBody:
+        $ref: '#/components/requestBodies/user_grant_managedkey'
+      responses:
+        '200':
+          description: Successfully changed access permissions.
+          content:
+            application/json:
+              schema:
+                example:
+                  code: 200
+                  error: false
+                  _system/testManagedKey: ro
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed to validate because you do not have access to the GeoFabric.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified GeoFabric, user, or managed key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Set the managed key access level
+      tags:
+      - Users
+  /_api/user/{user}/billing:
+    get:
+      description: Fetch the billing access level.
+      operationId: GetTheBillingAccessLevel
+      parameters:
+      - description: The id of the user for which you want to query the billing.
+        in: path
+        name: user
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        '200':
+          description: Successfully fetched billing access level.
+          content:
+            application/json:
+              schema:
+                example:
+                  code: 200
+                  error: false
+                  result:
+                    billing: rw
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed to validate because you do not have access to the GeoFabric.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find the specified user.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Get the billing access level
+      tags:
+      - Users
+    delete:
+      description: Clear the billing access level of user *user*.
+      operationId: ClearTheBillingAccessLevel
+      parameters:
+      - description: The id of the user.
+        in: path
+        name: user
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        '202':
+          description: Successfully cleared the billing access level.
+          content:
+            application/json:
+              schema:
+                example:
+                  code: 202
+                  error: false
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified user.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Clear the billing access level
+      tags:
+      - Users
+    put:
+      description: 'Set the billing access levels for user *user*.
+
+
+        **Note**: Requires *administrator* permissions.'
+      operationId: SetTheBillingAccessLevel
+      parameters:
+      - description: The id of the user.
+        in: path
+        name: user
+        required: true
+        schema:
+          type: string
+          format: string
+      requestBody:
+        $ref: '#/components/requestBodies/user_grant_database'
+      responses:
+        '200':
+          description: Successfully set billing access level.
+          content:
+            application/json:
+              schema:
+                example:
+                  code: 200
+                  error: false
+                  billing: ro
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed to validate because you do not have access to the GeoFabric.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified user.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Set the billing access level.
+      tags:
+      - Users
+  /_api/user/{user}/attributes:
+    get:
+      description: Fetch the list of attributes for the specified user.
+      operationId: GetTheAttributesForUser
+      parameters:
+      - in: path
+        name: user
+        required: true
+        description: The id of the user.
+        schema:
+          type: string
+          format: string
+          default: user
+      responses:
+        '200':
+          description: Successfully fetched attributes.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/http_examples_rc_200_attributes'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed to validate because you do not have access to the GeoFabric.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified user.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Get the user attributes
+      tags:
+      - Users
+    put:
+      description: 'Update the attributes for the user.
+
+
+        **Note**: Requires *administrator* permissions.'
+      operationId: CreateTheAttributesForUser
+      parameters:
+      - in: path
+        name: user
+        required: true
+        description: The id of the user.
+        schema:
+          type: string
+          format: string
+          default: user
+      requestBody:
+        $ref: '#/components/requestBodies/attribute_values'
+      responses:
+        '200':
+          description: Successfully changed attributes.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/http_examples_rc_200_attributes'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed to validate because you do not have access to the GeoFabric.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified user.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Update attributes
+      tags:
+      - Users
+  /_api/user/{user}/attributes/truncate:
+    delete:
+      description: Remove all user's attribute.
+      operationId: ClearAllAttributesForUser
+      parameters:
+      - in: path
+        name: user
+        required: true
+        description: The id of the user.
+        schema:
+          type: string
+          format: string
+          default: user
+      responses:
+        '202':
+          description: Successfully removed attributes.
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    description: HTTP response code.
+                    type: integer
+                    example: 202
+                  error:
+                    description: Flag if there is an error in response. *False* for this response.
+                    type: boolean
+                    example: false
+                required:
+                - error
+                type: object
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified user.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Remove all attributes
+      tags:
+      - Users
+  /_api/user/{user}/attributes/{attributeid}:
+    delete:
+      description: Remove a user's attribute.
+      operationId: ClearTheAttributesForUser
+      parameters:
+      - in: path
+        name: user
+        required: true
+        description: The id of the user.
+        schema:
+          type: string
+          format: string
+          default: user
+      - in: path
+        name: attributeid
+        required: true
+        description: Attribute id.
+        schema:
+          type: string
+          format: string
+          default: attributeid
+      responses:
+        '202':
+          description: Successfully removed attribute.
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    description: HTTP response code.
+                    type: integer
+                    example: 202
+                  error:
+                    description: Flag if there is an error in response. *False* for this response.
+                    type: boolean
+                    example: false
+                required:
+                - error
+                type: object
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified user.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Remove attribute
+      tags:
+      - Users
+components:
+  schemas:
+    user_grant_database:
+      properties:
+        grant:
+          description: '- Use "rw" to set the GeoFabric access level to *Administrate*.
+
+            - Use "ro" to set the GeoFabric access level to *Access*.
+
+            - Use "none" to set the database access level to *No access*.'
+          type: string
+          example: rw
+      required:
+      - grant
+      type: object
+    user_create:
+      properties:
+        active:
+          description: If set to *true*, the user is active.
+          format: boolean
+          type: boolean
+          default: true
+        email:
+          description: The email of the user.
+          type: string
+          example: test@bar.com
+        passwd:
+          description: The user password. The password must have at least 8 characters, one uppercase letter, one lowercase letter, one number, and one special character (!@#$%^&*).
+          type: string
+          example: P@55w0rd
+        displayName:
+          description: The display name of the user.
+          type: string
+          example: Jhon Doe
+      required:
+      - email
+      - passwd
+      type: object
+    headers:
+      x-gdn-region:
+        description: The federation's region hostname that served the request.
+        type: string
+      x-gdn-requestid:
+        description: A unique request ID for each API request.
+        type: string
+    user_grant_queryworker:
+      properties:
+        grant:
+          description: '- Use "rw" to set the query worker level access to *Read/Write*.
+
+            - Use "ro" to set the query worker level access to *Read Only*.
+
+            - Use "none" to set the query worker level access to *No access*.'
+          type: string
+          example: rw
+      required:
+      - grant
+      type: object
+    http_examples_rc_200_attributes:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          $ref: '#/components/schemas/attribute_values'
+    user_grant_collection:
+      properties:
+        grant:
+          description: '- Use "rw" to set the collection level access to *Read/Write*.
+
+            - Use "ro" to set the collection level access to *Read Only*.
+
+            - Use "none" to set the collection level access to *No access*.'
+          type: string
+          example: rw
+      required:
+      - grant
+      type: object
+    error_example_rc_404:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 404
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
+      type: object
+    api_key_http_examples_rc_200_0:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False*for this response.
+          type: boolean
+          example: false
+        tenant:
+          description: The name of the tenant.
+          type: string
+          example: _mm
+        user:
+          description: The id of the user.
+          type: string
+          example: Ugr0xjYMS9y0eN5gBxSSmg
+        displayName:
+          description: The username of the tenant.
+          type: string
+          example: test1
+        email:
+          description: The email of this API key.
+          type: string
+          example: test@foo.com
+        active:
+          description: Active status the API key.
+          type: boolean
+          example: true
+        apikey:
+          description: Hash of API key.
+          type: object
+          properties:
+            hash:
+              description: Hash of API key.
+              type: string
+              example: 1467ad2eed8e823f5a5db74aacd716d2f87dc3dde2bced8799e3c07dcf1c88ee
+            parent:
+              description: Hash of API key.
+              type: string
+              example: root
+        extra:
+          description: A JSON object with extra user information.
+          type: object
+          example: {}
+    error_example_rc_400:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 400
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 102020
+      required:
+      - error
+      type: object
+    error_example_rc_409:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 409
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
+      type: object
+    error_example_rc_401:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 401
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: '102020'
+      required:
+      - error
+      type: object
+    get_api_return_rc_200:
+      properties:
+        server:
+          description: Server type
+          type: string
+          example: C8DB
+        license:
+          description: Licene
+          type: string
+          example: Macrometa
+        version:
+          description: The server version string. The string has the format "*major*.*minor*.*sub*". *major* and *minor* are numeric, and *sub* may contain a number or a textual version.
+          type: string
+          example: 99.15.0-release
+      required:
+      - server
+      type: object
+    error_example_rc_403:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 403
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
+      type: object
+    user_modify:
+      properties:
+        active:
+          description: If set to _true_, then the user is active.
+          type: boolean
+          default: true
+        passwd:
+          description: The user password. The password must have at least 8 characters, one uppercase letter, one lowercase letter, one number, and one special character (!@#$%^&*).
+          type: string
+          example: P@55w0rd
+        displayName:
+          description: The user name.
+          type: string
+          example: joe
+        newEmail:
+          description: User's email. Requires *administrator* permissions.
+          properties:
+            email:
+              description: The user email.
+              type: string
+              example: example@xxx.com
+            isVerified:
+              description: If *true*, new email has been verified and can be updated in database.
+              type: boolean
+              example: false
+          required:
+          - email
+          - isVerified
+          type: object
+      type: object
+    attribute_values:
+      properties:
+        key1:
+          description: Attribute key-value.
+          format: string
+          type: string
+          example: value1
+        key2:
+          description: Attribute key-value.
+          format: string
+          type: string
+          example: value2
+    user_grant_managedkey:
+      properties:
+        grant:
+          description: '- Use "rw" to set the managed key level access to *Read/Write*.
+
+            - Use "ro" to set the managed key level access to *Read Only*.
+
+            - Use "none" to set the managed key level access to *No access*.'
+          type: string
+          example: rw
+      required:
+      - grant
+      type: object
+  requestBodies:
+    user_grant_queryworker:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/user_grant_queryworker'
+      required: true
+    user_grant_collection:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/user_grant_collection'
+      required: true
+    attribute_values:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/attribute_values'
+      required: true
+    user_grant_managedkey:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/user_grant_managedkey'
+      required: true
+    user_grant_database:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/user_grant_database'
+      required: true
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Provide an API Key to the `Authorization` header, prefixed with "apikey".
+
+
+        Example: `Authorization: apikey <key>`'
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Provide a JSON Web Token (JWT) to the `Authorization` header, prefixed with "bearer".
+
+
+        Example: `Authorization: bearer <jwt>`'

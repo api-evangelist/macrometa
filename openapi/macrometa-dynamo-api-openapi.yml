@@ -1,0 +1,213 @@
+openapi: 3.0.0
+info:
+  title: Macrometa API Reference Activity Metrics Dynamo API
+  version: 0.17.17
+  description: API reference for the Macrometa Global Data Network.
+  license:
+    name: Macrometa License, Version 2.0
+servers:
+- url: https://api-play.paas.macrometa.io
+  description: GDN API
+host: api-play.paas.macrometa.io
+security:
+- ApiKeyAuth: []
+- BearerAuth: []
+tags:
+- name: Dynamo
+paths:
+  /_api/dynamo:
+    post:
+      description: "Dynamo-like API interface.\n\nSet your JWT token or APIKEY as a aws_access_key_id (ex. '*bearer XXXXX*' or '*apikey XXXXX*').\n\nCurrently supported Dynamo actions (set as *'x-amz-target'* header tag):\n\n  - **CreateTable**\n  - **CreateGlobalTable**\n  - **DeleteItem**\n  - **DeleteTable**\n  - **DescribeGlobalTable**\n  - **DescribeTable**\n  - **DescribeTimeToLive**\n  - **GetItem**\n  - **ListGlobalTables**\n  - **ListTables**\n  - **PutItem**\n  - **Query**\n  - **UpdateItem**\n  - **UpdateTable**\n  - **UpdateTimeToLive**\n  - **Scan**\n  - **BatchGetItem**\n  - **BatchWriteItem**"
+      operationId: DynamoLikeInterfaceAPI
+      parameters:
+      - description: Dynamo actions
+        in: header
+        name: x-amz-target
+        required: true
+        schema:
+          type: string
+          format: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                AttributeDefinitions:
+                  type: array
+                  items:
+                    properties:
+                      AttributeName:
+                        type: string
+                      AttributeType:
+                        type: string
+                TableName:
+                  type: string
+                KeySchema:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      AttributeName:
+                        type: string
+                      KeyType:
+                        type: string
+                ProvisionedThroughput:
+                  properties:
+                    ReadCapacityUnits:
+                      type: number
+                    WriteCapacityUnits:
+                      type: number
+              example:
+                AttributeDefinitions:
+                - AttributeName: Artist
+                  AttributeType: S
+                - AttributeName: SongTitle
+                  AttributeType: S
+                TableName: Music
+                KeySchema:
+                - AttributeName: Artist
+                  KeyType: HASH
+                - AttributeName: SongTitle
+                  KeyType: RANGE
+                ProvisionedThroughput:
+                  ReadCapacityUnits: 5
+                  WriteCapacityUnits: 5
+        description: The body depends on the action.
+      responses:
+        '200':
+          description: Successfully returned after execution.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    description: HTTP response code.
+                    type: integer
+                    example: 200
+                  error:
+                    description: Flag if there is an error in response. *False* for this response.
+                    type: boolean
+                    example: false
+                  result:
+                    description: Result is based on Dynamo actions given in JSON body.
+                    type: object
+                    properties:
+                      TableDescription:
+                        type: object
+                        properties:
+                          AttributeDefinitions:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                AttributeName:
+                                  type: string
+                                AttributeType:
+                                  type: string
+                          TableName:
+                            type: string
+                          KeySchema:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                AttributeName:
+                                  type: string
+                                KeyType:
+                                  type: string
+                          TableStatus:
+                            type: string
+                          CreationDateTime:
+                            type: number
+                          TableSizeBytes:
+                            type: number
+                          ItemCount:
+                            type: number
+                    example:
+                      TableDescription:
+                        AttributeDefinitions:
+                        - AttributeName: Artist
+                          AttributeType: S
+                        - AttributeName: SongTitle
+                          AttributeType: S
+                        TableName: Music
+                        KeySchema:
+                        - AttributeName: Artist
+                          KeyType: HASH
+                        - AttributeName: SongTitle
+                          KeyType: RANGE
+                        TableStatus: ACTIVE
+                        CreationDateTime: 1637001376
+                        TableSizeBytes: 0
+                        ItemCount: 0
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Dynamo-like API interface
+      tags:
+      - Dynamo
+components:
+  schemas:
+    error_example_rc_400:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 400
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 102020
+      required:
+      - error
+      type: object
+    headers:
+      x-gdn-requestid:
+        description: A unique request ID for each API request.
+        type: string
+      x-gdn-region:
+        description: The federation's region hostname that served the request.
+        type: string
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Provide an API Key to the `Authorization` header, prefixed with "apikey".
+
+
+        Example: `Authorization: apikey <key>`'
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Provide a JSON Web Token (JWT) to the `Authorization` header, prefixed with "bearer".
+
+
+        Example: `Authorization: bearer <jwt>`'

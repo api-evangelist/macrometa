@@ -1,0 +1,79 @@
+openapi: 3.0.0
+info:
+  title: Macrometa API Reference Activity Metrics Health Check API
+  version: 0.17.17
+  description: API reference for the Macrometa Global Data Network.
+  license:
+    name: Macrometa License, Version 2.0
+servers:
+- url: https://api-play.paas.macrometa.io
+  description: GDN API
+host: api-play.paas.macrometa.io
+security:
+- ApiKeyAuth: []
+- BearerAuth: []
+tags:
+- name: Health Check
+  description: Perform EDS health check
+paths:
+  /api/es/v1/health:
+    get:
+      summary: EDS health check via WebSocket
+      description: Check the health status of the event delivery service.
+      operationId: check-health-ws
+      tags:
+      - Health Check
+      responses:
+        '200':
+          description: The service is up and running
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetStatusResponse'
+        '503':
+          description: Service Temporarily unavailable
+  /api/es/sse/v1/health:
+    security:
+    - api_key: []
+    get:
+      tags:
+      - Health Check
+      summary: EDS health check via SSE
+      description: Check the health status of the event delivery service.
+      operationId: check-health-sse
+      responses:
+        '200':
+          description: The service is up and running
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetStatusResponse'
+        '503':
+          description: Service Temporarily unavailable
+components:
+  schemas:
+    GetStatusResponse:
+      type: object
+      required:
+      - status
+      properties:
+        status:
+          type: string
+          example: up
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Provide an API Key to the `Authorization` header, prefixed with "apikey".
+
+
+        Example: `Authorization: apikey <key>`'
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Provide a JSON Web Token (JWT) to the `Authorization` header, prefixed with "bearer".
+
+
+        Example: `Authorization: bearer <jwt>`'

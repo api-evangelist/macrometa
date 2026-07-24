@@ -1,0 +1,811 @@
+openapi: 3.0.0
+info:
+  title: Macrometa API Reference Activity Metrics Managed Keys API
+  version: 0.17.17
+  description: API reference for the Macrometa Global Data Network.
+  license:
+    name: Macrometa License, Version 2.0
+servers:
+- url: https://api-play.paas.macrometa.io
+  description: GDN API
+host: api-play.paas.macrometa.io
+security:
+- ApiKeyAuth: []
+- BearerAuth: []
+tags:
+- name: Managed Keys
+paths:
+  /_fabric/{fabric}/_api/kms/managedkey:
+    get:
+      tags:
+      - Managed Keys
+      summary: List of managed keys.
+      description: Fetch managed keys with filter and pagination.
+      operationId: ListOfManagedKey
+      parameters:
+      - name: fabric
+        in: path
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          default: _system
+      - name: name
+        description: The name of the manged key.
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: service
+        in: query
+        required: false
+        description: The type of GND service used by the key.
+        schema:
+          type: string
+          enum:
+          - STORAGE
+          - SECRETS
+          - AUDIT
+      - name: managedKeyType
+        in: query
+        required: false
+        description: Who manages the key, Macrometa or customer(CMK)
+        schema:
+          type: string
+          enum:
+          - MACROMETA
+          - CMK
+      - name: keyProvider
+        in: query
+        required: false
+        description: The service that provides the root key.
+        schema:
+          type: string
+          enum:
+          - MACROMETA
+          - AWS
+      - name: offset
+        in: query
+        required: false
+        description: 'Number of managed keys to skip before displaying results. Default: 0'
+        schema:
+          type: integer
+      - name: count
+        in: query
+        required: false
+        description: 'The number of managed keys to return. Default: 50'
+        schema:
+          type: integer
+      - name: sortBy
+        description: Sort by field name.
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: order
+        in: query
+        required: false
+        description: Order the results ascending (ASC) or descending (DESC). Use with sortBy.
+        schema:
+          type: string
+          enum:
+          - ASC
+          - DESC
+      responses:
+        '200':
+          description: Successfully fetched the list of managed keys.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/get_all_managedkeys_examples_rc_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed because you do not have administrator permissions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed due to credentials restrictions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '412':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_412'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+    post:
+      tags:
+      - Managed Keys
+      summary: Create managed key.
+      description: Create managed key.
+      operationId: CreateManagedKey
+      parameters:
+      - description: The name of the fabric.
+        in: path
+        name: fabric
+        required: true
+        schema:
+          type: string
+          default: _system
+      requestBody:
+        $ref: '#/components/requestBodies/create_managed_key_request'
+      responses:
+        '200':
+          description: Successfully created the managed key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/create_managed_key_example_rc_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed because you do not have administrator permissions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed due to credentials restrictions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '412':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_412'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '422':
+          description: Failed because key policy has not been added to customer's ARN.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_422'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+  /_fabric/{fabric}/_api/kms/managedkey/{id}:
+    get:
+      tags:
+      - Managed Keys
+      summary: Fetch managed key by ID.
+      description: Fetch managed key by ID.
+      operationId: FetchManagedKey
+      parameters:
+      - name: fabric
+        in: path
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          default: _system
+      - name: id
+        in: path
+        required: true
+        description: The ID of the managed key.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successfully fetched the managed key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/get_managedkey_examples_rc_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed because you do not have administrator permissions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed due to credentials restrictions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified managed key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '412':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_412'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+    delete:
+      tags:
+      - Managed Keys
+      summary: Delete managed key by ID.
+      description: Set the managed key to status = `DELETING` or completely delete it returning status = `DELETED` if the key doesn't have encoded data.
+      operationId: DeleteManagedKey
+      parameters:
+      - name: fabric
+        in: path
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          default: _system
+      - name: id
+        in: path
+        required: true
+        description: The ID of the managed key.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successfully fetched the managed key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/get_managedkey_examples_rc_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed because you do not have administrator permissions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed due to credentials restrictions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified managed key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '412':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_412'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+  /_fabric/{fabric}/_api/kms/managedkey/{id}/enable/{enable}:
+    patch:
+      tags:
+      - Managed Keys
+      summary: Enable or disable the managed key.
+      description: Enable or disable the managed key by ID.
+      operationId: EnableOrDisableManagedKey
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          default: _system
+      - name: id
+        in: path
+        required: true
+        description: The ID of the managed key.
+        schema:
+          type: string
+      - name: enable
+        in: path
+        required: true
+        description: Enable or disable the key.
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Successfully set the managed key status.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/get_managedkey_examples_rc_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed because you do not have administrator permissions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed due to credentials restrictions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified managed key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '412':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_412'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+components:
+  schemas:
+    error_example_rc_422:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 422
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+      required:
+      - error
+      type: object
+    get_all_managedkeys_examples_rc_200:
+      properties:
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        code:
+          description: The generated response code.
+          type: integer
+          example: 200
+        result:
+          type: object
+          properties:
+            total:
+              description: Total managed keys found.
+              type: integer
+              example: 100
+            offset:
+              description: Fetch managed keys from offset.
+              type: integer
+              example: 0
+            count:
+              description: Count managed keys to return.
+              type: integer
+              example: 50
+            items:
+              description: An array of managed keys.
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: lPz8KjI2_yzYBgjkk2jlWA.IqXfBlY
+                  name:
+                    type: string
+                    example: managed_key_1
+                  keyOptions:
+                    type: object
+                    properties:
+                      masterKeyIds:
+                        type: array
+                        items: {}
+                  managedKeyType:
+                    type: string
+                    example: CMK
+                  keyProvider:
+                    type: string
+                    example: AWS
+                  tenant:
+                    type: string
+                    example: _mm
+                  fabric:
+                    type: string
+                    example: _system
+                  createdAt:
+                    type: number
+                    example: 1689020889736
+                  updatedAt:
+                    type: number
+                    example: 1689020889736
+                  status:
+                    type: string
+                    example: ENABLED
+                  description:
+                    type: string
+                    example: Customer's key.
+    create_managed_key_request:
+      type: object
+      properties:
+        name:
+          type: string
+          example: managed_key_1
+        managedKeyType:
+          type: string
+          example: CMK
+        keyProvider:
+          type: string
+          example: MACROMETA
+        service:
+          type: string
+          example: SECRETS
+        description:
+          type: string
+          example: 'Customer''s managed key #1.'
+        masterKeyIds:
+          type: object
+          example: null
+    error_example_rc_404:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 404
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
+      type: object
+    error_example_rc_403:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 403
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
+      type: object
+    headers:
+      x-gdn-region:
+        description: The federation's region hostname that served the request.
+        type: string
+      x-gdn-requestid:
+        description: A unique request ID for each API request.
+        type: string
+    get_managedkey_examples_rc_200:
+      properties:
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        code:
+          description: The generated response code.
+          type: integer
+          example: 200
+        result:
+          type: object
+          properties:
+            id:
+              type: string
+              example: lPz8KjI2_yzYBgjkk2jlWA.IqXfBlY
+            name:
+              type: string
+              example: managed_key_1
+            keyOptions:
+              type: object
+              properties:
+                masterKeyIds:
+                  type: array
+            managedKeyType:
+              type: string
+              example: CMK
+            keyProvider:
+              type: string
+              example: AWS
+            tenant:
+              type: string
+              example: _mm
+            fabric:
+              type: string
+              example: _system
+            createdAt:
+              type: number
+              example: 1689020889736
+            updatedAt:
+              type: number
+              example: 1689020889736
+            status:
+              type: string
+              example: ENABLED
+            description:
+              type: string
+              example: Customer's key.
+    error_example_rc_412:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 412
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
+      type: object
+    create_managed_key_example_rc_200:
+      properties:
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        code:
+          description: The generated response code.
+          type: integer
+          example: 200
+        result:
+          type: object
+          properties:
+            id:
+              type: string
+              example: lPz8KjI2_yzYBgjkk2jlWA.IqXfBlY
+            name:
+              type: string
+              example: managed_key_1
+            keyOptions:
+              type: object
+              example: null
+            managedKeyType:
+              type: string
+              example: CMK
+            keyProvider:
+              type: string
+              example: MACROMETA
+            tenant:
+              type: string
+              example: _mm
+            fabric:
+              type: string
+              example: _system
+            createdAt:
+              type: number
+              example: 1689020889736
+            updatedAt:
+              type: number
+              example: 1689020889736
+            status:
+              type: string
+              example: ENABLED
+            description:
+              type: string
+              example: Customer's key.
+    error_example_rc_401:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 401
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: '102020'
+      required:
+      - error
+      type: object
+  requestBodies:
+    create_managed_key_request:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/create_managed_key_request'
+      description: JSON for a new managed key.
+      required: true
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Provide an API Key to the `Authorization` header, prefixed with "apikey".
+
+
+        Example: `Authorization: apikey <key>`'
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Provide a JSON Web Token (JWT) to the `Authorization` header, prefixed with "bearer".
+
+
+        Example: `Authorization: bearer <jwt>`'

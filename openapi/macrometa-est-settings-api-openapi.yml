@@ -1,0 +1,145 @@
+openapi: 3.0.0
+info:
+  title: Macrometa API Reference Activity Metrics EST Settings API
+  version: 0.17.17
+  description: API reference for the Macrometa Global Data Network.
+  license:
+    name: Macrometa License, Version 2.0
+servers:
+- url: https://api-play.paas.macrometa.io
+  description: GDN API
+host: api-play.paas.macrometa.io
+security:
+- ApiKeyAuth: []
+- BearerAuth: []
+tags:
+- name: EST Settings
+  description: EST setting API to configure `origin`, `cookies`, and `basicAuth`. To access EST telemetrics `basicAuth` configuration is required.
+paths:
+  /api/est/v1/settings:
+    post:
+      tags:
+      - EST Settings
+      description: Create PhotonIQ EST settings.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                cookiesSettings:
+                  type: object
+                  properties:
+                    cookiesKey:
+                      type: string
+                    sameSite:
+                      type: string
+                      enum:
+                      - none
+                      - lax
+                      - strict
+                    secure:
+                      type: boolean
+                basicAuth:
+                  type: object
+                  properties:
+                    user:
+                      type: string
+                    password:
+                      type: string
+                origin:
+                  type: array
+                  items:
+                    type: string
+              required:
+              - cookiesSettings
+              - basicAuth
+              - origin
+      responses:
+        '200':
+          description: Returns created PhotonIQ EST settings.
+        '500':
+          description: Error creating PhotonIQ EST settings.
+    get:
+      tags:
+      - EST Settings
+      description: Get PhotonIQ EST settings.
+      responses:
+        '200':
+          description: Returns PhotonIQ EST settings.
+        '404':
+          description: Error PhotonIQ EST settings not found.
+        '500':
+          description: Error getting PhotonIQ EST settings.
+    patch:
+      tags:
+      - EST Settings
+      description: Update PhotonIQ EST settings.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                cookiesSettings:
+                  type: object
+                  properties:
+                    cookiesKey:
+                      type: string
+                    sameSite:
+                      type: string
+                      enum:
+                      - none
+                      - lax
+                      - strict
+                    secure:
+                      type: boolean
+                basicAuth:
+                  type: object
+                  properties:
+                    user:
+                      type: string
+                    password:
+                      type: string
+                origin:
+                  type: array
+                  items:
+                    type: string
+              required:
+              - cookiesSettings
+              - basicAuth
+              - origin
+      responses:
+        '200':
+          description: Returns updated PhotonIQ EST settings.
+        '500':
+          description: Error updating PhotonIQ EST settings.
+    delete:
+      tags:
+      - EST Settings
+      description: Delete PhotonIQ EST settings.
+      responses:
+        '200':
+          description: PhotonIQ EST settings deleted successfully.
+        '500':
+          description: Error deleting PhotonIQ EST settings.
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Provide an API Key to the `Authorization` header, prefixed with "apikey".
+
+
+        Example: `Authorization: apikey <key>`'
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Provide a JSON Web Token (JWT) to the `Authorization` header, prefixed with "bearer".
+
+
+        Example: `Authorization: bearer <jwt>`'

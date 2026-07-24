@@ -1,0 +1,885 @@
+openapi: 3.0.0
+info:
+  title: Macrometa API Reference Activity Metrics Query Workers API
+  version: 0.17.17
+  description: API reference for the Macrometa Global Data Network.
+  license:
+    name: Macrometa License, Version 2.0
+servers:
+- url: https://api-play.paas.macrometa.io
+  description: GDN API
+host: api-play.paas.macrometa.io
+security:
+- ApiKeyAuth: []
+- BearerAuth: []
+tags:
+- name: Query Workers
+paths:
+  /_fabric/{fabric}/_api/restql:
+    post:
+      description: Save a query for a user for a fabric.
+      operationId: SaveRestqlByName
+      parameters:
+      - description: Fabric name for which to save query.
+        in: path
+        name: fabric
+        required: true
+        schema:
+          type: string
+          format: string
+          default: _system
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/user_queries_create_user_queries'
+        required: true
+      responses:
+        '200':
+          description: Successfully saved query.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/query_workers_post_restql_rc_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed because you do not have access to the GeoFabric.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Save query worker
+      tags:
+      - Query Workers
+  /_fabric/{fabric}/_api/restql/import:
+    post:
+      description: Import custom queries.
+      operationId: ImportCustomRestQL
+      parameters:
+      - description: Fabric name for which to import queries.
+        in: path
+        name: fabric
+        required: true
+        schema:
+          type: string
+          format: string
+          default: _system
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/user_queries_import_custom_queries'
+        required: true
+      responses:
+        '200':
+          description: 'Successfully imported queries.
+
+
+            If there are any errors, an additional header *X-C8-Error-Codes* is set, that contains a map of the error codes that occurred together with their multiplicities, as in: 1205:10,1210:17 which means that in 10 cases the error 1205 "illegal document handle" and in 17 cases the error 1210 "unique constraint violated" has happened. The response body has additional failed document details in *details* object.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/example_import_custom_query_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed because of missing or malformed user-query.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed because you do not have access to the GeoFabric or you have reached the limit on *Max Stored Query Workers*. You need to upgrade to *Scale* plan.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Import custom query workers
+      tags:
+      - Query Workers
+  /_fabric/{fabric}/_api/restql/execute/{name}:
+    post:
+      description: Run a saved query for a given fabric. If there are more that 100 records (*default batch-size*), the *hasMore* flag is set to *true* and the *id* is set. This *id* is used to query subsequent records.
+      operationId: ExecuteRestqlByName
+      parameters:
+      - description: Fabric name of the saved query.
+        in: path
+        name: fabric
+        required: true
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: Query name to run.
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+          format: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/user_queries_execute_saved_queries'
+        required: true
+      responses:
+        '201':
+          description: Successfully ran the query.
+          headers:
+            x-gdn-view:
+              description: List of paused search views used by query.
+              schema:
+                type: string
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/query_workers_post_restql_execute_rc_201'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed because you do not have access to run the query worker.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Run query worker
+      tags:
+      - Query Workers
+  /_fabric/{fabric}/_api/restql/fetch/{id}:
+    put:
+      description: 'If the query worker cursor is still valid, returns an object with the following attributes:
+
+
+        - *id*: the *cursor-identifier*
+
+        - *result*: a list of documents for the current batch
+
+        - *hasMore*: *false* if this was the last batch
+
+        - *count*: if present the total number of elements
+
+
+        If *hasMore* returns *true*, the next call might still return no documents. If *hasMore* is *false*, the cursor is exhausted. Once the *hasMore* attribute has a value of *false*, the client can stop.'
+      operationId: fetchRestqlCursor
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: The id of the cursor.
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        '200':
+          description: Successfully fetched the next batch of records.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/query_workers_post_restql_execute_rc_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified query.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Read next batch from cursor
+      tags:
+      - Query Workers
+  /_fabric/{fabric}/_api/restql/user:
+    get:
+      description: Fetch list of saved queries for the fabric.
+      operationId: ListRestqlAssociatedWithCurrentUser
+      parameters:
+      - description: Fabric name for which to list saved queries.
+        in: path
+        name: fabric
+        required: true
+        schema:
+          type: string
+          format: string
+          default: _system
+      responses:
+        '200':
+          description: Successfully fetched queries.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/query_workers_get_restql_user_rc_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed because you do not have permission to list query workers.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: List current query workers
+      tags:
+      - Query Workers
+  /_fabric/{fabric}/_api/restql/{name}:
+    delete:
+      description: Remove a query for the fabric.
+      operationId: DeleteRestqlByName
+      parameters:
+      - description: Fabric name for which to remove a query.
+        in: path
+        name: fabric
+        required: true
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: Query name to be removed.
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        '200':
+          description: Successfully removed query.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    description: HTTP response code.
+                    type: integer
+                    example: 200
+                  error:
+                    description: Flag if there is an error in response. *False* for this response.
+                    type: boolean
+                    example: false
+                  result:
+                    type: array
+                    example: []
+                    items: {}
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed because you do not have access to remove the query worker.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Remove query worker
+      tags:
+      - Query Workers
+    put:
+      description: Update a saved query for a fabric.
+      operationId: UpdateRestqlByName
+      parameters:
+      - description: Fabric name for which to update a query.
+        in: path
+        name: fabric
+        required: true
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: Query name to update.
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+          format: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/user_queries_update_user_queries'
+        required: true
+      responses:
+        '200':
+          description: Sucessfully updated the query.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    description: HTTP response code.
+                    type: integer
+                    example: 200
+                  error:
+                    description: Flag if there is an error in response. *False* for this response.
+                    type: boolean
+                    example: false
+                  result:
+                    type: object
+                    properties:
+                      value:
+                        description: The query being saved
+                        type: string
+                        example: for u in testCollection return u
+                      _key:
+                        description: The key for this record
+                        type: string
+                        example: testuser._system.testQueryName
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed because you do not have access to update the query worker.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Update query worker
+      tags:
+      - Query Workers
+components:
+  schemas:
+    import_query_error_details:
+      properties:
+        query:
+          description: The failed query object
+          type: object
+        errorNumber:
+          description: The error code
+          type: integer
+          example: 102022
+        errorMessage:
+          description: The error message
+          type: string
+          example: The error message
+    user_queries_update_user_queries:
+      properties:
+        query:
+          $ref: '#/components/schemas/user_queries_update_data_format'
+      type: object
+    query_workers_post_restql_execute_rc_201:
+      type: object
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 201
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        hasMore:
+          type: boolean
+          example: true
+        id:
+          type: integer
+          example: 11894969
+        cached:
+          type: boolean
+          example: false
+        extra:
+          type: object
+          properties:
+            warnings:
+              type: array
+              example: []
+              items: {}
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/examples_id_key_rev_data'
+    examples_id_key_rev_data:
+      properties:
+        _id:
+          description: ID of the collection.
+          type: string
+          example: test/foo
+        _key:
+          description: _key details of collection.
+          type: string
+          example: foo
+        _rev:
+          description: _rev details of collection.
+          type: string
+          example: _dPRuHxe--_
+        data:
+          description: data in record.
+          type: string
+          example: data1
+      type: object
+    query_workers_post_restql_execute_rc_200:
+      type: object
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        hasMore:
+          type: boolean
+          example: true
+        id:
+          type: integer
+          example: 11894969
+        cached:
+          type: boolean
+          example: false
+        extra:
+          type: object
+          properties:
+            stats:
+              type: array
+              example: []
+              items: {}
+            warnings:
+              type: array
+              example: []
+              items: {}
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/examples_id_key_rev_data'
+    user_queries_update_data_format:
+      description: Specify the query parameters.
+      properties:
+        parameter:
+          additionalProperties: {}
+          description: bindVars for the query.
+          type: object
+          example: {}
+        value:
+          description: Value for the query.
+          type: string
+          example: for u in testCollection return u
+        type:
+          $ref: '#/components/schemas/user_queries_data_format_type'
+      required:
+      - value
+      type: object
+    headers:
+      x-gdn-region:
+        description: The federation's region hostname that served the request.
+        type: string
+      x-gdn-requestid:
+        description: A unique request ID for each API request.
+        type: string
+    user_queries_create_data_format:
+      description: Specify the query parameters.
+      properties:
+        name:
+          description: Name for the query.
+          type: string
+          example: workerName
+        parameter:
+          additionalProperties: {}
+          description: bindVars for the query.
+          type: object
+          example: {}
+        value:
+          description: Value of the query.
+          type: string
+          example: for u in testCollection return u
+        type:
+          $ref: '#/components/schemas/user_queries_data_format_type'
+      required:
+      - name
+      type: object
+    query_workers_get_restql_user_rc_200:
+      type: object
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/examples_id_key_rev_data'
+    error_example_rc_404:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 404
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
+      type: object
+    error_example_rc_400:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 400
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 102020
+      required:
+      - error
+      type: object
+    example_import_custom_query_200:
+      properties:
+        error:
+          description: 'Flag if there was an error (true) or not (false).
+
+            It is always true in this response.'
+          type: boolean
+          example: false
+        code:
+          description: The response code.
+          type: integer
+          example: 200
+        result:
+          properties:
+            created:
+              description: Number of queries which were successfully imported.
+              type: integer
+              example: 10
+            errors:
+              description: Number of queries which were failed to get imported.
+              type: integer
+              example: 0
+            details:
+              properties:
+                errors:
+                  description: Array of failed queries along with the respective errors
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/import_query_error_details'
+    error_example_rc_403:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 403
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
+      type: object
+    user_queries_import_custom_queries:
+      properties:
+        queries:
+          description: JSON documents embedded into a list.
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                description: Name for the query.
+                type: string
+                example: testQueryName
+              value:
+                description: Value of the query.
+                type: string
+                example: for u in testCollection return u
+              parameter:
+                additionalProperties: {}
+                description: Query bind parameters as JSON Object.
+                type: object
+                example: {}
+              type:
+                $ref: '#/components/schemas/user_queries_data_format_type'
+            required:
+            - name
+            - value
+        details:
+          description: If *true* extra information for errors will be returned in the result.
+          format: boolean
+          type: boolean
+          default: false
+      type: object
+    user_queries_execute_saved_queries:
+      properties:
+        bindVars:
+          additionalProperties: {}
+          description: Specify the bindVars of the query.
+          type: object
+          example: {}
+        batchSize:
+          description: The maximum number of documents returned when fetching data from the query.
+          format: int64
+          type: integer
+          default: 100
+          maximum: 1000
+      type: object
+    query_workers_post_restql_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          properties:
+            userid:
+              description: The userid
+              type: string
+              example: testuser
+            tenant:
+              description: The tenant
+              type: string
+              example: _mm
+            fabric:
+              description: The fabric
+              type: string
+              example: _system
+            name:
+              description: Query name
+              type: string
+              example: testQueryName
+            value:
+              description: The query being saved
+              type: string
+              example: for u in testCollection return u
+            _key:
+              description: The key for this record
+              type: string
+              example: testuser._system.testQueryName
+            type:
+              description: Record Type
+              type: string
+              example: c8ql
+    user_queries_data_format_type:
+      description: Query language.
+      type: string
+      enum:
+      - c8ql
+      - sql
+      default: c8ql
+      example: c8ql
+    user_queries_create_user_queries:
+      properties:
+        query:
+          $ref: '#/components/schemas/user_queries_create_data_format'
+      type: object
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Provide an API Key to the `Authorization` header, prefixed with "apikey".
+
+
+        Example: `Authorization: apikey <key>`'
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Provide a JSON Web Token (JWT) to the `Authorization` header, prefixed with "bearer".
+
+
+        Example: `Authorization: bearer <jwt>`'

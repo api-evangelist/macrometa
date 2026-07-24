@@ -1,0 +1,3220 @@
+openapi: 3.0.0
+info:
+  title: Macrometa API Reference Activity Metrics API Keys API
+  version: 0.17.17
+  description: API reference for the Macrometa Global Data Network.
+  license:
+    name: Macrometa License, Version 2.0
+servers:
+- url: https://api-play.paas.macrometa.io
+  description: GDN API
+host: api-play.paas.macrometa.io
+security:
+- ApiKeyAuth: []
+- BearerAuth: []
+tags:
+- name: API Keys
+paths:
+  /_api/key/validate:
+    post:
+      description: "Requires a JSON object with these properties:\n\n  - **apikey**: The API key as a string.\n  - **jwt**: The JWT token as a string.\n\n**Note**: Requires *administrator* permissions."
+      operationId: ValidateApiKey
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/apikey_validate'
+        required: true
+      responses:
+        '200':
+          description: Successfully validated API key.
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    description: HTTP response code.
+                    type: integer
+                    example: 200
+                  error:
+                    description: Flag if there is an error in response. *False* for this response.
+                    type: boolean
+                    example: false
+                  result:
+                    description: An array of API keys with details as keyid, user name and tenant name.
+                    items:
+                      properties:
+                        keyid:
+                          description: Keyid of the API key.
+                          type: string
+                          example: test
+                        parent:
+                          description: Name of the parent.
+                          type: string
+                          example: root
+                        tenant:
+                          description: Name of the tenant.
+                          type: string
+                          example: _mm
+                        limitRequestsPerSec:
+                          description: Maximum request limit.
+                          type: integer
+                          example: '0'
+                    type: array
+                required:
+                - error
+                type: object
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed because you do not have administrator permissions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Validate API Key
+      tags:
+      - API Keys
+  /_api/key:
+    post:
+      description: Create API keys for yourself.
+      operationId: CreateApiKey
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/apikey_create'
+        required: true
+      responses:
+        '201':
+          description: Successfully added API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api_key_http_examples_rc_201'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed because you do not have administrator permissions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '409':
+          description: Failed because API key already exists.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_409'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Create API Key
+      tags:
+      - API Keys
+    get:
+      description: Retrieve information about all of your API keys. Privileged users (service or _mm.root user) can use the 'user' query parameter to retrieve information of API keys belonging to another user.
+      operationId: ListAvailableApiKeys
+      parameters:
+      - description: Return a list of API keys associated with the specified user. This parameter can be used by service or _mm.root user only.
+        in: query
+        name: user
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successfully fetched API keys.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api_key_http_examples_rc_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed because you do not have administrator permissions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: List available API keys
+      tags:
+      - API Keys
+  /_api/key/{keyid}:
+    get:
+      description: Fetch an existing API key, identified by *keyid*. You can only get your API keys.
+      operationId: GetAvailableApiKey
+      parameters:
+      - description: The id of the API key.
+        in: path
+        name: keyid
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        '200':
+          description: Successfully fetched API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api_key_get_response_http_examples_rc_200_0'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed because you do not have administrator permissions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Get available API key.
+      tags:
+      - API Keys
+    delete:
+      description: Remove an existing API key, identified by *keyid*. You can only remove your API keys.
+      operationId: RemoveApiKey
+      parameters:
+      - description: The id of the API key.
+        in: path
+        name: keyid
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        '202':
+          description: Successfully removed API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api_key_http_examples_rc_202'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed because you do not have administrator permissions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Remove API Key.
+      tags:
+      - API Keys
+  /_api/key/{keyid}/database:
+    get:
+      description: 'Fetch the list of databases available to the specified *keyid*.
+
+
+        Returns a JSON object with the per-database access privileges for the specified *keyid*. The result object contains databases names as object keys, and associated privileges for the database as values.
+
+
+        If you specified *full*, the result contains permissions for the databases as well as permissions for the collections and streams.
+
+
+        **Note**: Requires *administrator* permissions.'
+      operationId: ListTheAccessibleDatabasesForApiKey
+      parameters:
+      - description: The id of the API key for which you want to query the databases.
+        in: path
+        name: keyid
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: Return the full set of access levels for all databases and all collections.
+        in: query
+        name: full
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: Successfully fetched database list.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api_key_get_http_examples_rc_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed because you do not have administrator permissions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: List the accessible databases for a keyid
+      tags:
+      - API Keys
+  /_api/key/{keyid}/database/{dbname}:
+    get:
+      description: Fetch the database access level for a specific database.
+      operationId: GetTheDatabaseAccessLevelForApiKey
+      parameters:
+      - description: The id of the API key.
+        in: path
+        name: keyid
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: The name of the database to query.
+        in: path
+        name: dbname
+        required: true
+        schema:
+          type: string
+          format: string
+          default: _system
+      responses:
+        '200':
+          description: Successfully fetched access level.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api_key_dbname_examples_rc_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed because you do not have administrator permissions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Get the database access level
+      tags:
+      - API Keys
+    delete:
+      description: 'Clears the database access level for the database *dbname* of API key with *keyid*. Reverts to default database access level. If there is no defined default database access level, it defaults to *No access*.
+
+
+        **Note**: Requires *administrator* permissions.'
+      operationId: ClearTheDatabaseAccessLevelForApiKey
+      parameters:
+      - description: The id of the API key.
+        in: path
+        name: keyid
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: The name of the database.
+        in: path
+        name: dbname
+        required: true
+        schema:
+          type: string
+          format: string
+          default: _system
+      responses:
+        '202':
+          description: Successfully cleared access level.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api_key_http_examples_rc_202'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Clear the database access level
+      tags:
+      - API Keys
+    put:
+      description: 'Sets the database access levels for the database *dbname* of API key with *keyid*.
+
+
+        **Note**: Requires *administrator* permissions.'
+      operationId: SetTheDatabaseAccessLevelForApiKey
+      parameters:
+      - description: The id of the API key.
+        in: path
+        name: keyid
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: The name of the database.
+        in: path
+        name: dbname
+        required: true
+        schema:
+          type: string
+          format: string
+          default: _system
+      requestBody:
+        $ref: '#/components/requestBodies/user_grant_database'
+      responses:
+        '200':
+          description: Successfully changed access level.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api_key_put_dbname_examples_rc_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed because you do not have administrator permissions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Set the database access level
+      tags:
+      - API Keys
+  /_api/key/{keyid}/database/{dbname}/collection:
+    get:
+      description: "Fetch the list of collections access level for a specific *user*\n\n If access level for collection is not set default(\"&#42;\") access level is used. If default(\"&#42;\") access level is also not set database access level is used."
+      operationId: GetTheApiKeyCollectionsAccessLevel
+      parameters:
+      - description: The id of the API key.
+        in: path
+        name: keyid
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: The name of the database to query.
+        in: path
+        name: dbname
+        required: true
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: Return the full set of access levels for all collections.
+        in: query
+        name: full
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: Successfully fetched access level.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api_key_database_collection_get_http_examples_rc_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed because you do not have administrator permissions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Get the specific collection access level
+      tags:
+      - API Keys
+  /_api/key/{keyid}/database/{dbname}/collection/{collection}:
+    get:
+      description: "Fetch the access level for a specific collection.\n\n If access level for collection is not set default(\"&#42;\") access level is used. If default(\"&#42;\") access level is also not set database access level is used."
+      operationId: GetTheSpecificCollectionAccessLevelForApiKey
+      parameters:
+      - description: The id of the API key.
+        in: path
+        name: keyid
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: The name of the database to query.
+        in: path
+        name: dbname
+        required: true
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: The name of the collection.
+        in: path
+        name: collection
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        '200':
+          description: Successfully fetched access level.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api_key_dbname_examples_rc_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed because you do not have administrator permissions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Get the specific collection access level
+      tags:
+      - API Keys
+    delete:
+      description: 'Clears the access level for the collection *collection* in the database *dbname* of API key with *keyid*. Reverts to default collection access level. If there is no defined default collection access level, it defaults to *No access*.
+
+
+        **Note**: Requires *administrator* permissions.'
+      operationId: ClearTheCollectionAccessLevelForApiKey
+      parameters:
+      - description: The id of the API key.
+        in: path
+        name: keyid
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: The name of the database.
+        in: path
+        name: dbname
+        required: true
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: The name of the collection.
+        in: path
+        name: collection
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        '202':
+          description: Successfully cleared access level.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api_key_http_examples_rc_202'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Clear the collection access level.
+      tags:
+      - API Keys
+    put:
+      description: "Sets the collection access level for the *collection* in the database *dbname* for API key with *keyid*.\n\nRequires a JSON object with these properties:\n\n  - **grant**: Use \"rw\" to set the collection level access to *Read/Write*. Use \"ro\" to set the collection level access to  *Read Only*. Use \"none\" to set the collection level access to *No access*.\n\n - **collection**: Use \"&#42;\" to set default access level for all collections.\n\nIf access level for collection is not set default(\"&#42;\") access level is used. If default(\"&#42;\") access level is also not set database access level is used.\n\n**Note**: Requires *administrator* permissions."
+      operationId: SetTheCollectionAccessLevelForApiKey
+      parameters:
+      - description: The id of the API key.
+        in: path
+        name: keyid
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: The name of the database.
+        in: path
+        name: dbname
+        required: true
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: The name of the collection.
+        in: path
+        name: collection
+        required: true
+        schema:
+          type: string
+          format: string
+          default: '*'
+      requestBody:
+        $ref: '#/components/requestBodies/user_grant_collection'
+      responses:
+        '200':
+          description: Successfully changed access level.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api_key_dbname_collection_put_examples_rc_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed because you do not have administrator permissions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Set the collection access level
+      tags:
+      - API Keys
+  /_api/key/{keyid}/database/{dbname}/stream:
+    get:
+      description: "Fetch the list of streams available to the specified *keyid*.\n\nThe call returns per-stream access privileges for the specified keyid. The *result* object contains the stream names as object keys and the associated privileges for the stream as values.\n\n If access level for stream is not set the default(\"&#42;\") access level is used. If default(\"&#42;\") access level is also not set the database access level is used.\n\n**Note**: Requires *administrator* permissions."
+      operationId: ListTheAccessibleStreamsForApiKey
+      parameters:
+      - description: The name of the database.
+        in: path
+        name: dbname
+        required: true
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: The id of the API key for which you want to query the streams.
+        in: path
+        name: keyid
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: Return the full set of access levels for all streams.
+        in: query
+        name: full
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: Successfully fetched streams.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api_key_database_stream_get_http_examples_rc_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed because you do not have administrator permissions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: List the accessible streams
+      tags:
+      - API Keys
+  /_api/key/{keyid}/database/{dbname}/stream/{stream}:
+    get:
+      description: Fetch the stream access level for a specific stream.
+      operationId: GetTheStreamAccessLevelForApiKey
+      parameters:
+      - description: The id of the API key for which you want to query the streams.
+        in: path
+        name: keyid
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: The name of the database.
+        in: path
+        name: dbname
+        required: true
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: The name of the stream to query.
+        in: path
+        name: stream
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        '200':
+          description: Successfully fetched access level.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api_key_dbname_examples_rc_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed because you do not have administrator permissions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Get the stream access level
+      tags:
+      - API Keys
+    delete:
+      description: Clears the stream access level for the *stream* of API key with *keyid*. Reverts to default stream access level. If there is no defined default stream access level, it defaults to *No access*.
+      operationId: ClearTheStreamAccessLevelForApiKey
+      parameters:
+      - description: The id of the API key.
+        in: path
+        name: keyid
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: The name of the database.
+        in: path
+        name: dbname
+        required: true
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: The name of the stream.
+        in: path
+        name: stream
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        '202':
+          description: Successfully cleared access level.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api_key_http_examples_rc_202'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Clear the stream access level
+      tags:
+      - API Keys
+    put:
+      description: "Sets the stream access levels for the *stream* of API key with *keyid*.\n\nRequires a JSON object with these properties:\n\n  - **grant**: Use \"ro\" to set the stream access level to Subscribe.\n   Use \"wo\" to set the stream access level to Publish.\n Use \"rw\" to set the stream access level to Publish and Subscribe.\n  Use \"none\" to set the stream access level to *No access*.\n\n - **stream**: Use \"&#42;\" to set default access level for all streams.\n\nIf access level for stream is not set default(\"&#42;\") access level is used. If default(\"&#42;\") access level is also not set database access level is used.\n\n**Note**: Requires *administrator* permissions."
+      operationId: SetTheStreamAccessLevelForApiKey
+      parameters:
+      - description: The id of the API key.
+        in: path
+        name: keyid
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: The name of the database.
+        in: path
+        name: dbname
+        required: true
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: The name of the stream.
+        in: path
+        name: stream
+        required: true
+        schema:
+          type: string
+          format: string
+          default: '*'
+      requestBody:
+        $ref: '#/components/requestBodies/user_grant_database'
+      responses:
+        '200':
+          description: Successfully changed access level.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api_key_dbname_examples_rc_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed because you do not have administrator permissions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Set the stream access level
+      tags:
+      - API Keys
+  /_api/key/{keyid}/database/{geofabric}/restql:
+    get:
+      description: "Fetch the list of query workers access level for a specific *keyid*.\n\n If access level for a query worker is not set, then the default(\"&#42;\") access level is used. If the default(\"&#42;\") access level is also not set, then the GeoFabric access level is used."
+      operationId: GetApiKeyQueryWorkerAccessLevel
+      parameters:
+      - description: The ID of the API key querying the GeoFabric.
+        in: path
+        name: keyid
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: The name of the GeoFabric to query.
+        in: path
+        name: geofabric
+        required: true
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: Return the full set of access levels for all query workers.
+        in: query
+        name: full
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: Successfully fetched query workers access level.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api_key_database_queryworker_get_http_examples_rc_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed to validate because you do not have access to the GeoFabric.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified API key or GeoFabric.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Get the query workers access level for a specific keyid
+      tags:
+      - API Keys
+  /_api/key/{keyid}/database/{geofabric}/restql/{query-worker}:
+    get:
+      description: "Fetch the access level for a specific query worker.\n\n If access level for the query worker is not set, then the default(\"&#42;\") access level is used. If the default(\"&#42;\") access level is also not set, then the GeoFabric access level is used."
+      operationId: GetSpecificQueryWorkerAccessLevelForApiKey
+      parameters:
+      - description: The ID of the API key querying the GeoFabric.
+        in: path
+        name: keyid
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: The name of the GeoFabric to query.
+        in: path
+        name: geofabric
+        required: true
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: The name of the query worker.
+        in: path
+        name: query-worker
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        '200':
+          description: Successfully fetched query worker access level.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api_key_dbname_examples_rc_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed to validate because you do not have access to the GeoFabric.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified fabric, API key, or query worker.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Get the specific query worker access level
+      tags:
+      - API Keys
+    delete:
+      description: 'Clears the access level for the query worker *query worker* in the GeoFabric *geofabric* of API key with *keyid*. After this runs, the default query worker access level is used. If there is no defined default query worker access level, then it defaults to *No access*.
+
+
+        **Note**: Requires *administrator* permissions.'
+      operationId: ClearQueryWorkerAccessLevelForApiKey
+      parameters:
+      - description: The ID of the API key.
+        in: path
+        name: keyid
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: The name of the GeoFabric.
+        in: path
+        name: geofabric
+        required: true
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: The name of the query worker.
+        in: path
+        name: query-worker
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        '202':
+          description: Successfully cleared query worker access level.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api_key_http_examples_rc_202'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified fabric, API key, or query worker.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Clear the query worker access level.
+      tags:
+      - API Keys
+    put:
+      description: "Sets the access level for the *query worker* in the GeoFabric *geofabric* for an API key with *keyid*.\n\nRequires a JSON object with these properties:\n\n  - **grant**: Use \"rw\" to set the query worker level access to *Read/Write*. Use \"ro\" to set the query worker level access to  *Read Only*. Use \"none\" to set the query worker level access to *No access*.\n\n - **query worker**: Use \"&#42;\" to set default access level for all query workers.\n\nIf access level for a query worker is not set, then the default(\"&#42;\") access level is used. If the default(\"&#42;\") access level is also not set, then the GeoFabric access level is used.\n\n**Note**: Requires *administrator* permissions."
+      operationId: SetQueryWorkerAccessLevelForApiKey
+      parameters:
+      - description: The ID of the API key querying the GeoFabric.
+        in: path
+        name: keyid
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: The name of the GeoFabric.
+        in: path
+        name: geofabric
+        required: true
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: The name of the query worker.
+        in: path
+        name: query-worker
+        required: true
+        schema:
+          type: string
+          format: string
+          default: '*'
+      requestBody:
+        $ref: '#/components/requestBodies/user_grant_queryworker'
+      responses:
+        '200':
+          description: Successfully changed access permissions.
+          content:
+            application/json:
+              schema:
+                example:
+                  code: 200
+                  error: false
+                  _system/testQueryWorker: ro
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed to validate because you do not have access to the GeoFabric.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified fabric, API key, or query worker.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Set the query worker access level
+      tags:
+      - API Keys
+  /_api/key/{keyid}/database/{geofabric}/managedkey:
+    get:
+      description: "Fetch the list of managed keys access level for a specific *keyid*.\n\n If access level for a managed key is not set, then the default(\"&#42;\") access level is used. If the default(\"&#42;\") access level is also not set, then the GeoFabric access level is used."
+      operationId: GetApiKeyManagedKeyAccessLevel
+      parameters:
+      - description: The ID of the API key querying the GeoFabric.
+        in: path
+        name: keyid
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: The name of the GeoFabric to query.
+        in: path
+        name: geofabric
+        required: true
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: Return the full set of access levels for all managed keys.
+        in: query
+        name: full
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: Successfully fetched managed keys access level.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api_key_database_managedkey_get_http_examples_rc_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed to validate because you do not have access to the GeoFabric.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified API key or GeoFabric.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Get the managed keys access level for a specific keyid
+      tags:
+      - API Keys
+  /_api/key/{keyid}/database/{geofabric}/managedkey/{managed-key-name}:
+    get:
+      description: "Fetch the access level for a specific managed key.\n\n If the access level for the managed key is not set, then the default(\"&#42;\") access level is used. If the default(\"&#42;\") access level is also not set, then the GeoFabric access level is used."
+      operationId: GetSpecificManagedKeyAccessLevelForApiKey
+      parameters:
+      - description: The ID of the API key querying the GeoFabric.
+        in: path
+        name: keyid
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: The name of the GeoFabric to query.
+        in: path
+        name: geofabric
+        required: true
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: The name of the managed key.
+        in: path
+        name: managed-key-name
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        '200':
+          description: Successfully fetched managed key access level.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api_key_dbname_examples_rc_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed to validate because you do not have access to the GeoFabric.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified GeoFabric, API key, or managed key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Get the specific managed key access level
+      tags:
+      - API Keys
+    delete:
+      description: 'Clears the access level for the *managed key name* in the GeoFabric *geofabric* of API key with *keyid*. After the access level is removed, the default managed key access level is used. If there is no defined default managed key access level, then it defaults to *No access*.
+
+
+        **Note**: Requires *administrator* permissions.'
+      operationId: ClearManagedKeyAccessLevelForApiKey
+      parameters:
+      - description: The ID of the API key.
+        in: path
+        name: keyid
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: The name of the GeoFabric.
+        in: path
+        name: geofabric
+        required: true
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: The name of the managed key.
+        in: path
+        name: managed-key-name
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        '202':
+          description: Successfully cleared managed key access level.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api_key_http_examples_rc_202'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified GeoFabric, API key, or managed key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Clear the managed key access level
+      tags:
+      - API Keys
+    put:
+      description: "Sets the access level for the *managed key name* in the GeoFabric *geofabric* for an API key with *keyid*.\n\nRequires a JSON object with these properties:\n\n  - **grant**: Use \"rw\" to set the managed key level access to *Read/Write*. Use \"ro\" to set the managed key level access to  *Read Only*. Use \"none\" to set the managed key worker level access to *No access*.\n\n - **managed keyr**: Use \"&#42;\" to set default access level for all managed keys.\n\nIf access level for the managed key is not set, then the default(\"&#42;\") access level is used. If the default(\"&#42;\") access level is also not set, then the GeoFabric access level is used.\n\n**Note**: Requires *administrator* permissions."
+      operationId: SetManagedKeyAccessLevelForApiKey
+      parameters:
+      - description: The ID of the API key querying the GeoFabric.
+        in: path
+        name: keyid
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: The name of the GeoFabric.
+        in: path
+        name: geofabric
+        required: true
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: The name of the managed key.
+        in: path
+        name: managed-key-name
+        required: true
+        schema:
+          type: string
+          format: string
+          default: '*'
+      requestBody:
+        $ref: '#/components/requestBodies/user_grant_managedkey'
+      responses:
+        '200':
+          description: Successfully changed access permissions.
+          content:
+            application/json:
+              schema:
+                example:
+                  code: 200
+                  error: false
+                  _system/testManagedKey: ro
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed to validate because you do not have access to the GeoFabric.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified GeoFabric, API key, or managed key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Set the managed key access level
+      tags:
+      - API Keys
+  /_api/key/{keyid}/billing:
+    get:
+      description: Fetch the billing access level.
+      operationId: GetTheBillingAccessLevelForApiKey
+      parameters:
+      - description: The id of the API key for which you want to query the billing access level.
+        in: path
+        name: keyid
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        '200':
+          description: Successfully fetched billing access level.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api_key_http_examples_rc_200_billing'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed because you do not have administrator permissions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Get the billing access level
+      tags:
+      - API Keys
+    delete:
+      description: Clears the billing access level of *keyid*.
+      operationId: ClearTheBillingAccessLevelForApiKey
+      parameters:
+      - description: The id of the API key.
+        in: path
+        name: keyid
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        '202':
+          description: Successfully cleared access level.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api_key_http_examples_rc_202'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Clear the billing access level
+      tags:
+      - API Keys
+    put:
+      description: 'Sets the billing access levels for API key with *keyid*.
+
+
+        **Note**: Requires *administrator* permissions.'
+      operationId: SetTheBillingAccessLevelForApiKey
+      parameters:
+      - description: The id of the API key.
+        in: path
+        name: keyid
+        required: true
+        schema:
+          type: string
+          format: string
+      requestBody:
+        $ref: '#/components/requestBodies/user_grant_database'
+      responses:
+        '200':
+          description: Successfully changed access level.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api_key_dbname_examples_rc_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed because you do not have administrator permissions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Set the billing access level
+      tags:
+      - API Keys
+  /_api/key/{keyid}/attributes:
+    get:
+      description: Fetch the list of attributes for the specified *keyid*.
+      operationId: GetTheAttributesForApiKey
+      parameters:
+      - description: The id of the API key.
+        in: path
+        name: keyid
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        '200':
+          description: Successfully fetched attributes.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/http_examples_rc_200_attributes'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed because you do not have administrator permissions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Get the API key attributes
+      tags:
+      - API Keys
+    put:
+      description: 'Update attributes of a key.
+
+
+        **Note**: Requires *administrator* permissions.'
+      operationId: UpdateTheAttributesForApiKey
+      parameters:
+      - description: The id of the API key.
+        in: path
+        name: keyid
+        required: true
+        schema:
+          type: string
+          format: string
+      requestBody:
+        $ref: '#/components/requestBodies/attribute_values'
+      responses:
+        '202':
+          description: Successfully changed attributes.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/http_examples_rc_200_attributes'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed because you do not have administrator permissions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Update attributes
+      tags:
+      - API Keys
+  /_api/key/{keyid}/attributes/truncate:
+    delete:
+      description: Remove all attributes from *keyid*.
+      operationId: ClearAllAttributesForApiKey
+      parameters:
+      - description: The id of the api key.
+        in: path
+        name: keyid
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        '202':
+          description: Successfully removed attributes.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api_key_http_examples_rc_202'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Remove all attributes
+      tags:
+      - API Keys
+  /_api/key/{keyid}/attributes/{attributeid}:
+    delete:
+      description: Remove the attribute from *keyid*.
+      operationId: ClearTheAttributesForApiKey
+      parameters:
+      - description: The id of the api key.
+        in: path
+        name: keyid
+        required: true
+        schema:
+          type: string
+          format: string
+      - in: path
+        name: attributeid
+        required: true
+        description: Attribute id.
+        schema:
+          type: string
+          format: string
+          default: attributeid
+      responses:
+        '202':
+          description: Successfully removed attribute.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api_key_http_examples_rc_202'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Remove attribute
+      tags:
+      - API Keys
+components:
+  schemas:
+    user_grant_database:
+      properties:
+        grant:
+          description: '- Use "rw" to set the GeoFabric access level to *Administrate*.
+
+            - Use "ro" to set the GeoFabric access level to *Access*.
+
+            - Use "none" to set the database access level to *No access*.'
+          type: string
+          example: rw
+      required:
+      - grant
+      type: object
+    api_key_http_examples_rc_200_billing:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          description: Billing tag with billing access level present.
+          properties:
+            billing:
+              type: string
+              example: rw
+      required:
+      - error
+      type: object
+    api_key_put_dbname_examples_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          type: string
+          example: rw
+      required:
+      - error
+      type: object
+    apikey_create:
+      properties:
+        keyid:
+          description: The id of the API key.
+          type: string
+          example: test1
+        user:
+          description: The user that owns the API key. The 'user' option should be used only when creating an API key that belongs to another user, and can be used only by service or _mm.root.
+          type: string
+          example: tenant1.user1
+        isSystem:
+          description: Indicates whether the key is a system API key.
+          type: boolean
+          example: 'false'
+      required:
+      - keyid
+      type: object
+    api_key_database_stream_get_http_examples_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          properties:
+            c8locals.streamTest:
+              type: string
+              example: rw
+      required:
+      - error
+      type: object
+    apikey_validate:
+      properties:
+        apikey:
+          description: The id of the API key.
+          type: string
+          example: test1
+      required:
+      - apikey
+      type: object
+    api_key_http_examples_rc_202:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 202
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+      required:
+      - error
+      type: object
+    api_key_database_collection_get_http_examples_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          description: List of collections and the access level.
+          type: object
+          properties:
+            test1:
+              type: string
+              example: rw
+      required:
+      - error
+      type: object
+    headers:
+      x-gdn-region:
+        description: The federation's region hostname that served the request.
+        type: string
+      x-gdn-requestid:
+        description: A unique request ID for each API request.
+        type: string
+    api_key_get_http_examples_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          items:
+            properties:
+              _system:
+                description: Access level of system is described.
+                type: string
+                example: rw
+      required:
+      - error
+      type: object
+    apikey200_help:
+      properties:
+        keyid:
+          description: Keyid of the API key.
+          type: string
+          example: test1
+        user:
+          description: Name of the user.
+          type: string
+          example: root
+        tenant:
+          description: Name of the tenant.
+          type: string
+          example: _mm
+        isSystem:
+          description: Indicates whether the key is a system API key.
+          type: boolean
+          example: 'false'
+    api_key_http_examples_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          description: An array of API keys with details as keyid, user name and tenant name.
+          items:
+            $ref: '#/components/schemas/apikey200_help'
+          type: array
+      required:
+      - error
+      type: object
+    api_key_dbname_collection_put_examples_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        _system/test1:
+          type: string
+          example: rw
+    user_grant_queryworker:
+      properties:
+        grant:
+          description: '- Use "rw" to set the query worker level access to *Read/Write*.
+
+            - Use "ro" to set the query worker level access to *Read Only*.
+
+            - Use "none" to set the query worker level access to *No access*.'
+          type: string
+          example: rw
+      required:
+      - grant
+      type: object
+    http_examples_rc_200_attributes:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          $ref: '#/components/schemas/attribute_values'
+    user_grant_collection:
+      properties:
+        grant:
+          description: '- Use "rw" to set the collection level access to *Read/Write*.
+
+            - Use "ro" to set the collection level access to *Read Only*.
+
+            - Use "none" to set the collection level access to *No access*.'
+          type: string
+          example: rw
+      required:
+      - grant
+      type: object
+    error_example_rc_404:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 404
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
+      type: object
+    api_key_database_managedkey_get_http_examples_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in the response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          description: Lists managed keys and the permissions assigned to that API key for each managed key.
+          type: object
+          properties:
+            test1:
+              type: string
+              example: rw
+      required:
+      - error
+      type: object
+    api_key_dbname_examples_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          type: string
+          example: rw
+    error_example_rc_400:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 400
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 102020
+      required:
+      - error
+      type: object
+    error_example_rc_409:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 409
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
+      type: object
+    api_key_database_queryworker_get_http_examples_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in the response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          description: Lists query workers and the permissions assigned to that API key for each query worker.
+          type: object
+          properties:
+            test1:
+              type: string
+              example: rw
+      required:
+      - error
+      type: object
+    error_example_rc_401:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 401
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: '102020'
+      required:
+      - error
+      type: object
+    api_key_get_response_http_examples_rc_200_0:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        user:
+          description: The ID of the API key.
+          type: string
+          example: Ugr0xjYMS9y0eN5gBxSSmg
+        displayName:
+          description: The username of the API key.
+          type: string
+          example: test1
+        active:
+          description: Active status the API key.
+          type: boolean
+          example: true
+        apikey:
+          description: API key and its parent.
+          type: object
+          properties:
+            key:
+              description: API key
+              type: string
+              example: tenant1_domain.com.test1.6umGXOk34BZDVVGraow0r7CaSy5XOXitaWPvquoX3Dilcyq8upF7RRKGGdPPpiDR741f65
+            parent:
+              description: Parent of API key.
+              type: string
+              example: root
+            isSystem:
+              description: Indicates whether the key is a system API key.
+              type: boolean
+              example: 'false'
+    error_example_rc_403:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 403
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
+      type: object
+    attribute_values:
+      properties:
+        key1:
+          description: Attribute key-value.
+          format: string
+          type: string
+          example: value1
+        key2:
+          description: Attribute key-value.
+          format: string
+          type: string
+          example: value2
+    api_key_http_examples_rc_201:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 201
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        key:
+          description: The generated key.
+          type: string
+          example: test1.KqEsCra56Nr6qiBvDhIUr7Fiey9gxUHCdg8dLuY75rOSAQtMUdeh6Hf851kd6atM3ccf69
+        keyid:
+          description: keyid of the key.
+          type: string
+          example: test1
+        tenant:
+          description: Name of the tenant.
+          type: string
+          example: _mm
+        user:
+          description: Name of the user.
+          type: string
+          example: root
+      required:
+      - error
+      type: object
+    user_grant_managedkey:
+      properties:
+        grant:
+          description: '- Use "rw" to set the managed key level access to *Read/Write*.
+
+            - Use "ro" to set the managed key level access to *Read Only*.
+
+            - Use "none" to set the managed key level access to *No access*.'
+          type: string
+          example: rw
+      required:
+      - grant
+      type: object
+  requestBodies:
+    user_grant_queryworker:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/user_grant_queryworker'
+      required: true
+    user_grant_collection:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/user_grant_collection'
+      required: true
+    attribute_values:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/attribute_values'
+      required: true
+    user_grant_managedkey:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/user_grant_managedkey'
+      required: true
+    user_grant_database:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/user_grant_database'
+      required: true
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Provide an API Key to the `Authorization` header, prefixed with "apikey".
+
+
+        Example: `Authorization: apikey <key>`'
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Provide a JSON Web Token (JWT) to the `Authorization` header, prefixed with "bearer".
+
+
+        Example: `Authorization: bearer <jwt>`'

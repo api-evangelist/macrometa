@@ -1,0 +1,173 @@
+openapi: 3.0.0
+info:
+  title: Macrometa API Reference Activity Metrics Manage Subscriptions API
+  version: 0.17.17
+  description: API reference for the Macrometa Global Data Network.
+  license:
+    name: Macrometa License, Version 2.0
+servers:
+- url: https://api-play.paas.macrometa.io
+  description: GDN API
+host: api-play.paas.macrometa.io
+security:
+- ApiKeyAuth: []
+- BearerAuth: []
+tags:
+- name: Manage Subscriptions
+  description: Event subscriptions and streaming
+paths:
+  /api/es/v1/subscribe:
+    get:
+      summary: Subscribe to stream via WebSocket
+      description: "Subscribes to an event stream via WebSocket to recieve live updates. This API keeps the connection live and continuously receives messages from the server based on the specified query filters. \n\nThe endpoint URL for subscribing to a stream via WebSocket follows this format: ```wss://<eds-host>/api/es/v1/subscribe``` \n\nRelated guide: [**Subscribe to events and recieve real time updates**](https://www.macrometa.com/docs/photoniq/event-delivery/getting-started-event-delivery#subscribing-to-the-eds). \n\n**Do not try this API here**."
+      operationId: subscribe-stream-ws
+      tags:
+      - Manage Subscriptions
+      parameters:
+      - in: query
+        name: apikey
+        required: true
+        schema:
+          type: string
+        description: The API key for authenticating the request
+      - in: query
+        name: x-customer-id
+        required: true
+        schema:
+          type: string
+          example: cust-1
+        description: ID of the customer to identify the user making the request.
+      - in: query
+        name: type
+        required: true
+        schema:
+          type: string
+          example: collection
+        description: The type of events to subscribe to. It can be local, global or collection
+      - in: query
+        name: filters
+        required: true
+        schema:
+          type: object
+          example: '{"action": "add", "once": "FALSE", "initialData":"TRUE", "queries": ["select * from collection where attendance=4"]}'
+          properties:
+            compress:
+              type: string
+              example: 'FALSE'
+            initialData:
+              type: boolean
+              example: 'FALSE'
+            action:
+              type: string
+              example: add
+            once:
+              type: boolean
+              example: 'FALSE'
+            queries:
+              type: string
+              items:
+                type: string
+        description: Define the event data to be recieved via the stream based on a specific criteria. Refer to [**Event delivery filters guide**](https://www.macrometa.com/docs/photoniq/event-delivery/event-delivery-filters) for more details.
+      responses:
+        '200':
+          description: Successfully subscribed to the stream via WebSocket
+          content:
+            text/event-stream:
+              schema:
+                type: string
+              example: 'data: event1
+
+                data: event2'
+  /api/es/sse/v1/subscribe:
+    post:
+      tags:
+      - Manage Subscriptions
+      summary: Subscribe to stream via SSE
+      description: "Subscribes to an event stream via SSE to recieve live updates.  This API keeps the connection live and continuously receives messages from the server based on the specified query filters. \n\nRelated guide: [**Subscribe to events and recieve real time updates**](https://www.macrometa.com/docs/photoniq/event-delivery/getting-started-event-delivery#subscribing-to-the-eds)."
+      operationId: subscribe-stream-sse
+      parameters:
+      - name: x-customer-id
+        in: header
+        description: ID of the customer to identify the user making the request.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: The request body
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubscribeRequest'
+            examples:
+              Event delivery service metrics:
+                value:
+                  type: collection
+                  filters:
+                    once: 'FALSE'
+                    compress: 'FALSE'
+                    initialData: 'TRUE'
+                    queries:
+                    - select * from collection-name where attendance=4
+        required: true
+      responses:
+        '200':
+          description: Successfully subscribed to the stream via SSE
+          content:
+            text/event-stream:
+              schema:
+                type: string
+              example: 'data: event1
+
+                data: event2'
+      security:
+      - api_key: []
+components:
+  schemas:
+    SubscribeRequest:
+      type: object
+      required:
+      - type
+      - filters
+      properties:
+        filters:
+          $ref: '#/components/schemas/FiltersRequest'
+        type:
+          type: string
+          description: The type of events to subscribe to. It can be local, global or collection
+    FiltersRequest:
+      type: object
+      description: Define the event data to be recieved via the stream based on a specific criteria. Refer to [**Event delivery filters guide**](https://www.macrometa.com/docs/photoniq/event-delivery/event-delivery-filters) for more details.
+      required:
+      - once
+      - initialData
+      - compress
+      - queries
+      properties:
+        compress:
+          type: string
+          example: 'FALSE'
+        initialData:
+          type: string
+          example: 'FALSE'
+        once:
+          type: string
+          example: 'FALSE'
+        queries:
+          type: string
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Provide an API Key to the `Authorization` header, prefixed with "apikey".
+
+
+        Example: `Authorization: apikey <key>`'
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Provide a JSON Web Token (JWT) to the `Authorization` header, prefixed with "bearer".
+
+
+        Example: `Authorization: bearer <jwt>`'

@@ -1,0 +1,365 @@
+openapi: 3.0.0
+info:
+  title: Macrometa API Reference Activity Metrics Prerender API
+  version: 0.17.17
+  description: API reference for the Macrometa Global Data Network.
+  license:
+    name: Macrometa License, Version 2.0
+servers:
+- url: https://api-play.paas.macrometa.io
+  description: GDN API
+host: api-play.paas.macrometa.io
+security:
+- ApiKeyAuth: []
+- BearerAuth: []
+tags:
+- name: Prerender
+paths:
+  /api/prerender/v1/render/{mobile}/{url}:
+    get:
+      summary: Get prerendered page
+      tags:
+      - Prerender
+      description: Returns the HTML content of the rendered page.
+      parameters:
+      - schema:
+          type: boolean
+        in: path
+        name: mobile
+        required: true
+        description: Whether rendering should be tailored for mobile devices.
+      - schema:
+          type: string
+        in: path
+        name: url
+        required: true
+        description: URL to render.
+      - schema:
+          type: string
+        in: header
+        name: x-photoniq-customerid
+        required: true
+        description: Customer unique identifier.
+      responses:
+        '200':
+          description: HTML content fetched successfully.
+          content:
+            text/html:
+              schema:
+                type: string
+                example: <!DOCTYPE html><html lang="en"><head><base href="https://www.origin.com/"></head><body></body></html>
+        '301':
+          description: Moved permanently.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Moved permanently.
+                properties:
+                  status:
+                    type: string
+                    description: Error status.
+                  message:
+                    type: string
+                    description: Error message.
+                required:
+                - status
+                - message
+                example:
+                  status: ERROR
+                  message: Moved permanently.
+        '308':
+          description: Permanent redirect.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Permanent redirect.
+                properties:
+                  status:
+                    type: string
+                    description: Error status.
+                  message:
+                    type: string
+                    description: Error message.
+                required:
+                - status
+                - message
+                example:
+                  status: ERROR
+                  message: Permanent redirect.
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Bad request.
+                properties:
+                  status:
+                    type: string
+                    description: Error status.
+                  message:
+                    type: string
+                    description: Error message.
+                required:
+                - status
+                - message
+                example:
+                  status: ERROR
+                  message: Header x-photoniq-customerid is required.
+        '404':
+          description: Not found.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Not found.
+                properties:
+                  status:
+                    type: string
+                    description: Error status.
+                  message:
+                    type: string
+                    description: Error message.
+                required:
+                - status
+                - message
+                example:
+                  status: ERROR
+                  message: Not found.
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Internal server error.
+                properties:
+                  status:
+                    type: string
+                    description: Error status.
+                  message:
+                    type: string
+                    description: Error message.
+                required:
+                - status
+                - message
+                example:
+                  status: ERROR
+                  message: Internal server error.
+        '504':
+          description: Gateway timeout.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Gateway timeout.
+                properties:
+                  status:
+                    type: string
+                    description: Error status.
+                  message:
+                    type: string
+                    description: Error message.
+                required:
+                - status
+                - message
+                example:
+                  status: ERROR
+                  message: Gateway timeout.
+  /api/prerender/v1/render:
+    get:
+      summary: Get prerendered page
+      tags:
+      - Prerender
+      description: Returns the HTML content of the rendered page.
+      parameters:
+      - schema:
+          type: string
+        in: query
+        name: origin
+        required: false
+        description: Origin base URL.
+      - schema:
+          type: boolean
+        in: query
+        name: mobile
+        required: false
+        description: Whether rendering should be tailored for mobile devices.
+      - schema:
+          type: string
+        in: query
+        name: path
+        required: false
+        description: Path to render.
+      - schema:
+          type: string
+        in: header
+        name: x-photoniq-customerid
+        required: true
+        description: Customer unique identifier.
+      - schema:
+          type: string
+        in: header
+        name: x-photoniq-prerender-origin
+        required: false
+        description: Origin base URL.
+      - schema:
+          type: boolean
+        in: header
+        name: x-photoniq-prerender-mobile
+        required: false
+        description: Whether rendering should be tailored for mobile devices.
+      - schema:
+          type: string
+        in: header
+        name: x-photoniq-prerender-path
+        required: false
+        description: Path to render.
+      responses:
+        '200':
+          description: HTML content fetched successfully.
+          content:
+            text/html:
+              schema:
+                type: string
+                example: <!DOCTYPE html><html lang="en"><head><base href="https://www.origin.com/"></head><body></body></html>
+        '301':
+          description: Moved permanently.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Moved permanently.
+                properties:
+                  status:
+                    type: string
+                    description: Error status.
+                  message:
+                    type: string
+                    description: Error message.
+                required:
+                - status
+                - message
+                example:
+                  status: ERROR
+                  message: Moved permanently.
+        '308':
+          description: Permanent redirect.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Permanent redirect.
+                properties:
+                  status:
+                    type: string
+                    description: Error status.
+                  message:
+                    type: string
+                    description: Error message.
+                required:
+                - status
+                - message
+                example:
+                  status: ERROR
+                  message: Permanent redirect.
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Bad request.
+                properties:
+                  status:
+                    type: string
+                    description: Error status.
+                  message:
+                    type: string
+                    description: Error message.
+                required:
+                - status
+                - message
+                example:
+                  status: ERROR
+                  message: Header x-photoniq-customerid is required.
+        '404':
+          description: Not found.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Not found.
+                properties:
+                  status:
+                    type: string
+                    description: Error status.
+                  message:
+                    type: string
+                    description: Error message.
+                required:
+                - status
+                - message
+                example:
+                  status: ERROR
+                  message: Not found.
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Internal server error.
+                properties:
+                  status:
+                    type: string
+                    description: Error status.
+                  message:
+                    type: string
+                    description: Error message.
+                required:
+                - status
+                - message
+                example:
+                  status: ERROR
+                  message: Internal server error.
+        '504':
+          description: Gateway timeout.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Gateway timeout.
+                properties:
+                  status:
+                    type: string
+                    description: Error status.
+                  message:
+                    type: string
+                    description: Error message.
+                required:
+                - status
+                - message
+                example:
+                  status: ERROR
+                  message: Gateway timeout.
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Provide an API Key to the `Authorization` header, prefixed with "apikey".
+
+
+        Example: `Authorization: apikey <key>`'
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Provide a JSON Web Token (JWT) to the `Authorization` header, prefixed with "bearer".
+
+
+        Example: `Authorization: bearer <jwt>`'

@@ -1,0 +1,75 @@
+openapi: 3.0.0
+info:
+  title: Macrometa API Reference Activity Metrics Track API
+  version: 0.17.17
+  description: API reference for the Macrometa Global Data Network.
+  license:
+    name: Macrometa License, Version 2.0
+servers:
+- url: https://api-play.paas.macrometa.io
+  description: GDN API
+host: api-play.paas.macrometa.io
+security:
+- ApiKeyAuth: []
+- BearerAuth: []
+tags:
+- name: Track
+  description: All the tracking endpoints.
+paths:
+  /api/est/v1/track:
+    post:
+      tags:
+      - Track
+      description: Event tracking endpoint.
+      parameters:
+      - in: header
+        name: X-PhotonIQ-CustomerID
+        schema:
+          type: string
+        required: true
+        description: PhotonIQ EST customer ID.
+      responses:
+        '200':
+          description: All the browser events are tracked with this endpoint.
+  /api/est/v1/session-settings:
+    post:
+      tags:
+      - Track
+      description: Get PhotonIQ EST settings and initialize client.
+      responses:
+        '200':
+          description: Sets cookies in the client browser for the first time.
+  /api/est/v1/inject-script:
+    get:
+      tags:
+      - Track
+      description: Get PhotonIQ EST script to inject in the client browser.
+      responses:
+        '200':
+          description: Injects PhotonIQ EST script in the client browser.
+  /api/est/v1/integration-script:
+    get:
+      tags:
+      - Track
+      description: Retrieve a client-side integration script for PhotonIQ EST, enabling PhotonIQ EST functionality on user webpages.
+      responses:
+        '200':
+          description: Successfully retrieved the PhotonIQ EST integration script.
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Provide an API Key to the `Authorization` header, prefixed with "apikey".
+
+
+        Example: `Authorization: apikey <key>`'
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Provide a JSON Web Token (JWT) to the `Authorization` header, prefixed with "bearer".
+
+
+        Example: `Authorization: bearer <jwt>`'

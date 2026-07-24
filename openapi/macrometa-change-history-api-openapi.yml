@@ -1,0 +1,74 @@
+openapi: 3.0.0
+info:
+  title: Macrometa API Reference Activity Metrics Change History API
+  version: 0.17.17
+  description: API reference for the Macrometa Global Data Network.
+  license:
+    name: Macrometa License, Version 2.0
+servers:
+- url: https://api-play.paas.macrometa.io
+  description: GDN API
+host: api-play.paas.macrometa.io
+security:
+- ApiKeyAuth: []
+- BearerAuth: []
+tags:
+- name: Change History
+  description: All the PhotonIQ EST Change History endpoints.
+paths:
+  /api/est/v1/change-history:
+    get:
+      tags:
+      - Change History
+      description: Get the change history of PhotonIQ EST service.
+      parameters:
+      - in: query
+        name: from
+        schema:
+          type: string
+          format: date-time
+        description: Optional. Filter results from a specified date and time in UTC (e.g. 2022-01-01T00:00:00Z).
+      - in: query
+        name: to
+        schema:
+          type: string
+          format: date-time
+        description: Optional. Filter results up to a specified date and time in UTC (e.g. 2022-01-01T00:00:00Z).
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+        description: Optional. Limit the number of results (positive integer, default is 20).
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+        description: Optional. Offset the results by a non-negative integer (default is 0).
+      responses:
+        '200':
+          description: Returns the change history for PhotonIQ EST based on the provided query parameters.
+        '400':
+          description: Bad request. Invalid query parameter.
+        '500':
+          description: Internal server error. Error getting change history.
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Provide an API Key to the `Authorization` header, prefixed with "apikey".
+
+
+        Example: `Authorization: apikey <key>`'
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Provide a JSON Web Token (JWT) to the `Authorization` header, prefixed with "bearer".
+
+
+        Example: `Authorization: bearer <jwt>`'

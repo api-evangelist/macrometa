@@ -1,0 +1,216 @@
+openapi: 3.0.0
+info:
+  title: Macrometa API Reference Activity Metrics Connectors API
+  version: 0.17.17
+  description: API reference for the Macrometa Global Data Network.
+  license:
+    name: Macrometa License, Version 2.0
+servers:
+- url: https://api-play.paas.macrometa.io
+  description: GDN API
+host: api-play.paas.macrometa.io
+security:
+- ApiKeyAuth: []
+- BearerAuth: []
+tags:
+- name: Connectors
+paths:
+  /api/hss/v1/connectors:
+    get:
+      tags:
+      - Connectors
+      summary: Get the list of available connectors
+      description: 'Connectors define the _mechanism_ to access the documents.  Get the list of available connectors.
+
+        This list includes the name of the connector and the configuration properties required to connect to the data source.'
+      operationId: get_connectors_api_hss_v1_connectors_get
+      responses:
+        '200':
+          description: Successfully returned connectors.
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ConnectorResponse'
+                type: array
+                title: Response getConnectors
+        '401':
+          description: 'Error: Unauthorized.'
+          content:
+            application/json:
+              example:
+                detail: Unauthorized.
+      security:
+      - APIKeyHeader: []
+  /api/hss/v1/connectors/{connector_id}:
+    get:
+      tags:
+      - Connectors
+      summary: Get detailed information about a connector
+      description: Retrieve information about a connector, including its configuration properties.
+      operationId: get_connector_api_hss_v1_connectors__connector_id__get
+      security:
+      - APIKeyHeader: []
+      parameters:
+      - name: connector_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Connector Id
+      responses:
+        '200':
+          description: Successfully returned connector.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorResponse'
+        '400':
+          description: 'Error: Bad request.'
+          content:
+            application/json:
+              example:
+                detail: Invalid connector name.
+        '401':
+          description: 'Error: Unauthorized.'
+          content:
+            application/json:
+              example:
+                detail: Unauthorized.
+        '404':
+          description: 'Error: Not Found.'
+          content:
+            application/json:
+              example:
+                detail: Connector `S3` not found.
+        '422':
+          description: 'Error: Unprocessable entity.'
+          content:
+            application/json:
+              example:
+                detail:
+                - type: json_invalid
+                  loc:
+                  - body
+                  - 72
+                  msg: JSON decode error
+                  input: {}
+                  ctx:
+                    error: Expecting ',' delimiter
+        '500':
+          description: 'Error: Internal server error.'
+          content:
+            application/json:
+              example:
+                message: Unable to find connector.
+components:
+  schemas:
+    ConnectorResponse:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: The id of the Connector.
+          examples:
+          - s3
+        name:
+          type: string
+          title: Name
+          description: The name of the Connector.
+          examples:
+          - S3 Connector
+        description:
+          type: string
+          title: Description
+          description: The description of the Connector.
+          examples:
+          - Source connector for Amazon S3
+        config:
+          items:
+            $ref: '#/components/schemas/ConnectorConfigResponse'
+          type: array
+          title: Config
+          description: Connection configurations for the Connector.
+      type: object
+      required:
+      - id
+      - name
+      - description
+      - config
+      title: ConnectorResponse
+    ConnectorConfigResponse:
+      properties:
+        name:
+          type: string
+          title: Name
+          description: The name of the config.
+          examples:
+          - aws_access_key_id
+        type:
+          type: string
+          title: Type
+          description: The value type of the config.
+          examples:
+          - ???
+        display_name:
+          type: string
+          title: Display Name
+          description: The display name of the config.
+          examples:
+          - AWS Access Key ID
+        is_mandatory:
+          type: boolean
+          title: Is Mandatory
+          description: Whether the config is mandatory.
+          default: true
+          examples:
+          - true
+        is_dynamic:
+          type: boolean
+          title: Is Dynamic
+          description: Whether the config is dynamic.
+          default: false
+          examples:
+          - false
+        description:
+          type: string
+          title: Description
+          description: A brief description of the config.
+          examples:
+          - AWS Access Key ID.
+        default_value:
+          type: string
+          title: Default Value
+          description: Default value of the config.
+          examples:
+          - ''
+        placeholder_value:
+          type: string
+          title: Placeholder Value
+          description: Placeholder value for the config.
+          examples:
+          - ''
+      type: object
+      required:
+      - name
+      - type
+      - display_name
+      - description
+      title: ConnectorConfigResponse
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Provide an API Key to the `Authorization` header, prefixed with "apikey".
+
+
+        Example: `Authorization: apikey <key>`'
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Provide a JSON Web Token (JWT) to the `Authorization` header, prefixed with "bearer".
+
+
+        Example: `Authorization: bearer <jwt>`'

@@ -1,0 +1,1300 @@
+openapi: 3.0.0
+info:
+  title: Macrometa API Reference Activity Metrics Documents API
+  version: 0.17.17
+  description: API reference for the Macrometa Global Data Network.
+  license:
+    name: Macrometa License, Version 2.0
+servers:
+- url: https://api-play.paas.macrometa.io
+  description: GDN API
+host: api-play.paas.macrometa.io
+security:
+- ApiKeyAuth: []
+- BearerAuth: []
+tags:
+- name: Documents
+paths:
+  /_fabric/{fabric}/_api/document/{collection}:
+    delete:
+      description: 'The body of the request is an array consisting of selectors for documents. A selector can either be a string with a key or a string with a document handle or an object with a *_key* attribute.
+
+
+        This API call removes all specified documents from *collection*. If the selector is an object and has a *_rev* attribute, it is a precondition that the actual revision of the removed document in the collection is the specified one.
+
+
+        The body of the response is an array of the same length as the input array. For each input selector, the output contains a JSON object with the information about the outcome of the operation. If no error occurred, an object is built in which the attribute *_id* contains the known *document-handle* of the removed document, *_key* contains the key which uniquely identifies a document in a given collection, and the attribute *_rev* contains the document revision.
+
+
+        In case of an error, an object with the attribute *error* set to *true* and *errorCode* set to the error code is built. If the query parameter *returnOld* is *true*, the previous revision of the document is returned under the *old* attribute in the result.
+
+
+        Note that if any precondition is violated or an error occurred with some of the documents, the return code is still 200 or 202, but the additional HTTP header *X-C8-Error-Codes* is set, which contains a map of the error codes that occurred together with their multiplicities, as in: *1200:17,1205:10* which means that in 17 cases the error 1200 "revision conflict" and in 10 cases the error 1205 "illegal document handle" has happened.'
+      operationId: removeDocument
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: Collection from which documents are removed.
+        in: path
+        name: collection
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: If set to *true*, adds the *old* attribute which displays original document.
+        in: query
+        name: returnOld
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - description: If set to *true*, ignore any *_rev* attribute in the selectors. No revision check is performed.
+        in: query
+        name: ignoreRevs
+        required: false
+        schema:
+          type: boolean
+          default: true
+      - description: If set to *true*, returns only after data has been synced to disk.
+        in: query
+        name: waitForSync
+        required: false
+        schema:
+          type: boolean
+          default: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+                example: key
+        description: An array of keys or documents.
+        required: true
+      responses:
+        '200':
+          description: Successfully removed documents when *waitForSync* is enabled.
+          headers:
+            x-c8-error-codes:
+              description: 'If any precondition is violated or an error occurred with some of the documents, this header contains a map of the error codes that occurred together with their multiplicities, as in: *1205:10,1210:17* which means that in 10 cases the error 1205 "illegal document handle" and in 17 cases the error 1210 "unique constraint violated" has happened.'
+              schema:
+                type: string
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/examples_id_key_rev_array'
+        '202':
+          description: Successfully removed documents when *waitForSync* is disabled.
+          headers:
+            x-c8-error-codes:
+              description: 'If any precondition is violated or an error occurred with some of the documents, this header contains a map of the error codes that occurred together with their multiplicities, as in: *1205:10,1210:17* which means that in 10 cases the error 1205 "illegal document handle" and in 17 cases the error 1210 "unique constraint violated" has happened.'
+              schema:
+                type: string
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/examples_id_key_rev_array'
+        '404':
+          description: Failed to find specified documents.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Remove multiple documents
+      tags:
+      - Documents
+    patch:
+      description: "Partially update documents. The *_key* attributes in the body specify which documents should be updated. The body of the request must contain a JSON array of document updates with the attributes to patch (the patch documents). All attributes from the patch documents are added to the existing documents if they do not yet exist and overwritten in the existing documents if they do exist.\n\nSetting an attribute value to *null* in the patch documents causees a value of *null* to be saved for the attribute.\n\nIf *ignoreRevs* is *false* and there is a *_rev* attribute in a document in the body and its value does not match the revision of the corresponding document in the database, the precondition is violated.\n\nIf the document exists and can be updated, a *HTTP 201* or a *HTTP 202* is returned (depending on *waitForSync*, see below).\n\nThe body of the response contains a JSON array of the same length as the input array with the information about the handle and the revision of the updated documents. In each entry:\n - *_id* contains the known *document-handle* of each updated document.\n - *_key* contains the key that uniquely identifies a document.\n - *_rev* contains the new document revision.\n\nIn case of an error or violated precondition, an error object with the attribute *error* set to *true* and the attribute *errorCode* set to the error code is built.\n\nIf the query parameter *returnOld* is *true*, then, for each generated document, the previous revision of the document is returned under the *old* attribute in the result.\n\nIf the query parameter *returnNew* is *true*, then, for each generated document, the new document is returned under the *new* attribute in the result.\n\nNote that if any precondition is violated or an error occurred with some of the documents, the return code is still 201 or 202, but the additional HTTP header *X-C8-Error-Codes* is set, which contains a map of the error codes that occurred together with their multiplicities, as in: *1200:17,1205:10* which means that in 17 cases the error 1200 \"revision conflict\" and in 10 cases the error 1205 \"illegal document handle\" has happened."
+      operationId: updateDocument
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: The name of the collection in which the documents are updated.
+        in: path
+        name: collection
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: If set to *false*, you can use the patch command to remove attributes from an existing document if the patch document contains the same attributes with a null value.
+        in: query
+        name: keepNull
+        required: false
+        schema:
+          type: boolean
+          default: true
+      - description: Controls whether objects (not arrays) are merged if present in both the existing and the patch document. If set to *false*, the value in the patch document overwrites the existing document's value. If set to *true*, objects are merged.
+        in: query
+        name: mergeObjects
+        required: false
+        schema:
+          type: boolean
+          default: true
+      - description: If this is set to *true*, the *_rev* attributes in the given documents are ignored. If this is set to *false*, any *_rev* attribute given in a body document is taken as a precondition. The document is only updated if the current revision is the one specified.
+        in: query
+        name: ignoreRevs
+        required: false
+        schema:
+          type: boolean
+          default: true
+      - description: If set to *true*, adds the *old* attribute which displays document revisions.
+        in: query
+        name: returnOld
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - description: If set to *true*, adds the new documents to the *new* attribute.
+        in: query
+        name: returnNew
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - description: If set to *true*, returns only after data has been synced to disk.
+        in: query
+        name: waitForSync
+        required: false
+        schema:
+          type: boolean
+          default: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+              - _key: key1
+                item1: data1
+        description: A JSON representation of an array of document updates as objects.
+        required: true
+      responses:
+        '201':
+          description: Successfully updated documents when *waitForSync* is enabled.
+          headers:
+            x-c8-error-codes:
+              description: 'If any precondition is violated or an error occurred with some of the documents, this header contains a map of the error codes that occurred together with their multiplicities, as in: *1205:10,1210:17* which means that in 10 cases the error 1205 "illegal document handle" and in 17 cases the error 1210 "unique constraint violated" has happened.'
+              schema:
+                type: string
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/examples_id_key_rev_array'
+        '202':
+          description: Successfully updated documents when *waitForSync* is disabled.
+          headers:
+            x-c8-error-codes:
+              description: 'If any precondition is violated or an error occurred with some of the documents, this header contains a map of the error codes that occurred together with their multiplicities, as in: *1205:10,1210:17* which means that in 10 cases the error 1205 "illegal document handle" and in 17 cases the error 1210 "unique constraint violated" has happened.'
+              schema:
+                type: string
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/examples_id_key_rev_array'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified collection.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Update documents
+      tags:
+      - Documents
+    post:
+      description: "Create a new document from the document given in the body, unless there is already a document with the *_key* given. If no *_key* is given, a new unique *_key* is generated automatically.\n\nThe body can be an array of documents, in which case all documents in the array are inserted with the same semantics as for a single document. The result body contains a JSON array of the same length as the input array, and each entry contains the result of the operation for the corresponding input. In case of an error the entry is a document with attributes *error* set to *true* and errorCode set to the error code that has happened.\n\nPossibly given *_id* and *_rev* attributes in the body are always ignored, the URL part or the query parameter collection respectively counts.\n\nIf the document is created successfully, the *Location* header contains the path to the newly created document. The *Etag* header field contains the revision of the document. Both are only set in the single document case.\n\nIf *silent* is not set to *true*, the body of the response contains a JSON object (single document case) with the following attributes:\n\n - *_id* contains the document handle of the newly created document.\n - *_key* contains the document key.\n - *_rev* contains the document revision.\n\nIn the multi case the body is an array of such objects. If the query parameter *returnNew* is *true*, then, for each generated document, the new document is returned under the *new* attribute in the result."
+      operationId: insertDocument
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: The *collection* in which the document is to be created.
+        in: path
+        name: collection
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: The name of the collection. This is only for backward compatibility.
+        in: query
+        name: collection
+        required: false
+        schema:
+          type: string
+      - description: If set to *true*, adds the new documents to the *new* attribute.
+        in: query
+        name: returnNew
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - description: If set to *true*, adds the *old* attribute which displays the previous version of the document. Only available if the *overwrite* option is set to *true*.
+        in: query
+        name: returnOld
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - description: If set to *true*, an empty object is returned as response. No meta-data is returned for the created document. This option can be used to save some network traffic.
+        in: query
+        name: silent
+        required: false
+        schema:
+          type: boolean
+          default: true
+      - description: If set to *true*, the insert becomes a replace-insert. If a document with the same *_key* already exists the new document is not rejected with unique constraint violated but replaces the old document.
+        in: query
+        name: overwrite
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - description: If set to *true*, returns only after data has been synced to disk.
+        in: query
+        name: waitForSync
+        required: false
+        schema:
+          type: boolean
+          default: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+              example:
+              - item1: data1
+              - item2: data2
+        description: A JSON representation of a single document or of an array of documents.
+        required: true
+      responses:
+        '201':
+          description: Successfully created documents when *waitForSync* is enabled. If more than one document is specified in the JSON body, check the response body to verify the creations succeeded.
+          headers:
+            x-c8-error-codes:
+              description: 'If an error occurred while inserting an array of documents, this header contains a map of the error codes that occurred together with their multiplicities, as in: *1205:10,1210:17* which means that in 10 cases the error 1205 "illegal document handle" and in 17 cases the error 1210 "unique constraint violated" has happened.'
+              schema:
+                type: string
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/examples_id_key_rev_array'
+        '202':
+          description: Successfully created documents when *waitForSync* is disabled.
+          headers:
+            x-c8-error-codes:
+              description: 'If an error occurred while inserting an array of documents, this header contains a map of the error codes that occurred together with their multiplicities, as in: *1205:10,1210:17* which means that in 10 cases the error 1205 "illegal document handle" and in 17 cases the error 1210 "unique constraint violated" has happened.'
+              schema:
+                type: string
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/examples_id_key_rev_array'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified collection.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '409':
+          description: 'Failed to create document, in the single document case. If a document with the same qualifiers in an indexed attribute conflicts with an already existing document and thus violates that unique constraint, the response body contains an error document. In the array case only 201 or 202 is returned, but if an error occurred, the additional HTTP header *X-C8-Error-Codes* is set, which contains a map of the error codes that occurred together with their multiplicities, as in: *1205:10,1210:17* which means that in 10 cases the error 1205 "illegal document handle" and in 17 cases the error 1210 "unique constraint violated" has happened.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_409'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Create document
+      tags:
+      - Documents
+    put:
+      description: "Replaces multiple documents in the specified collection with the ones in the body. The replaced documents are specified by the *_key* attributes in the body documents.\n\nIf *ignoreRevs* is *false*,, a *_rev* attribute in each document body must match the revision of the corresponding document in the database. Otherwise, the call fails\n\nIf the document exists and can be updated, a *HTTP 201* or a *HTTP 202* is returned (depending on *waitForSync*, see below).\n\nThe body of the response contains a JSON array of the same length as the input array with the information about the handle and the revision of the replaced documents. In each entry:\n - *_id* contains the known *document-handle* of each updated document.\n - *_key* contains the key which uniquely identifies a document.\n - *_rev* contains the new document revision.\n\nIn case of an error or violated precondition, an error object with the attribute *error* set to *true* and the attribute *errorCode* set to the error code.\n\nIf the query parameter *returnOld* is *true*, for each generated document the previous revision of the document is returned under the *old* attribute in the result.\n\nIf the query parameter *returnNew* is *true*, for each generated document the new document is returned under the *new* attribute in the result.\n\nNote that if any precondition is violated or an error occurred with some of the documents, the return code is still 201 or 202, but the additional HTTP header *X-C8-Error-Codes* is set, that contains a map of the error codes that occurred together with their multiplicities, as in: *1200:17,1205:10* which means that in 17 cases the error 1200 \"revision conflict\" and in 10 cases the error 1205 \"illegal document handle\" has happened."
+      operationId: replaceDocument:multiple
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: This URL parameter is the name of the collection in which the documents are replaced.
+        in: path
+        name: collection
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: If this is set to *true*, the *_rev* attributes in the given documents are ignored. If this is set to *false*, any *_rev* attribute given in a body document is taken as a precondition. The document is only replaced if the current revision is the one specified.
+        in: query
+        name: ignoreRevs
+        required: false
+        schema:
+          type: boolean
+          default: true
+      - description: If set to *true*, adds the *old* attribute which displays document revisions.
+        in: query
+        name: returnOld
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - description: If set to *true*, adds the new documents to the *new* attribute.
+        in: query
+        name: returnNew
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - description: If set to *true*, returns only after data has been synced to disk.
+        in: query
+        name: waitForSync
+        required: false
+        schema:
+          type: boolean
+          default: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+              - _key: key1
+                item1: data1
+        description: A JSON representation of an array of documents.
+        required: true
+      responses:
+        '201':
+          description: Successfully replaced documents when *waitForSync* is enabled.
+          headers:
+            x-c8-error-codes:
+              description: 'If any precondition is violated or an error occurred with some of the documents, this header contains a map of the error codes that occurred together with their multiplicities, as in: *1205:10,1210:17* which means that in 10 cases the error 1205 "illegal document handle" and in 17 cases the error 1210 "unique constraint violated" has happened.'
+              schema:
+                type: string
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/examples_id_key_rev_array'
+        '202':
+          description: Successfully replaced documents when *waitForSync* is disabled.
+          headers:
+            x-c8-error-codes:
+              description: 'If any precondition is violated or an error occurred with some of the documents, this header contains a map of the error codes that occurred together with their multiplicities, as in: *1205:10,1210:17* which means that in 10 cases the error 1205 "illegal document handle" and in 17 cases the error 1210 "unique constraint violated" has happened.'
+              schema:
+                type: string
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/examples_id_key_rev_array'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified collection.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Replace documents
+      tags:
+      - Documents
+  /_fabric/{fabric}/_api/document/{collection}/{key}:
+    delete:
+      description: "If *silent* is set to *false*, the body of the response contains a JSON object with the information about the handle and the revision.\n\n - *_id* contains the known *key* of the removed document.\n - *_key* contains the key which uniquely identifies a document.\n - *_rev* contains the document revision.\n\nIf the query parameter *returnOld* is *true*, the previous revision of the document is returned under the *old* attribute in the result."
+      operationId: removeDocument2
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: Remove the document identified by *collection*.
+        in: path
+        name: collection
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: Remove the document identified by *key*.
+        in: path
+        name: key
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: If set to *true*, adds the *old* attribute which displays document revisions.
+        in: query
+        name: returnOld
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - description: If set to *true*, an empty object is returned as response. No meta-data is returned for the removed document. This option can be used to save some network traffic.
+        in: query
+        name: silent
+        required: false
+        schema:
+          type: boolean
+          default: true
+      - description: If set to *true*, returns only after data has been synced to disk.
+        in: query
+        name: waitForSync
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - description: You can conditionally remove a document based on a target revision id by using the *if-match* HTTP header.
+        in: header
+        name: If-Match
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successfully removed document when *waitForSync* is enabled.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/examples_id_key_rev'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '202':
+          description: Successfully removed document when *waitForSync* is disabled.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/examples_id_key_rev'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified collection or document.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '412':
+          description: Failed to remove document due to different version if a *If-Match* header or *rev* is given. The response contains the found document's current revision in the *_rev* attribute. Additionally, the attributes *_id* and *_key* are returned.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/document_get_412'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Remove a document
+      tags:
+      - Documents
+    get:
+      description: "Fetch the document identified by *key*. The returned document contains three special attributes:\n - *_id* containing the document handle.\n - *_key* containing key which uniquely identifies a document.\n - *_rev* containing the revision."
+      operationId: readDocument
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: The name of the collection.
+        in: path
+        name: collection
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: The key of the document.
+        in: path
+        name: key
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: If the *If-None-Match* header is given, it must contain exactly one ETag. The document is returned, if it has a different revision than the given ETag. Otherwise a *HTTP 304* is returned.
+        in: header
+        name: If-None-Match
+        schema:
+          type: string
+      - description: If the *If-Match* header is given, it must contain exactly one ETag. The document is returned, if it has the same revision as the given ETag. Otherwise a *HTTP 412* is returned.
+        in: header
+        name: If-Match
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successfully fetched document.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/examples_id_key_rev_data'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '304':
+          description: Document has the same revision if the *If-None-Match* header is given.
+          content:
+            application/json:
+              schema:
+                type: string
+                example: 'Error: Not modified'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find the specified collection or document.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '412':
+          description: Document has different version if an *If-Match* header is given. The response contains the found document's current revision in the *_rev* attribute. Additionally, the attributes *_id* and *_key* are returned.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/document_get_412'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Read document
+      tags:
+      - Documents
+    head:
+      description: Like GET, but only fetch the header fields and not the body. You can use this call to get the current revision of a document or check if the document was deleted.
+      operationId: checkDocument
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: The name of the collection.
+        in: path
+        name: collection
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: The key of the document.
+        in: path
+        name: key
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: If the *If-None-Match* header is given, it must contain exactly one ETag. If the current document revision is not equal to the specified ETag, a *HTTP 200* response is returned. If the current document revision is identical to the specified ETag, a *HTTP 304* is returned.
+        in: header
+        name: If-None-Match
+        schema:
+          type: string
+      - description: If the *If-Match* header is given, it must contain exactly one ETag. The document is returned, if it has the same revision as the given ETag. Otherwise a *HTTP 412* is returned.
+        in: header
+        name: If-Match
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successfully fetched headers.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/examples_id_key_rev_data'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '304':
+          description: Document has the same version if the *If-None-Match* header is given.
+          content:
+            application/json:
+              schema:
+                type: string
+                example: 'Error: Not modified'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find the specified collection or document.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '412':
+          description: Document has different version if an *If-Match* header is given. The response contains the found document's current revision in the *_rev* attribute. Additionally, the attributes *_id* and *_key* are returned.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/document_get_412'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Read document header
+      tags:
+      - Documents
+    patch:
+      description: "Partially updates the document identified by *key*. The body of the request must contain a JSON document with the attributes to patch (the patch document). All attributes from the patch document are added to the existing document if they do not yet exist, and overwritten in the existing document if they do exist there.\n\nSetting an attribute value to *null* in the patch document causes a value of *null* to be saved for the attribute by default.\n\nIf the *If-Match* header is specified and the revision of the document in the database is unequal to the given revision, the precondition is violated.\n\nIf *If-Match* is not given and *ignoreRevs* is *false*, a *_rev* attribute in each document bodymust match the revision of the corresponding document in the database. Otherwise, the call fails.\n\nIf a precondition is violated, a *HTTP 412* is returned.\n\nIf the document exists and can be updated, a *HTTP 201* or a *HTTP 202* is returned, the *ETag* header field contains the new revision of the document (in double quotes) and the *Location* header contains a URL under which the document can be queried.\n\nIf *silent* is set to *false*, the body of the response contains a JSON object with the information about the handle and the revision.\n - *_id* contains the known *document-handle* of the updated document.\n - *_key* contains the key that uniquely identifies a document.\n - *_rev* contains the new document revision.\n\nIf the query parameter *returnOld* is *true*, the previous revision of the document is returned under the *old* attribute in the result.\n\nIf the query parameter *returnNew* is *true*, the new document is returned under the *new* attribute in the result.\n\nIf the document does not exist, a *HTTP 404* is returned and the body of the response contains an error document."
+      operationId: updateDocument2
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: The name of the collection.
+        in: path
+        name: collection
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: This URL parameter must be a document key.
+        in: path
+        name: key
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: If the intention is to remove existing attributes with the patch command, the URL query parameter *keepNull* can be used with a value of *false*. This modifies the behavior of the patch command to remove any attributes from the existing document that are contained in the patch document with an attribute value of *null*.
+        in: query
+        name: keepNull
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - description: Controls whether objects (not arrays) is merged if present in both the existing and the patch document. If set to *false*, the value in the patch document overwrites the existing document's value. If set to *true*, objects is merged. The default is *true*.
+        in: query
+        name: mergeObjects
+        required: false
+        schema:
+          type: boolean
+          default: true
+      - description: If set to *true*, the *_rev* attributes in the given document is ignored. If set to *false*, the *_rev* attribute given in the body document is taken as a precondition. The document is only updated if the current revision is the one specified.
+        in: query
+        name: ignoreRevs
+        required: false
+        schema:
+          type: boolean
+          default: true
+      - description: If set to *true*, adds the *old* attribute which displays document revisions.
+        in: query
+        name: returnOld
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - description: If set to *true*, adds the new documents to the *new* attribute.
+        in: query
+        name: returnNew
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - description: If set to *true*, an empty object is returned as response. No meta-data is returned for the updated document. This option can be used to save some network traffic.
+        in: query
+        name: silent
+        required: false
+        schema:
+          type: boolean
+          default: true
+      - description: If set to *true*, returns only after data has been synced to disk.
+        in: query
+        name: waitForSync
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - description: You can conditionally update a document based on a target revision id by using the *if-match* HTTP header.
+        in: header
+        name: If-Match
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                _key: key1
+                item1: data1
+        description: A JSON representation of a document update as an object.
+        required: true
+      responses:
+        '201':
+          description: Successfully updated document when *waitForSync* is enabled.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/examples_id_key_rev_oldrev'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '202':
+          description: Successfully updated document when *waitForSync* is disabled.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/examples_id_key_rev_oldrev'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified collection or document.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '412':
+          description: Failed due to the precondition being violated. The response contains the found documents' current revisions in the *_rev* attributes. Additionally, the attributes *_id* and *_key* are returned.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/document_get_412'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Update document
+      tags:
+      - Documents
+    put:
+      description: "Replaces the document with key <key> with the one in the body, provided there is such a document and no precondition is violated.\n\nIf the *If-Match* header is specified and the revision of the document in the database is unequal to the given revision, the precondition is violated.\n\nIf *If-Match* is not given and *ignoreRevs* is *false*, a *_rev* attribute in each document body must match the revision of the corresponding document in the database. Otherwise, the call fails.\n\nIf a precondition is violated, a *HTTP 412* is returned.\n\nIf the document exists and can be updated, a *HTTP 201* or a *HTTP 202* is returned (depending on *waitForSync*, see below), the *ETag* header field contains the new revision of the document and the *Location* header contains a URL under which the document can be queried.\n\nIf *silent* is set to *false*, the body of the response contains a JSON object with the information about the handle and the revision.\n - *_id* contains the known *document-handle* of each document.\n - *_key* contains the key that uniquely identifies a document.\n - *_rev* contains the new document revision.\n\nIf the query parameter *returnOld* is *true*, the previous revision of the document is returned under the *old* attribute in the result.\n\nIf the query parameter *returnNew* is *true*, the new document is returned under the *new* attribute in the result.\n\nIf the document does not exist, a *HTTP 404* is returned and the body of the response contains an error document."
+      operationId: replaceDocument
+      parameters:
+      - in: path
+        name: fabric
+        required: true
+        description: The name of the fabric.
+        schema:
+          type: string
+          format: string
+          default: _system
+      - description: The name of the collection.
+        in: path
+        name: collection
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: This URL parameter must be a document key.
+        in: path
+        name: key
+        required: true
+        schema:
+          type: string
+          format: string
+      - description: If set to *true*, the *_rev* attributes in the given document is ignored. If set to *false*, the *_rev* attribute given in the body document is taken as a precondition. The document is only replaced if the current revision is the one specified.
+        in: query
+        name: ignoreRevs
+        required: false
+        schema:
+          type: boolean
+          default: true
+      - description: If set to *true*, adds the *old* attribute which displays document revisions.
+        in: query
+        name: returnOld
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - description: If set to *true*, adds the new documents to the *new* attribute.
+        in: query
+        name: returnNew
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - description: If set to *true*, an empty object is returned as response. No meta-data is returned for the replaced document. This option can be used to save some network traffic.
+        in: query
+        name: silent
+        required: false
+        schema:
+          type: boolean
+          default: true
+      - description: If set to *true*, returns only after data has been synced to disk.
+        in: query
+        name: waitForSync
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - description: You can conditionally replace a document based on a target revision id by using the *if-match* HTTP header.
+        in: header
+        name: If-Match
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                item1: data1
+        description: A JSON representation of a single document.
+        required: true
+      responses:
+        '201':
+          description: Successfully replaced documents when *waitForSync* is enabled.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/examples_id_key_rev_oldrev'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '202':
+          description: Successfully replaced documents when *waitForSync* is disbled.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/examples_id_key_rev_oldrev'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified collection or document.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '412':
+          description: Failed due to the precondition being violated. The response contains the found documents' current revisions in the *_rev* attributes. Additionally, the attributes *_id* and *_key* are returned.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/document_get_412'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Replace document
+      tags:
+      - Documents
+components:
+  schemas:
+    error_example_rc_404:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 404
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
+      type: object
+    examples_id_key_rev_array:
+      type: array
+      items:
+        $ref: '#/components/schemas/examples_id_key_rev'
+    examples_id_key_rev_oldrev:
+      properties:
+        _id:
+          description: ID of the collection.
+          type: string
+          example: test/foo
+        _key:
+          description: _key details of collection.
+          type: string
+          example: foo
+        _rev:
+          description: _rev details of collection.
+          type: string
+          example: _dPRuHxe--_
+        _oldRev:
+          description: previous revision of collection.
+          type: string
+          example: _dP34awxe--_
+      type: object
+    examples_id_key_rev:
+      properties:
+        _id:
+          description: ID of the collection.
+          type: string
+          example: test/foo
+        _key:
+          description: _key details of collection.
+          type: string
+          example: foo
+        _rev:
+          description: _rev details of collection.
+          type: string
+          example: _dPRuHxe--_
+      type: object
+    document_get_412:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 412
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorNum:
+          example: 1200
+        errorMessage:
+          example: precondition failed
+        _id:
+          example: xxx/8753101
+        _key:
+          example: '8753101'
+        _rev:
+          example: _dpDlw6W--_
+    headers:
+      x-gdn-region:
+        description: The federation's region hostname that served the request.
+        type: string
+      x-gdn-requestid:
+        description: A unique request ID for each API request.
+        type: string
+    examples_id_key_rev_data:
+      properties:
+        _id:
+          description: ID of the collection.
+          type: string
+          example: test/foo
+        _key:
+          description: _key details of collection.
+          type: string
+          example: foo
+        _rev:
+          description: _rev details of collection.
+          type: string
+          example: _dPRuHxe--_
+        data:
+          description: data in record.
+          type: string
+          example: data1
+      type: object
+    error_example_rc_400:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 400
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 102020
+      required:
+      - error
+      type: object
+    error_example_rc_409:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 409
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
+      type: object
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Provide an API Key to the `Authorization` header, prefixed with "apikey".
+
+
+        Example: `Authorization: apikey <key>`'
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Provide a JSON Web Token (JWT) to the `Authorization` header, prefixed with "bearer".
+
+
+        Example: `Authorization: bearer <jwt>`'

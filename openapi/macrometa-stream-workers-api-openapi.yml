@@ -1,0 +1,874 @@
+openapi: 3.0.0
+info:
+  title: Macrometa API Reference Activity Metrics Stream Workers API
+  version: 0.17.17
+  description: API reference for the Macrometa Global Data Network.
+  license:
+    name: Macrometa License, Version 2.0
+servers:
+- url: https://api-play.paas.macrometa.io
+  description: GDN API
+host: api-play.paas.macrometa.io
+security:
+- ApiKeyAuth: []
+- BearerAuth: []
+tags:
+- name: Stream Workers
+paths:
+  /_fabric/{fabric}/_api/streamapps/validate:
+    post:
+      tags:
+      - Stream Workers
+      summary: Validate the definition of a stream application.
+      description: Validate the definition of a stream application.
+      operationId: validate
+      parameters:
+      - name: fabric
+        in: path
+        required: true
+        schema:
+          type: string
+          default: _system
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/stream_app_validate_request'
+        description: Stream application.
+        required: true
+      responses:
+        '200':
+          description: Successfully validated stream application.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/example_operation_success_rc_200_validate_stream_worker'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '422':
+          description: Failed to validate stream application because there is an error in the definition.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_422'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+  /_fabric/{fabric}/_api/streamapps:
+    get:
+      tags:
+      - Stream Workers
+      summary: Fetch all stream applications.
+      description: Fetch all stream applications.
+      operationId: getAll
+      parameters:
+      - name: fabric
+        in: path
+        required: true
+        schema:
+          type: string
+          default: _system
+      responses:
+        '200':
+          description: Successfully fetched stream applications.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/stream_app_response_container'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+    post:
+      tags:
+      - Stream Workers
+      summary: Create and deploy a stream application.
+      description: Create and deploy a stream application.
+      operationId: create
+      parameters:
+      - name: fabric
+        in: path
+        required: true
+        schema:
+          type: string
+          default: _system
+      requestBody:
+        $ref: '#/components/requestBodies/stream_app_request'
+      responses:
+        '201':
+          description: Successfully created stream application.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/stream_app_response_container_201'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '409':
+          description: Failed becasue stream application already exists.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_409'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '422':
+          description: Failed to create stream application because there is an error in the definition.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_422'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+  /_fabric/{fabric}/_api/streamapps/samples:
+    get:
+      tags:
+      - Stream Workers
+      summary: Fetch all sample stream applications.
+      description: Fetch all sample stream applications.
+      operationId: getSamples
+      parameters:
+      - name: fabric
+        in: path
+        required: true
+        schema:
+          type: string
+          default: _system
+      responses:
+        '200':
+          description: Successfully fetched sample stream applications.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/get_all_sample_stream_apps_response'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+  /_fabric/{fabric}/_api/streamapps/{appname}:
+    get:
+      tags:
+      - Stream Workers
+      summary: Fetch a stream application.
+      description: Fetch the specified stream application.
+      operationId: getApplication
+      parameters:
+      - name: fabric
+        in: path
+        required: true
+        schema:
+          type: string
+          default: _system
+      - name: appname
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successfully fetched stream application.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/get_all_stream_apps_response'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified stream application.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+    put:
+      tags:
+      - Stream Workers
+      summary: Update and redeploy a stream application.
+      description: Update and redeploy a stream application.
+      operationId: update
+      parameters:
+      - name: fabric
+        in: path
+        required: true
+        schema:
+          type: string
+          default: _system
+      - name: appname
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        $ref: '#/components/requestBodies/stream_app_request'
+      responses:
+        '200':
+          description: Successfully updated stream application.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/stream_app_response_container'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified stream application.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '422':
+          description: Failed to update stream application because there is an error in the definition.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_422'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+    delete:
+      tags:
+      - Stream Workers
+      summary: Stop and remove a stream application.
+      description: Stop and remove a stream application.
+      operationId: delete
+      parameters:
+      - name: fabric
+        in: path
+        required: true
+        schema:
+          type: string
+          default: _system
+      - name: appname
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Successfully removed stream application.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/example_operation_success_rc_204_delete_stream_worker'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified stream application.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+  /_fabric/{fabric}/_api/streamapps/query/{appName}:
+    post:
+      tags:
+      - Stream Workers
+      summary: Submit an ad hoc stream query and get the result
+      description: Submit an ad hoc stream query and get the resulting records from a store.
+      operationId: queryStreamApp
+      parameters:
+      - name: fabric
+        in: path
+        required: true
+        schema:
+          type: string
+          default: _system
+      - name: appName
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/stream_app_query_request'
+        description: Query object.
+        required: true
+      responses:
+        '200':
+          description: Successfully ran query.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/stream_app_query_response'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '422':
+          description: Failed to run query because there is an error in the stream application definition
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_422'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+  /_fabric/{fabric}/_api/streamapps/{appname}/active:
+    patch:
+      tags:
+      - Stream Workers
+      summary: Enable or disable a stream application.
+      description: Enable or disable a stream application.
+      operationId: enableApplication
+      parameters:
+      - name: fabric
+        in: path
+        required: true
+        schema:
+          type: string
+          default: _system
+      - name: appname
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: active
+        in: query
+        required: true
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Successfully set the stream application active status.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/get_all_stream_apps_response'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified stream application.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+  /_fabric/{fabric}/_api/streamapps/http/{appName}/{streamName}:
+    post:
+      tags:
+      - Stream Workers
+      summary: Publish message via HTTP-Source stream.
+      description: Publish message via HTTP-Source stream.
+      operationId: publishHttpSourceMessage
+      parameters:
+      - name: fabric
+        in: path
+        required: true
+        schema:
+          type: string
+          default: _system
+      - name: appName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: streamName
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/stream_app_http_source_request'
+        description: Message.
+        required: true
+      responses:
+        '202':
+          description: Successfully published message via HTTP-Source.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/publish_http_source_example_rc_202'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: HTTP-Source not found. Verify that HTTP-Source is running.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+components:
+  schemas:
+    error_example_rc_422:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 422
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+      required:
+      - error
+      type: object
+    headers:
+      x-gdn-region:
+        description: The federation's region hostname that served the request.
+        type: string
+      x-gdn-requestid:
+        description: A unique request ID for each API request.
+        type: string
+    stream_app_http_source_request:
+      type: object
+      properties:
+        param1:
+          type: string
+          example: string
+    get_all_stream_apps_response:
+      type: object
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        streamApps:
+          type: array
+          items:
+            $ref: '#/components/schemas/stream_app_information'
+    stream_app_request:
+      type: object
+      properties:
+        definition:
+          type: string
+        regions:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+    error_example_rc_404:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 404
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
+      type: object
+    stream_app_information:
+      type: object
+      properties:
+        name:
+          type: string
+          example: stream_app1
+        definition:
+          type: string
+        regions:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+          example: region1
+        isActive:
+          type: boolean
+          example: false
+    error_example_rc_400:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 400
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 102020
+      required:
+      - error
+      type: object
+    stream_app_response:
+      type: object
+      properties:
+        name:
+          type: string
+          example: stream_app1
+        definition:
+          type: string
+        regions:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+          example: region1
+        isActive:
+          type: boolean
+          example: false
+    error_example_rc_409:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 409
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
+      type: object
+    stream_app_response_container_201:
+      type: object
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 201
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        streamApps:
+          type: array
+          items:
+            $ref: '#/components/schemas/stream_app_response'
+    example_operation_success_rc_204_delete_stream_worker:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 204
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Successfully removed stream application
+    get_all_sample_stream_apps_response:
+      type: object
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        streamAppSamples:
+          type: array
+          items:
+            $ref: '#/components/schemas/sample_stream_app_information'
+    stream_app_response_container:
+      type: object
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        streamApps:
+          type: array
+          items:
+            $ref: '#/components/schemas/stream_app_response'
+    stream_app_validate_request:
+      type: object
+      properties:
+        definition:
+          type: string
+    stream_app_query_response:
+      type: object
+      properties:
+        records:
+          type: array
+          items:
+            type: array
+            items:
+              type: object
+    example_operation_success_rc_200_validate_stream_worker:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Successfully validated stream application
+    publish_http_source_example_rc_202:
+      properties:
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        code:
+          description: The generated response code.
+          type: integer
+          example: 202
+        result:
+          type: object
+    stream_app_query_request:
+      type: object
+      properties:
+        query:
+          type: string
+          example: for d in testCollection return d
+    sample_stream_app_information:
+      type: object
+      properties:
+        name:
+          type: string
+          example: stream_app1
+        definition:
+          type: string
+        description:
+          type: string
+  requestBodies:
+    stream_app_request:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/stream_app_request'
+      description: Stream application.
+      required: true
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Provide an API Key to the `Authorization` header, prefixed with "apikey".
+
+
+        Example: `Authorization: apikey <key>`'
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Provide a JSON Web Token (JWT) to the `Authorization` header, prefixed with "bearer".
+
+
+        Example: `Authorization: bearer <jwt>`'

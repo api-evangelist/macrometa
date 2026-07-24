@@ -1,0 +1,71 @@
+openapi: 3.0.0
+info:
+  title: Macrometa API Reference Activity Metrics Components API
+  version: 0.17.17
+  description: API reference for the Macrometa Global Data Network.
+  license:
+    name: Macrometa License, Version 2.0
+servers:
+- url: https://api-play.paas.macrometa.io
+  description: GDN API
+host: api-play.paas.macrometa.io
+security:
+- ApiKeyAuth: []
+- BearerAuth: []
+tags:
+- name: Components
+  description: This endpoint retrieves the current configuration settings of a specified component used for integrating third-party tags. It provides details about each third-party tag that has been configured with the component.
+paths:
+  /api/est/v1/components:
+    get:
+      tags:
+      - Components
+      description: Get all components supported by PhotonIQ EST service.
+      parameters:
+      - in: query
+        name: category
+        schema:
+          type: string
+        description: Filter components by category (optional)
+      responses:
+        '200':
+          description: Returns list of components supported by PhotonIQ EST.
+        '500':
+          description: Internal server error. Error getting list of components.
+  /api/est/v1/components/{component}:
+    get:
+      tags:
+      - Components
+      description: Get Component metadata by component name.
+      parameters:
+      - in: path
+        name: component
+        required: true
+        schema:
+          type: string
+        description: Name of the component.
+      responses:
+        '200':
+          description: Returns Component metadata.
+        '404':
+          description: Component not found.
+        '500':
+          description: Internal server error. Failed to retrieve the component.
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Provide an API Key to the `Authorization` header, prefixed with "apikey".
+
+
+        Example: `Authorization: apikey <key>`'
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Provide a JSON Web Token (JWT) to the `Authorization` header, prefixed with "bearer".
+
+
+        Example: `Authorization: bearer <jwt>`'

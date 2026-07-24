@@ -1,0 +1,172 @@
+openapi: 3.0.0
+info:
+  title: Macrometa API Reference Activity Metrics Authentication API
+  version: 0.17.17
+  description: API reference for the Macrometa Global Data Network.
+  license:
+    name: Macrometa License, Version 2.0
+servers:
+- url: https://api-play.paas.macrometa.io
+  description: GDN API
+host: api-play.paas.macrometa.io
+security:
+- ApiKeyAuth: []
+- BearerAuth: []
+tags:
+- name: Authentication
+paths:
+  /_open/auth:
+    post:
+      description: 'Obtain a JWT Authentication for a user.
+
+
+        After obtaining the token, REST API calls may be invoked by passing the obtained token in the REST header. Either email or both tenant and username are required. Add the following to your header when you make REST calls: *"Authorization: bearer TOKEN"*'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/auth_token'
+        required: true
+      responses:
+        '200':
+          description: Successfully created token.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/authentication_examples_rc_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '401':
+          description: Failed because you do not have administrator permissions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_401'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '429':
+          description: Requests count from this IP exceeds the rate limit.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    description: HTTP response code.
+                    type: integer
+                    example: 429
+                  error:
+                    description: Flag if there is an error in response. *True* for this response.
+                    type: boolean
+                    example: true
+                  errorMessage:
+                    description: A message created for this error.
+                    type: string
+                    example: Error message
+                  errorNum:
+                    description: Error number returned from the database.
+                    type: integer
+                    example: '102020'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Obtain JWT Authentication token for user.
+      tags:
+      - Authentication
+components:
+  schemas:
+    authentication_examples_rc_200:
+      properties:
+        jwt:
+          description: JWT authentication token.
+          type: string
+          example: IsInR5cCI6IkpXVCJ9.pvaG4gRG9lIiwiaWF0IjoyfQ.SflKxwRJSMeV_adQssw5c
+        tenant:
+          description: Name of the tenant.
+          type: string
+          example: foo
+        username:
+          description: Username of the tenant.
+          type: string
+          example: joe
+      type: object
+    headers:
+      x-gdn-region:
+        description: The federation's region hostname that served the request.
+        type: string
+      x-gdn-requestid:
+        description: A unique request ID for each API request.
+        type: string
+    auth_token:
+      properties:
+        email:
+          description: The email of the user for whom we want the auth token.
+          type: string
+          example: joe@foo.com
+        password:
+          description: The user password.
+          type: string
+          example: xxxxx
+        tenant:
+          description: The name of the tenant for whose user we want the auth token.
+          type: string
+          example: foo
+        username:
+          description: The id of the user for whom we want the auth token.
+          type: string
+          example: joe
+      required:
+      - password
+      type: object
+    error_example_rc_401:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 401
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: '102020'
+      required:
+      - error
+      type: object
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Provide an API Key to the `Authorization` header, prefixed with "apikey".
+
+
+        Example: `Authorization: apikey <key>`'
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Provide a JSON Web Token (JWT) to the `Authorization` header, prefixed with "bearer".
+
+
+        Example: `Authorization: bearer <jwt>`'

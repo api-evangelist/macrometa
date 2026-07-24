@@ -1,0 +1,779 @@
+openapi: 3.0.0
+info:
+  title: Macrometa API Reference Activity Metrics Environments API
+  version: 0.17.17
+  description: API reference for the Macrometa Global Data Network.
+  license:
+    name: Macrometa License, Version 2.0
+servers:
+- url: https://api-play.paas.macrometa.io
+  description: GDN API
+host: api-play.paas.macrometa.io
+security:
+- ApiKeyAuth: []
+- BearerAuth: []
+tags:
+- name: Environments
+paths:
+  /_api/environments:
+    get:
+      description: 'Fetch the list of all existing environments.
+
+
+        **Note**: Requires *administrator* permissions.'
+      operationId: ListEnvironments
+      responses:
+        '200':
+          description: Successfully fetched the list of available environments.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/get_all_environment_examples_rc_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: List of all environments
+      tags:
+      - Environments
+    post:
+      description: 'Creates a new environment.
+
+
+        **Note**: Requires *administrator* permissions.'
+      operationId: CreateEnvironment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/create_environment_database'
+        required: true
+      responses:
+        '201':
+          description: Successfully created new environment.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/create_environment_examples_rc_201'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '409':
+          description: Failed because environment already exists.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_409'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Create an environment
+      tags:
+      - Environments
+  /_api/environments/user:
+    get:
+      description: Fetch a list of all _environments_ the current user can access along with the corresponding information for each environment.
+      operationId: ListOfAccessibleEnvironments
+      responses:
+        '200':
+          description: Successfully fetched the list of _environments_
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/get_user_environments_examples_rc_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: List all environments
+      tags:
+      - Environments
+  /_api/environments/{environment}:
+    delete:
+      description: 'Remove the environment with all the data stored in it.
+
+
+        **Note**: Requires *administrator* permissions.'
+      operationId: DropEnvironment
+      parameters:
+      - description: The name of the environment.
+        in: path
+        name: environment
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        '200':
+          description: Successfully removed the environment.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dropped_environment_example_rc_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified environment.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Remove an environment
+      tags:
+      - Environments
+  /_api/environments/{environment}/metadata:
+    get:
+      description: Fetch information about an environment.
+      operationId: InformationOfTheEnvironment
+      parameters:
+      - description: The Database name for which we want the information.
+        in: path
+        name: environment
+        required: true
+        schema:
+          type: string
+          format: string
+          default: _system
+      responses:
+        '200':
+          description: Successfully fetched the information for the environment.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/get_environment_info_rc_200'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find the specified environment.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Information about the environment
+      tags:
+      - Environments
+    put:
+      description: Set the metadata for an environment.
+      operationId: SetMetadataInformationOfTheEnvironment
+      parameters:
+      - description: The environment name for which metadata should be set.
+        in: path
+        name: environment
+        required: true
+        schema:
+          type: string
+          format: string
+          default: _system
+      requestBody:
+        $ref: '#/components/requestBodies/database_metadata'
+      responses:
+        '201':
+          description: Successfully set the environment metadata.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/set_environment_example_rc_201'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified environment
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Set the environment metadata
+      tags:
+      - Environments
+    patch:
+      description: Update the environment metadata.
+      operationId: UpdateMetadataInformationOfTheEnvironment
+      parameters:
+      - description: Environment name.
+        in: path
+        name: environment
+        required: true
+        schema:
+          type: string
+          format: string
+          default: _system
+      requestBody:
+        $ref: '#/components/requestBodies/database_metadata'
+      responses:
+        '201':
+          description: Successfully updated the environment metadata.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/patch_environment_example_rc_201'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '400':
+          description: Failed due to missing or malformed data. Verify that all parameters are complete.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_400'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '403':
+          description: Failed to validate because you do not have access to the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_403'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+        '404':
+          description: Failed to find specified environment
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_example_rc_404'
+          headers:
+            x-gdn-region:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-region'
+            x-gdn-requestid:
+              schema:
+                $ref: '#/components/schemas/headers/x-gdn-requestid'
+      summary: Modify the environment metadata
+      tags:
+      - Environments
+components:
+  schemas:
+    dropped_environment_example_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          description: Whether environment was successfully removed.
+          type: boolean
+          example: true
+    database_metadata:
+      properties:
+        metadata:
+          description: Object with user defined key-value pairs.
+          type: object
+          example:
+            key: value
+    get_environment_info_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          description: Information about the current environment.
+          type: object
+          properties:
+            name:
+              type: string
+              example: _system
+            options:
+              $ref: '#/components/schemas/get_user_GeoFabrics_options_examples_rc_200'
+            isSystem:
+              description: Whether or not the current GeoFabric is the *_system* fabric
+              type: boolean
+              example: true
+    error_example_rc_403:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 403
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
+      type: object
+    get_user_environments_examples_rc_200:
+      type: object
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                example: _system
+              options:
+                $ref: '#/components/schemas/get_user_GeoFabrics_options_examples_rc_200'
+              isSystem:
+                type: boolean
+                example: true
+    error_example_rc_404:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 404
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
+      type: object
+    patch_environment_example_rc_201:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 201
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          type: boolean
+          description: Flag for if the environment was updated successfully.
+          example: true
+    get_user_GeoFabrics_options_examples_rc_200:
+      type: object
+      properties:
+        associated_regions:
+          description: List of data centers added.
+          type: array
+          items:
+            type: string
+          example:
+          - datacenter1
+          - datacenter2
+        clusters:
+          description: List of data centers added.
+          type: array
+          items:
+            type: string
+          example:
+          - datacenter1
+          - datacenter2
+        dcList:
+          description: List of data centers added.
+          type: string
+          example: datacenter1,datacenter2
+        dynamo_local_tables:
+          description: Flag indicator for dynamo_local_tables
+          type: boolean
+          example: false
+        metadata:
+          description: An optional JSON object with user defined key-value pairs
+          type: object
+          example:
+            key: value
+        name:
+          description: Name of GeoFabric
+          type: string
+          example: _system
+        realTime:
+          description: Whether the changes are published in real time streams
+          type: boolean
+        spotDc:
+          description: The Edge Location (Datacenter) where on-spot operations for the GeoFabric is performed
+          type: string
+          example: datacenter1
+        status:
+          description: Available or not
+          type: string
+          example: available
+        tenant:
+          description: Tenant name
+          type: string
+          example: _mm
+    headers:
+      x-gdn-region:
+        description: The federation's region hostname that served the request.
+        type: string
+      x-gdn-requestid:
+        description: A unique request ID for each API request.
+        type: string
+    get_all_environment_examples_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          description: An array of environment names
+          type: array
+          items:
+            type: string
+          example:
+          - _system
+          - demo._system
+    error_example_rc_400:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 400
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 102020
+      required:
+      - error
+      type: object
+    create_environment_database:
+      properties:
+        name:
+          description: Has to contain a valid environment name.
+          type: string
+        tenant:
+          description: Name of the tenant to associate with environment. This option is applicable and optional when system tenant *_mm* invokes the API. Other tenants should not specify this option as the tenant invoking API shall be associated with environment.
+          type: string
+        options:
+          $ref: '#/components/schemas/create_environment_database_options'
+        users:
+          description: Enter an array of user ids that has admin access to the new environment. If this field is left blank, the default user *root* has admin access.
+          items:
+            type: string
+          type: array
+      required:
+      - name
+      type: object
+    set_environment_example_rc_201:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 201
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          description: Flag for if the environment was set successfully.
+          type: boolean
+          example: true
+    error_example_rc_409:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 409
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
+      type: object
+    create_environment_examples_rc_201:
+      type: object
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 201
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          description: Whether the environment was created successfully.
+          type: boolean
+          example: true
+    create_environment_database_options:
+      description: 'Has to be a dictionary of Database options used when creating the environment. If this is not specified, default options are used. If one of the dict members is not specified, defaults is used for that dict member.
+
+        The members of the *options* dictionary are as follows:'
+      properties:
+        spotDc:
+          description: The Edge Location (data center) where on-spot operations for the given environment is performed. By default, a random data center is chosen from those which are capable.
+          type: string
+        metadata:
+          description: Object with user defined key-value pairs.
+          type: object
+          example:
+            key: value
+      type: object
+  requestBodies:
+    database_metadata:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/database_metadata'
+      description: A JSON object with user defined key-value pairs.
+      required: true
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Provide an API Key to the `Authorization` header, prefixed with "apikey".
+
+
+        Example: `Authorization: apikey <key>`'
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Provide a JSON Web Token (JWT) to the `Authorization` header, prefixed with "bearer".
+
+
+        Example: `Authorization: bearer <jwt>`'

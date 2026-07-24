@@ -1,0 +1,325 @@
+openapi: 3.0.0
+info:
+  title: Macrometa API Reference Activity Metrics Cache API
+  version: 0.17.17
+  description: API reference for the Macrometa Global Data Network.
+  license:
+    name: Macrometa License, Version 2.0
+servers:
+- url: https://api-play.paas.macrometa.io
+  description: GDN API
+host: api-play.paas.macrometa.io
+security:
+- ApiKeyAuth: []
+- BearerAuth: []
+tags:
+- name: Cache
+paths:
+  /api/prerender/v1/origins/{origin}/cache/purge:
+    post:
+      summary: Purge cache
+      tags:
+      - Cache
+      description: Clears rendered pages from the origin cache. It is possible to clear all records related to the origin or specific records according to the "urls" list.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                urls:
+                  type: array
+                  items:
+                    type: string
+                    description: Origin path.
+                  description: List of origin paths to be deleted from the cache.
+            example:
+              urls:
+              - /terms
+              - /privacy
+      parameters:
+      - schema:
+          type: string
+          minLength: 1
+        example: www.origin.com
+        in: path
+        name: origin
+        required: true
+        description: Origin hostname.
+      - schema:
+          type: string
+        in: header
+        name: x-photoniq-customerid
+        required: true
+        description: Customer unique identifier.
+      responses:
+        '200':
+          description: Cache purged successfully.
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Bad request.
+                properties:
+                  status:
+                    type: string
+                    description: Error status.
+                  message:
+                    type: string
+                    description: Error message.
+                required:
+                - status
+                - message
+                example:
+                  status: ERROR
+                  message: Header x-photoniq-customerid is required.
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Internal server error.
+                properties:
+                  status:
+                    type: string
+                    description: Error status.
+                  message:
+                    type: string
+                    description: Error message.
+                required:
+                - status
+                - message
+                example:
+                  status: ERROR
+                  message: Internal server error.
+  /api/prerender/v1/origins/{origin}/cache/{cacheKey}/preview:
+    get:
+      summary: Preview cached document
+      tags:
+      - Cache
+      description: This endpoint retrieves cached documents from the cache. Users must specify both the "origin" and the "cacheKey" of the document they wish to access.
+      parameters:
+      - schema:
+          type: string
+          minLength: 1
+        example: www.origin.com
+        in: path
+        name: origin
+        required: true
+        description: Origin hostname.
+      - schema:
+          type: string
+          minLength: 1
+        in: path
+        name: cacheKey
+        required: true
+        description: Unique key for the document.
+      - schema:
+          type: string
+        in: header
+        name: x-photoniq-customerid
+        required: true
+        description: Customer unique identifier.
+      responses:
+        '200':
+          description: Cached document preview fetched successfully.
+          content:
+            application/json:
+              schema:
+                type: string
+                description: Cached document preview fetched successfully.
+                example: <!DOCTYPE html><html lang="en"><head><base href="https://www.origin.com/"></head><body></body></html>
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Bad request.
+                properties:
+                  status:
+                    type: string
+                    description: Error status.
+                  message:
+                    type: string
+                    description: Error message.
+                required:
+                - status
+                - message
+                example:
+                  status: ERROR
+                  message: Header x-photoniq-customerid is required.
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Internal server error.
+                properties:
+                  status:
+                    type: string
+                    description: Error status.
+                  message:
+                    type: string
+                    description: Error message.
+                required:
+                - status
+                - message
+                example:
+                  status: ERROR
+                  message: Internal server error.
+  /api/prerender/v1/origins/{origin}/cache:
+    get:
+      summary: Get all cached documents information
+      tags:
+      - Cache
+      description: This endpoint provides a paginated list of cached documents associated with a specified "origin". Users can control pagination using the "limit" and "offset" query parameters. The "limit" parameter defines the number of documents to retrieve, while "offset" specifies the starting point in the list.
+      parameters:
+      - schema:
+          type: number
+          minimum: 1
+          default: 100
+          maximum: 1000
+        in: query
+        name: limit
+        required: false
+        description: Limit for results.
+      - schema:
+          type: number
+          default: 0
+        in: query
+        name: offset
+        required: false
+        description: Offset for results.
+      - schema:
+          type: string
+          minLength: 1
+        example: www.origin.com
+        in: path
+        name: origin
+        required: true
+        description: Origin hostname.
+      - schema:
+          type: string
+        in: header
+        name: x-photoniq-customerid
+        required: true
+        description: Customer unique identifier.
+      responses:
+        '200':
+          description: Cached documents information fetched successfully.
+          content:
+            application/json:
+              schema:
+                type: array
+                description: Cached documents information fetched successfully.
+                items:
+                  type: object
+                  properties:
+                    _key:
+                      type: string
+                      description: Cached document unique identifier.
+                      minLength: 1
+                    requestUrl:
+                      type: string
+                      format: uri
+                      description: URL of the content that has been cached.
+                    statusCode:
+                      type: number
+                      description: Response HTTP status code.
+                    isPrefetch:
+                      type: boolean
+                      description: Whether rendering was performed as a prefetch operation (true) or on demand (false).
+                    isMobile:
+                      type: boolean
+                      description: Whether rendering was tailored for mobile devices.
+                    expiry:
+                      type: number
+                      description: Timestamp (in seconds) indicating when the document will expire.
+                    created:
+                      type: number
+                      description: Timestamp (in milliseconds) indicating when the document was created.
+                  required:
+                  - _key
+                  - requestUrl
+                  - isPrefetch
+                  - isMobile
+                  - expiry
+                  - created
+                example:
+                - _key: 10a92b2d8f021820ca55d2d4cb70b35b
+                  requestUrl: https://www.origin.com/terms
+                  statusCode: 200
+                  isPrefetch: false
+                  isMobile: false
+                  expiry: 1703447373
+                  created: 1702928973210
+                - _key: 69fe05803fd08709f42dc48a551424c4
+                  requestUrl: https://www.origin.com/privacy
+                  statusCode: 200
+                  isPrefetch: false
+                  isMobile: false
+                  expiry: 1703447372
+                  created: 1702928972960
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Bad request.
+                properties:
+                  status:
+                    type: string
+                    description: Error status.
+                  message:
+                    type: string
+                    description: Error message.
+                required:
+                - status
+                - message
+                example:
+                  status: ERROR
+                  message: Header x-photoniq-customerid is required.
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Internal server error.
+                properties:
+                  status:
+                    type: string
+                    description: Error status.
+                  message:
+                    type: string
+                    description: Error message.
+                required:
+                - status
+                - message
+                example:
+                  status: ERROR
+                  message: Internal server error.
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Provide an API Key to the `Authorization` header, prefixed with "apikey".
+
+
+        Example: `Authorization: apikey <key>`'
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Provide a JSON Web Token (JWT) to the `Authorization` header, prefixed with "bearer".
+
+
+        Example: `Authorization: bearer <jwt>`'
