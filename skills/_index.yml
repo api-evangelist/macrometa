@@ -1,0 +1,16 @@
+generated: '2026-07-20'
+method: generated
+source: openapi/macrometa-gdn-openapi-original.json
+skills:
+- file: macrometa-document-store.md
+  name: Macrometa document store
+  api: openapi/macrometa-gdn-openapi-original.json
+  operations: [handleCommandPost:CreateCollection, insertDocument, readDocument, createQueryCursor]
+- file: macrometa-streams-pubsub.md
+  name: Macrometa streams pub/sub
+  api: openapi/macrometa-gdn-openapi-original.json
+  operations: [CreateStream, ListOfStreams]
+- file: macrometa-api-key-management.md
+  name: Macrometa API key management
+  api: openapi/macrometa-gdn-openapi-original.json
+  operations: [CreateApiKey, ListAvailableApiKeys, ValidateApiKey, SetTheDatabaseAccessLevelForApiKey]

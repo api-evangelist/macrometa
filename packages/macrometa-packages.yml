@@ -1,0 +1,32 @@
+generated: '2026-07-20'
+method: searched
+source: https://github.com/Macrometacorp
+packages:
+- language: python
+  registry: pypi
+  name: pyC8
+  version: 1.1.2
+  url: https://pypi.org/project/pyC8/
+  install: pip install pyC8
+  repo: https://github.com/Macrometacorp/pyC8
+  official: true
+  description: Official Python SDK for the Macrometa GDN.
+- language: javascript
+  registry: npm
+  name: jsc8
+  version: 2.0.0
+  url: https://www.npmjs.com/package/jsc8
+  install: npm install jsc8
+  repo: https://github.com/Macrometacorp/jsC8
+  official: true
+  description: Official JavaScript/TypeScript SDK for the Macrometa GDN.
+- language: javascript
+  registry: npm
+  name: gdnsl
+  version: 0.0.55
+  url: https://www.npmjs.com/package/gdnsl
+  install: npm install -g gdnsl
+  repo: https://github.com/Macrometacorp/gdnsl
+  official: true
+  kind: cli
+  description: Official Macrometa GDN serverless command line interface.

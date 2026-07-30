@@ -1,0 +1,1526 @@
+generated: '2026-07-20'
+method: derived
+status: candidate
+source: openapi/macrometa-gdn-openapi-original.json
+note: Candidate MCP tool list derived one-per-operation from the GDN OpenAPI. No official Macrometa MCP
+  server was found as of this pass.
+server:
+  name: macrometa-gdn
+  transport: stdio
+tool_count: 303
+tools:
+- name: ValidateApiKey
+  description: Validate API Key
+  method: POST
+  path: /_api/key/validate
+  source_operation: openapi/macrometa-gdn-openapi-original.json#ValidateApiKey
+- name: CreateApiKey
+  description: Create API Key
+  method: POST
+  path: /_api/key
+  source_operation: openapi/macrometa-gdn-openapi-original.json#CreateApiKey
+- name: ListAvailableApiKeys
+  description: List available API keys
+  method: GET
+  path: /_api/key
+  source_operation: openapi/macrometa-gdn-openapi-original.json#ListAvailableApiKeys
+- name: GetAvailableApiKey
+  description: Get available API key.
+  method: GET
+  path: /_api/key/{keyid}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#GetAvailableApiKey
+- name: RemoveApiKey
+  description: Remove API Key.
+  method: DELETE
+  path: /_api/key/{keyid}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#RemoveApiKey
+- name: ListTheAccessibleDatabasesForApiKey
+  description: List the accessible databases for a keyid
+  method: GET
+  path: /_api/key/{keyid}/database
+  source_operation: openapi/macrometa-gdn-openapi-original.json#ListTheAccessibleDatabasesForApiKey
+- name: GetTheDatabaseAccessLevelForApiKey
+  description: Get the database access level
+  method: GET
+  path: /_api/key/{keyid}/database/{dbname}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#GetTheDatabaseAccessLevelForApiKey
+- name: ClearTheDatabaseAccessLevelForApiKey
+  description: Clear the database access level
+  method: DELETE
+  path: /_api/key/{keyid}/database/{dbname}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#ClearTheDatabaseAccessLevelForApiKey
+- name: SetTheDatabaseAccessLevelForApiKey
+  description: Set the database access level
+  method: PUT
+  path: /_api/key/{keyid}/database/{dbname}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#SetTheDatabaseAccessLevelForApiKey
+- name: GetTheApiKeyCollectionsAccessLevel
+  description: Get the specific collection access level
+  method: GET
+  path: /_api/key/{keyid}/database/{dbname}/collection
+  source_operation: openapi/macrometa-gdn-openapi-original.json#GetTheApiKeyCollectionsAccessLevel
+- name: GetTheSpecificCollectionAccessLevelForApiKey
+  description: Get the specific collection access level
+  method: GET
+  path: /_api/key/{keyid}/database/{dbname}/collection/{collection}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#GetTheSpecificCollectionAccessLevelForApiKey
+- name: ClearTheCollectionAccessLevelForApiKey
+  description: Clear the collection access level.
+  method: DELETE
+  path: /_api/key/{keyid}/database/{dbname}/collection/{collection}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#ClearTheCollectionAccessLevelForApiKey
+- name: SetTheCollectionAccessLevelForApiKey
+  description: Set the collection access level
+  method: PUT
+  path: /_api/key/{keyid}/database/{dbname}/collection/{collection}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#SetTheCollectionAccessLevelForApiKey
+- name: ListTheAccessibleStreamsForApiKey
+  description: List the accessible streams
+  method: GET
+  path: /_api/key/{keyid}/database/{dbname}/stream
+  source_operation: openapi/macrometa-gdn-openapi-original.json#ListTheAccessibleStreamsForApiKey
+- name: GetTheStreamAccessLevelForApiKey
+  description: Get the stream access level
+  method: GET
+  path: /_api/key/{keyid}/database/{dbname}/stream/{stream}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#GetTheStreamAccessLevelForApiKey
+- name: ClearTheStreamAccessLevelForApiKey
+  description: Clear the stream access level
+  method: DELETE
+  path: /_api/key/{keyid}/database/{dbname}/stream/{stream}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#ClearTheStreamAccessLevelForApiKey
+- name: SetTheStreamAccessLevelForApiKey
+  description: Set the stream access level
+  method: PUT
+  path: /_api/key/{keyid}/database/{dbname}/stream/{stream}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#SetTheStreamAccessLevelForApiKey
+- name: GetApiKeyQueryWorkerAccessLevel
+  description: Get the query workers access level for a specific keyid
+  method: GET
+  path: /_api/key/{keyid}/database/{geofabric}/restql
+  source_operation: openapi/macrometa-gdn-openapi-original.json#GetApiKeyQueryWorkerAccessLevel
+- name: GetSpecificQueryWorkerAccessLevelForApiKey
+  description: Get the specific query worker access level
+  method: GET
+  path: /_api/key/{keyid}/database/{geofabric}/restql/{query-worker}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#GetSpecificQueryWorkerAccessLevelForApiKey
+- name: ClearQueryWorkerAccessLevelForApiKey
+  description: Clear the query worker access level.
+  method: DELETE
+  path: /_api/key/{keyid}/database/{geofabric}/restql/{query-worker}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#ClearQueryWorkerAccessLevelForApiKey
+- name: SetQueryWorkerAccessLevelForApiKey
+  description: Set the query worker access level
+  method: PUT
+  path: /_api/key/{keyid}/database/{geofabric}/restql/{query-worker}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#SetQueryWorkerAccessLevelForApiKey
+- name: GetApiKeyManagedKeyAccessLevel
+  description: Get the managed keys access level for a specific keyid
+  method: GET
+  path: /_api/key/{keyid}/database/{geofabric}/managedkey
+  source_operation: openapi/macrometa-gdn-openapi-original.json#GetApiKeyManagedKeyAccessLevel
+- name: GetSpecificManagedKeyAccessLevelForApiKey
+  description: Get the specific managed key access level
+  method: GET
+  path: /_api/key/{keyid}/database/{geofabric}/managedkey/{managed-key-name}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#GetSpecificManagedKeyAccessLevelForApiKey
+- name: ClearManagedKeyAccessLevelForApiKey
+  description: Clear the managed key access level
+  method: DELETE
+  path: /_api/key/{keyid}/database/{geofabric}/managedkey/{managed-key-name}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#ClearManagedKeyAccessLevelForApiKey
+- name: SetManagedKeyAccessLevelForApiKey
+  description: Set the managed key access level
+  method: PUT
+  path: /_api/key/{keyid}/database/{geofabric}/managedkey/{managed-key-name}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#SetManagedKeyAccessLevelForApiKey
+- name: GetTheBillingAccessLevelForApiKey
+  description: Get the billing access level
+  method: GET
+  path: /_api/key/{keyid}/billing
+  source_operation: openapi/macrometa-gdn-openapi-original.json#GetTheBillingAccessLevelForApiKey
+- name: ClearTheBillingAccessLevelForApiKey
+  description: Clear the billing access level
+  method: DELETE
+  path: /_api/key/{keyid}/billing
+  source_operation: openapi/macrometa-gdn-openapi-original.json#ClearTheBillingAccessLevelForApiKey
+- name: SetTheBillingAccessLevelForApiKey
+  description: Set the billing access level
+  method: PUT
+  path: /_api/key/{keyid}/billing
+  source_operation: openapi/macrometa-gdn-openapi-original.json#SetTheBillingAccessLevelForApiKey
+- name: GetTheAttributesForApiKey
+  description: Get the API key attributes
+  method: GET
+  path: /_api/key/{keyid}/attributes
+  source_operation: openapi/macrometa-gdn-openapi-original.json#GetTheAttributesForApiKey
+- name: UpdateTheAttributesForApiKey
+  description: Update attributes
+  method: PUT
+  path: /_api/key/{keyid}/attributes
+  source_operation: openapi/macrometa-gdn-openapi-original.json#UpdateTheAttributesForApiKey
+- name: ClearAllAttributesForApiKey
+  description: Remove all attributes
+  method: DELETE
+  path: /_api/key/{keyid}/attributes/truncate
+  source_operation: openapi/macrometa-gdn-openapi-original.json#ClearAllAttributesForApiKey
+- name: ClearTheAttributesForApiKey
+  description: Remove attribute
+  method: DELETE
+  path: /_api/key/{keyid}/attributes/{attributeid}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#ClearTheAttributesForApiKey
+- name: CreateNamespace
+  description: Create key-value collection
+  method: POST
+  path: /_fabric/{fabric}/_api/kv/{collection}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#CreateNamespace
+- name: GetValues
+  description: Get key-value pairs from collection
+  method: POST
+  path: /_fabric/{fabric}/_api/kv/{collection}/values
+  source_operation: openapi/macrometa-gdn-openapi-original.json#GetValues
+- name: DynamoLikeInterfaceAPI
+  description: Dynamo-like API interface
+  method: POST
+  path: /_api/dynamo
+  source_operation: openapi/macrometa-gdn-openapi-original.json#DynamoLikeInterfaceAPI
+- name: RedisPost
+  description: Redis-like API interface
+  method: POST
+  path: /_fabric/{fabric}/_api/redis/{collection}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#RedisPost
+- name: RedisGet
+  description: Redis-like API interface
+  method: GET
+  path: /_fabric/{fabric}/_api/redis/{collection}/{command}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#RedisGet
+- name: removeDocument
+  description: Remove multiple documents
+  method: DELETE
+  path: /_fabric/{fabric}/_api/document/{collection}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#removeDocument
+- name: updateDocument
+  description: Update documents
+  method: PATCH
+  path: /_fabric/{fabric}/_api/document/{collection}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#updateDocument
+- name: insertDocument
+  description: Create document
+  method: POST
+  path: /_fabric/{fabric}/_api/document/{collection}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#insertDocument
+- name: replaceDocument:multiple
+  description: Replace documents
+  method: PUT
+  path: /_fabric/{fabric}/_api/document/{collection}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#replaceDocument:multiple
+- name: removeDocument2
+  description: Remove a document
+  method: DELETE
+  path: /_fabric/{fabric}/_api/document/{collection}/{key}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#removeDocument2
+- name: readDocument
+  description: Read document
+  method: GET
+  path: /_fabric/{fabric}/_api/document/{collection}/{key}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#readDocument
+- name: checkDocument
+  description: Read document header
+  method: HEAD
+  path: /_fabric/{fabric}/_api/document/{collection}/{key}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#checkDocument
+- name: updateDocument2
+  description: Update document
+  method: PATCH
+  path: /_fabric/{fabric}/_api/document/{collection}/{key}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#updateDocument2
+- name: replaceDocument
+  description: Replace document
+  method: PUT
+  path: /_fabric/{fabric}/_api/document/{collection}/{key}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#replaceDocument
+- name: handleCommandGet
+  description: List all collections
+  method: GET
+  path: /_fabric/{fabric}/_api/collection
+  source_operation: openapi/macrometa-gdn-openapi-original.json#handleCommandGet
+- name: handleCommandPost:CreateCollection
+  description: Create collection
+  method: POST
+  path: /_fabric/{fabric}/_api/collection
+  source_operation: openapi/macrometa-gdn-openapi-original.json#handleCommandPost:CreateCollection
+- name: handleCommandDelete:collection
+  description: Remove collection
+  method: DELETE
+  path: /_fabric/{fabric}/_api/collection/{collection-name}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#handleCommandDelete:collection
+- name: handleCommandGet:collectionGetProperties
+  description: Get the information about collection
+  method: GET
+  path: /_fabric/{fabric}/_api/collection/{collection-name}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#handleCommandGet:collectionGetProperties
+- name: getWorkflows
+  description: Get workflows
+  method: GET
+  path: /_fabric/{fabric}/_api/collection/{collection-name}/workflows
+  source_operation: openapi/macrometa-gdn-openapi-original.json#getWorkflows
+- name: createWorkflow
+  description: Create a workflow
+  method: POST
+  path: /_fabric/{fabric}/_api/collection/{collection-name}/workflows
+  source_operation: openapi/macrometa-gdn-openapi-original.json#createWorkflow
+- name: deleteWorkflow
+  description: Remove workflow
+  method: DELETE
+  path: /_fabric/{fabric}/_api/collection/{collection-name}/workflows/{workflow-name}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#deleteWorkflow
+- name: getMetadata
+  description: Retrieve additional collection metadata
+  method: GET
+  path: /_fabric/{fabric}/_api/collection/{collection-name}/metadata
+  source_operation: openapi/macrometa-gdn-openapi-original.json#getMetadata
+- name: updateMetadata
+  description: Update collection metadata
+  method: PUT
+  path: /_fabric/{fabric}/_api/collection/{collection-name}/metadata
+  source_operation: openapi/macrometa-gdn-openapi-original.json#updateMetadata
+- name: reloadCollection
+  description: Truncate and reload data
+  method: PUT
+  path: /_fabric/{fabric}/_api/collection/{collection-name}/reload
+  source_operation: openapi/macrometa-gdn-openapi-original.json#reloadCollection
+- name: handleCommandGet:getCollectionCount
+  description: Get number of documents in a collection
+  method: GET
+  path: /_fabric/{fabric}/_api/collection/{collection-name}/count
+  source_operation: openapi/macrometa-gdn-openapi-original.json#handleCommandGet:getCollectionCount
+- name: handleCommandGet:collectionFigures
+  description: Return figures of a collection
+  method: GET
+  path: /_fabric/{fabric}/_api/collection/{collection-name}/figures
+  source_operation: openapi/macrometa-gdn-openapi-original.json#handleCommandGet:collectionFigures
+- name: handleCommandPut:truncateCollection
+  description: Truncate collection
+  method: PUT
+  path: /_fabric/{fabric}/_api/collection/{collection-name}/truncate
+  source_operation: openapi/macrometa-gdn-openapi-original.json#handleCommandPut:truncateCollection
+- name: handleCommandPut:modifyProperties
+  description: Update collection properties
+  method: PUT
+  path: /_fabric/{fabric}/_api/collection/{collection-name}/properties
+  source_operation: openapi/macrometa-gdn-openapi-original.json#handleCommandPut:modifyProperties
+- name: ListAllFunctionWorkerByType
+  description: List multiple edge functions.
+  method: GET
+  path: /_fabric/{fabric}/_api/function
+  source_operation: openapi/macrometa-gdn-openapi-original.json#ListAllFunctionWorkerByType
+- name: GenerateFunctionWorkerFromQueryWorker
+  description: Deploy the query worker to the edge worker.
+  method: POST
+  path: /_fabric/{fabric}/_api/function/generate
+  source_operation: openapi/macrometa-gdn-openapi-original.json#GenerateFunctionWorkerFromQueryWorker
+- name: GenerateFunctionWorkerFromStreamPublisher
+  description: Deploy the stream publisher to the edge worker.
+  method: POST
+  path: /_fabric/{fabric}/_api/function/generate/publisher
+  source_operation: openapi/macrometa-gdn-openapi-original.json#GenerateFunctionWorkerFromStreamPublisher
+- name: GenerateFunctionWorkerFromStreamQuery
+  description: Deploy the stream adhoc query to the edge worker.
+  method: POST
+  path: /_fabric/{fabric}/_api/function/generate/query
+  source_operation: openapi/macrometa-gdn-openapi-original.json#GenerateFunctionWorkerFromStreamQuery
+- name: GetFunctionWorkerByFunctionName
+  description: Get edge function information.
+  method: GET
+  path: /_fabric/{fabric}/_api/function/{fx-name}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#GetFunctionWorkerByFunctionName
+- name: DeleteFunctionWorkerByFunctionName
+  description: Remove a edge function.
+  method: DELETE
+  path: /_fabric/{fabric}/_api/function/{fx-name}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#DeleteFunctionWorkerByFunctionName
+- name: InvokeFunctionWorkerByFunctionName
+  description: Invoke a edge function.
+  method: POST
+  path: /_fabric/{fabric}/_api/function/invoke/{fx-name}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#InvokeFunctionWorkerByFunctionName
+- name: GetFunctionWorkerMetadata
+  description: Get metadata about the edge worker.
+  method: GET
+  path: /_fabric/{fabric}/_api/function/metadata
+  source_operation: openapi/macrometa-gdn-openapi-original.json#GetFunctionWorkerMetadata
+- name: ModifyFunctionWorkerMetadata
+  description: Modify the edge worker metadata.
+  method: PUT
+  path: /_fabric/{fabric}/_api/function/metadata
+  source_operation: openapi/macrometa-gdn-openapi-original.json#ModifyFunctionWorkerMetadata
+- name: UpdateFunctionWorkerMetadata
+  description: Create the edge worker metadata.
+  method: POST
+  path: /_fabric/{fabric}/_api/function/metadata
+  source_operation: openapi/macrometa-gdn-openapi-original.json#UpdateFunctionWorkerMetadata
+- name: RemoveFunctionWorkerMetadata
+  description: Remove the edge worker metadata.
+  method: DELETE
+  path: /_fabric/{fabric}/_api/function/metadata
+  source_operation: openapi/macrometa-gdn-openapi-original.json#RemoveFunctionWorkerMetadata
+- name: createQueryCursor
+  description: Create cursor from C8QL query
+  method: POST
+  path: /_fabric/{fabric}/_api/cursor
+  source_operation: openapi/macrometa-gdn-openapi-original.json#createQueryCursor
+- name: createSqlQueryCursor
+  description: Create cursor from SQL query.
+  method: POST
+  path: /_fabric/{fabric}/_api/cursor/sql
+  source_operation: openapi/macrometa-gdn-openapi-original.json#createSqlQueryCursor
+- name: deleteQueryCursor
+  description: Remove cursor
+  method: DELETE
+  path: /_fabric/{fabric}/_api/cursor/{cursor-identifier}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#deleteQueryCursor
+- name: modifyQueryCursor
+  description: Read next batch from cursor
+  method: PUT
+  path: /_fabric/{fabric}/_api/cursor/{cursor-identifier}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#modifyQueryCursor
+- name: parseQuery
+  description: Parse an C8QL query
+  method: POST
+  path: /_fabric/{fabric}/_api/query
+  source_operation: openapi/macrometa-gdn-openapi-original.json#parseQuery
+- name: explainQuery
+  description: Explain an C8QL query
+  method: POST
+  path: /_fabric/{fabric}/_api/query/explain
+  source_operation: openapi/macrometa-gdn-openapi-original.json#explainQuery
+- name: SaveRestqlByName
+  description: Save query worker
+  method: POST
+  path: /_fabric/{fabric}/_api/restql
+  source_operation: openapi/macrometa-gdn-openapi-original.json#SaveRestqlByName
+- name: ImportCustomRestQL
+  description: Import custom query workers
+  method: POST
+  path: /_fabric/{fabric}/_api/restql/import
+  source_operation: openapi/macrometa-gdn-openapi-original.json#ImportCustomRestQL
+- name: ExecuteRestqlByName
+  description: Run query worker
+  method: POST
+  path: /_fabric/{fabric}/_api/restql/execute/{name}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#ExecuteRestqlByName
+- name: fetchRestqlCursor
+  description: Read next batch from cursor
+  method: PUT
+  path: /_fabric/{fabric}/_api/restql/fetch/{id}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#fetchRestqlCursor
+- name: ListRestqlAssociatedWithCurrentUser
+  description: List current query workers
+  method: GET
+  path: /_fabric/{fabric}/_api/restql/user
+  source_operation: openapi/macrometa-gdn-openapi-original.json#ListRestqlAssociatedWithCurrentUser
+- name: DeleteRestqlByName
+  description: Remove query worker
+  method: DELETE
+  path: /_fabric/{fabric}/_api/restql/{name}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#DeleteRestqlByName
+- name: UpdateRestqlByName
+  description: Update query worker
+  method: PUT
+  path: /_fabric/{fabric}/_api/restql/{name}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#UpdateRestqlByName
+- name: getIndexes
+  description: List all indexes of a collection
+  method: GET
+  path: /_fabric/{fabric}/_api/index
+  source_operation: openapi/macrometa-gdn-openapi-original.json#getIndexes
+- name: createIndex:fulltext
+  description: Create fulltext index
+  method: POST
+  path: /_fabric/{fabric}/_api/index/fulltext
+  source_operation: openapi/macrometa-gdn-openapi-original.json#createIndex:fulltext
+- name: createIndex:general
+  description: Create index
+  method: POST
+  path: /_fabric/{fabric}/_api/index/general
+  source_operation: openapi/macrometa-gdn-openapi-original.json#createIndex:general
+- name: createIndex:geo
+  description: Create geo-spatial index
+  method: POST
+  path: /_fabric/{fabric}/_api/index/geo
+  source_operation: openapi/macrometa-gdn-openapi-original.json#createIndex:geo
+- name: createIndex:hash
+  description: Create hash index
+  method: POST
+  path: /_fabric/{fabric}/_api/index/hash
+  source_operation: openapi/macrometa-gdn-openapi-original.json#createIndex:hash
+- name: createIndex:persistent
+  description: Create a persistent index
+  method: POST
+  path: /_fabric/{fabric}/_api/index/persistent
+  source_operation: openapi/macrometa-gdn-openapi-original.json#createIndex:persistent
+- name: createIndex:skiplist
+  description: Create skip list
+  method: POST
+  path: /_fabric/{fabric}/_api/index/skiplist
+  source_operation: openapi/macrometa-gdn-openapi-original.json#createIndex:skiplist
+- name: createIndex:ttl
+  description: Create TTL index
+  method: POST
+  path: /_fabric/{fabric}/_api/index/ttl
+  source_operation: openapi/macrometa-gdn-openapi-original.json#createIndex:ttl
+- name: dropIndex
+  description: Remove index
+  method: DELETE
+  path: /_fabric/{fabric}/_api/index/{collection}/{indexName}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#dropIndex
+- name: getIndexes:handle
+  description: Read index
+  method: GET
+  path: /_fabric/{fabric}/_api/index/{collection}/{indexName}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#getIndexes:handle
+- name: ListAllGraphs
+  description: List all graphs
+  method: GET
+  path: /_fabric/{fabric}/_api/graph
+  source_operation: openapi/macrometa-gdn-openapi-original.json#ListAllGraphs
+- name: CreateAGraph
+  description: Create a graph
+  method: POST
+  path: /_fabric/{fabric}/_api/graph
+  source_operation: openapi/macrometa-gdn-openapi-original.json#CreateAGraph
+- name: DropAGraph
+  description: Remove a graph
+  method: DELETE
+  path: /_fabric/{fabric}/_api/graph/{graph}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#DropAGraph
+- name: GetAGraph
+  description: Get a graph
+  method: GET
+  path: /_fabric/{fabric}/_api/graph/{graph}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#GetAGraph
+- name: ListEdgedefinitions
+  description: List edge definitions
+  method: GET
+  path: /_fabric/{fabric}/_api/graph/{graph}/edge
+  source_operation: openapi/macrometa-gdn-openapi-original.json#ListEdgedefinitions
+- name: AddEdgedefinition
+  description: Add edge definition
+  method: POST
+  path: /_fabric/{fabric}/_api/graph/{graph}/edge
+  source_operation: openapi/macrometa-gdn-openapi-original.json#AddEdgedefinition
+- name: CreateAnEdge
+  description: Create an edge
+  method: POST
+  path: /_fabric/{fabric}/_api/graph/{graph}/edge/{edgeCollection}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#CreateAnEdge
+- name: ReplaceAnEdgedefinition
+  description: Replace an edge definition
+  method: PUT
+  path: /_fabric/{fabric}/_api/graph/{graph}/edge/{edgeCollection}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#ReplaceAnEdgedefinition
+- name: RemoveAnEdgedefinitionFromTheGraph
+  description: Remove an edge definition
+  method: DELETE
+  path: /_fabric/{fabric}/_api/graph/{graph}/edge/{edgeCollection}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#RemoveAnEdgedefinitionFromTheGraph
+- name: RemoveAnEdge
+  description: Remove an edge
+  method: DELETE
+  path: /_fabric/{fabric}/_api/graph/{graph}/edge/{collection}/{edge}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#RemoveAnEdge
+- name: GetAnEdge
+  description: Get an edge
+  method: GET
+  path: /_fabric/{fabric}/_api/graph/{graph}/edge/{collection}/{edge}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#GetAnEdge
+- name: ModifyAnEdge
+  description: Modify an edge
+  method: PATCH
+  path: /_fabric/{fabric}/_api/graph/{graph}/edge/{collection}/{edge}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#ModifyAnEdge
+- name: ReplaceAnEdge
+  description: Replace an edge
+  method: PUT
+  path: /_fabric/{fabric}/_api/graph/{graph}/edge/{collection}/{edge}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#ReplaceAnEdge
+- name: ListVertexCollections
+  description: List vertex collections
+  method: GET
+  path: /_fabric/{fabric}/_api/graph/{graph}/vertex
+  source_operation: openapi/macrometa-gdn-openapi-original.json#ListVertexCollections
+- name: AddVertexCollection
+  description: Add vertex collection
+  method: POST
+  path: /_fabric/{fabric}/_api/graph/{graph}/vertex
+  source_operation: openapi/macrometa-gdn-openapi-original.json#AddVertexCollection
+- name: RemoveVertexCollection
+  description: Remove vertex collection
+  method: DELETE
+  path: /_fabric/{fabric}/_api/graph/{graph}/vertex/{collection}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#RemoveVertexCollection
+- name: CreateAVertex
+  description: Create a vertex
+  method: POST
+  path: /_fabric/{fabric}/_api/graph/{graph}/vertex/{collection}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#CreateAVertex
+- name: RemoveAVertex
+  description: Remove a vertex
+  method: DELETE
+  path: /_fabric/{fabric}/_api/graph/{graph}/vertex/{collection}/{vertex}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#RemoveAVertex
+- name: GetAVertex
+  description: Get a vertex
+  method: GET
+  path: /_fabric/{fabric}/_api/graph/{graph}/vertex/{collection}/{vertex}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#GetAVertex
+- name: UpdateAVertex
+  description: Update a vertex
+  method: PATCH
+  path: /_fabric/{fabric}/_api/graph/{graph}/vertex/{collection}/{vertex}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#UpdateAVertex
+- name: ReplaceAVertex
+  description: Replace a vertex
+  method: PUT
+  path: /_fabric/{fabric}/_api/graph/{graph}/vertex/{collection}/{vertex}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#ReplaceAVertex
+- name: ReadIn-OrOutboundEdges
+  description: Read in- or outbound edges
+  method: GET
+  path: /_fabric/{fabric}/_api/edges/{collection-id}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#ReadIn-OrOutboundEdges
+- name: ListOfStreams
+  description: Get list of streams
+  method: GET
+  path: /_fabric/{fabric}/_api/streams
+  source_operation: openapi/macrometa-gdn-openapi-original.json#ListOfStreams
+- name: CreateStream
+  description: Create stream
+  method: POST
+  path: /_fabric/{fabric}/_api/streams/{stream}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#CreateStream
+- name: DeleteStream
+  description: Remove stream
+  method: DELETE
+  path: /_fabric/{fabric}/_api/streams/{stream}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#DeleteStream
+- name: PublishStreamMessage
+  description: Publish message
+  method: POST
+  path: /_fabric/{fabric}/_api/streams/{stream}/publish
+  source_operation: openapi/macrometa-gdn-openapi-original.json#PublishStreamMessage
+- name: Backlog
+  description: Get backlog for the stream
+  method: GET
+  path: /_fabric/{fabric}/_api/streams/{stream}/backlog
+  source_operation: openapi/macrometa-gdn-openapi-original.json#Backlog
+- name: Stats
+  description: Get stats for the stream
+  method: GET
+  path: /_fabric/{fabric}/_api/streams/{stream}/stats
+  source_operation: openapi/macrometa-gdn-openapi-original.json#Stats
+- name: GetSubscriptionsList
+  description: Get stream subscriptions
+  method: GET
+  path: /_fabric/{fabric}/_api/streams/{stream}/subscriptions
+  source_operation: openapi/macrometa-gdn-openapi-original.json#GetSubscriptionsList
+- name: GetStreamsTTL
+  description: Get message TTL for streams
+  method: GET
+  path: /_fabric/{fabric}/_api/streams/ttl
+  source_operation: openapi/macrometa-gdn-openapi-original.json#GetStreamsTTL
+- name: SetStreamsTTL
+  description: Set message TTL for streams
+  method: POST
+  path: /_fabric/{fabric}/_api/streams/ttl/{ttl}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#SetStreamsTTL
+- name: ClearBacklog
+  description: Clear backlog
+  method: POST
+  path: /_fabric/{fabric}/_api/streams/clearbacklog
+  source_operation: openapi/macrometa-gdn-openapi-original.json#ClearBacklog
+- name: ClearSubscription'sBacklog
+  description: Clear subscription's backlog
+  method: POST
+  path: /_fabric/{fabric}/_api/streams/clearbacklog/{subscription}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#ClearSubscription'sBacklog
+- name: ExpireMessages
+  description: Expire messages on the stream
+  method: POST
+  path: /_fabric/{fabric}/_api/streams/{stream}/expiry/{seconds}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#ExpireMessages
+- name: DeleteAllSubscriptions
+  description: Unsubscribe
+  method: DELETE
+  path: /_fabric/{fabric}/_api/streams/subscription/{subscription}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#DeleteAllSubscriptions
+- name: DeleteSubscription
+  description: Delete subscription
+  method: DELETE
+  path: /_fabric/{fabric}/_api/streams/{stream}/subscriptions/{subscription}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#DeleteSubscription
+- name: validate
+  description: Validate the definition of a stream application.
+  method: POST
+  path: /_fabric/{fabric}/_api/streamapps/validate
+  source_operation: openapi/macrometa-gdn-openapi-original.json#validate
+- name: getAll
+  description: Fetch all stream applications.
+  method: GET
+  path: /_fabric/{fabric}/_api/streamapps
+  source_operation: openapi/macrometa-gdn-openapi-original.json#getAll
+- name: create
+  description: Create and deploy a stream application.
+  method: POST
+  path: /_fabric/{fabric}/_api/streamapps
+  source_operation: openapi/macrometa-gdn-openapi-original.json#create
+- name: getSamples
+  description: Fetch all sample stream applications.
+  method: GET
+  path: /_fabric/{fabric}/_api/streamapps/samples
+  source_operation: openapi/macrometa-gdn-openapi-original.json#getSamples
+- name: getApplication
+  description: Fetch a stream application.
+  method: GET
+  path: /_fabric/{fabric}/_api/streamapps/{appname}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#getApplication
+- name: update
+  description: Update and redeploy a stream application.
+  method: PUT
+  path: /_fabric/{fabric}/_api/streamapps/{appname}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#update
+- name: delete
+  description: Stop and remove a stream application.
+  method: DELETE
+  path: /_fabric/{fabric}/_api/streamapps/{appname}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#delete
+- name: queryStreamApp
+  description: Submit an ad hoc stream query and get the result
+  method: POST
+  path: /_fabric/{fabric}/_api/streamapps/query/{appName}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#queryStreamApp
+- name: enableApplication
+  description: Enable or disable a stream application.
+  method: PATCH
+  path: /_fabric/{fabric}/_api/streamapps/{appname}/active
+  source_operation: openapi/macrometa-gdn-openapi-original.json#enableApplication
+- name: publishHttpSourceMessage
+  description: Publish message via HTTP-Source stream.
+  method: POST
+  path: /_fabric/{fabric}/_api/streamapps/http/{appName}/{streamName}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#publishHttpSourceMessage
+- name: SearchView
+  description: Search in collection
+  method: POST
+  path: /_fabric/{fabric}/_api/search
+  source_operation: openapi/macrometa-gdn-openapi-original.json#SearchView
+- name: SearchViewUpdate
+  description: Set Search Capability
+  method: POST
+  path: /_fabric/{fabric}/_api/search/collection/{collection-name}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#SearchViewUpdate
+- name: deleteView
+  description: Remove search view
+  method: DELETE
+  path: /_fabric/{fabric}/_api/search/view/{view-name}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#deleteView
+- name: getViews:Properties
+  description: Get the information about search view
+  method: GET
+  path: /_fabric/{fabric}/_api/search/view/{view-name}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#getViews:Properties
+- name: getView
+  description: Read properties of search view
+  method: GET
+  path: /_fabric/{fabric}/_api/search/view/{view-name}/properties
+  source_operation: openapi/macrometa-gdn-openapi-original.json#getView
+- name: modifyViewPut
+  description: Change properties of search view
+  method: PUT
+  path: /_fabric/{fabric}/_api/search/view/{view-name}/properties
+  source_operation: openapi/macrometa-gdn-openapi-original.json#modifyViewPut
+- name: modifyView:rename
+  description: Rename search view
+  method: PUT
+  path: /_fabric/{fabric}/_api/search/view/{view-name}/rename
+  source_operation: openapi/macrometa-gdn-openapi-original.json#modifyView:rename
+- name: getViews:AllViews
+  description: List all search views.
+  method: GET
+  path: /_fabric/{fabric}/_api/search/view
+  source_operation: openapi/macrometa-gdn-openapi-original.json#getViews:AllViews
+- name: createView
+  description: Create search view
+  method: POST
+  path: /_fabric/{fabric}/_api/search/view
+  source_operation: openapi/macrometa-gdn-openapi-original.json#createView
+- name: RestAnalyzerHandler:List
+  description: List all analyzers
+  method: GET
+  path: /_fabric/{fabric}/_api/search/analyzer
+  source_operation: openapi/macrometa-gdn-openapi-original.json#RestAnalyzerHandler:List
+- name: RestAnalyzerHandler:GetDefinition
+  description: Return the analyzer definition
+  method: GET
+  path: /_fabric/{fabric}/_api/search/analyzer/{analyzer-name}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#RestAnalyzerHandler:GetDefinition
+- name: ListOfManagedKey
+  description: List of managed keys.
+  method: GET
+  path: /_fabric/{fabric}/_api/kms/managedkey
+  source_operation: openapi/macrometa-gdn-openapi-original.json#ListOfManagedKey
+- name: CreateManagedKey
+  description: Create managed key.
+  method: POST
+  path: /_fabric/{fabric}/_api/kms/managedkey
+  source_operation: openapi/macrometa-gdn-openapi-original.json#CreateManagedKey
+- name: FetchManagedKey
+  description: Fetch managed key by ID.
+  method: GET
+  path: /_fabric/{fabric}/_api/kms/managedkey/{id}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#FetchManagedKey
+- name: DeleteManagedKey
+  description: Delete managed key by ID.
+  method: DELETE
+  path: /_fabric/{fabric}/_api/kms/managedkey/{id}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#DeleteManagedKey
+- name: EnableOrDisableManagedKey
+  description: Enable or disable the managed key.
+  method: PATCH
+  path: /_fabric/{fabric}/_api/kms/managedkey/{id}/enable/{enable}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#EnableOrDisableManagedKey
+- name: ListOfSecrets
+  description: List of secrets.
+  method: GET
+  path: /_fabric/{fabric}/_api/kms/secret
+  source_operation: openapi/macrometa-gdn-openapi-original.json#ListOfSecrets
+- name: CreateSecret
+  description: Create secret.
+  method: POST
+  path: /_fabric/{fabric}/_api/kms/secret
+  source_operation: openapi/macrometa-gdn-openapi-original.json#CreateSecret
+- name: DeleteAllSecrets
+  description: Delete all secrets.
+  method: DELETE
+  path: /_fabric/{fabric}/_api/kms/secret
+  source_operation: openapi/macrometa-gdn-openapi-original.json#DeleteAllSecrets
+- name: FetchSecret
+  description: Fetch secret.
+  method: GET
+  path: /_fabric/{fabric}/_api/kms/secret/{name}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#FetchSecret
+- name: UpdateSecret
+  description: Update secret.
+  method: PUT
+  path: /_fabric/{fabric}/_api/kms/secret/{name}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#UpdateSecret
+- name: DeleteSecret
+  description: Delete secret.
+  method: DELETE
+  path: /_fabric/{fabric}/_api/kms/secret/{name}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#DeleteSecret
+- name: ListOfGeo-fabrics
+  description: List of GeoFabrics
+  method: GET
+  path: /_fabric/_system/_api/database
+  source_operation: openapi/macrometa-gdn-openapi-original.json#ListOfGeo-fabrics
+- name: CreateGeo-fabric
+  description: Create GeoFabric
+  method: POST
+  path: /_fabric/_system/_api/database
+  source_operation: openapi/macrometa-gdn-openapi-original.json#CreateGeo-fabric
+- name: ListOfAccessibleGeoFabrics
+  description: List of accessible GeoFabrics
+  method: GET
+  path: /_fabric/_system/_api/database/user
+  source_operation: openapi/macrometa-gdn-openapi-original.json#ListOfAccessibleGeoFabrics
+- name: DropGeo-fabric
+  description: Remove GeoFabric
+  method: DELETE
+  path: /_fabric/_system/_api/database/{fabric}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#DropGeo-fabric
+- name: InformationOfTheGeo-fabric
+  description: Information of the GeoFabric
+  method: GET
+  path: /_fabric/{fabric}/_api/database/metadata
+  source_operation: openapi/macrometa-gdn-openapi-original.json#InformationOfTheGeo-fabric
+- name: SetMetadataInformationOfTheGeo-fabric
+  description: Set GeoFabric metadata
+  method: PUT
+  path: /_fabric/{fabric}/_api/database/metadata
+  source_operation: openapi/macrometa-gdn-openapi-original.json#SetMetadataInformationOfTheGeo-fabric
+- name: UpdateMetadataInformationOfTheGeo-fabric
+  description: Modify GeoFabric metadata
+  method: PATCH
+  path: /_fabric/{fabric}/_api/database/metadata
+  source_operation: openapi/macrometa-gdn-openapi-original.json#UpdateMetadataInformationOfTheGeo-fabric
+- name: createConnection
+  description: Create a connection
+  method: POST
+  path: /_fabric/{fabric}/_api/connections
+  source_operation: openapi/macrometa-gdn-openapi-original.json#createConnection
+- name: getConnections
+  description: List all connections
+  method: GET
+  path: /_fabric/{fabric}/_api/connections
+  source_operation: openapi/macrometa-gdn-openapi-original.json#getConnections
+- name: validateConnection
+  description: Validate a connection
+  method: POST
+  path: /_fabric/{fabric}/_api/connections/validate
+  source_operation: openapi/macrometa-gdn-openapi-original.json#validateConnection
+- name: getConnection
+  description: Get connection details
+  method: GET
+  path: /_fabric/{fabric}/_api/connections/{connection-name}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#getConnection
+- name: deleteConnection
+  description: Delete a connection
+  method: DELETE
+  path: /_fabric/{fabric}/_api/connections/{connection-name}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#deleteConnection
+- name: updateConnection
+  description: Update connection details
+  method: PUT
+  path: /_fabric/{fabric}/_api/connections/{connection-name}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#updateConnection
+- name: getMetrics
+  description: Retrieve metrics
+  method: GET
+  path: /_api/connections/metrics
+  source_operation: openapi/macrometa-gdn-openapi-original.json#getMetrics
+- name: ListEnvironments
+  description: List of all environments
+  method: GET
+  path: /_api/environments
+  source_operation: openapi/macrometa-gdn-openapi-original.json#ListEnvironments
+- name: CreateEnvironment
+  description: Create an environment
+  method: POST
+  path: /_api/environments
+  source_operation: openapi/macrometa-gdn-openapi-original.json#CreateEnvironment
+- name: ListOfAccessibleEnvironments
+  description: List all environments
+  method: GET
+  path: /_api/environments/user
+  source_operation: openapi/macrometa-gdn-openapi-original.json#ListOfAccessibleEnvironments
+- name: DropEnvironment
+  description: Remove an environment
+  method: DELETE
+  path: /_api/environments/{environment}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#DropEnvironment
+- name: InformationOfTheEnvironment
+  description: Information about the environment
+  method: GET
+  path: /_api/environments/{environment}/metadata
+  source_operation: openapi/macrometa-gdn-openapi-original.json#InformationOfTheEnvironment
+- name: SetMetadataInformationOfTheEnvironment
+  description: Set the environment metadata
+  method: PUT
+  path: /_api/environments/{environment}/metadata
+  source_operation: openapi/macrometa-gdn-openapi-original.json#SetMetadataInformationOfTheEnvironment
+- name: UpdateMetadataInformationOfTheEnvironment
+  description: Modify the environment metadata
+  method: PATCH
+  path: /_api/environments/{environment}/metadata
+  source_operation: openapi/macrometa-gdn-openapi-original.json#UpdateMetadataInformationOfTheEnvironment
+- name: RestVersionHandler
+  description: Return server version
+  method: GET
+  path: /_api/version
+  source_operation: openapi/macrometa-gdn-openapi-original.json#RestVersionHandler
+- name: CreateUser
+  description: Create User
+  method: POST
+  path: /_api/user
+  source_operation: openapi/macrometa-gdn-openapi-original.json#CreateUser
+- name: ListAvailableUsers
+  description: List available Users
+  method: GET
+  path: /_api/user/
+  source_operation: openapi/macrometa-gdn-openapi-original.json#ListAvailableUsers
+- name: RemoveUser
+  description: Remove User
+  method: DELETE
+  path: /_api/user/{user}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#RemoveUser
+- name: FetchUser
+  description: Fetch User
+  method: GET
+  path: /_api/user/{user}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#FetchUser
+- name: ModifyUser
+  description: Modify User.
+  method: PATCH
+  path: /_api/user/{user}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#ModifyUser
+- name: ListTheAccessibleDatabasesForAUser
+  description: List the GeoFabrics available to user.
+  method: GET
+  path: /_api/user/{user}/database
+  source_operation: openapi/macrometa-gdn-openapi-original.json#ListTheAccessibleDatabasesForAUser
+- name: GetTheDatabaseAccessLevel
+  description: Get the GeoFabric access level.
+  method: GET
+  path: /_api/user/{user}/database/{geofabric}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#GetTheDatabaseAccessLevel
+- name: ClearTheDatabaseAccessLevel
+  description: Clear the GeoFabric access level
+  method: DELETE
+  path: /_api/user/{user}/database/{geofabric}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#ClearTheDatabaseAccessLevel
+- name: SetTheDatabaseAccessLevel
+  description: Set the GeoFabric access level
+  method: PUT
+  path: /_api/user/{user}/database/{geofabric}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#SetTheDatabaseAccessLevel
+- name: GetTheAllCollectionAccessLevel
+  description: Get the collections access level for specific user
+  method: GET
+  path: /_api/user/{user}/database/{geofabric}/collection
+  source_operation: openapi/macrometa-gdn-openapi-original.json#GetTheAllCollectionAccessLevel
+- name: GetTheSpecificCollectionAccessLevel
+  description: Get the specific collection access level
+  method: GET
+  path: /_api/user/{user}/database/{geofabric}/collection/{collection}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#GetTheSpecificCollectionAccessLevel
+- name: ClearTheCollectionAccessLevel
+  description: Clear the collection access level.
+  method: DELETE
+  path: /_api/user/{user}/database/{geofabric}/collection/{collection}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#ClearTheCollectionAccessLevel
+- name: SetTheCollectionAccessLevel
+  description: Set the collection access level
+  method: PUT
+  path: /_api/user/{user}/database/{geofabric}/collection/{collection}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#SetTheCollectionAccessLevel
+- name: ListTheAccessibleStreamsForAUser
+  description: List the accessible streams
+  method: GET
+  path: /_api/user/{user}/database/{geofabric}/stream
+  source_operation: openapi/macrometa-gdn-openapi-original.json#ListTheAccessibleStreamsForAUser
+- name: GetTheStreamAccessLevel
+  description: Get the stream access level
+  method: GET
+  path: /_api/user/{user}/database/{geofabric}/stream/{stream}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#GetTheStreamAccessLevel
+- name: ClearTheStreamAccessLevel
+  description: Clear the stream access level.
+  method: DELETE
+  path: /_api/user/{user}/database/{geofabric}/stream/{stream}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#ClearTheStreamAccessLevel
+- name: SetTheStreamAccessLevel
+  description: Set the stream access level
+  method: PUT
+  path: /_api/user/{user}/database/{geofabric}/stream/{stream}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#SetTheStreamAccessLevel
+- name: GetTheAllQueryWorkerAccessLevel
+  description: Get the query workers access level for a specific user
+  method: GET
+  path: /_api/user/{user}/database/{geofabric}/restql
+  source_operation: openapi/macrometa-gdn-openapi-original.json#GetTheAllQueryWorkerAccessLevel
+- name: GetTheSpecificQueryWorkerAccessLevel
+  description: Get the specific query worker access level
+  method: GET
+  path: /_api/user/{user}/database/{geofabric}/restql/{query-worker}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#GetTheSpecificQueryWorkerAccessLevel
+- name: ClearTheQueryWorkerAccessLevel
+  description: Clear the query worker access level.
+  method: DELETE
+  path: /_api/user/{user}/database/{geofabric}/restql/{query-worker}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#ClearTheQueryWorkerAccessLevel
+- name: SetTheQueryWorkerAccessLevel
+  description: Set the query worker access level
+  method: PUT
+  path: /_api/user/{user}/database/{geofabric}/restql/{query-worker}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#SetTheQueryWorkerAccessLevel
+- name: GetAllManagedKeyAccessLevel
+  description: Get the managed keys access level for a specific user
+  method: GET
+  path: /_api/user/{user}/database/{geofabric}/managedkey
+  source_operation: openapi/macrometa-gdn-openapi-original.json#GetAllManagedKeyAccessLevel
+- name: GetSpecificManagedKeyAccessLevel
+  description: Get the specific managed key access level
+  method: GET
+  path: /_api/user/{user}/database/{geofabric}/managedkey/{managed-key-name}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#GetSpecificManagedKeyAccessLevel
+- name: ClearManagedKeyAccessLevel
+  description: Clear the managed key access level
+  method: DELETE
+  path: /_api/user/{user}/database/{geofabric}/managedkey/{managed-key-name}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#ClearManagedKeyAccessLevel
+- name: SetManagedKeyAccessLevel
+  description: Set the managed key access level
+  method: PUT
+  path: /_api/user/{user}/database/{geofabric}/managedkey/{managed-key-name}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#SetManagedKeyAccessLevel
+- name: GetTheBillingAccessLevel
+  description: Get the billing access level
+  method: GET
+  path: /_api/user/{user}/billing
+  source_operation: openapi/macrometa-gdn-openapi-original.json#GetTheBillingAccessLevel
+- name: ClearTheBillingAccessLevel
+  description: Clear the billing access level
+  method: DELETE
+  path: /_api/user/{user}/billing
+  source_operation: openapi/macrometa-gdn-openapi-original.json#ClearTheBillingAccessLevel
+- name: SetTheBillingAccessLevel
+  description: Set the billing access level.
+  method: PUT
+  path: /_api/user/{user}/billing
+  source_operation: openapi/macrometa-gdn-openapi-original.json#SetTheBillingAccessLevel
+- name: GetTheAttributesForUser
+  description: Get the user attributes
+  method: GET
+  path: /_api/user/{user}/attributes
+  source_operation: openapi/macrometa-gdn-openapi-original.json#GetTheAttributesForUser
+- name: CreateTheAttributesForUser
+  description: Update attributes
+  method: PUT
+  path: /_api/user/{user}/attributes
+  source_operation: openapi/macrometa-gdn-openapi-original.json#CreateTheAttributesForUser
+- name: ClearAllAttributesForUser
+  description: Remove all attributes
+  method: DELETE
+  path: /_api/user/{user}/attributes/truncate
+  source_operation: openapi/macrometa-gdn-openapi-original.json#ClearAllAttributesForUser
+- name: ClearTheAttributesForUser
+  description: Remove attribute
+  method: DELETE
+  path: /_api/user/{user}/attributes/{attributeid}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#ClearTheAttributesForUser
+- name: GetBillingAccount
+  description: Get account details
+  method: GET
+  path: /_api/billing/account
+  source_operation: openapi/macrometa-gdn-openapi-original.json#GetBillingAccount
+- name: UpdateContactDetails
+  description: Update contact details
+  method: PUT
+  path: /_api/billing/contact
+  source_operation: openapi/macrometa-gdn-openapi-original.json#UpdateContactDetails
+- name: GetPayments
+  description: Get payment details of the previous months for the given tenant.
+  method: GET
+  path: /_api/billing/payments
+  source_operation: openapi/macrometa-gdn-openapi-original.json#GetPayments
+- name: GetBillingInvoices
+  description: Get invoices for the previous months
+  method: GET
+  path: /_api/billing/invoices
+  source_operation: openapi/macrometa-gdn-openapi-original.json#GetBillingInvoices
+- name: GetCurrentMonthInvoice
+  description: Get invoice of the current month for the given tenant.
+  method: GET
+  path: /_api/billing/invoice/current
+  source_operation: openapi/macrometa-gdn-openapi-original.json#GetCurrentMonthInvoice
+- name: GetInvoiceForMonthYear
+  description: Get invoice of specific year and month for the tenant
+  method: GET
+  path: /_api/billing/invoices/{year}/{month}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#GetInvoiceForMonthYear
+- name: GetAccountUsage
+  description: Get usage of the tenant
+  method: GET
+  path: /_api/billing/usage
+  source_operation: openapi/macrometa-gdn-openapi-original.json#GetAccountUsage
+- name: GetAccountUsageOfSpecificRegion
+  description: Get usage of the tenant for specific region
+  method: GET
+  path: /_api/billing/region/{region}/usage
+  source_operation: openapi/macrometa-gdn-openapi-original.json#GetAccountUsageOfSpecificRegion
+- name: ExportQueryData
+  description: Export data
+  method: POST
+  path: /_fabric/{fabric}/_api/export
+  source_operation: openapi/macrometa-gdn-openapi-original.json#ExportQueryData
+- name: ExportCollectionData
+  description: Export collection data
+  method: GET
+  path: /_fabric/{fabric}/_api/export/{collection}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#ExportCollectionData
+- name: ImportCollectionData
+  description: Import collection data
+  method: POST
+  path: /_fabric/{fabric}/_api/import/{collection}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#ImportCollectionData
+- name: ReturnListOfAllEdgeLocations
+  description: Lists all data centers
+  method: GET
+  path: /datacenter/all
+  source_operation: openapi/macrometa-gdn-openapi-original.json#ReturnListOfAllEdgeLocations
+- name: ListDetailsOfLocalEdgeLocation
+  description: Get a regional data center
+  method: GET
+  path: /datacenter/local
+  source_operation: openapi/macrometa-gdn-openapi-original.json#ListDetailsOfLocalEdgeLocation
+- name: ListDetailsOfSpecifiedEdgeLocation
+  description: Get data center
+  method: GET
+  path: /datacenter/{dc-name}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#ListDetailsOfSpecifiedEdgeLocation
+- name: ChangeSpotCapabilityOfAnEdgeLocation
+  description: Set data center spot capability
+  method: PUT
+  path: /datacenter/{location}/{status}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#ChangeSpotCapabilityOfAnEdgeLocation
+- name: ListEdgeLocation(akaDatacenter)DetailsForSpecifiedTenant
+  description: List all available data centers.
+  method: GET
+  path: /datacenter/_tenant/{tenant-name}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#ListEdgeLocation(akaDatacenter)DetailsForSpecifiedTenant
+- name: ListOfFederationMembers
+  description: List all clusters
+  method: GET
+  path: /_api/members
+  source_operation: openapi/macrometa-gdn-openapi-original.json#ListOfFederationMembers
+- name: JoinFederationOfClusters
+  description: Update clusters in federation
+  method: POST
+  path: /_api/members
+  source_operation: openapi/macrometa-gdn-openapi-original.json#JoinFederationOfClusters
+- name: DeleteMemberFromFederation
+  description: Remove a cluster from federation
+  method: DELETE
+  path: /_api/members/{member}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#DeleteMemberFromFederation
+- name: ReturnListOfTenants
+  description: Fetch list of tenants
+  method: GET
+  path: /_api/tenants
+  source_operation: openapi/macrometa-gdn-openapi-original.json#ReturnListOfTenants
+- name: CreateTenant(requiresSuperuserPrivileges)
+  description: Create Tenant
+  method: POST
+  path: /_api/tenant
+  source_operation: openapi/macrometa-gdn-openapi-original.json#CreateTenant(requiresSuperuserPrivileges)
+- name: RemoveTenant(requiresSuperuserPrivileges)
+  description: Remove Tenant
+  method: DELETE
+  path: /_api/tenant/{tenant}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#RemoveTenant(requiresSuperuserPrivileges)
+- name: ListDetailsOfTenant
+  description: List details of the tenant
+  method: GET
+  path: /_api/tenant/{tenant}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#ListDetailsOfTenant
+- name: ModifyTenant
+  description: Modify Tenant
+  method: PATCH
+  path: /_api/tenant/{tenant}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#ModifyTenant
+- name: GetListOfPlans
+  description: Fetch list of billing plans
+  method: GET
+  path: /_api/plan
+  source_operation: openapi/macrometa-gdn-openapi-original.json#GetListOfPlans
+- name: CreatePlan
+  description: Create billing plan
+  method: POST
+  path: /_api/plan
+  source_operation: openapi/macrometa-gdn-openapi-original.json#CreatePlan
+- name: ListDetailsOfPlan
+  description: List details of the billing plan
+  method: GET
+  path: /_api/plan/{name}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#ListDetailsOfPlan
+- name: ModifyPlan
+  description: Modify billing plan
+  method: PATCH
+  path: /_api/plan/{name}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#ModifyPlan
+- name: RemovePlan
+  description: Remove billing plan
+  method: DELETE
+  path: /_api/plan/{name}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#RemovePlan
+- name: UpdateTenantPlan
+  description: Update tenant billing plan
+  method: POST
+  path: /_api/plan/update
+  source_operation: openapi/macrometa-gdn-openapi-original.json#UpdateTenantPlan
+- name: UpdatePaymentSettings
+  description: Update payment settings
+  method: PUT
+  path: /_api/billing/paymentsettings
+  source_operation: openapi/macrometa-gdn-openapi-original.json#UpdatePaymentSettings
+- name: GetDefaultTenantLimits
+  description: Fetch the default limits for tenants
+  method: GET
+  path: /_api/limits/defaults
+  source_operation: openapi/macrometa-gdn-openapi-original.json#GetDefaultTenantLimits
+- name: SetDefaultTenantLimits
+  description: Set the default tenant limits
+  method: PUT
+  path: /_api/limits/defaults
+  source_operation: openapi/macrometa-gdn-openapi-original.json#SetDefaultTenantLimits
+- name: UpdateDefaultTenantLimits
+  description: Update default tenant limits
+  method: PATCH
+  path: /_api/limits/defaults
+  source_operation: openapi/macrometa-gdn-openapi-original.json#UpdateDefaultTenantLimits
+- name: ResetDefaultTenantLimits
+  description: Reset default tenant limits
+  method: DELETE
+  path: /_api/limits/defaults
+  source_operation: openapi/macrometa-gdn-openapi-original.json#ResetDefaultTenantLimits
+- name: GetServiceDefaultLimits
+  description: Fetch the default limits for tenants
+  method: GET
+  path: /_api/limits/defaults/{service}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#GetServiceDefaultLimits
+- name: GetEnableLimits
+  description: Get limits configured
+  method: GET
+  path: /_api/limits/enable
+  source_operation: openapi/macrometa-gdn-openapi-original.json#GetEnableLimits
+- name: SetEnableLimits
+  description: Set limits configured
+  method: POST
+  path: /_api/limits/enable
+  source_operation: openapi/macrometa-gdn-openapi-original.json#SetEnableLimits
+- name: GetTenantLimits
+  description: Fetch the limits for a tenant
+  method: GET
+  path: /_api/limits/tenant/{tenant}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#GetTenantLimits
+- name: SetTenantLimits
+  description: Set the tenant limits
+  method: PUT
+  path: /_api/limits/tenant/{tenant}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#SetTenantLimits
+- name: UpdateTenantLimits
+  description: Update tenant limit
+  method: PATCH
+  path: /_api/limits/tenant/{tenant}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#UpdateTenantLimits
+- name: ResetTenantLimits
+  description: Reset tenant limits
+  method: DELETE
+  path: /_api/limits/tenant/{tenant}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#ResetTenantLimits
+- name: GetTenantServiceLimits
+  description: Get the limits for a tenant service
+  method: GET
+  path: /_api/limits/tenant/{tenant}/{service}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#GetTenantServiceLimits
+- name: GetPlanLimits
+  description: Get the limits for a billing plan
+  method: GET
+  path: /_api/limits/plan/{attribution}/{name}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#GetPlanLimits
+- name: SetPlanLimits
+  description: Set the billing plan limits
+  method: PUT
+  path: /_api/limits/plan/{attribution}/{name}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#SetPlanLimits
+- name: UpdatePlanLimits
+  description: Update billing plan limits
+  method: PATCH
+  path: /_api/limits/plan/{attribution}/{name}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#UpdatePlanLimits
+- name: ResetPlanLimits
+  description: Reset billing plan limits
+  method: DELETE
+  path: /_api/limits/plan/{attribution}/{name}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#ResetPlanLimits
+- name: GetPlanServiceLimits
+  description: Get the service limits for a billing plan
+  method: GET
+  path: /_api/limits/plan/{attribution}/{name}/{service}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#GetPlanServiceLimits
+- name: ResetFeaturesForATenant
+  description: Reset features for a tenant
+  method: DELETE
+  path: /_api/features/tenant/{tenant}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#ResetFeaturesForATenant
+- name: LookupFeaturesForATenant
+  description: Get features for a tenant
+  method: GET
+  path: /_api/features/tenant/{tenant}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#LookupFeaturesForATenant
+- name: UpdateFeaturesForATenant
+  description: Set features for a tenant
+  method: POST
+  path: /_api/features/tenant/{tenant}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#UpdateFeaturesForATenant
+- name: UpdateFeaturesForSpecifiedTenant
+  description: Update features for a tenant
+  method: PUT
+  path: /_api/features/tenant/{tenant}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#UpdateFeaturesForSpecifiedTenant
+- name: AddDatacentersToTenant(superuser)
+  description: Add data center to the tenant
+  method: POST
+  path: /_api/tenant/{tenant}/datacenter/{datacenter}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#AddDatacentersToTenant(superuser)
+- name: RemoveTenantDatacenter(superuser)
+  description: Remove data center from the tenant.
+  method: DELETE
+  path: /_api/tenant/{tenant}/datacenter/{datacenter}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#RemoveTenantDatacenter(superuser)
+- name: ReconcileTenantDatacenter(superuser)
+  description: Reconcile tenant from given data center
+  method: PUT
+  path: /_api/tenant/{tenant}/datacenter/{datacenter}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#ReconcileTenantDatacenter(superuser)
+- name: GetSyncStatus(superuser)
+  description: Get the current sync status of a tenant or fabric
+  method: GET
+  path: /_api/tenant/{tenant}/datacenter/status
+  source_operation: openapi/macrometa-gdn-openapi-original.json#GetSyncStatus(superuser)
+- name: AddDatacentersToAllTenant(superuser)
+  description: Add data center to all fabrics from all tenants
+  method: POST
+  path: /_api/tenant/datacenter/{datacenter}/syncall
+  source_operation: openapi/macrometa-gdn-openapi-original.json#AddDatacentersToAllTenant(superuser)
+- name: EnableLocalCollectionsUpdatesPublishing(superuser)
+  description: Enable publishing changes to local collections
+  method: PUT
+  path: /_api/tenant/{tenant}/fabric/{fabric}/publish-local-collections
+  source_operation: openapi/macrometa-gdn-openapi-original.json#EnableLocalCollectionsUpdatesPublishing(superuser)
+- name: DisableLocalCollectionsUpdatesPublishing(superuser)
+  description: Disable publishing changes to local collections
+  method: DELETE
+  path: /_api/tenant/{tenant}/fabric/{fabric}/publish-local-collections
+  source_operation: openapi/macrometa-gdn-openapi-original.json#DisableLocalCollectionsUpdatesPublishing(superuser)
+- name: EnableAcceptingLocalCollectionsUpdates(superuser)
+  description: Enable accepting updates to local collections
+  method: PUT
+  path: /_api/tenant/{tenant}/fabric/{fabric}/accept-local-collections-updates
+  source_operation: openapi/macrometa-gdn-openapi-original.json#EnableAcceptingLocalCollectionsUpdates(superuser)
+- name: DisableAcceptingLocalCollectionsUpdates(superuser)
+  description: Disable accepting updates to local collections
+  method: DELETE
+  path: /_api/tenant/{tenant}/fabric/{fabric}/accept-local-collections-updates
+  source_operation: openapi/macrometa-gdn-openapi-original.json#DisableAcceptingLocalCollectionsUpdates(superuser)
+- name: handleCommandPut:compactCollection
+  description: Compact Collection
+  method: PUT
+  path: /_fabric/{fabric}/_api/collection/{collection-name}/compact
+  source_operation: openapi/macrometa-gdn-openapi-original.json#handleCommandPut:compactCollection
+- name: DeleteEvent
+  description: Remove event
+  method: DELETE
+  path: /_fabric/{fabric}/_api/events
+  source_operation: openapi/macrometa-gdn-openapi-original.json#DeleteEvent
+- name: CreateEvent
+  description: Create event
+  method: POST
+  path: /_fabric/{fabric}/_api/events
+  source_operation: openapi/macrometa-gdn-openapi-original.json#CreateEvent
+- name: LookupEventsForATenantAndFabric
+  description: Lookup events for a tenant and fabric
+  method: GET
+  path: /_fabric/{fabric}/_api/events
+  source_operation: openapi/macrometa-gdn-openapi-original.json#LookupEventsForATenantAndFabric
+- name: names
+  description: Get metrics names
+  method: GET
+  path: /_fabric/{fabric}/_api/metrics/names
+  source_operation: openapi/macrometa-gdn-openapi-original.json#names
+- name: query
+  description: Query user metrics
+  method: POST
+  path: /_fabric/{fabric}/_api/metrics/query
+  source_operation: openapi/macrometa-gdn-openapi-original.json#query
+- name: FixesC8StreamsSettingsForAll
+  description: Fixes streams settings for all tenants and fabrics
+  method: POST
+  path: /_api/repair/all
+  source_operation: openapi/macrometa-gdn-openapi-original.json#FixesC8StreamsSettingsForAll
+- name: FixesC8StreamsSettingsForTenant
+  description: Fixes streams settings for a specific tenant and its fabrics
+  method: POST
+  path: /_api/repair/tenant/{tenant}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#FixesC8StreamsSettingsForTenant
+- name: repairCheckCollections
+  description: Check if regions are in sync
+  method: POST
+  path: /_api/repair/check
+  source_operation: openapi/macrometa-gdn-openapi-original.json#repairCheckCollections
+- name: repairSyncCollections
+  description: Synchronize global collections that are experiencing data discrepancies between regions
+  method: POST
+  path: /_api/repair/sync
+  source_operation: openapi/macrometa-gdn-openapi-original.json#repairSyncCollections
+- name: SyncPriority
+  description: Set sync priority
+  method: POST
+  path: /_api/repair/sync/priority/{priority}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#SyncPriority
+- name: CancelSync
+  description: Cancel sync operation
+  method: POST
+  path: /_api/repair/sync/cancel
+  source_operation: openapi/macrometa-gdn-openapi-original.json#CancelSync
+- name: zendeskAPI
+  description: Create a support ticket
+  method: POST
+  path: /_api/trigger/zendesk
+  source_operation: openapi/macrometa-gdn-openapi-original.json#zendeskAPI
+- name: GenerateHourlyBillingUsage(superuser)
+  description: Generates hourly usage data.
+  method: POST
+  path: /_api/_admin/_billing/usage/hourly
+  source_operation: openapi/macrometa-gdn-openapi-original.json#GenerateHourlyBillingUsage(superuser)
+- name: GenerateDailyUsage(superuser)
+  description: Generates daily usage data for billing.
+  method: POST
+  path: /_api/_admin/_billing/usage/daily
+  source_operation: openapi/macrometa-gdn-openapi-original.json#GenerateDailyUsage(superuser)
+- name: GenerateFederationUsage(superuser)
+  description: Generates aggregated usage data for billing.
+  method: POST
+  path: /_api/_admin/_billing/usage/federation
+  source_operation: openapi/macrometa-gdn-openapi-original.json#GenerateFederationUsage(superuser)
+- name: ReportUsageToStripe(superuser)
+  description: Upload usage data to Stripe for billing invoice.
+  method: POST
+  path: /_api/_admin/_billing/usage/report
+  source_operation: openapi/macrometa-gdn-openapi-original.json#ReportUsageToStripe(superuser)
+- name: CheckBillingUsage(superuser)
+  description: Returns the list of missing usage records of tenants.
+  method: GET
+  path: /_api/_admin/_billing/usage/missing
+  source_operation: openapi/macrometa-gdn-openapi-original.json#CheckBillingUsage(superuser)
+- name: GenerateMissingBillingUsage(superuser)
+  description: Generate missing usage records.
+  method: POST
+  path: /_api/_admin/_billing/usage/missing/generate
+  source_operation: openapi/macrometa-gdn-openapi-original.json#GenerateMissingBillingUsage(superuser)
+- name: getConnectors
+  description: Get available connectors
+  method: GET
+  path: /_api/connectors
+  source_operation: openapi/macrometa-gdn-openapi-original.json#getConnectors
+- name: getConnector
+  description: Get connector details
+  method: GET
+  path: /_api/connectors/{connector-name}
+  source_operation: openapi/macrometa-gdn-openapi-original.json#getConnector
+- name: retrieveSample
+  description: Retrieve sample data from the data source
+  method: POST
+  path: /_api/connectors/{connector-name}/sample
+  source_operation: openapi/macrometa-gdn-openapi-original.json#retrieveSample
+- name: retrieveSchema
+  description: Retrieve schema from the data source
+  method: POST
+  path: /_api/connectors/{connector-name}/schema
+  source_operation: openapi/macrometa-gdn-openapi-original.json#retrieveSchema
+- name: getSampleTransformation
+  description: Generate a transformation query sample
+  method: POST
+  path: /_api/transformations/sample
+  source_operation: openapi/macrometa-gdn-openapi-original.json#getSampleTransformation
+- name: validateTransformation
+  description: Validate transformation
+  method: POST
+  path: /_api/transformations/validate
+  source_operation: openapi/macrometa-gdn-openapi-original.json#validateTransformation
+- name: previewTransformation
+  description: Generate transformed data preview
+  method: POST
+  path: /_api/transformations/preview
+  source_operation: openapi/macrometa-gdn-openapi-original.json#previewTransformation

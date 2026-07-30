@@ -1,0 +1,27 @@
+# Macrometa
+
+> Macrometa is a global data network and edge computing platform. The Global Data Network (GDN) offers a geo-distributed serverless NoSQL database, pub/sub streams, complex event processing, and edge functions via a unified REST API and first-party Python (pyC8) and JavaScript (jsc8) SDKs. Macrometa also ships PhotonIQ, an AI-powered edge delivery suite for web performance (prerendering, edge-side tagging, FaaS, fingerprinting, virtual waiting rooms, event delivery, hypersearch).
+
+Authentication: API key (`Authorization: apikey <key>`) or JWT bearer (`Authorization: bearer <jwt>`, 12h TTL). See https://www.macrometa.com/docs/account-management/auth
+
+## APIs
+- [Macrometa GDN API Reference](https://www.macrometa.com/docs/api): Core geo-distributed database, streams, stream workers, queries, graphs, functions, and account management (303 operations).
+- [PhotonIQ EDS API](https://www.macrometa.com/docs/photoniq): Real-time event delivery.
+- [PhotonIQ Prerender / EST / FaaS / Fingerprint / HyperSearch / Virtual Waiting Rooms](https://www.macrometa.com/docs/photoniq): AI-powered edge delivery product family.
+
+## Specs
+- GDN OpenAPI: openapi/macrometa-gdn-openapi-original.json
+- PhotonIQ OpenAPI specs: openapi/macrometa-photoniq-*-openapi-original.json
+
+## SDKs & Tools
+- [pyC8 (Python SDK)](https://pypi.org/project/pyC8/): `pip install pyC8`
+- [jsc8 (JavaScript SDK)](https://www.npmjs.com/package/jsc8): `npm install jsc8`
+- [gdnsl (CLI)](https://www.npmjs.com/package/gdnsl): `npm install -g gdnsl`
+
+## Docs
+- [Developer Hub](https://www.macrometa.com/dev-hub)
+- [Documentation](https://www.macrometa.com/docs)
+- [Release Notes](https://www.macrometa.com/docs/release-notes)
+- [Pricing](https://www.macrometa.com/pricing)
+- [Status](https://status.macrometa.io/)
+- [GitHub](https://github.com/Macrometacorp)

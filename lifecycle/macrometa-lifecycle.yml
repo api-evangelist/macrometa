@@ -1,0 +1,16 @@
+generated: '2026-07-20'
+method: searched
+source: https://www.macrometa.com/docs/release-notes
+versioning:
+  scheme: uri-path
+  current: v0.17.x
+  docs: https://www.macrometa.com/docs
+release_notes: https://www.macrometa.com/docs/release-notes
+deprecation:
+  policy_url: null
+  sunset_header: false
+  note: No formal deprecation policy or RFC 8594 Sunset header support found.
+status_page: https://status.macrometa.io/
+sla:
+  url: null
+  note: No public SLA page found.

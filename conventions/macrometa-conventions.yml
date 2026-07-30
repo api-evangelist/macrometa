@@ -1,0 +1,41 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/macrometa-gdn-openapi-original.json
+authentication:
+  style: API key or JWT bearer token in Authorization header
+  api_key_format: 'Authorization: apikey <key>'
+  jwt_format: 'Authorization: bearer <jwt>'
+  jwt_ttl: 12 hours
+  docs: https://www.macrometa.com/docs/account-management/auth
+  artifact: authentication/macrometa-authentication.yml
+idempotency:
+  supported: false
+  note: No documented Idempotency-Key header in the GDN OpenAPI.
+pagination:
+  style: offset/limit and cursor
+  common_params:
+  - limit
+  - offset
+  - count
+  note: Query and list endpoints accept limit/offset; cursor-based batches (hasMore, id) for C8QL query
+    results.
+versioning:
+  scheme: uri-path
+  current: v0.17.x
+  note: API paths are prefixed with /_api and /_fabric/<fabric>.
+tenancy:
+  model: tenant + geofabric
+  note: Requests are scoped to a tenant and a geo-fabric (_system by default) via the /_fabric/<name>
+    path segment.
+errors:
+  artifact: errors/macrometa-problem-types.yml
+  envelope:
+  - error
+  - code
+  - errorNum
+  - errorMessage
+rate_limiting:
+  signaled: false
+  note: 429 responses are defined; no documented rate-limit response headers in the spec.
+lifecycle:
+  artifact: lifecycle/macrometa-lifecycle.yml

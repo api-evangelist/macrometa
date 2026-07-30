@@ -1,0 +1,37 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/macrometa-gdn-openapi-original.json, openapi/macrometa-photoniq-eds-openapi-original.json,
+  openapi/macrometa-photoniq-faas-openapi-original.json, openapi/macrometa-photoniq-fps-openapi-original.json,
+  openapi/macrometa-photoniq-hss-openapi-original.json, openapi/macrometa-photoniq-vwrs-openapi-original.json
+summary:
+  types:
+  - apiKey
+  - http
+  api_key_in:
+  - header
+schemes:
+- name: ApiKeyAuth
+  type: apiKey
+  in: header
+  parameter: Authorization
+  description: |-
+    Provide an API Key to the `Authorization` header, prefixed with "apikey".
+
+    Example: `Authorization: apikey <key>`
+  sources:
+  - openapi/macrometa-gdn-openapi-original.json
+  - openapi/macrometa-photoniq-eds-openapi-original.json
+  - openapi/macrometa-photoniq-faas-openapi-original.json
+  - openapi/macrometa-photoniq-fps-openapi-original.json
+  - openapi/macrometa-photoniq-hss-openapi-original.json
+  - openapi/macrometa-photoniq-vwrs-openapi-original.json
+- name: BearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  description: |-
+    Provide a JSON Web Token (JWT) to the `Authorization` header, prefixed with "bearer".
+
+    Example: `Authorization: bearer <jwt>`
+  sources:
+  - openapi/macrometa-gdn-openapi-original.json

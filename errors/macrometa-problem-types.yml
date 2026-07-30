@@ -1,0 +1,50 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/macrometa-gdn-openapi-original.json
+format: http-status
+note: Macrometa GDN returns errors as JSON objects with error, code, and errorNum/errorMessage fields
+  (ArangoDB-derived). Not RFC 9457 problem+json.
+envelope:
+  fields:
+  - error (bool)
+  - code (http status)
+  - errorNum
+  - errorMessage
+problems:
+- status: 400
+  title: Bad Request
+  description: Failed due to missing or malformed data. Verify that all parameters are complete.
+  occurrences: 238
+- status: 401
+  title: Unauthorized
+  description: Failed because you do not have administrator permissions.
+  occurrences: 180
+- status: 403
+  title: Forbidden
+  description: Failed to validate because you do not have access to the server.
+  occurrences: 192
+- status: 404
+  title: Not Found
+  description: Failed to find specified API key.
+  occurrences: 220
+- status: 405
+  title: Method Not Allowed
+  description: Failed due to unsupported HTTP method.
+  occurrences: 6
+- status: 409
+  title: Conflict
+  description: Failed because API key already exists.
+  occurrences: 15
+- status: 412
+  title: Precondition Failed
+  description: 'Failed to remove document due to different version if a *If-Match* header or *rev* is
+    given. The response contains the found document''s current revision in the '
+  occurrences: 24
+- status: 422
+  title: Unprocessable Entity
+  description: Failed to validate stream application because there is an error in the definition.
+  occurrences: 5
+- status: 429
+  title: Too Many Requests
+  description: Requests count from this IP exceeds the rate limit.
+  occurrences: 3

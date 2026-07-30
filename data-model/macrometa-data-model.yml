@@ -1,0 +1,71 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/macrometa-gdn-openapi-original.json
+note: Entities and relationships derived from the GDN OpenAPI path hierarchy (/_fabric/<fabric>/...) and
+  resource tags. 372 component schemas.
+entities:
+- name: Tenant
+  description: Top-level account/organization namespace.
+- name: GeoFabric
+  description: A named, geo-distributed database instance (default _system).
+- name: Collection
+  description: Document, edge, or key-value collection within a fabric.
+- name: Document
+  description: A record stored in a collection.
+- name: Graph
+  description: A named graph over edge and vertex collections.
+- name: Stream
+  description: A pub/sub messaging stream.
+- name: StreamWorker
+  description: A stream-processing / complex-event-processing worker (stream app).
+- name: QueryWorker
+  description: A saved parameterized C8QL query (RestQL).
+- name: Function
+  description: An edge function / serverless function.
+- name: User
+  description: A platform user account.
+- name: ApiKey
+  description: An API key with per-database/collection/stream access levels.
+- name: Index
+  description: An index defined on a collection.
+relationships:
+- from: GeoFabric
+  to: Tenant
+  type: belongs_to
+  via: tenant
+- from: Collection
+  to: GeoFabric
+  type: belongs_to
+  via: fabric
+- from: Document
+  to: Collection
+  type: belongs_to
+  via: collection
+- from: Index
+  to: Collection
+  type: belongs_to
+  via: collection
+- from: Graph
+  to: Collection
+  type: has_many
+  via: edgeDefinitions
+- from: Stream
+  to: GeoFabric
+  type: belongs_to
+  via: fabric
+- from: StreamWorker
+  to: GeoFabric
+  type: belongs_to
+  via: fabric
+- from: QueryWorker
+  to: GeoFabric
+  type: belongs_to
+  via: fabric
+- from: ApiKey
+  to: Collection
+  type: has_many
+  via: access-level
+- from: User
+  to: ApiKey
+  type: has_many
+  via: user

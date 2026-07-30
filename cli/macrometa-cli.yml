@@ -1,0 +1,18 @@
+generated: '2026-07-20'
+method: searched
+source: https://www.macrometa.com/docs/developer-hub/cli
+name: gdnsl
+description: Macrometa GDN serverless command line interface.
+install:
+- method: npm
+  command: npm install -g gdnsl
+package: packages/macrometa-packages.yml
+repo: https://github.com/Macrometacorp/gdnsl
+docs: https://www.macrometa.com/docs/developer-hub/cli
+capabilities:
+- init / configure profile
+- deploy serverless microservices and functions
+- manage collections, documents and queries
+- manage streams and stream workers
+- manage API keys
+- script serverless workflows via GitHub
