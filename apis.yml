@@ -1,8 +1,29 @@
 aid: macrometa
 name: Macrometa
-description: 'Macrometa is a company surfaced as a portfolio company of partech and added to the API Evangelist
-  network as a stub for enrichment. Sector: Infrastructure SaaS. This profile is a lead awaiting the enrichment
-  pipeline.'
+description: >-
+  Macrometa is a global data network and edge computing platform. Its Global
+  Data Network (GDN) provides a geo-distributed, serverless NoSQL database,
+  pub/sub streams, complex event processing, and edge functions through a
+  unified REST API plus first-party Python (pyC8) and JavaScript (jsC8) SDKs.
+  Macrometa has since expanded into PhotonIQ, an AI-powered edge delivery suite
+  for web performance and digital operations — prerendering, edge-side tagging,
+  function-as-a-service, digital fingerprinting, virtual waiting rooms, event
+  delivery, and hypersearch. This profile catalogs Macrometa's published
+  OpenAPI surface across the GDN core and the PhotonIQ product family, along
+  with its SDKs, CLI, status page, and developer documentation.
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://www.macrometa.com/images/opengraph-default-light.png
 url: https://raw.githubusercontent.com/api-evangelist/macrometa/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -12,16 +33,732 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-20'
 tags:
 - Company
-- Infrastructure Saas
-apis: []
+- Infrastructure
+- Edge Computing
+- Database
+- NoSQL
+- Serverless
+- Streaming
+- Stream Processing
+- Real Time
+- Web Performance
+- CDN
+- Search
+- Artificial Intelligence
+- API
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+apis:
+- aid: macrometa:macrometa-activity-metrics-api
+  name: Macrometa Activity Metrics API
+  description: All the PhotonIQ EST activity metrics endpoints.
+  humanURL: https://www.macrometa.com/docs/api
+  baseURL: https://api-play.paas.macrometa.io
+  tags:
+  - Activity Metrics
+  properties:
+  - type: OpenAPI
+    url: openapi/macrometa-activity-metrics-api-openapi.yml
+- aid: macrometa:macrometa-administration-api
+  name: Macrometa Administration API
+  description: The Administration API from Macrometa — 36 operation(s) for administration.
+  humanURL: https://www.macrometa.com/docs/api
+  baseURL: https://api-play.paas.macrometa.io
+  tags:
+  - Administration
+  properties:
+  - type: OpenAPI
+    url: openapi/macrometa-administration-api-openapi.yml
+- aid: macrometa:macrometa-api-key-api
+  name: Macrometa API key API
+  description: The API key API from Macrometa — 2 operation(s) for api key.
+  humanURL: https://www.macrometa.com/docs/api
+  baseURL: https://api-play.paas.macrometa.io
+  tags:
+  - API key
+  properties:
+  - type: OpenAPI
+    url: openapi/macrometa-api-key-api-openapi.yml
+- aid: macrometa:macrometa-api-keys-api
+  name: Macrometa API Keys API
+  description: The API Keys API from Macrometa — 17 operation(s) for api keys.
+  humanURL: https://www.macrometa.com/docs/api
+  baseURL: https://api-play.paas.macrometa.io
+  tags:
+  - API Keys
+  properties:
+  - type: OpenAPI
+    url: openapi/macrometa-api-keys-api-openapi.yml
+- aid: macrometa:macrometa-authentication-api
+  name: Macrometa Authentication API
+  description: The Authentication API from Macrometa — 1 operation(s) for authentication.
+  humanURL: https://www.macrometa.com/docs/api
+  baseURL: https://api-play.paas.macrometa.io
+  tags:
+  - Authentication
+  properties:
+  - type: OpenAPI
+    url: openapi/macrometa-authentication-api-openapi.yml
+- aid: macrometa:macrometa-billing-api
+  name: Macrometa Billing API
+  description: The Billing API from Macrometa — 8 operation(s) for billing.
+  humanURL: https://www.macrometa.com/docs/api
+  baseURL: https://api-play.paas.macrometa.io
+  tags:
+  - Billing
+  properties:
+  - type: OpenAPI
+    url: openapi/macrometa-billing-api-openapi.yml
+- aid: macrometa:macrometa-cache-api
+  name: Macrometa Cache API
+  description: The Cache API from Macrometa — 3 operation(s) for cache.
+  humanURL: https://www.macrometa.com/docs/api
+  baseURL: https://api-play.paas.macrometa.io
+  tags:
+  - Cache
+  properties:
+  - type: OpenAPI
+    url: openapi/macrometa-cache-api-openapi.yml
+- aid: macrometa:macrometa-change-history-api
+  name: Macrometa Change History API
+  description: All the PhotonIQ EST Change History endpoints.
+  humanURL: https://www.macrometa.com/docs/api
+  baseURL: https://api-play.paas.macrometa.io
+  tags:
+  - Change History
+  properties:
+  - type: OpenAPI
+    url: openapi/macrometa-change-history-api-openapi.yml
+- aid: macrometa:macrometa-collections-api
+  name: Macrometa Collections API
+  description: The Collections API from Macrometa — 10 operation(s) for collections.
+  humanURL: https://www.macrometa.com/docs/api
+  baseURL: https://api-play.paas.macrometa.io
+  tags:
+  - Collections
+  properties:
+  - type: OpenAPI
+    url: openapi/macrometa-collections-api-openapi.yml
+- aid: macrometa:macrometa-components-api
+  name: Macrometa Components API
+  description: >-
+    This endpoint retrieves the current configuration settings of a specified component used for integrating
+    third-party tags. It provides details about each third-party tag that has been configured with the
+    component.
+  humanURL: https://www.macrometa.com/docs/api
+  baseURL: https://api-play.paas.macrometa.io
+  tags:
+  - Components
+  properties:
+  - type: OpenAPI
+    url: openapi/macrometa-components-api-openapi.yml
+- aid: macrometa:macrometa-connections-api
+  name: Macrometa Connections API
+  description: The Connections API from Macrometa — 14 operation(s) for connections.
+  humanURL: https://www.macrometa.com/docs/api
+  baseURL: https://api-play.paas.macrometa.io
+  tags:
+  - Connections
+  properties:
+  - type: OpenAPI
+    url: openapi/macrometa-connections-api-openapi.yml
+- aid: macrometa:macrometa-connectors-api
+  name: Macrometa Connectors API
+  description: The Connectors API from Macrometa — 2 operation(s) for connectors.
+  humanURL: https://www.macrometa.com/docs/api
+  baseURL: https://api-play.paas.macrometa.io
+  tags:
+  - Connectors
+  properties:
+  - type: OpenAPI
+    url: openapi/macrometa-connectors-api-openapi.yml
+- aid: macrometa:macrometa-data-centers-api
+  name: Macrometa Data Centers API
+  description: The Data Centers API from Macrometa — 7 operation(s) for data centers.
+  humanURL: https://www.macrometa.com/docs/api
+  baseURL: https://api-play.paas.macrometa.io
+  tags:
+  - Data Centers
+  properties:
+  - type: OpenAPI
+    url: openapi/macrometa-data-centers-api-openapi.yml
+- aid: macrometa:macrometa-documents-api
+  name: Macrometa Documents API
+  description: The Documents API from Macrometa — 2 operation(s) for documents.
+  humanURL: https://www.macrometa.com/docs/api
+  baseURL: https://api-play.paas.macrometa.io
+  tags:
+  - Documents
+  properties:
+  - type: OpenAPI
+    url: openapi/macrometa-documents-api-openapi.yml
+- aid: macrometa:macrometa-dynamo-api
+  name: Macrometa Dynamo API
+  description: The Dynamo API from Macrometa — 1 operation(s) for dynamo.
+  humanURL: https://www.macrometa.com/docs/api
+  baseURL: https://api-play.paas.macrometa.io
+  tags:
+  - Dynamo
+  properties:
+  - type: OpenAPI
+    url: openapi/macrometa-dynamo-api-openapi.yml
+- aid: macrometa:macrometa-embeddings-api
+  name: Macrometa Embeddings API
+  description: The Embeddings API from Macrometa — 3 operation(s) for embeddings.
+  humanURL: https://www.macrometa.com/docs/api
+  baseURL: https://api-play.paas.macrometa.io
+  tags:
+  - Embeddings
+  properties:
+  - type: OpenAPI
+    url: openapi/macrometa-embeddings-api-openapi.yml
+- aid: macrometa:macrometa-environments-api
+  name: Macrometa Environments API
+  description: The Environments API from Macrometa — 4 operation(s) for environments.
+  humanURL: https://www.macrometa.com/docs/api
+  baseURL: https://api-play.paas.macrometa.io
+  tags:
+  - Environments
+  properties:
+  - type: OpenAPI
+    url: openapi/macrometa-environments-api-openapi.yml
+- aid: macrometa:macrometa-error-metrics-api
+  name: Macrometa Error Metrics API
+  description: All the PhotonIQ EST error metrics endpoints.
+  humanURL: https://www.macrometa.com/docs/api
+  baseURL: https://api-play.paas.macrometa.io
+  tags:
+  - Error Metrics
+  properties:
+  - type: OpenAPI
+    url: openapi/macrometa-error-metrics-api-openapi.yml
+- aid: macrometa:macrometa-est-settings-api
+  name: Macrometa EST Settings API
+  description: >-
+    EST setting API to configure `origin`, `cookies`, and `basicAuth`. To access EST telemetrics `basicAuth`
+    configuration is required.
+  humanURL: https://www.macrometa.com/docs/api
+  baseURL: https://api-play.paas.macrometa.io
+  tags:
+  - EST Settings
+  properties:
+  - type: OpenAPI
+    url: openapi/macrometa-est-settings-api-openapi.yml
+- aid: macrometa:macrometa-function-api
+  name: Macrometa Function API
+  description: The Function API from Macrometa — 18 operation(s) for function.
+  humanURL: https://www.macrometa.com/docs/api
+  baseURL: https://api-play.paas.macrometa.io
+  tags:
+  - Function
+  properties:
+  - type: OpenAPI
+    url: openapi/macrometa-function-api-openapi.yml
+- aid: macrometa:macrometa-geofabrics-api
+  name: Macrometa GeoFabrics API
+  description: The GeoFabrics API from Macrometa — 4 operation(s) for geofabrics.
+  humanURL: https://www.macrometa.com/docs/api
+  baseURL: https://api-play.paas.macrometa.io
+  tags:
+  - GeoFabrics
+  properties:
+  - type: OpenAPI
+    url: openapi/macrometa-geofabrics-api-openapi.yml
+- aid: macrometa:macrometa-graphs-api
+  name: Macrometa Graphs API
+  description: The Graphs API from Macrometa — 9 operation(s) for graphs.
+  humanURL: https://www.macrometa.com/docs/api
+  baseURL: https://api-play.paas.macrometa.io
+  tags:
+  - Graphs
+  properties:
+  - type: OpenAPI
+    url: openapi/macrometa-graphs-api-openapi.yml
+- aid: macrometa:macrometa-health-api
+  name: Macrometa Health API
+  description: Health check related routes.
+  humanURL: https://www.macrometa.com/docs/api
+  baseURL: https://api-play.paas.macrometa.io
+  tags:
+  - Health
+  properties:
+  - type: OpenAPI
+    url: openapi/macrometa-health-api-openapi.yml
+- aid: macrometa:macrometa-health-check-api
+  name: Macrometa Health Check API
+  description: Perform EDS health check
+  humanURL: https://www.macrometa.com/docs/api
+  baseURL: https://api-play.paas.macrometa.io
+  tags:
+  - Health Check
+  properties:
+  - type: OpenAPI
+    url: openapi/macrometa-health-check-api-openapi.yml
+- aid: macrometa:macrometa-import-export-api
+  name: Macrometa Import Export API
+  description: The Import Export API from Macrometa — 3 operation(s) for import export.
+  humanURL: https://www.macrometa.com/docs/api
+  baseURL: https://api-play.paas.macrometa.io
+  tags:
+  - Import Export
+  properties:
+  - type: OpenAPI
+    url: openapi/macrometa-import-export-api-openapi.yml
+- aid: macrometa:macrometa-index-api
+  name: Macrometa Index API
+  description: The Index API from Macrometa — 6 operation(s) for index.
+  humanURL: https://www.macrometa.com/docs/api
+  baseURL: https://api-play.paas.macrometa.io
+  tags:
+  - Index
+  properties:
+  - type: OpenAPI
+    url: openapi/macrometa-index-api-openapi.yml
+- aid: macrometa:macrometa-indexes-api
+  name: Macrometa Indexes API
+  description: The Indexes API from Macrometa — 9 operation(s) for indexes.
+  humanURL: https://www.macrometa.com/docs/api
+  baseURL: https://api-play.paas.macrometa.io
+  tags:
+  - Indexes
+  properties:
+  - type: OpenAPI
+    url: openapi/macrometa-indexes-api-openapi.yml
+- aid: macrometa:macrometa-key-value-api
+  name: Macrometa Key Value API
+  description: The Key Value API from Macrometa — 8 operation(s) for key value.
+  humanURL: https://www.macrometa.com/docs/api
+  baseURL: https://api-play.paas.macrometa.io
+  tags:
+  - Key Value
+  properties:
+  - type: OpenAPI
+    url: openapi/macrometa-key-value-api-openapi.yml
+- aid: macrometa:macrometa-logs-api
+  name: Macrometa Logs API
+  description: The Logs API from Macrometa — 2 operation(s) for logs.
+  humanURL: https://www.macrometa.com/docs/api
+  baseURL: https://api-play.paas.macrometa.io
+  tags:
+  - Logs
+  properties:
+  - type: OpenAPI
+    url: openapi/macrometa-logs-api-openapi.yml
+- aid: macrometa:macrometa-manage-subscriptions-api
+  name: Macrometa Manage Subscriptions API
+  description: Event subscriptions and streaming
+  humanURL: https://www.macrometa.com/docs/api
+  baseURL: https://api-play.paas.macrometa.io
+  tags:
+  - Manage Subscriptions
+  properties:
+  - type: OpenAPI
+    url: openapi/macrometa-manage-subscriptions-api-openapi.yml
+- aid: macrometa:macrometa-managed-keys-api
+  name: Macrometa Managed Keys API
+  description: The Managed Keys API from Macrometa — 3 operation(s) for managed keys.
+  humanURL: https://www.macrometa.com/docs/api
+  baseURL: https://api-play.paas.macrometa.io
+  tags:
+  - Managed Keys
+  properties:
+  - type: OpenAPI
+    url: openapi/macrometa-managed-keys-api-openapi.yml
+- aid: macrometa:macrometa-metrics-api
+  name: Macrometa Metrics API
+  description: Retrieve EDS metrics data
+  humanURL: https://www.macrometa.com/docs/api
+  baseURL: https://api-play.paas.macrometa.io
+  tags:
+  - Metrics
+  properties:
+  - type: OpenAPI
+    url: openapi/macrometa-metrics-api-openapi.yml
+- aid: macrometa:macrometa-models-api
+  name: Macrometa Models API
+  description: The Models API from Macrometa — 1 operation(s) for models.
+  humanURL: https://www.macrometa.com/docs/api
+  baseURL: https://api-play.paas.macrometa.io
+  tags:
+  - Models
+  properties:
+  - type: OpenAPI
+    url: openapi/macrometa-models-api-openapi.yml
+- aid: macrometa:macrometa-origins-api
+  name: Macrometa Origins API
+  description: The Origins API from Macrometa — 2 operation(s) for origins.
+  humanURL: https://www.macrometa.com/docs/api
+  baseURL: https://api-play.paas.macrometa.io
+  tags:
+  - Origins
+  properties:
+  - type: OpenAPI
+    url: openapi/macrometa-origins-api-openapi.yml
+- aid: macrometa:macrometa-position-api
+  name: Macrometa Position API
+  description: The Position API from Macrometa — 2 operation(s) for position.
+  humanURL: https://www.macrometa.com/docs/api
+  baseURL: https://api-play.paas.macrometa.io
+  tags:
+  - Position
+  properties:
+  - type: OpenAPI
+    url: openapi/macrometa-position-api-openapi.yml
+- aid: macrometa:macrometa-prefetch-api
+  name: Macrometa Prefetch API
+  description: The Prefetch API from Macrometa — 3 operation(s) for prefetch.
+  humanURL: https://www.macrometa.com/docs/api
+  baseURL: https://api-play.paas.macrometa.io
+  tags:
+  - Prefetch
+  properties:
+  - type: OpenAPI
+    url: openapi/macrometa-prefetch-api-openapi.yml
+- aid: macrometa:macrometa-prerender-api
+  name: Macrometa Prerender API
+  description: The Prerender API from Macrometa — 2 operation(s) for prerender.
+  humanURL: https://www.macrometa.com/docs/api
+  baseURL: https://api-play.paas.macrometa.io
+  tags:
+  - Prerender
+  properties:
+  - type: OpenAPI
+    url: openapi/macrometa-prerender-api-openapi.yml
+- aid: macrometa:macrometa-prerender-history-api
+  name: Macrometa Prerender History API
+  description: The Prerender History API from Macrometa — 2 operation(s) for prerender history.
+  humanURL: https://www.macrometa.com/docs/api
+  baseURL: https://api-play.paas.macrometa.io
+  tags:
+  - Prerender History
+  properties:
+  - type: OpenAPI
+    url: openapi/macrometa-prerender-history-api-openapi.yml
+- aid: macrometa:macrometa-prerender-settings-api
+  name: Macrometa Prerender Settings API
+  description: The Prerender Settings API from Macrometa — 1 operation(s) for prerender settings.
+  humanURL: https://www.macrometa.com/docs/api
+  baseURL: https://api-play.paas.macrometa.io
+  tags:
+  - Prerender Settings
+  properties:
+  - type: OpenAPI
+    url: openapi/macrometa-prerender-settings-api-openapi.yml
+- aid: macrometa:macrometa-query-api
+  name: Macrometa Query API
+  description: The Query API from Macrometa — 5 operation(s) for query.
+  humanURL: https://www.macrometa.com/docs/api
+  baseURL: https://api-play.paas.macrometa.io
+  tags:
+  - Query
+  properties:
+  - type: OpenAPI
+    url: openapi/macrometa-query-api-openapi.yml
+- aid: macrometa:macrometa-query-workers-api
+  name: Macrometa Query Workers API
+  description: The Query Workers API from Macrometa — 6 operation(s) for query workers.
+  humanURL: https://www.macrometa.com/docs/api
+  baseURL: https://api-play.paas.macrometa.io
+  tags:
+  - Query Workers
+  properties:
+  - type: OpenAPI
+    url: openapi/macrometa-query-workers-api-openapi.yml
+- aid: macrometa:macrometa-redis-api
+  name: Macrometa Redis API
+  description: The Redis API from Macrometa — 2 operation(s) for redis.
+  humanURL: https://www.macrometa.com/docs/api
+  baseURL: https://api-play.paas.macrometa.io
+  tags:
+  - Redis
+  properties:
+  - type: OpenAPI
+    url: openapi/macrometa-redis-api-openapi.yml
+- aid: macrometa:macrometa-search-api
+  name: Macrometa Search API
+  description: The Search API from Macrometa — 10 operation(s) for search.
+  humanURL: https://www.macrometa.com/docs/api
+  baseURL: https://api-play.paas.macrometa.io
+  tags:
+  - Search
+  properties:
+  - type: OpenAPI
+    url: openapi/macrometa-search-api-openapi.yml
+- aid: macrometa:macrometa-secrets-api
+  name: Macrometa Secrets API
+  description: The Secrets API from Macrometa — 2 operation(s) for secrets.
+  humanURL: https://www.macrometa.com/docs/api
+  baseURL: https://api-play.paas.macrometa.io
+  tags:
+  - Secrets
+  properties:
+  - type: OpenAPI
+    url: openapi/macrometa-secrets-api-openapi.yml
+- aid: macrometa:macrometa-service-information-api
+  name: Macrometa Service information API
+  description: The Service information API from Macrometa — 1 operation(s) for service information.
+  humanURL: https://www.macrometa.com/docs/api
+  baseURL: https://api-play.paas.macrometa.io
+  tags:
+  - Service information
+  properties:
+  - type: OpenAPI
+    url: openapi/macrometa-service-information-api-openapi.yml
+- aid: macrometa:macrometa-settings-api
+  name: Macrometa Settings API
+  description: >-
+    Settings endpoints allows users to configure a component to integrate various third-party tags into
+    their system. It accepts configuration settings for different types of tags, such as analytics, advertising,
+    social media, and so on.
+  humanURL: https://www.macrometa.com/docs/api
+  baseURL: https://api-play.paas.macrometa.io
+  tags:
+  - Settings
+  properties:
+  - type: OpenAPI
+    url: openapi/macrometa-settings-api-openapi.yml
+- aid: macrometa:macrometa-stream-workers-api
+  name: Macrometa Stream Workers API
+  description: The Stream Workers API from Macrometa — 7 operation(s) for stream workers.
+  humanURL: https://www.macrometa.com/docs/api
+  baseURL: https://api-play.paas.macrometa.io
+  tags:
+  - Stream Workers
+  properties:
+  - type: OpenAPI
+    url: openapi/macrometa-stream-workers-api-openapi.yml
+- aid: macrometa:macrometa-streams-api
+  name: Macrometa Streams API
+  description: The Streams API from Macrometa — 13 operation(s) for streams.
+  humanURL: https://www.macrometa.com/docs/api
+  baseURL: https://api-play.paas.macrometa.io
+  tags:
+  - Streams
+  properties:
+  - type: OpenAPI
+    url: openapi/macrometa-streams-api-openapi.yml
+- aid: macrometa:macrometa-support-api
+  name: Macrometa Support API
+  description: The Support API from Macrometa — 1 operation(s) for support.
+  humanURL: https://www.macrometa.com/docs/api
+  baseURL: https://api-play.paas.macrometa.io
+  tags:
+  - Support
+  properties:
+  - type: OpenAPI
+    url: openapi/macrometa-support-api-openapi.yml
+- aid: macrometa:macrometa-synthetic-interactions-api
+  name: Macrometa Synthetic Interactions API
+  description: >-
+    The Synthetic Interactions API from Macrometa — 2 operation(s) for synthetic interactions.
+  humanURL: https://www.macrometa.com/docs/api
+  baseURL: https://api-play.paas.macrometa.io
+  tags:
+  - Synthetic Interactions
+  properties:
+  - type: OpenAPI
+    url: openapi/macrometa-synthetic-interactions-api-openapi.yml
+- aid: macrometa:macrometa-system-api
+  name: Macrometa System API
+  description: The System API from Macrometa — 3 operation(s) for system.
+  humanURL: https://www.macrometa.com/docs/api
+  baseURL: https://api-play.paas.macrometa.io
+  tags:
+  - System
+  properties:
+  - type: OpenAPI
+    url: openapi/macrometa-system-api-openapi.yml
+- aid: macrometa:macrometa-telemetry-api
+  name: Macrometa Telemetry API
+  description: The Telemetry API from Macrometa — 4 operation(s) for telemetry.
+  humanURL: https://www.macrometa.com/docs/api
+  baseURL: https://api-play.paas.macrometa.io
+  tags:
+  - Telemetry
+  properties:
+  - type: OpenAPI
+    url: openapi/macrometa-telemetry-api-openapi.yml
+- aid: macrometa:macrometa-track-api
+  name: Macrometa Track API
+  description: All the tracking endpoints.
+  humanURL: https://www.macrometa.com/docs/api
+  baseURL: https://api-play.paas.macrometa.io
+  tags:
+  - Track
+  properties:
+  - type: OpenAPI
+    url: openapi/macrometa-track-api-openapi.yml
+- aid: macrometa:macrometa-triggers-api
+  name: Macrometa Triggers API
+  description: >-
+    This endpoint is designed for configuring triggers for a specific component. Triggers are essential
+    for initiating actions within a component, as they define the specific conditions  under which these
+    actions are executed. Each trigger consists of one or more rules, known as Trigger Rules, which collectively
+    determine when an action should be started. In the  configuration process, you can define various
+    types of Trigger Rules, each tailored to different conditions and scenarios. This flexibility allows
+    for precise control over component behavior,  enabling actions to be executed in response to defined
+    events or states. It is crucial to accurately set up triggers to ensure the proper functioning of
+    the component within your website's  architecture. By using this endpoint, you can create, modify,
+    or delete trigger configurations, thereby customizing how and when your component reacts to specific
+    conditions or user interactions.
+  humanURL: https://www.macrometa.com/docs/api
+  baseURL: https://api-play.paas.macrometa.io
+  tags:
+  - Triggers
+  properties:
+  - type: OpenAPI
+    url: openapi/macrometa-triggers-api-openapi.yml
+- aid: macrometa:macrometa-usage-api
+  name: Macrometa Usage API
+  description: The Usage API from Macrometa — 5 operation(s) for usage.
+  humanURL: https://www.macrometa.com/docs/api
+  baseURL: https://api-play.paas.macrometa.io
+  tags:
+  - Usage
+  properties:
+  - type: OpenAPI
+    url: openapi/macrometa-usage-api-openapi.yml
+- aid: macrometa:macrometa-usage-metrics-api
+  name: Macrometa Usage Metrics API
+  description: All the PhotonIQ EST usage metrics endpoints.
+  humanURL: https://www.macrometa.com/docs/api
+  baseURL: https://api-play.paas.macrometa.io
+  tags:
+  - Usage Metrics
+  properties:
+  - type: OpenAPI
+    url: openapi/macrometa-usage-metrics-api-openapi.yml
+- aid: macrometa:macrometa-users-api
+  name: Macrometa Users API
+  description: The Users API from Macrometa — 18 operation(s) for users.
+  humanURL: https://www.macrometa.com/docs/api
+  baseURL: https://api-play.paas.macrometa.io
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/macrometa-users-api-openapi.yml
+- aid: macrometa:macrometa-variables-api
+  name: Macrometa Variables API
+  description: All the PhotonIQ EST variables endpoints
+  humanURL: https://www.macrometa.com/docs/api
+  baseURL: https://api-play.paas.macrometa.io
+  tags:
+  - Variables
+  properties:
+  - type: OpenAPI
+    url: openapi/macrometa-variables-api-openapi.yml
+- aid: macrometa:macrometa-version-api
+  name: Macrometa Version API
+  description: Get EDS version
+  humanURL: https://www.macrometa.com/docs/api
+  baseURL: https://api-play.paas.macrometa.io
+  tags:
+  - Version
+  properties:
+  - type: OpenAPI
+    url: openapi/macrometa-version-api-openapi.yml
+- aid: macrometa:macrometa-visitors-api
+  name: Macrometa Visitors API
+  description: The Visitors API from Macrometa — 1 operation(s) for visitors.
+  humanURL: https://www.macrometa.com/docs/api
+  baseURL: https://api-play.paas.macrometa.io
+  tags:
+  - Visitors
+  properties:
+  - type: OpenAPI
+    url: openapi/macrometa-visitors-api-openapi.yml
+- aid: macrometa:macrometa-visits-api
+  name: Macrometa Visits API
+  description: The Visits API from Macrometa — 1 operation(s) for visits.
+  humanURL: https://www.macrometa.com/docs/api
+  baseURL: https://api-play.paas.macrometa.io
+  tags:
+  - Visits
+  properties:
+  - type: OpenAPI
+    url: openapi/macrometa-visits-api-openapi.yml
+- aid: macrometa:macrometa-waiting-room-status-api
+  name: Macrometa Waiting room status API
+  description: The Waiting room status API from Macrometa — 1 operation(s) for waiting room status.
+  humanURL: https://www.macrometa.com/docs/api
+  baseURL: https://api-play.paas.macrometa.io
+  tags:
+  - Waiting room status
+  properties:
+  - type: OpenAPI
+    url: openapi/macrometa-waiting-room-status-api-openapi.yml
+- aid: macrometa:macrometa-waiting-rooms-api
+  name: Macrometa Waiting rooms API
+  description: The Waiting rooms API from Macrometa — 2 operation(s) for waiting rooms.
+  humanURL: https://www.macrometa.com/docs/api
+  baseURL: https://api-play.paas.macrometa.io
+  tags:
+  - Waiting rooms
+  properties:
+  - type: OpenAPI
+    url: openapi/macrometa-waiting-rooms-api-openapi.yml
 common:
+- type: DomainSecurity
+  url: security/macrometa-domain-security.yml
+- type: AgenticAccess
+  url: agentic-access/macrometa-agentic-access.yml
+- type: Authentication
+  url: authentication/macrometa-authentication.yml
 - type: Website
-  url: https://www.macrometa.co/
+  url: https://www.macrometa.com/
+- type: DeveloperPortal
+  url: https://www.macrometa.com/dev-hub
+- type: Documentation
+  url: https://www.macrometa.com/docs
+- type: APIReference
+  url: https://www.macrometa.com/docs/api
+- type: GettingStarted
+  url: https://www.macrometa.com/docs/developer-hub
+- type: Blog
+  url: https://www.macrometa.com/blog
+- type: Pricing
+  url: https://www.macrometa.com/pricing
+- type: Support
+  url: https://www.macrometa.com/support
+- type: GitHubOrganization
+  url: https://github.com/Macrometacorp
+- type: StatusPage
+  url: https://status.macrometa.io/
+- type: ChangeLog
+  url: https://www.macrometa.com/docs/release-notes
+- type: Packages
+  url: packages/macrometa-packages.yml
+- type: SDKs
+  url: packages/macrometa-packages.yml
+- type: CLI
+  url: cli/macrometa-cli.yml
+- type: Lifecycle
+  url: lifecycle/macrometa-lifecycle.yml
+- type: LLMsTxt
+  url: llms/macrometa-llms.txt
+- type: MCPServer
+  url: mcp/macrometa-mcp.yml
+- type: ErrorCatalog
+  url: errors/macrometa-problem-types.yml
+- type: Conventions
+  url: conventions/macrometa-conventions.yml
+- type: Conformance
+  url: conformance/macrometa-conformance.yml
+- type: DataModel
+  url: data-model/macrometa-data-model.yml
+- type: Overlay
+  url: overlays/macrometa-gdn-overlay.yaml
+- type: AgentSkill
+  url: skills/_index.yml
+x-enrichment:
+  date: '2026-07-20'
+  status: enriched
+  artifacts_added: 26
+  pass: local-v1
