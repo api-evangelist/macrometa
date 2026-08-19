@@ -1,0 +1,244 @@
+{
+  "item": [
+    {
+      "id": "291d8871-f4ad-4826-80dd-4afc031ad5af",
+      "name": "Dynamo",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "22062368-7235-4d72-8294-8681d55bfe4a",
+          "name": "Dynamo-like API interface",
+          "request": {
+            "name": "Dynamo-like API interface",
+            "description": {
+              "content": "Dynamo-like API interface.\n\nSet your JWT token or APIKEY as a aws_access_key_id (ex. '*bearer XXXXX*' or '*apikey XXXXX*').\n\nCurrently supported Dynamo actions (set as *'x-amz-target'* header tag):\n\n  - **CreateTable**\n  - **CreateGlobalTable**\n  - **DeleteItem**\n  - **DeleteTable**\n  - **DescribeGlobalTable**\n  - **DescribeTable**\n  - **DescribeTimeToLive**\n  - **GetItem**\n  - **ListGlobalTables**\n  - **ListTables**\n  - **PutItem**\n  - **Query**\n  - **UpdateItem**\n  - **UpdateTable**\n  - **UpdateTimeToLive**\n  - **Scan**\n  - **BatchGetItem**\n  - **BatchWriteItem**",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "_api",
+                "dynamo"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Dynamo actions",
+                "key": "x-amz-target",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"AttributeDefinitions\": [\n    {\n      \"AttributeName\": \"<string>\",\n      \"AttributeType\": \"<string>\"\n    },\n    {\n      \"AttributeName\": \"<string>\",\n      \"AttributeType\": \"<string>\"\n    }\n  ],\n  \"TableName\": \"<string>\",\n  \"KeySchema\": [\n    {\n      \"AttributeName\": \"<string>\",\n      \"KeyType\": \"<string>\"\n    },\n    {\n      \"AttributeName\": \"<string>\",\n      \"KeyType\": \"<string>\"\n    }\n  ],\n  \"ProvisionedThroughput\": {\n    \"ReadCapacityUnits\": \"<number>\",\n    \"WriteCapacityUnits\": \"<number>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3bf0551a-e090-4a63-997d-aed231237bd6",
+              "name": "Successfully returned after execution.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_api",
+                    "dynamo"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Dynamo actions",
+                    "key": "x-amz-target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"AttributeDefinitions\": [\n    {\n      \"AttributeName\": \"Artist\",\n      \"AttributeType\": \"S\"\n    },\n    {\n      \"AttributeName\": \"SongTitle\",\n      \"AttributeType\": \"S\"\n    }\n  ],\n  \"TableName\": \"Music\",\n  \"KeySchema\": [\n    {\n      \"AttributeName\": \"Artist\",\n      \"KeyType\": \"HASH\"\n    },\n    {\n      \"AttributeName\": \"SongTitle\",\n      \"KeyType\": \"RANGE\"\n    }\n  ],\n  \"ProvisionedThroughput\": {\n    \"ReadCapacityUnits\": 5,\n    \"WriteCapacityUnits\": 5\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 200,\n  \"error\": false,\n  \"result\": {\n    \"TableDescription\": {\n      \"AttributeDefinitions\": [\n        {\n          \"AttributeName\": \"Artist\",\n          \"AttributeType\": \"S\"\n        },\n        {\n          \"AttributeName\": \"SongTitle\",\n          \"AttributeType\": \"S\"\n        }\n      ],\n      \"TableName\": \"Music\",\n      \"KeySchema\": [\n        {\n          \"AttributeName\": \"Artist\",\n          \"KeyType\": \"HASH\"\n        },\n        {\n          \"AttributeName\": \"SongTitle\",\n          \"KeyType\": \"RANGE\"\n        }\n      ],\n      \"TableStatus\": \"ACTIVE\",\n      \"CreationDateTime\": 1637001376,\n      \"TableSizeBytes\": 0,\n      \"ItemCount\": 0\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "be851d0a-bf7e-471b-bbee-4467e22585aa",
+              "name": "Failed due to missing or malformed data. Verify that all parameters are complete.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_api",
+                    "dynamo"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Dynamo actions",
+                    "key": "x-amz-target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"AttributeDefinitions\": [\n    {\n      \"AttributeName\": \"Artist\",\n      \"AttributeType\": \"S\"\n    },\n    {\n      \"AttributeName\": \"SongTitle\",\n      \"AttributeType\": \"S\"\n    }\n  ],\n  \"TableName\": \"Music\",\n  \"KeySchema\": [\n    {\n      \"AttributeName\": \"Artist\",\n      \"KeyType\": \"HASH\"\n    },\n    {\n      \"AttributeName\": \"SongTitle\",\n      \"KeyType\": \"RANGE\"\n    }\n  ],\n  \"ProvisionedThroughput\": {\n    \"ReadCapacityUnits\": 5,\n    \"WriteCapacityUnits\": 5\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 400,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 102020\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-play.paas.macrometa.io",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "71e25fc3-a22e-4530-a56d-f918e17a44b2",
+    "name": "Macrometa API Reference Activity Metrics Dynamo API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API reference for the Macrometa Global Data Network.",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,831 @@
+{
+  "item": [
+    {
+      "id": "2ef10dfb-318c-4ce9-ac21-e98ab73a365a",
+      "name": "Triggers",
+      "description": {
+        "content": "This endpoint is designed for configuring triggers for a specific component. Triggers are essential for initiating actions within a component, as they define the specific conditions  under which these actions are executed. Each trigger consists of one or more rules, known as Trigger Rules, which collectively determine when an action should be started. In the  configuration process, you can define various types of Trigger Rules, each tailored to different conditions and scenarios. This flexibility allows for precise control over component behavior,  enabling actions to be executed in response to defined events or states. It is crucial to accurately set up triggers to ensure the proper functioning of the component within your website's  architecture. By using this endpoint, you can create, modify, or delete trigger configurations, thereby customizing how and when your component reacts to specific conditions or user interactions. ",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ac85c427-de8d-45bf-95e6-eeee7f92b657",
+          "name": "Create PhotonIQ EST trigger.",
+          "request": {
+            "name": "Create PhotonIQ EST trigger.",
+            "description": {
+              "content": "Create PhotonIQ EST trigger.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "est",
+                "v1",
+                "trigger"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"ruleType\": \"<string>\",\n  \"variableName\": \"<string>\",\n  \"matchOperation\": \"<string>\",\n  \"matchValue\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5e61068b-13e7-49e5-8768-82d2581f9b52",
+              "name": "Returns created PhotonIQ EST trigger.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "est",
+                    "v1",
+                    "trigger"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"ruleType\": \"<string>\",\n  \"variableName\": \"<string>\",\n  \"matchOperation\": \"<string>\",\n  \"matchValue\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "54e2aa06-4ffa-4916-a9e0-2a0b329b71db",
+              "name": "Error creating PhotonIQ EST trigger.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "est",
+                    "v1",
+                    "trigger"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"ruleType\": \"<string>\",\n  \"variableName\": \"<string>\",\n  \"matchOperation\": \"<string>\",\n  \"matchValue\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "38f8e68a-cc08-4e9a-96ad-ba35723b2138",
+          "name": "Get all PhotonIQ EST triggers.",
+          "request": {
+            "name": "Get all PhotonIQ EST triggers.",
+            "description": {
+              "content": "Get all PhotonIQ EST triggers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "est",
+                "v1",
+                "trigger"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "39ae58e8-202e-4a88-aa8b-9c0a420e867a",
+              "name": "Returns PhotonIQ EST trigger.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "est",
+                    "v1",
+                    "trigger"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f4310a85-7701-40d7-a3db-fe38cd88a7a5",
+              "name": "Error getting PhotonIQ EST trigger.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "est",
+                    "v1",
+                    "trigger"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f41b96d1-5fed-4097-8223-46dc0dd5b7f1",
+          "name": "Get PhotonIQ EST trigger.",
+          "request": {
+            "name": "Get PhotonIQ EST trigger.",
+            "description": {
+              "content": "Get PhotonIQ EST trigger.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "est",
+                "v1",
+                "trigger",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) Trigger name"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2e36d832-f277-4696-aa56-3b3cb45cac28",
+              "name": "Returns PhotonIQ EST trigger.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "est",
+                    "v1",
+                    "trigger",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) Trigger name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "82b84972-b0cb-4510-9147-d691c4aa8a0c",
+              "name": "Error getting PhotonIQ EST trigger.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "est",
+                    "v1",
+                    "trigger",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) Trigger name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ba568ee1-e27c-4164-9810-5e35d6c391ee",
+          "name": "Update PhotonIQ EST trigger.",
+          "request": {
+            "name": "Update PhotonIQ EST trigger.",
+            "description": {
+              "content": "Update PhotonIQ EST trigger.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "est",
+                "v1",
+                "trigger",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) Trigger name."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"ruleType\": \"<string>\",\n  \"variableName\": \"<string>\",\n  \"matchOperation\": \"<string>\",\n  \"matchValue\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b4deec05-08a2-4f11-88ba-b8ca59e798b6",
+              "name": "Returns updated PhotonIQ EST trigger.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "est",
+                    "v1",
+                    "trigger",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) Trigger name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"ruleType\": \"<string>\",\n  \"variableName\": \"<string>\",\n  \"matchOperation\": \"<string>\",\n  \"matchValue\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e2e1cf37-c123-4ded-8951-301aaeacf83e",
+              "name": "Error Trigger not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "est",
+                    "v1",
+                    "trigger",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) Trigger name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"ruleType\": \"<string>\",\n  \"variableName\": \"<string>\",\n  \"matchOperation\": \"<string>\",\n  \"matchValue\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4bc53c86-3a26-4a5f-8eff-180eaecf1626",
+              "name": "Error updating PhotonIQ EST trigger.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "est",
+                    "v1",
+                    "trigger",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) Trigger name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"ruleType\": \"<string>\",\n  \"variableName\": \"<string>\",\n  \"matchOperation\": \"<string>\",\n  \"matchValue\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8fa952bf-2d08-4bcd-a306-362bd6fdcf3a",
+          "name": "Delete PhotonIQ EST trigger.",
+          "request": {
+            "name": "Delete PhotonIQ EST trigger.",
+            "description": {
+              "content": "Delete PhotonIQ EST trigger.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "est",
+                "v1",
+                "trigger",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) Trigger name."
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "41c2648d-3127-48a3-843b-11443390c082",
+              "name": "PhotonIQ EST service trigger deleted successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "est",
+                    "v1",
+                    "trigger",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) Trigger name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ac2f95bb-e0d3-4f42-b292-35d3afaea5f5",
+              "name": "Error deleting PhotonIQ EST trigger.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "est",
+                    "v1",
+                    "trigger",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) Trigger name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-play.paas.macrometa.io",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "6fc31c7a-83ce-4bbc-8d14-89929aa41d91",
+    "name": "Macrometa API Reference Activity Metrics Triggers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API reference for the Macrometa Global Data Network.",
+      "type": "text/plain"
+    }
+  }
+}

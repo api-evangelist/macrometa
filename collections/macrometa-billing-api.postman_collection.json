@@ -1,0 +1,2320 @@
+{
+  "item": [
+    {
+      "id": "af8b916e-6e96-4cf3-aa45-bd4f1eeee7c4",
+      "name": "Billing",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "82d4d094-aa2c-42c4-919e-dc8f8d018c7c",
+          "name": "Get account details",
+          "request": {
+            "name": "Get account details",
+            "description": {
+              "content": "Get account details (plan, contact and payment settings) for given tenant.\n\n **Note**: this API is not applicable for system tenants.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "_api",
+                "billing",
+                "account"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Tenant name. *If not set it uses the tenant invoking the request.*",
+                "key": "tenant",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b8081f98-78e4-4630-986a-eec593d8c6d1",
+              "name": "Successfully fetched account details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_api",
+                    "billing",
+                    "account"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Tenant name. *If not set it uses the tenant invoking the request.*",
+                    "key": "tenant",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8457.23861010505,\n  \"error\": false,\n  \"data\": {\n    \"created_at\": \"Timestamp when account was created.\",\n    \"plan\": {\n      \"attribution\": \"Macrometa\",\n      \"name\": \"PlanName\",\n      \"subscription\": {},\n      \"target\": \"Macrometa\"\n    },\n    \"subscription_id\": \"sub_<subscription_id>\",\n    \"customer_id\": \"cus_<customer_id>\",\n    \"contact\": {\n      \"firstname\": \"First name of the user.\",\n      \"lastname\": \"Last name of the user.\",\n      \"email\": \"Email address of the user.\",\n      \"phone\": \"Phone number of the user.\",\n      \"line1\": \"Address line 1.\",\n      \"line2\": \"Address line 2.\",\n      \"city\": \"Address city.\",\n      \"state\": \"Address state.\",\n      \"country\": \"Address country.\",\n      \"zipcode\": \"Address zip code.\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5913276f-8e31-4f21-a94a-622e4ce86ed2",
+              "name": "Failed due to missing or malformed data. Verify that all parameters are complete.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_api",
+                    "billing",
+                    "account"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Tenant name. *If not set it uses the tenant invoking the request.*",
+                    "key": "tenant",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 400,\n  \"error\": true,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9cc7fd88-3b80-4132-a65d-066952f8985f",
+              "name": "Failed because you do not have administrator permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_api",
+                    "billing",
+                    "account"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Tenant name. *If not set it uses the tenant invoking the request.*",
+                    "key": "tenant",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 401,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 6031\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "899dd778-cd25-48d4-ba93-fa24fd0d9f4a",
+          "name": "Update contact details",
+          "request": {
+            "name": "Update contact details",
+            "description": {
+              "content": "Update contact details for given tenant name.\n\n**Note**:\n- This API is not applicable for system tenants.\n- Updates the Stripe account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "_api",
+                "billing",
+                "contact"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Tenant name. *If not set it uses the tenant invoking the request.*",
+                "key": "tenant",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstname\": \"<string>\",\n  \"lastname\": \"<string>\",\n  \"email\": \"<string>\",\n  \"phone\": \"<string>\",\n  \"line1\": \"<string>\",\n  \"line2\": \"<string>\",\n  \"city\": \"<string>\",\n  \"state\": \"<string>\",\n  \"country\": \"<string>\",\n  \"zipcode\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "acd7cef4-60e2-4370-801b-4039e40e8ac3",
+              "name": "Successfully updated contact details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_api",
+                    "billing",
+                    "contact"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Tenant name. *If not set it uses the tenant invoking the request.*",
+                    "key": "tenant",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"firstname\": \"John\",\n  \"lastname\": \"Doe\",\n  \"email\": \"john@acme.com\",\n  \"phone\": \"404-555-8726\",\n  \"line1\": \"1388 Villa Drive\",\n  \"line2\": \"Suite 240C\",\n  \"city\": \"South Bend\",\n  \"state\": \"IN\",\n  \"country\": \"US\",\n  \"zipcode\": \"46601\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 200,\n  \"error\": false,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ad873ff5-9f53-4dab-8a48-44c9c358510d",
+              "name": "Failed due to missing or malformed data. Verify that all parameters are complete.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_api",
+                    "billing",
+                    "contact"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Tenant name. *If not set it uses the tenant invoking the request.*",
+                    "key": "tenant",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"firstname\": \"John\",\n  \"lastname\": \"Doe\",\n  \"email\": \"john@acme.com\",\n  \"phone\": \"404-555-8726\",\n  \"line1\": \"1388 Villa Drive\",\n  \"line2\": \"Suite 240C\",\n  \"city\": \"South Bend\",\n  \"state\": \"IN\",\n  \"country\": \"US\",\n  \"zipcode\": \"46601\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 400,\n  \"error\": true,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b5a5177c-229c-4744-8cd8-e96fcc68eb48",
+              "name": "Failed because you do not have administrator permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_api",
+                    "billing",
+                    "contact"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Tenant name. *If not set it uses the tenant invoking the request.*",
+                    "key": "tenant",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"firstname\": \"John\",\n  \"lastname\": \"Doe\",\n  \"email\": \"john@acme.com\",\n  \"phone\": \"404-555-8726\",\n  \"line1\": \"1388 Villa Drive\",\n  \"line2\": \"Suite 240C\",\n  \"city\": \"South Bend\",\n  \"state\": \"IN\",\n  \"country\": \"US\",\n  \"zipcode\": \"46601\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 401,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 6031\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e38fc364-ec52-425f-b731-37b25fe3a67c",
+              "name": "Failed to validate because you do not have access to the server.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_api",
+                    "billing",
+                    "contact"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Tenant name. *If not set it uses the tenant invoking the request.*",
+                    "key": "tenant",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"firstname\": \"John\",\n  \"lastname\": \"Doe\",\n  \"email\": \"john@acme.com\",\n  \"phone\": \"404-555-8726\",\n  \"line1\": \"1388 Villa Drive\",\n  \"line2\": \"Suite 240C\",\n  \"city\": \"South Bend\",\n  \"state\": \"IN\",\n  \"country\": \"US\",\n  \"zipcode\": \"46601\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 403,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 581\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "da6ca305-0064-42f8-a27e-a166cce161a0",
+              "name": "Failed becasue billing plan already exists.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_api",
+                    "billing",
+                    "contact"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Tenant name. *If not set it uses the tenant invoking the request.*",
+                    "key": "tenant",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"firstname\": \"John\",\n  \"lastname\": \"Doe\",\n  \"email\": \"john@acme.com\",\n  \"phone\": \"404-555-8726\",\n  \"line1\": \"1388 Villa Drive\",\n  \"line2\": \"Suite 240C\",\n  \"city\": \"South Bend\",\n  \"state\": \"IN\",\n  \"country\": \"US\",\n  \"zipcode\": \"46601\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 409,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 581\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6d320019-a1e3-4ad7-9490-ffb580dc1e8d",
+          "name": "Get payment details of the previous months for the given tenant.",
+          "request": {
+            "name": "Get payment details of the previous months for the given tenant.",
+            "description": {
+              "content": "Fetch all payments details of the tenant for specified number of previous months.\n\n**Note**: This API is not applicable for system tenants.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "_api",
+                "billing",
+                "payments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Number of previous months for which payment details are required."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Tenant name. *If not set it uses the tenant invoking the request.*",
+                "key": "tenant",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "05b1ebf1-59d8-4329-841e-f121f1f3b421",
+              "name": "Successfully fetched payment details.\n\nExample - https://stripe.com/docs/api/payment_intents/list\n\n**Note**: the example here is an excerpt please follow the link above for a complete example.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_api",
+                    "billing",
+                    "payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Tenant name. *If not set it uses the tenant invoking the request.*",
+                    "key": "tenant",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"object\": \"list\",\n  \"url\": \"/v1/payment_intents\",\n  \"has_more\": false,\n  \"data\": [\n    {\n      \"id\": \"pi_1DpxME2eZvKYlo2CdLPnXZPO\",\n      \"object\": \"payment_intent\",\n      \"amount\": 1099\n    },\n    {\n      \"id\": \"pi_1DpxME2eZvKYlo2CdLPnXZPO\",\n      \"object\": \"payment_intent\",\n      \"amount\": 1099\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1b77ed50-cada-4ab7-8478-0fd0c9149245",
+              "name": "Failed due to missing or malformed data. Verify that all parameters are complete.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_api",
+                    "billing",
+                    "payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Tenant name. *If not set it uses the tenant invoking the request.*",
+                    "key": "tenant",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 400,\n  \"error\": true,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3e3ed630-b29e-4166-b9f6-3540bca7fee4",
+              "name": "Failed because you do not have administrator permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_api",
+                    "billing",
+                    "payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Tenant name. *If not set it uses the tenant invoking the request.*",
+                    "key": "tenant",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 401,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 6031\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "73f879f5-62ff-4cec-8676-d20ccc9ffb15",
+          "name": "Get invoices for the previous months",
+          "request": {
+            "name": "Get invoices for the previous months",
+            "description": {
+              "content": "Fetch all invoice details of the tenant for specified number of previous months.\n\n**Note**: this API is not applicable for system tenants.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "_api",
+                "billing",
+                "invoices"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "3",
+                  "description": "Number of previous months for which invoices are required."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Tenant name. *If not set it uses the tenant invoking the request.*",
+                "key": "tenant",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "71f9c814-5c4f-495a-97b6-860736b98c0d",
+              "name": "Successfully fetched invoice details.\n\nExample - https://stripe.com/docs/api/invoices/list\n\n**Note**: the example here is an excerpt please follow the link above for a complete example.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_api",
+                    "billing",
+                    "invoices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "3"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Tenant name. *If not set it uses the tenant invoking the request.*",
+                    "key": "tenant",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"object\": \"list\",\n  \"url\": \"/v1/payment_intents\",\n  \"has_more\": false,\n  \"data\": [\n    {\n      \"id\": \"pi_1DpxME2eZvKYlo2CdLPnXZPO\",\n      \"object\": \"invoice\",\n      \"account_country\": \"US\",\n      \"account_name\": \"Stripe.com\",\n      \"account_tax_ids\": {},\n      \"amount_due\": 498,\n      \"amount_paid\": 0,\n      \"amount_remaining\": 498\n    },\n    {\n      \"id\": \"pi_1DpxME2eZvKYlo2CdLPnXZPO\",\n      \"object\": \"invoice\",\n      \"account_country\": \"US\",\n      \"account_name\": \"Stripe.com\",\n      \"account_tax_ids\": {},\n      \"amount_due\": 498,\n      \"amount_paid\": 0,\n      \"amount_remaining\": 498\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eb6e463f-6470-46a6-80b1-b3c879ce9245",
+              "name": "Failed due to missing or malformed data. Verify that all parameters are complete.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_api",
+                    "billing",
+                    "invoices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "3"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Tenant name. *If not set it uses the tenant invoking the request.*",
+                    "key": "tenant",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 400,\n  \"error\": true,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "15e971f7-1e3d-4591-92d7-baed77e4d909",
+              "name": "Failed because you do not have administrator permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_api",
+                    "billing",
+                    "invoices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "3"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Tenant name. *If not set it uses the tenant invoking the request.*",
+                    "key": "tenant",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 401,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 6031\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e17ebac5-865b-4381-a59c-e2804517759c",
+          "name": "Get invoice of the current month for the given tenant.",
+          "request": {
+            "name": "Get invoice of the current month for the given tenant.",
+            "description": {
+              "content": "Fetch invoice of the tenant for the current month.\n\n**Note**: this API is not applicable for system tenants.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "_api",
+                "billing",
+                "invoice",
+                "current"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Tenant name. *If not set it uses the tenant invoking the request.*",
+                "key": "tenant",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f6a8ea82-159b-46ad-ab9b-8c0f0a666296",
+              "name": "Successfully fetched invoice details.\n\nExample - https://stripe.com/docs/api/invoices/upcoming\n\n**Note**: the example here is an excerpt please follow the link above for a complete example.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_api",
+                    "billing",
+                    "invoice",
+                    "current"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Tenant name. *If not set it uses the tenant invoking the request.*",
+                    "key": "tenant",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"object\": \"invoice\",\n  \"account_country\": \"US\",\n  \"account_name\": \"Stripe.com\",\n  \"account_tax_ids\": {},\n  \"amount_due\": 40298,\n  \"amount_paid\": 0,\n  \"amount_remaining\": 40298\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fe2bb9f7-ad11-472a-b9bd-64f4e159fa3c",
+              "name": "Failed due to missing or malformed data. Verify that all parameters are complete.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_api",
+                    "billing",
+                    "invoice",
+                    "current"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Tenant name. *If not set it uses the tenant invoking the request.*",
+                    "key": "tenant",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 400,\n  \"error\": true,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f4e880a9-de5a-4d69-b600-1f4b9f362e07",
+              "name": "Failed because you do not have administrator permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_api",
+                    "billing",
+                    "invoice",
+                    "current"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Tenant name. *If not set it uses the tenant invoking the request.*",
+                    "key": "tenant",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 401,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 6031\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3bb975f0-eaad-4d51-918f-76ab08e2e6d3",
+          "name": "Get invoice of specific year and month for the tenant",
+          "request": {
+            "name": "Get invoice of specific year and month for the tenant",
+            "description": {
+              "content": "Fetch invoices for a tenant, in a specific month and year.\n\n**Note**: This API is not applicable for system tenants.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "_api",
+                "billing",
+                "invoices",
+                ":year",
+                ":month"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "year",
+                  "description": "(Required) Year in 'YYYY' format."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "month",
+                  "description": "(Required) Month. Valid values:[1..12]"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Tenant name. *If not set it uses the tenant invoking the request.*",
+                "key": "tenant",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "89548842-2d95-40d3-b855-f1acbe90457d",
+              "name": "Successfully fetched invoice details.\n\nExample - https://stripe.com/docs/api/invoices/retrieve\n\n**Note**: the example here is an excerpt please follow the link above for a complete example.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_api",
+                    "billing",
+                    "invoices",
+                    ":year",
+                    ":month"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "year",
+                      "description": "(Required) Year in 'YYYY' format."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "month",
+                      "description": "(Required) Month. Valid values:[1..12]"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Tenant name. *If not set it uses the tenant invoking the request.*",
+                    "key": "tenant",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"ID\",\n  \"object\": \"invoice\",\n  \"account_country\": \"US\",\n  \"account_name\": \"Stripe.com\",\n  \"account_tax_ids\": {},\n  \"amount_due\": 40298,\n  \"amount_paid\": 0,\n  \"amount_remaining\": 40298\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "495f6432-d4c5-4f0c-9020-b5e3add9e88e",
+              "name": "Failed due to missing or malformed data. Verify that all parameters are complete.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_api",
+                    "billing",
+                    "invoices",
+                    ":year",
+                    ":month"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "year",
+                      "description": "(Required) Year in 'YYYY' format."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "month",
+                      "description": "(Required) Month. Valid values:[1..12]"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Tenant name. *If not set it uses the tenant invoking the request.*",
+                    "key": "tenant",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 400,\n  \"error\": true,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1ef03176-2abe-4d04-84e7-014b15d08b61",
+              "name": "Failed because you do not have administrator permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_api",
+                    "billing",
+                    "invoices",
+                    ":year",
+                    ":month"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "year",
+                      "description": "(Required) Year in 'YYYY' format."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "month",
+                      "description": "(Required) Month. Valid values:[1..12]"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Tenant name. *If not set it uses the tenant invoking the request.*",
+                    "key": "tenant",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 401,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 6031\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a5b313a3-2810-4f2f-b8c3-a2fc2b429364",
+          "name": "Get usage of the tenant",
+          "request": {
+            "name": "Get usage of the tenant",
+            "description": {
+              "content": "Fetch usage of a tenant in a specific date range. If no query parameters are specified, usage from start date of the month to current date is returned.\n\n**Note**: This API is not applicable for system tenants.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "_api",
+                "billing",
+                "usage"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "startDate",
+                  "value": "<string>",
+                  "description": "Start date in 'YYYY-MM-DD' format."
+                },
+                {
+                  "disabled": false,
+                  "key": "endDate",
+                  "value": "<string>",
+                  "description": "End date in 'YYYY-MM-DD' format."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Tenant name. *If not set it uses the tenant invoking the request.*",
+                "key": "tenant",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "19e073ea-faa0-4593-979c-8111afe6afdb",
+              "name": "Successfully fetched usage of tenant.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_api",
+                    "billing",
+                    "usage"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Tenant name. *If not set it uses the tenant invoking the request.*",
+                    "key": "tenant",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 200,\n  \"error\": false,\n  \"data\": [\n    {\n      \"_key\": \"key\",\n      \"tenant\": \"tenant1\",\n      \"from\": 1194,\n      \"to\": 4502,\n      \"region\": \"region1\",\n      \"records\": [\n        {\n          \"name\": \"string\",\n          \"type\": 7533,\n          \"value\": \"string\"\n        },\n        {\n          \"name\": \"string\",\n          \"type\": 772,\n          \"value\": \"string\"\n        }\n      ]\n    },\n    {\n      \"_key\": \"key\",\n      \"tenant\": \"tenant1\",\n      \"from\": 3822,\n      \"to\": 2469,\n      \"region\": \"region1\",\n      \"records\": [\n        {\n          \"name\": \"string\",\n          \"type\": 5756,\n          \"value\": \"string\"\n        },\n        {\n          \"name\": \"string\",\n          \"type\": 1850,\n          \"value\": \"string\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3be8f32a-65df-431c-b4c3-6795e10df9d1",
+              "name": "Failed due to missing or malformed data. Verify that all parameters are complete.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_api",
+                    "billing",
+                    "usage"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Tenant name. *If not set it uses the tenant invoking the request.*",
+                    "key": "tenant",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 400,\n  \"error\": true,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "04ad0666-a5bc-49c2-b926-7752568e8ff0",
+              "name": "Failed because you do not have administrator permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_api",
+                    "billing",
+                    "usage"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Tenant name. *If not set it uses the tenant invoking the request.*",
+                    "key": "tenant",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 401,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 6031\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "39306020-b307-4786-8640-5cfaa39948f9",
+          "name": "Get usage of the tenant for specific region",
+          "request": {
+            "name": "Get usage of the tenant for specific region",
+            "description": {
+              "content": "Fetch usage of a tenant in specific date range for a specific region. If no query parameters are specified, usage from start date of the month to current date is returned.\n\n**Note**: This API is not applicable for system tenants.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "_api",
+                "billing",
+                "region",
+                ":region",
+                "usage"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "startDate",
+                  "value": "<string>",
+                  "description": "Start date in 'YYYY-MM-DD' format."
+                },
+                {
+                  "disabled": false,
+                  "key": "endDate",
+                  "value": "<string>",
+                  "description": "End date in 'YYYY-MM-DD' format."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "region",
+                  "description": "(Required) Name of the region."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Tenant name. *If not set it uses the tenant invoking the request.*",
+                "key": "tenant",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6c5feb41-8719-49b6-919e-669a575700e8",
+              "name": "Successfully fetched usage of tenant.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_api",
+                    "billing",
+                    "region",
+                    ":region",
+                    "usage"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "region",
+                      "description": "(Required) Name of the region."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Tenant name. *If not set it uses the tenant invoking the request.*",
+                    "key": "tenant",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 200,\n  \"error\": false,\n  \"data\": [\n    {\n      \"_key\": \"key\",\n      \"tenant\": \"tenant1\",\n      \"from\": 3412,\n      \"to\": 254,\n      \"region\": \"region1\",\n      \"records\": [\n        {\n          \"name\": \"string\",\n          \"type\": 8453,\n          \"value\": \"string\"\n        },\n        {\n          \"name\": \"string\",\n          \"type\": 361,\n          \"value\": \"string\"\n        }\n      ]\n    },\n    {\n      \"_key\": \"key\",\n      \"tenant\": \"tenant1\",\n      \"from\": 5773,\n      \"to\": 2038,\n      \"region\": \"region1\",\n      \"records\": [\n        {\n          \"name\": \"string\",\n          \"type\": 5281,\n          \"value\": \"string\"\n        },\n        {\n          \"name\": \"string\",\n          \"type\": 5926,\n          \"value\": \"string\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4c076d25-423b-4d15-b634-9000706cb669",
+              "name": "Failed due to missing or malformed data. Verify that all parameters are complete.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_api",
+                    "billing",
+                    "region",
+                    ":region",
+                    "usage"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "region",
+                      "description": "(Required) Name of the region."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Tenant name. *If not set it uses the tenant invoking the request.*",
+                    "key": "tenant",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 400,\n  \"error\": true,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ffc8baee-260b-4fc1-a628-71a2b2eead2e",
+              "name": "Failed because you do not have administrator permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_api",
+                    "billing",
+                    "region",
+                    ":region",
+                    "usage"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "region",
+                      "description": "(Required) Name of the region."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Tenant name. *If not set it uses the tenant invoking the request.*",
+                    "key": "tenant",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 401,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 6031\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-play.paas.macrometa.io",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "49855ed9-b391-4f54-a8c9-87bfa870ff33",
+    "name": "Macrometa API Reference Activity Metrics Billing API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API reference for the Macrometa Global Data Network.",
+      "type": "text/plain"
+    }
+  }
+}

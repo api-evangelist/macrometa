@@ -1,0 +1,86 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Macrometa API Reference Activity Metrics Redis API",
+    "version": "0.17.17"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Redis",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Redis-like API interface",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/redis/:collection",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "collection",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Redis collection."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This API provides a REST API to access Redis databases. The REST API follows the same convention that the Redis Protocol uses.\n\n Using an HTTP POST request, the redis command and its parameters can be set the in the request body. The command can also be in the url suffix with the parameter set in the request body. The parameter suffixes can vary in number, depending upon the command. For example http://api.macrometa.io/_fabric/myfabric/_api/redis/SET/foo/bar.\n\n Currently supported Redis commands"
+        },
+        {
+          "info": {
+            "name": "Redis-like API interface",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/redis/:collection/:command",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "collection",
+                "value": "",
+                "type": "path",
+                "description": "The name of the collection."
+              },
+              {
+                "name": "command",
+                "value": "",
+                "type": "path",
+                "description": "The name of the redis command."
+              }
+            ]
+          },
+          "docs": "This API provides a REST API to access Redis databases. The REST API follows the same convention that the Redis Protocol uses. \n\n Give the command name and parameters in the same order as the Redis protocol, separating commands with a '/'. The parameter suffixes can vary in number, depending upon the command. For example http://api.macrometa.io/_fabric/myfabric/_api/redis/SET/foo/bar. Query params can also be used along with suffixes, for example http://api.macrometa.io/_fabric/myfabric/_api/red"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

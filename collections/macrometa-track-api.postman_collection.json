@@ -1,0 +1,359 @@
+{
+  "item": [
+    {
+      "id": "22e08115-d840-40de-951d-de67182c1df4",
+      "name": "Track",
+      "description": {
+        "content": "All the tracking endpoints.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a1fd2a4b-052f-4896-8d40-3129fa5c2203",
+          "name": "Event tracking endpoint.",
+          "request": {
+            "name": "Event tracking endpoint.",
+            "description": {
+              "content": "Event tracking endpoint.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "est",
+                "v1",
+                "track"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) PhotonIQ EST customer ID.",
+                "key": "X-PhotonIQ-CustomerID",
+                "value": "<string>"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d5dc4367-4867-47d0-ab25-e5b6e2007aa9",
+              "name": "All the browser events are tracked with this endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "est",
+                    "v1",
+                    "track"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) PhotonIQ EST customer ID.",
+                    "key": "X-PhotonIQ-CustomerID",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bc20b887-d878-4492-965c-ceb63e3e220d",
+          "name": "Get PhotonIQ EST settings and initialize client.",
+          "request": {
+            "name": "Get PhotonIQ EST settings and initialize client.",
+            "description": {
+              "content": "Get PhotonIQ EST settings and initialize client.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "est",
+                "v1",
+                "session-settings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d9f073e0-feb6-4036-b7cc-516b64c3dbe6",
+              "name": "Sets cookies in the client browser for the first time.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "est",
+                    "v1",
+                    "session-settings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a5f5992d-db23-4d09-96f9-4733e1d64002",
+          "name": "Get PhotonIQ EST script to inject in the client browser.",
+          "request": {
+            "name": "Get PhotonIQ EST script to inject in the client browser.",
+            "description": {
+              "content": "Get PhotonIQ EST script to inject in the client browser.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "est",
+                "v1",
+                "inject-script"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c0563d29-ccec-45d2-8ee4-641a035a5d70",
+              "name": "Injects PhotonIQ EST script in the client browser.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "est",
+                    "v1",
+                    "inject-script"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c6ac98c3-9e3f-493a-80bd-73c287521575",
+          "name": "Retrieve a client-side integration script for PhotonIQ EST, enabling PhotonIQ EST functionality on user webpages.",
+          "request": {
+            "name": "Retrieve a client-side integration script for PhotonIQ EST, enabling PhotonIQ EST functionality on user webpages.",
+            "description": {
+              "content": "Retrieve a client-side integration script for PhotonIQ EST, enabling PhotonIQ EST functionality on user webpages.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "est",
+                "v1",
+                "integration-script"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f661ac30-8ade-4e44-8200-9f90566abe87",
+              "name": "Successfully retrieved the PhotonIQ EST integration script.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "est",
+                    "v1",
+                    "integration-script"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-play.paas.macrometa.io",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "dd8cedc6-a9a9-4d2c-8190-16d371fcaf1d",
+    "name": "Macrometa API Reference Activity Metrics Track API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API reference for the Macrometa Global Data Network.",
+      "type": "text/plain"
+    }
+  }
+}

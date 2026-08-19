@@ -1,0 +1,434 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Macrometa API Reference Activity Metrics Streams API",
+    "version": "0.17.17"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Streams",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get list of streams",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/streams",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "Fabric name of the streams."
+              },
+              {
+                "name": "global",
+                "value": "",
+                "type": "query",
+                "description": "Whether the stream is geo-replicated globally."
+              }
+            ]
+          },
+          "docs": "Fetch the list of all streams."
+        },
+        {
+          "info": {
+            "name": "Create stream",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/streams/:stream",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "Fabric name of the streams."
+              },
+              {
+                "name": "stream",
+                "value": "",
+                "type": "path",
+                "description": "The name of the stream (up to 230 characters)."
+              },
+              {
+                "name": "global",
+                "value": "",
+                "type": "query",
+                "description": "Whether the stream is geo-replicated globally"
+              }
+            ]
+          },
+          "docs": "Create a stream."
+        },
+        {
+          "info": {
+            "name": "Remove stream",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/streams/:stream",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "Fabric name of the stream."
+              },
+              {
+                "name": "stream",
+                "value": "",
+                "type": "path",
+                "description": "The name of the stream (up to 240 characters). It should start with *c8locals.* or *c8globals.*."
+              },
+              {
+                "name": "force",
+                "value": "",
+                "type": "query",
+                "description": "Stop all producers/consumers and delete the stream forcefully. *deprecated*"
+              }
+            ]
+          },
+          "docs": " Remove a stream."
+        },
+        {
+          "info": {
+            "name": "Publish message",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/streams/:stream/publish",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "Fabric name of the stream."
+              },
+              {
+                "name": "stream",
+                "value": "",
+                "type": "path",
+                "description": "The name of the stream (up to 240 characters). It should start with *c8locals.* or *c8globals.*."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Publish message in a stream."
+        },
+        {
+          "info": {
+            "name": "Get backlog for the stream",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/streams/:stream/backlog",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "Fabric name of the streams."
+              },
+              {
+                "name": "stream",
+                "value": "",
+                "type": "path",
+                "description": "The name of the stream (up to 240 characters). It should start with *c8locals.* or *c8globals.*."
+              }
+            ]
+          },
+          "docs": "Get the estimated backlog for the stream."
+        },
+        {
+          "info": {
+            "name": "Get stats for the stream",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/streams/:stream/stats",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "Fabric name of the streams."
+              },
+              {
+                "name": "stream",
+                "value": "",
+                "type": "path",
+                "description": "The name of the stream (up to 240 characters). It should start with *c8locals.* or *c8globals.*."
+              },
+              {
+                "name": "getPreciseBacklog",
+                "value": "",
+                "type": "query",
+                "description": "If set to *true*, returns precise backlog"
+              },
+              {
+                "name": "subscriptionBacklogSize",
+                "value": "",
+                "type": "query",
+                "description": "If set to *true*, returns backlog size for each subscription.\n\nNote: This requires locking the ledger so be careful not to use it when there's heavy traffic."
+              }
+            ]
+          },
+          "docs": "Get the statistics for a stream."
+        },
+        {
+          "info": {
+            "name": "Get stream subscriptions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/streams/:stream/subscriptions",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "Fabric name."
+              },
+              {
+                "name": "stream",
+                "value": "",
+                "type": "path",
+                "description": "The name of the stream (up to 240 characters). It should start with *c8locals.* or *c8globals.*."
+              }
+            ]
+          },
+          "docs": "Get the list of subscriptions for a stream."
+        },
+        {
+          "info": {
+            "name": "Get message TTL for streams",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/streams/ttl",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "Fabric name of the streams."
+              },
+              {
+                "name": "global",
+                "value": "",
+                "type": "query",
+                "description": "Whether the stream is geo-replicated globally."
+              }
+            ]
+          },
+          "docs": "Fetch the Time To Live (TTL) in seconds for messages in streams."
+        },
+        {
+          "info": {
+            "name": "Set message TTL for streams",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/streams/ttl/:ttl",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "Fabric name of the streams."
+              },
+              {
+                "name": "ttl",
+                "value": "",
+                "type": "path",
+                "description": "TTL in seconds."
+              },
+              {
+                "name": "global",
+                "value": "",
+                "type": "query",
+                "description": "Whether the stream is geo-replicated globally."
+              }
+            ]
+          },
+          "docs": " Set the message Time To Live (TTL) in seconds for all streams."
+        },
+        {
+          "info": {
+            "name": "Clear backlog",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/streams/clearbacklog",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "Fabric name of the streams."
+              },
+              {
+                "name": "global",
+                "value": "",
+                "type": "query",
+                "description": "Whether the stream is geo-replicated globally."
+              }
+            ]
+          },
+          "docs": "Clear backlog for all streams."
+        },
+        {
+          "info": {
+            "name": "Clear subscription's backlog",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/streams/clearbacklog/:subscription",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "Fabric name of the streams."
+              },
+              {
+                "name": "subscription",
+                "value": "",
+                "type": "path",
+                "description": "Subscription name"
+              },
+              {
+                "name": "global",
+                "value": "",
+                "type": "query",
+                "description": "Whether the stream is geo-replicated globally."
+              }
+            ]
+          },
+          "docs": "Clear stream backlogs for a specified subscription."
+        },
+        {
+          "info": {
+            "name": "Expire messages on the stream",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/streams/:stream/expiry/:seconds",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "Fabric name."
+              },
+              {
+                "name": "stream",
+                "value": "",
+                "type": "path",
+                "description": "The name of the stream (up to 240 characters). It should start with *c8locals.* or *c8globals.*."
+              },
+              {
+                "name": "seconds",
+                "value": "",
+                "type": "path",
+                "description": "Expiry time in seconds."
+              }
+            ]
+          },
+          "docs": " Set the expiration time for all messages on the stream, this applies to all subscriptions."
+        },
+        {
+          "info": {
+            "name": "Unsubscribe",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/streams/subscription/:subscription",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "Fabric name of the streams."
+              },
+              {
+                "name": "subscription",
+                "value": "",
+                "type": "path",
+                "description": "Subscription name"
+              },
+              {
+                "name": "global",
+                "value": "",
+                "type": "query",
+                "description": "Whether the stream is geo-replicated globally."
+              }
+            ]
+          },
+          "docs": "Remove the specified subscription on all streams."
+        },
+        {
+          "info": {
+            "name": "Delete subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/streams/:stream/subscriptions/:subscription",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "Fabric name of the streams."
+              },
+              {
+                "name": "stream",
+                "value": "",
+                "type": "path",
+                "description": "The name of the stream (up to 240 characters). It should start with *c8locals.* or *c8globals.*."
+              },
+              {
+                "name": "subscription",
+                "value": "",
+                "type": "path",
+                "description": "Subscription name"
+              }
+            ]
+          },
+          "docs": "Removed the specified subscription from a stream. There should not be any active consumers."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

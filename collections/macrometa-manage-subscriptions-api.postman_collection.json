@@ -1,0 +1,333 @@
+{
+  "item": [
+    {
+      "id": "bac353f4-8806-4857-9511-d1ded507a430",
+      "name": "Manage Subscriptions",
+      "description": {
+        "content": "Event subscriptions and streaming",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "55eb54de-8335-4cbc-9059-8013ba752351",
+          "name": "Subscribe to stream via WebSocket",
+          "request": {
+            "name": "Subscribe to stream via WebSocket",
+            "description": {
+              "content": "Subscribes to an event stream via WebSocket to recieve live updates. This API keeps the connection live and continuously receives messages from the server based on the specified query filters. \n\nThe endpoint URL for subscribing to a stream via WebSocket follows this format: ```wss://<eds-host>/api/es/v1/subscribe``` \n\nRelated guide: [**Subscribe to events and recieve real time updates**](https://www.macrometa.com/docs/photoniq/event-delivery/getting-started-event-delivery#subscribing-to-the-eds). \n\n**Do not try this API here**.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "es",
+                "v1",
+                "subscribe"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>",
+                  "description": "(Required) The API key for authenticating the request"
+                },
+                {
+                  "disabled": false,
+                  "key": "x-customer-id",
+                  "value": "<string>",
+                  "description": "(Required) ID of the customer to identify the user making the request."
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "(Required) The type of events to subscribe to. It can be local, global or collection"
+                },
+                {
+                  "disabled": false,
+                  "key": "compress",
+                  "value": "<string>",
+                  "description": "(Required) Define the event data to be recieved via the stream based on a specific criteria. Refer to [**Event delivery filters guide**](https://www.macrometa.com/docs/photoniq/event-delivery/event-delivery-filters) for more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "initialData",
+                  "value": "<boolean>",
+                  "description": "(Required) Define the event data to be recieved via the stream based on a specific criteria. Refer to [**Event delivery filters guide**](https://www.macrometa.com/docs/photoniq/event-delivery/event-delivery-filters) for more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "action",
+                  "value": "<string>",
+                  "description": "(Required) Define the event data to be recieved via the stream based on a specific criteria. Refer to [**Event delivery filters guide**](https://www.macrometa.com/docs/photoniq/event-delivery/event-delivery-filters) for more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "once",
+                  "value": "<boolean>",
+                  "description": "(Required) Define the event data to be recieved via the stream based on a specific criteria. Refer to [**Event delivery filters guide**](https://www.macrometa.com/docs/photoniq/event-delivery/event-delivery-filters) for more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "queries",
+                  "value": "<string>",
+                  "description": "(Required) Define the event data to be recieved via the stream based on a specific criteria. Refer to [**Event delivery filters guide**](https://www.macrometa.com/docs/photoniq/event-delivery/event-delivery-filters) for more details."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/event-stream"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "87c35f55-aa3d-438e-9f21-242746799a8b",
+              "name": "Successfully subscribed to the stream via WebSocket",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "es",
+                    "v1",
+                    "subscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "x-customer-id",
+                      "value": "cust-1"
+                    },
+                    {
+                      "key": "type",
+                      "value": "collection"
+                    },
+                    {
+                      "key": "compress",
+                      "value": "FALSE"
+                    },
+                    {
+                      "key": "initialData",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "action",
+                      "value": "add"
+                    },
+                    {
+                      "key": "once",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "queries",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/event-stream"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/event-stream"
+                }
+              ],
+              "body": "data: event1\ndata: event2",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "93609a87-8ad1-4bcd-a021-cc56b567da2e",
+          "name": "Subscribe to stream via SSE",
+          "request": {
+            "name": "Subscribe to stream via SSE",
+            "description": {
+              "content": "Subscribes to an event stream via SSE to recieve live updates.  This API keeps the connection live and continuously receives messages from the server based on the specified query filters. \n\nRelated guide: [**Subscribe to events and recieve real time updates**](https://www.macrometa.com/docs/photoniq/event-delivery/getting-started-event-delivery#subscribing-to-the-eds).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "es",
+                "sse",
+                "v1",
+                "subscribe"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ID of the customer to identify the user making the request.",
+                "key": "x-customer-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "text/event-stream"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"<string>\",\n  \"filters\": {\n    \"once\": \"<string>\",\n    \"initialData\": \"<string>\",\n    \"compress\": \"<string>\",\n    \"queries\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "394cc90c-37e0-489b-b070-d437b5fa422a",
+              "name": "Successfully subscribed to the stream via SSE",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "es",
+                    "sse",
+                    "v1",
+                    "subscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ID of the customer to identify the user making the request.",
+                    "key": "x-customer-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/event-stream"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"collection\",\n  \"filters\": {\n    \"once\": \"FALSE\",\n    \"compress\": \"FALSE\",\n    \"initialData\": \"TRUE\",\n    \"queries\": [\n      \"select * from collection-name where attendance=4\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/event-stream"
+                }
+              ],
+              "body": "data: event1\ndata: event2",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-play.paas.macrometa.io",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "66f8018b-0e8f-4b68-af4b-6e6d7a545153",
+    "name": "Macrometa API Reference Activity Metrics Manage Subscriptions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API reference for the Macrometa Global Data Network.",
+      "type": "text/plain"
+    }
+  }
+}

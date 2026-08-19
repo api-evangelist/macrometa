@@ -1,0 +1,1422 @@
+{
+  "item": [
+    {
+      "id": "4756051e-2d03-4986-98b0-f079ff579ae7",
+      "name": "Origins",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "cfa37c9e-444b-4845-a93c-3563a7cc61d3",
+          "name": "Get origins",
+          "request": {
+            "name": "Get origins",
+            "description": {
+              "content": "Returns all origins.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "prerender",
+                "v1",
+                "origins"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Customer unique identifier.",
+                "key": "x-photoniq-customerid",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3e6f7aac-7e3e-4599-b7ec-3f707abf3d39",
+              "name": "Origins fetched successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "prerender",
+                    "v1",
+                    "origins"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Customer unique identifier.",
+                    "key": "x-photoniq-customerid",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"_key\": \"string\",\n    \"origin\": \"http://DsJDkktzQ.sdPKkkPRhufa.TA5QV0olrhn7\",\n    \"siteMaps\": [\n      \"string\",\n      \"string\"\n    ],\n    \"caching\": false,\n    \"ttl\": 6787.857110165186,\n    \"created\": \"2013-01-27T21:36:41.717Z\",\n    \"identifyNotfound\": \"string\",\n    \"allowOriginHeaderValue\": \"string\",\n    \"passThroughHeaders\": [\n      \"string\",\n      \"string\"\n    ],\n    \"addResponseHeaders\": {\n      \"key_0\": {\n        \"basedOnStatusCode\": true,\n        \"value\": \"string\"\n      }\n    },\n    \"lastUpdated\": \"2011-03-20T09:43:54.115Z\"\n  },\n  {\n    \"_key\": \"string\",\n    \"origin\": \"https://UxnWiYfhyZNJMHidk.mefrCry-RGXwDd,5tW-YBLnM.\",\n    \"siteMaps\": [\n      \"string\",\n      \"string\"\n    ],\n    \"caching\": false,\n    \"ttl\": 7134.1602035388205,\n    \"created\": \"1970-10-18T04:16:40.318Z\",\n    \"identifyNotfound\": \"string\",\n    \"allowOriginHeaderValue\": \"string\",\n    \"passThroughHeaders\": [\n      \"string\",\n      \"string\"\n    ],\n    \"addResponseHeaders\": {\n      \"key_0\": {\n        \"basedOnStatusCode\": false,\n        \"value\": \"string\"\n      }\n    },\n    \"lastUpdated\": \"1969-01-07T13:36:53.950Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "66c7b2ef-72d5-48e4-a707-52084ebf9201",
+              "name": "Bad request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "prerender",
+                    "v1",
+                    "origins"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Customer unique identifier.",
+                    "key": "x-photoniq-customerid",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"ERROR\",\n  \"message\": \"Header x-photoniq-customerid is required.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ec430a52-2d82-45b9-94ad-b9a7d4e886da",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "prerender",
+                    "v1",
+                    "origins"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Customer unique identifier.",
+                    "key": "x-photoniq-customerid",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"ERROR\",\n  \"message\": \"Internal server error.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3499e406-f148-4e73-98e8-3bfbb04b18a9",
+          "name": "Create origin",
+          "request": {
+            "name": "Create origin",
+            "description": {
+              "content": "Creates an origin.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "prerender",
+                "v1",
+                "origins"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Customer unique identifier.",
+                "key": "x-photoniq-customerid",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"origin\": \"<uri>\",\n  \"siteMaps\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"ttl\": \"<number>\",\n  \"caching\": \"<boolean>\",\n  \"identifyNotfound\": \"<string>\",\n  \"allowOriginHeaderValue\": \"<string>\",\n  \"passThroughHeaders\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"addResponseHeaders\": {\n    \"key_0\": {\n      \"basedOnStatusCode\": \"<boolean>\",\n      \"value\": \"<string>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e2723f27-884b-4fd1-8a06-61fccb6854ef",
+              "name": "Origin created successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "prerender",
+                    "v1",
+                    "origins"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Customer unique identifier.",
+                    "key": "x-photoniq-customerid",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"origin\": \"https://www.origin.com\",\n  \"siteMaps\": [\n    \"/sitemap.xml\"\n  ],\n  \"identifyNotfound\": \"Page Not Found\",\n  \"allowOriginHeaderValue\": \"948ef5f9-f15f-4b61-91b3-305b77db30e9\",\n  \"passThroughHeaders\": [\n    \"accept-language\",\n    \"user-agent\"\n  ],\n  \"addResponseHeaders\": {\n    \"cache-control\": {\n      \"basedOnStatusCode\": true,\n      \"value\": {\n        \"2xx\": \"public, max-age=86400\",\n        \"3xx\": \"public, max-age=7200\",\n        \"4xx\": \"no-store\",\n        \"5xx\": \"no-store\"\n      }\n    },\n    \"x-prerender-provider\": {\n      \"basedOnStatusCode\": false,\n      \"value\": \"PhotonIQ\"\n    }\n  },\n  \"caching\": false,\n  \"ttl\": 86400\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_key\": \"www_origin_com\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c04fe736-affa-4798-8ec5-074876bd5233",
+              "name": "Bad request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "prerender",
+                    "v1",
+                    "origins"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Customer unique identifier.",
+                    "key": "x-photoniq-customerid",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"origin\": \"https://www.origin.com\",\n  \"siteMaps\": [\n    \"/sitemap.xml\"\n  ],\n  \"identifyNotfound\": \"Page Not Found\",\n  \"allowOriginHeaderValue\": \"948ef5f9-f15f-4b61-91b3-305b77db30e9\",\n  \"passThroughHeaders\": [\n    \"accept-language\",\n    \"user-agent\"\n  ],\n  \"addResponseHeaders\": {\n    \"cache-control\": {\n      \"basedOnStatusCode\": true,\n      \"value\": {\n        \"2xx\": \"public, max-age=86400\",\n        \"3xx\": \"public, max-age=7200\",\n        \"4xx\": \"no-store\",\n        \"5xx\": \"no-store\"\n      }\n    },\n    \"x-prerender-provider\": {\n      \"basedOnStatusCode\": false,\n      \"value\": \"PhotonIQ\"\n    }\n  },\n  \"caching\": false,\n  \"ttl\": 86400\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"ERROR\",\n  \"message\": \"Header x-photoniq-customerid is required.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "87cd39ed-4b65-46f4-873f-9d71717db4cf",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "prerender",
+                    "v1",
+                    "origins"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Customer unique identifier.",
+                    "key": "x-photoniq-customerid",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"origin\": \"https://www.origin.com\",\n  \"siteMaps\": [\n    \"/sitemap.xml\"\n  ],\n  \"identifyNotfound\": \"Page Not Found\",\n  \"allowOriginHeaderValue\": \"948ef5f9-f15f-4b61-91b3-305b77db30e9\",\n  \"passThroughHeaders\": [\n    \"accept-language\",\n    \"user-agent\"\n  ],\n  \"addResponseHeaders\": {\n    \"cache-control\": {\n      \"basedOnStatusCode\": true,\n      \"value\": {\n        \"2xx\": \"public, max-age=86400\",\n        \"3xx\": \"public, max-age=7200\",\n        \"4xx\": \"no-store\",\n        \"5xx\": \"no-store\"\n      }\n    },\n    \"x-prerender-provider\": {\n      \"basedOnStatusCode\": false,\n      \"value\": \"PhotonIQ\"\n    }\n  },\n  \"caching\": false,\n  \"ttl\": 86400\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"ERROR\",\n  \"message\": \"Internal server error.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b7bb0bc1-bcab-4561-b488-1c5f5a9e8daa",
+          "name": "Get origin",
+          "request": {
+            "name": "Get origin",
+            "description": {
+              "content": "Returns an origin.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "prerender",
+                "v1",
+                "origins",
+                ":origin"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "origin",
+                  "description": "(Required) Origin hostname."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Customer unique identifier.",
+                "key": "x-photoniq-customerid",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "619438f1-217a-4cb0-85bd-8b74b41be0b9",
+              "name": "Origin fetched successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "prerender",
+                    "v1",
+                    "origins",
+                    ":origin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "origin",
+                      "description": "(Required) Origin hostname."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Customer unique identifier.",
+                    "key": "x-photoniq-customerid",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_key\": \"string\",\n  \"origin\": \"http://FXTvWZaZxKpsGRFSamPjNTMSd.yjanrYTgtHZ\",\n  \"siteMaps\": [\n    \"string\",\n    \"string\"\n  ],\n  \"caching\": false,\n  \"ttl\": 9330.666155949835,\n  \"created\": \"2016-08-21T10:22:40.649Z\",\n  \"identifyNotfound\": \"string\",\n  \"allowOriginHeaderValue\": \"string\",\n  \"passThroughHeaders\": [\n    \"string\",\n    \"string\"\n  ],\n  \"addResponseHeaders\": {\n    \"key_0\": {\n      \"basedOnStatusCode\": false,\n      \"value\": \"string\"\n    },\n    \"key_1\": {\n      \"basedOnStatusCode\": true,\n      \"value\": \"string\"\n    }\n  },\n  \"lastUpdated\": \"1992-07-19T12:10:01.817Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6221c335-88e1-46c5-9712-44cc6ffe2860",
+              "name": "Bad request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "prerender",
+                    "v1",
+                    "origins",
+                    ":origin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "origin",
+                      "description": "(Required) Origin hostname."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Customer unique identifier.",
+                    "key": "x-photoniq-customerid",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"ERROR\",\n  \"message\": \"Header x-photoniq-customerid is required.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fa6bacd6-dbf3-4cee-abc3-9dbf0686fc88",
+              "name": "Not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "prerender",
+                    "v1",
+                    "origins",
+                    ":origin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "origin",
+                      "description": "(Required) Origin hostname."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Customer unique identifier.",
+                    "key": "x-photoniq-customerid",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"ERROR\",\n  \"message\": \"Not found.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9177e788-b4d5-436f-a384-e2a80581b2d3",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "prerender",
+                    "v1",
+                    "origins",
+                    ":origin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "origin",
+                      "description": "(Required) Origin hostname."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Customer unique identifier.",
+                    "key": "x-photoniq-customerid",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"ERROR\",\n  \"message\": \"Internal server error.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9e38f071-254d-436d-a31a-f1bc2575c80d",
+          "name": "Update origin",
+          "request": {
+            "name": "Update origin",
+            "description": {
+              "content": "Updates an origin.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "prerender",
+                "v1",
+                "origins",
+                ":origin"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "origin",
+                  "description": "(Required) Origin hostname."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Customer unique identifier.",
+                "key": "x-photoniq-customerid",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"siteMaps\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"identifyNotfound\": \"<string>\",\n  \"allowOriginHeaderValue\": \"<string>\",\n  \"passThroughHeaders\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"addResponseHeaders\": {\n    \"key_0\": {\n      \"basedOnStatusCode\": \"<boolean>\",\n      \"value\": \"<string>\"\n    },\n    \"key_1\": {\n      \"basedOnStatusCode\": \"<boolean>\",\n      \"value\": \"<string>\"\n    }\n  },\n  \"caching\": \"<boolean>\",\n  \"ttl\": \"<number>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1a232add-8ef9-4945-96a2-4a220450c1dd",
+              "name": "Origin updated successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "prerender",
+                    "v1",
+                    "origins",
+                    ":origin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "origin",
+                      "description": "(Required) Origin hostname."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Customer unique identifier.",
+                    "key": "x-photoniq-customerid",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"siteMaps\": [\n    \"/sitemap.xml\"\n  ],\n  \"identifyNotfound\": \"Page Not Found\",\n  \"allowOriginHeaderValue\": \"948ef5f9-f15f-4b61-91b3-305b77db30e9\",\n  \"passThroughHeaders\": [\n    \"accept-language\",\n    \"user-agent\"\n  ],\n  \"addResponseHeaders\": {\n    \"cache-control\": {\n      \"basedOnStatusCode\": true,\n      \"value\": {\n        \"2xx\": \"public, max-age=86400\",\n        \"3xx\": \"public, max-age=7200\",\n        \"4xx\": \"no-store\",\n        \"5xx\": \"no-store\"\n      }\n    },\n    \"x-prerender-provider\": {\n      \"basedOnStatusCode\": false,\n      \"value\": \"PhotonIQ\"\n    }\n  },\n  \"caching\": false,\n  \"ttl\": 86400\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_key\": \"www_origin_com\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "879eaa19-a44f-4597-a71d-d96b6dc871b2",
+              "name": "Bad request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "prerender",
+                    "v1",
+                    "origins",
+                    ":origin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "origin",
+                      "description": "(Required) Origin hostname."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Customer unique identifier.",
+                    "key": "x-photoniq-customerid",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"siteMaps\": [\n    \"/sitemap.xml\"\n  ],\n  \"identifyNotfound\": \"Page Not Found\",\n  \"allowOriginHeaderValue\": \"948ef5f9-f15f-4b61-91b3-305b77db30e9\",\n  \"passThroughHeaders\": [\n    \"accept-language\",\n    \"user-agent\"\n  ],\n  \"addResponseHeaders\": {\n    \"cache-control\": {\n      \"basedOnStatusCode\": true,\n      \"value\": {\n        \"2xx\": \"public, max-age=86400\",\n        \"3xx\": \"public, max-age=7200\",\n        \"4xx\": \"no-store\",\n        \"5xx\": \"no-store\"\n      }\n    },\n    \"x-prerender-provider\": {\n      \"basedOnStatusCode\": false,\n      \"value\": \"PhotonIQ\"\n    }\n  },\n  \"caching\": false,\n  \"ttl\": 86400\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"ERROR\",\n  \"message\": \"Header x-photoniq-customerid is required.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e3070dc6-bf08-42a6-9cef-75ccc8ad6b51",
+              "name": "Not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "prerender",
+                    "v1",
+                    "origins",
+                    ":origin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "origin",
+                      "description": "(Required) Origin hostname."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Customer unique identifier.",
+                    "key": "x-photoniq-customerid",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"siteMaps\": [\n    \"/sitemap.xml\"\n  ],\n  \"identifyNotfound\": \"Page Not Found\",\n  \"allowOriginHeaderValue\": \"948ef5f9-f15f-4b61-91b3-305b77db30e9\",\n  \"passThroughHeaders\": [\n    \"accept-language\",\n    \"user-agent\"\n  ],\n  \"addResponseHeaders\": {\n    \"cache-control\": {\n      \"basedOnStatusCode\": true,\n      \"value\": {\n        \"2xx\": \"public, max-age=86400\",\n        \"3xx\": \"public, max-age=7200\",\n        \"4xx\": \"no-store\",\n        \"5xx\": \"no-store\"\n      }\n    },\n    \"x-prerender-provider\": {\n      \"basedOnStatusCode\": false,\n      \"value\": \"PhotonIQ\"\n    }\n  },\n  \"caching\": false,\n  \"ttl\": 86400\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"ERROR\",\n  \"message\": \"Not found.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2294796b-397c-4d51-9cd0-bb9db59163cd",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "prerender",
+                    "v1",
+                    "origins",
+                    ":origin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "origin",
+                      "description": "(Required) Origin hostname."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Customer unique identifier.",
+                    "key": "x-photoniq-customerid",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"siteMaps\": [\n    \"/sitemap.xml\"\n  ],\n  \"identifyNotfound\": \"Page Not Found\",\n  \"allowOriginHeaderValue\": \"948ef5f9-f15f-4b61-91b3-305b77db30e9\",\n  \"passThroughHeaders\": [\n    \"accept-language\",\n    \"user-agent\"\n  ],\n  \"addResponseHeaders\": {\n    \"cache-control\": {\n      \"basedOnStatusCode\": true,\n      \"value\": {\n        \"2xx\": \"public, max-age=86400\",\n        \"3xx\": \"public, max-age=7200\",\n        \"4xx\": \"no-store\",\n        \"5xx\": \"no-store\"\n      }\n    },\n    \"x-prerender-provider\": {\n      \"basedOnStatusCode\": false,\n      \"value\": \"PhotonIQ\"\n    }\n  },\n  \"caching\": false,\n  \"ttl\": 86400\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"ERROR\",\n  \"message\": \"Internal server error.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "990f9415-e3ea-406c-8bbd-766096a3de35",
+          "name": "Delete origin",
+          "request": {
+            "name": "Delete origin",
+            "description": {
+              "content": "Deletes an origin.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "prerender",
+                "v1",
+                "origins",
+                ":origin"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "origin",
+                  "description": "(Required) Origin hostname."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Customer unique identifier.",
+                "key": "x-photoniq-customerid",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "540b2fc4-8764-40ee-8a75-365f43a7dd90",
+              "name": "Origin deleted successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "prerender",
+                    "v1",
+                    "origins",
+                    ":origin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "origin",
+                      "description": "(Required) Origin hostname."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Customer unique identifier.",
+                    "key": "x-photoniq-customerid",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_key\": \"www_origin_com\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a8f0ce05-07b1-4922-ab30-b815d3f90c26",
+              "name": "Bad request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "prerender",
+                    "v1",
+                    "origins",
+                    ":origin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "origin",
+                      "description": "(Required) Origin hostname."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Customer unique identifier.",
+                    "key": "x-photoniq-customerid",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"ERROR\",\n  \"message\": \"Header x-photoniq-customerid is required.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3a6d086c-d938-4aee-9cbd-c49b055727f0",
+              "name": "Not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "prerender",
+                    "v1",
+                    "origins",
+                    ":origin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "origin",
+                      "description": "(Required) Origin hostname."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Customer unique identifier.",
+                    "key": "x-photoniq-customerid",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"ERROR\",\n  \"message\": \"Not found.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8679f83b-7381-42b2-a765-36e1bf98a156",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "prerender",
+                    "v1",
+                    "origins",
+                    ":origin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "origin",
+                      "description": "(Required) Origin hostname."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Customer unique identifier.",
+                    "key": "x-photoniq-customerid",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"ERROR\",\n  \"message\": \"Internal server error.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-play.paas.macrometa.io",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "63defb04-66c4-456d-ba2f-97dfd9429335",
+    "name": "Macrometa API Reference Activity Metrics Origins API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API reference for the Macrometa Global Data Network.",
+      "type": "text/plain"
+    }
+  }
+}

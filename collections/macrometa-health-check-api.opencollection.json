@@ -1,0 +1,48 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Macrometa API Reference Activity Metrics Health Check API",
+    "version": "0.17.17"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Health Check",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "EDS health check via WebSocket",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/es/v1/health"
+          },
+          "docs": "Check the health status of the event delivery service."
+        },
+        {
+          "info": {
+            "name": "EDS health check via SSE",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/es/sse/v1/health"
+          },
+          "docs": "Check the health status of the event delivery service."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

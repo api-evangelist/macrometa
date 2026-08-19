@@ -1,0 +1,199 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Macrometa API Reference Activity Metrics Query Workers API",
+    "version": "0.17.17"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Query Workers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Save query worker",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/restql",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "Fabric name for which to save query."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Save a query for a user for a fabric."
+        },
+        {
+          "info": {
+            "name": "Import custom query workers",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/restql/import",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "Fabric name for which to import queries."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Import custom queries."
+        },
+        {
+          "info": {
+            "name": "Run query worker",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/restql/execute/:name",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "Fabric name of the saved query."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Query name to run."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Run a saved query for a given fabric. If there are more that 100 records (*default batch-size*), the *hasMore* flag is set to *true* and the *id* is set. This *id* is used to query subsequent records."
+        },
+        {
+          "info": {
+            "name": "Read next batch from cursor",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/restql/fetch/:id",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the cursor."
+              }
+            ]
+          },
+          "docs": "If the query worker cursor is still valid, returns an object with the following attributes:\n\n- *id*: the *cursor-identifier*\n- *result*: a list of documents for the current batch\n- *hasMore*: *false* if this was the last batch\n- *count*: if present the total number of elements\n\nIf *hasMore* returns *true*, the next call might still return no documents. If *hasMore* is *false*, the cursor is exhausted. Once the *hasMore* attribute has a value of *false*, the client can stop."
+        },
+        {
+          "info": {
+            "name": "List current query workers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/restql/user",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "Fabric name for which to list saved queries."
+              }
+            ]
+          },
+          "docs": "Fetch list of saved queries for the fabric."
+        },
+        {
+          "info": {
+            "name": "Update query worker",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/restql/:name",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "Fabric name for which to update a query."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Query name to update."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a saved query for a fabric."
+        },
+        {
+          "info": {
+            "name": "Remove query worker",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/restql/:name",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "Fabric name for which to remove a query."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Query name to be removed."
+              }
+            ]
+          },
+          "docs": "Remove a query for the fabric."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

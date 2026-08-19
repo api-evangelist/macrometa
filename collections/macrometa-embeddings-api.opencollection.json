@@ -1,0 +1,71 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Macrometa API Reference Activity Metrics Embeddings API",
+    "version": "0.17.17"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Embeddings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get text embeddings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/api/hss/v1/embeddings/text",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Get text embeddings"
+        },
+        {
+          "info": {
+            "name": "Get image embeddings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/api/hss/v1/embeddings/image",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Get image embeddings"
+        },
+        {
+          "info": {
+            "name": "Get multimodal embeddings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/api/hss/v1/embeddings/multimodal",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Get multimodal embeddings"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

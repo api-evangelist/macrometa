@@ -1,0 +1,4273 @@
+{
+  "item": [
+    {
+      "id": "d85324a4-aeec-46c8-ae44-dfe3ae7351de",
+      "name": "Collections",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1965e20e-3343-4ecc-b8fe-e31bce2643d1",
+          "name": "List all collections",
+          "request": {
+            "name": "List all collections",
+            "description": {
+              "content": "Fetch the list of all collections.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "_fabric",
+                ":fabric",
+                "_api",
+                "collection"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "excludeSystem",
+                  "value": "true",
+                  "description": "Whether or not system collections should be excluded from the result."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "_system",
+                  "key": "fabric",
+                  "description": "(Required) The name of the fabric."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3a213214-9573-4e29-84cd-20929dd73ce5",
+              "name": "Successfully fetched collections.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "collection"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "excludeSystem",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The name of the fabric."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 200,\n  \"error\": false,\n  \"result\": [\n    {\n      \"id\": \"89218\",\n      \"name\": \"colltest0127133421258ogefv\",\n      \"status\": 3,\n      \"type\": 2,\n      \"collectionModel\": \"DOC\",\n      \"isSpot\": false,\n      \"isLocal\": false,\n      \"hasStream\": true,\n      \"waitForSync\": false,\n      \"isSystem\": false,\n      \"globallyUniqueId\": \"h2C627F3DCC8E/89218\",\n      \"searchEnabled\": false\n    },\n    {\n      \"id\": \"89218\",\n      \"name\": \"colltest0127133421258ogefv\",\n      \"status\": 3,\n      \"type\": 2,\n      \"collectionModel\": \"DOC\",\n      \"isSpot\": false,\n      \"isLocal\": false,\n      \"hasStream\": true,\n      \"waitForSync\": false,\n      \"isSystem\": false,\n      \"globallyUniqueId\": \"h2C627F3DCC8E/89218\",\n      \"searchEnabled\": false\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2c49e0fa-bdfd-4bd4-bc55-bc0875376b26",
+              "name": "Failed to find specified fabric.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "collection"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "excludeSystem",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The name of the fabric."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 404,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 581\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7ba66339-f2dd-4a81-81a2-5e2bfe9cccd9",
+          "name": "Create collection",
+          "request": {
+            "name": "Create collection",
+            "description": {
+              "content": "Create collection.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "_fabric",
+                ":fabric",
+                "_api",
+                "collection"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "_system",
+                  "key": "fabric",
+                  "description": "(Required) The name of the fabric."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"isLocal\": false,\n  \"keyOptions\": {\n    \"allowUserKeys\": \"<boolean>\",\n    \"increment\": \"<integer>\",\n    \"offset\": \"<integer>\",\n    \"type\": \"<string>\"\n  },\n  \"cacheEnabled\": false,\n  \"waitForSync\": false,\n  \"enableShards\": false,\n  \"type\": 2,\n  \"stream\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9e709a79-f3fa-4e7b-b5ec-b07bc43fcb6c",
+              "name": "Successfully created collection.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "collection"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The name of the fabric."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Test\",\n  \"isLocal\": false,\n  \"keyOptions\": {\n    \"allowUserKeys\": false,\n    \"increment\": 1,\n    \"offset\": 1,\n    \"type\": \"autoincrement\"\n  },\n  \"cacheEnabled\": false,\n  \"waitForSync\": false,\n  \"enableShards\": false,\n  \"type\": 2,\n  \"stream\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"89218\",\n  \"name\": \"colltest0127133421258ogefv\",\n  \"status\": 3,\n  \"type\": 2,\n  \"collectionModel\": \"DOC\",\n  \"isSpot\": false,\n  \"isLocal\": false,\n  \"hasStream\": true,\n  \"waitForSync\": false,\n  \"isSystem\": false,\n  \"globallyUniqueId\": \"h2C627F3DCC8E/89218\",\n  \"searchEnabled\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "247f8c78-57f3-4264-a0eb-25672cfc639d",
+              "name": "Failed due to missing or malformed data. Verify that all parameters are complete.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "collection"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The name of the fabric."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Test\",\n  \"isLocal\": false,\n  \"keyOptions\": {\n    \"allowUserKeys\": false,\n    \"increment\": 1,\n    \"offset\": 1,\n    \"type\": \"autoincrement\"\n  },\n  \"cacheEnabled\": false,\n  \"waitForSync\": false,\n  \"enableShards\": false,\n  \"type\": 2,\n  \"stream\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 400,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 102020\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bc98962a-c22c-4f87-85dc-1d1f80864306",
+              "name": "Failed to validate because you do not have access to the server.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "collection"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The name of the fabric."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Test\",\n  \"isLocal\": false,\n  \"keyOptions\": {\n    \"allowUserKeys\": false,\n    \"increment\": 1,\n    \"offset\": 1,\n    \"type\": \"autoincrement\"\n  },\n  \"cacheEnabled\": false,\n  \"waitForSync\": false,\n  \"enableShards\": false,\n  \"type\": 2,\n  \"stream\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 403,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 581\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3282666f-09e8-4410-bfce-8a4429aaa1cb",
+              "name": "Failed to find specified fabric.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "collection"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The name of the fabric."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Test\",\n  \"isLocal\": false,\n  \"keyOptions\": {\n    \"allowUserKeys\": false,\n    \"increment\": 1,\n    \"offset\": 1,\n    \"type\": \"autoincrement\"\n  },\n  \"cacheEnabled\": false,\n  \"waitForSync\": false,\n  \"enableShards\": false,\n  \"type\": 2,\n  \"stream\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 404,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 581\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c78b6eaf-9988-4f7d-afa1-2db89e27ff25",
+          "name": "Remove collection",
+          "request": {
+            "name": "Remove collection",
+            "description": {
+              "content": "Remove the collection.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "_fabric",
+                ":fabric",
+                "_api",
+                "collection",
+                ":collection-name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "isSystem",
+                  "value": "false",
+                  "description": "Whether or not the collection to remove is a system collection. This parameter must be set to *true* in order to remove system collections."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "_system",
+                  "key": "fabric",
+                  "description": "(Required) The name of the fabric."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "collection-name",
+                  "description": "(Required) The name of the collection to remove."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5689bff2-a7d4-4816-97d2-7f99a5bf9122",
+              "name": "Successfully removed collection.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "collection",
+                    ":collection-name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "isSystem",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The name of the fabric."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection-name",
+                      "description": "(Required) The name of the collection to remove."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 200,\n  \"error\": false,\n  \"id\": \"61862387\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c4e4f41a-fcaa-42cb-a0e3-73bcb27c49a6",
+              "name": "Failed due to missing or malformed data. Verify that all parameters are complete.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "collection",
+                    ":collection-name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "isSystem",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The name of the fabric."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection-name",
+                      "description": "(Required) The name of the collection to remove."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 400,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 102020\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1299c46b-9b4e-48b9-8f6a-fb039bf7f4bd",
+              "name": "Failed to find specified collection.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "collection",
+                    ":collection-name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "isSystem",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The name of the fabric."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection-name",
+                      "description": "(Required) The name of the collection to remove."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 404,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 581\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6c9388be-2240-4f97-9939-5549402d0a8e",
+          "name": "Get the information about collection",
+          "request": {
+            "name": "Get the information about collection",
+            "description": {
+              "content": "Fetch the information about collection.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "_fabric",
+                ":fabric",
+                "_api",
+                "collection",
+                ":collection-name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "_system",
+                  "key": "fabric",
+                  "description": "(Required) The name of the fabric."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "collection-name",
+                  "description": "(Required) The name of the collection."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4f44e98f-df28-4127-919f-a29c7c60d5e8",
+              "name": "Successfully fetched collection.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "collection",
+                    ":collection-name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The name of the fabric."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection-name",
+                      "description": "(Required) The name of the collection."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 200,\n  \"error\": false,\n  \"id\": \"89218\",\n  \"name\": \"colltest0127133421258ogefv\",\n  \"status\": 3,\n  \"type\": 2,\n  \"collectionModel\": \"DOC\",\n  \"isSpot\": false,\n  \"isLocal\": false,\n  \"hasStream\": true,\n  \"waitForSync\": false,\n  \"isSystem\": false,\n  \"globallyUniqueId\": \"h2C627F3DCC8E/89218\",\n  \"searchEnabled\": false,\n  \"blobs\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "01c897c9-9028-45e2-a078-9c6067222b5e",
+              "name": "Failed due to missing or malformed data. Verify that all parameters are complete.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "collection",
+                    ":collection-name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The name of the fabric."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection-name",
+                      "description": "(Required) The name of the collection."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 400,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 102020\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b5a91456-e958-4eaa-bd06-368ed37216fc",
+              "name": "Failed to validate because you do not have access to the server.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "collection",
+                    ":collection-name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The name of the fabric."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection-name",
+                      "description": "(Required) The name of the collection."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 403,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 581\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "90e2251e-b0b1-4457-8e64-25116519a6e8",
+              "name": "Failed to find specified collection.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "collection",
+                    ":collection-name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The name of the fabric."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection-name",
+                      "description": "(Required) The name of the collection."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 404,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 581\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "526df80e-d4f3-4132-8f56-ad33dadb7555",
+          "name": "Get workflows",
+          "request": {
+            "name": "Get workflows",
+            "description": {
+              "content": "Retrieve details of assigned workflows to a collection.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "_fabric",
+                ":fabric",
+                "_api",
+                "collection",
+                ":collection-name",
+                "workflows"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "fabric",
+                  "description": "(Required) Fabric name of the resource."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "collection-name",
+                  "description": "(Required) Collection name."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "395d1148-1a3b-4d45-aeb5-687dae9f0fec",
+              "name": "Successfully fetched the workflows assigned to the collection.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "collection",
+                    ":collection-name",
+                    "workflows"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fabric",
+                      "description": "(Required) Fabric name of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection-name",
+                      "description": "(Required) Collection name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": false,\n  \"code\": 200,\n  \"result\": [\n    {\n      \"uuid\": \"connectorse83a79c296f748b18fd9\",\n      \"name\": \"ToPostgres\",\n      \"connector\": {\n        \"name\": \"macrometa-source-oracle\",\n        \"displayName\": \"OracleDB\",\n        \"description\": \"Source for loading data from a GDN collection.\",\n        \"type\": \"source\",\n        \"version\": \"1.0.0\"\n      },\n      \"isEditable\": false,\n      \"isInternal\": false,\n      \"status\": \"Succeeded\"\n    },\n    {\n      \"uuid\": \"connectorse83a79c296f748b18fd9\",\n      \"name\": \"ToPostgres\",\n      \"connector\": {\n        \"name\": \"macrometa-source-oracle\",\n        \"displayName\": \"OracleDB\",\n        \"description\": \"Source for loading data from a GDN collection.\",\n        \"type\": \"source\",\n        \"version\": \"1.0.0\"\n      },\n      \"isEditable\": false,\n      \"isInternal\": false,\n      \"status\": \"Succeeded\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bfb78e8d-ef9f-48d4-a86a-f3d7605a89e3",
+              "name": "Failed to authenticate the request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "collection",
+                    ":collection-name",
+                    "workflows"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fabric",
+                      "description": "(Required) Fabric name of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection-name",
+                      "description": "(Required) Collection name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 401,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 5129\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "daa28f0c-b9dd-4294-acca-0ae0e4613b1c",
+              "name": "Failed to find specified collection.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "collection",
+                    ":collection-name",
+                    "workflows"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fabric",
+                      "description": "(Required) Fabric name of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection-name",
+                      "description": "(Required) Collection name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 404,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 581\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "306fb594-834c-4bd1-8f16-5f1ff142dd69",
+          "name": "Create a workflow",
+          "request": {
+            "name": "Create a workflow",
+            "description": {
+              "content": "Create a new workflow to an external data source or target from an existing collection.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "_fabric",
+                ":fabric",
+                "_api",
+                "collection",
+                ":collection-name",
+                "workflows"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "fabric",
+                  "description": "(Required) Fabric name of the resource."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "collection-name",
+                  "description": "(Required) Collection name."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key_0\": 3292.359054915318\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "be7d9e9a-a4a1-4b6a-81c7-aeb3b67e82d8",
+              "name": "Successfully created the workflow.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "collection",
+                    ":collection-name",
+                    "workflows"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fabric",
+                      "description": "(Required) Fabric name of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection-name",
+                      "description": "(Required) Collection name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key_0\": 2471.3838943285095\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": false,\n  \"code\": 200,\n  \"result\": {\n    \"uuid\": \"connectorse83a79c296f748b18fd9\",\n    \"name\": \"ToPostgres\",\n    \"connector\": {\n      \"name\": \"macrometa-source-oracle\",\n      \"displayName\": \"OracleDB\",\n      \"description\": \"Source for loading data from a GDN collection.\",\n      \"type\": \"source\",\n      \"version\": \"1.0.0\"\n    },\n    \"isEditable\": false,\n    \"isInternal\": false,\n    \"status\": \"Succeeded\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a2578d6c-14db-41d9-8917-31457dc96dbd",
+              "name": "Failed due to missing or malformed data. Verify that all parameters are complete.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "collection",
+                    ":collection-name",
+                    "workflows"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fabric",
+                      "description": "(Required) Fabric name of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection-name",
+                      "description": "(Required) Collection name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key_0\": 2471.3838943285095\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 400,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 102020\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7df07e57-117c-4db0-8b65-c888f1285a7e",
+              "name": "Failed to authenticate the request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "collection",
+                    ":collection-name",
+                    "workflows"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fabric",
+                      "description": "(Required) Fabric name of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection-name",
+                      "description": "(Required) Collection name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key_0\": 2471.3838943285095\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 401,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 5129\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c6fec923-40a3-4322-a2fd-cafd8cce3189",
+          "name": "Remove workflow",
+          "request": {
+            "name": "Remove workflow",
+            "description": {
+              "content": "Remove a workflow from a collection.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "_fabric",
+                ":fabric",
+                "_api",
+                "collection",
+                ":collection-name",
+                "workflows",
+                ":workflow-name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "fabric",
+                  "description": "(Required) Fabric name of the resource."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "collection-name",
+                  "description": "(Required) Collection name."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workflow-name",
+                  "description": "(Required) Name of the workflow."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b5973691-8dbb-4795-b524-529cb2cd6bfe",
+              "name": "Successfully deleted the workflow.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "collection",
+                    ":collection-name",
+                    "workflows",
+                    ":workflow-name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fabric",
+                      "description": "(Required) Fabric name of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection-name",
+                      "description": "(Required) Collection name."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workflow-name",
+                      "description": "(Required) Name of the workflow."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": false,\n  \"code\": 200,\n  \"id\": \"123\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "10f474a0-507a-4bde-87e1-73b56af85313",
+              "name": "Failed to authenticate the request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "collection",
+                    ":collection-name",
+                    "workflows",
+                    ":workflow-name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fabric",
+                      "description": "(Required) Fabric name of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection-name",
+                      "description": "(Required) Collection name."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workflow-name",
+                      "description": "(Required) Name of the workflow."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 401,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 5129\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0de827af-547c-44c6-8bcc-2567c0bd57d3",
+              "name": "Failed to find specified collection or workflow.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "collection",
+                    ":collection-name",
+                    "workflows",
+                    ":workflow-name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fabric",
+                      "description": "(Required) Fabric name of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection-name",
+                      "description": "(Required) Collection name."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workflow-name",
+                      "description": "(Required) Name of the workflow."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 404,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 581\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "43a396a5-78bf-49ee-958e-3c95c7d48189",
+          "name": "Retrieve additional collection metadata",
+          "request": {
+            "name": "Retrieve additional collection metadata",
+            "description": {
+              "content": "Retrieve metadata related to the collection.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "_fabric",
+                ":fabric",
+                "_api",
+                "collection",
+                ":collection-name",
+                "metadata"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "fabric",
+                  "description": "(Required) Fabric name of the resource."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "collection-name",
+                  "description": "(Required) Collection name."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cab2b6da-cb89-4626-bf5d-a0fa306e3760",
+              "name": "Successfully retrieved metadata of a collection.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "collection",
+                    ":collection-name",
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fabric",
+                      "description": "(Required) Fabric name of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection-name",
+                      "description": "(Required) Collection name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": false,\n  \"code\": 200,\n  \"result\": {\n    \"_key\": \"1\",\n    \"tenant\": \"demo\",\n    \"fabric\": \"_system\",\n    \"name\": \"MyCollection\",\n    \"workflows\": [\n      {\n        \"uuid\": \"connectorse83a79c296f748b18fd9\",\n        \"sourceConnection\": {\n          \"name\": \"FromPostgres\",\n          \"dynamicConfigs\": {\n            \"key_0\": false\n          },\n          \"connector\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"isEditable\": false,\n          \"isInternal\": false\n        },\n        \"targetConnection\": {\n          \"name\": \"FromPostgres\",\n          \"dynamicConfigs\": {\n            \"key_0\": 322\n          },\n          \"connector\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"isEditable\": false,\n          \"isInternal\": false\n        },\n        \"transformation\": \"@App:name(connectorse83a79c296f748b18fd9...\"\n      },\n      {\n        \"uuid\": \"connectorse83a79c296f748b18fd9\",\n        \"sourceConnection\": {\n          \"name\": \"FromPostgres\",\n          \"dynamicConfigs\": {\n            \"key_0\": false,\n            \"key_1\": \"string\",\n            \"key_2\": 2244\n          },\n          \"connector\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"isEditable\": false,\n          \"isInternal\": false\n        },\n        \"targetConnection\": {\n          \"name\": \"FromPostgres\",\n          \"dynamicConfigs\": {\n            \"key_0\": \"string\"\n          },\n          \"connector\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"isEditable\": false,\n          \"isInternal\": false\n        },\n        \"transformation\": \"@App:name(connectorse83a79c296f748b18fd9...\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f88f837c-3623-4f35-825b-d3c02d30337b",
+              "name": "Failed to authenticate the request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "collection",
+                    ":collection-name",
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fabric",
+                      "description": "(Required) Fabric name of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection-name",
+                      "description": "(Required) Collection name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 401,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 5129\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d03e7981-3dc1-4926-a13f-88d4ccad12c0",
+              "name": "Failed to find the metadata entry for the collection.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "collection",
+                    ":collection-name",
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fabric",
+                      "description": "(Required) Fabric name of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection-name",
+                      "description": "(Required) Collection name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 404,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 581\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "97d59ac0-90da-46d5-ae5e-3af0742bcdde",
+          "name": "Update collection metadata",
+          "request": {
+            "name": "Update collection metadata",
+            "description": {
+              "content": "Update metadata related to the collection.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "_fabric",
+                ":fabric",
+                "_api",
+                "collection",
+                ":collection-name",
+                "metadata"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "fabric",
+                  "description": "(Required) Fabric name of the resource."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "collection-name",
+                  "description": "(Required) Collection name."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"workflows\": [\n    {\n      \"uuid\": \"<string>\",\n      \"sourceConnection\": {\n        \"name\": \"<string>\",\n        \"dynamicConfigs\": {\n          \"key_0\": 1702,\n          \"key_1\": 5815\n        },\n        \"connector\": {\n          \"name\": \"<string>\",\n          \"displayName\": \"<string>\",\n          \"description\": \"<string>\",\n          \"type\": \"<string>\",\n          \"version\": \"<string>\"\n        },\n        \"isEditable\": false,\n        \"isInternal\": false\n      },\n      \"targetConnection\": {\n        \"name\": \"<string>\",\n        \"dynamicConfigs\": {\n          \"key_0\": 2092.614935813988\n        },\n        \"connector\": {\n          \"name\": \"<string>\",\n          \"displayName\": \"<string>\",\n          \"description\": \"<string>\",\n          \"type\": \"<string>\",\n          \"version\": \"<string>\"\n        },\n        \"isEditable\": false,\n        \"isInternal\": false\n      },\n      \"transformation\": \"<string>\"\n    },\n    {\n      \"uuid\": \"<string>\",\n      \"sourceConnection\": {\n        \"name\": \"<string>\",\n        \"dynamicConfigs\": {\n          \"key_0\": 387.18081278665494\n        },\n        \"connector\": {\n          \"name\": \"<string>\",\n          \"displayName\": \"<string>\",\n          \"description\": \"<string>\",\n          \"type\": \"<string>\",\n          \"version\": \"<string>\"\n        },\n        \"isEditable\": false,\n        \"isInternal\": false\n      },\n      \"targetConnection\": {\n        \"name\": \"<string>\",\n        \"dynamicConfigs\": {\n          \"key_0\": \"string\"\n        },\n        \"connector\": {\n          \"name\": \"<string>\",\n          \"displayName\": \"<string>\",\n          \"description\": \"<string>\",\n          \"type\": \"<string>\",\n          \"version\": \"<string>\"\n        },\n        \"isEditable\": false,\n        \"isInternal\": false\n      },\n      \"transformation\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "028ed51d-77a9-45fa-9a83-8c863ed7b138",
+              "name": "Successfully updated metadata of the collection.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "collection",
+                    ":collection-name",
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fabric",
+                      "description": "(Required) Fabric name of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection-name",
+                      "description": "(Required) Collection name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"workflows\": [\n    {\n      \"uuid\": \"connectorse83a79c296f748b18fd9\",\n      \"sourceConnection\": {\n        \"name\": \"FromPostgres\",\n        \"dynamicConfigs\": {\n          \"key_0\": 2777.6822053770657\n        },\n        \"connector\": {\n          \"name\": \"macrometa-source-oracle\",\n          \"displayName\": \"OracleDB\",\n          \"description\": \"Source for loading data from a GDN collection.\",\n          \"type\": \"source\",\n          \"version\": \"1.0.0\"\n        },\n        \"isEditable\": false,\n        \"isInternal\": false\n      },\n      \"targetConnection\": {\n        \"name\": \"FromPostgres\",\n        \"dynamicConfigs\": {\n          \"key_0\": 4913\n        },\n        \"connector\": {\n          \"name\": \"macrometa-source-oracle\",\n          \"displayName\": \"OracleDB\",\n          \"description\": \"Source for loading data from a GDN collection.\",\n          \"type\": \"source\",\n          \"version\": \"1.0.0\"\n        },\n        \"isEditable\": false,\n        \"isInternal\": false\n      },\n      \"transformation\": \"@App:name(connectorse83a79c296f748b18fd9...\"\n    },\n    {\n      \"uuid\": \"connectorse83a79c296f748b18fd9\",\n      \"sourceConnection\": {\n        \"name\": \"FromPostgres\",\n        \"dynamicConfigs\": {\n          \"key_0\": 8781\n        },\n        \"connector\": {\n          \"name\": \"macrometa-source-oracle\",\n          \"displayName\": \"OracleDB\",\n          \"description\": \"Source for loading data from a GDN collection.\",\n          \"type\": \"source\",\n          \"version\": \"1.0.0\"\n        },\n        \"isEditable\": false,\n        \"isInternal\": false\n      },\n      \"targetConnection\": {\n        \"name\": \"FromPostgres\",\n        \"dynamicConfigs\": {\n          \"key_0\": true\n        },\n        \"connector\": {\n          \"name\": \"macrometa-source-oracle\",\n          \"displayName\": \"OracleDB\",\n          \"description\": \"Source for loading data from a GDN collection.\",\n          \"type\": \"source\",\n          \"version\": \"1.0.0\"\n        },\n        \"isEditable\": false,\n        \"isInternal\": false\n      },\n      \"transformation\": \"@App:name(connectorse83a79c296f748b18fd9...\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": false,\n  \"code\": 200,\n  \"result\": {\n    \"_key\": \"string\",\n    \"_rev\": \"_3er45_\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c2cf403c-47b3-45a9-9e19-fc4a57c0c3d8",
+              "name": "Failed due to missing or malformed data. Verify that all parameters are complete.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "collection",
+                    ":collection-name",
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fabric",
+                      "description": "(Required) Fabric name of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection-name",
+                      "description": "(Required) Collection name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"workflows\": [\n    {\n      \"uuid\": \"connectorse83a79c296f748b18fd9\",\n      \"sourceConnection\": {\n        \"name\": \"FromPostgres\",\n        \"dynamicConfigs\": {\n          \"key_0\": 2777.6822053770657\n        },\n        \"connector\": {\n          \"name\": \"macrometa-source-oracle\",\n          \"displayName\": \"OracleDB\",\n          \"description\": \"Source for loading data from a GDN collection.\",\n          \"type\": \"source\",\n          \"version\": \"1.0.0\"\n        },\n        \"isEditable\": false,\n        \"isInternal\": false\n      },\n      \"targetConnection\": {\n        \"name\": \"FromPostgres\",\n        \"dynamicConfigs\": {\n          \"key_0\": 4913\n        },\n        \"connector\": {\n          \"name\": \"macrometa-source-oracle\",\n          \"displayName\": \"OracleDB\",\n          \"description\": \"Source for loading data from a GDN collection.\",\n          \"type\": \"source\",\n          \"version\": \"1.0.0\"\n        },\n        \"isEditable\": false,\n        \"isInternal\": false\n      },\n      \"transformation\": \"@App:name(connectorse83a79c296f748b18fd9...\"\n    },\n    {\n      \"uuid\": \"connectorse83a79c296f748b18fd9\",\n      \"sourceConnection\": {\n        \"name\": \"FromPostgres\",\n        \"dynamicConfigs\": {\n          \"key_0\": 8781\n        },\n        \"connector\": {\n          \"name\": \"macrometa-source-oracle\",\n          \"displayName\": \"OracleDB\",\n          \"description\": \"Source for loading data from a GDN collection.\",\n          \"type\": \"source\",\n          \"version\": \"1.0.0\"\n        },\n        \"isEditable\": false,\n        \"isInternal\": false\n      },\n      \"targetConnection\": {\n        \"name\": \"FromPostgres\",\n        \"dynamicConfigs\": {\n          \"key_0\": true\n        },\n        \"connector\": {\n          \"name\": \"macrometa-source-oracle\",\n          \"displayName\": \"OracleDB\",\n          \"description\": \"Source for loading data from a GDN collection.\",\n          \"type\": \"source\",\n          \"version\": \"1.0.0\"\n        },\n        \"isEditable\": false,\n        \"isInternal\": false\n      },\n      \"transformation\": \"@App:name(connectorse83a79c296f748b18fd9...\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 400,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 102020\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b02eb4db-434d-4cbf-b6ab-83a7414cad2a",
+              "name": "Failed to authenticate the request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "collection",
+                    ":collection-name",
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fabric",
+                      "description": "(Required) Fabric name of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection-name",
+                      "description": "(Required) Collection name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"workflows\": [\n    {\n      \"uuid\": \"connectorse83a79c296f748b18fd9\",\n      \"sourceConnection\": {\n        \"name\": \"FromPostgres\",\n        \"dynamicConfigs\": {\n          \"key_0\": 2777.6822053770657\n        },\n        \"connector\": {\n          \"name\": \"macrometa-source-oracle\",\n          \"displayName\": \"OracleDB\",\n          \"description\": \"Source for loading data from a GDN collection.\",\n          \"type\": \"source\",\n          \"version\": \"1.0.0\"\n        },\n        \"isEditable\": false,\n        \"isInternal\": false\n      },\n      \"targetConnection\": {\n        \"name\": \"FromPostgres\",\n        \"dynamicConfigs\": {\n          \"key_0\": 4913\n        },\n        \"connector\": {\n          \"name\": \"macrometa-source-oracle\",\n          \"displayName\": \"OracleDB\",\n          \"description\": \"Source for loading data from a GDN collection.\",\n          \"type\": \"source\",\n          \"version\": \"1.0.0\"\n        },\n        \"isEditable\": false,\n        \"isInternal\": false\n      },\n      \"transformation\": \"@App:name(connectorse83a79c296f748b18fd9...\"\n    },\n    {\n      \"uuid\": \"connectorse83a79c296f748b18fd9\",\n      \"sourceConnection\": {\n        \"name\": \"FromPostgres\",\n        \"dynamicConfigs\": {\n          \"key_0\": 8781\n        },\n        \"connector\": {\n          \"name\": \"macrometa-source-oracle\",\n          \"displayName\": \"OracleDB\",\n          \"description\": \"Source for loading data from a GDN collection.\",\n          \"type\": \"source\",\n          \"version\": \"1.0.0\"\n        },\n        \"isEditable\": false,\n        \"isInternal\": false\n      },\n      \"targetConnection\": {\n        \"name\": \"FromPostgres\",\n        \"dynamicConfigs\": {\n          \"key_0\": true\n        },\n        \"connector\": {\n          \"name\": \"macrometa-source-oracle\",\n          \"displayName\": \"OracleDB\",\n          \"description\": \"Source for loading data from a GDN collection.\",\n          \"type\": \"source\",\n          \"version\": \"1.0.0\"\n        },\n        \"isEditable\": false,\n        \"isInternal\": false\n      },\n      \"transformation\": \"@App:name(connectorse83a79c296f748b18fd9...\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 401,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 5129\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "61c7048f-d575-4bfd-9e5e-40354498ad6e",
+              "name": "Failed to find the metadata entry for the collection.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "collection",
+                    ":collection-name",
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fabric",
+                      "description": "(Required) Fabric name of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection-name",
+                      "description": "(Required) Collection name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"workflows\": [\n    {\n      \"uuid\": \"connectorse83a79c296f748b18fd9\",\n      \"sourceConnection\": {\n        \"name\": \"FromPostgres\",\n        \"dynamicConfigs\": {\n          \"key_0\": 2777.6822053770657\n        },\n        \"connector\": {\n          \"name\": \"macrometa-source-oracle\",\n          \"displayName\": \"OracleDB\",\n          \"description\": \"Source for loading data from a GDN collection.\",\n          \"type\": \"source\",\n          \"version\": \"1.0.0\"\n        },\n        \"isEditable\": false,\n        \"isInternal\": false\n      },\n      \"targetConnection\": {\n        \"name\": \"FromPostgres\",\n        \"dynamicConfigs\": {\n          \"key_0\": 4913\n        },\n        \"connector\": {\n          \"name\": \"macrometa-source-oracle\",\n          \"displayName\": \"OracleDB\",\n          \"description\": \"Source for loading data from a GDN collection.\",\n          \"type\": \"source\",\n          \"version\": \"1.0.0\"\n        },\n        \"isEditable\": false,\n        \"isInternal\": false\n      },\n      \"transformation\": \"@App:name(connectorse83a79c296f748b18fd9...\"\n    },\n    {\n      \"uuid\": \"connectorse83a79c296f748b18fd9\",\n      \"sourceConnection\": {\n        \"name\": \"FromPostgres\",\n        \"dynamicConfigs\": {\n          \"key_0\": 8781\n        },\n        \"connector\": {\n          \"name\": \"macrometa-source-oracle\",\n          \"displayName\": \"OracleDB\",\n          \"description\": \"Source for loading data from a GDN collection.\",\n          \"type\": \"source\",\n          \"version\": \"1.0.0\"\n        },\n        \"isEditable\": false,\n        \"isInternal\": false\n      },\n      \"targetConnection\": {\n        \"name\": \"FromPostgres\",\n        \"dynamicConfigs\": {\n          \"key_0\": true\n        },\n        \"connector\": {\n          \"name\": \"macrometa-source-oracle\",\n          \"displayName\": \"OracleDB\",\n          \"description\": \"Source for loading data from a GDN collection.\",\n          \"type\": \"source\",\n          \"version\": \"1.0.0\"\n        },\n        \"isEditable\": false,\n        \"isInternal\": false\n      },\n      \"transformation\": \"@App:name(connectorse83a79c296f748b18fd9...\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 404,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 581\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "646ceb80-62e8-4741-8649-c0250e0f76cf",
+          "name": "Truncate and reload data",
+          "request": {
+            "name": "Truncate and reload data",
+            "description": {
+              "content": "Truncate the collection and reload data from source connection.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "_fabric",
+                ":fabric",
+                "_api",
+                "collection",
+                ":collection-name",
+                "reload"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "fabric",
+                  "description": "(Required) Fabric name of the resource."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "collection-name",
+                  "description": "(Required) Collection name."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7d564c98-dac0-470d-8ca4-f8f6651c1f92",
+              "name": "Successfully reloaded collection.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "collection",
+                    ":collection-name",
+                    "reload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fabric",
+                      "description": "(Required) Fabric name of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection-name",
+                      "description": "(Required) Collection name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": false,\n  \"code\": 200\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c167bc82-bb6d-4f92-994d-f9b2ed681f6f",
+              "name": "Failed to authenticate the request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "collection",
+                    ":collection-name",
+                    "reload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fabric",
+                      "description": "(Required) Fabric name of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection-name",
+                      "description": "(Required) Collection name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 401,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 5129\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e9e35157-c163-4fb9-9c66-1362fb778846",
+              "name": "Failed to find specified collection.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "collection",
+                    ":collection-name",
+                    "reload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fabric",
+                      "description": "(Required) Fabric name of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection-name",
+                      "description": "(Required) Collection name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 404,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 581\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "50f79173-28db-4c56-b8a8-e53eefbb70cc",
+          "name": "Get number of documents in a collection",
+          "request": {
+            "name": "Get number of documents in a collection",
+            "description": {
+              "content": "Retrieve the count of documents within the collection.\n\n**Note**: This always loads the collection into memory.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "_fabric",
+                ":fabric",
+                "_api",
+                "collection",
+                ":collection-name",
+                "count"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "_system",
+                  "key": "fabric",
+                  "description": "(Required) The name of the fabric."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "collection-name",
+                  "description": "(Required) The name of the collection."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "370d6288-0fb1-46d3-a8bb-2683713be038",
+              "name": "Successfully fetched number of documents in a collection.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "collection",
+                    ":collection-name",
+                    "count"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The name of the fabric."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection-name",
+                      "description": "(Required) The name of the collection."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 200,\n  \"error\": false,\n  \"searchEnabled\": false,\n  \"count\": \"89218\",\n  \"id\": \"89218\",\n  \"isSystem\": false,\n  \"name\": \"colltest0127133421258ogefv\",\n  \"globallyUniqueId\": \"h83A7584E8AA9\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0fd216b1-6bef-46a3-a8b6-75b247660f33",
+              "name": "Failed due to missing or malformed data. Verify that all parameters are complete.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "collection",
+                    ":collection-name",
+                    "count"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The name of the fabric."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection-name",
+                      "description": "(Required) The name of the collection."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 400,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 102020\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d57196be-876b-4ec2-9202-897a57751047",
+              "name": "Failed to find specified collection.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "collection",
+                    ":collection-name",
+                    "count"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The name of the fabric."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection-name",
+                      "description": "(Required) The name of the collection."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 404,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 581\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "27103446-6653-45c6-bdc2-74f2e15890bd",
+          "name": "Return figures of a collection",
+          "request": {
+            "name": "Return figures of a collection",
+            "description": {
+              "content": "Returns an object containing statistics about a collection.\n\n**Note**: This always loads the collection into memory.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "_fabric",
+                ":fabric",
+                "_api",
+                "collection",
+                ":collection-name",
+                "figures"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "_system",
+                  "key": "fabric",
+                  "description": "(Required) The name of the fabric."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "collection-name",
+                  "description": "(Required) The name of the collection."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dfc269d1-6602-41cb-bae4-25c8b9b702e2",
+              "name": "Returns information about the collection.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "collection",
+                    ":collection-name",
+                    "figures"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The name of the fabric."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection-name",
+                      "description": "(Required) The name of the collection."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 200,\n  \"error\": false,\n  \"id\": \"89218\",\n  \"objectId\": \"6966663\",\n  \"name\": \"colltest0127133421258ogefv\",\n  \"statusString\": \"unloaded\",\n  \"collectionModel\": 0,\n  \"isSpot\": false,\n  \"isLocal\": false,\n  \"cacheEnabled\": false,\n  \"hasStream\": true,\n  \"waitForSync\": false,\n  \"keyOptions\": {\n    \"allowUserKeys\": false,\n    \"increment\": 1,\n    \"offset\": 1,\n    \"type\": \"autoincrement\"\n  },\n  \"isSystem\": false,\n  \"globallyUniqueId\": \"h2C627F3DCC8E/89218\",\n  \"searchEnabled\": false,\n  \"figures\": {\n    \"indexes\": {\n      \"count\": 1,\n      \"size\": 2070\n    },\n    \"viewIndexes\": {\n      \"count\": 0,\n      \"size\": 0\n    },\n    \"documentsSize\": 8485,\n    \"cacheInUse\": false,\n    \"cacheSize\": 4226,\n    \"cacheUsage\": 9690\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "119daac6-4324-4caf-bb34-a5df0aba9997",
+              "name": "Failed due to missing or malformed data. Verify that all parameters are complete.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "collection",
+                    ":collection-name",
+                    "figures"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The name of the fabric."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection-name",
+                      "description": "(Required) The name of the collection."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 400,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 102020\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "def47821-c630-4435-af82-813676995cf4",
+              "name": "Failed to find specified collection.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "collection",
+                    ":collection-name",
+                    "figures"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The name of the fabric."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection-name",
+                      "description": "(Required) The name of the collection."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 404,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 581\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cdbf4a8c-b310-440b-b5d3-4edb9f13ac1b",
+          "name": "Truncate collection",
+          "request": {
+            "name": "Truncate collection",
+            "description": {
+              "content": "Remove all documents from the collection but leaves the indexes intact.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "_fabric",
+                ":fabric",
+                "_api",
+                "collection",
+                ":collection-name",
+                "truncate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "_system",
+                  "key": "fabric",
+                  "description": "(Required) The name of the fabric."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "collection-name",
+                  "description": "(Required) The name of the collection."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d8d21eed-6dd4-4135-a166-8b1c0fdf341a",
+              "name": "Successfully removed all the documents.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "collection",
+                    ":collection-name",
+                    "truncate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The name of the fabric."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection-name",
+                      "description": "(Required) The name of the collection."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 200,\n  \"error\": false,\n  \"id\": \"89218\",\n  \"name\": \"colltest0127133421258ogefv\",\n  \"status\": 3,\n  \"type\": 2,\n  \"collectionModel\": \"DOC\",\n  \"isSpot\": false,\n  \"isLocal\": false,\n  \"hasStream\": true,\n  \"waitForSync\": false,\n  \"isSystem\": false,\n  \"globallyUniqueId\": \"h2C627F3DCC8E/89218\",\n  \"searchEnabled\": false,\n  \"blobs\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4e5e6bd2-7692-45e9-805f-b46d807be377",
+              "name": "Failed due to missing or malformed data. Verify that all parameters are complete.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "collection",
+                    ":collection-name",
+                    "truncate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The name of the fabric."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection-name",
+                      "description": "(Required) The name of the collection."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 400,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 102020\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2449fbbc-ae56-4865-955e-4a15898e9d2c",
+              "name": "Failed to find specified collection.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "collection",
+                    ":collection-name",
+                    "truncate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The name of the fabric."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection-name",
+                      "description": "(Required) The name of the collection."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 404,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 581\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0a87d286-dd4a-47ec-b6e7-1514ff43d637",
+          "name": "Update collection properties",
+          "request": {
+            "name": "Update collection properties",
+            "description": {
+              "content": "Changes the properties of a collection.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "_fabric",
+                ":fabric",
+                "_api",
+                "collection",
+                ":collection-name",
+                "properties"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "_system",
+                  "key": "fabric",
+                  "description": "(Required) The name of the fabric."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "collection-name",
+                  "description": "(Required) The name of the collection."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"hasStream\": \"<boolean>\",\n  \"waitForSync\": \"<boolean>\",\n  \"cacheEnabled\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "79152cf1-3127-4d8e-9cb8-b156425369c6",
+              "name": "Successfully updated the document.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "collection",
+                    ":collection-name",
+                    "properties"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The name of the fabric."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection-name",
+                      "description": "(Required) The name of the collection."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"hasStream\": \"<boolean>\",\n  \"waitForSync\": \"<boolean>\",\n  \"cacheEnabled\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 200,\n  \"error\": false,\n  \"id\": \"89218\",\n  \"objectId\": \"6966663\",\n  \"name\": \"colltest0127133421258ogefv\",\n  \"statusString\": \"loading\",\n  \"type\": 2,\n  \"collectionModel\": \"DOC\",\n  \"isSpot\": false,\n  \"isLocal\": false,\n  \"cacheEnabled\": false,\n  \"hasStream\": true,\n  \"waitForSync\": false,\n  \"keyOptions\": {\n    \"allowUserKeys\": false,\n    \"increment\": 1,\n    \"offset\": 1,\n    \"type\": \"autoincrement\"\n  },\n  \"isSystem\": false,\n  \"globallyUniqueId\": \"h2C627F3DCC8E/89218\",\n  \"searchEnabled\": false,\n  \"status\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5abe26ed-659e-4884-a13a-801fae781865",
+              "name": "Failed due to missing or malformed data. Verify that all parameters are complete.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "collection",
+                    ":collection-name",
+                    "properties"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The name of the fabric."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection-name",
+                      "description": "(Required) The name of the collection."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"hasStream\": \"<boolean>\",\n  \"waitForSync\": \"<boolean>\",\n  \"cacheEnabled\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 400,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 102020\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0aea72d4-8ff1-46f0-b942-447117b69959",
+              "name": "Failed to find specified collection.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "collection",
+                    ":collection-name",
+                    "properties"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The name of the fabric."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection-name",
+                      "description": "(Required) The name of the collection."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"hasStream\": \"<boolean>\",\n  \"waitForSync\": \"<boolean>\",\n  \"cacheEnabled\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 404,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 581\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-play.paas.macrometa.io",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "ff083eab-b61a-4c61-885d-768c62eb33d1",
+    "name": "Macrometa API Reference Activity Metrics Collections API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API reference for the Macrometa Global Data Network.",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,757 @@
+{
+  "item": [
+    {
+      "id": "b22088f1-73fc-4627-92ef-a4c1384dd85b",
+      "name": "Activity Metrics",
+      "description": {
+        "content": "All the PhotonIQ EST activity metrics endpoints.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1f1334cd-a0cb-4ff9-a0ec-5dc33d488c47",
+          "name": "Get hourly activity metrics based on start and end date-time parameters.",
+          "request": {
+            "name": "Get hourly activity metrics based on start and end date-time parameters.",
+            "description": {
+              "content": "Get hourly activity metrics based on start and end date-time parameters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "est",
+                "v1",
+                "activity",
+                "hourly"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "from",
+                  "value": "<dateTime>",
+                  "description": "(Required) The UTC start date and time for which activity information is retrieved (e.g. 2022-01-01T00:00:00Z)."
+                },
+                {
+                  "disabled": false,
+                  "key": "to",
+                  "value": "<dateTime>",
+                  "description": "(Required) The UTC end date and time for which activity information is retrieved (e.g. 2022-01-01T00:00:00Z)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) PhotonIQ EST customer ID.",
+                "key": "X-PhotonIQ-CustomerID",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "50a6c1d6-89aa-4792-a133-0fdaa6154ea5",
+              "name": "Activity metrics retrieved successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "est",
+                    "v1",
+                    "activity",
+                    "hourly"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) PhotonIQ EST customer ID.",
+                    "key": "X-PhotonIQ-CustomerID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"activityMetrics\": [\n    {\n      \"customerId\": \"string\",\n      \"componentName\": \"string\",\n      \"eventType\": \"string\",\n      \"eventName\": \"string\",\n      \"count\": 9205.372106197683\n    },\n    {\n      \"customerId\": \"string\",\n      \"componentName\": \"string\",\n      \"eventType\": \"string\",\n      \"eventName\": \"string\",\n      \"count\": 4202.734125051487\n    }\n  ],\n  \"type\": [\n    {\n      \"totalRequests\": 8058.013388649523,\n      \"totalBytes\": 8818.98678885741\n    },\n    {\n      \"totalRequests\": 6228.150834692562,\n      \"totalBytes\": 3741.3288425774194\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f4fa0f0e-4fc5-4cec-ba45-eabee8ed142b",
+              "name": "Invalid date parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "est",
+                    "v1",
+                    "activity",
+                    "hourly"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) PhotonIQ EST customer ID.",
+                    "key": "X-PhotonIQ-CustomerID",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "315f38e6-a8ac-4c67-b9db-7dabbe5f1f92",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "est",
+                    "v1",
+                    "activity",
+                    "hourly"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) PhotonIQ EST customer ID.",
+                    "key": "X-PhotonIQ-CustomerID",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "08785389-f111-4639-b1f8-a3c5e5dedc50",
+          "name": "Get daily activity metrics based on start and end date-time parameters.",
+          "request": {
+            "name": "Get daily activity metrics based on start and end date-time parameters.",
+            "description": {
+              "content": "Get daily activity metrics based on start and end date-time parameters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "est",
+                "v1",
+                "activity",
+                "daily"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "from",
+                  "value": "<dateTime>",
+                  "description": "(Required) The UTC start date and time for which activity information is retrieved (e.g. 2022-01-01T00:00:00Z)."
+                },
+                {
+                  "disabled": false,
+                  "key": "to",
+                  "value": "<dateTime>",
+                  "description": "(Required) The UTC end date and time for which activity information is retrieved (e.g. 2022-01-01T00:00:00Z)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) PhotonIQ EST customer ID.",
+                "key": "X-PhotonIQ-CustomerID",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "baa447ce-064e-4bad-ad30-95555f4b3d7b",
+              "name": "Activity metrics retrieved successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "est",
+                    "v1",
+                    "activity",
+                    "daily"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) PhotonIQ EST customer ID.",
+                    "key": "X-PhotonIQ-CustomerID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"activityMetrics\": [\n    {\n      \"customerId\": \"string\",\n      \"componentName\": \"string\",\n      \"eventType\": \"string\",\n      \"eventName\": \"string\",\n      \"count\": 6412.484265969088\n    },\n    {\n      \"customerId\": \"string\",\n      \"componentName\": \"string\",\n      \"eventType\": \"string\",\n      \"eventName\": \"string\",\n      \"count\": 1784.240817602486\n    }\n  ],\n  \"type\": [\n    {\n      \"totalRequests\": 9320.515773352281,\n      \"totalBytes\": 2242.1025310364794\n    },\n    {\n      \"totalRequests\": 3206.4686404292474,\n      \"totalBytes\": 7557.004785236232\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "93c076c0-8e7f-48f0-bc50-6a560a0b8f12",
+              "name": "Invalid date parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "est",
+                    "v1",
+                    "activity",
+                    "daily"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) PhotonIQ EST customer ID.",
+                    "key": "X-PhotonIQ-CustomerID",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "cf0c0a64-ee1d-4a78-bd70-3d26dd48bb47",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "est",
+                    "v1",
+                    "activity",
+                    "daily"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) PhotonIQ EST customer ID.",
+                    "key": "X-PhotonIQ-CustomerID",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "695120b5-508e-4175-9639-56ddd09c6a6d",
+          "name": "Get monthly activity metrics based on start and end date-time parameters.",
+          "request": {
+            "name": "Get monthly activity metrics based on start and end date-time parameters.",
+            "description": {
+              "content": "Get monthly activity metrics based on start and end date-time parameters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "est",
+                "v1",
+                "activity",
+                "monthly"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "from",
+                  "value": "<dateTime>",
+                  "description": "(Required) The UTC start date and time for which activity information is retrieved (e.g. 2022-01-01T00:00:00Z)."
+                },
+                {
+                  "disabled": false,
+                  "key": "to",
+                  "value": "<dateTime>",
+                  "description": "(Required) The UTC end date and time for which activity information is retrieved (e.g. 2022-01-01T00:00:00Z)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) PhotonIQ EST customer ID.",
+                "key": "X-PhotonIQ-CustomerID",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b8d836c5-693f-48e8-8688-a79dd40b15e5",
+              "name": "Activity metrics retrieved successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "est",
+                    "v1",
+                    "activity",
+                    "monthly"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) PhotonIQ EST customer ID.",
+                    "key": "X-PhotonIQ-CustomerID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"activityMetrics\": [\n    {\n      \"customerId\": \"string\",\n      \"componentName\": \"string\",\n      \"eventType\": \"string\",\n      \"eventName\": \"string\",\n      \"count\": 6412.484265969088\n    },\n    {\n      \"customerId\": \"string\",\n      \"componentName\": \"string\",\n      \"eventType\": \"string\",\n      \"eventName\": \"string\",\n      \"count\": 1784.240817602486\n    }\n  ],\n  \"type\": [\n    {\n      \"totalRequests\": 9320.515773352281,\n      \"totalBytes\": 2242.1025310364794\n    },\n    {\n      \"totalRequests\": 3206.4686404292474,\n      \"totalBytes\": 7557.004785236232\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "27ac114b-4a65-44bb-9f5e-c06568ae6234",
+              "name": "Invalid date parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "est",
+                    "v1",
+                    "activity",
+                    "monthly"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) PhotonIQ EST customer ID.",
+                    "key": "X-PhotonIQ-CustomerID",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2a02e405-af8b-4880-b4f7-95392df1afb8",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "est",
+                    "v1",
+                    "activity",
+                    "monthly"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) PhotonIQ EST customer ID.",
+                    "key": "X-PhotonIQ-CustomerID",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-play.paas.macrometa.io",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "994c8617-31eb-446f-996a-c9f15b6331c9",
+    "name": "Macrometa API Reference Activity Metrics API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API reference for the Macrometa Global Data Network.",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,389 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Macrometa API Reference Activity Metrics Key Value API",
+    "version": "0.17.17"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Key Value",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get number of key-value pairs in collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/kv/:collection/count",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "collection",
+                "value": "",
+                "type": "path",
+                "description": "The name of the key-value collection."
+              },
+              {
+                "name": "groupID",
+                "value": "",
+                "type": "query",
+                "description": "Get count of key-value pairs belonging to this groupID."
+              }
+            ]
+          },
+          "docs": "Get number of key-value pairs in collection."
+        },
+        {
+          "info": {
+            "name": "Gets keys from key-value collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/kv/:collection/keys",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "collection",
+                "value": "",
+                "type": "path",
+                "description": "The name of the key-value collection."
+              },
+              {
+                "name": "groupID",
+                "value": "",
+                "type": "query",
+                "description": "Get keys belonging to this groupID."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "This option simulates paging."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "This option limits results while simulating paging."
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Order the results ascending (asc) or descending (desc)."
+              }
+            ]
+          },
+          "docs": "Fetch keys from key-value collection."
+        },
+        {
+          "info": {
+            "name": "Lists all key-value collections",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/kv",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              }
+            ]
+          },
+          "docs": "Fetch all key-value collections."
+        },
+        {
+          "info": {
+            "name": "Create key-value collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/kv/:collection",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "collection",
+                "value": "",
+                "type": "path",
+                "description": "The name of the key-value collection."
+              },
+              {
+                "name": "expiration",
+                "value": "",
+                "type": "query",
+                "description": "Enable TTL support."
+              },
+              {
+                "name": "group",
+                "value": "",
+                "type": "query",
+                "description": "Enable KV group support."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create key-value collection."
+        },
+        {
+          "info": {
+            "name": "Remove key-value collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/kv/:collection",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "collection",
+                "value": "",
+                "type": "path",
+                "description": "The name of the key-value collection."
+              }
+            ]
+          },
+          "docs": "Remove key-value collection."
+        },
+        {
+          "info": {
+            "name": "Get value from key-value collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/kv/:collection/value/:key",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "collection",
+                "value": "",
+                "type": "path",
+                "description": "The name of the key-value collection."
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "The key."
+              }
+            ]
+          },
+          "docs": "Fetch value from key-value collection.\n\nNote that you should only specify multipart/form-data as the response content type when you are retrieving from a blob collection."
+        },
+        {
+          "info": {
+            "name": "Remove key-value pair",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/kv/:collection/value/:key",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "collection",
+                "value": "",
+                "type": "path",
+                "description": "The name of the key-value collection."
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "The key."
+              }
+            ]
+          },
+          "docs": "Remove key-value pair."
+        },
+        {
+          "info": {
+            "name": "Get key-value pairs from collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/kv/:collection/values",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "collection",
+                "value": "",
+                "type": "path",
+                "description": "The name of the key-value collection."
+              },
+              {
+                "name": "groupID",
+                "value": "",
+                "type": "query",
+                "description": "Get key-value pairs belonging to this groupID."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "This option can be used to simulate paging."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "This option can be used to simulate paging. Limit the result."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Fetch key-value pairs from collection. Optional list of keys.\n\n**Note:** Max limit is 100 keys per request.\n\nNote that you should specify multipart/form-data as the response content type when you are retrieving from a blob collection."
+        },
+        {
+          "info": {
+            "name": "Remove key-value pairs.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/kv/:collection/values",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "collection",
+                "value": "",
+                "type": "path",
+                "description": "The name of the key-value collection."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Remove key-value pairs. Requires a list of keys.\n\n**Note:** Max limit is 1000 keys per request."
+        },
+        {
+          "info": {
+            "name": "Set one or more key-value pairs in key-value collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/kv/:collection/value",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "collection",
+                "value": "",
+                "type": "path",
+                "description": "The name of the key-value collection"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Set one or more key-value pairs in key-value collection.\n\nIf the input is an array of objects, then key-value pairs are created in a batch.\n\nIf the key does not exist, then the key-value pairs are created. Otherwise, the entry for the key is updated.\n\nSpecify expiration in UTC timestamp.\n\nNote that you can use this API for both normal (text) and blob KV collections. When setting blob data in a blob collection, specify the multipart/form-data as the content type for the request body, and provide "
+        },
+        {
+          "info": {
+            "name": "Remove all key-value pairs in a collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/kv/:collection/truncate",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "collection",
+                "value": "",
+                "type": "path",
+                "description": "The name of the key-value collection."
+              },
+              {
+                "name": "groupID",
+                "value": "",
+                "type": "query",
+                "description": "Truncate the key-value pairs belonging to this group ID."
+              }
+            ]
+          },
+          "docs": "Remove all key-value pairs in a collection."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,119 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Macrometa API Reference Activity Metrics API",
+    "version": "0.17.17"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Activity Metrics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /api/est/v1/activity/hourly",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/est/v1/activity/hourly",
+            "headers": [
+              {
+                "name": "X-PhotonIQ-CustomerID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "The UTC start date and time for which activity information is retrieved (e.g. 2022-01-01T00:00:00Z)."
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "The UTC end date and time for which activity information is retrieved (e.g. 2022-01-01T00:00:00Z)."
+              }
+            ]
+          },
+          "docs": "Get hourly activity metrics based on start and end date-time parameters."
+        },
+        {
+          "info": {
+            "name": "GET /api/est/v1/activity/daily",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/est/v1/activity/daily",
+            "headers": [
+              {
+                "name": "X-PhotonIQ-CustomerID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "The UTC start date and time for which activity information is retrieved (e.g. 2022-01-01T00:00:00Z)."
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "The UTC end date and time for which activity information is retrieved (e.g. 2022-01-01T00:00:00Z)."
+              }
+            ]
+          },
+          "docs": "Get daily activity metrics based on start and end date-time parameters."
+        },
+        {
+          "info": {
+            "name": "GET /api/est/v1/activity/monthly",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/est/v1/activity/monthly",
+            "headers": [
+              {
+                "name": "X-PhotonIQ-CustomerID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "The UTC start date and time for which activity information is retrieved (e.g. 2022-01-01T00:00:00Z)."
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "The UTC end date and time for which activity information is retrieved (e.g. 2022-01-01T00:00:00Z)."
+              }
+            ]
+          },
+          "docs": "Get monthly activity metrics based on start and end date-time parameters."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

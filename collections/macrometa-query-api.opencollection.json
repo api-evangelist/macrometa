@@ -1,0 +1,168 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Macrometa API Reference Activity Metrics Query API",
+    "version": "0.17.17"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Query",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create cursor from C8QL query",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/cursor",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Queries are executed on the server and the results are returned to the client.\n\n If the resulting queries returned a number of documents less than the *batchSize* (attribute set in query), then all documents are returned in the *result* JSON attribute.\n\n If there are more documents than the defined *batchSize*, then the *hasMore* JSON attribute is set to *true* and the *id* JSON attribute contains the cursor ID. The cursor ID is then used in subsequent calls to the cursor API to retrieve all doc"
+        },
+        {
+          "info": {
+            "name": "Create cursor from SQL query.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/cursor/sql",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "To more efficiently batch communication, results of SQL queries are returned as cursors. Each REST API call returns a portion of the documents in a batch and indicates if this is the final batch. Batches are sent until the batch with the final indicator.\n\nDepending on the query, the total number of documents in the result set might not be known in advance.\n\nIn order to free resources, delete the cursor as soon as it is no longer needed."
+        },
+        {
+          "info": {
+            "name": "Read next batch from cursor",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/cursor/:cursor-identifier",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "cursor-identifier",
+                "value": "",
+                "type": "path",
+                "description": "The name of the cursor."
+              }
+            ]
+          },
+          "docs": "If the cursor has not been deleted, fetch an object with the following attributes:\n\n- *id*: the *cursor-identifier*\n- *result*: a list of documents for the current batch\n- *hasMore*: *false* if this was the last batch\n- *count*: if present the total number of elements\n\nIf *hasMore* returns *true*, the next call might still return no documents. If *hasMore* is *false*, the cursor is exhausted. Once the *hasMore* attribute has a value of *false*, the client can stop."
+        },
+        {
+          "info": {
+            "name": "Remove cursor",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/cursor/:cursor-identifier",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "cursor-identifier",
+                "value": "",
+                "type": "path",
+                "description": "The id of the cursor."
+              }
+            ]
+          },
+          "docs": "Remove the cursor and free the resources associated with it. The cursor is automatically removed on the server when the client has retrieved all documents from it. The client can also explicitly remove the cursor at any earlier time using a HTTP DELETE request. The cursor *ID* must be included as part of the URL.\n\n**Note**: The server automatically removes abandoned cursors after a period of time specified by the *ttl* attribute when the cursor was created."
+        },
+        {
+          "info": {
+            "name": "Parse an C8QL query",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/query",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint is for query validation only. To query the database, see `/api/cursor`."
+        },
+        {
+          "info": {
+            "name": "Explain an C8QL query",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/query/explain",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "To explain how an C8QL query would run on the server, the query string can be sent to the server via a HTTP POST request. The server validates the query and creates an execution plan for it. The execution plan is returned, but the query does not run.\n\nThe execution plan that is returned by the server can be used to estimate the probable performance of the query. Though the actual performance depends on many different factors, the execution plan normally can provide some rough estimates on the am"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

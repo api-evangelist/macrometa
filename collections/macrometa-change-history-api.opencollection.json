@@ -1,0 +1,63 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Macrometa API Reference Activity Metrics Change History API",
+    "version": "0.17.17"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Change History",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /api/est/v1/change-history",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/est/v1/change-history",
+            "params": [
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Optional. Filter results from a specified date and time in UTC (e.g. 2022-01-01T00:00:00Z)."
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "Optional. Filter results up to a specified date and time in UTC (e.g. 2022-01-01T00:00:00Z)."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Optional. Limit the number of results (positive integer, default is 20)."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Optional. Offset the results by a non-negative integer (default is 0)."
+              }
+            ]
+          },
+          "docs": "Get the change history of PhotonIQ EST service."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

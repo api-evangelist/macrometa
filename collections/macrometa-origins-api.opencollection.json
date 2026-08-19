@@ -1,0 +1,143 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Macrometa API Reference Activity Metrics Origins API",
+    "version": "0.17.17"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Origins",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get origins",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/prerender/v1/origins",
+            "headers": [
+              {
+                "name": "x-photoniq-customerid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Returns all origins."
+        },
+        {
+          "info": {
+            "name": "Create origin",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/api/prerender/v1/origins",
+            "headers": [
+              {
+                "name": "x-photoniq-customerid",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates an origin."
+        },
+        {
+          "info": {
+            "name": "Get origin",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/prerender/v1/origins/:origin",
+            "headers": [
+              {
+                "name": "x-photoniq-customerid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "origin",
+                "value": "www.origin.com",
+                "type": "path",
+                "description": "Origin hostname."
+              }
+            ]
+          },
+          "docs": "Returns an origin."
+        },
+        {
+          "info": {
+            "name": "Update origin",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api-play.paas.macrometa.io/api/prerender/v1/origins/:origin",
+            "headers": [
+              {
+                "name": "x-photoniq-customerid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "origin",
+                "value": "www.origin.com",
+                "type": "path",
+                "description": "Origin hostname."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an origin."
+        },
+        {
+          "info": {
+            "name": "Delete origin",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-play.paas.macrometa.io/api/prerender/v1/origins/:origin",
+            "headers": [
+              {
+                "name": "x-photoniq-customerid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "origin",
+                "value": "www.origin.com",
+                "type": "path",
+                "description": "Origin hostname."
+              }
+            ]
+          },
+          "docs": "Deletes an origin."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

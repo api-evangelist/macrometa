@@ -1,0 +1,230 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Macrometa API Reference Activity Metrics Billing API",
+    "version": "0.17.17"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Billing",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get account details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_api/billing/account",
+            "headers": [
+              {
+                "name": "tenant",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Get account details (plan, contact and payment settings) for given tenant.\n\n **Note**: this API is not applicable for system tenants."
+        },
+        {
+          "info": {
+            "name": "Update contact details",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-play.paas.macrometa.io/_api/billing/contact",
+            "headers": [
+              {
+                "name": "tenant",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update contact details for given tenant name.\n\n**Note**:\n- This API is not applicable for system tenants.\n- Updates the Stripe account."
+        },
+        {
+          "info": {
+            "name": "Get payment details of the previous months for the given tenant.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_api/billing/payments",
+            "headers": [
+              {
+                "name": "tenant",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of previous months for which payment details are required."
+              }
+            ]
+          },
+          "docs": "Fetch all payments details of the tenant for specified number of previous months.\n\n**Note**: This API is not applicable for system tenants."
+        },
+        {
+          "info": {
+            "name": "Get invoices for the previous months",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_api/billing/invoices",
+            "headers": [
+              {
+                "name": "tenant",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of previous months for which invoices are required."
+              }
+            ]
+          },
+          "docs": "Fetch all invoice details of the tenant for specified number of previous months.\n\n**Note**: this API is not applicable for system tenants."
+        },
+        {
+          "info": {
+            "name": "Get invoice of the current month for the given tenant.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_api/billing/invoice/current",
+            "headers": [
+              {
+                "name": "tenant",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Fetch invoice of the tenant for the current month.\n\n**Note**: this API is not applicable for system tenants."
+        },
+        {
+          "info": {
+            "name": "Get invoice of specific year and month for the tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_api/billing/invoices/:year/:month",
+            "headers": [
+              {
+                "name": "tenant",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "year",
+                "value": "",
+                "type": "path",
+                "description": "Year in 'YYYY' format."
+              },
+              {
+                "name": "month",
+                "value": "",
+                "type": "path",
+                "description": "Month. Valid values:[1..12]"
+              }
+            ]
+          },
+          "docs": "Fetch invoices for a tenant, in a specific month and year.\n\n**Note**: This API is not applicable for system tenants."
+        },
+        {
+          "info": {
+            "name": "Get usage of the tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_api/billing/usage",
+            "headers": [
+              {
+                "name": "tenant",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "Start date in 'YYYY-MM-DD' format."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "End date in 'YYYY-MM-DD' format."
+              }
+            ]
+          },
+          "docs": "Fetch usage of a tenant in a specific date range. If no query parameters are specified, usage from start date of the month to current date is returned.\n\n**Note**: This API is not applicable for system tenants."
+        },
+        {
+          "info": {
+            "name": "Get usage of the tenant for specific region",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_api/billing/region/:region/usage",
+            "headers": [
+              {
+                "name": "tenant",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "region",
+                "value": "",
+                "type": "path",
+                "description": "Name of the region."
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "Start date in 'YYYY-MM-DD' format."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "End date in 'YYYY-MM-DD' format."
+              }
+            ]
+          },
+          "docs": "Fetch usage of a tenant in specific date range for a specific region. If no query parameters are specified, usage from start date of the month to current date is returned.\n\n**Note**: This API is not applicable for system tenants."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

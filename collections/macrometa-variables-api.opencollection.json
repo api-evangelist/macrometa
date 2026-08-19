@@ -1,0 +1,113 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Macrometa API Reference Activity Metrics Variables API",
+    "version": "0.17.17"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Variables",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /api/est/v1/variable",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/est/v1/variable"
+          },
+          "docs": "Get PhotonIQ EST variable"
+        },
+        {
+          "info": {
+            "name": "POST /api/est/v1/variable",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/api/est/v1/variable",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create PhotonIQ EST variable"
+        },
+        {
+          "info": {
+            "name": "GET /api/est/v1/variable/{name}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/est/v1/variable/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Variable name"
+              }
+            ]
+          },
+          "docs": "Get PhotonIQ EST variable"
+        },
+        {
+          "info": {
+            "name": "PATCH /api/est/v1/variable/{name}",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api-play.paas.macrometa.io/api/est/v1/variable/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Variable name"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update PhotonIQ EST variable"
+        },
+        {
+          "info": {
+            "name": "DELETE /api/est/v1/variable/{name}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-play.paas.macrometa.io/api/est/v1/variable/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Variable name"
+              }
+            ]
+          },
+          "docs": "Delete PhotonIQ EST variable"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

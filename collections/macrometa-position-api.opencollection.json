@@ -1,0 +1,69 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Macrometa API Reference Activity Metrics Position API",
+    "version": "0.17.17"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Position",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get initial position in the waiting room",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/vwr/v1/position/:waitingroom_key",
+            "params": [
+              {
+                "name": "waitingroom_key",
+                "value": "",
+                "type": "path",
+                "description": "The unique key of a waiting room."
+              }
+            ]
+          },
+          "docs": "Get initial position in the waiting room."
+        },
+        {
+          "info": {
+            "name": "Provide current position in the waiting room",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/vwr/v1/position/:waitingroom_key/:request_id",
+            "params": [
+              {
+                "name": "waitingroom_key",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "request_id",
+                "value": "",
+                "type": "path",
+                "description": "The user's request ID."
+              }
+            ]
+          },
+          "docs": "Provides the user's position in the waiting room.\\n\\nA position of 0 indicates that the user is no longer in the waiting room and has gained access to the requested resource."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

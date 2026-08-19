@@ -1,0 +1,2083 @@
+{
+  "item": [
+    {
+      "id": "59c9c5a9-6607-4e4d-98ce-3c1e1f03f2a0",
+      "name": "GeoFabrics",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1f3187de-f0aa-49de-b839-257e97ec1a33",
+          "name": "List of GeoFabrics",
+          "request": {
+            "name": "List of GeoFabrics",
+            "description": {
+              "content": "Fetch the list of all existing GeoFabrics\n\n**Note**: Requires *administrator* permissions.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "_fabric",
+                "_system",
+                "_api",
+                "database"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cea9d276-d63d-4a5b-80e6-229f3f4db7ee",
+              "name": "Successfully fetched the list of GeoFabrics.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    "_system",
+                    "_api",
+                    "database"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 200,\n  \"error\": false,\n  \"result\": [\n    \"_system\",\n    \"demo._system\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c79cd56a-48be-4a03-8866-692c47e77015",
+              "name": "Failed due to missing or malformed data. Verify that all parameters are complete.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    "_system",
+                    "_api",
+                    "database"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 400,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 102020\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cb91097f-401d-4776-bf16-6e6b04d69555",
+              "name": "Failed to validate because you do not have access to the server.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    "_system",
+                    "_api",
+                    "database"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 403,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 581\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c04dfd47-4391-4c6e-980e-a4a731345e1c",
+          "name": "Create GeoFabric",
+          "request": {
+            "name": "Create GeoFabric",
+            "description": {
+              "content": "Create a new GeoFabric.\n\n**Note**: Creating a new GeoFabric is only possible from within the *_system* fabric.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "_fabric",
+                "_system",
+                "_api",
+                "database"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"tenant\": \"<string>\",\n  \"options\": {\n    \"dcList\": \"<string>\",\n    \"spotDc\": \"<string>\",\n    \"metadata\": \"<object>\"\n  },\n  \"users\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "361dbab8-0e85-423d-9c8c-61449c561bcc",
+              "name": "Successfully created the GeoFabric.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    "_system",
+                    "_api",
+                    "database"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"_system\",\n  \"tenant\": \"_mm\",\n  \"options\": {\n    \"dcList\": \"datacenter1,datacenter2\",\n    \"spotDc\": \"datacenter1\",\n    \"metadata\": {\n      \"key\": \"value\"\n    }\n  },\n  \"users\": [\n    \"root\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 201,\n  \"error\": false,\n  \"result\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6fd10c9a-e169-40bd-92b5-890f39a7f986",
+              "name": "Failed due to missing or malformed data. Verify that all parameters are complete.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    "_system",
+                    "_api",
+                    "database"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"_system\",\n  \"tenant\": \"_mm\",\n  \"options\": {\n    \"dcList\": \"datacenter1,datacenter2\",\n    \"spotDc\": \"datacenter1\",\n    \"metadata\": {\n      \"key\": \"value\"\n    }\n  },\n  \"users\": [\n    \"root\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 400,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 102020\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7befd0a3-ccac-4a2f-a6e4-ceab24198c81",
+              "name": "Failed to validate because you do not have access to the server.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    "_system",
+                    "_api",
+                    "database"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"_system\",\n  \"tenant\": \"_mm\",\n  \"options\": {\n    \"dcList\": \"datacenter1,datacenter2\",\n    \"spotDc\": \"datacenter1\",\n    \"metadata\": {\n      \"key\": \"value\"\n    }\n  },\n  \"users\": [\n    \"root\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 403,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 581\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "28b32cf6-0ec8-4eb6-b029-af4e913df055",
+              "name": "Failed because GeoFabric already exists.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    "_system",
+                    "_api",
+                    "database"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"_system\",\n  \"tenant\": \"_mm\",\n  \"options\": {\n    \"dcList\": \"datacenter1,datacenter2\",\n    \"spotDc\": \"datacenter1\",\n    \"metadata\": {\n      \"key\": \"value\"\n    }\n  },\n  \"users\": [\n    \"root\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 409,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 581\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c132ad89-334f-47e7-b7be-0bfdb27f2ef0",
+          "name": "List of accessible GeoFabrics",
+          "request": {
+            "name": "List of accessible GeoFabrics",
+            "description": {
+              "content": "Fetch a list of all GeoFabrics the current user can access along with the corresponding information for each GeoFabric.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "_fabric",
+                "_system",
+                "_api",
+                "database",
+                "user"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d9e36d18-2f12-4980-82c5-7e91736ddc6f",
+              "name": "Successfully fetched list of GeoFabrics.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    "_system",
+                    "_api",
+                    "database",
+                    "user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 200,\n  \"error\": false,\n  \"result\": [\n    {\n      \"name\": \"_system\",\n      \"options\": {\n        \"associated_regions\": [\n          \"datacenter1\",\n          \"datacenter2\"\n        ],\n        \"clusters\": [\n          \"datacenter1\",\n          \"datacenter2\"\n        ],\n        \"dcList\": \"datacenter1,datacenter2\",\n        \"dynamo_local_tables\": false,\n        \"metadata\": {\n          \"key\": \"value\"\n        },\n        \"name\": \"_system\",\n        \"realTime\": false,\n        \"spotDc\": \"datacenter1\",\n        \"status\": \"available\",\n        \"tenant\": \"_mm\"\n      },\n      \"isSystem\": true\n    },\n    {\n      \"name\": \"_system\",\n      \"options\": {\n        \"associated_regions\": [\n          \"datacenter1\",\n          \"datacenter2\"\n        ],\n        \"clusters\": [\n          \"datacenter1\",\n          \"datacenter2\"\n        ],\n        \"dcList\": \"datacenter1,datacenter2\",\n        \"dynamo_local_tables\": false,\n        \"metadata\": {\n          \"key\": \"value\"\n        },\n        \"name\": \"_system\",\n        \"realTime\": false,\n        \"spotDc\": \"datacenter1\",\n        \"status\": \"available\",\n        \"tenant\": \"_mm\"\n      },\n      \"isSystem\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f49858c9-54e9-481d-8744-0fb81b277f36",
+              "name": "Failed due to missing or malformed data. Verify that all parameters are complete.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    "_system",
+                    "_api",
+                    "database",
+                    "user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 400,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 102020\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2be160fe-d36e-4fec-b2f4-7c7e9fe8a1cf",
+          "name": "Remove GeoFabric",
+          "request": {
+            "name": "Remove GeoFabric",
+            "description": {
+              "content": "Remove the GeoFabric along with all the data stored in it.\n\n**Note**: Requires *administrator* permissions.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "_fabric",
+                "_system",
+                "_api",
+                "database",
+                ":fabric"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "fabric",
+                  "description": "(Required) The name of the GeoFabric."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c1cd83a6-0afb-49c9-9e30-7c59c34c54fa",
+              "name": "Successfully removed the GeoFabric.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    "_system",
+                    "_api",
+                    "database",
+                    ":fabric"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fabric",
+                      "description": "(Required) The name of the GeoFabric."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 200,\n  \"error\": false,\n  \"result\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d27a9e2f-bcb0-4eea-b445-d52c8f8cd97a",
+              "name": "Failed due to missing or malformed data. Verify that all parameters are complete.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    "_system",
+                    "_api",
+                    "database",
+                    ":fabric"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fabric",
+                      "description": "(Required) The name of the GeoFabric."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 400,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 102020\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4f239740-c227-4760-892b-fbd7a99710a7",
+              "name": "Failed to validate because you do not have access to the server.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    "_system",
+                    "_api",
+                    "database",
+                    ":fabric"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fabric",
+                      "description": "(Required) The name of the GeoFabric."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 403,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 581\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5ed4423d-d95c-442d-a8b1-8a998fb86715",
+              "name": "Failed to find specified GeoFabric.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    "_system",
+                    "_api",
+                    "database",
+                    ":fabric"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fabric",
+                      "description": "(Required) The name of the GeoFabric."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 404,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 581\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "98e39a35-9ec7-4802-a942-bb0d90115d6c",
+          "name": "Information of the GeoFabric",
+          "request": {
+            "name": "Information of the GeoFabric",
+            "description": {
+              "content": "Fetch information about a GeoFabric.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "_fabric",
+                ":fabric",
+                "_api",
+                "database",
+                "metadata"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "_system",
+                  "key": "fabric",
+                  "description": "(Required) The GeoFabric name for which we want the information."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1ff3edd6-da1a-43d4-bf67-f243e4eb2ccc",
+              "name": "Successfully fetched the information for the GeoFabric.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "database",
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The GeoFabric name for which we want the information."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 200,\n  \"error\": false,\n  \"result\": {\n    \"name\": \"_system\",\n    \"options\": {\n      \"associated_regions\": [\n        \"datacenter1\",\n        \"datacenter2\"\n      ],\n      \"clusters\": [\n        \"datacenter1\",\n        \"datacenter2\"\n      ],\n      \"dcList\": \"datacenter1,datacenter2\",\n      \"dynamo_local_tables\": false,\n      \"metadata\": {\n        \"key\": \"value\"\n      },\n      \"name\": \"_system\",\n      \"realTime\": false,\n      \"spotDc\": \"datacenter1\",\n      \"status\": \"available\",\n      \"tenant\": \"_mm\"\n    },\n    \"isSystem\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4d58032a-bf28-4a0c-8b70-664b7f33d9d4",
+              "name": "Failed due to missing or malformed data. Verify that all parameters are complete.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "database",
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The GeoFabric name for which we want the information."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 400,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 102020\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5bcd4334-4a05-449d-9d1e-e7270c55fa05",
+              "name": "Failed to validate because you do not have access to the server.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "database",
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The GeoFabric name for which we want the information."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 403,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 581\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8ade5752-9771-463e-bb03-b1da0fbd9a91",
+              "name": "Failed to find specified GeoFabric.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "database",
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The GeoFabric name for which we want the information."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 404,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 581\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a1a672c6-f734-4feb-9790-57ecf8d25901",
+          "name": "Set GeoFabric metadata",
+          "request": {
+            "name": "Set GeoFabric metadata",
+            "description": {
+              "content": "Set the GeoFabric Metadata.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "_fabric",
+                ":fabric",
+                "_api",
+                "database",
+                "metadata"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "_system",
+                  "key": "fabric",
+                  "description": "(Required) The GeoFabric name for which metadata should be set."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"metadata\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "eb5b34ee-bbb7-4fe6-a740-db46d3edea53",
+              "name": "Successfully set the GeoFabric metadata.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "database",
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The GeoFabric name for which metadata should be set."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {\n    \"key\": \"value\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 201,\n  \"error\": false,\n  \"result\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b4cc9941-f634-44c6-b336-ba771f17641d",
+              "name": "Failed due to missing or malformed data. Verify that all parameters are complete.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "database",
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The GeoFabric name for which metadata should be set."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {\n    \"key\": \"value\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 400,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 102020\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "00f23abf-1f0e-4416-aa77-867571c2260a",
+              "name": "Failed to validate because you do not have access to the server.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "database",
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The GeoFabric name for which metadata should be set."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {\n    \"key\": \"value\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 403,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 581\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3d726834-7d01-422e-a575-7a3cb5cb0d39",
+              "name": "Failed to find specified GeoFabric.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "database",
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The GeoFabric name for which metadata should be set."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {\n    \"key\": \"value\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 404,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 581\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ff928785-32aa-482e-a7e9-d55ab65a074a",
+          "name": "Modify GeoFabric metadata",
+          "request": {
+            "name": "Modify GeoFabric metadata",
+            "description": {
+              "content": "Modfiy the GeoFabric metadata.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "_fabric",
+                ":fabric",
+                "_api",
+                "database",
+                "metadata"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "_system",
+                  "key": "fabric",
+                  "description": "(Required) The GeoFabric name for which metadata should be updated."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"metadata\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "71f5705d-ca64-4a51-a085-b0e179921836",
+              "name": "Successfully updated the GeoFabric metadata.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "database",
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The GeoFabric name for which metadata should be updated."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {\n    \"key\": \"value\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 201,\n  \"error\": false,\n  \"result\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1e2a842b-0647-492e-a42d-b96174dd6251",
+              "name": "Failed due to missing or malformed data. Verify that all parameters are complete.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "database",
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The GeoFabric name for which metadata should be updated."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {\n    \"key\": \"value\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 400,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 102020\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "28f6b0a5-89d7-403f-b0c2-142f8db49467",
+              "name": "Failed to validate because you do not have access to the server.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "database",
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The GeoFabric name for which metadata should be updated."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {\n    \"key\": \"value\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 403,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 581\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1214ded3-2ed0-4399-946d-c9d3d5009234",
+              "name": "Failed to find specified GeoFabric.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "database",
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The GeoFabric name for which metadata should be updated."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {\n    \"key\": \"value\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 404,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 581\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-play.paas.macrometa.io",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "48224d43-a9fe-4f9a-88cf-21ccdf898fff",
+    "name": "Macrometa API Reference Activity Metrics GeoFabrics API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API reference for the Macrometa Global Data Network.",
+      "type": "text/plain"
+    }
+  }
+}

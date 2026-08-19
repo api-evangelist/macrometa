@@ -1,0 +1,86 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Macrometa API Reference Activity Metrics Telemetry API",
+    "version": "0.17.17"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Telemetry",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get the telemetry data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/es/sse/v1/telemetry"
+          },
+          "docs": "Retrieves telemetry data in Prometheus format. Useful for monitoring services to monitor the statustics."
+        },
+        {
+          "info": {
+            "name": "Provides telemetry data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/ds/v1/telemetry",
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Provide telemetry data in Prometheus format. Useful for monitoring services to monitor the health of the Fingerprint service."
+        },
+        {
+          "info": {
+            "name": "Get prerender service telemetry",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/prerender/v1/telemetry",
+            "headers": [
+              {
+                "name": "x-photoniq-customerid",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Returns prerender service telemetry."
+        },
+        {
+          "info": {
+            "name": "Provides the telemetry data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/vwr/v1/telemetry"
+          },
+          "docs": "Provides telemetry data in Prometheus format. Useful for monitoring services to monitor the health of the Virtual Waiting Rooms."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

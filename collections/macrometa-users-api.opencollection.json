@@ -1,0 +1,887 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Macrometa API Reference Activity Metrics Users API",
+    "version": "0.17.17"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Return server version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_api/version"
+          },
+          "docs": "Fetch the server name and version number."
+        },
+        {
+          "info": {
+            "name": "Create User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_api/user",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new user.\n\n**Note**: Requires *administrator* permissions."
+        },
+        {
+          "info": {
+            "name": "List available Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_api/user/"
+          },
+          "docs": "Fetch data about all users."
+        },
+        {
+          "info": {
+            "name": "Fetch User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_api/user/:user",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "path",
+                "description": "The id of the user."
+              }
+            ]
+          },
+          "docs": "Fetch data about the specified user.\n\n**Note**: Requires *administrator* permissions to access other users data."
+        },
+        {
+          "info": {
+            "name": "Modify User.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api-play.paas.macrometa.io/_api/user/:user",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "path",
+                "description": "The id of the user."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the data of an existing user.\n\n**Note**: Requires *administrator* permissions if changing the email address."
+        },
+        {
+          "info": {
+            "name": "Remove User",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-play.paas.macrometa.io/_api/user/:user",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "path",
+                "description": "The id of the user."
+              }
+            ]
+          },
+          "docs": "Remove an existing user.\n\n**Note**: Requires *administrator* permissions."
+        },
+        {
+          "info": {
+            "name": "List the GeoFabrics available to user.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_api/user/:user/database",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "path",
+                "description": "The id of the user for which you want to query the databases."
+              },
+              {
+                "name": "full",
+                "value": "",
+                "type": "query",
+                "description": "Return the full set of access levels for all GeoFabrics and all collections."
+              }
+            ]
+          },
+          "docs": "Fetch the list of GeoFabrics available.\n\nThe *result* object contains the GeoFabric names as object keys and the associated privileges for the GeoFabric as values.\n\nIn case *full* is specified, the result contains the permissions for the GeoFabric as well as the permissions for the collections and streams.\n\n**Note**: Requires *administrator* permissions."
+        },
+        {
+          "info": {
+            "name": "Get the GeoFabric access level.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_api/user/:user/database/:geofabric",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "path",
+                "description": "The id of the user for which you want to query the GeoFabric."
+              },
+              {
+                "name": "geofabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the GeoFabric to query."
+              }
+            ]
+          },
+          "docs": "Fetch the access level for a specific GeoFabric."
+        },
+        {
+          "info": {
+            "name": "Set the GeoFabric access level",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-play.paas.macrometa.io/_api/user/:user/database/:geofabric",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "path",
+                "description": "The id of the user."
+              },
+              {
+                "name": "geofabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the GeoFabric."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Set the access levels for the GeoFabric *geoname* of user *user*.\n\n**Note**: Requires *administrator* permissions."
+        },
+        {
+          "info": {
+            "name": "Clear the GeoFabric access level",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-play.paas.macrometa.io/_api/user/:user/database/:geofabric",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "path",
+                "description": "The id of the user."
+              },
+              {
+                "name": "geofabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the database."
+              }
+            ]
+          },
+          "docs": "Clear the access level for the GeoFabric *geoname* of user *user*. As consequence the default GeoFabric access level is used. If there is no defined default GeoFabric access level, it defaults to *No access*.\n\n**Note**: Requires *administrator* permissions."
+        },
+        {
+          "info": {
+            "name": "Get the collections access level for specific user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_api/user/:user/database/:geofabric/collection",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "path",
+                "description": "The id of the user for which you want to query the GeoFabric."
+              },
+              {
+                "name": "geofabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the GeoFabric to query."
+              },
+              {
+                "name": "full",
+                "value": "",
+                "type": "query",
+                "description": "Return the full set of access levels for all collections."
+              }
+            ]
+          },
+          "docs": "Fetch the list of collections access level for a specific *user*\n\n If access level for collection is not set default(\"&#42;\") access level is used. If default(\"&#42;\") access level is also not set GeoFabric access level is used."
+        },
+        {
+          "info": {
+            "name": "Get the specific collection access level",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_api/user/:user/database/:geofabric/collection/:collection",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "path",
+                "description": "The id of the user for which you want to query the GeoFabric."
+              },
+              {
+                "name": "geofabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the GeoFabric to query."
+              },
+              {
+                "name": "collection",
+                "value": "",
+                "type": "path",
+                "description": "The name of the collection."
+              }
+            ]
+          },
+          "docs": "Fetch the collection access level for a specific collection\n\n If access level for collection is not set default(\"&#42;\") access level is used. If default(\"&#42;\") access level is also not set GeoFabric access level is used."
+        },
+        {
+          "info": {
+            "name": "Set the collection access level",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-play.paas.macrometa.io/_api/user/:user/database/:geofabric/collection/:collection",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "path",
+                "description": "The id of the user."
+              },
+              {
+                "name": "geofabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the database."
+              },
+              {
+                "name": "collection",
+                "value": "",
+                "type": "path",
+                "description": "The name of the collection."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Set the collection access level for the *collection* in the GeoFabric *geoname* for user *user*.\n\nIf access level for collection is not set default(\"&#42;\") access level is used. If default(\"&#42;\") access level is also not set GeoFabric access level is used.\n\n**Note**: Requires *administrator* permissions."
+        },
+        {
+          "info": {
+            "name": "Clear the collection access level.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-play.paas.macrometa.io/_api/user/:user/database/:geofabric/collection/:collection",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "path",
+                "description": "The id of the user."
+              },
+              {
+                "name": "geofabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the database."
+              },
+              {
+                "name": "collection",
+                "value": "",
+                "type": "path",
+                "description": "The name of the collection."
+              }
+            ]
+          },
+          "docs": "Clear the collection access level for the collection *collection* in the GeoFabric *geofabric* of user *user*. As consequence the default collection access level is used. If there is no defined default collection access level, it defaults to *No access*.\n\n**Note**: Requires *administrator* permissions."
+        },
+        {
+          "info": {
+            "name": "List the accessible streams",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_api/user/:user/database/:geofabric/stream",
+            "params": [
+              {
+                "name": "geofabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the database."
+              },
+              {
+                "name": "user",
+                "value": "",
+                "type": "path",
+                "description": "The id of the user for which you want to query the streams."
+              },
+              {
+                "name": "full",
+                "value": "",
+                "type": "query",
+                "description": "Return the full set of access levels for all streams. If set to *false*, return the read-only streams."
+              }
+            ]
+          },
+          "docs": "Fetch the list of streams available to the specified *user*.\n\nThe *result* object contains the stream names as object keys, and the associated privileges for the stream as values.\n\nIf access level for stream is not set default(\"&#42;\") access level is used. If default(\"&#42;\") access level is also not set GeoFabric access level is used.\n\n**Note**: Requires *administrator* permissions."
+        },
+        {
+          "info": {
+            "name": "Get the stream access level",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_api/user/:user/database/:geofabric/stream/:stream",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "path",
+                "description": "The id of the user for which you want to query the streams."
+              },
+              {
+                "name": "geofabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the GeoFabric."
+              },
+              {
+                "name": "stream",
+                "value": "",
+                "type": "path",
+                "description": "The name of the stream to query."
+              }
+            ]
+          },
+          "docs": "Fetch the stream access level for a specific stream."
+        },
+        {
+          "info": {
+            "name": "Set the stream access level",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-play.paas.macrometa.io/_api/user/:user/database/:geofabric/stream/:stream",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "path",
+                "description": "The id of the user."
+              },
+              {
+                "name": "geofabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the database."
+              },
+              {
+                "name": "stream",
+                "value": "",
+                "type": "path",
+                "description": "The name of the stream."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Set the stream access levels for the *stream* of API key with *keyid*.\n\nIf access level for stream is not set the default(\"&#42;\") access level is used. If default(\"&#42;\") access level is also not set the GeoFabric access level is used.\n\n**Note**: Requires *administrator* permissions."
+        },
+        {
+          "info": {
+            "name": "Clear the stream access level.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-play.paas.macrometa.io/_api/user/:user/database/:geofabric/stream/:stream",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "path",
+                "description": "The id of the user."
+              },
+              {
+                "name": "geofabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the database."
+              },
+              {
+                "name": "stream",
+                "value": "",
+                "type": "path",
+                "description": "The name of the stream."
+              }
+            ]
+          },
+          "docs": "Clear the stream access level for the *stream* of user *user*. As consequence the default stream access level is used. If there is no defined default stream access level, it defaults to *No access*."
+        },
+        {
+          "info": {
+            "name": "Get the query workers access level for a specific user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_api/user/:user/database/:geofabric/restql",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the user querying the GeoFabric."
+              },
+              {
+                "name": "geofabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the GeoFabric to query."
+              },
+              {
+                "name": "full",
+                "value": "",
+                "type": "query",
+                "description": "Return the full set of access levels for all query workers."
+              }
+            ]
+          },
+          "docs": "Fetch the list of query worker access level for a specific *user*\n\n If access level for query worker is not set, then default(\"&#42;\") access level is used. If default(\"&#42;\") access level is also not set, then GeoFabric access level is used."
+        },
+        {
+          "info": {
+            "name": "Get the specific query worker access level",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_api/user/:user/database/:geofabric/restql/:query-worker",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the user querying the GeoFabric."
+              },
+              {
+                "name": "geofabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the GeoFabric to query."
+              },
+              {
+                "name": "query-worker",
+                "value": "",
+                "type": "path",
+                "description": "The name of the query worker."
+              }
+            ]
+          },
+          "docs": "Fetch the access level for a specific query worker\n\n If access level for query worker is not set, then default(\"&#42;\") access level is used. If default(\"&#42;\") access level is also not set, then GeoFabric access level is used."
+        },
+        {
+          "info": {
+            "name": "Set the query worker access level",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-play.paas.macrometa.io/_api/user/:user/database/:geofabric/restql/:query-worker",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the user querying the GeoFabric."
+              },
+              {
+                "name": "geofabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the GeoFabric."
+              },
+              {
+                "name": "query-worker",
+                "value": "",
+                "type": "path",
+                "description": "The name of the query worker."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Set the access level for the *query worker* in the GeoFabric *geofabric* for user *user*.\n\nIf access level for query worker is not set, then default(\"&#42;\") access level is used. If default(\"&#42;\") access level is also not set, then GeoFabric access level is used.\n\n**Note**: Requires *administrator* permissions."
+        },
+        {
+          "info": {
+            "name": "Clear the query worker access level.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-play.paas.macrometa.io/_api/user/:user/database/:geofabric/restql/:query-worker",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the user."
+              },
+              {
+                "name": "geofabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the GeoFabric."
+              },
+              {
+                "name": "query-worker",
+                "value": "",
+                "type": "path",
+                "description": "The name of the query worker."
+              }
+            ]
+          },
+          "docs": "Clear the access level for the query worker *query worker* in the GeoFabric *geofabric* of user *user*. After this runs, the default query worker access level is used. If there is no defined default query worker access level, it defaults to *No access*.\n\n**Note**: Requires *administrator* permissions."
+        },
+        {
+          "info": {
+            "name": "Get the managed keys access level for a specific user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_api/user/:user/database/:geofabric/managedkey",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the user querying the GeoFabric."
+              },
+              {
+                "name": "geofabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the GeoFabric to query."
+              },
+              {
+                "name": "full",
+                "value": "",
+                "type": "query",
+                "description": "Return the full set of access levels for all managed keys."
+              }
+            ]
+          },
+          "docs": "Fetch the list of managed keys access level for a specific *user*.\n\n If the access level for a managed key is not set, then the default(\"&#42;\") access level is used. If the default(\"&#42;\") access level is also not set, then the GeoFabric access level is used."
+        },
+        {
+          "info": {
+            "name": "Get the specific managed key access level",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_api/user/:user/database/:geofabric/managedkey/:managed-key-name",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the user querying the GeoFabric."
+              },
+              {
+                "name": "geofabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the GeoFabric to query."
+              },
+              {
+                "name": "managed-key-name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the managed key."
+              }
+            ]
+          },
+          "docs": "Fetch the access level for a specific managed key.\n\n If the access level for the managed key is not set, then the default(\"&#42;\") access level is used. If the default(\"&#42;\") access level is also not set, then the GeoFabric access level is used."
+        },
+        {
+          "info": {
+            "name": "Set the managed key access level",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-play.paas.macrometa.io/_api/user/:user/database/:geofabric/managedkey/:managed-key-name",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the user querying the GeoFabric."
+              },
+              {
+                "name": "geofabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the GeoFabric."
+              },
+              {
+                "name": "managed-key-name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the managed key."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Set the access level for the *managed key* in the GeoFabric *geofabric* for user *user*.\n\nIf the access level for the managed key is not set, then the default(\"&#42;\") access level is used. If the default(\"&#42;\") access level is also not set, then the GeoFabric access level is used.\n\n**Note**: Requires *administrator* permissions."
+        },
+        {
+          "info": {
+            "name": "Clear the managed key access level",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-play.paas.macrometa.io/_api/user/:user/database/:geofabric/managedkey/:managed-key-name",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the user."
+              },
+              {
+                "name": "geofabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the GeoFabric."
+              },
+              {
+                "name": "managed-key-name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the managed key."
+              }
+            ]
+          },
+          "docs": "Clear the access level for the *managed key name* in the GeoFabric *geofabric* of user *user*. After the access level is removed, the default managed key access level is used. If there is no defined default managed key access level, then the access level defaults to *No access*.\n\n**Note**: Requires *administrator* permissions."
+        },
+        {
+          "info": {
+            "name": "Get the billing access level",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_api/user/:user/billing",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "path",
+                "description": "The id of the user for which you want to query the billing."
+              }
+            ]
+          },
+          "docs": "Fetch the billing access level."
+        },
+        {
+          "info": {
+            "name": "Set the billing access level.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-play.paas.macrometa.io/_api/user/:user/billing",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "path",
+                "description": "The id of the user."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Set the billing access levels for user *user*.\n\n**Note**: Requires *administrator* permissions."
+        },
+        {
+          "info": {
+            "name": "Clear the billing access level",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-play.paas.macrometa.io/_api/user/:user/billing",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "path",
+                "description": "The id of the user."
+              }
+            ]
+          },
+          "docs": "Clear the billing access level of user *user*."
+        },
+        {
+          "info": {
+            "name": "Get the user attributes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_api/user/:user/attributes",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "path",
+                "description": "The id of the user."
+              }
+            ]
+          },
+          "docs": "Fetch the list of attributes for the specified user."
+        },
+        {
+          "info": {
+            "name": "Update attributes",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-play.paas.macrometa.io/_api/user/:user/attributes",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "path",
+                "description": "The id of the user."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the attributes for the user.\n\n**Note**: Requires *administrator* permissions."
+        },
+        {
+          "info": {
+            "name": "Remove all attributes",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-play.paas.macrometa.io/_api/user/:user/attributes/truncate",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "path",
+                "description": "The id of the user."
+              }
+            ]
+          },
+          "docs": "Remove all user's attribute."
+        },
+        {
+          "info": {
+            "name": "Remove attribute",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-play.paas.macrometa.io/_api/user/:user/attributes/:attributeid",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "path",
+                "description": "The id of the user."
+              },
+              {
+                "name": "attributeid",
+                "value": "",
+                "type": "path",
+                "description": "Attribute id."
+              }
+            ]
+          },
+          "docs": "Remove a user's attribute."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

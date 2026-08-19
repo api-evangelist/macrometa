@@ -1,0 +1,147 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Macrometa API Reference Activity Metrics GeoFabrics API",
+    "version": "0.17.17"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "GeoFabrics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List of GeoFabrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_fabric/_system/_api/database"
+          },
+          "docs": "Fetch the list of all existing GeoFabrics\n\n**Note**: Requires *administrator* permissions."
+        },
+        {
+          "info": {
+            "name": "Create GeoFabric",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_fabric/_system/_api/database",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new GeoFabric.\n\n**Note**: Creating a new GeoFabric is only possible from within the *_system* fabric."
+        },
+        {
+          "info": {
+            "name": "List of accessible GeoFabrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_fabric/_system/_api/database/user"
+          },
+          "docs": "Fetch a list of all GeoFabrics the current user can access along with the corresponding information for each GeoFabric."
+        },
+        {
+          "info": {
+            "name": "Remove GeoFabric",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-play.paas.macrometa.io/_fabric/_system/_api/database/:fabric",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the GeoFabric."
+              }
+            ]
+          },
+          "docs": "Remove the GeoFabric along with all the data stored in it.\n\n**Note**: Requires *administrator* permissions."
+        },
+        {
+          "info": {
+            "name": "Information of the GeoFabric",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/database/metadata",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The GeoFabric name for which we want the information."
+              }
+            ]
+          },
+          "docs": "Fetch information about a GeoFabric."
+        },
+        {
+          "info": {
+            "name": "Set GeoFabric metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/database/metadata",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The GeoFabric name for which metadata should be set."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Set the GeoFabric Metadata."
+        },
+        {
+          "info": {
+            "name": "Modify GeoFabric metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/database/metadata",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The GeoFabric name for which metadata should be updated."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Modfiy the GeoFabric metadata."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

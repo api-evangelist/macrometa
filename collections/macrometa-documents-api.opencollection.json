@@ -1,0 +1,547 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Macrometa API Reference Activity Metrics Documents API",
+    "version": "0.17.17"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Documents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create document",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/document/:collection",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "collection",
+                "value": "",
+                "type": "path",
+                "description": "The *collection* in which the document is to be created."
+              },
+              {
+                "name": "collection",
+                "value": "",
+                "type": "query",
+                "description": "The name of the collection. This is only for backward compatibility."
+              },
+              {
+                "name": "returnNew",
+                "value": "",
+                "type": "query",
+                "description": "If set to *true*, adds the new documents to the *new* attribute."
+              },
+              {
+                "name": "returnOld",
+                "value": "",
+                "type": "query",
+                "description": "If set to *true*, adds the *old* attribute which displays the previous version of the document. Only available if the *overwrite* option is set to *true*."
+              },
+              {
+                "name": "silent",
+                "value": "",
+                "type": "query",
+                "description": "If set to *true*, an empty object is returned as response. No meta-data is returned for the created document. This option can be used to save some network traffic."
+              },
+              {
+                "name": "overwrite",
+                "value": "",
+                "type": "query",
+                "description": "If set to *true*, the insert becomes a replace-insert. If a document with the same *_key* already exists the new document is not rejected with unique constraint violated but replaces the old document."
+              },
+              {
+                "name": "waitForSync",
+                "value": "",
+                "type": "query",
+                "description": "If set to *true*, returns only after data has been synced to disk."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new document from the document given in the body, unless there is already a document with the *_key* given. If no *_key* is given, a new unique *_key* is generated automatically.\n\nThe body can be an array of documents, in which case all documents in the array are inserted with the same semantics as for a single document. The result body contains a JSON array of the same length as the input array, and each entry contains the result of the operation for the corresponding input. In case of"
+        },
+        {
+          "info": {
+            "name": "Replace documents",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/document/:collection",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "collection",
+                "value": "",
+                "type": "path",
+                "description": "This URL parameter is the name of the collection in which the documents are replaced."
+              },
+              {
+                "name": "ignoreRevs",
+                "value": "",
+                "type": "query",
+                "description": "If this is set to *true*, the *_rev* attributes in the given documents are ignored. If this is set to *false*, any *_rev* attribute given in a body document is taken as a precondition. The document is only replaced if the current revision is the one specified."
+              },
+              {
+                "name": "returnOld",
+                "value": "",
+                "type": "query",
+                "description": "If set to *true*, adds the *old* attribute which displays document revisions."
+              },
+              {
+                "name": "returnNew",
+                "value": "",
+                "type": "query",
+                "description": "If set to *true*, adds the new documents to the *new* attribute."
+              },
+              {
+                "name": "waitForSync",
+                "value": "",
+                "type": "query",
+                "description": "If set to *true*, returns only after data has been synced to disk."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replaces multiple documents in the specified collection with the ones in the body. The replaced documents are specified by the *_key* attributes in the body documents.\n\nIf *ignoreRevs* is *false*,, a *_rev* attribute in each document body must match the revision of the corresponding document in the database. Otherwise, the call fails\n\nIf the document exists and can be updated, a *HTTP 201* or a *HTTP 202* is returned (depending on *waitForSync*, see below).\n\nThe body of the response contains a J"
+        },
+        {
+          "info": {
+            "name": "Update documents",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/document/:collection",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "collection",
+                "value": "",
+                "type": "path",
+                "description": "The name of the collection in which the documents are updated."
+              },
+              {
+                "name": "keepNull",
+                "value": "",
+                "type": "query",
+                "description": "If set to *false*, you can use the patch command to remove attributes from an existing document if the patch document contains the same attributes with a null value."
+              },
+              {
+                "name": "mergeObjects",
+                "value": "",
+                "type": "query",
+                "description": "Controls whether objects (not arrays) are merged if present in both the existing and the patch document. If set to *false*, the value in the patch document overwrites the existing document's value. If set to *true*, objects are merged."
+              },
+              {
+                "name": "ignoreRevs",
+                "value": "",
+                "type": "query",
+                "description": "If this is set to *true*, the *_rev* attributes in the given documents are ignored. If this is set to *false*, any *_rev* attribute given in a body document is taken as a precondition. The document is only updated if the current revision is the one specified."
+              },
+              {
+                "name": "returnOld",
+                "value": "",
+                "type": "query",
+                "description": "If set to *true*, adds the *old* attribute which displays document revisions."
+              },
+              {
+                "name": "returnNew",
+                "value": "",
+                "type": "query",
+                "description": "If set to *true*, adds the new documents to the *new* attribute."
+              },
+              {
+                "name": "waitForSync",
+                "value": "",
+                "type": "query",
+                "description": "If set to *true*, returns only after data has been synced to disk."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Partially update documents. The *_key* attributes in the body specify which documents should be updated. The body of the request must contain a JSON array of document updates with the attributes to patch (the patch documents). All attributes from the patch documents are added to the existing documents if they do not yet exist and overwritten in the existing documents if they do exist.\n\nSetting an attribute value to *null* in the patch documents causees a value of *null* to be saved for the attri"
+        },
+        {
+          "info": {
+            "name": "Remove multiple documents",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/document/:collection",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "collection",
+                "value": "",
+                "type": "path",
+                "description": "Collection from which documents are removed."
+              },
+              {
+                "name": "returnOld",
+                "value": "",
+                "type": "query",
+                "description": "If set to *true*, adds the *old* attribute which displays original document."
+              },
+              {
+                "name": "ignoreRevs",
+                "value": "",
+                "type": "query",
+                "description": "If set to *true*, ignore any *_rev* attribute in the selectors. No revision check is performed."
+              },
+              {
+                "name": "waitForSync",
+                "value": "",
+                "type": "query",
+                "description": "If set to *true*, returns only after data has been synced to disk."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "The body of the request is an array consisting of selectors for documents. A selector can either be a string with a key or a string with a document handle or an object with a *_key* attribute.\n\nThis API call removes all specified documents from *collection*. If the selector is an object and has a *_rev* attribute, it is a precondition that the actual revision of the removed document in the collection is the specified one.\n\nThe body of the response is an array of the same length as the input arra"
+        },
+        {
+          "info": {
+            "name": "Read document",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/document/:collection/:key",
+            "headers": [
+              {
+                "name": "If-None-Match",
+                "value": ""
+              },
+              {
+                "name": "If-Match",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "collection",
+                "value": "",
+                "type": "path",
+                "description": "The name of the collection."
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "The key of the document."
+              }
+            ]
+          },
+          "docs": "Fetch the document identified by *key*. The returned document contains three special attributes:\n - *_id* containing the document handle.\n - *_key* containing key which uniquely identifies a document.\n - *_rev* containing the revision."
+        },
+        {
+          "info": {
+            "name": "Replace document",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/document/:collection/:key",
+            "headers": [
+              {
+                "name": "If-Match",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "collection",
+                "value": "",
+                "type": "path",
+                "description": "The name of the collection."
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "This URL parameter must be a document key."
+              },
+              {
+                "name": "ignoreRevs",
+                "value": "",
+                "type": "query",
+                "description": "If set to *true*, the *_rev* attributes in the given document is ignored. If set to *false*, the *_rev* attribute given in the body document is taken as a precondition. The document is only replaced if the current revision is the one specified."
+              },
+              {
+                "name": "returnOld",
+                "value": "",
+                "type": "query",
+                "description": "If set to *true*, adds the *old* attribute which displays document revisions."
+              },
+              {
+                "name": "returnNew",
+                "value": "",
+                "type": "query",
+                "description": "If set to *true*, adds the new documents to the *new* attribute."
+              },
+              {
+                "name": "silent",
+                "value": "",
+                "type": "query",
+                "description": "If set to *true*, an empty object is returned as response. No meta-data is returned for the replaced document. This option can be used to save some network traffic."
+              },
+              {
+                "name": "waitForSync",
+                "value": "",
+                "type": "query",
+                "description": "If set to *true*, returns only after data has been synced to disk."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replaces the document with key <key> with the one in the body, provided there is such a document and no precondition is violated.\n\nIf the *If-Match* header is specified and the revision of the document in the database is unequal to the given revision, the precondition is violated.\n\nIf *If-Match* is not given and *ignoreRevs* is *false*, a *_rev* attribute in each document body must match the revision of the corresponding document in the database. Otherwise, the call fails.\n\nIf a precondition is "
+        },
+        {
+          "info": {
+            "name": "Update document",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/document/:collection/:key",
+            "headers": [
+              {
+                "name": "If-Match",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "collection",
+                "value": "",
+                "type": "path",
+                "description": "The name of the collection."
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "This URL parameter must be a document key."
+              },
+              {
+                "name": "keepNull",
+                "value": "",
+                "type": "query",
+                "description": "If the intention is to remove existing attributes with the patch command, the URL query parameter *keepNull* can be used with a value of *false*. This modifies the behavior of the patch command to remove any attributes from the existing document that are contained in the patch document with an attribute value of *null*."
+              },
+              {
+                "name": "mergeObjects",
+                "value": "",
+                "type": "query",
+                "description": "Controls whether objects (not arrays) is merged if present in both the existing and the patch document. If set to *false*, the value in the patch document overwrites the existing document's value. If set to *true*, objects is merged. The default is *true*."
+              },
+              {
+                "name": "ignoreRevs",
+                "value": "",
+                "type": "query",
+                "description": "If set to *true*, the *_rev* attributes in the given document is ignored. If set to *false*, the *_rev* attribute given in the body document is taken as a precondition. The document is only updated if the current revision is the one specified."
+              },
+              {
+                "name": "returnOld",
+                "value": "",
+                "type": "query",
+                "description": "If set to *true*, adds the *old* attribute which displays document revisions."
+              },
+              {
+                "name": "returnNew",
+                "value": "",
+                "type": "query",
+                "description": "If set to *true*, adds the new documents to the *new* attribute."
+              },
+              {
+                "name": "silent",
+                "value": "",
+                "type": "query",
+                "description": "If set to *true*, an empty object is returned as response. No meta-data is returned for the updated document. This option can be used to save some network traffic."
+              },
+              {
+                "name": "waitForSync",
+                "value": "",
+                "type": "query",
+                "description": "If set to *true*, returns only after data has been synced to disk."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Partially updates the document identified by *key*. The body of the request must contain a JSON document with the attributes to patch (the patch document). All attributes from the patch document are added to the existing document if they do not yet exist, and overwritten in the existing document if they do exist there.\n\nSetting an attribute value to *null* in the patch document causes a value of *null* to be saved for the attribute by default.\n\nIf the *If-Match* header is specified and the revis"
+        },
+        {
+          "info": {
+            "name": "Remove a document",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/document/:collection/:key",
+            "headers": [
+              {
+                "name": "If-Match",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "collection",
+                "value": "",
+                "type": "path",
+                "description": "Remove the document identified by *collection*."
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "Remove the document identified by *key*."
+              },
+              {
+                "name": "returnOld",
+                "value": "",
+                "type": "query",
+                "description": "If set to *true*, adds the *old* attribute which displays document revisions."
+              },
+              {
+                "name": "silent",
+                "value": "",
+                "type": "query",
+                "description": "If set to *true*, an empty object is returned as response. No meta-data is returned for the removed document. This option can be used to save some network traffic."
+              },
+              {
+                "name": "waitForSync",
+                "value": "",
+                "type": "query",
+                "description": "If set to *true*, returns only after data has been synced to disk."
+              }
+            ]
+          },
+          "docs": "If *silent* is set to *false*, the body of the response contains a JSON object with the information about the handle and the revision.\n\n - *_id* contains the known *key* of the removed document.\n - *_key* contains the key which uniquely identifies a document.\n - *_rev* contains the document revision.\n\nIf the query parameter *returnOld* is *true*, the previous revision of the document is returned under the *old* attribute in the result."
+        },
+        {
+          "info": {
+            "name": "Read document header",
+            "type": "http"
+          },
+          "http": {
+            "method": "HEAD",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/document/:collection/:key",
+            "headers": [
+              {
+                "name": "If-None-Match",
+                "value": ""
+              },
+              {
+                "name": "If-Match",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "collection",
+                "value": "",
+                "type": "path",
+                "description": "The name of the collection."
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "The key of the document."
+              }
+            ]
+          },
+          "docs": "Like GET, but only fetch the header fields and not the body. You can use this call to get the current revision of a document or check if the document was deleted."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

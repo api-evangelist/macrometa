@@ -1524,3 +1524,9 @@ tools:
   method: POST
   path: /_api/transformations/preview
   source_operation: openapi/macrometa-gdn-openapi-original.json#previewTransformation
+deployment:
+  mode: none
+  verified: derived
+  tools: 303
+  checked: '2026-08-12'
+  source: catalog MCP census

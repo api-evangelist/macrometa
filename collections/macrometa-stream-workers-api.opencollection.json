@@ -1,0 +1,266 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Macrometa API Reference Activity Metrics Stream Workers API",
+    "version": "0.17.17"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Stream Workers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Validate the definition of a stream application.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/streamapps/validate",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Validate the definition of a stream application."
+        },
+        {
+          "info": {
+            "name": "Fetch all stream applications.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/streamapps",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Fetch all stream applications."
+        },
+        {
+          "info": {
+            "name": "Create and deploy a stream application.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/streamapps",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create and deploy a stream application."
+        },
+        {
+          "info": {
+            "name": "Fetch all sample stream applications.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/streamapps/samples",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Fetch all sample stream applications."
+        },
+        {
+          "info": {
+            "name": "Fetch a stream application.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/streamapps/:appname",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "appname",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Fetch the specified stream application."
+        },
+        {
+          "info": {
+            "name": "Update and redeploy a stream application.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/streamapps/:appname",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "appname",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update and redeploy a stream application."
+        },
+        {
+          "info": {
+            "name": "Stop and remove a stream application.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/streamapps/:appname",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "appname",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Stop and remove a stream application."
+        },
+        {
+          "info": {
+            "name": "Submit an ad hoc stream query and get the result",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/streamapps/query/:appName",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "appName",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit an ad hoc stream query and get the resulting records from a store."
+        },
+        {
+          "info": {
+            "name": "Enable or disable a stream application.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/streamapps/:appname/active",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "appname",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "active",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Enable or disable a stream application."
+        },
+        {
+          "info": {
+            "name": "Publish message via HTTP-Source stream.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/streamapps/http/:appName/:streamName",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "appName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "streamName",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Publish message via HTTP-Source stream."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,2244 @@
+{
+  "item": [
+    {
+      "id": "af0ff307-bf97-4e84-b105-91d5c98d9f4b",
+      "name": "Usage",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9f12acf2-8260-4c53-b9f8-01e6cf5f73f3",
+          "name": "Get usage metrics",
+          "request": {
+            "name": "Get usage metrics",
+            "description": {
+              "content": "Returns usage metrics for a specified time range, with mandatory aggregation by type and an optional origin filter. This endpoint requires from and to query parameters as epoch times, along with an aggregationType in the path to define the data aggregation granularity (e.g., hourly, daily, monthly). It supports pagination (limit, offset) and sorting (sortOrder, sortBy) options in the query. Authentication is managed via the customerId header.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "prerender",
+                "v1",
+                "usage",
+                ":aggregationType"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "from",
+                  "value": "<number>",
+                  "description": "(Required) Timestamp (in seconds) used as the initial time for filtering."
+                },
+                {
+                  "disabled": false,
+                  "key": "to",
+                  "value": "<number>",
+                  "description": "(Required) Timestamp (in seconds) used as the final time for filtering."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "1000",
+                  "description": "Limit for results."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Offset for results."
+                },
+                {
+                  "disabled": false,
+                  "key": "sortOrder",
+                  "value": "ASC",
+                  "description": "Sorting order."
+                },
+                {
+                  "disabled": false,
+                  "key": "sortBy",
+                  "value": "timestamp",
+                  "description": "Sorting field."
+                },
+                {
+                  "disabled": false,
+                  "key": "aggregation",
+                  "value": "false",
+                  "description": "If the aggregate flag is true, then the results are consolidated and returned as an aggregate summary for the specified start and end period."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "aggregationType",
+                  "description": "(Required) Aggregation type."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Customer unique identifier.",
+                "key": "x-photoniq-customerid",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "19e2af2b-bfa6-4183-ad1c-867942d0f99f",
+              "name": "Usage metrics fetched successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "prerender",
+                    "v1",
+                    "usage",
+                    ":aggregationType"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "sortOrder",
+                      "value": "ASC"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "timestamp"
+                    },
+                    {
+                      "key": "aggregation",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "aggregationType",
+                      "description": "(Required) Aggregation type."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Customer unique identifier.",
+                    "key": "x-photoniq-customerid",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"timestamp\": 1672628400000,\n    \"totalRenders\": 44,\n    \"maxRps\": 3\n  },\n  {\n    \"timestamp\": 1672542000000,\n    \"totalRenders\": 66,\n    \"maxRps\": 4\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "00027e5a-626e-42ba-9a25-f97a85d80e9c",
+              "name": "Bad request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "prerender",
+                    "v1",
+                    "usage",
+                    ":aggregationType"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "sortOrder",
+                      "value": "ASC"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "timestamp"
+                    },
+                    {
+                      "key": "aggregation",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "aggregationType",
+                      "description": "(Required) Aggregation type."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Customer unique identifier.",
+                    "key": "x-photoniq-customerid",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"ERROR\",\n  \"message\": \"Header x-photoniq-customerid is required.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6fe84148-e9a3-4266-8c18-1ee041cb3241",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "prerender",
+                    "v1",
+                    "usage",
+                    ":aggregationType"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "sortOrder",
+                      "value": "ASC"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "timestamp"
+                    },
+                    {
+                      "key": "aggregation",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "aggregationType",
+                      "description": "(Required) Aggregation type."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Customer unique identifier.",
+                    "key": "x-photoniq-customerid",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"ERROR\",\n  \"message\": \"Internal server error.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "120f948c-b748-4df2-aa61-a32ffeba130f",
+          "name": "Get usage metrics by origin",
+          "request": {
+            "name": "Get usage metrics by origin",
+            "description": {
+              "content": "Returns usage metrics for a specified time range, with mandatory aggregation by type and an optional origin filter. This endpoint requires from and to query parameters as epoch times, along with an aggregationType in the path to define the data aggregation granularity (e.g., hourly, daily, monthly). It supports pagination (limit, offset) and sorting (sortOrder, sortBy) options in the query. Authentication is managed via the customerId header.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "prerender",
+                "v1",
+                "usage",
+                ":aggregationType",
+                ":origin"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "from",
+                  "value": "<number>",
+                  "description": "(Required) Timestamp (in seconds) used as the initial time for filtering."
+                },
+                {
+                  "disabled": false,
+                  "key": "to",
+                  "value": "<number>",
+                  "description": "(Required) Timestamp (in seconds) used as the final time for filtering."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "1000",
+                  "description": "Limit for results."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Offset for results."
+                },
+                {
+                  "disabled": false,
+                  "key": "sortOrder",
+                  "value": "ASC",
+                  "description": "Sorting order."
+                },
+                {
+                  "disabled": false,
+                  "key": "sortBy",
+                  "value": "timestamp",
+                  "description": "Sorting field."
+                },
+                {
+                  "disabled": false,
+                  "key": "aggregation",
+                  "value": "false",
+                  "description": "If the aggregate flag is true, then the results are consolidated and returned as an aggregate summary for the specified start and end period."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "aggregationType",
+                  "description": "(Required) Aggregation type."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "origin",
+                  "description": "(Required) Origin hostname."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Customer unique identifier.",
+                "key": "x-photoniq-customerid",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "34c8ca62-3203-495d-be92-6b465a1f54b3",
+              "name": "Usage metrics fetched successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "prerender",
+                    "v1",
+                    "usage",
+                    ":aggregationType",
+                    ":origin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "sortOrder",
+                      "value": "ASC"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "timestamp"
+                    },
+                    {
+                      "key": "aggregation",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "aggregationType",
+                      "description": "(Required) Aggregation type."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "origin",
+                      "description": "(Required) Origin hostname."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Customer unique identifier.",
+                    "key": "x-photoniq-customerid",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"timestamp\": 1672628400000,\n    \"totalRenders\": 44,\n    \"maxRps\": 3\n  },\n  {\n    \"timestamp\": 1672542000000,\n    \"totalRenders\": 66,\n    \"maxRps\": 4\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "90a9ea01-7dca-4899-80db-369fe8c142f0",
+              "name": "Bad request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "prerender",
+                    "v1",
+                    "usage",
+                    ":aggregationType",
+                    ":origin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "sortOrder",
+                      "value": "ASC"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "timestamp"
+                    },
+                    {
+                      "key": "aggregation",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "aggregationType",
+                      "description": "(Required) Aggregation type."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "origin",
+                      "description": "(Required) Origin hostname."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Customer unique identifier.",
+                    "key": "x-photoniq-customerid",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"ERROR\",\n  \"message\": \"Header x-photoniq-customerid is required.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "849f39a7-bba0-4407-bb81-4e4d65d033a9",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "prerender",
+                    "v1",
+                    "usage",
+                    ":aggregationType",
+                    ":origin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "sortOrder",
+                      "value": "ASC"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "timestamp"
+                    },
+                    {
+                      "key": "aggregation",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "aggregationType",
+                      "description": "(Required) Aggregation type."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "origin",
+                      "description": "(Required) Origin hostname."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Customer unique identifier.",
+                    "key": "x-photoniq-customerid",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"ERROR\",\n  \"message\": \"Internal server error.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b1b92b10-314f-4e87-86fb-4ee15c867fd7",
+          "name": "Gets hourly usage statistics",
+          "request": {
+            "name": "Gets hourly usage statistics",
+            "description": {
+              "content": "Get hourly usage statistics of a specific waiting room for a specified time period.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "vwr",
+                "v1",
+                "usage",
+                "hourly"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "waitingroom",
+                  "value": "<string>",
+                  "description": "(Required) Unique identifier for a waiting room."
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<string>",
+                  "description": "(Required) The start date and time used for querying usage data. Must be provided in RFC3339 date-time format and be in UTC."
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<string>",
+                  "description": "(Required) The end date and time used for querying usage data. Must be provided in RFC3339 date-time format and be in UTC."
+                },
+                {
+                  "disabled": false,
+                  "key": "aggregate",
+                  "value": "false",
+                  "description": "If the _aggregate_ flag is _true_, then the results are consolidated and returned as an aggregate summary for the specified _start_ and _end_ period. If the _aggregate_ flag is _false_ or not provided, then the data is returned as separate, distributed records for the same period on an hourly basis without aggregation. If _aggregate_ flag is _true_, then [offset, limit, sort, order] are not considered."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "1000",
+                  "description": "The _limit_ parameter determines the number of usage records returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Represents the starting point from where to begin fetching the usage records. This parameter is especially useful in conjunction with the _limit_ parameter for pagination of a large number of usage records. By default, it is set to 0, meaning that data retrieval will start from the very first record. For example, if you have 10,000 usage records and set the _limit_ to 100, then the first API call without an _offset_ will retrieve records 1 to 100. If you set the _offset_ to 100 for the next call, you will retrieve records 101 to 200, and so on. This way, by incrementing the _offset_ by the _limit_ value for successive calls, you can paginate through the entire dataset."
+                },
+                {
+                  "disabled": false,
+                  "key": "sortby",
+                  "value": "timestamp",
+                  "description": "The field used for sorting."
+                },
+                {
+                  "disabled": false,
+                  "key": "order",
+                  "value": "asc",
+                  "description": "The sort order:\n * _asc_ - Ascending, from A to Z\n * _desc_ - Descending, from Z to A\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "60acab5e-6b04-4084-a917-31a72e640f8c",
+              "name": "Successfully fetched usage information.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "vwr",
+                    "v1",
+                    "usage",
+                    "hourly"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "waitingroom",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "YYYY-MM-DDTHH:MM:SSZ"
+                    },
+                    {
+                      "key": "end",
+                      "value": "YYYY-MM-DDTHH:MM:SSZ"
+                    },
+                    {
+                      "key": "aggregate",
+                      "value": "false"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "sortby",
+                      "value": "timestamp"
+                    },
+                    {
+                      "key": "order",
+                      "value": "asc"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "The total number of records for the specified time period if _aggregate_ is set to _false_.",
+                  "key": "X-count",
+                  "value": "1000"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"waitingroom_key\": \"test.waitingroom\",\n    \"requests\": 1305,\n    \"max_rps\": 100,\n    \"timestamp\": \"2023-07-12T07:00:00.000Z\"\n  },\n  {\n    \"waitingroom_key\": \"test.waitingroom\",\n    \"requests\": 1200,\n    \"max_rps\": 125,\n    \"timestamp\": \"2023-07-12T08:00:00.000Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "99a1138f-a1da-455d-ba79-a9ad11ab7545",
+              "name": "Authorization failure due to invalid authentication credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "vwr",
+                    "v1",
+                    "usage",
+                    "hourly"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "waitingroom",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "YYYY-MM-DDTHH:MM:SSZ"
+                    },
+                    {
+                      "key": "end",
+                      "value": "YYYY-MM-DDTHH:MM:SSZ"
+                    },
+                    {
+                      "key": "aggregate",
+                      "value": "false"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "sortby",
+                      "value": "timestamp"
+                    },
+                    {
+                      "key": "order",
+                      "value": "asc"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "34e2899b-6d28-4ba1-a68c-3e9b255d1e76",
+              "name": "Either the API key doesn't have permissions or it is deactivated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "vwr",
+                    "v1",
+                    "usage",
+                    "hourly"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "waitingroom",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "YYYY-MM-DDTHH:MM:SSZ"
+                    },
+                    {
+                      "key": "end",
+                      "value": "YYYY-MM-DDTHH:MM:SSZ"
+                    },
+                    {
+                      "key": "aggregate",
+                      "value": "false"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "sortby",
+                      "value": "timestamp"
+                    },
+                    {
+                      "key": "order",
+                      "value": "asc"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "15fb0b3d-138a-4722-ac33-81719d96acbf",
+              "name": "Usage info not available.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "vwr",
+                    "v1",
+                    "usage",
+                    "hourly"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "waitingroom",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "YYYY-MM-DDTHH:MM:SSZ"
+                    },
+                    {
+                      "key": "end",
+                      "value": "YYYY-MM-DDTHH:MM:SSZ"
+                    },
+                    {
+                      "key": "aggregate",
+                      "value": "false"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "sortby",
+                      "value": "timestamp"
+                    },
+                    {
+                      "key": "order",
+                      "value": "asc"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f996e953-85c0-4e01-83ae-6ec11cf3d528",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "vwr",
+                    "v1",
+                    "usage",
+                    "hourly"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "waitingroom",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "YYYY-MM-DDTHH:MM:SSZ"
+                    },
+                    {
+                      "key": "end",
+                      "value": "YYYY-MM-DDTHH:MM:SSZ"
+                    },
+                    {
+                      "key": "aggregate",
+                      "value": "false"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "sortby",
+                      "value": "timestamp"
+                    },
+                    {
+                      "key": "order",
+                      "value": "asc"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "478e4dfb-799e-4e2d-a3fd-d33f927f4cab",
+          "name": "Gets daily usage statistics",
+          "request": {
+            "name": "Gets daily usage statistics",
+            "description": {
+              "content": "Gets daily usage statistics of a specific waiting room for a specified time period.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "vwr",
+                "v1",
+                "usage",
+                "daily"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "waitingroom",
+                  "value": "<string>",
+                  "description": "(Required) Unique identifier for a waiting room."
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<string>",
+                  "description": "(Required) The start date and time used for querying usage data. Must be provided in RFC3339 date-time format and be in UTC."
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<string>",
+                  "description": "(Required) The end date and time used for querying usage data. Must be provided in RFC3339 date-time format and be in UTC."
+                },
+                {
+                  "disabled": false,
+                  "key": "aggregate",
+                  "value": "false",
+                  "description": "If the _aggregate_ flag is is included and set to _true_, then the results are consolidated and returned as an aggregate summary for the specified _start_ and _end_ period. If the _aggregate_ flag is _false_ or not provided, then the data is returned as separate, distributed records for the same period on a per-day basis without aggregation. If _aggregate_ flag is _true_, then [offset, limit, sort, order] are not considered."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "1000",
+                  "description": "The _limit_ parameter determines the number of usage records returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Represents the starting point from where to begin fetching the usage records. This parameter is especially useful in conjunction with the _limit_ parameter for pagination of a large number of usage records. By default, it is set to 0, meaning that data retrieval will start from the very first record. For example, if you have 10,000 usage records and set the _limit_ to 100, then the first API call without an _offset_ will retrieve records 1 to 100. If you set the _offset_ to 100 for the next call, you will retrieve records 101 to 200, and so on. This way, by incrementing the _offset_ by the _limit_ value for successive calls, you can paginate through the entire dataset."
+                },
+                {
+                  "disabled": false,
+                  "key": "sortby",
+                  "value": "timestamp",
+                  "description": "The field used for sorting."
+                },
+                {
+                  "disabled": false,
+                  "key": "order",
+                  "value": "asc",
+                  "description": "The sort order:\n * _asc_ - Ascending, from A to Z\n * _desc_ - Descending, from Z to A\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "b39600df-e290-44d4-8dd5-75b579e69844",
+              "name": "Successfully fetched usage information.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "vwr",
+                    "v1",
+                    "usage",
+                    "daily"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "waitingroom",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "YYYY-MM-DDTHH:MM:SSZ"
+                    },
+                    {
+                      "key": "end",
+                      "value": "YYYY-MM-DDTHH:MM:SSZ"
+                    },
+                    {
+                      "key": "aggregate",
+                      "value": "false"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "sortby",
+                      "value": "timestamp"
+                    },
+                    {
+                      "key": "order",
+                      "value": "asc"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "The total number of records for the specified time period if _aggregate_ is set to _false_.",
+                  "key": "X-count",
+                  "value": "1000"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"waitingroom_key\": \"test.waitingroom\",\n    \"requests\": 1305,\n    \"max_rps\": 100,\n    \"timestamp\": \"2023-07-12T07:00:00.000Z\"\n  },\n  {\n    \"waitingroom_key\": \"test.waitingroom\",\n    \"requests\": 1200,\n    \"max_rps\": 125,\n    \"timestamp\": \"2023-07-13T08:00:00.000Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ad1ce79e-dc21-4ad7-ad19-451a3721e80f",
+              "name": "Authorization failure due to invalid authentication credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "vwr",
+                    "v1",
+                    "usage",
+                    "daily"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "waitingroom",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "YYYY-MM-DDTHH:MM:SSZ"
+                    },
+                    {
+                      "key": "end",
+                      "value": "YYYY-MM-DDTHH:MM:SSZ"
+                    },
+                    {
+                      "key": "aggregate",
+                      "value": "false"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "sortby",
+                      "value": "timestamp"
+                    },
+                    {
+                      "key": "order",
+                      "value": "asc"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "206c2978-aa2e-4166-88f8-6e798146124d",
+              "name": "Either the API key doesn't have permissions or it is deactivated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "vwr",
+                    "v1",
+                    "usage",
+                    "daily"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "waitingroom",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "YYYY-MM-DDTHH:MM:SSZ"
+                    },
+                    {
+                      "key": "end",
+                      "value": "YYYY-MM-DDTHH:MM:SSZ"
+                    },
+                    {
+                      "key": "aggregate",
+                      "value": "false"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "sortby",
+                      "value": "timestamp"
+                    },
+                    {
+                      "key": "order",
+                      "value": "asc"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "44ca62e4-ccda-47e7-ac8f-6198bdb3d0eb",
+              "name": "Usage info not available.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "vwr",
+                    "v1",
+                    "usage",
+                    "daily"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "waitingroom",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "YYYY-MM-DDTHH:MM:SSZ"
+                    },
+                    {
+                      "key": "end",
+                      "value": "YYYY-MM-DDTHH:MM:SSZ"
+                    },
+                    {
+                      "key": "aggregate",
+                      "value": "false"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "sortby",
+                      "value": "timestamp"
+                    },
+                    {
+                      "key": "order",
+                      "value": "asc"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b6ee05bb-860e-4df7-82ce-a1d4e21001c4",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "vwr",
+                    "v1",
+                    "usage",
+                    "daily"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "waitingroom",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "YYYY-MM-DDTHH:MM:SSZ"
+                    },
+                    {
+                      "key": "end",
+                      "value": "YYYY-MM-DDTHH:MM:SSZ"
+                    },
+                    {
+                      "key": "aggregate",
+                      "value": "false"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "sortby",
+                      "value": "timestamp"
+                    },
+                    {
+                      "key": "order",
+                      "value": "asc"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "58e12e29-f008-4c2f-9d4e-bada2e9aaeb0",
+          "name": "Get monthly usage statistics",
+          "request": {
+            "name": "Get monthly usage statistics",
+            "description": {
+              "content": "Gets monthly usage statistics of a specific waiting room for a specified time period.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "vwr",
+                "v1",
+                "usage",
+                "monthly"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "waitingroom",
+                  "value": "<string>",
+                  "description": "Unique waiting room identifier. If unused, retrieve the monthly usage information for all waiting rooms."
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<string>",
+                  "description": "(Required) The start date and time used for querying usage data. Must be provided in RFC3339 date-time format and be in UTC."
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<string>",
+                  "description": "(Required) The end date and time used for querying usage data. Must be provided in RFC3339 date-time format and be in UTC."
+                },
+                {
+                  "disabled": false,
+                  "key": "aggregate",
+                  "value": "false",
+                  "description": "If the _aggregate_ flag is included and set to _true_, then the results are consolidated and returned as an aggregate summary for the specified _start_ and _end_ period. If the _aggregate_ flag is _false_ or not provided, then the data is returned as separate, distributed records for the same period. By default, the value is false."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "1000",
+                  "description": "The _limit_ parameter determines the number of usage records returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Represents the starting point from where to begin fetching the usage records. This parameter is especially useful in conjunction with the _limit_ parameter for pagination of a large number of usage records. By default, it is set to 0, meaning the data retrieval will start from the very first record. For example, if you have 10,000 usage records and set the _limit_ to 100, then the first API call without an _offset_ will retrieve records 1 to 100. If you set the _offset_ to 100 for the next call, you will retrieve records from 101 to 200, and so on. This way, by incrementing the _offset_ by the _limit_ value for successive calls, you can paginate through the entire dataset."
+                },
+                {
+                  "disabled": false,
+                  "key": "sortby",
+                  "value": "timestamp",
+                  "description": "The field used for sorting."
+                },
+                {
+                  "disabled": false,
+                  "key": "order",
+                  "value": "asc",
+                  "description": "The sort order:\n * _asc_ - Ascending, from A to Z\n * _desc_ - Descending, from Z to A\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "c57932c2-530a-41a1-bd0f-0cb872157178",
+              "name": "Successfully fetched usage information.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "vwr",
+                    "v1",
+                    "usage",
+                    "monthly"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "waitingroom",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "YYYY-MM-DDTHH:MM:SSZ"
+                    },
+                    {
+                      "key": "end",
+                      "value": "YYYY-MM-DDTHH:MM:SSZ"
+                    },
+                    {
+                      "key": "aggregate",
+                      "value": "false"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "sortby",
+                      "value": "timestamp"
+                    },
+                    {
+                      "key": "order",
+                      "value": "asc"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "The total number of records for the specified time period.",
+                  "key": "X-count",
+                  "value": "1000"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"waitingroom_key\": \"test.waitingroom\",\n    \"requests\": 1305,\n    \"max_rps\": 100,\n    \"timestamp\": \"2023-06-12T00:00:00.000Z\"\n  },\n  {\n    \"waitingroom_key\": \"test.waitingroom\",\n    \"requests\": 1200,\n    \"max_rps\": 125,\n    \"timestamp\": \"2023-07-12T00:00:00.000Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5efcad77-e5d9-40a0-9511-eca1b2b63794",
+              "name": "Authorization failure due to invalid authentication credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "vwr",
+                    "v1",
+                    "usage",
+                    "monthly"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "waitingroom",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "YYYY-MM-DDTHH:MM:SSZ"
+                    },
+                    {
+                      "key": "end",
+                      "value": "YYYY-MM-DDTHH:MM:SSZ"
+                    },
+                    {
+                      "key": "aggregate",
+                      "value": "false"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "sortby",
+                      "value": "timestamp"
+                    },
+                    {
+                      "key": "order",
+                      "value": "asc"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6a84b6f1-a0b2-4aa3-8fc7-81ce8358d86a",
+              "name": "Either the API key doesn't have permissions or it is deactivated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "vwr",
+                    "v1",
+                    "usage",
+                    "monthly"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "waitingroom",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "YYYY-MM-DDTHH:MM:SSZ"
+                    },
+                    {
+                      "key": "end",
+                      "value": "YYYY-MM-DDTHH:MM:SSZ"
+                    },
+                    {
+                      "key": "aggregate",
+                      "value": "false"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "sortby",
+                      "value": "timestamp"
+                    },
+                    {
+                      "key": "order",
+                      "value": "asc"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "37f57d97-782b-4408-80d6-f9ad4a115b99",
+              "name": "Usage info not available.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "vwr",
+                    "v1",
+                    "usage",
+                    "monthly"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "waitingroom",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "YYYY-MM-DDTHH:MM:SSZ"
+                    },
+                    {
+                      "key": "end",
+                      "value": "YYYY-MM-DDTHH:MM:SSZ"
+                    },
+                    {
+                      "key": "aggregate",
+                      "value": "false"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "sortby",
+                      "value": "timestamp"
+                    },
+                    {
+                      "key": "order",
+                      "value": "asc"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4ccf9c4b-0c33-4b26-bf41-7b9775ea6903",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "vwr",
+                    "v1",
+                    "usage",
+                    "monthly"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "waitingroom",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "YYYY-MM-DDTHH:MM:SSZ"
+                    },
+                    {
+                      "key": "end",
+                      "value": "YYYY-MM-DDTHH:MM:SSZ"
+                    },
+                    {
+                      "key": "aggregate",
+                      "value": "false"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "sortby",
+                      "value": "timestamp"
+                    },
+                    {
+                      "key": "order",
+                      "value": "asc"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-play.paas.macrometa.io",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "8279ecd2-412c-4de0-a813-a60c2bbaa19f",
+    "name": "Macrometa API Reference Activity Metrics Usage API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API reference for the Macrometa Global Data Network.",
+      "type": "text/plain"
+    }
+  }
+}

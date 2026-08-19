@@ -1,0 +1,81 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Macrometa API Reference Activity Metrics Health API",
+    "version": "0.17.17"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Health",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /api/est/v1/health",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/est/v1/health"
+          },
+          "docs": "Get PhotonIQ EST health status."
+        },
+        {
+          "info": {
+            "name": "Check the health of the service",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/ds/v1/health"
+          },
+          "docs": "Check the health of the service."
+        },
+        {
+          "info": {
+            "name": "Get application health",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/hss/v1/health"
+          },
+          "docs": "Get the current application health status."
+        },
+        {
+          "info": {
+            "name": "Get service health",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/prerender/v1/health"
+          },
+          "docs": "Returns the service health."
+        },
+        {
+          "info": {
+            "name": "Check the health of the service",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/vwr/v1/health"
+          },
+          "docs": "Gets the health of the virtual Rooms service. This API returns HTTP status 200 OK if the service is running, otherwise it returns a 500 Internal Server Error."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

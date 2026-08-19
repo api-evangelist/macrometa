@@ -1,0 +1,432 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Macrometa API Reference Activity Metrics Connections API",
+    "version": "0.17.17"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Connections",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all connections",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/connections",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "Fabric name of the resource."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Connection type."
+              }
+            ]
+          },
+          "docs": "Get the list of existing connections.\nTo get complete information about a connection, use [getConnection API]](#/Collections/getConnection) with the connection name."
+        },
+        {
+          "info": {
+            "name": "Create a connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/connections",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "Fabric name of the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a connection using a connector to an external data source."
+        },
+        {
+          "info": {
+            "name": "Validate a connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/connections/validate",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "Fabric name of the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Validate a connection to an external data source."
+        },
+        {
+          "info": {
+            "name": "Get connection details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/connections/:connection-name",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "Fabric name of the resource."
+              },
+              {
+                "name": "connection-name",
+                "value": "",
+                "type": "path",
+                "description": "Name of the connection."
+              }
+            ]
+          },
+          "docs": "Get information about a specific connection to an external data source."
+        },
+        {
+          "info": {
+            "name": "Update connection details",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/connections/:connection-name",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "Fabric name of the resource."
+              },
+              {
+                "name": "connection-name",
+                "value": "",
+                "type": "path",
+                "description": "Name of the connection."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a connection. Note that if the connection is already in use, then it will not be updated in the workflows."
+        },
+        {
+          "info": {
+            "name": "Delete a connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/connections/:connection-name",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "Fabric name of the resource."
+              },
+              {
+                "name": "connection-name",
+                "value": "",
+                "type": "path",
+                "description": "Name of the connection."
+              },
+              {
+                "name": "isInternal",
+                "value": "",
+                "type": "query",
+                "description": "Setting this parameter to `true` allows internal connections to be deleted."
+              }
+            ]
+          },
+          "docs": "Delete a connection to an external data source."
+        },
+        {
+          "info": {
+            "name": "Retrieve metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_api/connections/metrics",
+            "params": [
+              {
+                "name": "start",
+                "value": "1689592893735",
+                "type": "query",
+                "description": "A Unix timestamp. Use this parameter to filter metrics generated after the specified date and time. Must be used together with `end` parameter."
+              },
+              {
+                "name": "end",
+                "value": "1689592893735",
+                "type": "query",
+                "description": "A Unix timestamp. Use this parameter to filter metrics generated before the specified date and time. Must be used together with `start` parameter."
+              },
+              {
+                "name": "step",
+                "value": "24h",
+                "type": "query",
+                "description": "Metric results step duration."
+              }
+            ]
+          },
+          "docs": "Retrieve connections metrics."
+        },
+        {
+          "info": {
+            "name": "Get available connectors",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_api/connectors"
+          },
+          "docs": "Get available connectors."
+        },
+        {
+          "info": {
+            "name": "Get connector details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_api/connectors/:connector-name",
+            "params": [
+              {
+                "name": "connector-name",
+                "value": "postgres",
+                "type": "path",
+                "description": "Name of the connector."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Specifies which type of connector to retrieve, \nNo value returns both source and target connectors."
+              }
+            ]
+          },
+          "docs": "Obtain comprehensive information about the connector,\nincluding the configuration details necessary for setting up an connection using this connector."
+        },
+        {
+          "info": {
+            "name": "Retrieve sample data from the data source",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_api/connectors/:connector-name/sample",
+            "params": [
+              {
+                "name": "connector-name",
+                "value": "postgres",
+                "type": "path",
+                "description": "Name of the connector."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieve sample data from the data source by supplying the connector configuration.\nThe response includes both the schema and sample data."
+        },
+        {
+          "info": {
+            "name": "Retrieve schema from the data source",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_api/connectors/:connector-name/schema",
+            "params": [
+              {
+                "name": "connector-name",
+                "value": "postgres",
+                "type": "path",
+                "description": "Name of the connector."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieve schema for the connector by supplying the connector configurations."
+        },
+        {
+          "info": {
+            "name": "Generate a transformation query sample",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_api/transformations/sample",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generate a sample transformation query based on the schema of the specific data source.\nThis API serves as the initial step in creating a data transformation process.\nUse this API's generated sample transformation query to construct your transformation logic."
+        },
+        {
+          "info": {
+            "name": "Validate transformation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_api/transformations/validate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Validate the provided transformation query and the parameters."
+        },
+        {
+          "info": {
+            "name": "Generate transformed data preview",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_api/transformations/preview",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generate a preview of the data after the transformation. The preview is generated based on a sample data set from the data source.\nYou can use [get connector sample API](#/Connections/retrieveSample) to retrieve a sample dataset from the data source."
+        },
+        {
+          "info": {
+            "name": "Get the list of available connections.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/hss/v1/connections"
+          },
+          "docs": "Get the list of available connections."
+        },
+        {
+          "info": {
+            "name": "Creates a connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/api/hss/v1/connections",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Connections define the location of documents to be indexed.\nThey use _connectors_ to access documents and maintain the credentials needed to access that location."
+        },
+        {
+          "info": {
+            "name": "Updates a connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-play.paas.macrometa.io/api/hss/v1/connections",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a connection"
+        },
+        {
+          "info": {
+            "name": "Get details of a connection including its configurations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/hss/v1/connections/:connection_name",
+            "params": [
+              {
+                "name": "connection_name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get details of a connection including its configurations"
+        },
+        {
+          "info": {
+            "name": "Deletes a connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-play.paas.macrometa.io/api/hss/v1/connections/:connection_name",
+            "params": [
+              {
+                "name": "connection_name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes a connection"
+        },
+        {
+          "info": {
+            "name": "Validates a connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/api/hss/v1/connections/validate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Validates a connection"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

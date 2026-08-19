@@ -1,0 +1,939 @@
+{
+  "item": [
+    {
+      "id": "ae158239-a0cd-43a0-a083-a4db593ddfa8",
+      "name": "Settings",
+      "description": {
+        "content": "Settings endpoints allows users to configure a component to integrate various third-party tags into their system. It accepts configuration settings for different types of tags, such as analytics, advertising, social media, and so on.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "38ccc6ee-ed68-48cd-959b-b661d50970ee",
+          "name": "Create PhotonIQ EST component setting.",
+          "request": {
+            "name": "Create PhotonIQ EST component setting.",
+            "description": {
+              "content": "Create PhotonIQ EST component setting.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "est",
+                "v1",
+                "components",
+                "settings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ec720a45-6366-4a8c-8b7d-a5866137e0f5",
+              "name": "Returns created PhotonIQ EST component setting.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "est",
+                    "v1",
+                    "components",
+                    "settings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "86b09b28-51ba-403d-8d74-a53e2d45e997",
+              "name": "Error creating PhotonIQ EST component setting.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "est",
+                    "v1",
+                    "components",
+                    "settings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f3027d5b-a8a5-4a22-8b2f-45d999b1f60b",
+          "name": "Get all PhotonIQ EST component settings.",
+          "request": {
+            "name": "Get all PhotonIQ EST component settings.",
+            "description": {
+              "content": "Get all PhotonIQ EST component settings.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "est",
+                "v1",
+                "components",
+                "settings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1e2f15b4-b0f9-47a0-b96a-dd77cfd6de6e",
+              "name": "Returns all PhotonIQ EST component settings.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "est",
+                    "v1",
+                    "components",
+                    "settings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "144c1b43-9dda-480f-97c4-941450983481",
+              "name": "Error PhotonIQ EST component settings not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "est",
+                    "v1",
+                    "components",
+                    "settings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2703312b-6f3e-4e58-bc58-1cda525589dc",
+              "name": "Error getting all PhotonIQ EST component settings.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "est",
+                    "v1",
+                    "components",
+                    "settings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3bd80c1f-7c38-407b-a831-dc178c38b153",
+          "name": "Delete all PhotonIQ EST component settings.",
+          "request": {
+            "name": "Delete all PhotonIQ EST component settings.",
+            "description": {
+              "content": "Delete all PhotonIQ EST component settings.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "est",
+                "v1",
+                "components",
+                "settings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f13009b4-5037-4275-addd-c6d8f1e37600",
+              "name": "All PhotonIQ EST component settings deleted successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "est",
+                    "v1",
+                    "components",
+                    "settings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a8f9ef3e-bed3-46e9-9b0f-a2025b7713bb",
+              "name": "Error deleting all PhotonIQ EST component settings.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "est",
+                    "v1",
+                    "components",
+                    "settings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "15dec81f-5004-4f54-82ed-3ecf80795118",
+          "name": "Get PhotonIQ EST component setting.",
+          "request": {
+            "name": "Get PhotonIQ EST component setting.",
+            "description": {
+              "content": "Get PhotonIQ EST component setting.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "est",
+                "v1",
+                "components",
+                "settings",
+                ":component"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "component",
+                  "description": "(Required) Name of the component."
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fc1f6a43-1add-4c77-ab97-50e089b743ef",
+              "name": "Returns PhotonIQ EST component setting.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "est",
+                    "v1",
+                    "components",
+                    "settings",
+                    ":component"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "component",
+                      "description": "(Required) Name of the component."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9d938928-b0b4-45db-b0ca-39331a565474",
+              "name": "Error PhotonIQ EST component setting not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "est",
+                    "v1",
+                    "components",
+                    "settings",
+                    ":component"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "component",
+                      "description": "(Required) Name of the component."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ef98a288-bba0-484a-95b7-592223213945",
+              "name": "Error getting PhotonIQ EST component setting.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "est",
+                    "v1",
+                    "components",
+                    "settings",
+                    ":component"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "component",
+                      "description": "(Required) Name of the component."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e9edf24e-4898-4d9c-bac9-2e50fd4fc9e4",
+          "name": "Update PhotonIQ EST component setting.",
+          "request": {
+            "name": "Update PhotonIQ EST component setting.",
+            "description": {
+              "content": "Update PhotonIQ EST component setting.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "est",
+                "v1",
+                "components",
+                "settings",
+                ":component"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "component",
+                  "description": "(Required) Name of the component."
+                }
+              ]
+            },
+            "method": "PATCH",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "52a62cc1-97bd-4a14-b4fb-5742398b8155",
+              "name": "Returns updated PhotonIQ EST component setting.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "est",
+                    "v1",
+                    "components",
+                    "settings",
+                    ":component"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "component",
+                      "description": "(Required) Name of the component."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "30263232-edd7-40e0-a8ef-b6735f76922c",
+              "name": "Error updating PhotonIQ EST component setting.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "est",
+                    "v1",
+                    "components",
+                    "settings",
+                    ":component"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "component",
+                      "description": "(Required) Name of the component."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b211c9d8-1b5a-40ec-bab6-162eca4c0b79",
+          "name": "Delete PhotonIQ EST component setting.",
+          "request": {
+            "name": "Delete PhotonIQ EST component setting.",
+            "description": {
+              "content": "Delete PhotonIQ EST component setting.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "est",
+                "v1",
+                "components",
+                "settings",
+                ":component"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "component",
+                  "description": "(Required) Name of the component."
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "09d4bf60-d69b-4218-bb7f-7c319d08e207",
+              "name": "PhotonIQ EST component setting deleted successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "est",
+                    "v1",
+                    "components",
+                    "settings",
+                    ":component"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "component",
+                      "description": "(Required) Name of the component."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d1cbcae3-93c6-4d7d-923d-7e61c712ccae",
+              "name": "Error deleting PhotonIQ EST component setting.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "est",
+                    "v1",
+                    "components",
+                    "settings",
+                    ":component"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "component",
+                      "description": "(Required) Name of the component."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-play.paas.macrometa.io",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "fe1fe991-208c-4c25-8f4c-bdb22d194855",
+    "name": "Macrometa API Reference Activity Metrics Settings API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API reference for the Macrometa Global Data Network.",
+      "type": "text/plain"
+    }
+  }
+}

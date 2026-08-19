@@ -1,0 +1,156 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Macrometa API Reference Activity Metrics Data Centers API",
+    "version": "0.17.17"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Data Centers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Lists all data centers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/datacenter/all"
+          },
+          "docs": "Fetch data about all the data centers."
+        },
+        {
+          "info": {
+            "name": "Get a regional data center",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/datacenter/local"
+          },
+          "docs": "Fetch data for a local/regional the data center."
+        },
+        {
+          "info": {
+            "name": "Get data center",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/datacenter/:dc-name",
+            "params": [
+              {
+                "name": "dc-name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the data center."
+              }
+            ]
+          },
+          "docs": "Fetch data for data center, identified by *dc-name*."
+        },
+        {
+          "info": {
+            "name": "Set data center spot capability",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-play.paas.macrometa.io/datacenter/:location/:status",
+            "params": [
+              {
+                "name": "location",
+                "value": "",
+                "type": "path",
+                "description": "The name of the data center."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "path",
+                "description": "The on-spot capability of the data center."
+              }
+            ]
+          },
+          "docs": "Changes the properties of a data center."
+        },
+        {
+          "info": {
+            "name": "List all available data centers.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/datacenter/_tenant/:tenant-name",
+            "params": [
+              {
+                "name": "tenant-name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the tenant"
+              }
+            ]
+          },
+          "docs": "Fetch data for all data centers for tenant identified by *tenant-name*."
+        },
+        {
+          "info": {
+            "name": "List all clusters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_api/members"
+          },
+          "docs": "Fetch data for all the clusters in the federation."
+        },
+        {
+          "info": {
+            "name": "Update clusters in federation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_api/members",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the clusters in federation."
+        },
+        {
+          "info": {
+            "name": "Remove a cluster from federation",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-play.paas.macrometa.io/_api/members/:member",
+            "params": [
+              {
+                "name": "member",
+                "value": "",
+                "type": "path",
+                "description": "The name of the cluster."
+              }
+            ]
+          },
+          "docs": "Remove the cluster from federation, identified by *member*."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

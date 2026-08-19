@@ -1,0 +1,182 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Macrometa API Reference Activity Metrics Index API",
+    "version": "0.17.17"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Index",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all indexes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/hss/v1/index"
+          },
+          "docs": "Get the list of all indexes."
+        },
+        {
+          "info": {
+            "name": "Create an index",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/api/hss/v1/index",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "An index is a bucket where all searchable documents are collected.\nWe support indexing text documents, JSON documents, and PDFs.  An index can be created in one of two ways: a lexical search index or a\nsemantic search index.\n\nA lexical search index is based on the exact match of query terms or phrases within the text.  It operates on\nthe surface level, looking for specific sequences of characters or work forms without considering the deeper meaning of those words.\nUse the *LexicalSearchIndex* sc"
+        },
+        {
+          "info": {
+            "name": "Get an index",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/hss/v1/index/:index_name",
+            "params": [
+              {
+                "name": "index_name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get details of an index. This will include the complete index configuration."
+        },
+        {
+          "info": {
+            "name": "Delete an index",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-play.paas.macrometa.io/api/hss/v1/index/:index_name",
+            "params": [
+              {
+                "name": "index_name",
+                "value": "",
+                "type": "path",
+                "description": "Name of the index to fetch."
+              },
+              {
+                "name": "force",
+                "value": "",
+                "type": "query",
+                "description": "This will try to delete all related resources ignoring intermediate errors."
+              }
+            ]
+          },
+          "docs": "Delete an index."
+        },
+        {
+          "info": {
+            "name": "Trigger re-indexing on the source.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/api/hss/v1/index/:index_name/reindex",
+            "params": [
+              {
+                "name": "index_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "truncate",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Trigger re-indexing on the source."
+        },
+        {
+          "info": {
+            "name": "Attach connection to index",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/api/hss/v1/index/:index_name/sources/:connection_name",
+            "params": [
+              {
+                "name": "index_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "connection_name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Attach connection to index"
+        },
+        {
+          "info": {
+            "name": "Return list of attached connections",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/hss/v1/index/:index_name/sources",
+            "params": [
+              {
+                "name": "index_name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the list of connections attached to the index."
+        },
+        {
+          "info": {
+            "name": "Remove connection attached to the index",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-play.paas.macrometa.io/api/hss/v1/index/:index_name/sources/:source_name",
+            "params": [
+              {
+                "name": "index_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "source_name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Remove a connection from the index.  This removes all the documents from the index that were added by the connection.\nAnd this stops these documents from being indexed in the future."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

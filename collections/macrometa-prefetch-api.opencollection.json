@@ -1,0 +1,196 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Macrometa API Reference Activity Metrics Prefetch API",
+    "version": "0.17.17"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Prefetch",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get prefetch configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/prerender/v1/origins/:origin/prefetch/configs",
+            "headers": [
+              {
+                "name": "x-photoniq-customerid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "origin",
+                "value": "www.origin.com",
+                "type": "path",
+                "description": "Origin hostname."
+              }
+            ]
+          },
+          "docs": "Returns the prefetch configuration associated with the origin."
+        },
+        {
+          "info": {
+            "name": "Create prefetch configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/api/prerender/v1/origins/:origin/prefetch/configs",
+            "headers": [
+              {
+                "name": "x-photoniq-customerid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "origin",
+                "value": "www.origin.com",
+                "type": "path",
+                "description": "Origin hostname."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a prefetch configuration associated with the origin."
+        },
+        {
+          "info": {
+            "name": "Update prefetch configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api-play.paas.macrometa.io/api/prerender/v1/origins/:origin/prefetch/configs",
+            "headers": [
+              {
+                "name": "x-photoniq-customerid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "origin",
+                "value": "www.origin.com",
+                "type": "path",
+                "description": "Origin hostname."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the prefetch configuration associated with the origin."
+        },
+        {
+          "info": {
+            "name": "Delete prefetch configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-play.paas.macrometa.io/api/prerender/v1/origins/:origin/prefetch/configs",
+            "headers": [
+              {
+                "name": "x-photoniq-customerid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "origin",
+                "value": "www.origin.com",
+                "type": "path",
+                "description": "Origin hostname."
+              }
+            ]
+          },
+          "docs": "Deletes the prefetch configuration associated with the origin."
+        },
+        {
+          "info": {
+            "name": "Trigger prefetching process",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/api/prerender/v1/origins/:origin/prefetch/triggers",
+            "headers": [
+              {
+                "name": "x-photoniq-customerid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "origin",
+                "value": "www.origin.com",
+                "type": "path",
+                "description": "Origin hostname."
+              }
+            ]
+          },
+          "docs": "Starts prefetching all sitemap URLs associated with the origin."
+        },
+        {
+          "info": {
+            "name": "Get prefetch URLs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/prerender/v1/origins/:origin/prefetch/urls",
+            "headers": [
+              {
+                "name": "x-photoniq-customerid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Pagination offset."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Pagination limit."
+              },
+              {
+                "name": "origin",
+                "value": "www.origin.com",
+                "type": "path",
+                "description": "Origin hostname."
+              }
+            ]
+          },
+          "docs": "Returns the latest prefetch URLs associated with the origin."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

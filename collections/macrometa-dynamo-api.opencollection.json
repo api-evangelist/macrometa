@@ -1,0 +1,47 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Macrometa API Reference Activity Metrics Dynamo API",
+    "version": "0.17.17"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Dynamo",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Dynamo-like API interface",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_api/dynamo",
+            "headers": [
+              {
+                "name": "x-amz-target",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Dynamo-like API interface.\n\nSet your JWT token or APIKEY as a aws_access_key_id (ex. '*bearer XXXXX*' or '*apikey XXXXX*').\n\nCurrently supported Dynamo actions (set as *'x-amz-target'* header tag):\n\n  - **CreateTable**\n  - **CreateGlobalTable**\n  - **DeleteItem**\n  - **DeleteTable**\n  - **DescribeGlobalTable**\n  - **DescribeTable**\n  - **DescribeTimeToLive**\n  - **GetItem**\n  - **ListGlobalTables**\n  - **ListTables**\n  - **PutItem**\n  - **Query**\n  - **UpdateItem**\n  - **UpdateTable**\n  - **Upda"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

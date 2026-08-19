@@ -1,0 +1,197 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Macrometa API Reference Activity Metrics Managed Keys API",
+    "version": "0.17.17"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Managed Keys",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List of managed keys.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/kms/managedkey",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "The name of the manged key."
+              },
+              {
+                "name": "service",
+                "value": "",
+                "type": "query",
+                "description": "The type of GND service used by the key."
+              },
+              {
+                "name": "managedKeyType",
+                "value": "",
+                "type": "query",
+                "description": "Who manages the key, Macrometa or customer(CMK)"
+              },
+              {
+                "name": "keyProvider",
+                "value": "",
+                "type": "query",
+                "description": "The service that provides the root key."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of managed keys to skip before displaying results. Default: 0"
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "The number of managed keys to return. Default: 50"
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "Sort by field name."
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Order the results ascending (ASC) or descending (DESC). Use with sortBy."
+              }
+            ]
+          },
+          "docs": "Fetch managed keys with filter and pagination."
+        },
+        {
+          "info": {
+            "name": "Create managed key.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/kms/managedkey",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create managed key."
+        },
+        {
+          "info": {
+            "name": "Fetch managed key by ID.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/kms/managedkey/:id",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the managed key."
+              }
+            ]
+          },
+          "docs": "Fetch managed key by ID."
+        },
+        {
+          "info": {
+            "name": "Delete managed key by ID.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/kms/managedkey/:id",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the managed key."
+              }
+            ]
+          },
+          "docs": "Set the managed key to status = `DELETING` or completely delete it returning status = `DELETED` if the key doesn't have encoded data."
+        },
+        {
+          "info": {
+            "name": "Enable or disable the managed key.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/kms/managedkey/:id/enable/:enable",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the managed key."
+              },
+              {
+                "name": "enable",
+                "value": "",
+                "type": "path",
+                "description": "Enable or disable the key."
+              }
+            ]
+          },
+          "docs": "Enable or disable the managed key by ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

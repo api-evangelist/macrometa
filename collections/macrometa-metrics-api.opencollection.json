@@ -1,0 +1,603 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Macrometa API Reference Activity Metrics API",
+    "version": "0.17.17"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Metrics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve metrics data via WebSocket",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/es/v1/metrics",
+            "headers": [
+              {
+                "name": "x-customer-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "The start date used for querying metrics data. Must be provided in RFC3339 date-time format."
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "The end date used for querying metrics data. Must be provided in RFC3339 date-time format."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "The type of the metrics data points. Supported types - sec, min, hr, day, month."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "The name of the metrics data to retrieve."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of metrics to retrieve."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "This denotes the initial number of metrics to skip in the response."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "The sort on metrics field."
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "To arrange the metrics in ASC or DESC order."
+              }
+            ]
+          },
+          "docs": "Understanding the performance and usage of the EDS is vital. Metrics provide insights that help identify issues, analyze trends, optimize operations, and measure effectiveness."
+        },
+        {
+          "info": {
+            "name": "Retrieve metrics data via SSE",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/es/sse/v1/metrics",
+            "headers": [
+              {
+                "name": "x-customer-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "The start date used for querying metrics data. Must be provided in RFC3339 date-time format."
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "The end date used for querying metrics data. Must be provided in RFC3339 date-time format."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "The type of the metrics data points. Supported types - sec, min, hr, day, month."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "The name of the metrics data to retrieve."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of metrics to retrieve."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "This denotes the initial number of metrics to skip in the response."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "The sort on metrics field."
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "To arrange the metrics in ASC or DESC order."
+              }
+            ]
+          },
+          "docs": "Understanding the performance and usage of the EDS is vital. Metrics provide insights that help identify issues, analyze trends, optimize operations, and measure effectiveness."
+        },
+        {
+          "info": {
+            "name": "Retrieve metrics data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/ds/v1/metrics",
+            "params": [
+              {
+                "name": "start",
+                "value": "YYYY-MM-DDTHH:MM:SSZ",
+                "type": "query",
+                "description": "The start date used for querying metrics data. Must be provided in RFC3339 date-time format and UTC."
+              },
+              {
+                "name": "end",
+                "value": "YYYY-MM-DDTHH:MM:SSZ",
+                "type": "query",
+                "description": "The end date used for querying metrics data. Must be provided in RFC3339 date-time format and UTC."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns metrics data for a given time period. If the data for a particular period is 'null', then metrics cannot be calculated for that time period. For example, accuracy cannot be calculated if there were no visits for that day."
+        },
+        {
+          "info": {
+            "name": "Retrieve top visits count with their visitor IDs.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/ds/v1/metrics/topn/visits",
+            "params": [
+              {
+                "name": "n",
+                "value": "true",
+                "type": "query",
+                "description": "Number of top visits data to return to."
+              },
+              {
+                "name": "isBot",
+                "value": "false",
+                "type": "query",
+                "description": "Flag to include bots in top n visits count."
+              },
+              {
+                "name": "start",
+                "value": "YYYY-MM-DDTHH:MM:SSZ",
+                "type": "query",
+                "description": "The start date used for querying visits data. Must be provided in RFC3339 date-time format and be in UTC. The default start time is 24 hours before the current time."
+              },
+              {
+                "name": "end",
+                "value": "YYYY-MM-DDTHH:MM:SSZ",
+                "type": "query",
+                "description": "The end date used for querying visits data. Must be provided in RFC3339 date-time format and be in UTC. The default end time is the current time."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns top visits count with their visitor IDs for a given time period."
+        },
+        {
+          "info": {
+            "name": "Retrieve visitor traffic metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/ds/v1/metrics/traffic",
+            "params": [
+              {
+                "name": "start",
+                "value": "YYYY-MM-DDTHH:MM:SSZ",
+                "type": "query",
+                "description": "The start date used for querying visitor traffic data. Must be provided in RFC3339 date-time format and UTC. The default start time is 24 hours before the current time."
+              },
+              {
+                "name": "end",
+                "value": "YYYY-MM-DDTHH:MM:SSZ",
+                "type": "query",
+                "description": "The end date used for querying visitor traffic data. Must be provided in RFC3339 date-time format and UTC. The default end time is the current time."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns the visitor traffic over a period of time.\n\nThe traffic metrics are reported in five-minute intervals:\n- Total number of human visitors\n- Total number of good bot visitors\n- Total number of bad bot visitors\n- Total number of unknown bot visitors\n\n_Human visitors_ are non-bot visitors. _Good bots_ are a list of well-known bots, including Googlebot, Bingbot, and so on).\n_Bad bots_ are a list of known bad bots, including Grinchbots, AhrefsBot, and so on. _Unknown bots_ are visitors that are"
+        },
+        {
+          "info": {
+            "name": "Retrieve the different device types for the visits",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/ds/v1/metrics/device/types",
+            "params": [
+              {
+                "name": "start",
+                "value": "YYYY-MM-DDTHH:MM:SSZ",
+                "type": "query",
+                "description": "The start date used for querying the device data. Must be provided in RFC3339 date-time format and UTC. The default start time is 24 hours from current time."
+              },
+              {
+                "name": "end",
+                "value": "YYYY-MM-DDTHH:MM:SSZ",
+                "type": "query",
+                "description": "The end date used for querying the device data. Must be provided in RFC3339 date-time format and UTC. The default end time is the current time."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns the device types over a period of time.\n"
+        },
+        {
+          "info": {
+            "name": "Get response time percentiles ",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/prerender/v1/metrics/percentiles/responsetime",
+            "headers": [
+              {
+                "name": "x-photoniq-customerid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Timestamp (in seconds) used as the initial time for filtering."
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "Timestamp (in seconds) used as the final time for filtering."
+              },
+              {
+                "name": "urlRegex",
+                "value": "",
+                "type": "query",
+                "description": "Regex of URL path."
+              },
+              {
+                "name": "responseCode",
+                "value": "",
+                "type": "query",
+                "description": "Response code for filtering."
+              }
+            ]
+          },
+          "docs": "Returns response time percentiles within a specific time range, optionally filtered by URL pattern and response code. Required query parameters include from and to, denoting the epoch time range in seconds. An optional urlRegex parameter allows filtering by URL patterns, while responseCode filters the metrics by HTTP response code. The endpoint returns the 90th, 95th, and 99th percentiles of response times. A customerId header is required for authentication."
+        },
+        {
+          "info": {
+            "name": "Get response time percentiles  by origin",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/prerender/v1/metrics/percentiles/responsetime/:origin",
+            "headers": [
+              {
+                "name": "x-photoniq-customerid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Timestamp (in seconds) used as the initial time for filtering."
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "Timestamp (in seconds) used as the final time for filtering."
+              },
+              {
+                "name": "urlRegex",
+                "value": "",
+                "type": "query",
+                "description": "Regex of URL path."
+              },
+              {
+                "name": "responseCode",
+                "value": "",
+                "type": "query",
+                "description": "Response code for filtering."
+              },
+              {
+                "name": "origin",
+                "value": "www.origin.com",
+                "type": "path",
+                "description": "Origin hostname."
+              }
+            ]
+          },
+          "docs": "Returns response time percentiles within a specific time range, optionally filtered by URL pattern and response code. Required query parameters include from and to, denoting the epoch time range in seconds. An optional urlRegex parameter allows filtering by URL patterns, while responseCode filters the metrics by HTTP response code. The endpoint returns the 90th, 95th, and 99th percentiles of response times. A customerId header is required for authentication."
+        },
+        {
+          "info": {
+            "name": "Get prefetch statistics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/prerender/v1/metrics/stats/prefetch/:origin",
+            "headers": [
+              {
+                "name": "x-photoniq-customerid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Prefetch status."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Pagination offset."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Pagination limit."
+              },
+              {
+                "name": "origin",
+                "value": "www.origin.com",
+                "type": "path",
+                "description": "Origin hostname."
+              }
+            ]
+          },
+          "docs": "Returns the latest prefetch statistics associated with the origin."
+        },
+        {
+          "info": {
+            "name": "Get render-stats metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/prerender/v1/metrics/stats/render",
+            "headers": [
+              {
+                "name": "x-photoniq-customerid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Timestamp (in seconds) used as the initial time for filtering."
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "Timestamp (in seconds) used as the final time for filtering."
+              }
+            ]
+          },
+          "docs": "Returns render stats metrics within a specified time range. This endpoint expects two required query parameters: from and to, representing the start and end of the time range in epoch seconds. The request must include a customerId header for authentication."
+        },
+        {
+          "info": {
+            "name": "Get render-stats metrics by origin",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/prerender/v1/metrics/stats/render/:origin",
+            "headers": [
+              {
+                "name": "x-photoniq-customerid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Timestamp (in seconds) used as the initial time for filtering."
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "Timestamp (in seconds) used as the final time for filtering."
+              },
+              {
+                "name": "origin",
+                "value": "www.origin.com",
+                "type": "path",
+                "description": "Origin hostname."
+              }
+            ]
+          },
+          "docs": "Returns render stats metrics within a specified time range. This endpoint expects two required query parameters: from and to, representing the start and end of the time range in epoch seconds. The request must include a customerId header for authentication."
+        },
+        {
+          "info": {
+            "name": "Get metrics by waiting room key",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/vwr/v1/metrics/:waitingroom_key",
+            "params": [
+              {
+                "name": "waitingroom_key",
+                "value": "",
+                "type": "path",
+                "description": "The key of the waiting room."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "The start date and time used for querying metrics data. Must be provided in RFC3339 date-time format and be in UTC."
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "The end date and time used for querying metrics data. Must be provided in RFC3339 date-time format and be in UTC."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Represents the starting point from where to begin fetching the metrics records. This parameter is especially useful in conjunction with the _limit_ parameter for pagination of a large number of metrics records. By default, it is set to 0, meaning that data retrieval will start from the very first record. For example, if you have 10,000 metrics records and set the _limit_ to 100, then the first API call without an offset will retrieve records 1 to 100. If you set the _offset_ to 100 for the next call, you will retrieve records 101 to 200, and so on. This way, by incrementing the _offset_ by the _limit_ value for successive calls, you can paginate through the entire dataset."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The _limit_ parameter determines the number of metrics returned."
+              },
+              {
+                "name": "sortby",
+                "value": "",
+                "type": "query",
+                "description": "The field used for sorting."
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "The sort order:\n * _asc_ - Ascending, from A to Z\n * _desc_ - Descending, from Z to A\n"
+              }
+            ]
+          },
+          "docs": "Allows you to retrieve waiting room telemetry per waiting room, per minute. Gets metrics for a specific waiting room. Optionally provide _start_ and _end_ filter for a specific period. Ninety days of metrics are kept."
+        },
+        {
+          "info": {
+            "name": "Get metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/vwr/v1/metrics",
+            "params": [
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "The start date and time used for querying metrics data. Must be provided in RFC3339 date-time format and be in UTC."
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "The end date and time used for querying metrics data. Must be provided in RFC3339 date-time format and be in UTC."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Represents the starting point from where to begin fetching the metrics records. This parameter is especially useful in conjunction with the _limit_ parameter for pagination of a large number of metrics records. By default, it is set to 0, meaning that data retrieval will start from the very first record. For example, if you have 10,000 metrics records and set the _limit_ to 100, then the first API call without an offset will retrieve records 1 to 100. If you set the _offset_ to 100 for the next call, you will retrieve records 101 to 200, and so on. This way, by incrementing the _offset_ by the _limit_ value for successive calls, you can paginate through the entire dataset."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The _limit_ parameter determines the number of metrics returned."
+              },
+              {
+                "name": "sortby",
+                "value": "",
+                "type": "query",
+                "description": "The field used for sorting."
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "The sort order:\n * _asc_ - Ascending, from A to Z\n * _desc_ - Descending, from Z to A\n"
+              }
+            ]
+          },
+          "docs": "Allows you to retrieve waiting room telemetry per minute. Gets metrics for all the waiting rooms. Optionally provide _start_ and _to_ filter for a specific period. Ninety days of metrics are kept."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

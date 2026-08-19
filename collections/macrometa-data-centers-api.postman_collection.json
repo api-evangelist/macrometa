@@ -1,0 +1,1708 @@
+{
+  "item": [
+    {
+      "id": "8956c243-8c20-475d-9374-801254091124",
+      "name": "Data Centers",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0bb26052-8d56-4197-a118-3033c64cbc24",
+          "name": "Lists all data centers",
+          "request": {
+            "name": "Lists all data centers",
+            "description": {
+              "content": "Fetch data about all the data centers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "datacenter",
+                "all"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4857e29e-e24c-45ea-bac0-9cfefb4544c5",
+              "name": "Successfully fetched data centers.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "datacenter",
+                    "all"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"_key\": \"gdn-us-west\",\n    \"host\": \"92.236.111.184\",\n    \"local\": true,\n    \"name\": \"gdn-us-west\",\n    \"spot_region\": false,\n    \"status\": 0,\n    \"tags\": {\n      \"api\": \"api-gdn-us-west.paas.macrometa.io\",\n      \"url\": \"gdn-us-west.paas.macrometa.io\"\n    },\n    \"locationInfo\": {\n      \"city\": \"San Jose\",\n      \"countrycode\": \"US\",\n      \"countryname\": \"United States\",\n      \"latitude\": \"string\",\n      \"longitude\": \"string\",\n      \"url\": \"gdn-us-west.paas.macrometa.io\"\n    }\n  },\n  {\n    \"_key\": \"gdn-us-west\",\n    \"host\": \"92.236.111.184\",\n    \"local\": true,\n    \"name\": \"gdn-us-west\",\n    \"spot_region\": false,\n    \"status\": 0,\n    \"tags\": {\n      \"api\": \"api-gdn-us-west.paas.macrometa.io\",\n      \"url\": \"gdn-us-west.paas.macrometa.io\"\n    },\n    \"locationInfo\": {\n      \"city\": \"San Jose\",\n      \"countrycode\": \"US\",\n      \"countryname\": \"United States\",\n      \"latitude\": \"string\",\n      \"longitude\": \"string\",\n      \"url\": \"gdn-us-west.paas.macrometa.io\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "270fa931-3d86-4162-b6f8-64c13ec56dca",
+              "name": "Failed because you do not have administrator permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "datacenter",
+                    "all"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 401,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 1728\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d1ef2a43-18f6-4930-af0f-9217438d85fd",
+          "name": "Get a regional data center",
+          "request": {
+            "name": "Get a regional data center",
+            "description": {
+              "content": "Fetch data for a local/regional the data center.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "datacenter",
+                "local"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6c65764b-03a9-4f22-a10a-f9693a483b40",
+              "name": "Successfully fetched data center.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "datacenter",
+                    "local"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_key\": \"gdn-us-west\",\n  \"host\": \"92.236.111.184\",\n  \"local\": true,\n  \"name\": \"gdn-us-west\",\n  \"spot_region\": false,\n  \"status\": 0,\n  \"tags\": {\n    \"api\": \"api-gdn-us-west.paas.macrometa.io\",\n    \"url\": \"gdn-us-west.paas.macrometa.io\"\n  },\n  \"locationInfo\": {\n    \"city\": \"San Jose\",\n    \"countrycode\": \"US\",\n    \"countryname\": \"United States\",\n    \"latitude\": \"string\",\n    \"longitude\": \"string\",\n    \"url\": \"gdn-us-west.paas.macrometa.io\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9d9de051-affe-467c-95cd-dd3772f2a02b",
+              "name": "Failed because you do not have administrator permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "datacenter",
+                    "local"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 401,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 1728\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e623462b-e47e-4360-a9ba-c9e2e75b5520",
+          "name": "Get data center",
+          "request": {
+            "name": "Get data center",
+            "description": {
+              "content": "Fetch data for data center, identified by *dc-name*.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "datacenter",
+                ":dc-name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "dc-name",
+                  "description": "(Required) The name of the data center."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "97f8051d-f7dd-4935-a1eb-4ceedc785b06",
+              "name": "Successfully fetched data center.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "datacenter",
+                    ":dc-name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dc-name",
+                      "description": "(Required) The name of the data center."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"gdn-us-west\",\n  \"local\": true,\n  \"status\": 0,\n  \"tags\": {\n    \"api\": \"api-gdn-us-west.paas.macrometa.io\",\n    \"url\": \"gdn-us-west.paas.macrometa.io\"\n  },\n  \"locationInfo\": {\n    \"city\": \"San Jose\",\n    \"countrycode\": \"US\",\n    \"countryname\": \"United States\",\n    \"latitude\": \"string\",\n    \"longitude\": \"string\",\n    \"url\": \"gdn-us-west.paas.macrometa.io\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a6643b6a-22b4-405f-9778-27746497d221",
+              "name": "Failed to find specified data center.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "datacenter",
+                    ":dc-name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dc-name",
+                      "description": "(Required) The name of the data center."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 404,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 581\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ec3b47f0-45d1-4341-bd18-08b097b5c80c",
+          "name": "Set data center spot capability",
+          "request": {
+            "name": "Set data center spot capability",
+            "description": {
+              "content": "Changes the properties of a data center.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "datacenter",
+                ":location",
+                ":status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "location",
+                  "description": "(Required) The name of the data center."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<boolean>",
+                  "key": "status",
+                  "description": "(Required) The on-spot capability of the data center."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2433d366-e381-465b-bc2d-292863e9aade",
+              "name": "Successfully changed data center on-spot capability.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "datacenter",
+                    ":location",
+                    ":status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "location",
+                      "description": "(Required) The name of the data center."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<boolean>",
+                      "key": "status",
+                      "description": "(Required) The on-spot capability of the data center."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2327fcfb-de36-4779-9046-20abac4939d2",
+              "name": "Failed due to missing or malformed data. Verify that all parameters are complete.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "datacenter",
+                    ":location",
+                    ":status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "location",
+                      "description": "(Required) The name of the data center."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<boolean>",
+                      "key": "status",
+                      "description": "(Required) The on-spot capability of the data center."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 400,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 102020\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8b3438f3-2ad2-4f2d-bc87-92f122d35875",
+          "name": "List all available data centers.",
+          "request": {
+            "name": "List all available data centers.",
+            "description": {
+              "content": "Fetch data for all data centers for tenant identified by *tenant-name*.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "datacenter",
+                "_tenant",
+                ":tenant-name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenant-name",
+                  "description": "(Required) The name of the tenant"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ee95fbff-434d-4b9d-a945-09bef5add6e4",
+              "name": "Successfully fetched data center.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "datacenter",
+                    "_tenant",
+                    ":tenant-name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant-name",
+                      "description": "(Required) The name of the tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"tenant\": \"_mm\",\n    \"dcInfo\": [\n      {\n        \"_id\": \"_clusters/gdn-us-west\",\n        \"_key\": \"gdn-us-west\",\n        \"_rev\": \"_c9VHcYC--_\",\n        \"host\": \"192.168.1.100\",\n        \"local\": true,\n        \"name\": \"gdn-us-west\",\n        \"spot_region\": false,\n        \"status\": 0,\n        \"tags\": {\n          \"api\": \"api-gdn-us-west.paas.macrometa.io\",\n          \"url\": \"gdn-us-west.paas.macrometa.io\"\n        },\n        \"locationInfo\": {\n          \"_id\": \"_members/gdn-us-west\",\n          \"_key\": \"gdn-us-west\",\n          \"_rev\": \"_c9VHcYC--_\",\n          \"city\": \"San Jose\",\n          \"countrycode\": \"US\",\n          \"countryname\": \"United States\",\n          \"latitude\": \"string\",\n          \"longitude\": \"string\",\n          \"host\": \"92.236.111.184\",\n          \"status\": 0,\n          \"url\": \"gdn-us-west.paas.macrometa.io\"\n        }\n      },\n      {\n        \"_id\": \"_clusters/gdn-us-west\",\n        \"_key\": \"gdn-us-west\",\n        \"_rev\": \"_c9VHcYC--_\",\n        \"host\": \"192.168.1.100\",\n        \"local\": true,\n        \"name\": \"gdn-us-west\",\n        \"spot_region\": false,\n        \"status\": 0,\n        \"tags\": {\n          \"api\": \"api-gdn-us-west.paas.macrometa.io\",\n          \"url\": \"gdn-us-west.paas.macrometa.io\"\n        },\n        \"locationInfo\": {\n          \"_id\": \"_members/gdn-us-west\",\n          \"_key\": \"gdn-us-west\",\n          \"_rev\": \"_c9VHcYC--_\",\n          \"city\": \"San Jose\",\n          \"countrycode\": \"US\",\n          \"countryname\": \"United States\",\n          \"latitude\": \"string\",\n          \"longitude\": \"string\",\n          \"host\": \"92.236.111.184\",\n          \"status\": 0,\n          \"url\": \"gdn-us-west.paas.macrometa.io\"\n        }\n      }\n    ]\n  },\n  {\n    \"tenant\": \"_mm\",\n    \"dcInfo\": [\n      {\n        \"_id\": \"_clusters/gdn-us-west\",\n        \"_key\": \"gdn-us-west\",\n        \"_rev\": \"_c9VHcYC--_\",\n        \"host\": \"192.168.1.100\",\n        \"local\": true,\n        \"name\": \"gdn-us-west\",\n        \"spot_region\": false,\n        \"status\": 0,\n        \"tags\": {\n          \"api\": \"api-gdn-us-west.paas.macrometa.io\",\n          \"url\": \"gdn-us-west.paas.macrometa.io\"\n        },\n        \"locationInfo\": {\n          \"_id\": \"_members/gdn-us-west\",\n          \"_key\": \"gdn-us-west\",\n          \"_rev\": \"_c9VHcYC--_\",\n          \"city\": \"San Jose\",\n          \"countrycode\": \"US\",\n          \"countryname\": \"United States\",\n          \"latitude\": \"string\",\n          \"longitude\": \"string\",\n          \"host\": \"92.236.111.184\",\n          \"status\": 0,\n          \"url\": \"gdn-us-west.paas.macrometa.io\"\n        }\n      },\n      {\n        \"_id\": \"_clusters/gdn-us-west\",\n        \"_key\": \"gdn-us-west\",\n        \"_rev\": \"_c9VHcYC--_\",\n        \"host\": \"192.168.1.100\",\n        \"local\": true,\n        \"name\": \"gdn-us-west\",\n        \"spot_region\": false,\n        \"status\": 0,\n        \"tags\": {\n          \"api\": \"api-gdn-us-west.paas.macrometa.io\",\n          \"url\": \"gdn-us-west.paas.macrometa.io\"\n        },\n        \"locationInfo\": {\n          \"_id\": \"_members/gdn-us-west\",\n          \"_key\": \"gdn-us-west\",\n          \"_rev\": \"_c9VHcYC--_\",\n          \"city\": \"San Jose\",\n          \"countrycode\": \"US\",\n          \"countryname\": \"United States\",\n          \"latitude\": \"string\",\n          \"longitude\": \"string\",\n          \"host\": \"92.236.111.184\",\n          \"status\": 0,\n          \"url\": \"gdn-us-west.paas.macrometa.io\"\n        }\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bceae0ff-48a2-4a5c-80c9-361c19e357ba",
+              "name": "Failed due to missing or malformed data. Verify that all parameters are complete.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "datacenter",
+                    "_tenant",
+                    ":tenant-name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant-name",
+                      "description": "(Required) The name of the tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 400,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 102020\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d0804b7e-d06e-44b6-9d89-228807ef307a",
+              "name": "Failed because you do not have administrator permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "datacenter",
+                    "_tenant",
+                    ":tenant-name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant-name",
+                      "description": "(Required) The name of the tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 401,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 1728\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8cb914e8-745d-404a-b648-df155710242e",
+              "name": "Failed to validate because you do not have access to the server.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "datacenter",
+                    "_tenant",
+                    ":tenant-name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant-name",
+                      "description": "(Required) The name of the tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 403,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 581\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "57900dab-f1b8-4055-9c35-1ef56e465156",
+          "name": "List all clusters",
+          "request": {
+            "name": "List all clusters",
+            "description": {
+              "content": "Fetch data for all the clusters in the federation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "_api",
+                "members"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3fc80e06-724b-460b-aaaa-0b02e8875ddc",
+              "name": "Successfully fetched clusters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_api",
+                    "members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"_key\": \"gdn-us-west\",\n    \"host\": \"192.168.1.100\",\n    \"status\": 0,\n    \"city\": \"San Jose\",\n    \"countrycode\": \"US\",\n    \"countryname\": \"United States\",\n    \"latitude\": \"string\",\n    \"longitude\": \"string\",\n    \"url\": \"gdn-us-west.paas.macrometa.io\"\n  },\n  {\n    \"_key\": \"gdn-us-west\",\n    \"host\": \"192.168.1.100\",\n    \"status\": 0,\n    \"city\": \"San Jose\",\n    \"countrycode\": \"US\",\n    \"countryname\": \"United States\",\n    \"latitude\": \"string\",\n    \"longitude\": \"string\",\n    \"url\": \"gdn-us-west.paas.macrometa.io\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "72cc771c-3ccf-42da-9c08-905c30594d4a",
+              "name": "Failed because you do not have administrator permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_api",
+                    "members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 401,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 1728\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0f4cd2b5-3dd6-4821-b169-1ef2f35eb613",
+          "name": "Update clusters in federation",
+          "request": {
+            "name": "Update clusters in federation",
+            "description": {
+              "content": "Update the clusters in federation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "_api",
+                "members"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"peer\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2496f685-e833-4373-8610-fb4731ccfea9",
+              "name": "Successfully updated clusters in federation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_api",
+                    "members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"peer\": \"192.168.251.192\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 202,\n  \"error\": false,\n  \"result\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "406bb59e-381f-4ff5-a7cc-3496a721603f",
+              "name": "Failed due to missing or malformed data. Verify that all parameters are complete.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_api",
+                    "members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"peer\": \"192.168.251.192\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 400,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 102020\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9af11206-0763-47cd-b7f5-b3c02d305727",
+              "name": "Failed because you do not have administrator permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_api",
+                    "members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"peer\": \"192.168.251.192\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 401,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 1728\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b97c7727-7ddf-4064-84cb-929c5d5bb99e",
+          "name": "Remove a cluster from federation",
+          "request": {
+            "name": "Remove a cluster from federation",
+            "description": {
+              "content": "Remove the cluster from federation, identified by *member*.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "_api",
+                "members",
+                ":member"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "member",
+                  "description": "(Required) The name of the cluster."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cde89bde-dfc6-400f-a8d5-886f91f59200",
+              "name": "Successfully removed cluster from federation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_api",
+                    "members",
+                    ":member"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "member",
+                      "description": "(Required) The name of the cluster."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "fce08900-2e06-4978-8be1-3a3678c83e05",
+              "name": "Failed due to missing or malformed data. Verify that all parameters are complete.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_api",
+                    "members",
+                    ":member"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "member",
+                      "description": "(Required) The name of the cluster."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 400,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 102020\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0f6e2d7b-9057-4c96-b078-ea6069d564f6",
+              "name": "Failed because you do not have administrator permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_api",
+                    "members",
+                    ":member"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "member",
+                      "description": "(Required) The name of the cluster."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 401,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 1728\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f1f7df78-ddc5-40fa-a573-be58207d2069",
+              "name": "Failed to find specified data center.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_api",
+                    "members",
+                    ":member"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "member",
+                      "description": "(Required) The name of the cluster."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 404,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 581\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-play.paas.macrometa.io",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "61c6885f-5aff-436e-8552-2a11ef2d090f",
+    "name": "Macrometa API Reference Activity Metrics Data Centers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API reference for the Macrometa Global Data Network.",
+      "type": "text/plain"
+    }
+  }
+}

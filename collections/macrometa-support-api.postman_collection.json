@@ -1,0 +1,225 @@
+{
+  "item": [
+    {
+      "id": "79d847bf-9ae6-40e8-8b71-222f329146f9",
+      "name": "Support",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2c07e4d5-e2d6-4987-91c8-4fc66932a237",
+          "name": "Create a support ticket",
+          "request": {
+            "name": "Create a support ticket",
+            "description": {
+              "content": "Create a new support ticket.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "_api",
+                "trigger",
+                "zendesk"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"operation\": \"<string>\",\n  \"subject\": \"<string>\",\n  \"body\": \"<string>\",\n  \"parameters\": {\n    \"name\": \"<string>\",\n    \"email\": \"<string>\",\n    \"datacenter\": \"<string>\",\n    \"fabric\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2be4b7e1-f370-470b-898d-56503486f7e0",
+              "name": "Successfully created a support ticket.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_api",
+                    "trigger",
+                    "zendesk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"operation\": \"Generic\",\n  \"subject\": \"Enable Stream worker\",\n  \"body\": \"Can you please enable Stream worker feature for my tenant?\",\n  \"parameters\": {\n    \"name\": \"Demo\",\n    \"email\": \"demo@gmail.com\",\n    \"datacenter\": \"gdn-us-west\",\n    \"fabric\": \"_system\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "300a9544-d898-4d5b-b5cb-c2637282cdc3",
+              "name": "Failed due to missing or malformed data. Verify that all parameters are complete.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_api",
+                    "trigger",
+                    "zendesk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"operation\": \"Generic\",\n  \"subject\": \"Enable Stream worker\",\n  \"body\": \"Can you please enable Stream worker feature for my tenant?\",\n  \"parameters\": {\n    \"name\": \"Demo\",\n    \"email\": \"demo@gmail.com\",\n    \"datacenter\": \"gdn-us-west\",\n    \"fabric\": \"_system\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 400,\n  \"error\": true,\n  \"message\": \"Invalid input API request paramaters\",\n  \"requestId\": \"b0d08ea6-efa3-472c-a5f3-5b91558113e8/2\",\n  \"serverId\": \"C8Apid 0.1.39\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-play.paas.macrometa.io",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "fe80cc3b-6795-4d29-af08-8ee2d0717cbb",
+    "name": "Macrometa API Reference Activity Metrics Support API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API reference for the Macrometa Global Data Network.",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,316 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Macrometa API Reference Activity Metrics Indexes API",
+    "version": "0.17.17"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Indexes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all indexes of a collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/index",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "collection",
+                "value": "",
+                "type": "query",
+                "description": "The collection name."
+              }
+            ]
+          },
+          "docs": "Fetch the list of all indexes of a collection."
+        },
+        {
+          "info": {
+            "name": "Create fulltext index",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/index/fulltext",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "collection",
+                "value": "",
+                "type": "query",
+                "description": "The collection name."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create full-text index, if it does not already exist."
+        },
+        {
+          "info": {
+            "name": "Create index",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/index/general",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "collection",
+                "value": "",
+                "type": "query",
+                "description": "The collection name."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new index.\n\n**Note**: Indexing the system attribute _id is not supported for user-defined indexes. Manually creating an index using _id as an index attribute fails with an error."
+        },
+        {
+          "info": {
+            "name": "Create geo-spatial index",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/index/geo",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "collection",
+                "value": "",
+                "type": "query",
+                "description": "The collection name."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a geo index.\n\n**Note**: Geo indexes are always sparse, meaning that documents that do not contain the index attributes or have non-numeric values in the index attributes are not indexed."
+        },
+        {
+          "info": {
+            "name": "Create hash index",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/index/hash",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "collection",
+                "value": "",
+                "type": "query",
+                "description": "The collection name."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a hash index.\n\n**Note**:\n- In a sparse index all documents are excluded from the index that do not contain at least one of the specified index attributes (i.e. *fields*) or that have a value of *null* in any of the specified index attributes. Such documents are not indexed and are not taken into account for uniqueness checks if the *unique* flag is set.\n- In a non-sparse index, these documents are indexed (for non-present indexed attributes, a value of *null* is used) and are taken into a"
+        },
+        {
+          "info": {
+            "name": "Create a persistent index",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/index/persistent",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "collection",
+                "value": "",
+                "type": "query",
+                "description": "The collection name."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a hash index.\n\n **Note**:\n- In a sparse index all documents are excluded from the index that do not contain at least one of the specified index attributes (i.e. *fields*) or that have a value of *null* in any of the specified index attributes. Such documents are not indexed and are not taken into account for uniqueness checks if the unique flag is set.\n- In a non-sparse index, these documents are indexed (for non-present indexed attributes, a value of *null* is used) and are taken into ac"
+        },
+        {
+          "info": {
+            "name": "Create skip list",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/index/skiplist",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "collection",
+                "value": "",
+                "type": "query",
+                "description": "The collection name."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a hash index.\n\n**Note**:\n- In a sparse index all documents are excluded from the index that do not contain at least one of the specified index attributes (i.e. *fields*) or that have a value of *null* in any of the specified index attributes. Such documents are not indexed and are not taken into account for uniqueness checks if the *unique* flag is set.\n- In a non-sparse index, these documents are indexed (for non-present indexed attributes, a value of *null* is used) and are taken into a"
+        },
+        {
+          "info": {
+            "name": "Create TTL index",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/index/ttl",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "collection",
+                "value": "",
+                "type": "query",
+                "description": "The collection name."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a hash index."
+        },
+        {
+          "info": {
+            "name": "Read index",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/index/:collection/:indexName",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "collection",
+                "value": "",
+                "type": "path",
+                "description": "The collection name."
+              },
+              {
+                "name": "indexName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the index."
+              }
+            ]
+          },
+          "docs": "Fetch the information about index."
+        },
+        {
+          "info": {
+            "name": "Remove index",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/index/:collection/:indexName",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "collection",
+                "value": "",
+                "type": "path",
+                "description": "The collection name."
+              },
+              {
+                "name": "indexName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the index."
+              }
+            ]
+          },
+          "docs": "Remove an index."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

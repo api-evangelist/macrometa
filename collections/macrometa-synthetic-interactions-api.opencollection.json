@@ -1,0 +1,183 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Macrometa API Reference Activity Metrics Synthetic Interactions API",
+    "version": "0.17.17"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Synthetic Interactions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get synthetic interactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/prerender/v1/origins/:origin/interactions",
+            "headers": [
+              {
+                "name": "x-photoniq-customerid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "origin",
+                "value": "www.origin.com",
+                "type": "path",
+                "description": "Origin hostname."
+              }
+            ]
+          },
+          "docs": "Returns the synthetic interactions associated with the origin."
+        },
+        {
+          "info": {
+            "name": "Get synthetic interaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/prerender/v1/origins/:origin/interactions/:type",
+            "headers": [
+              {
+                "name": "x-photoniq-customerid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "origin",
+                "value": "www.origin.com",
+                "type": "path",
+                "description": "Origin hostname."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "path",
+                "description": "Interaction type."
+              }
+            ]
+          },
+          "docs": "Returns a synthetic interaction associated with the origin."
+        },
+        {
+          "info": {
+            "name": "Create synthetic interaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/api/prerender/v1/origins/:origin/interactions/:type",
+            "headers": [
+              {
+                "name": "x-photoniq-customerid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "origin",
+                "value": "www.origin.com",
+                "type": "path",
+                "description": "Origin hostname."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "path",
+                "description": "Interaction type."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a synthetic interaction associated with the origin."
+        },
+        {
+          "info": {
+            "name": "Update synthetic interaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api-play.paas.macrometa.io/api/prerender/v1/origins/:origin/interactions/:type",
+            "headers": [
+              {
+                "name": "x-photoniq-customerid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "origin",
+                "value": "www.origin.com",
+                "type": "path",
+                "description": "Origin hostname."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "path",
+                "description": "Interaction type."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a synthetic interaction associated with the origin."
+        },
+        {
+          "info": {
+            "name": "Delete synthetic interaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-play.paas.macrometa.io/api/prerender/v1/origins/:origin/interactions/:type",
+            "headers": [
+              {
+                "name": "x-photoniq-customerid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "origin",
+                "value": "www.origin.com",
+                "type": "path",
+                "description": "Origin hostname."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "path",
+                "description": "Interaction type."
+              }
+            ]
+          },
+          "docs": "Deletes a synthetic interaction associated with the origin."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

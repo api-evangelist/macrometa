@@ -1,0 +1,4964 @@
+{
+  "item": [
+    {
+      "id": "d847903a-04fe-4e96-aa8f-6c02e0174eff",
+      "name": "Documents",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f88a5ad3-32c7-4f67-9844-497a1f674502",
+          "name": "Remove multiple documents",
+          "request": {
+            "name": "Remove multiple documents",
+            "description": {
+              "content": "The body of the request is an array consisting of selectors for documents. A selector can either be a string with a key or a string with a document handle or an object with a *_key* attribute.\n\nThis API call removes all specified documents from *collection*. If the selector is an object and has a *_rev* attribute, it is a precondition that the actual revision of the removed document in the collection is the specified one.\n\nThe body of the response is an array of the same length as the input array. For each input selector, the output contains a JSON object with the information about the outcome of the operation. If no error occurred, an object is built in which the attribute *_id* contains the known *document-handle* of the removed document, *_key* contains the key which uniquely identifies a document in a given collection, and the attribute *_rev* contains the document revision.\n\nIn case of an error, an object with the attribute *error* set to *true* and *errorCode* set to the error code is built. If the query parameter *returnOld* is *true*, the previous revision of the document is returned under the *old* attribute in the result.\n\nNote that if any precondition is violated or an error occurred with some of the documents, the return code is still 200 or 202, but the additional HTTP header *X-C8-Error-Codes* is set, which contains a map of the error codes that occurred together with their multiplicities, as in: *1200:17,1205:10* which means that in 17 cases the error 1200 \"revision conflict\" and in 10 cases the error 1205 \"illegal document handle\" has happened.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "_fabric",
+                ":fabric",
+                "_api",
+                "document",
+                ":collection"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "returnOld",
+                  "value": "false",
+                  "description": "If set to *true*, adds the *old* attribute which displays original document."
+                },
+                {
+                  "disabled": false,
+                  "key": "ignoreRevs",
+                  "value": "true",
+                  "description": "If set to *true*, ignore any *_rev* attribute in the selectors. No revision check is performed."
+                },
+                {
+                  "disabled": false,
+                  "key": "waitForSync",
+                  "value": "false",
+                  "description": "If set to *true*, returns only after data has been synced to disk."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "_system",
+                  "key": "fabric",
+                  "description": "(Required) The name of the fabric."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "collection",
+                  "description": "(Required) Collection from which documents are removed."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  \"<string>\",\n  \"<string>\"\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "cce79927-c442-4b0b-9f5e-4ec0467ff0c8",
+              "name": "Successfully removed documents when *waitForSync* is enabled.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "document",
+                    ":collection"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnOld",
+                      "value": "false"
+                    },
+                    {
+                      "key": "ignoreRevs",
+                      "value": "true"
+                    },
+                    {
+                      "key": "waitForSync",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The name of the fabric."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection",
+                      "description": "(Required) Collection from which documents are removed."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  \"key\",\n  \"key\"\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "If any precondition is violated or an error occurred with some of the documents, this header contains a map of the error codes that occurred together with their multiplicities, as in: *1205:10,1210:17* which means that in 10 cases the error 1205 \"illegal document handle\" and in 17 cases the error 1210 \"unique constraint violated\" has happened.",
+                  "key": "x-c8-error-codes",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"_id\": \"test/foo\",\n    \"_key\": \"foo\",\n    \"_rev\": \"_dPRuHxe--_\"\n  },\n  {\n    \"_id\": \"test/foo\",\n    \"_key\": \"foo\",\n    \"_rev\": \"_dPRuHxe--_\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "487edbb4-a418-4726-81db-74b75fd611d2",
+              "name": "Successfully removed documents when *waitForSync* is disabled.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "document",
+                    ":collection"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnOld",
+                      "value": "false"
+                    },
+                    {
+                      "key": "ignoreRevs",
+                      "value": "true"
+                    },
+                    {
+                      "key": "waitForSync",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The name of the fabric."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection",
+                      "description": "(Required) Collection from which documents are removed."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  \"key\",\n  \"key\"\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "If any precondition is violated or an error occurred with some of the documents, this header contains a map of the error codes that occurred together with their multiplicities, as in: *1205:10,1210:17* which means that in 10 cases the error 1205 \"illegal document handle\" and in 17 cases the error 1210 \"unique constraint violated\" has happened.",
+                  "key": "x-c8-error-codes",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"_id\": \"test/foo\",\n    \"_key\": \"foo\",\n    \"_rev\": \"_dPRuHxe--_\"\n  },\n  {\n    \"_id\": \"test/foo\",\n    \"_key\": \"foo\",\n    \"_rev\": \"_dPRuHxe--_\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9df46dd4-65ee-42e8-bd7b-934781cb1752",
+              "name": "Failed to find specified documents.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "document",
+                    ":collection"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnOld",
+                      "value": "false"
+                    },
+                    {
+                      "key": "ignoreRevs",
+                      "value": "true"
+                    },
+                    {
+                      "key": "waitForSync",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The name of the fabric."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection",
+                      "description": "(Required) Collection from which documents are removed."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  \"key\",\n  \"key\"\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 404,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 581\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a3f6180e-3f87-4a97-97ef-26c49a66910d",
+          "name": "Update documents",
+          "request": {
+            "name": "Update documents",
+            "description": {
+              "content": "Partially update documents. The *_key* attributes in the body specify which documents should be updated. The body of the request must contain a JSON array of document updates with the attributes to patch (the patch documents). All attributes from the patch documents are added to the existing documents if they do not yet exist and overwritten in the existing documents if they do exist.\n\nSetting an attribute value to *null* in the patch documents causees a value of *null* to be saved for the attribute.\n\nIf *ignoreRevs* is *false* and there is a *_rev* attribute in a document in the body and its value does not match the revision of the corresponding document in the database, the precondition is violated.\n\nIf the document exists and can be updated, a *HTTP 201* or a *HTTP 202* is returned (depending on *waitForSync*, see below).\n\nThe body of the response contains a JSON array of the same length as the input array with the information about the handle and the revision of the updated documents. In each entry:\n - *_id* contains the known *document-handle* of each updated document.\n - *_key* contains the key that uniquely identifies a document.\n - *_rev* contains the new document revision.\n\nIn case of an error or violated precondition, an error object with the attribute *error* set to *true* and the attribute *errorCode* set to the error code is built.\n\nIf the query parameter *returnOld* is *true*, then, for each generated document, the previous revision of the document is returned under the *old* attribute in the result.\n\nIf the query parameter *returnNew* is *true*, then, for each generated document, the new document is returned under the *new* attribute in the result.\n\nNote that if any precondition is violated or an error occurred with some of the documents, the return code is still 201 or 202, but the additional HTTP header *X-C8-Error-Codes* is set, which contains a map of the error codes that occurred together with their multiplicities, as in: *1200:17,1205:10* which means that in 17 cases the error 1200 \"revision conflict\" and in 10 cases the error 1205 \"illegal document handle\" has happened.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "_fabric",
+                ":fabric",
+                "_api",
+                "document",
+                ":collection"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "keepNull",
+                  "value": "true",
+                  "description": "If set to *false*, you can use the patch command to remove attributes from an existing document if the patch document contains the same attributes with a null value."
+                },
+                {
+                  "disabled": false,
+                  "key": "mergeObjects",
+                  "value": "true",
+                  "description": "Controls whether objects (not arrays) are merged if present in both the existing and the patch document. If set to *false*, the value in the patch document overwrites the existing document's value. If set to *true*, objects are merged."
+                },
+                {
+                  "disabled": false,
+                  "key": "ignoreRevs",
+                  "value": "true",
+                  "description": "If this is set to *true*, the *_rev* attributes in the given documents are ignored. If this is set to *false*, any *_rev* attribute given in a body document is taken as a precondition. The document is only updated if the current revision is the one specified."
+                },
+                {
+                  "disabled": false,
+                  "key": "returnOld",
+                  "value": "false",
+                  "description": "If set to *true*, adds the *old* attribute which displays document revisions."
+                },
+                {
+                  "disabled": false,
+                  "key": "returnNew",
+                  "value": "false",
+                  "description": "If set to *true*, adds the new documents to the *new* attribute."
+                },
+                {
+                  "disabled": false,
+                  "key": "waitForSync",
+                  "value": "false",
+                  "description": "If set to *true*, returns only after data has been synced to disk."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "_system",
+                  "key": "fabric",
+                  "description": "(Required) The name of the fabric."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "collection",
+                  "description": "(Required) The name of the collection in which the documents are updated."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fd74f54b-7eaf-4152-9a43-48c07b6cf8f7",
+              "name": "Successfully updated documents when *waitForSync* is enabled.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "document",
+                    ":collection"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "keepNull",
+                      "value": "true"
+                    },
+                    {
+                      "key": "mergeObjects",
+                      "value": "true"
+                    },
+                    {
+                      "key": "ignoreRevs",
+                      "value": "true"
+                    },
+                    {
+                      "key": "returnOld",
+                      "value": "false"
+                    },
+                    {
+                      "key": "returnNew",
+                      "value": "false"
+                    },
+                    {
+                      "key": "waitForSync",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The name of the fabric."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection",
+                      "description": "(Required) The name of the collection in which the documents are updated."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<object>",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "If any precondition is violated or an error occurred with some of the documents, this header contains a map of the error codes that occurred together with their multiplicities, as in: *1205:10,1210:17* which means that in 10 cases the error 1205 \"illegal document handle\" and in 17 cases the error 1210 \"unique constraint violated\" has happened.",
+                  "key": "x-c8-error-codes",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"_id\": \"test/foo\",\n    \"_key\": \"foo\",\n    \"_rev\": \"_dPRuHxe--_\"\n  },\n  {\n    \"_id\": \"test/foo\",\n    \"_key\": \"foo\",\n    \"_rev\": \"_dPRuHxe--_\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eb9b9875-bf40-474d-a271-34ee506b2878",
+              "name": "Successfully updated documents when *waitForSync* is disabled.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "document",
+                    ":collection"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "keepNull",
+                      "value": "true"
+                    },
+                    {
+                      "key": "mergeObjects",
+                      "value": "true"
+                    },
+                    {
+                      "key": "ignoreRevs",
+                      "value": "true"
+                    },
+                    {
+                      "key": "returnOld",
+                      "value": "false"
+                    },
+                    {
+                      "key": "returnNew",
+                      "value": "false"
+                    },
+                    {
+                      "key": "waitForSync",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The name of the fabric."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection",
+                      "description": "(Required) The name of the collection in which the documents are updated."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<object>",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "If any precondition is violated or an error occurred with some of the documents, this header contains a map of the error codes that occurred together with their multiplicities, as in: *1205:10,1210:17* which means that in 10 cases the error 1205 \"illegal document handle\" and in 17 cases the error 1210 \"unique constraint violated\" has happened.",
+                  "key": "x-c8-error-codes",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"_id\": \"test/foo\",\n    \"_key\": \"foo\",\n    \"_rev\": \"_dPRuHxe--_\"\n  },\n  {\n    \"_id\": \"test/foo\",\n    \"_key\": \"foo\",\n    \"_rev\": \"_dPRuHxe--_\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b25edc23-78c2-4d25-929c-55a0d460d602",
+              "name": "Failed due to missing or malformed data. Verify that all parameters are complete.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "document",
+                    ":collection"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "keepNull",
+                      "value": "true"
+                    },
+                    {
+                      "key": "mergeObjects",
+                      "value": "true"
+                    },
+                    {
+                      "key": "ignoreRevs",
+                      "value": "true"
+                    },
+                    {
+                      "key": "returnOld",
+                      "value": "false"
+                    },
+                    {
+                      "key": "returnNew",
+                      "value": "false"
+                    },
+                    {
+                      "key": "waitForSync",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The name of the fabric."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection",
+                      "description": "(Required) The name of the collection in which the documents are updated."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<object>",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 400,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 102020\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ba27e809-bb68-4deb-9cbe-530d8acbc673",
+              "name": "Failed to find specified collection.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "document",
+                    ":collection"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "keepNull",
+                      "value": "true"
+                    },
+                    {
+                      "key": "mergeObjects",
+                      "value": "true"
+                    },
+                    {
+                      "key": "ignoreRevs",
+                      "value": "true"
+                    },
+                    {
+                      "key": "returnOld",
+                      "value": "false"
+                    },
+                    {
+                      "key": "returnNew",
+                      "value": "false"
+                    },
+                    {
+                      "key": "waitForSync",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The name of the fabric."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection",
+                      "description": "(Required) The name of the collection in which the documents are updated."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<object>",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 404,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 581\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "545e2c16-f68f-4a3c-9dd8-ecde5db8e09f",
+          "name": "Create document",
+          "request": {
+            "name": "Create document",
+            "description": {
+              "content": "Create a new document from the document given in the body, unless there is already a document with the *_key* given. If no *_key* is given, a new unique *_key* is generated automatically.\n\nThe body can be an array of documents, in which case all documents in the array are inserted with the same semantics as for a single document. The result body contains a JSON array of the same length as the input array, and each entry contains the result of the operation for the corresponding input. In case of an error the entry is a document with attributes *error* set to *true* and errorCode set to the error code that has happened.\n\nPossibly given *_id* and *_rev* attributes in the body are always ignored, the URL part or the query parameter collection respectively counts.\n\nIf the document is created successfully, the *Location* header contains the path to the newly created document. The *Etag* header field contains the revision of the document. Both are only set in the single document case.\n\nIf *silent* is not set to *true*, the body of the response contains a JSON object (single document case) with the following attributes:\n\n - *_id* contains the document handle of the newly created document.\n - *_key* contains the document key.\n - *_rev* contains the document revision.\n\nIn the multi case the body is an array of such objects. If the query parameter *returnNew* is *true*, then, for each generated document, the new document is returned under the *new* attribute in the result.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "_fabric",
+                ":fabric",
+                "_api",
+                "document",
+                ":collection"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "collection",
+                  "value": "<string>",
+                  "description": "The name of the collection. This is only for backward compatibility."
+                },
+                {
+                  "disabled": false,
+                  "key": "returnNew",
+                  "value": "false",
+                  "description": "If set to *true*, adds the new documents to the *new* attribute."
+                },
+                {
+                  "disabled": false,
+                  "key": "returnOld",
+                  "value": "false",
+                  "description": "If set to *true*, adds the *old* attribute which displays the previous version of the document. Only available if the *overwrite* option is set to *true*."
+                },
+                {
+                  "disabled": false,
+                  "key": "silent",
+                  "value": "true",
+                  "description": "If set to *true*, an empty object is returned as response. No meta-data is returned for the created document. This option can be used to save some network traffic."
+                },
+                {
+                  "disabled": false,
+                  "key": "overwrite",
+                  "value": "false",
+                  "description": "If set to *true*, the insert becomes a replace-insert. If a document with the same *_key* already exists the new document is not rejected with unique constraint violated but replaces the old document."
+                },
+                {
+                  "disabled": false,
+                  "key": "waitForSync",
+                  "value": "false",
+                  "description": "If set to *true*, returns only after data has been synced to disk."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "_system",
+                  "key": "fabric",
+                  "description": "(Required) The name of the fabric."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "collection",
+                  "description": "(Required) The *collection* in which the document is to be created."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  \"<object>\",\n  \"<object>\"\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "825f5e5a-28ff-44ed-aa70-c0ebf9bcaaf3",
+              "name": "Successfully created documents when *waitForSync* is enabled. If more than one document is specified in the JSON body, check the response body to verify the creations succeeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "document",
+                    ":collection"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "collection",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "returnNew",
+                      "value": "false"
+                    },
+                    {
+                      "key": "returnOld",
+                      "value": "false"
+                    },
+                    {
+                      "key": "silent",
+                      "value": "true"
+                    },
+                    {
+                      "key": "overwrite",
+                      "value": "false"
+                    },
+                    {
+                      "key": "waitForSync",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The name of the fabric."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection",
+                      "description": "(Required) The *collection* in which the document is to be created."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"item1\": \"data1\"\n  },\n  {\n    \"item2\": \"data2\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "If an error occurred while inserting an array of documents, this header contains a map of the error codes that occurred together with their multiplicities, as in: *1205:10,1210:17* which means that in 10 cases the error 1205 \"illegal document handle\" and in 17 cases the error 1210 \"unique constraint violated\" has happened.",
+                  "key": "x-c8-error-codes",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"_id\": \"test/foo\",\n    \"_key\": \"foo\",\n    \"_rev\": \"_dPRuHxe--_\"\n  },\n  {\n    \"_id\": \"test/foo\",\n    \"_key\": \"foo\",\n    \"_rev\": \"_dPRuHxe--_\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1adeba56-b01e-45d5-9d19-ab3e3bd2b6c2",
+              "name": "Successfully created documents when *waitForSync* is disabled.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "document",
+                    ":collection"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "collection",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "returnNew",
+                      "value": "false"
+                    },
+                    {
+                      "key": "returnOld",
+                      "value": "false"
+                    },
+                    {
+                      "key": "silent",
+                      "value": "true"
+                    },
+                    {
+                      "key": "overwrite",
+                      "value": "false"
+                    },
+                    {
+                      "key": "waitForSync",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The name of the fabric."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection",
+                      "description": "(Required) The *collection* in which the document is to be created."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"item1\": \"data1\"\n  },\n  {\n    \"item2\": \"data2\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "If an error occurred while inserting an array of documents, this header contains a map of the error codes that occurred together with their multiplicities, as in: *1205:10,1210:17* which means that in 10 cases the error 1205 \"illegal document handle\" and in 17 cases the error 1210 \"unique constraint violated\" has happened.",
+                  "key": "x-c8-error-codes",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"_id\": \"test/foo\",\n    \"_key\": \"foo\",\n    \"_rev\": \"_dPRuHxe--_\"\n  },\n  {\n    \"_id\": \"test/foo\",\n    \"_key\": \"foo\",\n    \"_rev\": \"_dPRuHxe--_\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5062ce8b-9c1a-4a92-8f4d-81e2fcfee262",
+              "name": "Failed due to missing or malformed data. Verify that all parameters are complete.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "document",
+                    ":collection"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "collection",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "returnNew",
+                      "value": "false"
+                    },
+                    {
+                      "key": "returnOld",
+                      "value": "false"
+                    },
+                    {
+                      "key": "silent",
+                      "value": "true"
+                    },
+                    {
+                      "key": "overwrite",
+                      "value": "false"
+                    },
+                    {
+                      "key": "waitForSync",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The name of the fabric."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection",
+                      "description": "(Required) The *collection* in which the document is to be created."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"item1\": \"data1\"\n  },\n  {\n    \"item2\": \"data2\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 400,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 102020\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f0dcbf2d-27e9-47e1-a86f-5b36dae5fea1",
+              "name": "Failed to find specified collection.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "document",
+                    ":collection"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "collection",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "returnNew",
+                      "value": "false"
+                    },
+                    {
+                      "key": "returnOld",
+                      "value": "false"
+                    },
+                    {
+                      "key": "silent",
+                      "value": "true"
+                    },
+                    {
+                      "key": "overwrite",
+                      "value": "false"
+                    },
+                    {
+                      "key": "waitForSync",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The name of the fabric."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection",
+                      "description": "(Required) The *collection* in which the document is to be created."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"item1\": \"data1\"\n  },\n  {\n    \"item2\": \"data2\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 404,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 581\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3ef951de-3c6a-4e31-9509-c3ec2760379f",
+              "name": "Failed to create document, in the single document case. If a document with the same qualifiers in an indexed attribute conflicts with an already existing document and thus violates that unique constraint, the response body contains an error document. In the array case only 201 or 202 is returned, but if an error occurred, the additional HTTP header *X-C8-Error-Codes* is set, which contains a map of the error codes that occurred together with their multiplicities, as in: *1205:10,1210:17* which means that in 10 cases the error 1205 \"illegal document handle\" and in 17 cases the error 1210 \"unique constraint violated\" has happened.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "document",
+                    ":collection"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "collection",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "returnNew",
+                      "value": "false"
+                    },
+                    {
+                      "key": "returnOld",
+                      "value": "false"
+                    },
+                    {
+                      "key": "silent",
+                      "value": "true"
+                    },
+                    {
+                      "key": "overwrite",
+                      "value": "false"
+                    },
+                    {
+                      "key": "waitForSync",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The name of the fabric."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection",
+                      "description": "(Required) The *collection* in which the document is to be created."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"item1\": \"data1\"\n  },\n  {\n    \"item2\": \"data2\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 409,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 581\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8a75e0f5-7f64-4158-aa16-103d4ef34429",
+          "name": "Replace documents",
+          "request": {
+            "name": "Replace documents",
+            "description": {
+              "content": "Replaces multiple documents in the specified collection with the ones in the body. The replaced documents are specified by the *_key* attributes in the body documents.\n\nIf *ignoreRevs* is *false*,, a *_rev* attribute in each document body must match the revision of the corresponding document in the database. Otherwise, the call fails\n\nIf the document exists and can be updated, a *HTTP 201* or a *HTTP 202* is returned (depending on *waitForSync*, see below).\n\nThe body of the response contains a JSON array of the same length as the input array with the information about the handle and the revision of the replaced documents. In each entry:\n - *_id* contains the known *document-handle* of each updated document.\n - *_key* contains the key which uniquely identifies a document.\n - *_rev* contains the new document revision.\n\nIn case of an error or violated precondition, an error object with the attribute *error* set to *true* and the attribute *errorCode* set to the error code.\n\nIf the query parameter *returnOld* is *true*, for each generated document the previous revision of the document is returned under the *old* attribute in the result.\n\nIf the query parameter *returnNew* is *true*, for each generated document the new document is returned under the *new* attribute in the result.\n\nNote that if any precondition is violated or an error occurred with some of the documents, the return code is still 201 or 202, but the additional HTTP header *X-C8-Error-Codes* is set, that contains a map of the error codes that occurred together with their multiplicities, as in: *1200:17,1205:10* which means that in 17 cases the error 1200 \"revision conflict\" and in 10 cases the error 1205 \"illegal document handle\" has happened.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "_fabric",
+                ":fabric",
+                "_api",
+                "document",
+                ":collection"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "ignoreRevs",
+                  "value": "true",
+                  "description": "If this is set to *true*, the *_rev* attributes in the given documents are ignored. If this is set to *false*, any *_rev* attribute given in a body document is taken as a precondition. The document is only replaced if the current revision is the one specified."
+                },
+                {
+                  "disabled": false,
+                  "key": "returnOld",
+                  "value": "false",
+                  "description": "If set to *true*, adds the *old* attribute which displays document revisions."
+                },
+                {
+                  "disabled": false,
+                  "key": "returnNew",
+                  "value": "false",
+                  "description": "If set to *true*, adds the new documents to the *new* attribute."
+                },
+                {
+                  "disabled": false,
+                  "key": "waitForSync",
+                  "value": "false",
+                  "description": "If set to *true*, returns only after data has been synced to disk."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "_system",
+                  "key": "fabric",
+                  "description": "(Required) The name of the fabric."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "collection",
+                  "description": "(Required) This URL parameter is the name of the collection in which the documents are replaced."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "19d65ecd-5685-410e-b839-c8daaf48708a",
+              "name": "Successfully replaced documents when *waitForSync* is enabled.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "document",
+                    ":collection"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ignoreRevs",
+                      "value": "true"
+                    },
+                    {
+                      "key": "returnOld",
+                      "value": "false"
+                    },
+                    {
+                      "key": "returnNew",
+                      "value": "false"
+                    },
+                    {
+                      "key": "waitForSync",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The name of the fabric."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection",
+                      "description": "(Required) This URL parameter is the name of the collection in which the documents are replaced."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<object>",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "If any precondition is violated or an error occurred with some of the documents, this header contains a map of the error codes that occurred together with their multiplicities, as in: *1205:10,1210:17* which means that in 10 cases the error 1205 \"illegal document handle\" and in 17 cases the error 1210 \"unique constraint violated\" has happened.",
+                  "key": "x-c8-error-codes",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"_id\": \"test/foo\",\n    \"_key\": \"foo\",\n    \"_rev\": \"_dPRuHxe--_\"\n  },\n  {\n    \"_id\": \"test/foo\",\n    \"_key\": \"foo\",\n    \"_rev\": \"_dPRuHxe--_\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "45658dd6-3e0d-47b8-8c74-354dfb30e7ef",
+              "name": "Successfully replaced documents when *waitForSync* is disabled.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "document",
+                    ":collection"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ignoreRevs",
+                      "value": "true"
+                    },
+                    {
+                      "key": "returnOld",
+                      "value": "false"
+                    },
+                    {
+                      "key": "returnNew",
+                      "value": "false"
+                    },
+                    {
+                      "key": "waitForSync",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The name of the fabric."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection",
+                      "description": "(Required) This URL parameter is the name of the collection in which the documents are replaced."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<object>",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "If any precondition is violated or an error occurred with some of the documents, this header contains a map of the error codes that occurred together with their multiplicities, as in: *1205:10,1210:17* which means that in 10 cases the error 1205 \"illegal document handle\" and in 17 cases the error 1210 \"unique constraint violated\" has happened.",
+                  "key": "x-c8-error-codes",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"_id\": \"test/foo\",\n    \"_key\": \"foo\",\n    \"_rev\": \"_dPRuHxe--_\"\n  },\n  {\n    \"_id\": \"test/foo\",\n    \"_key\": \"foo\",\n    \"_rev\": \"_dPRuHxe--_\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "45f70bec-9f99-46ee-ac2f-7d2129874586",
+              "name": "Failed due to missing or malformed data. Verify that all parameters are complete.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "document",
+                    ":collection"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ignoreRevs",
+                      "value": "true"
+                    },
+                    {
+                      "key": "returnOld",
+                      "value": "false"
+                    },
+                    {
+                      "key": "returnNew",
+                      "value": "false"
+                    },
+                    {
+                      "key": "waitForSync",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The name of the fabric."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection",
+                      "description": "(Required) This URL parameter is the name of the collection in which the documents are replaced."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<object>",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 400,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 102020\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f2689e38-1818-4989-b6ed-530cd96518ee",
+              "name": "Failed to find specified collection.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "document",
+                    ":collection"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ignoreRevs",
+                      "value": "true"
+                    },
+                    {
+                      "key": "returnOld",
+                      "value": "false"
+                    },
+                    {
+                      "key": "returnNew",
+                      "value": "false"
+                    },
+                    {
+                      "key": "waitForSync",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The name of the fabric."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection",
+                      "description": "(Required) This URL parameter is the name of the collection in which the documents are replaced."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<object>",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 404,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 581\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9cdf040a-261b-4110-a322-d88ccd43180d",
+          "name": "Remove a document",
+          "request": {
+            "name": "Remove a document",
+            "description": {
+              "content": "If *silent* is set to *false*, the body of the response contains a JSON object with the information about the handle and the revision.\n\n - *_id* contains the known *key* of the removed document.\n - *_key* contains the key which uniquely identifies a document.\n - *_rev* contains the document revision.\n\nIf the query parameter *returnOld* is *true*, the previous revision of the document is returned under the *old* attribute in the result.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "_fabric",
+                ":fabric",
+                "_api",
+                "document",
+                ":collection",
+                ":key"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "returnOld",
+                  "value": "false",
+                  "description": "If set to *true*, adds the *old* attribute which displays document revisions."
+                },
+                {
+                  "disabled": false,
+                  "key": "silent",
+                  "value": "true",
+                  "description": "If set to *true*, an empty object is returned as response. No meta-data is returned for the removed document. This option can be used to save some network traffic."
+                },
+                {
+                  "disabled": false,
+                  "key": "waitForSync",
+                  "value": "false",
+                  "description": "If set to *true*, returns only after data has been synced to disk."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "_system",
+                  "key": "fabric",
+                  "description": "(Required) The name of the fabric."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "collection",
+                  "description": "(Required) Remove the document identified by *collection*."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "key",
+                  "description": "(Required) Remove the document identified by *key*."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "You can conditionally remove a document based on a target revision id by using the *if-match* HTTP header.",
+                "key": "If-Match",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "846073ae-7d80-4670-8b70-98b47a2a938f",
+              "name": "Successfully removed document when *waitForSync* is enabled.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "document",
+                    ":collection",
+                    ":key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnOld",
+                      "value": "false"
+                    },
+                    {
+                      "key": "silent",
+                      "value": "true"
+                    },
+                    {
+                      "key": "waitForSync",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The name of the fabric."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection",
+                      "description": "(Required) Remove the document identified by *collection*."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) Remove the document identified by *key*."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "You can conditionally remove a document based on a target revision id by using the *if-match* HTTP header.",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"test/foo\",\n  \"_key\": \"foo\",\n  \"_rev\": \"_dPRuHxe--_\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4bef742d-46cb-4366-83bd-3d49f7c90874",
+              "name": "Successfully removed document when *waitForSync* is disabled.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "document",
+                    ":collection",
+                    ":key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnOld",
+                      "value": "false"
+                    },
+                    {
+                      "key": "silent",
+                      "value": "true"
+                    },
+                    {
+                      "key": "waitForSync",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The name of the fabric."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection",
+                      "description": "(Required) Remove the document identified by *collection*."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) Remove the document identified by *key*."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "You can conditionally remove a document based on a target revision id by using the *if-match* HTTP header.",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"test/foo\",\n  \"_key\": \"foo\",\n  \"_rev\": \"_dPRuHxe--_\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3b9e68cb-9665-40f8-b4a2-be1e55ca6a5f",
+              "name": "Failed to find specified collection or document.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "document",
+                    ":collection",
+                    ":key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnOld",
+                      "value": "false"
+                    },
+                    {
+                      "key": "silent",
+                      "value": "true"
+                    },
+                    {
+                      "key": "waitForSync",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The name of the fabric."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection",
+                      "description": "(Required) Remove the document identified by *collection*."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) Remove the document identified by *key*."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "You can conditionally remove a document based on a target revision id by using the *if-match* HTTP header.",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 404,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 581\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ae9d6360-6f05-4d9c-b593-bf37afbed8f0",
+              "name": "Failed to remove document due to different version if a *If-Match* header or *rev* is given. The response contains the found document's current revision in the *_rev* attribute. Additionally, the attributes *_id* and *_key* are returned.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "document",
+                    ":collection",
+                    ":key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnOld",
+                      "value": "false"
+                    },
+                    {
+                      "key": "silent",
+                      "value": "true"
+                    },
+                    {
+                      "key": "waitForSync",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The name of the fabric."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection",
+                      "description": "(Required) Remove the document identified by *collection*."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) Remove the document identified by *key*."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "You can conditionally remove a document based on a target revision id by using the *if-match* HTTP header.",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Precondition Failed",
+              "code": 412,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 412,\n  \"error\": true,\n  \"errorNum\": {},\n  \"errorMessage\": {},\n  \"_id\": {},\n  \"_key\": {},\n  \"_rev\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b3371df4-a1e1-4525-8e10-d5f5d01c36ab",
+          "name": "Read document",
+          "request": {
+            "name": "Read document",
+            "description": {
+              "content": "Fetch the document identified by *key*. The returned document contains three special attributes:\n - *_id* containing the document handle.\n - *_key* containing key which uniquely identifies a document.\n - *_rev* containing the revision.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "_fabric",
+                ":fabric",
+                "_api",
+                "document",
+                ":collection",
+                ":key"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "_system",
+                  "key": "fabric",
+                  "description": "(Required) The name of the fabric."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "collection",
+                  "description": "(Required) The name of the collection."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "key",
+                  "description": "(Required) The key of the document."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "If the *If-None-Match* header is given, it must contain exactly one ETag. The document is returned, if it has a different revision than the given ETag. Otherwise a *HTTP 304* is returned.",
+                "key": "If-None-Match",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "If the *If-Match* header is given, it must contain exactly one ETag. The document is returned, if it has the same revision as the given ETag. Otherwise a *HTTP 412* is returned.",
+                "key": "If-Match",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b84e5740-690c-4a9c-967f-1b389015e174",
+              "name": "Successfully fetched document.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "document",
+                    ":collection",
+                    ":key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The name of the fabric."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection",
+                      "description": "(Required) The name of the collection."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) The key of the document."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "If the *If-None-Match* header is given, it must contain exactly one ETag. The document is returned, if it has a different revision than the given ETag. Otherwise a *HTTP 304* is returned.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "If the *If-Match* header is given, it must contain exactly one ETag. The document is returned, if it has the same revision as the given ETag. Otherwise a *HTTP 412* is returned.",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"test/foo\",\n  \"_key\": \"foo\",\n  \"_rev\": \"_dPRuHxe--_\",\n  \"data\": \"data1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5a791060-42b2-4972-9fa3-147aaf50d081",
+              "name": "Document has the same revision if the *If-None-Match* header is given.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "document",
+                    ":collection",
+                    ":key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The name of the fabric."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection",
+                      "description": "(Required) The name of the collection."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) The key of the document."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "If the *If-None-Match* header is given, it must contain exactly one ETag. The document is returned, if it has a different revision than the given ETag. Otherwise a *HTTP 304* is returned.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "If the *If-Match* header is given, it must contain exactly one ETag. The document is returned, if it has the same revision as the given ETag. Otherwise a *HTTP 412* is returned.",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Modified",
+              "code": 304,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"Error: Not modified\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9c5e0999-bfea-4fb5-9115-807011eb8216",
+              "name": "Failed to find the specified collection or document.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "document",
+                    ":collection",
+                    ":key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The name of the fabric."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection",
+                      "description": "(Required) The name of the collection."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) The key of the document."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "If the *If-None-Match* header is given, it must contain exactly one ETag. The document is returned, if it has a different revision than the given ETag. Otherwise a *HTTP 304* is returned.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "If the *If-Match* header is given, it must contain exactly one ETag. The document is returned, if it has the same revision as the given ETag. Otherwise a *HTTP 412* is returned.",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 404,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 581\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c5f5b519-2bef-414c-8575-81599f89b77a",
+              "name": "Document has different version if an *If-Match* header is given. The response contains the found document's current revision in the *_rev* attribute. Additionally, the attributes *_id* and *_key* are returned.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "document",
+                    ":collection",
+                    ":key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The name of the fabric."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection",
+                      "description": "(Required) The name of the collection."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) The key of the document."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "If the *If-None-Match* header is given, it must contain exactly one ETag. The document is returned, if it has a different revision than the given ETag. Otherwise a *HTTP 304* is returned.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "If the *If-Match* header is given, it must contain exactly one ETag. The document is returned, if it has the same revision as the given ETag. Otherwise a *HTTP 412* is returned.",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Precondition Failed",
+              "code": 412,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 412,\n  \"error\": true,\n  \"errorNum\": {},\n  \"errorMessage\": {},\n  \"_id\": {},\n  \"_key\": {},\n  \"_rev\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bc7f523f-cff9-4249-9060-1529462c7734",
+          "name": "Read document header",
+          "request": {
+            "name": "Read document header",
+            "description": {
+              "content": "Like GET, but only fetch the header fields and not the body. You can use this call to get the current revision of a document or check if the document was deleted.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "_fabric",
+                ":fabric",
+                "_api",
+                "document",
+                ":collection",
+                ":key"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "_system",
+                  "key": "fabric",
+                  "description": "(Required) The name of the fabric."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "collection",
+                  "description": "(Required) The name of the collection."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "key",
+                  "description": "(Required) The key of the document."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "If the *If-None-Match* header is given, it must contain exactly one ETag. If the current document revision is not equal to the specified ETag, a *HTTP 200* response is returned. If the current document revision is identical to the specified ETag, a *HTTP 304* is returned.",
+                "key": "If-None-Match",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "If the *If-Match* header is given, it must contain exactly one ETag. The document is returned, if it has the same revision as the given ETag. Otherwise a *HTTP 412* is returned.",
+                "key": "If-Match",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "HEAD",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2afabffe-c580-4bc4-8fec-6342f48a905c",
+              "name": "Successfully fetched headers.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "document",
+                    ":collection",
+                    ":key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The name of the fabric."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection",
+                      "description": "(Required) The name of the collection."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) The key of the document."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "If the *If-None-Match* header is given, it must contain exactly one ETag. If the current document revision is not equal to the specified ETag, a *HTTP 200* response is returned. If the current document revision is identical to the specified ETag, a *HTTP 304* is returned.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "If the *If-Match* header is given, it must contain exactly one ETag. The document is returned, if it has the same revision as the given ETag. Otherwise a *HTTP 412* is returned.",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "HEAD",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"test/foo\",\n  \"_key\": \"foo\",\n  \"_rev\": \"_dPRuHxe--_\",\n  \"data\": \"data1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "853a1b7a-67ee-412c-8b85-99347ebc4032",
+              "name": "Document has the same version if the *If-None-Match* header is given.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "document",
+                    ":collection",
+                    ":key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The name of the fabric."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection",
+                      "description": "(Required) The name of the collection."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) The key of the document."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "If the *If-None-Match* header is given, it must contain exactly one ETag. If the current document revision is not equal to the specified ETag, a *HTTP 200* response is returned. If the current document revision is identical to the specified ETag, a *HTTP 304* is returned.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "If the *If-Match* header is given, it must contain exactly one ETag. The document is returned, if it has the same revision as the given ETag. Otherwise a *HTTP 412* is returned.",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "HEAD",
+                "body": {}
+              },
+              "status": "Not Modified",
+              "code": 304,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"Error: Not modified\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d076aacb-64ae-4d94-b606-73db4fb91d9e",
+              "name": "Failed to find the specified collection or document.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "document",
+                    ":collection",
+                    ":key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The name of the fabric."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection",
+                      "description": "(Required) The name of the collection."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) The key of the document."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "If the *If-None-Match* header is given, it must contain exactly one ETag. If the current document revision is not equal to the specified ETag, a *HTTP 200* response is returned. If the current document revision is identical to the specified ETag, a *HTTP 304* is returned.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "If the *If-Match* header is given, it must contain exactly one ETag. The document is returned, if it has the same revision as the given ETag. Otherwise a *HTTP 412* is returned.",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "HEAD",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 404,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 581\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "343ad153-fb3c-4745-86df-2f9fee4e53a0",
+              "name": "Document has different version if an *If-Match* header is given. The response contains the found document's current revision in the *_rev* attribute. Additionally, the attributes *_id* and *_key* are returned.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "document",
+                    ":collection",
+                    ":key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The name of the fabric."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection",
+                      "description": "(Required) The name of the collection."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) The key of the document."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "If the *If-None-Match* header is given, it must contain exactly one ETag. If the current document revision is not equal to the specified ETag, a *HTTP 200* response is returned. If the current document revision is identical to the specified ETag, a *HTTP 304* is returned.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "If the *If-Match* header is given, it must contain exactly one ETag. The document is returned, if it has the same revision as the given ETag. Otherwise a *HTTP 412* is returned.",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "HEAD",
+                "body": {}
+              },
+              "status": "Precondition Failed",
+              "code": 412,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 412,\n  \"error\": true,\n  \"errorNum\": {},\n  \"errorMessage\": {},\n  \"_id\": {},\n  \"_key\": {},\n  \"_rev\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e619b6f4-d2b8-4ffb-9a7c-5ffe7ad885e6",
+          "name": "Update document",
+          "request": {
+            "name": "Update document",
+            "description": {
+              "content": "Partially updates the document identified by *key*. The body of the request must contain a JSON document with the attributes to patch (the patch document). All attributes from the patch document are added to the existing document if they do not yet exist, and overwritten in the existing document if they do exist there.\n\nSetting an attribute value to *null* in the patch document causes a value of *null* to be saved for the attribute by default.\n\nIf the *If-Match* header is specified and the revision of the document in the database is unequal to the given revision, the precondition is violated.\n\nIf *If-Match* is not given and *ignoreRevs* is *false*, a *_rev* attribute in each document bodymust match the revision of the corresponding document in the database. Otherwise, the call fails.\n\nIf a precondition is violated, a *HTTP 412* is returned.\n\nIf the document exists and can be updated, a *HTTP 201* or a *HTTP 202* is returned, the *ETag* header field contains the new revision of the document (in double quotes) and the *Location* header contains a URL under which the document can be queried.\n\nIf *silent* is set to *false*, the body of the response contains a JSON object with the information about the handle and the revision.\n - *_id* contains the known *document-handle* of the updated document.\n - *_key* contains the key that uniquely identifies a document.\n - *_rev* contains the new document revision.\n\nIf the query parameter *returnOld* is *true*, the previous revision of the document is returned under the *old* attribute in the result.\n\nIf the query parameter *returnNew* is *true*, the new document is returned under the *new* attribute in the result.\n\nIf the document does not exist, a *HTTP 404* is returned and the body of the response contains an error document.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "_fabric",
+                ":fabric",
+                "_api",
+                "document",
+                ":collection",
+                ":key"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "keepNull",
+                  "value": "false",
+                  "description": "If the intention is to remove existing attributes with the patch command, the URL query parameter *keepNull* can be used with a value of *false*. This modifies the behavior of the patch command to remove any attributes from the existing document that are contained in the patch document with an attribute value of *null*."
+                },
+                {
+                  "disabled": false,
+                  "key": "mergeObjects",
+                  "value": "true",
+                  "description": "Controls whether objects (not arrays) is merged if present in both the existing and the patch document. If set to *false*, the value in the patch document overwrites the existing document's value. If set to *true*, objects is merged. The default is *true*."
+                },
+                {
+                  "disabled": false,
+                  "key": "ignoreRevs",
+                  "value": "true",
+                  "description": "If set to *true*, the *_rev* attributes in the given document is ignored. If set to *false*, the *_rev* attribute given in the body document is taken as a precondition. The document is only updated if the current revision is the one specified."
+                },
+                {
+                  "disabled": false,
+                  "key": "returnOld",
+                  "value": "false",
+                  "description": "If set to *true*, adds the *old* attribute which displays document revisions."
+                },
+                {
+                  "disabled": false,
+                  "key": "returnNew",
+                  "value": "false",
+                  "description": "If set to *true*, adds the new documents to the *new* attribute."
+                },
+                {
+                  "disabled": false,
+                  "key": "silent",
+                  "value": "true",
+                  "description": "If set to *true*, an empty object is returned as response. No meta-data is returned for the updated document. This option can be used to save some network traffic."
+                },
+                {
+                  "disabled": false,
+                  "key": "waitForSync",
+                  "value": "false",
+                  "description": "If set to *true*, returns only after data has been synced to disk."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "_system",
+                  "key": "fabric",
+                  "description": "(Required) The name of the fabric."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "collection",
+                  "description": "(Required) The name of the collection."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "key",
+                  "description": "(Required) This URL parameter must be a document key."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "You can conditionally update a document based on a target revision id by using the *if-match* HTTP header.",
+                "key": "If-Match",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "483efa89-abbf-424b-8acd-d6c1862e3fdc",
+              "name": "Successfully updated document when *waitForSync* is enabled.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "document",
+                    ":collection",
+                    ":key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "keepNull",
+                      "value": "false"
+                    },
+                    {
+                      "key": "mergeObjects",
+                      "value": "true"
+                    },
+                    {
+                      "key": "ignoreRevs",
+                      "value": "true"
+                    },
+                    {
+                      "key": "returnOld",
+                      "value": "false"
+                    },
+                    {
+                      "key": "returnNew",
+                      "value": "false"
+                    },
+                    {
+                      "key": "silent",
+                      "value": "true"
+                    },
+                    {
+                      "key": "waitForSync",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The name of the fabric."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection",
+                      "description": "(Required) The name of the collection."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) This URL parameter must be a document key."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "You can conditionally update a document based on a target revision id by using the *if-match* HTTP header.",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"_key\": \"key1\",\n  \"item1\": \"data1\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"test/foo\",\n  \"_key\": \"foo\",\n  \"_rev\": \"_dPRuHxe--_\",\n  \"_oldRev\": \"_dP34awxe--_\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "34854640-6514-43b4-bac4-d75adab6423b",
+              "name": "Successfully updated document when *waitForSync* is disabled.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "document",
+                    ":collection",
+                    ":key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "keepNull",
+                      "value": "false"
+                    },
+                    {
+                      "key": "mergeObjects",
+                      "value": "true"
+                    },
+                    {
+                      "key": "ignoreRevs",
+                      "value": "true"
+                    },
+                    {
+                      "key": "returnOld",
+                      "value": "false"
+                    },
+                    {
+                      "key": "returnNew",
+                      "value": "false"
+                    },
+                    {
+                      "key": "silent",
+                      "value": "true"
+                    },
+                    {
+                      "key": "waitForSync",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The name of the fabric."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection",
+                      "description": "(Required) The name of the collection."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) This URL parameter must be a document key."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "You can conditionally update a document based on a target revision id by using the *if-match* HTTP header.",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"_key\": \"key1\",\n  \"item1\": \"data1\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"test/foo\",\n  \"_key\": \"foo\",\n  \"_rev\": \"_dPRuHxe--_\",\n  \"_oldRev\": \"_dP34awxe--_\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d89dcf83-411d-4ab8-8447-732e542d949d",
+              "name": "Failed due to missing or malformed data. Verify that all parameters are complete.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "document",
+                    ":collection",
+                    ":key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "keepNull",
+                      "value": "false"
+                    },
+                    {
+                      "key": "mergeObjects",
+                      "value": "true"
+                    },
+                    {
+                      "key": "ignoreRevs",
+                      "value": "true"
+                    },
+                    {
+                      "key": "returnOld",
+                      "value": "false"
+                    },
+                    {
+                      "key": "returnNew",
+                      "value": "false"
+                    },
+                    {
+                      "key": "silent",
+                      "value": "true"
+                    },
+                    {
+                      "key": "waitForSync",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The name of the fabric."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection",
+                      "description": "(Required) The name of the collection."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) This URL parameter must be a document key."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "You can conditionally update a document based on a target revision id by using the *if-match* HTTP header.",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"_key\": \"key1\",\n  \"item1\": \"data1\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 400,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 102020\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7ad5edf8-af63-4052-b5cd-9d4be6914a1c",
+              "name": "Failed to find specified collection or document.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "document",
+                    ":collection",
+                    ":key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "keepNull",
+                      "value": "false"
+                    },
+                    {
+                      "key": "mergeObjects",
+                      "value": "true"
+                    },
+                    {
+                      "key": "ignoreRevs",
+                      "value": "true"
+                    },
+                    {
+                      "key": "returnOld",
+                      "value": "false"
+                    },
+                    {
+                      "key": "returnNew",
+                      "value": "false"
+                    },
+                    {
+                      "key": "silent",
+                      "value": "true"
+                    },
+                    {
+                      "key": "waitForSync",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The name of the fabric."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection",
+                      "description": "(Required) The name of the collection."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) This URL parameter must be a document key."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "You can conditionally update a document based on a target revision id by using the *if-match* HTTP header.",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"_key\": \"key1\",\n  \"item1\": \"data1\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 404,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 581\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5a7fbfad-65c0-4a69-ba71-c02ac925f7eb",
+              "name": "Failed due to the precondition being violated. The response contains the found documents' current revisions in the *_rev* attributes. Additionally, the attributes *_id* and *_key* are returned.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "document",
+                    ":collection",
+                    ":key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "keepNull",
+                      "value": "false"
+                    },
+                    {
+                      "key": "mergeObjects",
+                      "value": "true"
+                    },
+                    {
+                      "key": "ignoreRevs",
+                      "value": "true"
+                    },
+                    {
+                      "key": "returnOld",
+                      "value": "false"
+                    },
+                    {
+                      "key": "returnNew",
+                      "value": "false"
+                    },
+                    {
+                      "key": "silent",
+                      "value": "true"
+                    },
+                    {
+                      "key": "waitForSync",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The name of the fabric."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection",
+                      "description": "(Required) The name of the collection."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) This URL parameter must be a document key."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "You can conditionally update a document based on a target revision id by using the *if-match* HTTP header.",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"_key\": \"key1\",\n  \"item1\": \"data1\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Precondition Failed",
+              "code": 412,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 412,\n  \"error\": true,\n  \"errorNum\": {},\n  \"errorMessage\": {},\n  \"_id\": {},\n  \"_key\": {},\n  \"_rev\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dc9b8351-b61b-48f0-b8a1-b1dad3024cd2",
+          "name": "Replace document",
+          "request": {
+            "name": "Replace document",
+            "description": {
+              "content": "Replaces the document with key <key> with the one in the body, provided there is such a document and no precondition is violated.\n\nIf the *If-Match* header is specified and the revision of the document in the database is unequal to the given revision, the precondition is violated.\n\nIf *If-Match* is not given and *ignoreRevs* is *false*, a *_rev* attribute in each document body must match the revision of the corresponding document in the database. Otherwise, the call fails.\n\nIf a precondition is violated, a *HTTP 412* is returned.\n\nIf the document exists and can be updated, a *HTTP 201* or a *HTTP 202* is returned (depending on *waitForSync*, see below), the *ETag* header field contains the new revision of the document and the *Location* header contains a URL under which the document can be queried.\n\nIf *silent* is set to *false*, the body of the response contains a JSON object with the information about the handle and the revision.\n - *_id* contains the known *document-handle* of each document.\n - *_key* contains the key that uniquely identifies a document.\n - *_rev* contains the new document revision.\n\nIf the query parameter *returnOld* is *true*, the previous revision of the document is returned under the *old* attribute in the result.\n\nIf the query parameter *returnNew* is *true*, the new document is returned under the *new* attribute in the result.\n\nIf the document does not exist, a *HTTP 404* is returned and the body of the response contains an error document.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "_fabric",
+                ":fabric",
+                "_api",
+                "document",
+                ":collection",
+                ":key"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "ignoreRevs",
+                  "value": "true",
+                  "description": "If set to *true*, the *_rev* attributes in the given document is ignored. If set to *false*, the *_rev* attribute given in the body document is taken as a precondition. The document is only replaced if the current revision is the one specified."
+                },
+                {
+                  "disabled": false,
+                  "key": "returnOld",
+                  "value": "false",
+                  "description": "If set to *true*, adds the *old* attribute which displays document revisions."
+                },
+                {
+                  "disabled": false,
+                  "key": "returnNew",
+                  "value": "false",
+                  "description": "If set to *true*, adds the new documents to the *new* attribute."
+                },
+                {
+                  "disabled": false,
+                  "key": "silent",
+                  "value": "true",
+                  "description": "If set to *true*, an empty object is returned as response. No meta-data is returned for the replaced document. This option can be used to save some network traffic."
+                },
+                {
+                  "disabled": false,
+                  "key": "waitForSync",
+                  "value": "false",
+                  "description": "If set to *true*, returns only after data has been synced to disk."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "_system",
+                  "key": "fabric",
+                  "description": "(Required) The name of the fabric."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "collection",
+                  "description": "(Required) The name of the collection."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "key",
+                  "description": "(Required) This URL parameter must be a document key."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "You can conditionally replace a document based on a target revision id by using the *if-match* HTTP header.",
+                "key": "If-Match",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8bf644a0-a10a-492f-ac6a-7b620f4cb9f3",
+              "name": "Successfully replaced documents when *waitForSync* is enabled.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "document",
+                    ":collection",
+                    ":key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ignoreRevs",
+                      "value": "true"
+                    },
+                    {
+                      "key": "returnOld",
+                      "value": "false"
+                    },
+                    {
+                      "key": "returnNew",
+                      "value": "false"
+                    },
+                    {
+                      "key": "silent",
+                      "value": "true"
+                    },
+                    {
+                      "key": "waitForSync",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The name of the fabric."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection",
+                      "description": "(Required) The name of the collection."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) This URL parameter must be a document key."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "You can conditionally replace a document based on a target revision id by using the *if-match* HTTP header.",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"item1\": \"data1\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"test/foo\",\n  \"_key\": \"foo\",\n  \"_rev\": \"_dPRuHxe--_\",\n  \"_oldRev\": \"_dP34awxe--_\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "808568a4-a4d7-474b-9c51-fed975e48f96",
+              "name": "Successfully replaced documents when *waitForSync* is disbled.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "document",
+                    ":collection",
+                    ":key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ignoreRevs",
+                      "value": "true"
+                    },
+                    {
+                      "key": "returnOld",
+                      "value": "false"
+                    },
+                    {
+                      "key": "returnNew",
+                      "value": "false"
+                    },
+                    {
+                      "key": "silent",
+                      "value": "true"
+                    },
+                    {
+                      "key": "waitForSync",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The name of the fabric."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection",
+                      "description": "(Required) The name of the collection."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) This URL parameter must be a document key."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "You can conditionally replace a document based on a target revision id by using the *if-match* HTTP header.",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"item1\": \"data1\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"test/foo\",\n  \"_key\": \"foo\",\n  \"_rev\": \"_dPRuHxe--_\",\n  \"_oldRev\": \"_dP34awxe--_\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b1e63b7c-d208-4a19-8d51-94237314a5d5",
+              "name": "Failed due to missing or malformed data. Verify that all parameters are complete.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "document",
+                    ":collection",
+                    ":key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ignoreRevs",
+                      "value": "true"
+                    },
+                    {
+                      "key": "returnOld",
+                      "value": "false"
+                    },
+                    {
+                      "key": "returnNew",
+                      "value": "false"
+                    },
+                    {
+                      "key": "silent",
+                      "value": "true"
+                    },
+                    {
+                      "key": "waitForSync",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The name of the fabric."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection",
+                      "description": "(Required) The name of the collection."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) This URL parameter must be a document key."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "You can conditionally replace a document based on a target revision id by using the *if-match* HTTP header.",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"item1\": \"data1\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 400,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 102020\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1fd15fa1-811d-492d-9702-3d8979523a0f",
+              "name": "Failed to find specified collection or document.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "document",
+                    ":collection",
+                    ":key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ignoreRevs",
+                      "value": "true"
+                    },
+                    {
+                      "key": "returnOld",
+                      "value": "false"
+                    },
+                    {
+                      "key": "returnNew",
+                      "value": "false"
+                    },
+                    {
+                      "key": "silent",
+                      "value": "true"
+                    },
+                    {
+                      "key": "waitForSync",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The name of the fabric."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection",
+                      "description": "(Required) The name of the collection."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) This URL parameter must be a document key."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "You can conditionally replace a document based on a target revision id by using the *if-match* HTTP header.",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"item1\": \"data1\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 404,\n  \"errorMessage\": \"Error message\",\n  \"errorNum\": 581\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5265a1e7-dfc7-4182-8e3f-631eb97dd709",
+              "name": "Failed due to the precondition being violated. The response contains the found documents' current revisions in the *_rev* attributes. Additionally, the attributes *_id* and *_key* are returned.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "document",
+                    ":collection",
+                    ":key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ignoreRevs",
+                      "value": "true"
+                    },
+                    {
+                      "key": "returnOld",
+                      "value": "false"
+                    },
+                    {
+                      "key": "returnNew",
+                      "value": "false"
+                    },
+                    {
+                      "key": "silent",
+                      "value": "true"
+                    },
+                    {
+                      "key": "waitForSync",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The name of the fabric."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection",
+                      "description": "(Required) The name of the collection."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) This URL parameter must be a document key."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "You can conditionally replace a document based on a target revision id by using the *if-match* HTTP header.",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"item1\": \"data1\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Precondition Failed",
+              "code": 412,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 412,\n  \"error\": true,\n  \"errorNum\": {},\n  \"errorMessage\": {},\n  \"_id\": {},\n  \"_key\": {},\n  \"_rev\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-play.paas.macrometa.io",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f4ec59d6-b589-4d9c-b695-fe8bdc140ebd",
+    "name": "Macrometa API Reference Activity Metrics Documents API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API reference for the Macrometa Global Data Network.",
+      "type": "text/plain"
+    }
+  }
+}

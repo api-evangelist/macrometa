@@ -1,0 +1,876 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Macrometa API Reference Activity Metrics API Keys API",
+    "version": "0.17.17"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "API Keys",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Validate API Key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_api/key/validate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Requires a JSON object with these properties:\n\n  - **apikey**: The API key as a string.\n  - **jwt**: The JWT token as a string.\n\n**Note**: Requires *administrator* permissions."
+        },
+        {
+          "info": {
+            "name": "List available API keys",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_api/key",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "query",
+                "description": "Return a list of API keys associated with the specified user. This parameter can be used by service or _mm.root user only."
+              }
+            ]
+          },
+          "docs": "Retrieve information about all of your API keys. Privileged users (service or _mm.root user) can use the 'user' query parameter to retrieve information of API keys belonging to another user."
+        },
+        {
+          "info": {
+            "name": "Create API Key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_api/key",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create API keys for yourself."
+        },
+        {
+          "info": {
+            "name": "Get available API key.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_api/key/:keyid",
+            "params": [
+              {
+                "name": "keyid",
+                "value": "",
+                "type": "path",
+                "description": "The id of the API key."
+              }
+            ]
+          },
+          "docs": "Fetch an existing API key, identified by *keyid*. You can only get your API keys."
+        },
+        {
+          "info": {
+            "name": "Remove API Key.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-play.paas.macrometa.io/_api/key/:keyid",
+            "params": [
+              {
+                "name": "keyid",
+                "value": "",
+                "type": "path",
+                "description": "The id of the API key."
+              }
+            ]
+          },
+          "docs": "Remove an existing API key, identified by *keyid*. You can only remove your API keys."
+        },
+        {
+          "info": {
+            "name": "List the accessible databases for a keyid",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_api/key/:keyid/database",
+            "params": [
+              {
+                "name": "keyid",
+                "value": "",
+                "type": "path",
+                "description": "The id of the API key for which you want to query the databases."
+              },
+              {
+                "name": "full",
+                "value": "",
+                "type": "query",
+                "description": "Return the full set of access levels for all databases and all collections."
+              }
+            ]
+          },
+          "docs": "Fetch the list of databases available to the specified *keyid*.\n\nReturns a JSON object with the per-database access privileges for the specified *keyid*. The result object contains databases names as object keys, and associated privileges for the database as values.\n\nIf you specified *full*, the result contains permissions for the databases as well as permissions for the collections and streams.\n\n**Note**: Requires *administrator* permissions."
+        },
+        {
+          "info": {
+            "name": "Get the database access level",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_api/key/:keyid/database/:dbname",
+            "params": [
+              {
+                "name": "keyid",
+                "value": "",
+                "type": "path",
+                "description": "The id of the API key."
+              },
+              {
+                "name": "dbname",
+                "value": "",
+                "type": "path",
+                "description": "The name of the database to query."
+              }
+            ]
+          },
+          "docs": "Fetch the database access level for a specific database."
+        },
+        {
+          "info": {
+            "name": "Set the database access level",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-play.paas.macrometa.io/_api/key/:keyid/database/:dbname",
+            "params": [
+              {
+                "name": "keyid",
+                "value": "",
+                "type": "path",
+                "description": "The id of the API key."
+              },
+              {
+                "name": "dbname",
+                "value": "",
+                "type": "path",
+                "description": "The name of the database."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sets the database access levels for the database *dbname* of API key with *keyid*.\n\n**Note**: Requires *administrator* permissions."
+        },
+        {
+          "info": {
+            "name": "Clear the database access level",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-play.paas.macrometa.io/_api/key/:keyid/database/:dbname",
+            "params": [
+              {
+                "name": "keyid",
+                "value": "",
+                "type": "path",
+                "description": "The id of the API key."
+              },
+              {
+                "name": "dbname",
+                "value": "",
+                "type": "path",
+                "description": "The name of the database."
+              }
+            ]
+          },
+          "docs": "Clears the database access level for the database *dbname* of API key with *keyid*. Reverts to default database access level. If there is no defined default database access level, it defaults to *No access*.\n\n**Note**: Requires *administrator* permissions."
+        },
+        {
+          "info": {
+            "name": "Get the specific collection access level",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_api/key/:keyid/database/:dbname/collection",
+            "params": [
+              {
+                "name": "keyid",
+                "value": "",
+                "type": "path",
+                "description": "The id of the API key."
+              },
+              {
+                "name": "dbname",
+                "value": "",
+                "type": "path",
+                "description": "The name of the database to query."
+              },
+              {
+                "name": "full",
+                "value": "",
+                "type": "query",
+                "description": "Return the full set of access levels for all collections."
+              }
+            ]
+          },
+          "docs": "Fetch the list of collections access level for a specific *user*\n\n If access level for collection is not set default(\"&#42;\") access level is used. If default(\"&#42;\") access level is also not set database access level is used."
+        },
+        {
+          "info": {
+            "name": "Get the specific collection access level",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_api/key/:keyid/database/:dbname/collection/:collection",
+            "params": [
+              {
+                "name": "keyid",
+                "value": "",
+                "type": "path",
+                "description": "The id of the API key."
+              },
+              {
+                "name": "dbname",
+                "value": "",
+                "type": "path",
+                "description": "The name of the database to query."
+              },
+              {
+                "name": "collection",
+                "value": "",
+                "type": "path",
+                "description": "The name of the collection."
+              }
+            ]
+          },
+          "docs": "Fetch the access level for a specific collection.\n\n If access level for collection is not set default(\"&#42;\") access level is used. If default(\"&#42;\") access level is also not set database access level is used."
+        },
+        {
+          "info": {
+            "name": "Set the collection access level",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-play.paas.macrometa.io/_api/key/:keyid/database/:dbname/collection/:collection",
+            "params": [
+              {
+                "name": "keyid",
+                "value": "",
+                "type": "path",
+                "description": "The id of the API key."
+              },
+              {
+                "name": "dbname",
+                "value": "",
+                "type": "path",
+                "description": "The name of the database."
+              },
+              {
+                "name": "collection",
+                "value": "",
+                "type": "path",
+                "description": "The name of the collection."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sets the collection access level for the *collection* in the database *dbname* for API key with *keyid*.\n\nRequires a JSON object with these properties:\n\n  - **grant**: Use \"rw\" to set the collection level access to *Read/Write*. Use \"ro\" to set the collection level access to  *Read Only*. Use \"none\" to set the collection level access to *No access*.\n\n - **collection**: Use \"&#42;\" to set default access level for all collections.\n\nIf access level for collection is not set default(\"&#42;\") access "
+        },
+        {
+          "info": {
+            "name": "Clear the collection access level.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-play.paas.macrometa.io/_api/key/:keyid/database/:dbname/collection/:collection",
+            "params": [
+              {
+                "name": "keyid",
+                "value": "",
+                "type": "path",
+                "description": "The id of the API key."
+              },
+              {
+                "name": "dbname",
+                "value": "",
+                "type": "path",
+                "description": "The name of the database."
+              },
+              {
+                "name": "collection",
+                "value": "",
+                "type": "path",
+                "description": "The name of the collection."
+              }
+            ]
+          },
+          "docs": "Clears the access level for the collection *collection* in the database *dbname* of API key with *keyid*. Reverts to default collection access level. If there is no defined default collection access level, it defaults to *No access*.\n\n**Note**: Requires *administrator* permissions."
+        },
+        {
+          "info": {
+            "name": "List the accessible streams",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_api/key/:keyid/database/:dbname/stream",
+            "params": [
+              {
+                "name": "dbname",
+                "value": "",
+                "type": "path",
+                "description": "The name of the database."
+              },
+              {
+                "name": "keyid",
+                "value": "",
+                "type": "path",
+                "description": "The id of the API key for which you want to query the streams."
+              },
+              {
+                "name": "full",
+                "value": "",
+                "type": "query",
+                "description": "Return the full set of access levels for all streams."
+              }
+            ]
+          },
+          "docs": "Fetch the list of streams available to the specified *keyid*.\n\nThe call returns per-stream access privileges for the specified keyid. The *result* object contains the stream names as object keys and the associated privileges for the stream as values.\n\n If access level for stream is not set the default(\"&#42;\") access level is used. If default(\"&#42;\") access level is also not set the database access level is used.\n\n**Note**: Requires *administrator* permissions."
+        },
+        {
+          "info": {
+            "name": "Get the stream access level",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_api/key/:keyid/database/:dbname/stream/:stream",
+            "params": [
+              {
+                "name": "keyid",
+                "value": "",
+                "type": "path",
+                "description": "The id of the API key for which you want to query the streams."
+              },
+              {
+                "name": "dbname",
+                "value": "",
+                "type": "path",
+                "description": "The name of the database."
+              },
+              {
+                "name": "stream",
+                "value": "",
+                "type": "path",
+                "description": "The name of the stream to query."
+              }
+            ]
+          },
+          "docs": "Fetch the stream access level for a specific stream."
+        },
+        {
+          "info": {
+            "name": "Set the stream access level",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-play.paas.macrometa.io/_api/key/:keyid/database/:dbname/stream/:stream",
+            "params": [
+              {
+                "name": "keyid",
+                "value": "",
+                "type": "path",
+                "description": "The id of the API key."
+              },
+              {
+                "name": "dbname",
+                "value": "",
+                "type": "path",
+                "description": "The name of the database."
+              },
+              {
+                "name": "stream",
+                "value": "",
+                "type": "path",
+                "description": "The name of the stream."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sets the stream access levels for the *stream* of API key with *keyid*.\n\nRequires a JSON object with these properties:\n\n  - **grant**: Use \"ro\" to set the stream access level to Subscribe.\n   Use \"wo\" to set the stream access level to Publish.\n Use \"rw\" to set the stream access level to Publish and Subscribe.\n  Use \"none\" to set the stream access level to *No access*.\n\n - **stream**: Use \"&#42;\" to set default access level for all streams.\n\nIf access level for stream is not set default(\"&#42;\") "
+        },
+        {
+          "info": {
+            "name": "Clear the stream access level",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-play.paas.macrometa.io/_api/key/:keyid/database/:dbname/stream/:stream",
+            "params": [
+              {
+                "name": "keyid",
+                "value": "",
+                "type": "path",
+                "description": "The id of the API key."
+              },
+              {
+                "name": "dbname",
+                "value": "",
+                "type": "path",
+                "description": "The name of the database."
+              },
+              {
+                "name": "stream",
+                "value": "",
+                "type": "path",
+                "description": "The name of the stream."
+              }
+            ]
+          },
+          "docs": "Clears the stream access level for the *stream* of API key with *keyid*. Reverts to default stream access level. If there is no defined default stream access level, it defaults to *No access*."
+        },
+        {
+          "info": {
+            "name": "Get the query workers access level for a specific keyid",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_api/key/:keyid/database/:geofabric/restql",
+            "params": [
+              {
+                "name": "keyid",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the API key querying the GeoFabric."
+              },
+              {
+                "name": "geofabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the GeoFabric to query."
+              },
+              {
+                "name": "full",
+                "value": "",
+                "type": "query",
+                "description": "Return the full set of access levels for all query workers."
+              }
+            ]
+          },
+          "docs": "Fetch the list of query workers access level for a specific *keyid*.\n\n If access level for a query worker is not set, then the default(\"&#42;\") access level is used. If the default(\"&#42;\") access level is also not set, then the GeoFabric access level is used."
+        },
+        {
+          "info": {
+            "name": "Get the specific query worker access level",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_api/key/:keyid/database/:geofabric/restql/:query-worker",
+            "params": [
+              {
+                "name": "keyid",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the API key querying the GeoFabric."
+              },
+              {
+                "name": "geofabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the GeoFabric to query."
+              },
+              {
+                "name": "query-worker",
+                "value": "",
+                "type": "path",
+                "description": "The name of the query worker."
+              }
+            ]
+          },
+          "docs": "Fetch the access level for a specific query worker.\n\n If access level for the query worker is not set, then the default(\"&#42;\") access level is used. If the default(\"&#42;\") access level is also not set, then the GeoFabric access level is used."
+        },
+        {
+          "info": {
+            "name": "Set the query worker access level",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-play.paas.macrometa.io/_api/key/:keyid/database/:geofabric/restql/:query-worker",
+            "params": [
+              {
+                "name": "keyid",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the API key querying the GeoFabric."
+              },
+              {
+                "name": "geofabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the GeoFabric."
+              },
+              {
+                "name": "query-worker",
+                "value": "",
+                "type": "path",
+                "description": "The name of the query worker."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sets the access level for the *query worker* in the GeoFabric *geofabric* for an API key with *keyid*.\n\nRequires a JSON object with these properties:\n\n  - **grant**: Use \"rw\" to set the query worker level access to *Read/Write*. Use \"ro\" to set the query worker level access to  *Read Only*. Use \"none\" to set the query worker level access to *No access*.\n\n - **query worker**: Use \"&#42;\" to set default access level for all query workers.\n\nIf access level for a query worker is not set, then the de"
+        },
+        {
+          "info": {
+            "name": "Clear the query worker access level.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-play.paas.macrometa.io/_api/key/:keyid/database/:geofabric/restql/:query-worker",
+            "params": [
+              {
+                "name": "keyid",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the API key."
+              },
+              {
+                "name": "geofabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the GeoFabric."
+              },
+              {
+                "name": "query-worker",
+                "value": "",
+                "type": "path",
+                "description": "The name of the query worker."
+              }
+            ]
+          },
+          "docs": "Clears the access level for the query worker *query worker* in the GeoFabric *geofabric* of API key with *keyid*. After this runs, the default query worker access level is used. If there is no defined default query worker access level, then it defaults to *No access*.\n\n**Note**: Requires *administrator* permissions."
+        },
+        {
+          "info": {
+            "name": "Get the managed keys access level for a specific keyid",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_api/key/:keyid/database/:geofabric/managedkey",
+            "params": [
+              {
+                "name": "keyid",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the API key querying the GeoFabric."
+              },
+              {
+                "name": "geofabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the GeoFabric to query."
+              },
+              {
+                "name": "full",
+                "value": "",
+                "type": "query",
+                "description": "Return the full set of access levels for all managed keys."
+              }
+            ]
+          },
+          "docs": "Fetch the list of managed keys access level for a specific *keyid*.\n\n If access level for a managed key is not set, then the default(\"&#42;\") access level is used. If the default(\"&#42;\") access level is also not set, then the GeoFabric access level is used."
+        },
+        {
+          "info": {
+            "name": "Get the specific managed key access level",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_api/key/:keyid/database/:geofabric/managedkey/:managed-key-name",
+            "params": [
+              {
+                "name": "keyid",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the API key querying the GeoFabric."
+              },
+              {
+                "name": "geofabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the GeoFabric to query."
+              },
+              {
+                "name": "managed-key-name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the managed key."
+              }
+            ]
+          },
+          "docs": "Fetch the access level for a specific managed key.\n\n If the access level for the managed key is not set, then the default(\"&#42;\") access level is used. If the default(\"&#42;\") access level is also not set, then the GeoFabric access level is used."
+        },
+        {
+          "info": {
+            "name": "Set the managed key access level",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-play.paas.macrometa.io/_api/key/:keyid/database/:geofabric/managedkey/:managed-key-name",
+            "params": [
+              {
+                "name": "keyid",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the API key querying the GeoFabric."
+              },
+              {
+                "name": "geofabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the GeoFabric."
+              },
+              {
+                "name": "managed-key-name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the managed key."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sets the access level for the *managed key name* in the GeoFabric *geofabric* for an API key with *keyid*.\n\nRequires a JSON object with these properties:\n\n  - **grant**: Use \"rw\" to set the managed key level access to *Read/Write*. Use \"ro\" to set the managed key level access to  *Read Only*. Use \"none\" to set the managed key worker level access to *No access*.\n\n - **managed keyr**: Use \"&#42;\" to set default access level for all managed keys.\n\nIf access level for the managed key is not set, the"
+        },
+        {
+          "info": {
+            "name": "Clear the managed key access level",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-play.paas.macrometa.io/_api/key/:keyid/database/:geofabric/managedkey/:managed-key-name",
+            "params": [
+              {
+                "name": "keyid",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the API key."
+              },
+              {
+                "name": "geofabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the GeoFabric."
+              },
+              {
+                "name": "managed-key-name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the managed key."
+              }
+            ]
+          },
+          "docs": "Clears the access level for the *managed key name* in the GeoFabric *geofabric* of API key with *keyid*. After the access level is removed, the default managed key access level is used. If there is no defined default managed key access level, then it defaults to *No access*.\n\n**Note**: Requires *administrator* permissions."
+        },
+        {
+          "info": {
+            "name": "Get the billing access level",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_api/key/:keyid/billing",
+            "params": [
+              {
+                "name": "keyid",
+                "value": "",
+                "type": "path",
+                "description": "The id of the API key for which you want to query the billing access level."
+              }
+            ]
+          },
+          "docs": "Fetch the billing access level."
+        },
+        {
+          "info": {
+            "name": "Set the billing access level",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-play.paas.macrometa.io/_api/key/:keyid/billing",
+            "params": [
+              {
+                "name": "keyid",
+                "value": "",
+                "type": "path",
+                "description": "The id of the API key."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sets the billing access levels for API key with *keyid*.\n\n**Note**: Requires *administrator* permissions."
+        },
+        {
+          "info": {
+            "name": "Clear the billing access level",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-play.paas.macrometa.io/_api/key/:keyid/billing",
+            "params": [
+              {
+                "name": "keyid",
+                "value": "",
+                "type": "path",
+                "description": "The id of the API key."
+              }
+            ]
+          },
+          "docs": "Clears the billing access level of *keyid*."
+        },
+        {
+          "info": {
+            "name": "Get the API key attributes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_api/key/:keyid/attributes",
+            "params": [
+              {
+                "name": "keyid",
+                "value": "",
+                "type": "path",
+                "description": "The id of the API key."
+              }
+            ]
+          },
+          "docs": "Fetch the list of attributes for the specified *keyid*."
+        },
+        {
+          "info": {
+            "name": "Update attributes",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-play.paas.macrometa.io/_api/key/:keyid/attributes",
+            "params": [
+              {
+                "name": "keyid",
+                "value": "",
+                "type": "path",
+                "description": "The id of the API key."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update attributes of a key.\n\n**Note**: Requires *administrator* permissions."
+        },
+        {
+          "info": {
+            "name": "Remove all attributes",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-play.paas.macrometa.io/_api/key/:keyid/attributes/truncate",
+            "params": [
+              {
+                "name": "keyid",
+                "value": "",
+                "type": "path",
+                "description": "The id of the api key."
+              }
+            ]
+          },
+          "docs": "Remove all attributes from *keyid*."
+        },
+        {
+          "info": {
+            "name": "Remove attribute",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-play.paas.macrometa.io/_api/key/:keyid/attributes/:attributeid",
+            "params": [
+              {
+                "name": "keyid",
+                "value": "",
+                "type": "path",
+                "description": "The id of the api key."
+              },
+              {
+                "name": "attributeid",
+                "value": "",
+                "type": "path",
+                "description": "Attribute id."
+              }
+            ]
+          },
+          "docs": "Remove the attribute from *keyid*."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

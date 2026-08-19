@@ -1,0 +1,926 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Macrometa API Reference Activity Metrics Graphs API",
+    "version": "0.17.17"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Graphs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all graphs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/graph",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              }
+            ]
+          },
+          "docs": "Lists all graphs stored in this GeoFabric."
+        },
+        {
+          "info": {
+            "name": "Create a graph",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/graph",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "To create a graph, you must name the graph and define its edges.\n\n**Note**: Requires *Administrator* permissions to access the GeoFabric and *Read Only* access on every collection used within this graph."
+        },
+        {
+          "info": {
+            "name": "Get a graph",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/graph/:graph",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "graph",
+                "value": "",
+                "type": "path",
+                "description": "The name of the graph."
+              }
+            ]
+          },
+          "docs": "Fetch information for a graph. Returns the edge definitions and orphan collections."
+        },
+        {
+          "info": {
+            "name": "Remove a graph",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/graph/:graph",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "graph",
+                "value": "",
+                "type": "path",
+                "description": "The name of the graph."
+              },
+              {
+                "name": "dropCollections",
+                "value": "",
+                "type": "query",
+                "description": "Remove collections of this graph. Collections are only removed if they are not used in other graphs."
+              }
+            ]
+          },
+          "docs": "Remove an existing graph object by name. Optionally all collections not used by other graphs can be removed as well.\n\n**Note**: Requires *administrator* permissions."
+        },
+        {
+          "info": {
+            "name": "List edge definitions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/graph/:graph/edge",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "graph",
+                "value": "",
+                "type": "path",
+                "description": "The name of the graph."
+              }
+            ]
+          },
+          "docs": "Fetch all edge collections within this graph."
+        },
+        {
+          "info": {
+            "name": "Add edge definition",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/graph/:graph/edge",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "graph",
+                "value": "",
+                "type": "path",
+                "description": "The name of the graph."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds an additional edge definition to the graph.\n\nThis edge definition has to contain a *collection* and an array of each *from* and *to* vertex collections. An edge definition can only be added if this definition is either not used in any other graph, or it is used with exactly the same definition. It is not possible to store a definition \"e\" from \"v1\" to \"v2\" in the one graph, and \"e\" from \"v2\" to \"v1\" in the other graph.\n\n**Note**: Requires *administrator* permissions."
+        },
+        {
+          "info": {
+            "name": "Create an edge",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/graph/:graph/edge/:edgeCollection",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "graph",
+                "value": "",
+                "type": "path",
+                "description": "The name of the graph."
+              },
+              {
+                "name": "edgeCollection",
+                "value": "",
+                "type": "path",
+                "description": "The name of the edge collection the edge belongs to."
+              },
+              {
+                "name": "returnNew",
+                "value": "",
+                "type": "query",
+                "description": "If set to *true*, the response contains the complete new version of the document."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new edge in the collection.\n\n**Note:** Requires *Read Only* permissions on the GeoFabric and *Write* access on the collection."
+        },
+        {
+          "info": {
+            "name": "Replace an edge definition",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/graph/:graph/edge/:edgeCollection",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "graph",
+                "value": "",
+                "type": "path",
+                "description": "The name of the graph."
+              },
+              {
+                "name": "edgeCollection",
+                "value": "",
+                "type": "path",
+                "description": "The name of the edge collection the edge belongs to."
+              },
+              {
+                "name": "dropCollections",
+                "value": "",
+                "type": "query",
+                "description": "If set to *true*, also removes the collection. Collection is only removed if it is not used in other graphs."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Change a specified edge definition.\n\nThis modifies all occurrences of this definition in all graphs known to your GeoFabric.\n\n**Note**: Requires *administrator* permissions."
+        },
+        {
+          "info": {
+            "name": "Remove an edge definition",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/graph/:graph/edge/:edgeCollection",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "graph",
+                "value": "",
+                "type": "path",
+                "description": "The name of the graph."
+              },
+              {
+                "name": "edgeCollection",
+                "value": "",
+                "type": "path",
+                "description": "The name of the edge collection the edge belongs to."
+              },
+              {
+                "name": "dropCollections",
+                "value": "",
+                "type": "query",
+                "description": "Set *true* to remove the collection. Collection is only removed if it is not used in other graphs."
+              }
+            ]
+          },
+          "docs": "Remove one edge definition from the graph. This only removes the edge collection, the vertex collections can still be used in your queries.\n\n**Note**: Requires *administrator* permissions."
+        },
+        {
+          "info": {
+            "name": "Get an edge",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/graph/:graph/edge/:collection/:edge",
+            "headers": [
+              {
+                "name": "if-match",
+                "value": ""
+              },
+              {
+                "name": "if-none-match",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "graph",
+                "value": "",
+                "type": "path",
+                "description": "The name of the graph."
+              },
+              {
+                "name": "collection",
+                "value": "",
+                "type": "path",
+                "description": "The name of the edge collection the edge belongs to."
+              },
+              {
+                "name": "edge",
+                "value": "",
+                "type": "path",
+                "description": "The *_key* attribute of the edge."
+              },
+              {
+                "name": "rev",
+                "value": "",
+                "type": "query",
+                "description": "Must contain a revision. If this is set a document is only returned if it has exactly this revision. Also see *if-match* header as an alternative to this."
+              }
+            ]
+          },
+          "docs": "Fetch an edge from the given collection.\n\n**Note**: Requires *Read Only* permissions to access the GeoFabric and *Read Only* access on the collection."
+        },
+        {
+          "info": {
+            "name": "Replace an edge",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/graph/:graph/edge/:collection/:edge",
+            "headers": [
+              {
+                "name": "if-match",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "graph",
+                "value": "",
+                "type": "path",
+                "description": "The name of the graph."
+              },
+              {
+                "name": "collection",
+                "value": "",
+                "type": "path",
+                "description": "The name of the edge collection the edge belongs to."
+              },
+              {
+                "name": "edge",
+                "value": "",
+                "type": "path",
+                "description": "The *_key* attribute of the vertex."
+              },
+              {
+                "name": "keepNull",
+                "value": "",
+                "type": "query",
+                "description": "If set to *false*, null attributes are deleted from the document."
+              },
+              {
+                "name": "returnOld",
+                "value": "",
+                "type": "query",
+                "description": "If set to *true*, the deleted document is returned in the response object."
+              },
+              {
+                "name": "returnNew",
+                "value": "",
+                "type": "query",
+                "description": "If set to *true*, the new document is returned in the response object."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replaces the data of an edge in the collection.\n\n**Note:** Requires *Read Only* permissions on the GeoFabric and *Write* access on the collection."
+        },
+        {
+          "info": {
+            "name": "Modify an edge",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/graph/:graph/edge/:collection/:edge",
+            "headers": [
+              {
+                "name": "if-match",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "graph",
+                "value": "",
+                "type": "path",
+                "description": "The name of the graph."
+              },
+              {
+                "name": "collection",
+                "value": "",
+                "type": "path",
+                "description": "The name of the edge collection the edge belongs to."
+              },
+              {
+                "name": "edge",
+                "value": "",
+                "type": "path",
+                "description": "The *_key* attribute of the vertex."
+              },
+              {
+                "name": "keepNull",
+                "value": "",
+                "type": "query",
+                "description": "If set to *false*, null attributes are deleted from the document."
+              },
+              {
+                "name": "returnOld",
+                "value": "",
+                "type": "query",
+                "description": "If set to *true*, the deleted document is returned in the response object."
+              },
+              {
+                "name": "returnNew",
+                "value": "",
+                "type": "query",
+                "description": "If set to *true*, the new document is returned in the response object."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the data of the specific edge in the collection.\n\n**Note:** Requires *Read Only* permissions on the GeoFabric and *Write* access on the collection."
+        },
+        {
+          "info": {
+            "name": "Remove an edge",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/graph/:graph/edge/:collection/:edge",
+            "headers": [
+              {
+                "name": "if-match",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "graph",
+                "value": "",
+                "type": "path",
+                "description": "The name of the graph."
+              },
+              {
+                "name": "collection",
+                "value": "",
+                "type": "path",
+                "description": "The name of the edge collection the edge belongs to."
+              },
+              {
+                "name": "edge",
+                "value": "",
+                "type": "path",
+                "description": "The *_key* attribute of the edge."
+              },
+              {
+                "name": "returnOld",
+                "value": "",
+                "type": "query",
+                "description": "If set to *true*, the removed document is returned in the response object."
+              }
+            ]
+          },
+          "docs": "Remove an edge from the collection.\n\n**Note:** Requires *Read Only* permissions on the GeoFabric and *Write* access on the collection."
+        },
+        {
+          "info": {
+            "name": "List vertex collections",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/graph/:graph/vertex",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "graph",
+                "value": "",
+                "type": "path",
+                "description": "The name of the graph."
+              }
+            ]
+          },
+          "docs": "Fetch all vertex collections within this graph."
+        },
+        {
+          "info": {
+            "name": "Add vertex collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/graph/:graph/vertex",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "graph",
+                "value": "",
+                "type": "path",
+                "description": "The name of the graph."
+              }
+            ]
+          },
+          "docs": "Adds a vertex collection to the set of orphan collections of the graph. If the collection does not exist, it is created.\n\n**Note:** Requires *Administrator* permissions to access the GeoFabric and *Read Only* access on every collection used within this graph."
+        },
+        {
+          "info": {
+            "name": "Create a vertex",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/graph/:graph/vertex/:collection",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "graph",
+                "value": "",
+                "type": "path",
+                "description": "The name of the graph."
+              },
+              {
+                "name": "collection",
+                "value": "",
+                "type": "path",
+                "description": "The name of the vertex collection the vertex should be inserted into."
+              },
+              {
+                "name": "returnNew",
+                "value": "",
+                "type": "query",
+                "description": "If set to *true*, the response contains the complete new document."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a vertex to the given collection.\n\n**Note:** Requires *Read Only* permissions to access the GeoFabric and *Write* permissions to access the collection."
+        },
+        {
+          "info": {
+            "name": "Remove vertex collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/graph/:graph/vertex/:collection",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "graph",
+                "value": "",
+                "type": "path",
+                "description": "The name of the graph."
+              },
+              {
+                "name": "collection",
+                "value": "",
+                "type": "path",
+                "description": "The name of the vertex collection."
+              },
+              {
+                "name": "dropCollection",
+                "value": "",
+                "type": "query",
+                "description": "Set *true* to remove the collection. Collection is only removed if it is not used in other graphs."
+              }
+            ]
+          },
+          "docs": "Remove a vertex collection from the graph and optionally  the collection, if it is not used in any other graph. It only removes vertex collections that are no longer part of edge definitions.\n\n**Note**: Requires *administrator* permissions."
+        },
+        {
+          "info": {
+            "name": "Get a vertex",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/graph/:graph/vertex/:collection/:vertex",
+            "headers": [
+              {
+                "name": "if-match",
+                "value": ""
+              },
+              {
+                "name": "if-none-match",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "graph",
+                "value": "",
+                "type": "path",
+                "description": "The name of the graph."
+              },
+              {
+                "name": "collection",
+                "value": "",
+                "type": "path",
+                "description": "The name of the vertex collection the vertex belongs to."
+              },
+              {
+                "name": "vertex",
+                "value": "",
+                "type": "path",
+                "description": "The *_key* attribute of the vertex."
+              },
+              {
+                "name": "rev",
+                "value": "",
+                "type": "query",
+                "description": "Must contain a revision. If this is set a document is only returned if it has exactly this revision. Also see *if-match* header as an alternative to this."
+              }
+            ]
+          },
+          "docs": "Fetch a vertex from the given collection.\n\n**Note:** Requires *Read Only* permissions to access the GeoFabric and *Read Only* permissions to access the collection."
+        },
+        {
+          "info": {
+            "name": "Replace a vertex",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/graph/:graph/vertex/:collection/:vertex",
+            "headers": [
+              {
+                "name": "if-match",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "graph",
+                "value": "",
+                "type": "path",
+                "description": "The name of the graph."
+              },
+              {
+                "name": "collection",
+                "value": "",
+                "type": "path",
+                "description": "The name of the vertex collection the vertex belongs to."
+              },
+              {
+                "name": "vertex",
+                "value": "",
+                "type": "path",
+                "description": "The *_key* attribute of the vertex."
+              },
+              {
+                "name": "keepNull",
+                "value": "",
+                "type": "query",
+                "description": "If set to *false*, null attributes are deleted from the document."
+              },
+              {
+                "name": "returnOld",
+                "value": "",
+                "type": "query",
+                "description": "If set to *true*, the deleted document is returned in the response object."
+              },
+              {
+                "name": "returnNew",
+                "value": "",
+                "type": "query",
+                "description": "If set to *true*, the new document is returned in the response object."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replaces the data of a vertex in a collection.\n\n**Note:** Requires *Read Only* permissions to access the GeoFabric and *Write* permissions to access the collection."
+        },
+        {
+          "info": {
+            "name": "Update a vertex",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/graph/:graph/vertex/:collection/:vertex",
+            "headers": [
+              {
+                "name": "if-match",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "graph",
+                "value": "",
+                "type": "path",
+                "description": "The name of the graph."
+              },
+              {
+                "name": "collection",
+                "value": "",
+                "type": "path",
+                "description": "The name of the vertex collection the vertex belongs to."
+              },
+              {
+                "name": "vertex",
+                "value": "",
+                "type": "path",
+                "description": "The *_key* attribute of the vertex."
+              },
+              {
+                "name": "keepNull",
+                "value": "",
+                "type": "query",
+                "description": "If set to *false*, null attributes are deleted from the document."
+              },
+              {
+                "name": "returnOld",
+                "value": "",
+                "type": "query",
+                "description": "If set to *true*, the deleted document is returned in the response object."
+              },
+              {
+                "name": "returnNew",
+                "value": "",
+                "type": "query",
+                "description": "If set to *true*, the new document is returned in the response object."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the data of the specific vertex in the collection.\n\n**Note:** Requires *Read Only* permissions to access the GeoFabric and *Write* permissions to access the collection."
+        },
+        {
+          "info": {
+            "name": "Remove a vertex",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/graph/:graph/vertex/:collection/:vertex",
+            "headers": [
+              {
+                "name": "if-match",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "graph",
+                "value": "",
+                "type": "path",
+                "description": "The name of the graph."
+              },
+              {
+                "name": "collection",
+                "value": "",
+                "type": "path",
+                "description": "The name of the vertex collection the vertex belongs to."
+              },
+              {
+                "name": "vertex",
+                "value": "",
+                "type": "path",
+                "description": "The *_key* attribute of the vertex."
+              },
+              {
+                "name": "returnOld",
+                "value": "",
+                "type": "query",
+                "description": "If set to *true*, the deleted document is returned in the response object."
+              }
+            ]
+          },
+          "docs": "Remove a vertex from the collection.\n\n**Note:** Requires *Read Only* permissions to access the GeoFabric and *Write* permissions to access the collection."
+        },
+        {
+          "info": {
+            "name": "Read in- or outbound edges",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/edges/:collection-id",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "collection-id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the collection."
+              },
+              {
+                "name": "vertex",
+                "value": "",
+                "type": "query",
+                "description": "The id of the start vertex."
+              },
+              {
+                "name": "direction",
+                "value": "",
+                "type": "query",
+                "description": "Select *in* or *out* direction for edges. If not set, all edges are returned."
+              }
+            ]
+          },
+          "docs": "Fetch an array of edges starting or ending in the vertex identified by *vertex*."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

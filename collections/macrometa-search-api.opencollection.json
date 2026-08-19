@@ -1,0 +1,346 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Macrometa API Reference Activity Metrics Search API",
+    "version": "0.17.17"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Search",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search in collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/search",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Search a collection for string matches.\n\nThe specified search query is ran for the collection. If there are too many results, the cursor *id* can be used to obtain the remaining results.\n\n **Note**: This API is applicable for collections with search capability enabled. For user created views, use C8QL query to run search operation."
+        },
+        {
+          "info": {
+            "name": "Set Search Capability",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/search/collection/:collection-name",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "collection-name",
+                "value": "",
+                "type": "path",
+                "description": "Collection for which to set search capability."
+              },
+              {
+                "name": "enable",
+                "value": "",
+                "type": "query",
+                "description": "*True* enables search. *False* disables search."
+              },
+              {
+                "name": "field",
+                "value": "",
+                "type": "query",
+                "description": "The field for which you want to enable search. Required if *enable* is set to *true*."
+              }
+            ]
+          },
+          "docs": "Enable or disable search capability of a collection. The collection is created if it does not exist. Search capability is enabled only for one field per collection."
+        },
+        {
+          "info": {
+            "name": "Get the information about search view",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/search/view/:view-name",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "view-name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the search view."
+              }
+            ]
+          },
+          "docs": "Fetch information about a search view."
+        },
+        {
+          "info": {
+            "name": "Remove search view",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/search/view/:view-name",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "view-name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the search view to remove."
+              }
+            ]
+          },
+          "docs": "Remove the search view identified by *view-name*."
+        },
+        {
+          "info": {
+            "name": "Read properties of search view",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/search/view/:view-name/properties",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "view-name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the search view."
+              }
+            ]
+          },
+          "docs": "Fetch an object containing the definition of the search view identified by *view-name*."
+        },
+        {
+          "info": {
+            "name": "Change properties of search view",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/search/view/:view-name/properties",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "view-name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the search view."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Changes the properties of search view."
+        },
+        {
+          "info": {
+            "name": "Rename search view",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/search/view/:view-name/rename",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "view-name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the search view to rename."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Renames a search view.\n\n**Note**: This method is not available in a cluster."
+        },
+        {
+          "info": {
+            "name": "List all search views.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/search/view",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              }
+            ]
+          },
+          "docs": "Fetch an array of all search view descriptions."
+        },
+        {
+          "info": {
+            "name": "Create search view",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/search/view",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a search view. Search view is updated with collection data changes every 10 seconds.\n\n**Note**: Search view can't be created with the links. Use PUT/PATCH for links management."
+        },
+        {
+          "info": {
+            "name": "List all analyzers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/search/analyzer",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              }
+            ]
+          },
+          "docs": "Fetch an array of all anlyzer descriptions."
+        },
+        {
+          "info": {
+            "name": "Return the analyzer definition",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/search/analyzer/:analyzer-name",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "analyzer-name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the analyzer to retrieve."
+              }
+            ]
+          },
+          "docs": "Fetch the information about analyzer."
+        },
+        {
+          "info": {
+            "name": "Search",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/api/hss/v1/index/:index_name/search",
+            "params": [
+              {
+                "name": "index_name",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Perform a search on an index."
+        },
+        {
+          "info": {
+            "name": "Get suggestions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/hss/v1/index/:index_name/search/suggestions",
+            "params": [
+              {
+                "name": "index_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the index."
+              }
+            ]
+          },
+          "docs": "Get search suggestions for the current user."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

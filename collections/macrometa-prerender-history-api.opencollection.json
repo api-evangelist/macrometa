@@ -1,0 +1,142 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Macrometa API Reference Activity Metrics Prerender History API",
+    "version": "0.17.17"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Prerender History",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get render history data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/prerender/v1/history/render",
+            "headers": [
+              {
+                "name": "x-photoniq-customerid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Timestamp (in seconds) used as the initial time for filtering."
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "Timestamp (in seconds) used as the final time for filtering."
+              },
+              {
+                "name": "responseCode",
+                "value": "",
+                "type": "query",
+                "description": "Response code for filtering. It can be a specific response code or a range value, e.g., 200-310."
+              },
+              {
+                "name": "responseTime",
+                "value": "",
+                "type": "query",
+                "description": "Response time range in seconds for filtering, e.g., 2-10."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit for results."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset for results."
+              }
+            ]
+          },
+          "docs": "Returns historical data for web metrics, with time-range filtering and optional response code criteria. This endpoint requires the from and to query parameters, indicating the time range as epoch seconds. Optional filters include responseCode for HTTP status, and pagination controls through limit and offset. Data can be optionally scoped to a specific origin if the origin path parameter is included. The response comprises an array of historical records, detailing bytes sent, response time, devic"
+        },
+        {
+          "info": {
+            "name": "Get render history data by origin",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/prerender/v1/history/render/:origin",
+            "headers": [
+              {
+                "name": "x-photoniq-customerid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Timestamp (in seconds) used as the initial time for filtering."
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "Timestamp (in seconds) used as the final time for filtering."
+              },
+              {
+                "name": "responseCode",
+                "value": "",
+                "type": "query",
+                "description": "Response code for filtering. It can be a specific response code or a range value, e.g., 200-310."
+              },
+              {
+                "name": "responseTime",
+                "value": "",
+                "type": "query",
+                "description": "Response time range in seconds for filtering, e.g., 2-10."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit for results."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset for results."
+              },
+              {
+                "name": "origin",
+                "value": "www.origin.com",
+                "type": "path",
+                "description": "Origin hostname."
+              }
+            ]
+          },
+          "docs": "Returns historical data for web metrics, with time-range filtering and optional response code criteria. This endpoint requires the from and to query parameters, indicating the time range as epoch seconds. Optional filters include responseCode for HTTP status, and pagination controls through limit and offset. Data can be optionally scoped to a specific origin if the origin path parameter is included. The response comprises an array of historical records, detailing bytes sent, response time, devic"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

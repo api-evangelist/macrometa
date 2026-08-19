@@ -1,0 +1,116 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Macrometa API Reference Activity Metrics Settings API",
+    "version": "0.17.17"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Settings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /api/est/v1/components/settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/est/v1/components/settings"
+          },
+          "docs": "Get all PhotonIQ EST component settings."
+        },
+        {
+          "info": {
+            "name": "POST /api/est/v1/components/settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/api/est/v1/components/settings"
+          },
+          "docs": "Create PhotonIQ EST component setting."
+        },
+        {
+          "info": {
+            "name": "DELETE /api/est/v1/components/settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-play.paas.macrometa.io/api/est/v1/components/settings"
+          },
+          "docs": "Delete all PhotonIQ EST component settings."
+        },
+        {
+          "info": {
+            "name": "GET /api/est/v1/components/settings/{component}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/est/v1/components/settings/:component",
+            "params": [
+              {
+                "name": "component",
+                "value": "",
+                "type": "path",
+                "description": "Name of the component."
+              }
+            ]
+          },
+          "docs": "Get PhotonIQ EST component setting."
+        },
+        {
+          "info": {
+            "name": "PATCH /api/est/v1/components/settings/{component}",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api-play.paas.macrometa.io/api/est/v1/components/settings/:component",
+            "params": [
+              {
+                "name": "component",
+                "value": "",
+                "type": "path",
+                "description": "Name of the component."
+              }
+            ]
+          },
+          "docs": "Update PhotonIQ EST component setting."
+        },
+        {
+          "info": {
+            "name": "DELETE /api/est/v1/components/settings/{component}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-play.paas.macrometa.io/api/est/v1/components/settings/:component",
+            "params": [
+              {
+                "name": "component",
+                "value": "",
+                "type": "path",
+                "description": "Name of the component."
+              }
+            ]
+          },
+          "docs": "Delete PhotonIQ EST component setting."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

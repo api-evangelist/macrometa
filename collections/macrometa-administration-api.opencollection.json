@@ -1,0 +1,1308 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Macrometa API Reference Activity Metrics Administration API",
+    "version": "0.17.17"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Administration",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Fetch list of tenants",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_api/tenants"
+          },
+          "docs": "Fetch a list of tenants in the system.\n\n**Note**: Requires *administrator* permissions."
+        },
+        {
+          "info": {
+            "name": "Create Tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_api/tenant",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new tenant.\n\n**Note**: Requires *administrator* permissions."
+        },
+        {
+          "info": {
+            "name": "List details of the tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_api/tenant/:tenant",
+            "params": [
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "path",
+                "description": "The tenant name for whom we want to fetch info."
+              }
+            ]
+          },
+          "docs": "Fetch information about the tenant.\n\n**Note**: Requires *administrator* permissions."
+        },
+        {
+          "info": {
+            "name": "Modify Tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api-play.paas.macrometa.io/_api/tenant/:tenant",
+            "params": [
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "path",
+                "description": "The name of the tenant."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a tenant.\n\n**Note**: Requires *administrator* permissions."
+        },
+        {
+          "info": {
+            "name": "Remove Tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-play.paas.macrometa.io/_api/tenant/:tenant",
+            "params": [
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "path",
+                "description": "The tenant name to remove. The main default system tenant *_mm* cannot remove."
+              }
+            ]
+          },
+          "docs": "Remove the tenant. The system tenant _mm account cannot remove.\n\n**Note**: Requires *administrator* permissions."
+        },
+        {
+          "info": {
+            "name": "Fetch list of billing plans",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_api/plan"
+          },
+          "docs": "Fetch a list of billing plans.\n\n**Note**: Requires *administrator* permissions."
+        },
+        {
+          "info": {
+            "name": "Create billing plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_api/plan",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new billing plan.\n\n**Note**: Requires *administrator* permissions."
+        },
+        {
+          "info": {
+            "name": "List details of the billing plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_api/plan/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The billing plan name for which we want to fetch info."
+              }
+            ]
+          },
+          "docs": "Fetch information about a billing plan."
+        },
+        {
+          "info": {
+            "name": "Modify billing plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api-play.paas.macrometa.io/_api/plan/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the billing plan to modify."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the billing plan."
+        },
+        {
+          "info": {
+            "name": "Remove billing plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-play.paas.macrometa.io/_api/plan/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The billing plan name to remove."
+              }
+            ]
+          },
+          "docs": "Remove an existing billing plan."
+        },
+        {
+          "info": {
+            "name": "Update tenant billing plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_api/plan/update",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the billing plan for a tenant.\n\n**Note**: If tenant name is not specified, the tenant invoking the API is used to update billing plan."
+        },
+        {
+          "info": {
+            "name": "Update payment settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-play.paas.macrometa.io/_api/billing/paymentsettings",
+            "headers": [
+              {
+                "name": "tenant",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update payment settings for given tenant.\n\n **Note**: This API is not applicable for system tenants `_mm` and `demo`."
+        },
+        {
+          "info": {
+            "name": "Fetch the default limits for tenants",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_api/limits/defaults"
+          },
+          "docs": "Fetch the default limits for tenants."
+        },
+        {
+          "info": {
+            "name": "Set the default tenant limits",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-play.paas.macrometa.io/_api/limits/defaults",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Set the default tenant limits.\n\n **Note**: If data fields are omitted, they are set to GDN default values. The GDN limits can be retrieved via the `GET /_api/tenant/{tenant}` API."
+        },
+        {
+          "info": {
+            "name": "Update default tenant limits",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api-play.paas.macrometa.io/_api/limits/defaults",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update default tenant limits.\n\n **Note**: Omitted data fields keep their current value."
+        },
+        {
+          "info": {
+            "name": "Reset default tenant limits",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-play.paas.macrometa.io/_api/limits/defaults"
+          },
+          "docs": "Reset default tenant limits."
+        },
+        {
+          "info": {
+            "name": "Fetch the default limits for tenants",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_api/limits/defaults/:service",
+            "params": [
+              {
+                "name": "service",
+                "value": "",
+                "type": "path",
+                "description": "The name of the service."
+              }
+            ]
+          },
+          "docs": "Fetch the default service limits for tenants.\n\n This API supports these services: `[apiServer, cep, database, eventHub, streamsGlobal, streamsLocal, and dataMeshIntegration]`."
+        },
+        {
+          "info": {
+            "name": "Get limits configured",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_api/limits/enable"
+          },
+          "docs": "Fetch weather limits are configured for all tenants.\n\n **Note**: If set to *false* the limits are not enforced"
+        },
+        {
+          "info": {
+            "name": "Set limits configured",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_api/limits/enable",
+            "params": [
+              {
+                "name": "value",
+                "value": "",
+                "type": "query",
+                "description": "The flag indication whether limits are enabled for all tenants. The default value is *true*. If set to *false*, the configured limits are not applicable."
+              }
+            ]
+          },
+          "docs": "Enable configuration of limits for all tenants. If set to *false* the limits are not enforced."
+        },
+        {
+          "info": {
+            "name": "Fetch the limits for a tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_api/limits/tenant/:tenant",
+            "params": [
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "path",
+                "description": "The name of the tenant."
+              }
+            ]
+          },
+          "docs": "Fetch the limits for a tenant."
+        },
+        {
+          "info": {
+            "name": "Set the tenant limits",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-play.paas.macrometa.io/_api/limits/tenant/:tenant",
+            "params": [
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "path",
+                "description": "The name of the tenant."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Set the tenant limits.\n\n**Note**: If data fields are omitted, they are set to GDN default values. The GDN limits can be retrieved via the `GET /_api/tenant/{tenant}` API."
+        },
+        {
+          "info": {
+            "name": "Update tenant limit",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api-play.paas.macrometa.io/_api/limits/tenant/:tenant",
+            "params": [
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "path",
+                "description": "The name of the tenant."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update tenant limits.\n\n **Note**: Omitted data fields keep their current value."
+        },
+        {
+          "info": {
+            "name": "Reset tenant limits",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-play.paas.macrometa.io/_api/limits/tenant/:tenant",
+            "params": [
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "path",
+                "description": "The name of the tenant."
+              }
+            ]
+          },
+          "docs": "Reset tenant limits."
+        },
+        {
+          "info": {
+            "name": "Get the limits for a tenant service",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_api/limits/tenant/:tenant/:service",
+            "params": [
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "path",
+                "description": "The name of the tenant."
+              },
+              {
+                "name": "service",
+                "value": "",
+                "type": "path",
+                "description": "The name of the service."
+              }
+            ]
+          },
+          "docs": "Fetch the limit for a tenant.\n\n This API supports these services: `[apiServer, cep, database, eventHub, streamsGlobal, streamsLocal, and dataMeshIntegration]`"
+        },
+        {
+          "info": {
+            "name": "Get the limits for a billing plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_api/limits/plan/:attribution/:name",
+            "params": [
+              {
+                "name": "attribution",
+                "value": "",
+                "type": "path",
+                "description": "The attribution of the billing plan."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the billing plan."
+              }
+            ]
+          },
+          "docs": "Fetch the limits for a billing plan."
+        },
+        {
+          "info": {
+            "name": "Set the billing plan limits",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-play.paas.macrometa.io/_api/limits/plan/:attribution/:name",
+            "params": [
+              {
+                "name": "attribution",
+                "value": "",
+                "type": "path",
+                "description": "The attribution of the billing plan."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the billing plan."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Set the billing plan limits.\n\n **Note**: If data fields are omitted, they are set to GDN defined default values."
+        },
+        {
+          "info": {
+            "name": "Update billing plan limits",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api-play.paas.macrometa.io/_api/limits/plan/:attribution/:name",
+            "params": [
+              {
+                "name": "attribution",
+                "value": "",
+                "type": "path",
+                "description": "The attribution of the billing plan."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the billing plan."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update billing plan limits.\n\n **Note**: Omitted data fields keep their current value."
+        },
+        {
+          "info": {
+            "name": "Reset billing plan limits",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-play.paas.macrometa.io/_api/limits/plan/:attribution/:name",
+            "params": [
+              {
+                "name": "attribution",
+                "value": "",
+                "type": "path",
+                "description": "The attribution of the billing plan."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the billing plan."
+              }
+            ]
+          },
+          "docs": "Reset specified billing plan limits."
+        },
+        {
+          "info": {
+            "name": "Get the service limits for a billing plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_api/limits/plan/:attribution/:name/:service",
+            "params": [
+              {
+                "name": "attribution",
+                "value": "",
+                "type": "path",
+                "description": "The attribution of the billing plan."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the billing plan."
+              },
+              {
+                "name": "service",
+                "value": "",
+                "type": "path",
+                "description": "The name of the service."
+              }
+            ]
+          },
+          "docs": "Fetch the service limits for a billing plan.\n\n This API supports these services: `[apiServer, cep, database, eventHub, streamsGlobal, streamsLocal, and dataMeshIntegration]`"
+        },
+        {
+          "info": {
+            "name": "Get features for a tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_api/features/tenant/:tenant",
+            "params": [
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "path",
+                "description": "The name of the tenant."
+              }
+            ]
+          },
+          "docs": "Fetch features for a tenant."
+        },
+        {
+          "info": {
+            "name": "Set features for a tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_api/features/tenant/:tenant",
+            "params": [
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "path",
+                "description": "The name of the tenant."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Set the features for a tenant."
+        },
+        {
+          "info": {
+            "name": "Update features for a tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-play.paas.macrometa.io/_api/features/tenant/:tenant",
+            "params": [
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "path",
+                "description": "The name of the tenant."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the features for a tenant."
+        },
+        {
+          "info": {
+            "name": "Reset features for a tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-play.paas.macrometa.io/_api/features/tenant/:tenant",
+            "params": [
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "path",
+                "description": "The name of the tenant."
+              }
+            ]
+          },
+          "docs": "Reset features for a tenant to default values."
+        },
+        {
+          "info": {
+            "name": "Add data center to the tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_api/tenant/:tenant/datacenter/:datacenter",
+            "params": [
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "path",
+                "description": "The tenant to which the data center is added. You cannot add the system tenants `_mm` and `demo` to a data center."
+              },
+              {
+                "name": "datacenter",
+                "value": "",
+                "type": "path",
+                "description": "Data center that needs to add to the tenant."
+              },
+              {
+                "name": "force",
+                "value": "",
+                "type": "query",
+                "description": "Force syncing fabric data."
+              },
+              {
+                "name": "copyLocalCollections",
+                "value": "",
+                "type": "query",
+                "description": "Copy local collections data."
+              },
+              {
+                "name": "remoteDc",
+                "value": "",
+                "type": "query",
+                "description": "Name of remote data center to sync fabric data from."
+              },
+              {
+                "name": "excludeCollections",
+                "value": "",
+                "type": "query",
+                "description": "Collections to exclude from syncing (comma-separated)."
+              },
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "query",
+                "description": "Fabric to which the data center needs to add."
+              }
+            ]
+          },
+          "docs": "Add data center to a tenant.\n\n**Note**:\n- While the new data center is being added to the tenant, the new data center is not available for normal operations until all tenant data is synced to it.\n- Requires *administrator* permissions"
+        },
+        {
+          "info": {
+            "name": "Reconcile tenant from given data center",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-play.paas.macrometa.io/_api/tenant/:tenant/datacenter/:datacenter",
+            "params": [
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "path",
+                "description": "The tenant to reconcile. You cannot modify the system tenants `_mm` and `demo`."
+              },
+              {
+                "name": "datacenter",
+                "value": "",
+                "type": "path",
+                "description": "The data center on which to perform reconciling."
+              },
+              {
+                "name": "force",
+                "value": "",
+                "type": "query",
+                "description": "Force syncing fabric data."
+              },
+              {
+                "name": "remoteDc",
+                "value": "",
+                "type": "query",
+                "description": "Name of remote data center to sync fabric data from (leave empty to use default)."
+              },
+              {
+                "name": "excludeCollections",
+                "value": "",
+                "type": "query",
+                "description": "Collections to exclude from syncing (comma-separated)."
+              },
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "query",
+                "description": "Fabric that needs to reconcile."
+              },
+              {
+                "name": "resume",
+                "value": "",
+                "type": "query",
+                "description": "*True* if sync resumes from last point of failure. *False* if sync starts from the beginning and removes all data replicated from previous sync."
+              },
+              {
+                "name": "cleanup",
+                "value": "",
+                "type": "query",
+                "description": "If true, all collections, views and stream are removed from local data center which are not available on remoteDc."
+              }
+            ]
+          },
+          "docs": "Reconcile data center of a tenant.\n\n**Note**: Requires *administrator* permissions."
+        },
+        {
+          "info": {
+            "name": "Remove data center from the tenant.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-play.paas.macrometa.io/_api/tenant/:tenant/datacenter/:datacenter",
+            "params": [
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "path",
+                "description": "The tenant to modify. You cannot modify the system tenants `_mm` and `demo`."
+              },
+              {
+                "name": "datacenter",
+                "value": "",
+                "type": "path",
+                "description": "The data center to remove."
+              },
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "query",
+                "description": "Fabric from which the data center needs to remove."
+              }
+            ]
+          },
+          "docs": "Remove data center from a tenant.\n\n**Note**: Requires *administrator* permissions."
+        },
+        {
+          "info": {
+            "name": "Get the current sync status of a tenant or fabric",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_api/tenant/:tenant/datacenter/status",
+            "params": [
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "path",
+                "description": "Name of the tenant."
+              },
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "query",
+                "description": "Name of the fabric."
+              }
+            ]
+          },
+          "docs": "Fetch the current sync status.\n\n**Note**: Requires *administrator* permissions."
+        },
+        {
+          "info": {
+            "name": "Add data center to all fabrics from all tenants",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_api/tenant/datacenter/:datacenter/syncall",
+            "params": [
+              {
+                "name": "datacenter",
+                "value": "",
+                "type": "path",
+                "description": "Data center that needs to add to the tenant."
+              },
+              {
+                "name": "remoteDc",
+                "value": "",
+                "type": "query",
+                "description": "Name of remote data center to sync fabric data from (leave empty to use default)."
+              },
+              {
+                "name": "command",
+                "value": "",
+                "type": "query",
+                "description": "The command which decides the mode of sync operation. The allowed values are: \n  - region_add(To sync the newly added region.)\n  - region_add_copy_local(Add region and copy local collections data)\n  - catchup_start(Start sync in catchup mode.)\n  - catchup_pause(Pause the sync in catchup mode.)\n  - catchup_resume(Resume the sync in catchup mode.)\n  - catchup_kill(Stop the sync in catchup mode.) "
+              },
+              {
+                "name": "skip",
+                "value": "",
+                "type": "query",
+                "description": "If *true* automatically exclude tenants and fabrics which are not added to all dc except the one passed in data center parameter."
+              },
+              {
+                "name": "excludeTenants",
+                "value": "",
+                "type": "query",
+                "description": "Tenants to exclude from syncing (comma-separated)."
+              },
+              {
+                "name": "force",
+                "value": "",
+                "type": "query",
+                "description": "Force restart the sync call."
+              },
+              {
+                "name": "priority",
+                "value": "",
+                "type": "query",
+                "description": "Priority for the catchup mode sync."
+              }
+            ]
+          },
+          "docs": "Add data center to all fabrics from all tenants.\n\n**Note**:\n- Synchronize all *tenants* from remote regions, including all *GeoFabrics* created for each tenant.\n- While the new data center is being added to the all fabrics, the new data center is not available for normal operations until after the synchronization is finished.\n- Requires *administrator* permissions."
+        },
+        {
+          "info": {
+            "name": "Enable publishing changes to local collections",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-play.paas.macrometa.io/_api/tenant/:tenant/fabric/:fabric/publish-local-collections",
+            "params": [
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "path",
+                "description": "Tenant."
+              },
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "Fabric."
+              }
+            ]
+          },
+          "docs": "Enable publishing changes to local collections.\n\n**Note**: Requires *administrator* permissions."
+        },
+        {
+          "info": {
+            "name": "Disable publishing changes to local collections",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-play.paas.macrometa.io/_api/tenant/:tenant/fabric/:fabric/publish-local-collections",
+            "params": [
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "path",
+                "description": "Tenant."
+              },
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "Fabric."
+              }
+            ]
+          },
+          "docs": "Disable publishing changes to local collections.\n\n**Note**: Requires *administrator* permissions."
+        },
+        {
+          "info": {
+            "name": "Enable accepting updates to local collections",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-play.paas.macrometa.io/_api/tenant/:tenant/fabric/:fabric/accept-local-collections-updates",
+            "params": [
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "path",
+                "description": "Tenant."
+              },
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "Fabric."
+              }
+            ]
+          },
+          "docs": "Enable accepting updates to local collections.\n\n**Note**: Requires *administrator* permissions."
+        },
+        {
+          "info": {
+            "name": "Disable accepting updates to local collections",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-play.paas.macrometa.io/_api/tenant/:tenant/fabric/:fabric/accept-local-collections-updates",
+            "params": [
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "path",
+                "description": "Tenant."
+              },
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "Fabric."
+              }
+            ]
+          },
+          "docs": "Disable accepting updates to local collections.\n\n**Note**: Requires *administrator* permissions."
+        },
+        {
+          "info": {
+            "name": "Compact Collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/collection/:collection-name/compact",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "collection-name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the collection."
+              }
+            ]
+          },
+          "docs": "Compacts the data of a collection in order to reclaim disk space.\n The operation compacts the document and index data by rewriting the data while keeping the relevant entries.\nUnder normal circumstances running a compact operation is not necessary, as the collection data eventually gets compacted anyway. However, in some situations, e.g. after running many update or remove operations, the data for a collection may contain a lot of outdated data for which the space shall be reclaimed. In this cas"
+        },
+        {
+          "info": {
+            "name": "Lookup events for a tenant and fabric",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/events",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The fabric name to use in the URL path for this API call. The main default system database is _system"
+              }
+            ]
+          },
+          "docs": "Fetch events for a given fabric."
+        },
+        {
+          "info": {
+            "name": "Create event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/events",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an event."
+        },
+        {
+          "info": {
+            "name": "Remove event",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/events",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Remove one or more events by _id."
+        },
+        {
+          "info": {
+            "name": "Get metrics names",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/metrics/names",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              }
+            ]
+          },
+          "docs": "Fetch an array of all metrics names."
+        },
+        {
+          "info": {
+            "name": "Query user metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/metrics/query",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Query user metrics."
+        },
+        {
+          "info": {
+            "name": "Fixes streams settings for all tenants and fabrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_api/repair/all"
+          },
+          "docs": "Fixes streams settings for all tenants and fabrics."
+        },
+        {
+          "info": {
+            "name": "Fixes streams settings for a specific tenant and its fabrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_api/repair/tenant/:tenant",
+            "params": [
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "path",
+                "description": "The name of the tenant."
+              }
+            ]
+          },
+          "docs": "Fixes streams settings for all fabrics of a specific tenant."
+        },
+        {
+          "info": {
+            "name": "Check if regions are in sync",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_api/repair/check",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns an array of all metrics names."
+        },
+        {
+          "info": {
+            "name": "Synchronize global collections that are experiencing data discrepancies between regions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_api/repair/sync",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Provides a way to synchronize global collections across remote regions using RICE data"
+        },
+        {
+          "info": {
+            "name": "Set sync priority",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_api/repair/sync/priority/:priority",
+            "params": [
+              {
+                "name": "priority",
+                "value": "",
+                "type": "path",
+                "description": "Priority of sync operation."
+              }
+            ]
+          },
+          "docs": "Set sync priority."
+        },
+        {
+          "info": {
+            "name": "Cancel sync operation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_api/repair/sync/cancel"
+          },
+          "docs": "Cancel sync operation if it is already running."
+        },
+        {
+          "info": {
+            "name": "Generates hourly usage data.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_api/_admin/_billing/usage/hourly",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generates hourly usage data for all tenants. Requires administrator permissions."
+        },
+        {
+          "info": {
+            "name": "Generates daily usage data for billing.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_api/_admin/_billing/usage/daily",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generates daily usage data for tenants. Requires administrator permissions."
+        },
+        {
+          "info": {
+            "name": "Generates aggregated usage data for billing.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_api/_admin/_billing/usage/federation",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generates aggregated usage data for tenants. Requires administrator permissions."
+        },
+        {
+          "info": {
+            "name": "Upload usage data to Stripe for billing invoice.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_api/_admin/_billing/usage/report",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Upload usage data to Stripe for billing invoice. Requires administrator permissions."
+        },
+        {
+          "info": {
+            "name": "Returns the list of missing usage records of tenants.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_api/_admin/_billing/usage/missing",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns the list of missing usage record between start and end date. List contains records from daily and federation usage. Requires administrator permissions."
+        },
+        {
+          "info": {
+            "name": "Generate missing usage records.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_api/_admin/_billing/usage/missing/generate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generate missing usage records from daily and federation usage between start and end date. Requires administrator permissions."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

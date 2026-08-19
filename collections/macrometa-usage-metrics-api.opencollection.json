@@ -1,0 +1,209 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Macrometa API Reference Activity Metrics Usage Metrics API",
+    "version": "0.17.17"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Usage Metrics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /api/est/v1/usage/hourly",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/est/v1/usage/hourly",
+            "headers": [
+              {
+                "name": "X-PhotonIQ-CustomerID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "The UTC start date and time when usage information is retrieved (e.g. 2022-01-01T00:00:00Z)."
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "The UTC end date and time when usage information is retrieved (e.g. 2022-01-01T00:00:00Z)."
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "Sort by arrtibute."
+              },
+              {
+                "name": "sortOrder",
+                "value": "",
+                "type": "query",
+                "description": "Sort order."
+              },
+              {
+                "name": "aggregate",
+                "value": "",
+                "type": "query",
+                "description": "If the *aggregate* flag is true, then the result are consolidated and returned as an aggregated summary for the specified from and to period.  If the aggregate flag is false or not provided, then only separate records for the same time period is returned."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The *limit* parameter determines the number of usage records to be returned.'"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The *offset* from which data is to be returned from total queried records."
+              }
+            ]
+          },
+          "docs": "Get hourly usage metrics based on start and end date-time parameters."
+        },
+        {
+          "info": {
+            "name": "GET /api/est/v1/usage/daily",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/est/v1/usage/daily",
+            "headers": [
+              {
+                "name": "X-PhotonIQ-CustomerID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "The UTC start date and time when usage information is retrieved (e.g. 2022-01-01T00:00:00Z)."
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "The UTC end date and time when usage information is retrieved (e.g. 2022-01-01T00:00:00Z)."
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "Sort by arrtibute."
+              },
+              {
+                "name": "sortOrder",
+                "value": "",
+                "type": "query",
+                "description": "Sort order."
+              },
+              {
+                "name": "aggregate",
+                "value": "",
+                "type": "query",
+                "description": "If the *aggregate* flag is true, then the result are consolidated and returned as an aggregated summary for the specified from and to period.  If the aggregate flag is false or not provided, then only separate records for the same time period is returned."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The *limit* parameter determines the number of usage records to be returned.'"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The *offset* from where data to be returned from total queried records."
+              }
+            ]
+          },
+          "docs": "Get daily usage metrics based on start and end date-time parameters."
+        },
+        {
+          "info": {
+            "name": "GET /api/est/v1/usage/monthly",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/est/v1/usage/monthly",
+            "headers": [
+              {
+                "name": "X-PhotonIQ-CustomerID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "The UTC start date and time when usage information is retrieved (e.g. 2022-01-01T00:00:00Z)."
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "The UTC end date and time when usage information is retrieved (e.g. 2022-01-01T00:00:00Z)."
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "Sort by arrtibute"
+              },
+              {
+                "name": "sortOrder",
+                "value": "",
+                "type": "query",
+                "description": "Sort order"
+              },
+              {
+                "name": "aggregate",
+                "value": "",
+                "type": "query",
+                "description": "If the *aggregate* flag is true, then the result are consolidated and returned as an aggregated summary for the specified from and to period.  If the aggregate flag is false or not provided, then only separate records for the same time period is returned."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The *limit* parameter determines the number of usage records to be returned.'"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The *offset* from which data is to be returned from total queried records."
+              }
+            ]
+          },
+          "docs": "Get monthly usage metrics based on start and end date-time parameters."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

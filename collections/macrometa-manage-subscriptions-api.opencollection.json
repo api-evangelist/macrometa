@@ -1,0 +1,84 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Macrometa API Reference Activity Metrics Manage Subscriptions API",
+    "version": "0.17.17"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Manage Subscriptions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Subscribe to stream via WebSocket",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/es/v1/subscribe",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "The API key for authenticating the request"
+              },
+              {
+                "name": "x-customer-id",
+                "value": "",
+                "type": "query",
+                "description": "ID of the customer to identify the user making the request."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "The type of events to subscribe to. It can be local, global or collection"
+              },
+              {
+                "name": "filters",
+                "value": "",
+                "type": "query",
+                "description": "Define the event data to be recieved via the stream based on a specific criteria. Refer to [**Event delivery filters guide**](https://www.macrometa.com/docs/photoniq/event-delivery/event-delivery-filters) for more details."
+              }
+            ]
+          },
+          "docs": "Subscribes to an event stream via WebSocket to recieve live updates. This API keeps the connection live and continuously receives messages from the server based on the specified query filters. \n\nThe endpoint URL for subscribing to a stream via WebSocket follows this format: ```wss://<eds-host>/api/es/v1/subscribe``` \n\nRelated guide: [**Subscribe to events and recieve real time updates**](https://www.macrometa.com/docs/photoniq/event-delivery/getting-started-event-delivery#subscribing-to-the-eds)"
+        },
+        {
+          "info": {
+            "name": "Subscribe to stream via SSE",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/api/es/sse/v1/subscribe",
+            "headers": [
+              {
+                "name": "x-customer-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Subscribes to an event stream via SSE to recieve live updates.  This API keeps the connection live and continuously receives messages from the server based on the specified query filters. \n\nRelated guide: [**Subscribe to events and recieve real time updates**](https://www.macrometa.com/docs/photoniq/event-delivery/getting-started-event-delivery#subscribing-to-the-eds)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

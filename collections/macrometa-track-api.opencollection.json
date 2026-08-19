@@ -1,0 +1,76 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Macrometa API Reference Activity Metrics Track API",
+    "version": "0.17.17"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Track",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "POST /api/est/v1/track",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/api/est/v1/track",
+            "headers": [
+              {
+                "name": "X-PhotonIQ-CustomerID",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Event tracking endpoint."
+        },
+        {
+          "info": {
+            "name": "POST /api/est/v1/session-settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/api/est/v1/session-settings"
+          },
+          "docs": "Get PhotonIQ EST settings and initialize client."
+        },
+        {
+          "info": {
+            "name": "GET /api/est/v1/inject-script",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/est/v1/inject-script"
+          },
+          "docs": "Get PhotonIQ EST script to inject in the client browser."
+        },
+        {
+          "info": {
+            "name": "GET /api/est/v1/integration-script",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/est/v1/integration-script"
+          },
+          "docs": "Retrieve a client-side integration script for PhotonIQ EST, enabling PhotonIQ EST functionality on user webpages."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,502 @@
+{
+  "item": [
+    {
+      "id": "10ab8935-7039-4608-9b44-ec89ba3b9168",
+      "name": "Visits",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9c8e58a4-cff5-4de1-b7ae-ab9db5e9a49e",
+          "name": "Record a visit to the site",
+          "request": {
+            "name": "Record a visit to the site",
+            "description": {
+              "content": "Record a visit with the specified properties.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "ds",
+                "v1",
+                "visits"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "If this cookie is present then this is a returning visitor before.",
+                "key": "Cookie",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"signals\": {\n    \"key_0\": {\n      \"duration\": \"<number>\",\n      \"error\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    \"key_1\": {\n      \"duration\": \"<number>\",\n      \"error\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  },\n  \"version\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b23649d6-ddc0-4709-846c-ff6c2dfc7d48",
+              "name": "Successfully recorded the visit.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "ds",
+                    "v1",
+                    "visits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "If this cookie is present then this is a returning visitor before.",
+                    "key": "Cookie",
+                    "value": "x-photoniq-vid=value;http-only=true;secure"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"signals\": {\n    \"key_0\": {\n      \"duration\": \"<number>\",\n      \"error\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  },\n  \"version\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Digital signature ID.",
+                  "key": "x-photoniq-dsid",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "The visitor ID.",
+                  "key": "x-photoniq-vid",
+                  "value": "062b8104-6a71-4ac3-ac7f-6cd1ba6f2fa1"
+                },
+                {
+                  "disabled": false,
+                  "description": "Security features will be enabled for this cookie to minimize tampering.",
+                  "key": "Cookie",
+                  "value": "x-photoniq-vid=value;http-only=true;secure"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"visitorId\": \"string\",\n  \"signature\": \"string\",\n  \"visit\": {\n    \"visitId\": \"string\",\n    \"platformDetails\": {\n      \"browser\": {\n        \"name\": \"string\",\n        \"version\": \"string\",\n        \"major\": \"string\"\n      },\n      \"engine\": {\n        \"name\": \"string\",\n        \"version\": \"string\"\n      },\n      \"os\": {\n        \"name\": \"string\",\n        \"version\": \"string\"\n      },\n      \"device\": {\n        \"vendor\": \"string\",\n        \"model\": \"string\"\n      },\n      \"ua\": \"string\"\n    },\n    \"incognito\": true,\n    \"ip\": \"string\",\n    \"url\": \"string\",\n    \"visitorFound\": true,\n    \"confidence\": {\n      \"matchScore\": 6120.439563133216\n    },\n    \"timestamp\": 4366.328941540911,\n    \"firstSeenAt\": 7726.789629539722\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6f085152-7c95-4e62-9a78-3cfb75f88171",
+              "name": "Bad request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "ds",
+                    "v1",
+                    "visits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "If this cookie is present then this is a returning visitor before.",
+                    "key": "Cookie",
+                    "value": "x-photoniq-vid=value;http-only=true;secure"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"signals\": {\n    \"key_0\": {\n      \"duration\": \"<number>\",\n      \"error\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  },\n  \"version\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2ea332fc-d64b-4c32-8d50-b900baf88a51",
+              "name": "Authorization failure due to invalid authentication credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "ds",
+                    "v1",
+                    "visits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "If this cookie is present then this is a returning visitor before.",
+                    "key": "Cookie",
+                    "value": "x-photoniq-vid=value;http-only=true;secure"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"signals\": {\n    \"key_0\": {\n      \"duration\": \"<number>\",\n      \"error\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  },\n  \"version\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cc33466c-cb3a-4f81-95cc-a2f975a5e086",
+          "name": "Retrieve data for a particular visit",
+          "request": {
+            "name": "Retrieve data for a particular visit",
+            "description": {
+              "content": "Returns data for a particular visit based on the visit ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "ds",
+                "v1",
+                "visits"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "visitId",
+                  "value": "<string>",
+                  "description": "(Required) Visit ID."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e75f0ba6-f335-4757-89f9-26d60171c98a",
+              "name": "Successfully retrieved the visit data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "ds",
+                    "v1",
+                    "visits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "visitId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_key\": \"string\",\n  \"visitorId\": \"string\",\n  \"signature\": \"string\",\n  \"url\": \"string\",\n  \"createdAt\": 2312.7689433952146,\n  \"confidence\": {\n    \"matchScore\": 5808.962429975205\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e6760e09-4e59-40cf-8117-7003c0ad6816",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "ds",
+                    "v1",
+                    "visits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "visitId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "50edc444-40cc-4b30-8ddb-37906d461101",
+              "name": "Authorization failure due to invalid authentication credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "ds",
+                    "v1",
+                    "visits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "visitId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-play.paas.macrometa.io",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "dadc0623-0a72-43f1-99dd-8d7d950c15ef",
+    "name": "Macrometa API Reference Activity Metrics Visits API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API reference for the Macrometa Global Data Network.",
+      "type": "text/plain"
+    }
+  }
+}

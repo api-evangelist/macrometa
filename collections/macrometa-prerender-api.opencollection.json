@@ -1,0 +1,106 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Macrometa API Reference Activity Metrics Prerender API",
+    "version": "0.17.17"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Prerender",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get prerendered page",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/prerender/v1/render/:mobile/:url",
+            "headers": [
+              {
+                "name": "x-photoniq-customerid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "mobile",
+                "value": "",
+                "type": "path",
+                "description": "Whether rendering should be tailored for mobile devices."
+              },
+              {
+                "name": "url",
+                "value": "",
+                "type": "path",
+                "description": "URL to render."
+              }
+            ]
+          },
+          "docs": "Returns the HTML content of the rendered page."
+        },
+        {
+          "info": {
+            "name": "Get prerendered page",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/prerender/v1/render",
+            "headers": [
+              {
+                "name": "x-photoniq-customerid",
+                "value": ""
+              },
+              {
+                "name": "x-photoniq-prerender-origin",
+                "value": ""
+              },
+              {
+                "name": "x-photoniq-prerender-mobile",
+                "value": ""
+              },
+              {
+                "name": "x-photoniq-prerender-path",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "origin",
+                "value": "",
+                "type": "query",
+                "description": "Origin base URL."
+              },
+              {
+                "name": "mobile",
+                "value": "",
+                "type": "query",
+                "description": "Whether rendering should be tailored for mobile devices."
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "query",
+                "description": "Path to render."
+              }
+            ]
+          },
+          "docs": "Returns the HTML content of the rendered page."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

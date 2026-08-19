@@ -1,0 +1,670 @@
+{
+  "item": [
+    {
+      "id": "3cca34d5-cfe2-48cd-9fd8-40ed6511b195",
+      "name": "Redis",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "13a86a46-a4d1-4e1f-b3dd-fbd19a457af8",
+          "name": "Redis-like API interface",
+          "request": {
+            "name": "Redis-like API interface",
+            "description": {
+              "content": "This API provides a REST API to access Redis databases. The REST API follows the same convention that the Redis Protocol uses.\n\n Using an HTTP POST request, the redis command and its parameters can be set the in the request body. The command can also be in the url suffix with the parameter set in the request body. The parameter suffixes can vary in number, depending upon the command. For example http://api.macrometa.io/_fabric/myfabric/_api/redis/SET/foo/bar.\n\n Currently supported Redis commands :\n\n * **String:** - **APPEND**  - **DECR**  - **DECRBY**  - **GET**  - **GETDEL**  - **GETEX**  - **GETRANGE** - **GETSET**  - **INCR**  - **INCRBY**  - **INCRBYFLOAT**  - **MGET**  - **MSET**  - **MSETNX** - **PSETEX**  - **SET** - **SETBIT** - **SETEX**  - **SETNX** - **SETRANGE**  - **STRLEN**  - **BITCOUNT** - **BITOP** - **BITPOS** - **GETBIT**\n\n * **Hash:** - **HDEL**  - **HEXISTS**  - **HGET** - **HGETALL**  - **HINCRBY**  - **HINCRBYFLOAT**  - **HKEYS** - **HLEN**  - **HMGET**  - **HMSET**  - **HSCAN** - **HSET**  - **HSETNX**  - **HSTRLEN**  - **HRANDFIELD** - **HVALS**\n\n * **List:** - **LINDEX** - **LINSERT** - **LLEN** - **LMOVE** - **LPOP** - **LPOS** - **LPUSH** - **LPUSHX** - **LRANGE** - **LREM** - **LSET** - **LTRIM** - **RPOP** - **RPOPLPUSH** - **RPUSH** - **RPUSHX**\n\n *  **Set:** - **SADD** - **SCARD** - **SDIFF** - **SDIFFSTORE** - **SINTER** - **SINTERSTORE** - **SISMEMBER** - **SMEMBERS** - **SMISMEMBER** - **SMOVE** - **SPOP** - **SRANDMEMBER** - **SREM** - **SSCAN** - **SUNION** - **SUNIONSTORE**\n\n * **SortedSet:** - **ZADD** - **ZCARD** - **ZCOUNT** - **ZDIFF** - **ZDIFFSTORE** - **ZINCRBY** - **ZINTER** - **ZINTERSTORE** - **ZLEXCOUNT** - **ZMSCORE** - **ZPOPMAX** - **ZPOPMIN** - **ZRANDMEMBER** - **ZRANGE** - **ZRANGEBYLEX** - **ZRANGEBYSCORE** - **ZRANGESTORE** - **ZRANK** - **ZREM** - **ZREMRANGEBYLEX** - **ZREMRANGEBYRANK** - **ZREMRANGEBYSCORE** - **ZREVRANGE** - **ZREVRANGEBYLEX** - **ZREVRANGEBYSCORE** - **ZREVRANK** - **ZSCAN** - **ZSCORE** - **ZUNION** - **ZUNIONSTORE**\n\n * **Generic:** - **COPY** - **DEL** - **EXISTS** - **EXPIRE** - **EXPIREAT** - **PERSIST** - **PEXPIRE** - **PEXPIREAT** - **PTTL** - **RANDOMKEY** - **RENAME** - **RENAMENX** - **SCAN** - **TTL** - **TYPE** - **UNLINK**\n\n * **Server:** - **ECHO** - **PING** - **PIPELINE** - **DBSIZE** - **FLUSHDB** - **TIME**\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "_fabric",
+                ":fabric",
+                "_api",
+                "redis",
+                ":collection"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "_system",
+                  "key": "fabric",
+                  "description": "(Required) The name of the fabric."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "collection",
+                  "description": "(Required) The name of the Redis collection."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ea27001e-77d5-4887-b08e-2890e709bf09",
+              "name": "Successfully returned after execution.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "redis",
+                    ":collection"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The name of the fabric."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection",
+                      "description": "(Required) The name of the Redis collection."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 200\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "862acdc3-ea77-4c6a-8f80-4e065fdda29e",
+              "name": "Failed due to invalid command parameters. Verify that all parameters are correct.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "redis",
+                    ":collection"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The name of the fabric."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection",
+                      "description": "(Required) The name of the Redis collection."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Invalid cmd params.\",\n  \"code\": 400\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d173f258-f447-4ad1-8d76-0c13cfd5e57e",
+              "name": "Failed because you do not have execute permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "redis",
+                    ":collection"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The name of the fabric."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection",
+                      "description": "(Required) The name of the Redis collection."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"errorMessage\": \"not authorized to execute this request\",\n  \"code\": 401\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "462808f2-28e7-4d72-befa-6a14996f1b90",
+          "name": "Redis-like API interface",
+          "request": {
+            "name": "Redis-like API interface",
+            "description": {
+              "content": "This API provides a REST API to access Redis databases. The REST API follows the same convention that the Redis Protocol uses. \n\n Give the command name and parameters in the same order as the Redis protocol, separating commands with a '/'. The parameter suffixes can vary in number, depending upon the command. For example http://api.macrometa.io/_fabric/myfabric/_api/redis/SET/foo/bar. Query params can also be used along with suffixes, for example http://api.macrometa.io/_fabric/myfabric/_api/redis/SET/foo/bar?ex=100.\n\n Currently supported Redis commands :\n\n * **String:** - **APPEND**  - **DECR**  - **DECRBY**  - **GET**  - **GETDEL**  - **GETEX**  - **GETRANGE** - **GETSET**  - **INCR**  - **INCRBY**  - **INCRBYFLOAT**  - **MGET**  - **MSET**  - **MSETNX** - **PSETEX**  - **SET** - **SETBIT** - **SETEX**  - **SETNX** - **SETRANGE**  - **STRLEN**  - **BITCOUNT** - **BITOP** - **BITPOS** - **GETBIT**\n\n * **Hash:** - **HDEL**  - **HEXISTS**  - **HGET** - **HGETALL**  - **HINCRBY**  - **HINCRBYFLOAT**  - **HKEYS** - **HLEN**  - **HMGET**  - **HMSET**  - **HSCAN** - **HSET**  - **HSETNX**  - **HSTRLEN**  - **HRANDFIELD** - **HVALS**\n\n * **List:** - **LINDEX** - **LINSERT** - **LLEN** - **LMOVE** - **LPOP** - **LPOS** - **LPUSH** - **LPUSHX** - **LRANGE** - **LREM** - **LSET** - **LTRIM** - **RPOP** - **RPOPLPUSH** - **RPUSH** - **RPUSHX**\n\n *  **Set:** - **SADD** - **SCARD** - **SDIFF** - **SDIFFSTORE** - **SINTER** - **SINTERSTORE** - **SISMEMBER** - **SMEMBERS** - **SMISMEMBER** - **SMOVE** - **SPOP** - **SRANDMEMBER** - **SREM** - **SSCAN** - **SUNION** - **SUNIONSTORE**\n\n * **SortedSet:** - **ZADD** - **ZCARD** - **ZCOUNT** - **ZDIFF** - **ZDIFFSTORE** - **ZINCRBY** - **ZINTER** - **ZINTERSTORE** - **ZLEXCOUNT** - **ZMSCORE** - **ZPOPMAX** - **ZPOPMIN** - **ZRANDMEMBER** - **ZRANGE** - **ZRANGEBYLEX** - **ZRANGEBYSCORE** - **ZRANGESTORE** - **ZRANK** - **ZREM** - **ZREMRANGEBYLEX** - **ZREMRANGEBYRANK** - **ZREMRANGEBYSCORE** - **ZREVRANGE** - **ZREVRANGEBYLEX** - **ZREVRANGEBYSCORE** - **ZREVRANK** - **ZSCAN** - **ZSCORE** - **ZUNION** - **ZUNIONSTORE**\n\n * **Generic:** - **COPY** - **DEL** - **EXISTS** - **EXPIRE** - **EXPIREAT** - **PERSIST** - **PEXPIRE** - **PEXPIREAT** - **PTTL** - **RANDOMKEY** - **RENAME** - **RENAMENX** - **SCAN** - **TTL** - **TYPE** - **UNLINK**\n\n * **Server:** - **ECHO** - **PING** - **PIPELINE** - **DBSIZE** - **FLUSHDB** - **TIME**\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "_fabric",
+                ":fabric",
+                "_api",
+                "redis",
+                ":collection",
+                ":command"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "_system",
+                  "key": "fabric",
+                  "description": "(Required) The name of the fabric."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "collection",
+                  "description": "(Required) The name of the collection."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "command",
+                  "description": "(Required) The name of the redis command."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "531449d4-5cb7-48e8-b637-fa191ad73dbe",
+              "name": "Successfully returned after execution.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "redis",
+                    ":collection",
+                    ":command"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The name of the fabric."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection",
+                      "description": "(Required) The name of the collection."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "command",
+                      "description": "(Required) The name of the redis command."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 200\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a777b289-41d2-4710-bb83-2fcc9081a1ee",
+              "name": "Failed due to invalid command parameters. Verify that all parameters are correct.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "redis",
+                    ":collection",
+                    ":command"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The name of the fabric."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection",
+                      "description": "(Required) The name of the collection."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "command",
+                      "description": "(Required) The name of the redis command."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Invalid cmd params.\",\n  \"code\": 400\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0549a298-b84d-45a5-ac0f-20abe97a5e93",
+              "name": "Failed because you do not have execute permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "_fabric",
+                    ":fabric",
+                    "_api",
+                    "redis",
+                    ":collection",
+                    ":command"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "_system",
+                      "key": "fabric",
+                      "description": "(Required) The name of the fabric."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collection",
+                      "description": "(Required) The name of the collection."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "command",
+                      "description": "(Required) The name of the redis command."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-gdn-region",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-gdn-requestid",
+                  "value": "<string>",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"errorMessage\": \"not authorized to execute this request\",\n  \"code\": 401\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-play.paas.macrometa.io",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "04be06d3-e9a5-45d2-91f6-461db006c933",
+    "name": "Macrometa API Reference Activity Metrics Redis API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API reference for the Macrometa Global Data Network.",
+      "type": "text/plain"
+    }
+  }
+}

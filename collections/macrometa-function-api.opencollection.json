@@ -1,0 +1,620 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Macrometa API Reference Activity Metrics Function API",
+    "version": "0.17.17"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Function",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List multiple edge functions.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/function",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Type of edge function."
+              }
+            ]
+          },
+          "docs": "List multiple edge functions."
+        },
+        {
+          "info": {
+            "name": "Deploy the query worker to the edge worker.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/function/generate",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Type of edge worker."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Name of the edge worker."
+              },
+              {
+                "name": "queryWorkerName",
+                "value": "",
+                "type": "query",
+                "description": "Name of the Macrometa query worker."
+              },
+              {
+                "name": "environment",
+                "value": "",
+                "type": "query",
+                "description": "The environment in which the edge worker is activated."
+              }
+            ]
+          },
+          "docs": "Deploy the query worker to the edge worker environment.\n\n**Note**: The edge worker activation is delayed while the environment is setup. Use the get edge function information API to get the activation status of the edge worker."
+        },
+        {
+          "info": {
+            "name": "Deploy the stream publisher to the edge worker.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/function/generate/publisher",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Type of edge worker."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Name of the edge worker."
+              },
+              {
+                "name": "streamWorkerName",
+                "value": "",
+                "type": "query",
+                "description": "Name of the stream worker."
+              },
+              {
+                "name": "streamName",
+                "value": "",
+                "type": "query",
+                "description": "Name of the stream."
+              },
+              {
+                "name": "environment",
+                "value": "",
+                "type": "query",
+                "description": "The environment in which the edge worker is activated."
+              }
+            ]
+          },
+          "docs": "Deploy the stream publisher to the edge worker environment.\n\n**Note**: The edge worker activation is delayed while the environment is setup. Use the get edge function information API to get the activation status of the edge worker."
+        },
+        {
+          "info": {
+            "name": "Deploy the stream adhoc query to the edge worker.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/function/generate/query",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Type of edge worker."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Name of the edge worker."
+              },
+              {
+                "name": "streamWorkerName",
+                "value": "",
+                "type": "query",
+                "description": "Name of the stream worker."
+              },
+              {
+                "name": "environment",
+                "value": "",
+                "type": "query",
+                "description": "The environment in which the edge worker is activated."
+              }
+            ]
+          },
+          "docs": "Deploy the stream adhoc query to the edge worker environment. \n\n**Note**: The edge worker activation is delayed while the environment is setup. Use the get edge function information API to get the activation status of the edge worker."
+        },
+        {
+          "info": {
+            "name": "Get edge function information.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/function/:fx-name",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "fx-name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the edge function."
+              }
+            ]
+          },
+          "docs": "Get edge function information."
+        },
+        {
+          "info": {
+            "name": "Remove a edge function.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/function/:fx-name",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "fx-name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the edge function."
+              }
+            ]
+          },
+          "docs": "Remove a edge function."
+        },
+        {
+          "info": {
+            "name": "Invoke a edge function.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/function/invoke/:fx-name",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "fx-name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the edge function."
+              },
+              {
+                "name": "params",
+                "value": "",
+                "type": "query",
+                "description": "Params for edge worker like bindVars or query. E.g: {'key1':'val1'}."
+              }
+            ]
+          },
+          "docs": "Invoke a edge function."
+        },
+        {
+          "info": {
+            "name": "Get metadata about the edge worker.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/function/metadata",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              }
+            ]
+          },
+          "docs": "Get metadata about the edge worker."
+        },
+        {
+          "info": {
+            "name": "Create the edge worker metadata.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/function/metadata",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create the edge worker metadata."
+        },
+        {
+          "info": {
+            "name": "Modify the edge worker metadata.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/function/metadata",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Modify the edge worker metadata."
+        },
+        {
+          "info": {
+            "name": "Remove the edge worker metadata.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/function/metadata",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              }
+            ]
+          },
+          "docs": "Remove metadata for an edge worker."
+        },
+        {
+          "info": {
+            "name": "Deploy the function",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/api/faas/v1/deploy",
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            }
+          },
+          "docs": "This endpoint allows you to deploy a function by specifying its unique function name. Unique Function name is defined in `.toml`.\nThe function code and configuration details are required to complete the deployment.\nThe function code should be provided as a `.js` or `.wasm` file, and the configuration details should be in a `.toml` file format.\nBoth files should be included in the multipart form data."
+        },
+        {
+          "info": {
+            "name": "Download the latest version of a function",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/faas/v1/download/:functionName",
+            "params": [
+              {
+                "name": "functionName",
+                "value": "",
+                "type": "path",
+                "description": "The unique name of the function"
+              },
+              {
+                "name": "metaOnly",
+                "value": "",
+                "type": "query",
+                "description": "If true, only the metadata will be downloaded. If false, only the function file (either `.js` or `.wasm`) will be downloaded."
+              }
+            ]
+          },
+          "docs": "Download the latest version of a function for the specified function name. The downloaded file will be either a `.js` or `.wasm` file, depending on the function's implementation."
+        },
+        {
+          "info": {
+            "name": "Download the function",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/faas/v1/download/:functionName/:version",
+            "params": [
+              {
+                "name": "functionName",
+                "value": "",
+                "type": "path",
+                "description": "The unique name of the function"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The unique name of the function to download"
+              },
+              {
+                "name": "metaOnly",
+                "value": "",
+                "type": "query",
+                "description": "If true, only the metadata will be downloaded. If false, only the function file (either `.js` or `.wasm`) will be downloaded."
+              }
+            ]
+          },
+          "docs": "Download the function for the specified version and function name. The downloaded file will be either a `.js` or `.wasm` file, depending on the function's implementation."
+        },
+        {
+          "info": {
+            "name": "Delete All Versions",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-play.paas.macrometa.io/api/faas/v1/function/:functionName",
+            "params": [
+              {
+                "name": "functionName",
+                "value": "",
+                "type": "path",
+                "description": "The unique name of the function"
+              }
+            ]
+          },
+          "docs": "Delete all versions of the specified function name. This operation removes every version of the function, effectively erasing all its deployment history."
+        },
+        {
+          "info": {
+            "name": "Delete a Specific Version of a Function",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-play.paas.macrometa.io/api/faas/v1/function/:functionName/:version",
+            "params": [
+              {
+                "name": "functionName",
+                "value": "",
+                "type": "path",
+                "description": "The unique name of the function"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The unique name of the function to download"
+              }
+            ]
+          },
+          "docs": "Delete the specified version of a function identified by its unique function name and version number. This operation removes only the specified version, leaving other versions intact."
+        },
+        {
+          "info": {
+            "name": "Retrieve Function Names",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/faas/v1/functions"
+          },
+          "docs": "Retrieve the names of all functions available in the system. This endpoint returns a list of function names that can be used for further operations such as deploying or deleting functions."
+        },
+        {
+          "info": {
+            "name": "Retrieve Function Versions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/faas/v1/function/:functionName/versions",
+            "params": [
+              {
+                "name": "functionName",
+                "value": "",
+                "type": "path",
+                "description": "The unique name of the function"
+              }
+            ]
+          },
+          "docs": "Retrieve all versions of the specified function identified by its unique function name. This endpoint returns a list of versions, providing details about each version of the function that is available in the system."
+        },
+        {
+          "info": {
+            "name": "Execute the Latest Version of a Function",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/api/faas/v1/execute/:functionName",
+            "params": [
+              {
+                "name": "functionName",
+                "value": "",
+                "type": "path",
+                "description": "The unique name of the function"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Execute the latest version of a function identified by its unique function name. The function is executed with the provided JSON body, which contains the necessary input for the function."
+        },
+        {
+          "info": {
+            "name": "Execute the Function with Alias or Version Parameter",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/api/faas/v1/execute/:functionName/:versionOrAlias",
+            "params": [
+              {
+                "name": "functionName",
+                "value": "",
+                "type": "path",
+                "description": "The unique name of the function"
+              },
+              {
+                "name": "versionOrAlias",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Execute the specified version or alias of a function identified by its unique function name. The version or alias is provided as a path parameter, allowing the execution of different versions or named aliases of the function. The function is executed with the provided JSON body, which contains the necessary input for the function."
+        },
+        {
+          "info": {
+            "name": "Retrieve the Alias",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/faas/v1/function/:functionName/alias/:aliasName",
+            "params": [
+              {
+                "name": "functionName",
+                "value": "",
+                "type": "path",
+                "description": "The unique name of the function"
+              },
+              {
+                "name": "aliasName",
+                "value": "",
+                "type": "path",
+                "description": "The alias name associated with a specific version of a function."
+              }
+            ]
+          },
+          "docs": "Retrieve the alias associated with a specified function name. This endpoint returns the alias configuration for the function, providing details about the versions and weights associated with the alias."
+        },
+        {
+          "info": {
+            "name": "Update the Alias",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-play.paas.macrometa.io/api/faas/v1/function/:functionName/alias/:aliasName",
+            "params": [
+              {
+                "name": "functionName",
+                "value": "",
+                "type": "path",
+                "description": "The unique name of the function"
+              },
+              {
+                "name": "aliasName",
+                "value": "",
+                "type": "path",
+                "description": "The alias name associated with a specific version of a function."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the alias for the specified function name. This endpoint allows you to change the alias configuration, associating it with different versions of the function and specifying their weights. The alias configuration is provided as an array of objects, each containing a valid version and a corresponding weight."
+        },
+        {
+          "info": {
+            "name": "Retrieve All Aliases",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/faas/v1/function/:functionName/aliases",
+            "params": [
+              {
+                "name": "functionName",
+                "value": "",
+                "type": "path",
+                "description": "The unique name of the function"
+              }
+            ]
+          },
+          "docs": "Retrieve all aliases associated with the specified function name. This endpoint returns a list of all alias configurations for the function, providing details about the versions and weights associated with each alias."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,121 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Macrometa API Reference Activity Metrics Logs API",
+    "version": "0.17.17"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Logs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve the function logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/faas/v1/logs",
+            "params": [
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "The start of the period requested. Example: \"2024-01-01T00:00:00\"."
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "The end of the period requested. Example: \"2024-01-02T00:00:00\"."
+              },
+              {
+                "name": "lines",
+                "value": "",
+                "type": "query",
+                "description": "The number of logs. Example: \"100\"."
+              },
+              {
+                "name": "asc",
+                "value": "",
+                "type": "query",
+                "description": "The sort logs by time. Example: \"true\"."
+              },
+              {
+                "name": "region",
+                "value": "",
+                "type": "query",
+                "description": "The region of logs. Example: \"us-west\"."
+              },
+              {
+                "name": "instance",
+                "value": "",
+                "type": "query",
+                "description": "The region of logs. Example: \"13638401-f561-4742-9d2e-7aeebf2243ad\"."
+              },
+              {
+                "name": "functionName",
+                "value": "",
+                "type": "query",
+                "description": "The function name. Example: \"periods\"."
+              },
+              {
+                "name": "functionVersion",
+                "value": "",
+                "type": "query",
+                "description": "The function version. Example: \"0.0.1\"."
+              },
+              {
+                "name": "level",
+                "value": "",
+                "type": "query",
+                "description": "The level of logs. Example: \"ERROR\"."
+              },
+              {
+                "name": "executionId",
+                "value": "",
+                "type": "query",
+                "description": "The execution id. Example: \"664d1ecc-58158f1a\"."
+              }
+            ]
+          },
+          "docs": "Retrieve the function logs in the specified period. If no period is specified it will return the last hour logs."
+        },
+        {
+          "info": {
+            "name": "Get the current log level",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/vwr/v1/log/level"
+          },
+          "docs": "Gets the current log level of the service.\n\nThis API requires _admin_ permissions to run.\n"
+        },
+        {
+          "info": {
+            "name": "Set the log level",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-play.paas.macrometa.io/api/vwr/v1/log/level"
+          },
+          "docs": "Sets the current log level of the service.\n\nValid values are 'DEBUG', 'INFO', 'WARNING', and 'ERROR'.\n\nThis API requires _admin_ permissions to run.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

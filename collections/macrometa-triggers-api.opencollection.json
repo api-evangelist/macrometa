@@ -1,0 +1,113 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Macrometa API Reference Activity Metrics Triggers API",
+    "version": "0.17.17"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Triggers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /api/est/v1/trigger",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/est/v1/trigger"
+          },
+          "docs": "Get all PhotonIQ EST triggers."
+        },
+        {
+          "info": {
+            "name": "POST /api/est/v1/trigger",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/api/est/v1/trigger",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create PhotonIQ EST trigger."
+        },
+        {
+          "info": {
+            "name": "GET /api/est/v1/trigger/{name}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/est/v1/trigger/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Trigger name"
+              }
+            ]
+          },
+          "docs": "Get PhotonIQ EST trigger."
+        },
+        {
+          "info": {
+            "name": "PATCH /api/est/v1/trigger/{name}",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api-play.paas.macrometa.io/api/est/v1/trigger/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Trigger name."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update PhotonIQ EST trigger."
+        },
+        {
+          "info": {
+            "name": "DELETE /api/est/v1/trigger/{name}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-play.paas.macrometa.io/api/est/v1/trigger/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Trigger name."
+              }
+            ]
+          },
+          "docs": "Delete PhotonIQ EST trigger."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

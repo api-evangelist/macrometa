@@ -1,0 +1,59 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Macrometa API Reference Activity Metrics System API",
+    "version": "0.17.17"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "System",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Check the health of the service",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/faas/v1/health"
+          },
+          "docs": "Gets the health of the FaaS service. This API returns HTTP status 200 OK if the service is running, otherwise it returns a 500 Internal Server Error."
+        },
+        {
+          "info": {
+            "name": "Check the readiness of the service",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/faas/v1/ready"
+          },
+          "docs": "Gets the readiness of the FaaS service. This API returns HTTP status 200 OK if the service is able to handle requests, otherwise it returns a 503 Service Unavailable."
+        },
+        {
+          "info": {
+            "name": "Version of the service",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/faas/v1/version"
+          },
+          "docs": "Gets the current version of the service."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

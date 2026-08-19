@@ -1,0 +1,2202 @@
+{
+  "item": [
+    {
+      "id": "c68c36c7-feb6-426e-9557-beb3243ac118",
+      "name": "Waiting rooms",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "cead8654-2144-438e-9cf7-3fbcaa68a966",
+          "name": "Create a waiting room",
+          "request": {
+            "name": "Create a waiting room",
+            "description": {
+              "content": "Creates a new waiting room with the specified properties.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "vwr",
+                "v1",
+                "waitingrooms"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"waitingroom_key\": \"<string>\",\n  \"waitingroom_url\": \"<string>\",\n  \"access_type\": \"users\",\n  \"queue_type\": \"fifo\",\n  \"queue_mode\": \"auto\",\n  \"dequeue_mode\": \"on\",\n  \"waiting_room_path\": \"<string>\",\n  \"metric_interval\": 60,\n  \"rate_limit\": 100,\n  \"rate_period\": 1,\n  \"max_origin_usage_time\": 60,\n  \"waiting_room_interval\": 10,\n  \"request_priority\": [\n    [],\n    []\n  ],\n  \"custom_attributes\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "77e63e5f-4180-438b-85d6-b82fc448a4ab",
+              "name": "Successfully created the waiting room.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "vwr",
+                    "v1",
+                    "waitingrooms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"waitingroom_key\": \"<string>\",\n  \"waitingroom_url\": \"<string>\",\n  \"access_type\": \"users\",\n  \"queue_type\": \"fifo\",\n  \"queue_mode\": \"auto\",\n  \"dequeue_mode\": \"on\",\n  \"waiting_room_path\": \"<string>\",\n  \"metric_interval\": 60,\n  \"rate_limit\": 100,\n  \"rate_period\": 1,\n  \"max_origin_usage_time\": 60,\n  \"waiting_room_interval\": 10,\n  \"request_priority\": [\n    1,\n    4,\n    255\n  ],\n  \"custom_attributes\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"waitingroom_key\": \"string\",\n  \"created_at\": 1694757000\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f8ad8973-873e-4c1f-aeff-1b9cd527d9b8",
+              "name": "Bad request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "vwr",
+                    "v1",
+                    "waitingrooms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"waitingroom_key\": \"<string>\",\n  \"waitingroom_url\": \"<string>\",\n  \"access_type\": \"users\",\n  \"queue_type\": \"fifo\",\n  \"queue_mode\": \"auto\",\n  \"dequeue_mode\": \"on\",\n  \"waiting_room_path\": \"<string>\",\n  \"metric_interval\": 60,\n  \"rate_limit\": 100,\n  \"rate_period\": 1,\n  \"max_origin_usage_time\": 60,\n  \"waiting_room_interval\": 10,\n  \"request_priority\": [\n    1,\n    4,\n    255\n  ],\n  \"custom_attributes\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d1c985a3-205f-4525-a807-04b3ada09e36",
+              "name": "Authorization failure due to invalid authentication credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "vwr",
+                    "v1",
+                    "waitingrooms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"waitingroom_key\": \"<string>\",\n  \"waitingroom_url\": \"<string>\",\n  \"access_type\": \"users\",\n  \"queue_type\": \"fifo\",\n  \"queue_mode\": \"auto\",\n  \"dequeue_mode\": \"on\",\n  \"waiting_room_path\": \"<string>\",\n  \"metric_interval\": 60,\n  \"rate_limit\": 100,\n  \"rate_period\": 1,\n  \"max_origin_usage_time\": 60,\n  \"waiting_room_interval\": 10,\n  \"request_priority\": [\n    1,\n    4,\n    255\n  ],\n  \"custom_attributes\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bc0b8591-0c76-40da-81d4-fb7185ba8e79",
+              "name": "Either the API key doesn't have permissions or it is deactivated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "vwr",
+                    "v1",
+                    "waitingrooms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"waitingroom_key\": \"<string>\",\n  \"waitingroom_url\": \"<string>\",\n  \"access_type\": \"users\",\n  \"queue_type\": \"fifo\",\n  \"queue_mode\": \"auto\",\n  \"dequeue_mode\": \"on\",\n  \"waiting_room_path\": \"<string>\",\n  \"metric_interval\": 60,\n  \"rate_limit\": 100,\n  \"rate_period\": 1,\n  \"max_origin_usage_time\": 60,\n  \"waiting_room_interval\": 10,\n  \"request_priority\": [\n    1,\n    4,\n    255\n  ],\n  \"custom_attributes\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c47db14e-e165-48aa-9cf2-7e265a1687ee",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "vwr",
+                    "v1",
+                    "waitingrooms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"waitingroom_key\": \"<string>\",\n  \"waitingroom_url\": \"<string>\",\n  \"access_type\": \"users\",\n  \"queue_type\": \"fifo\",\n  \"queue_mode\": \"auto\",\n  \"dequeue_mode\": \"on\",\n  \"waiting_room_path\": \"<string>\",\n  \"metric_interval\": 60,\n  \"rate_limit\": 100,\n  \"rate_period\": 1,\n  \"max_origin_usage_time\": 60,\n  \"waiting_room_interval\": 10,\n  \"request_priority\": [\n    1,\n    4,\n    255\n  ],\n  \"custom_attributes\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "801b15c4-6d36-4609-9ec9-f770f388ef1b",
+          "name": "Get information on all waiting rooms",
+          "request": {
+            "name": "Get information on all waiting rooms",
+            "description": {
+              "content": "Retrieves a list of waiting rooms that match a specified pattern.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "vwr",
+                "v1",
+                "waitingrooms"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pattern",
+                  "value": "*",
+                  "description": "Fetch waiting room information that matches the pattern. For example, a pattern could be 'aa' or 'test'. To get all waiting room, set the pattern to '*'."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "1000",
+                  "description": "The _limit_ parameter determines the number of waiting rooms returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Represents the starting point from where to begin fetching the waiting room records. This parameter is especially useful in conjunction with the _limit_ parameter for pagination of a large number of waiting room records. By default, it is set to 0, meaning that data retrieval will start from the very first record. For example, if you have 10,000 waiting room records and set the _limit_ to 100, then the first API call without an offset will retrieve records 1 to 100. If you set the _offset_ to 100 for the next call, you will retrieve records 101 to 200, and so on. This way, by incrementing the _offset_ by the _limit_ value for successive calls, you can paginate through the entire dataset."
+                },
+                {
+                  "disabled": false,
+                  "key": "sortby",
+                  "value": "waitingroom_url",
+                  "description": "The field used for sorting."
+                },
+                {
+                  "disabled": false,
+                  "key": "order",
+                  "value": "asc",
+                  "description": "The sort order:\n * _asc_ - Ascending, from A to Z\n * _desc_ - Descending, from Z to A\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "b9d198f6-f054-4d07-a810-c9da141aeac7",
+              "name": "Successfully fetched all waiting rooms information.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "vwr",
+                    "v1",
+                    "waitingrooms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pattern",
+                      "value": "*"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "sortby",
+                      "value": "waitingroom_url"
+                    },
+                    {
+                      "key": "order",
+                      "value": "asc"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "The total number of records that match the pattern.",
+                  "key": "X-count",
+                  "value": "1000"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"waitingroom_url\": \"<string>\",\n    \"access_type\": \"users\",\n    \"queue_type\": \"fifo\",\n    \"queue_mode\": \"auto\",\n    \"dequeue_mode\": \"on\",\n    \"waiting_room_path\": \"<string>\",\n    \"metric_interval\": 60,\n    \"rate_limit\": 100,\n    \"rate_period\": 1,\n    \"max_origin_usage_time\": 60,\n    \"waiting_room_interval\": 10,\n    \"request_priority\": [\n      1,\n      4,\n      255\n    ],\n    \"custom_attributes\": \"<object>\"\n  },\n  {\n    \"waitingroom_url\": \"<string>\",\n    \"access_type\": \"users\",\n    \"queue_type\": \"fifo\",\n    \"queue_mode\": \"auto\",\n    \"dequeue_mode\": \"on\",\n    \"waiting_room_path\": \"<string>\",\n    \"metric_interval\": 60,\n    \"rate_limit\": 100,\n    \"rate_period\": 1,\n    \"max_origin_usage_time\": 60,\n    \"waiting_room_interval\": 10,\n    \"request_priority\": [\n      1,\n      4,\n      255\n    ],\n    \"custom_attributes\": \"<object>\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ca3afd13-3d98-4685-b4a0-b11aff84a0c4",
+              "name": "Bad request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "vwr",
+                    "v1",
+                    "waitingrooms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pattern",
+                      "value": "*"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "sortby",
+                      "value": "waitingroom_url"
+                    },
+                    {
+                      "key": "order",
+                      "value": "asc"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ddea8d8d-f076-4216-bdea-e9102f8ebdda",
+              "name": "Authorization failure due to invalid authentication credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "vwr",
+                    "v1",
+                    "waitingrooms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pattern",
+                      "value": "*"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "sortby",
+                      "value": "waitingroom_url"
+                    },
+                    {
+                      "key": "order",
+                      "value": "asc"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "22ed78c8-d896-46d1-80b9-d61632380134",
+              "name": "Either the API key doesn't have permissions or it is deactivated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "vwr",
+                    "v1",
+                    "waitingrooms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pattern",
+                      "value": "*"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "sortby",
+                      "value": "waitingroom_url"
+                    },
+                    {
+                      "key": "order",
+                      "value": "asc"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d74941d8-0ca0-4d3a-a9f7-195e1ae7455e",
+              "name": "Waiting room not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "vwr",
+                    "v1",
+                    "waitingrooms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pattern",
+                      "value": "*"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "sortby",
+                      "value": "waitingroom_url"
+                    },
+                    {
+                      "key": "order",
+                      "value": "asc"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "aed3af1f-cafb-4f32-a320-7110ff2f0df4",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "vwr",
+                    "v1",
+                    "waitingrooms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pattern",
+                      "value": "*"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "sortby",
+                      "value": "waitingroom_url"
+                    },
+                    {
+                      "key": "order",
+                      "value": "asc"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8f55e7a4-da0d-4a87-8bfc-24288f30f877",
+          "name": "Get information for a specific waiting room",
+          "request": {
+            "name": "Get information for a specific waiting room",
+            "description": {
+              "content": "Retrieves information about a specific waiting room.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "vwr",
+                "v1",
+                "waitingrooms",
+                ":waitingroom_key"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "waitingroom_key",
+                  "description": "(Required) The unique identifier for the waiting room of interest."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "79996072-13d7-476d-aa61-7e48e13eac6f",
+              "name": "Successfully fetched the waiting room information.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "vwr",
+                    "v1",
+                    "waitingrooms",
+                    ":waitingroom_key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "waitingroom_key",
+                      "description": "(Required) The unique identifier for the waiting room of interest."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"waitingroom_url\": \"<string>\",\n  \"access_type\": \"users\",\n  \"queue_type\": \"fifo\",\n  \"queue_mode\": \"auto\",\n  \"dequeue_mode\": \"on\",\n  \"waiting_room_path\": \"<string>\",\n  \"metric_interval\": 60,\n  \"rate_limit\": 100,\n  \"rate_period\": 1,\n  \"max_origin_usage_time\": 60,\n  \"waiting_room_interval\": 10,\n  \"request_priority\": [\n    1,\n    4,\n    255\n  ],\n  \"custom_attributes\": \"<object>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1c06a15c-36ea-44d9-91e2-2443c29dd49c",
+              "name": "Authorization failure due to invalid authentication credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "vwr",
+                    "v1",
+                    "waitingrooms",
+                    ":waitingroom_key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "waitingroom_key",
+                      "description": "(Required) The unique identifier for the waiting room of interest."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8faf378a-1ba2-4085-8d14-696984f69d06",
+              "name": "Either the API key doesn't have permissions or it is deactivated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "vwr",
+                    "v1",
+                    "waitingrooms",
+                    ":waitingroom_key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "waitingroom_key",
+                      "description": "(Required) The unique identifier for the waiting room of interest."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8b2bfc10-28c4-425d-801b-a874602dff48",
+              "name": "Waiting room key not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "vwr",
+                    "v1",
+                    "waitingrooms",
+                    ":waitingroom_key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "waitingroom_key",
+                      "description": "(Required) The unique identifier for the waiting room of interest."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "17f7d589-64e0-494c-9b18-ad6d6a08f44a",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "vwr",
+                    "v1",
+                    "waitingrooms",
+                    ":waitingroom_key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "waitingroom_key",
+                      "description": "(Required) The unique identifier for the waiting room of interest."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2374a384-c7aa-430f-b8ca-b14ae4247321",
+          "name": "Update a waiting room",
+          "request": {
+            "name": "Update a waiting room",
+            "description": {
+              "content": "Updates an existing waiting room with the specified properties.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "vwr",
+                "v1",
+                "waitingrooms",
+                ":waitingroom_key"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "waitingroom_key",
+                  "description": "(Required) A unique identifier for the waiting room."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"waitingroom_url\": \"<string>\",\n  \"access_type\": \"users\",\n  \"queue_type\": \"fifo\",\n  \"queue_mode\": \"auto\",\n  \"dequeue_mode\": \"on\",\n  \"waiting_room_path\": \"<string>\",\n  \"metric_interval\": 60,\n  \"rate_limit\": 100,\n  \"rate_period\": 1,\n  \"max_origin_usage_time\": 60,\n  \"waiting_room_interval\": 10,\n  \"request_priority\": [\n    [],\n    []\n  ],\n  \"custom_attributes\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "aa9303fc-c7c3-4f92-b7eb-15d0ae6b84ee",
+              "name": "Successfully updated the waiting room.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "vwr",
+                    "v1",
+                    "waitingrooms",
+                    ":waitingroom_key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "waitingroom_key",
+                      "description": "(Required) A unique identifier for the waiting room."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"waitingroom_url\": \"<string>\",\n  \"access_type\": \"users\",\n  \"queue_type\": \"fifo\",\n  \"queue_mode\": \"auto\",\n  \"dequeue_mode\": \"on\",\n  \"waiting_room_path\": \"<string>\",\n  \"metric_interval\": 60,\n  \"rate_limit\": 100,\n  \"rate_period\": 1,\n  \"max_origin_usage_time\": 60,\n  \"waiting_room_interval\": 10,\n  \"request_priority\": [\n    1,\n    4,\n    255\n  ],\n  \"custom_attributes\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"waitingroom_key\": \"string\",\n  \"updated_at\": 1694757010\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a2ad500c-856b-4fb8-8ebf-4171f2326440",
+              "name": "Bad request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "vwr",
+                    "v1",
+                    "waitingrooms",
+                    ":waitingroom_key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "waitingroom_key",
+                      "description": "(Required) A unique identifier for the waiting room."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"waitingroom_url\": \"<string>\",\n  \"access_type\": \"users\",\n  \"queue_type\": \"fifo\",\n  \"queue_mode\": \"auto\",\n  \"dequeue_mode\": \"on\",\n  \"waiting_room_path\": \"<string>\",\n  \"metric_interval\": 60,\n  \"rate_limit\": 100,\n  \"rate_period\": 1,\n  \"max_origin_usage_time\": 60,\n  \"waiting_room_interval\": 10,\n  \"request_priority\": [\n    1,\n    4,\n    255\n  ],\n  \"custom_attributes\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "de4a86b0-a42b-427d-a44f-1e158a8a4241",
+              "name": "Authorization failure due to invalid authentication credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "vwr",
+                    "v1",
+                    "waitingrooms",
+                    ":waitingroom_key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "waitingroom_key",
+                      "description": "(Required) A unique identifier for the waiting room."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"waitingroom_url\": \"<string>\",\n  \"access_type\": \"users\",\n  \"queue_type\": \"fifo\",\n  \"queue_mode\": \"auto\",\n  \"dequeue_mode\": \"on\",\n  \"waiting_room_path\": \"<string>\",\n  \"metric_interval\": 60,\n  \"rate_limit\": 100,\n  \"rate_period\": 1,\n  \"max_origin_usage_time\": 60,\n  \"waiting_room_interval\": 10,\n  \"request_priority\": [\n    1,\n    4,\n    255\n  ],\n  \"custom_attributes\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bc6a2d64-3db7-432f-a0b5-679df242343d",
+              "name": "Either the API key doesn't have permissions or it is deactivated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "vwr",
+                    "v1",
+                    "waitingrooms",
+                    ":waitingroom_key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "waitingroom_key",
+                      "description": "(Required) A unique identifier for the waiting room."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"waitingroom_url\": \"<string>\",\n  \"access_type\": \"users\",\n  \"queue_type\": \"fifo\",\n  \"queue_mode\": \"auto\",\n  \"dequeue_mode\": \"on\",\n  \"waiting_room_path\": \"<string>\",\n  \"metric_interval\": 60,\n  \"rate_limit\": 100,\n  \"rate_period\": 1,\n  \"max_origin_usage_time\": 60,\n  \"waiting_room_interval\": 10,\n  \"request_priority\": [\n    1,\n    4,\n    255\n  ],\n  \"custom_attributes\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "be3aacb4-3135-4967-9098-b627fbf30469",
+              "name": "Waiting room key not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "vwr",
+                    "v1",
+                    "waitingrooms",
+                    ":waitingroom_key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "waitingroom_key",
+                      "description": "(Required) A unique identifier for the waiting room."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"waitingroom_url\": \"<string>\",\n  \"access_type\": \"users\",\n  \"queue_type\": \"fifo\",\n  \"queue_mode\": \"auto\",\n  \"dequeue_mode\": \"on\",\n  \"waiting_room_path\": \"<string>\",\n  \"metric_interval\": 60,\n  \"rate_limit\": 100,\n  \"rate_period\": 1,\n  \"max_origin_usage_time\": 60,\n  \"waiting_room_interval\": 10,\n  \"request_priority\": [\n    1,\n    4,\n    255\n  ],\n  \"custom_attributes\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9097ad73-82f0-4f17-9f71-01601f4a95da",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "vwr",
+                    "v1",
+                    "waitingrooms",
+                    ":waitingroom_key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "waitingroom_key",
+                      "description": "(Required) A unique identifier for the waiting room."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"waitingroom_url\": \"<string>\",\n  \"access_type\": \"users\",\n  \"queue_type\": \"fifo\",\n  \"queue_mode\": \"auto\",\n  \"dequeue_mode\": \"on\",\n  \"waiting_room_path\": \"<string>\",\n  \"metric_interval\": 60,\n  \"rate_limit\": 100,\n  \"rate_period\": 1,\n  \"max_origin_usage_time\": 60,\n  \"waiting_room_interval\": 10,\n  \"request_priority\": [\n    1,\n    4,\n    255\n  ],\n  \"custom_attributes\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "edd40550-b238-4de9-9e2f-fbe83e5d6989",
+          "name": "Modify specific property of a waiting room",
+          "request": {
+            "name": "Modify specific property of a waiting room",
+            "description": {
+              "content": "Modifies an existing waiting room with one or more specified properties.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "vwr",
+                "v1",
+                "waitingrooms",
+                ":waitingroom_key"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "waitingroom_key",
+                  "description": "(Required) A unique identifier for the waiting room."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"waitingroom_url\": \"<string>\",\n  \"access_type\": \"users\",\n  \"queue_type\": \"fifo\",\n  \"queue_mode\": \"auto\",\n  \"dequeue_mode\": \"on\",\n  \"waiting_room_path\": \"<string>\",\n  \"metric_interval\": 60,\n  \"rate_limit\": 100,\n  \"rate_period\": 1,\n  \"max_origin_usage_time\": 60,\n  \"waiting_room_interval\": 10,\n  \"request_priority\": [\n    [],\n    []\n  ],\n  \"custom_attributes\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "09071eab-5e46-4d3b-82dc-6fba435d2720",
+              "name": "Successfully updated the waiting room.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "vwr",
+                    "v1",
+                    "waitingrooms",
+                    ":waitingroom_key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "waitingroom_key",
+                      "description": "(Required) A unique identifier for the waiting room."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"waitingroom_url\": \"<string>\",\n  \"access_type\": \"users\",\n  \"queue_type\": \"fifo\",\n  \"queue_mode\": \"auto\",\n  \"dequeue_mode\": \"on\",\n  \"waiting_room_path\": \"<string>\",\n  \"metric_interval\": 60,\n  \"rate_limit\": 100,\n  \"rate_period\": 1,\n  \"max_origin_usage_time\": 60,\n  \"waiting_room_interval\": 10,\n  \"request_priority\": [\n    1,\n    4,\n    255\n  ],\n  \"custom_attributes\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"waitingroom_url\": \"<string>\",\n  \"access_type\": \"users\",\n  \"queue_type\": \"fifo\",\n  \"queue_mode\": \"auto\",\n  \"dequeue_mode\": \"on\",\n  \"waiting_room_path\": \"<string>\",\n  \"metric_interval\": 60,\n  \"rate_limit\": 100,\n  \"rate_period\": 1,\n  \"max_origin_usage_time\": 60,\n  \"waiting_room_interval\": 10,\n  \"request_priority\": [\n    1,\n    4,\n    255\n  ],\n  \"custom_attributes\": \"<object>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "207ce9a5-91aa-46e6-ada1-ebe57b7f2949",
+              "name": "Bad request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "vwr",
+                    "v1",
+                    "waitingrooms",
+                    ":waitingroom_key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "waitingroom_key",
+                      "description": "(Required) A unique identifier for the waiting room."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"waitingroom_url\": \"<string>\",\n  \"access_type\": \"users\",\n  \"queue_type\": \"fifo\",\n  \"queue_mode\": \"auto\",\n  \"dequeue_mode\": \"on\",\n  \"waiting_room_path\": \"<string>\",\n  \"metric_interval\": 60,\n  \"rate_limit\": 100,\n  \"rate_period\": 1,\n  \"max_origin_usage_time\": 60,\n  \"waiting_room_interval\": 10,\n  \"request_priority\": [\n    1,\n    4,\n    255\n  ],\n  \"custom_attributes\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1e15c7ad-1d76-459e-b0ed-9ba887a0b1d4",
+              "name": "Authorization failure due to invalid authentication credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "vwr",
+                    "v1",
+                    "waitingrooms",
+                    ":waitingroom_key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "waitingroom_key",
+                      "description": "(Required) A unique identifier for the waiting room."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"waitingroom_url\": \"<string>\",\n  \"access_type\": \"users\",\n  \"queue_type\": \"fifo\",\n  \"queue_mode\": \"auto\",\n  \"dequeue_mode\": \"on\",\n  \"waiting_room_path\": \"<string>\",\n  \"metric_interval\": 60,\n  \"rate_limit\": 100,\n  \"rate_period\": 1,\n  \"max_origin_usage_time\": 60,\n  \"waiting_room_interval\": 10,\n  \"request_priority\": [\n    1,\n    4,\n    255\n  ],\n  \"custom_attributes\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "fe40bc1e-23e9-496d-90cd-3cbfb935ae4c",
+              "name": "Either the API key doesn't have permissions or it is deactivated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "vwr",
+                    "v1",
+                    "waitingrooms",
+                    ":waitingroom_key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "waitingroom_key",
+                      "description": "(Required) A unique identifier for the waiting room."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"waitingroom_url\": \"<string>\",\n  \"access_type\": \"users\",\n  \"queue_type\": \"fifo\",\n  \"queue_mode\": \"auto\",\n  \"dequeue_mode\": \"on\",\n  \"waiting_room_path\": \"<string>\",\n  \"metric_interval\": 60,\n  \"rate_limit\": 100,\n  \"rate_period\": 1,\n  \"max_origin_usage_time\": 60,\n  \"waiting_room_interval\": 10,\n  \"request_priority\": [\n    1,\n    4,\n    255\n  ],\n  \"custom_attributes\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "87afd446-c43c-4a83-827a-5a40fa76afe9",
+              "name": "Waiting room key not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "vwr",
+                    "v1",
+                    "waitingrooms",
+                    ":waitingroom_key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "waitingroom_key",
+                      "description": "(Required) A unique identifier for the waiting room."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"waitingroom_url\": \"<string>\",\n  \"access_type\": \"users\",\n  \"queue_type\": \"fifo\",\n  \"queue_mode\": \"auto\",\n  \"dequeue_mode\": \"on\",\n  \"waiting_room_path\": \"<string>\",\n  \"metric_interval\": 60,\n  \"rate_limit\": 100,\n  \"rate_period\": 1,\n  \"max_origin_usage_time\": 60,\n  \"waiting_room_interval\": 10,\n  \"request_priority\": [\n    1,\n    4,\n    255\n  ],\n  \"custom_attributes\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4fe8d8d5-e188-4d91-bda3-305fe7c10556",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "vwr",
+                    "v1",
+                    "waitingrooms",
+                    ":waitingroom_key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "waitingroom_key",
+                      "description": "(Required) A unique identifier for the waiting room."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"waitingroom_url\": \"<string>\",\n  \"access_type\": \"users\",\n  \"queue_type\": \"fifo\",\n  \"queue_mode\": \"auto\",\n  \"dequeue_mode\": \"on\",\n  \"waiting_room_path\": \"<string>\",\n  \"metric_interval\": 60,\n  \"rate_limit\": 100,\n  \"rate_period\": 1,\n  \"max_origin_usage_time\": 60,\n  \"waiting_room_interval\": 10,\n  \"request_priority\": [\n    1,\n    4,\n    255\n  ],\n  \"custom_attributes\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "984acde7-be95-4060-b255-11f06e72bec1",
+          "name": "Delete waiting room information",
+          "request": {
+            "name": "Delete waiting room information",
+            "description": {
+              "content": "Deletes waiting room configuration of a specific waiting room.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "vwr",
+                "v1",
+                "waitingrooms",
+                ":waitingroom_key"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "waitingroom_key",
+                  "description": "(Required) The key of the waiting room to delete information for."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE"
+          },
+          "response": [
+            {
+              "id": "484afd07-e8b2-4a40-a959-2afdc3eab9b2",
+              "name": "Successfully deleted the waiting room.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "vwr",
+                    "v1",
+                    "waitingrooms",
+                    ":waitingroom_key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "waitingroom_key",
+                      "description": "(Required) The key of the waiting room to delete information for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"waitingroom_key\": \"string\",\n  \"deleted_at\": 1694757100\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "718392b8-c01c-4f56-996b-0bfdbfd7cf2b",
+              "name": "Either the API key doesn't have permissions or it is deactivated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "vwr",
+                    "v1",
+                    "waitingrooms",
+                    ":waitingroom_key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "waitingroom_key",
+                      "description": "(Required) The key of the waiting room to delete information for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "62e2252e-0264-4da3-bddf-1632a790b78c",
+              "name": "Waiting room key not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "vwr",
+                    "v1",
+                    "waitingrooms",
+                    ":waitingroom_key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "waitingroom_key",
+                      "description": "(Required) The key of the waiting room to delete information for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1954fc1a-1307-4498-bbd0-7f24e808632b",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "vwr",
+                    "v1",
+                    "waitingrooms",
+                    ":waitingroom_key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "waitingroom_key",
+                      "description": "(Required) The key of the waiting room to delete information for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-play.paas.macrometa.io",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "9bb639c6-2a81-477f-9562-d7b8c99cd92f",
+    "name": "Macrometa API Reference Activity Metrics Waiting rooms API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API reference for the Macrometa Global Data Network.",
+      "type": "text/plain"
+    }
+  }
+}

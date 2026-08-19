@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Macrometa API Reference Activity Metrics Service information API",
+    "version": "0.17.17"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Service information",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get the type name and instance of the service",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/vwr/v1/info"
+          },
+          "docs": "Gets the type and instance name of the service.\n\nValid values for type are 'leader', 'follower', and 'vwrs'.\n\nThis API requires _admin_ permissions to run.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

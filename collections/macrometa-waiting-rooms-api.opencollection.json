@@ -1,0 +1,168 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Macrometa API Reference Activity Metrics Waiting rooms API",
+    "version": "0.17.17"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Waiting rooms",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get information on all waiting rooms",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/vwr/v1/waitingrooms",
+            "params": [
+              {
+                "name": "pattern",
+                "value": "",
+                "type": "query",
+                "description": "Fetch waiting room information that matches the pattern. For example, a pattern could be 'aa' or 'test'. To get all waiting room, set the pattern to '*'."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The _limit_ parameter determines the number of waiting rooms returned."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Represents the starting point from where to begin fetching the waiting room records. This parameter is especially useful in conjunction with the _limit_ parameter for pagination of a large number of waiting room records. By default, it is set to 0, meaning that data retrieval will start from the very first record. For example, if you have 10,000 waiting room records and set the _limit_ to 100, then the first API call without an offset will retrieve records 1 to 100. If you set the _offset_ to 100 for the next call, you will retrieve records 101 to 200, and so on. This way, by incrementing the _offset_ by the _limit_ value for successive calls, you can paginate through the entire dataset."
+              },
+              {
+                "name": "sortby",
+                "value": "",
+                "type": "query",
+                "description": "The field used for sorting."
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "The sort order:\n * _asc_ - Ascending, from A to Z\n * _desc_ - Descending, from Z to A\n"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of waiting rooms that match a specified pattern."
+        },
+        {
+          "info": {
+            "name": "Create a waiting room",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/api/vwr/v1/waitingrooms",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new waiting room with the specified properties."
+        },
+        {
+          "info": {
+            "name": "Get information for a specific waiting room",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/vwr/v1/waitingrooms/:waitingroom_key",
+            "params": [
+              {
+                "name": "waitingroom_key",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the waiting room of interest."
+              }
+            ]
+          },
+          "docs": "Retrieves information about a specific waiting room."
+        },
+        {
+          "info": {
+            "name": "Update a waiting room",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-play.paas.macrometa.io/api/vwr/v1/waitingrooms/:waitingroom_key",
+            "params": [
+              {
+                "name": "waitingroom_key",
+                "value": "",
+                "type": "path",
+                "description": "A unique identifier for the waiting room."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing waiting room with the specified properties."
+        },
+        {
+          "info": {
+            "name": "Modify specific property of a waiting room",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api-play.paas.macrometa.io/api/vwr/v1/waitingrooms/:waitingroom_key",
+            "params": [
+              {
+                "name": "waitingroom_key",
+                "value": "",
+                "type": "path",
+                "description": "A unique identifier for the waiting room."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Modifies an existing waiting room with one or more specified properties."
+        },
+        {
+          "info": {
+            "name": "Delete waiting room information",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-play.paas.macrometa.io/api/vwr/v1/waitingrooms/:waitingroom_key",
+            "params": [
+              {
+                "name": "waitingroom_key",
+                "value": "",
+                "type": "path",
+                "description": "The key of the waiting room to delete information for."
+              }
+            ]
+          },
+          "docs": "Deletes waiting room configuration of a specific waiting room."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

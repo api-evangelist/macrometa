@@ -1,0 +1,121 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Macrometa API Reference Activity Metrics Import Export API",
+    "version": "0.17.17"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Import Export",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Export data",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/export",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Run the **query** and return list of result documents. **Query** cannot contain the following keywords: **INSERT**, **UPDATE**, **REPLACE**, **REMOVE** and **UPSERT**."
+        },
+        {
+          "info": {
+            "name": "Export collection data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/export/:collection",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "collection",
+                "value": "",
+                "type": "path",
+                "description": "The name of the collection."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "This option can be used to simulate paging."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "This option can be used to simulate paging. Limit the result. **Maximum: 1000**."
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Order the results asc or desc."
+              }
+            ]
+          },
+          "docs": "Fetch a list of documents in the specified collection. If offset, limit and order are not specified their default values are applied."
+        },
+        {
+          "info": {
+            "name": "Import collection data",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/_fabric/:fabric/_api/import/:collection",
+            "params": [
+              {
+                "name": "fabric",
+                "value": "",
+                "type": "path",
+                "description": "The name of the fabric."
+              },
+              {
+                "name": "collection",
+                "value": "",
+                "type": "path",
+                "description": "The name of the collection."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create documents in the collection identified by collection parameter."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,123 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Macrometa API Reference Activity Metrics Cache API",
+    "version": "0.17.17"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Cache",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Purge cache",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-play.paas.macrometa.io/api/prerender/v1/origins/:origin/cache/purge",
+            "headers": [
+              {
+                "name": "x-photoniq-customerid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "origin",
+                "value": "www.origin.com",
+                "type": "path",
+                "description": "Origin hostname."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Clears rendered pages from the origin cache. It is possible to clear all records related to the origin or specific records according to the \"urls\" list."
+        },
+        {
+          "info": {
+            "name": "Preview cached document",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/prerender/v1/origins/:origin/cache/:cacheKey/preview",
+            "headers": [
+              {
+                "name": "x-photoniq-customerid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "origin",
+                "value": "www.origin.com",
+                "type": "path",
+                "description": "Origin hostname."
+              },
+              {
+                "name": "cacheKey",
+                "value": "",
+                "type": "path",
+                "description": "Unique key for the document."
+              }
+            ]
+          },
+          "docs": "This endpoint retrieves cached documents from the cache. Users must specify both the \"origin\" and the \"cacheKey\" of the document they wish to access."
+        },
+        {
+          "info": {
+            "name": "Get all cached documents information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/prerender/v1/origins/:origin/cache",
+            "headers": [
+              {
+                "name": "x-photoniq-customerid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit for results."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset for results."
+              },
+              {
+                "name": "origin",
+                "value": "www.origin.com",
+                "type": "path",
+                "description": "Origin hostname."
+              }
+            ]
+          },
+          "docs": "This endpoint provides a paginated list of cached documents associated with a specified \"origin\". Users can control pagination using the \"limit\" and \"offset\" query parameters. The \"limit\" parameter defines the number of documents to retrieve, while \"offset\" specifies the starting point in the list."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

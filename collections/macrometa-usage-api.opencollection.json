@@ -1,0 +1,349 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Macrometa API Reference Activity Metrics Usage API",
+    "version": "0.17.17"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Usage",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get usage metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/prerender/v1/usage/:aggregationType",
+            "headers": [
+              {
+                "name": "x-photoniq-customerid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Timestamp (in seconds) used as the initial time for filtering."
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "Timestamp (in seconds) used as the final time for filtering."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit for results."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset for results."
+              },
+              {
+                "name": "sortOrder",
+                "value": "",
+                "type": "query",
+                "description": "Sorting order."
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "Sorting field."
+              },
+              {
+                "name": "aggregation",
+                "value": "",
+                "type": "query",
+                "description": "If the aggregate flag is true, then the results are consolidated and returned as an aggregate summary for the specified start and end period."
+              },
+              {
+                "name": "aggregationType",
+                "value": "",
+                "type": "path",
+                "description": "Aggregation type."
+              }
+            ]
+          },
+          "docs": "Returns usage metrics for a specified time range, with mandatory aggregation by type and an optional origin filter. This endpoint requires from and to query parameters as epoch times, along with an aggregationType in the path to define the data aggregation granularity (e.g., hourly, daily, monthly). It supports pagination (limit, offset) and sorting (sortOrder, sortBy) options in the query. Authentication is managed via the customerId header."
+        },
+        {
+          "info": {
+            "name": "Get usage metrics by origin",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/prerender/v1/usage/:aggregationType/:origin",
+            "headers": [
+              {
+                "name": "x-photoniq-customerid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Timestamp (in seconds) used as the initial time for filtering."
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "Timestamp (in seconds) used as the final time for filtering."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit for results."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset for results."
+              },
+              {
+                "name": "sortOrder",
+                "value": "",
+                "type": "query",
+                "description": "Sorting order."
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "Sorting field."
+              },
+              {
+                "name": "aggregation",
+                "value": "",
+                "type": "query",
+                "description": "If the aggregate flag is true, then the results are consolidated and returned as an aggregate summary for the specified start and end period."
+              },
+              {
+                "name": "aggregationType",
+                "value": "",
+                "type": "path",
+                "description": "Aggregation type."
+              },
+              {
+                "name": "origin",
+                "value": "",
+                "type": "path",
+                "description": "Origin hostname."
+              }
+            ]
+          },
+          "docs": "Returns usage metrics for a specified time range, with mandatory aggregation by type and an optional origin filter. This endpoint requires from and to query parameters as epoch times, along with an aggregationType in the path to define the data aggregation granularity (e.g., hourly, daily, monthly). It supports pagination (limit, offset) and sorting (sortOrder, sortBy) options in the query. Authentication is managed via the customerId header."
+        },
+        {
+          "info": {
+            "name": "Gets hourly usage statistics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/vwr/v1/usage/hourly",
+            "params": [
+              {
+                "name": "waitingroom",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier for a waiting room."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "The start date and time used for querying usage data. Must be provided in RFC3339 date-time format and be in UTC."
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "The end date and time used for querying usage data. Must be provided in RFC3339 date-time format and be in UTC."
+              },
+              {
+                "name": "aggregate",
+                "value": "",
+                "type": "query",
+                "description": "If the _aggregate_ flag is _true_, then the results are consolidated and returned as an aggregate summary for the specified _start_ and _end_ period. If the _aggregate_ flag is _false_ or not provided, then the data is returned as separate, distributed records for the same period on an hourly basis without aggregation. If _aggregate_ flag is _true_, then [offset, limit, sort, order] are not considered."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The _limit_ parameter determines the number of usage records returned."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Represents the starting point from where to begin fetching the usage records. This parameter is especially useful in conjunction with the _limit_ parameter for pagination of a large number of usage records. By default, it is set to 0, meaning that data retrieval will start from the very first record. For example, if you have 10,000 usage records and set the _limit_ to 100, then the first API call without an _offset_ will retrieve records 1 to 100. If you set the _offset_ to 100 for the next call, you will retrieve records 101 to 200, and so on. This way, by incrementing the _offset_ by the _limit_ value for successive calls, you can paginate through the entire dataset."
+              },
+              {
+                "name": "sortby",
+                "value": "",
+                "type": "query",
+                "description": "The field used for sorting."
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "The sort order:\n * _asc_ - Ascending, from A to Z\n * _desc_ - Descending, from Z to A\n"
+              }
+            ]
+          },
+          "docs": "Get hourly usage statistics of a specific waiting room for a specified time period."
+        },
+        {
+          "info": {
+            "name": "Gets daily usage statistics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/vwr/v1/usage/daily",
+            "params": [
+              {
+                "name": "waitingroom",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier for a waiting room."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "The start date and time used for querying usage data. Must be provided in RFC3339 date-time format and be in UTC."
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "The end date and time used for querying usage data. Must be provided in RFC3339 date-time format and be in UTC."
+              },
+              {
+                "name": "aggregate",
+                "value": "",
+                "type": "query",
+                "description": "If the _aggregate_ flag is is included and set to _true_, then the results are consolidated and returned as an aggregate summary for the specified _start_ and _end_ period. If the _aggregate_ flag is _false_ or not provided, then the data is returned as separate, distributed records for the same period on a per-day basis without aggregation. If _aggregate_ flag is _true_, then [offset, limit, sort, order] are not considered."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The _limit_ parameter determines the number of usage records returned."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Represents the starting point from where to begin fetching the usage records. This parameter is especially useful in conjunction with the _limit_ parameter for pagination of a large number of usage records. By default, it is set to 0, meaning that data retrieval will start from the very first record. For example, if you have 10,000 usage records and set the _limit_ to 100, then the first API call without an _offset_ will retrieve records 1 to 100. If you set the _offset_ to 100 for the next call, you will retrieve records 101 to 200, and so on. This way, by incrementing the _offset_ by the _limit_ value for successive calls, you can paginate through the entire dataset."
+              },
+              {
+                "name": "sortby",
+                "value": "",
+                "type": "query",
+                "description": "The field used for sorting."
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "The sort order:\n * _asc_ - Ascending, from A to Z\n * _desc_ - Descending, from Z to A\n"
+              }
+            ]
+          },
+          "docs": "Gets daily usage statistics of a specific waiting room for a specified time period."
+        },
+        {
+          "info": {
+            "name": "Get monthly usage statistics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-play.paas.macrometa.io/api/vwr/v1/usage/monthly",
+            "params": [
+              {
+                "name": "waitingroom",
+                "value": "",
+                "type": "query",
+                "description": "Unique waiting room identifier. If unused, retrieve the monthly usage information for all waiting rooms."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "The start date and time used for querying usage data. Must be provided in RFC3339 date-time format and be in UTC."
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "The end date and time used for querying usage data. Must be provided in RFC3339 date-time format and be in UTC."
+              },
+              {
+                "name": "aggregate",
+                "value": "",
+                "type": "query",
+                "description": "If the _aggregate_ flag is included and set to _true_, then the results are consolidated and returned as an aggregate summary for the specified _start_ and _end_ period. If the _aggregate_ flag is _false_ or not provided, then the data is returned as separate, distributed records for the same period. By default, the value is false."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The _limit_ parameter determines the number of usage records returned."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Represents the starting point from where to begin fetching the usage records. This parameter is especially useful in conjunction with the _limit_ parameter for pagination of a large number of usage records. By default, it is set to 0, meaning the data retrieval will start from the very first record. For example, if you have 10,000 usage records and set the _limit_ to 100, then the first API call without an _offset_ will retrieve records 1 to 100. If you set the _offset_ to 100 for the next call, you will retrieve records from 101 to 200, and so on. This way, by incrementing the _offset_ by the _limit_ value for successive calls, you can paginate through the entire dataset."
+              },
+              {
+                "name": "sortby",
+                "value": "",
+                "type": "query",
+                "description": "The field used for sorting."
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "The sort order:\n * _asc_ - Ascending, from A to Z\n * _desc_ - Descending, from Z to A\n"
+              }
+            ]
+          },
+          "docs": "Gets monthly usage statistics of a specific waiting room for a specified time period."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
