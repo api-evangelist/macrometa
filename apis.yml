@@ -43,6 +43,20 @@ tags:
 - Serverless
 - Streaming
 - Stream Processing
+- Real-Time
+- Web Performance
+- CDN
+- Search
+- Artificial Intelligence
+tags_raw:
+- Company
+- Infrastructure
+- Edge Computing
+- Database
+- NoSQL
+- Serverless
+- Streaming
+- Stream Processing
 - Real Time
 - Web Performance
 - CDN
@@ -81,6 +95,8 @@ apis:
   humanURL: https://www.macrometa.com/docs/api
   baseURL: https://api-play.paas.macrometa.io
   tags:
+  - APIKeys
+  tags_raw:
   - API key
   properties:
   - type: OpenAPI
@@ -91,6 +107,8 @@ apis:
   humanURL: https://www.macrometa.com/docs/api
   baseURL: https://api-play.paas.macrometa.io
   tags:
+  - APIKeys
+  tags_raw:
   - API Keys
   properties:
   - type: OpenAPI
@@ -141,6 +159,8 @@ apis:
   humanURL: https://www.macrometa.com/docs/api
   baseURL: https://api-play.paas.macrometa.io
   tags:
+  - Collection
+  tags_raw:
   - Collections
   properties:
   - type: OpenAPI
@@ -336,6 +356,8 @@ apis:
   humanURL: https://www.macrometa.com/docs/api
   baseURL: https://api-play.paas.macrometa.io
   tags:
+  - Key-Value
+  tags_raw:
   - Key Value
   properties:
   - type: OpenAPI
@@ -506,6 +528,8 @@ apis:
   humanURL: https://www.macrometa.com/docs/api
   baseURL: https://api-play.paas.macrometa.io
   tags:
+  - Service Information
+  tags_raw:
   - Service information
   properties:
   - type: OpenAPI
@@ -640,6 +664,8 @@ apis:
   humanURL: https://www.macrometa.com/docs/api
   baseURL: https://api-play.paas.macrometa.io
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
