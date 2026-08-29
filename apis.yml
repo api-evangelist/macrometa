@@ -11,6 +11,18 @@ description: >-
   delivery, and hypersearch. This profile catalogs Macrometa's published
   OpenAPI surface across the GDN core and the PhotonIQ product family, along
   with its SDKs, CLI, status page, and developer documentation.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: self-serve
@@ -731,6 +743,9 @@ apis:
   - type: OpenAPI
     url: openapi/macrometa-waiting-rooms-api-openapi.yml
 common:
+- type: CapabilityMap
+  url: capabilities/macrometa-capability-edges.yml
+  name: Macrometa Business Capability Map
 - type: DomainSecurity
   url: security/macrometa-domain-security.yml
 - type: AgenticAccess
