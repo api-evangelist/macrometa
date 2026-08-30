@@ -107,7 +107,7 @@ apis:
   humanURL: https://www.macrometa.com/docs/api
   baseURL: https://api-play.paas.macrometa.io
   tags:
-  - APIKeys
+  - API key
   tags_raw:
   - API key
   properties:
@@ -368,7 +368,7 @@ apis:
   humanURL: https://www.macrometa.com/docs/api
   baseURL: https://api-play.paas.macrometa.io
   tags:
-  - Key-Value
+  - Key Value
   tags_raw:
   - Key Value
   properties:
@@ -540,7 +540,7 @@ apis:
   humanURL: https://www.macrometa.com/docs/api
   baseURL: https://api-play.paas.macrometa.io
   tags:
-  - Service Information
+  - Service information
   tags_raw:
   - Service information
   properties:
