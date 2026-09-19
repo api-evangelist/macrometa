@@ -217,6 +217,8 @@ apis:
   humanURL: https://www.macrometa.com/docs/api
   baseURL: https://api-play.paas.macrometa.io
   tags:
+  - Data-Center
+  tags_raw:
   - Data Centers
   properties:
   - type: OpenAPI
@@ -257,6 +259,8 @@ apis:
   humanURL: https://www.macrometa.com/docs/api
   baseURL: https://api-play.paas.macrometa.io
   tags:
+  - Environment
+  tags_raw:
   - Environments
   properties:
   - type: OpenAPI
@@ -359,6 +363,8 @@ apis:
   humanURL: https://www.macrometa.com/docs/api
   baseURL: https://api-play.paas.macrometa.io
   tags:
+  - Index
+  tags_raw:
   - Indexes
   properties:
   - type: OpenAPI
