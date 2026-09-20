@@ -1,0 +1,22 @@
+# Pricing transcribed from the provider's own page — see provenance. Numbers are quoted, not derived.
+generated: '2026-09-20'
+method: searched
+source: https://www.macrometa.com/pricing
+sources:
+- https://www.macrometa.com/pricing
+provenance:
+  tool: planning/api-economics/harvest_pricing.py
+  run: 20260920T120546
+  grounding: every price_text was found verbatim in the fetched page text
+audience: business-product
+pricing_basis: negotiated
+published: false
+note: No numeric price is published on the pricing page; Page shows only an Enterprise tier with a sales-contact
+  CTA; no numeric prices.
+plan_count: 1
+plans:
+- name: Enterprise
+  price_text: Connect with our Sales Team
+  period: none
+  included_quota: Complete access to the Global Data Network - deploy to over 175+ locations around the
+    world
