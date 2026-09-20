@@ -11,7 +11,7 @@ capability_model:
   attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
     CC BY 4.0
   notice: NOTICE
-edge_count: 4
+edge_count: 5
 edges:
 - tag: Users
   spec_file: macrometa-users-api-openapi.yml
@@ -34,6 +34,17 @@ edges:
   reason: The single operation raises a support ticket in Zendesk, i.e. inbound customer inquiry/support
     case capture. Sub-capability inferred as Customer Inquiry Management; confidence moderate because
     the surface is a single thin trigger endpoint.
+- tag: Secrets
+  spec_file: macrometa-secrets-api-openapi.yml
+  capability_id: BC-4210.60
+  capability_id_l1: BC-4210
+  capability_name: Configuration & Secrets Management
+  confidence: 0.72
+  evidence: POST /_fabric/{fabric}/_api/kms/secret  CreateSecret  Create secret.
+  reason: A key-management-service surface for CRUD over named secrets scoped to a fabric — i.e. management
+    of secrets consumed by services, matching Configuration & Secrets Management. Not identity/access
+    administration, so IAM is a poorer fit.
+  recovered_from: sweep-20260829T005356Z-edges.json
 - tag: Administration
   spec_file: macrometa-administration-api-openapi.yml
   capability_id: BC-4230.10
