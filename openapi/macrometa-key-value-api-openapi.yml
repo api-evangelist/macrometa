@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Macrometa API Reference Activity Metrics Key Value API
+  title: Macrometa API Reference Key Value API
   version: 0.17.17
   description: API reference for the Macrometa Global Data Network.
   license:
@@ -71,6 +71,8 @@ paths:
       summary: Get number of key-value pairs in collection
       tags:
       - Key Value
+      operationId: getFabricByFabricApiKvByCollectionCount
+      x-operation-id-source: derived
   /_fabric/{fabric}/_api/kv/{collection}/keys:
     get:
       description: Fetch keys from key-value collection.
@@ -149,6 +151,8 @@ paths:
       summary: Gets keys from key-value collection
       tags:
       - Key Value
+      operationId: getFabricByFabricApiKvByCollectionKeys
+      x-operation-id-source: derived
   /_fabric/{fabric}/_api/kv:
     get:
       description: Fetch all key-value collections.
@@ -191,6 +195,8 @@ paths:
       summary: Lists all key-value collections
       tags:
       - Key Value
+      operationId: getFabricByFabricApiKv
+      x-operation-id-source: derived
   /_fabric/{fabric}/_api/kv/{collection}:
     post:
       description: Create key-value collection.
@@ -375,6 +381,8 @@ paths:
       summary: Remove key-value collection
       tags:
       - Key Value
+      operationId: deleteFabricByFabricApiKvByCollection
+      x-operation-id-source: derived
   /_fabric/{fabric}/_api/kv/{collection}/value/{key}:
     get:
       description: 'Fetch value from key-value collection.
@@ -440,6 +448,8 @@ paths:
       summary: Get value from key-value collection
       tags:
       - Key Value
+      operationId: getFabricByFabricApiKvByCollectionValueByKey
+      x-operation-id-source: derived
     delete:
       description: Remove key-value pair.
       parameters:
@@ -495,6 +505,8 @@ paths:
       summary: Remove key-value pair
       tags:
       - Key Value
+      operationId: deleteFabricByFabricApiKvByCollectionValueByKey
+      x-operation-id-source: derived
   /_fabric/{fabric}/_api/kv/{collection}/values:
     post:
       description: 'Fetch key-value pairs from collection. Optional list of keys.
@@ -655,9 +667,11 @@ paths:
             x-gdn-requestid:
               schema:
                 $ref: '#/components/schemas/headers/x-gdn-requestid'
-      summary: Remove key-value pairs.
+      summary: Remove key-value pairs
       tags:
       - Key Value
+      operationId: deleteFabricByFabricApiKvByCollectionValues
+      x-operation-id-source: derived
   /_fabric/{fabric}/_api/kv/{collection}/value:
     put:
       description: 'Set one or more key-value pairs in key-value collection.
@@ -765,6 +779,8 @@ paths:
       summary: Set one or more key-value pairs in key-value collection
       tags:
       - Key Value
+      operationId: putFabricByFabricApiKvByCollectionValue
+      x-operation-id-source: derived
   /_fabric/{fabric}/_api/kv/{collection}/truncate:
     put:
       description: Remove all key-value pairs in a collection.
@@ -821,91 +837,24 @@ paths:
       summary: Remove all key-value pairs in a collection
       tags:
       - Key Value
+      operationId: putFabricByFabricApiKvByCollectionTruncate
+      x-operation-id-source: derived
 components:
   schemas:
-    keys_array_rc_200_1:
-      type: object
+    examples_id_key_rev:
       properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 200
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        result:
-          description: An array of keys. If there are no results, the array is returned as empty.
-          type: array
-          items:
-            type: object
-            properties:
-              name:
-                description: Name of the collection.
-                type: string
-                example: testCollection
-              expiration:
-                description: Expiration details of a collection.
-                type: string
-                example: true
-    kv_array_rc_200:
-      type: object
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 200
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        result:
-          description: An array of keys. If there are no results, the array is returned as empty.
-          type: array
-          items:
-            type: string
-            example: data
-    error_example_rc_429:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 429
-        error:
-          description: Flag if there is an error in response. *True* for this response.
-          type: boolean
-          example: true
-        errorMessage:
-          description: A message created for this error.
+        _id:
+          description: ID of the collection.
           type: string
-          example: Error message
-        errorNum:
-          description: Error number returned from the database.
-          type: integer
-          example: 581
-      required:
-      - error
-      type: object
-    error_example_rc_404:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 404
-        error:
-          description: Flag if there is an error in response. *True* for this response.
-          type: boolean
-          example: true
-        errorMessage:
-          description: A message created for this error.
+          example: test/foo
+        _key:
+          description: _key details of collection.
           type: string
-          example: Error message
-        errorNum:
-          description: Error number returned from the database.
-          type: integer
-          example: 581
-      required:
-      - error
+          example: foo
+        _rev:
+          description: _rev details of collection.
+          type: string
+          example: _dPRuHxe--_
       type: object
     key_blob:
       properties:
@@ -932,6 +881,88 @@ components:
       items:
         $ref: '#/components/schemas/key_value'
       type: array
+    kv_collection_examples_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        name:
+          description: It shows name of the collection.
+          type: string
+          example: testCollection
+      required:
+      - error
+      type: object
+    kv_array_rc_200:
+      type: object
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          description: An array of keys. If there are no results, the array is returned as empty.
+          type: array
+          items:
+            type: string
+            example: data
+    keys_array:
+      items:
+        type: string
+        format: string
+        example: foo
+      type: array
+    kv_examples_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        name:
+          description: It shows name of the collection.
+          type: string
+          example: testCollection
+        count:
+          description: It gives kv count.
+          type: integer
+          example: 5
+      required:
+      - error
+      type: object
+    error_example_rc_409:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 409
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
+      type: object
     kv_get_values_examples_rc_200:
       properties:
         code:
@@ -960,12 +991,73 @@ components:
       required:
       - error
       type: object
-    keys_array:
-      items:
-        type: string
-        format: string
-        example: foo
-      type: array
+    keys_array_rc_200_1:
+      type: object
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          description: An array of keys. If there are no results, the array is returned as empty.
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                description: Name of the collection.
+                type: string
+                example: testCollection
+              expiration:
+                description: Expiration details of a collection.
+                type: string
+                example: true
+    error_example_rc_400:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 400
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 102020
+      required:
+      - error
+      type: object
+    error_example_rc_429:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 429
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
+      type: object
     key_value:
       properties:
         _key:
@@ -995,101 +1087,6 @@ components:
       x-gdn-requestid:
         description: A unique request ID for each API request.
         type: string
-    kv_examples_rc_200:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 200
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        name:
-          description: It shows name of the collection.
-          type: string
-          example: testCollection
-        count:
-          description: It gives kv count.
-          type: integer
-          example: 5
-      required:
-      - error
-      type: object
-    examples_id_key_rev:
-      properties:
-        _id:
-          description: ID of the collection.
-          type: string
-          example: test/foo
-        _key:
-          description: _key details of collection.
-          type: string
-          example: foo
-        _rev:
-          description: _rev details of collection.
-          type: string
-          example: _dPRuHxe--_
-      type: object
-    error_example_rc_400:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 400
-        error:
-          description: Flag if there is an error in response. *True* for this response.
-          type: boolean
-          example: true
-        errorMessage:
-          description: A message created for this error.
-          type: string
-          example: Error message
-        errorNum:
-          description: Error number returned from the database.
-          type: integer
-          example: 102020
-      required:
-      - error
-      type: object
-    kv_collection_examples_rc_200:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 200
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        name:
-          description: It shows name of the collection.
-          type: string
-          example: testCollection
-      required:
-      - error
-      type: object
-    error_example_rc_409:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 409
-        error:
-          description: Flag if there is an error in response. *True* for this response.
-          type: boolean
-          example: true
-        errorMessage:
-          description: A message created for this error.
-          type: string
-          example: Error message
-        errorNum:
-          description: Error number returned from the database.
-          type: integer
-          example: 581
-      required:
-      - error
-      type: object
     key_blob_array:
       items:
         $ref: '#/components/schemas/key_blob'
@@ -1116,6 +1113,27 @@ components:
           description: Value of the collection.
           type: string
           example: bar
+      type: object
+    error_example_rc_404:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 404
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
       type: object
   securitySchemes:
     ApiKeyAuth:

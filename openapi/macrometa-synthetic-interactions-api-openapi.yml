@@ -1,17 +1,10 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Macrometa API Reference Activity Metrics Synthetic Interactions API
-  version: 0.17.17
-  description: API reference for the Macrometa Global Data Network.
-  license:
-    name: Macrometa License, Version 2.0
+  title: PhotonIQ Prerender Service Synthetic Interactions API
+  description: API documentation for the PhotonIQ Prerender service
+  version: 1.2.0
 servers:
-- url: https://api-play.paas.macrometa.io
-  description: GDN API
-host: api-play.paas.macrometa.io
-security:
-- ApiKeyAuth: []
-- BearerAuth: []
+- url: https://demo-prerender.photoniq.macrometa.io
 tags:
 - name: Synthetic Interactions
 paths:
@@ -363,6 +356,8 @@ paths:
                 example:
                   status: ERROR
                   message: Internal server error.
+      operationId: getApiPrerenderV1OriginsByOriginInteractions
+      x-operation-id-source: derived
   /api/prerender/v1/origins/{origin}/interactions/{type}:
     get:
       summary: Get synthetic interaction
@@ -629,6 +624,8 @@ paths:
                 example:
                   status: ERROR
                   message: Internal server error.
+      operationId: getApiPrerenderV1OriginsByOriginInteractionsByType
+      x-operation-id-source: derived
     post:
       summary: Create synthetic interaction
       tags:
@@ -881,6 +878,8 @@ paths:
                 example:
                   status: ERROR
                   message: Internal server error.
+      operationId: postApiPrerenderV1OriginsByOriginInteractionsByType
+      x-operation-id-source: derived
     patch:
       summary: Update synthetic interaction
       tags:
@@ -1129,6 +1128,8 @@ paths:
                 example:
                   status: ERROR
                   message: Internal server error.
+      operationId: patchApiPrerenderV1OriginsByOriginInteractionsByType
+      x-operation-id-source: derived
     delete:
       summary: Delete synthetic interaction
       tags:
@@ -1235,21 +1236,5 @@ paths:
                 example:
                   status: ERROR
                   message: Internal server error.
-components:
-  securitySchemes:
-    ApiKeyAuth:
-      type: apiKey
-      in: header
-      name: Authorization
-      description: 'Provide an API Key to the `Authorization` header, prefixed with "apikey".
-
-
-        Example: `Authorization: apikey <key>`'
-    BearerAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
-      description: 'Provide a JSON Web Token (JWT) to the `Authorization` header, prefixed with "bearer".
-
-
-        Example: `Authorization: bearer <jwt>`'
+      operationId: deleteApiPrerenderV1OriginsByOriginInteractionsByType
+      x-operation-id-source: derived

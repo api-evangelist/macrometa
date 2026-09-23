@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Macrometa API Reference Activity Metrics Managed Keys API
+  title: Macrometa API Reference Managed Keys API
   version: 0.17.17
   description: API reference for the Macrometa Global Data Network.
   license:
@@ -19,7 +19,7 @@ paths:
     get:
       tags:
       - Managed Keys
-      summary: List of managed keys.
+      summary: List of managed keys
       description: Fetch managed keys with filter and pagination.
       operationId: ListOfManagedKey
       parameters:
@@ -147,7 +147,7 @@ paths:
     post:
       tags:
       - Managed Keys
-      summary: Create managed key.
+      summary: Create managed key
       description: Create managed key.
       operationId: CreateManagedKey
       parameters:
@@ -230,7 +230,7 @@ paths:
     get:
       tags:
       - Managed Keys
-      summary: Fetch managed key by ID.
+      summary: Fetch managed key by ID
       description: Fetch managed key by ID.
       operationId: FetchManagedKey
       parameters:
@@ -316,7 +316,7 @@ paths:
     delete:
       tags:
       - Managed Keys
-      summary: Delete managed key by ID.
+      summary: Delete managed key by ID
       description: Set the managed key to status = `DELETING` or completely delete it returning status = `DELETED` if the key doesn't have encoded data.
       operationId: DeleteManagedKey
       parameters:
@@ -403,7 +403,7 @@ paths:
     patch:
       tags:
       - Managed Keys
-      summary: Enable or disable the managed key.
+      summary: Enable or disable the managed key
       description: Enable or disable the managed key by ID.
       operationId: EnableOrDisableManagedKey
       parameters:
@@ -494,6 +494,54 @@ paths:
                 $ref: '#/components/schemas/headers/x-gdn-requestid'
 components:
   schemas:
+    get_managedkey_examples_rc_200:
+      properties:
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        code:
+          description: The generated response code.
+          type: integer
+          example: 200
+        result:
+          type: object
+          properties:
+            id:
+              type: string
+              example: lPz8KjI2_yzYBgjkk2jlWA.IqXfBlY
+            name:
+              type: string
+              example: managed_key_1
+            keyOptions:
+              type: object
+              properties:
+                masterKeyIds:
+                  type: array
+            managedKeyType:
+              type: string
+              example: CMK
+            keyProvider:
+              type: string
+              example: AWS
+            tenant:
+              type: string
+              example: _mm
+            fabric:
+              type: string
+              example: _system
+            createdAt:
+              type: number
+              example: 1689020889736
+            updatedAt:
+              type: number
+              example: 1689020889736
+            status:
+              type: string
+              example: ENABLED
+            description:
+              type: string
+              example: Customer's key.
     error_example_rc_422:
       properties:
         code:
@@ -511,6 +559,164 @@ components:
       required:
       - error
       type: object
+    error_example_rc_401:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 401
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: '102020'
+      required:
+      - error
+      type: object
+    error_example_rc_403:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 403
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
+      type: object
+    error_example_rc_412:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 412
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
+      type: object
+    headers:
+      x-gdn-region:
+        description: The federation's region hostname that served the request.
+        type: string
+      x-gdn-requestid:
+        description: A unique request ID for each API request.
+        type: string
+    create_managed_key_request:
+      type: object
+      properties:
+        name:
+          type: string
+          example: managed_key_1
+        managedKeyType:
+          type: string
+          example: CMK
+        keyProvider:
+          type: string
+          example: MACROMETA
+        service:
+          type: string
+          example: SECRETS
+        description:
+          type: string
+          example: 'Customer''s managed key #1.'
+        masterKeyIds:
+          type: object
+          example: null
+    error_example_rc_404:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 404
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
+      type: object
+    create_managed_key_example_rc_200:
+      properties:
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        code:
+          description: The generated response code.
+          type: integer
+          example: 200
+        result:
+          type: object
+          properties:
+            id:
+              type: string
+              example: lPz8KjI2_yzYBgjkk2jlWA.IqXfBlY
+            name:
+              type: string
+              example: managed_key_1
+            keyOptions:
+              type: object
+              example: null
+            managedKeyType:
+              type: string
+              example: CMK
+            keyProvider:
+              type: string
+              example: MACROMETA
+            tenant:
+              type: string
+              example: _mm
+            fabric:
+              type: string
+              example: _system
+            createdAt:
+              type: number
+              example: 1689020889736
+            updatedAt:
+              type: number
+              example: 1689020889736
+            status:
+              type: string
+              example: ENABLED
+            description:
+              type: string
+              example: Customer's key.
     get_all_managedkeys_examples_rc_200:
       properties:
         error:
@@ -578,212 +784,6 @@ components:
                   description:
                     type: string
                     example: Customer's key.
-    create_managed_key_request:
-      type: object
-      properties:
-        name:
-          type: string
-          example: managed_key_1
-        managedKeyType:
-          type: string
-          example: CMK
-        keyProvider:
-          type: string
-          example: MACROMETA
-        service:
-          type: string
-          example: SECRETS
-        description:
-          type: string
-          example: 'Customer''s managed key #1.'
-        masterKeyIds:
-          type: object
-          example: null
-    error_example_rc_404:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 404
-        error:
-          description: Flag if there is an error in response. *True* for this response.
-          type: boolean
-          example: true
-        errorMessage:
-          description: A message created for this error.
-          type: string
-          example: Error message
-        errorNum:
-          description: Error number returned from the database.
-          type: integer
-          example: 581
-      required:
-      - error
-      type: object
-    error_example_rc_403:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 403
-        error:
-          description: Flag if there is an error in response. *True* for this response.
-          type: boolean
-          example: true
-        errorMessage:
-          description: A message created for this error.
-          type: string
-          example: Error message
-        errorNum:
-          description: Error number returned from the database.
-          type: integer
-          example: 581
-      required:
-      - error
-      type: object
-    headers:
-      x-gdn-region:
-        description: The federation's region hostname that served the request.
-        type: string
-      x-gdn-requestid:
-        description: A unique request ID for each API request.
-        type: string
-    get_managedkey_examples_rc_200:
-      properties:
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        code:
-          description: The generated response code.
-          type: integer
-          example: 200
-        result:
-          type: object
-          properties:
-            id:
-              type: string
-              example: lPz8KjI2_yzYBgjkk2jlWA.IqXfBlY
-            name:
-              type: string
-              example: managed_key_1
-            keyOptions:
-              type: object
-              properties:
-                masterKeyIds:
-                  type: array
-            managedKeyType:
-              type: string
-              example: CMK
-            keyProvider:
-              type: string
-              example: AWS
-            tenant:
-              type: string
-              example: _mm
-            fabric:
-              type: string
-              example: _system
-            createdAt:
-              type: number
-              example: 1689020889736
-            updatedAt:
-              type: number
-              example: 1689020889736
-            status:
-              type: string
-              example: ENABLED
-            description:
-              type: string
-              example: Customer's key.
-    error_example_rc_412:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 412
-        error:
-          description: Flag if there is an error in response. *True* for this response.
-          type: boolean
-          example: true
-        errorMessage:
-          description: A message created for this error.
-          type: string
-          example: Error message
-        errorNum:
-          description: Error number returned from the database.
-          type: integer
-          example: 581
-      required:
-      - error
-      type: object
-    create_managed_key_example_rc_200:
-      properties:
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        code:
-          description: The generated response code.
-          type: integer
-          example: 200
-        result:
-          type: object
-          properties:
-            id:
-              type: string
-              example: lPz8KjI2_yzYBgjkk2jlWA.IqXfBlY
-            name:
-              type: string
-              example: managed_key_1
-            keyOptions:
-              type: object
-              example: null
-            managedKeyType:
-              type: string
-              example: CMK
-            keyProvider:
-              type: string
-              example: MACROMETA
-            tenant:
-              type: string
-              example: _mm
-            fabric:
-              type: string
-              example: _system
-            createdAt:
-              type: number
-              example: 1689020889736
-            updatedAt:
-              type: number
-              example: 1689020889736
-            status:
-              type: string
-              example: ENABLED
-            description:
-              type: string
-              example: Customer's key.
-    error_example_rc_401:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 401
-        error:
-          description: Flag if there is an error in response. *True* for this response.
-          type: boolean
-          example: true
-        errorMessage:
-          description: A message created for this error.
-          type: string
-          example: Error message
-        errorNum:
-          description: Error number returned from the database.
-          type: integer
-          example: '102020'
-      required:
-      - error
-      type: object
   requestBodies:
     create_managed_key_request:
       content:

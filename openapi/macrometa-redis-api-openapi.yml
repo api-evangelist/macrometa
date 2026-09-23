@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Macrometa API Reference Activity Metrics Redis API
+  title: Macrometa API Reference Redis API
   version: 0.17.17
   description: API reference for the Macrometa Global Data Network.
   license:
@@ -17,7 +17,34 @@ tags:
 paths:
   /_fabric/{fabric}/_api/redis/{collection}:
     post:
-      description: "This API provides a REST API to access Redis databases. The REST API follows the same convention that the Redis Protocol uses.\n\n Using an HTTP POST request, the redis command and its parameters can be set the in the request body. The command can also be in the url suffix with the parameter set in the request body. The parameter suffixes can vary in number, depending upon the command. For example http://api.macrometa.io/_fabric/myfabric/_api/redis/SET/foo/bar.\n\n Currently supported Redis commands :\n\n * **String:** - **APPEND**  - **DECR**  - **DECRBY**  - **GET**  - **GETDEL**  - **GETEX**  - **GETRANGE** - **GETSET**  - **INCR**  - **INCRBY**  - **INCRBYFLOAT**  - **MGET**  - **MSET**  - **MSETNX** - **PSETEX**  - **SET** - **SETBIT** - **SETEX**  - **SETNX** - **SETRANGE**  - **STRLEN**  - **BITCOUNT** - **BITOP** - **BITPOS** - **GETBIT**\n\n * **Hash:** - **HDEL**  - **HEXISTS**  - **HGET** - **HGETALL**  - **HINCRBY**  - **HINCRBYFLOAT**  - **HKEYS** - **HLEN**  - **HMGET**  - **HMSET**  - **HSCAN** - **HSET**  - **HSETNX**  - **HSTRLEN**  - **HRANDFIELD** - **HVALS**\n\n * **List:** - **LINDEX** - **LINSERT** - **LLEN** - **LMOVE** - **LPOP** - **LPOS** - **LPUSH** - **LPUSHX** - **LRANGE** - **LREM** - **LSET** - **LTRIM** - **RPOP** - **RPOPLPUSH** - **RPUSH** - **RPUSHX**\n\n *  **Set:** - **SADD** - **SCARD** - **SDIFF** - **SDIFFSTORE** - **SINTER** - **SINTERSTORE** - **SISMEMBER** - **SMEMBERS** - **SMISMEMBER** - **SMOVE** - **SPOP** - **SRANDMEMBER** - **SREM** - **SSCAN** - **SUNION** - **SUNIONSTORE**\n\n * **SortedSet:** - **ZADD** - **ZCARD** - **ZCOUNT** - **ZDIFF** - **ZDIFFSTORE** - **ZINCRBY** - **ZINTER** - **ZINTERSTORE** - **ZLEXCOUNT** - **ZMSCORE** - **ZPOPMAX** - **ZPOPMIN** - **ZRANDMEMBER** - **ZRANGE** - **ZRANGEBYLEX** - **ZRANGEBYSCORE** - **ZRANGESTORE** - **ZRANK** - **ZREM** - **ZREMRANGEBYLEX** - **ZREMRANGEBYRANK** - **ZREMRANGEBYSCORE** - **ZREVRANGE** - **ZREVRANGEBYLEX** - **ZREVRANGEBYSCORE** - **ZREVRANK** - **ZSCAN** - **ZSCORE** - **ZUNION** - **ZUNIONSTORE**\n\n * **Generic:** - **COPY** - **DEL** - **EXISTS** - **EXPIRE** - **EXPIREAT** - **PERSIST** - **PEXPIRE** - **PEXPIREAT** - **PTTL** - **RANDOMKEY** - **RENAME** - **RENAMENX** - **SCAN** - **TTL** - **TYPE** - **UNLINK**\n\n * **Server:** - **ECHO** - **PING** - **PIPELINE** - **DBSIZE** - **FLUSHDB** - **TIME**\n\n"
+      description: 'This API provides a REST API to access Redis databases. The REST API follows the same convention that the Redis Protocol uses.
+
+
+        Using an HTTP POST request, the redis command and its parameters can be set the in the request body. The command can also be in the url suffix with the parameter set in the request body. The parameter suffixes can vary in number, depending upon the command. For example http://api.macrometa.io/_fabric/myfabric/_api/redis/SET/foo/bar.
+
+
+        Currently supported Redis commands :
+
+
+        * **String:** - **APPEND** - **DECR** - **DECRBY** - **GET** - **GETDEL** - **GETEX** - **GETRANGE** - **GETSET** - **INCR** - **INCRBY** - **INCRBYFLOAT** - **MGET** - **MSET** - **MSETNX** - **PSETEX** - **SET** - **SETBIT** - **SETEX** - **SETNX** - **SETRANGE** - **STRLEN** - **BITCOUNT** - **BITOP** - **BITPOS** - **GETBIT**
+
+
+        * **Hash:** - **HDEL** - **HEXISTS** - **HGET** - **HGETALL** - **HINCRBY** - **HINCRBYFLOAT** - **HKEYS** - **HLEN** - **HMGET** - **HMSET** - **HSCAN** - **HSET** - **HSETNX** - **HSTRLEN** - **HRANDFIELD** - **HVALS**
+
+
+        * **List:** - **LINDEX** - **LINSERT** - **LLEN** - **LMOVE** - **LPOP** - **LPOS** - **LPUSH** - **LPUSHX** - **LRANGE** - **LREM** - **LSET** - **LTRIM** - **RPOP** - **RPOPLPUSH** - **RPUSH** - **RPUSHX**
+
+
+        * **Set:** - **SADD** - **SCARD** - **SDIFF** - **SDIFFSTORE** - **SINTER** - **SINTERSTORE** - **SISMEMBER** - **SMEMBERS** - **SMISMEMBER** - **SMOVE** - **SPOP** - **SRANDMEMBER** - **SREM** - **SSCAN** - **SUNION** - **SUNIONSTORE**
+
+
+        * **SortedSet:** - **ZADD** - **ZCARD** - **ZCOUNT** - **ZDIFF** - **ZDIFFSTORE** - **ZINCRBY** - **ZINTER** - **ZINTERSTORE** - **ZLEXCOUNT** - **ZMSCORE** - **ZPOPMAX** - **ZPOPMIN** - **ZRANDMEMBER** - **ZRANGE** - **ZRANGEBYLEX** - **ZRANGEBYSCORE** - **ZRANGESTORE** - **ZRANK** - **ZREM** - **ZREMRANGEBYLEX** - **ZREMRANGEBYRANK** - **ZREMRANGEBYSCORE** - **ZREVRANGE** - **ZREVRANGEBYLEX** - **ZREVRANGEBYSCORE** - **ZREVRANK** - **ZSCAN** - **ZSCORE** - **ZUNION** - **ZUNIONSTORE**
+
+
+        * **Generic:** - **COPY** - **DEL** - **EXISTS** - **EXPIRE** - **EXPIREAT** - **PERSIST** - **PEXPIRE** - **PEXPIREAT** - **PTTL** - **RANDOMKEY** - **RENAME** - **RENAMENX** - **SCAN** - **TTL** - **TYPE** - **UNLINK**
+
+
+        * **Server:** - **ECHO** - **PING** - **PIPELINE** - **DBSIZE** - **FLUSHDB** - **TIME**'
       operationId: RedisPost
       parameters:
       - in: path
@@ -120,7 +147,34 @@ paths:
       - Redis
   /_fabric/{fabric}/_api/redis/{collection}/{command}:
     get:
-      description: "This API provides a REST API to access Redis databases. The REST API follows the same convention that the Redis Protocol uses. \n\n Give the command name and parameters in the same order as the Redis protocol, separating commands with a '/'. The parameter suffixes can vary in number, depending upon the command. For example http://api.macrometa.io/_fabric/myfabric/_api/redis/SET/foo/bar. Query params can also be used along with suffixes, for example http://api.macrometa.io/_fabric/myfabric/_api/redis/SET/foo/bar?ex=100.\n\n Currently supported Redis commands :\n\n * **String:** - **APPEND**  - **DECR**  - **DECRBY**  - **GET**  - **GETDEL**  - **GETEX**  - **GETRANGE** - **GETSET**  - **INCR**  - **INCRBY**  - **INCRBYFLOAT**  - **MGET**  - **MSET**  - **MSETNX** - **PSETEX**  - **SET** - **SETBIT** - **SETEX**  - **SETNX** - **SETRANGE**  - **STRLEN**  - **BITCOUNT** - **BITOP** - **BITPOS** - **GETBIT**\n\n * **Hash:** - **HDEL**  - **HEXISTS**  - **HGET** - **HGETALL**  - **HINCRBY**  - **HINCRBYFLOAT**  - **HKEYS** - **HLEN**  - **HMGET**  - **HMSET**  - **HSCAN** - **HSET**  - **HSETNX**  - **HSTRLEN**  - **HRANDFIELD** - **HVALS**\n\n * **List:** - **LINDEX** - **LINSERT** - **LLEN** - **LMOVE** - **LPOP** - **LPOS** - **LPUSH** - **LPUSHX** - **LRANGE** - **LREM** - **LSET** - **LTRIM** - **RPOP** - **RPOPLPUSH** - **RPUSH** - **RPUSHX**\n\n *  **Set:** - **SADD** - **SCARD** - **SDIFF** - **SDIFFSTORE** - **SINTER** - **SINTERSTORE** - **SISMEMBER** - **SMEMBERS** - **SMISMEMBER** - **SMOVE** - **SPOP** - **SRANDMEMBER** - **SREM** - **SSCAN** - **SUNION** - **SUNIONSTORE**\n\n * **SortedSet:** - **ZADD** - **ZCARD** - **ZCOUNT** - **ZDIFF** - **ZDIFFSTORE** - **ZINCRBY** - **ZINTER** - **ZINTERSTORE** - **ZLEXCOUNT** - **ZMSCORE** - **ZPOPMAX** - **ZPOPMIN** - **ZRANDMEMBER** - **ZRANGE** - **ZRANGEBYLEX** - **ZRANGEBYSCORE** - **ZRANGESTORE** - **ZRANK** - **ZREM** - **ZREMRANGEBYLEX** - **ZREMRANGEBYRANK** - **ZREMRANGEBYSCORE** - **ZREVRANGE** - **ZREVRANGEBYLEX** - **ZREVRANGEBYSCORE** - **ZREVRANK** - **ZSCAN** - **ZSCORE** - **ZUNION** - **ZUNIONSTORE**\n\n * **Generic:** - **COPY** - **DEL** - **EXISTS** - **EXPIRE** - **EXPIREAT** - **PERSIST** - **PEXPIRE** - **PEXPIREAT** - **PTTL** - **RANDOMKEY** - **RENAME** - **RENAMENX** - **SCAN** - **TTL** - **TYPE** - **UNLINK**\n\n * **Server:** - **ECHO** - **PING** - **PIPELINE** - **DBSIZE** - **FLUSHDB** - **TIME**\n\n"
+      description: 'This API provides a REST API to access Redis databases. The REST API follows the same convention that the Redis Protocol uses.
+
+
+        Give the command name and parameters in the same order as the Redis protocol, separating commands with a ''/''. The parameter suffixes can vary in number, depending upon the command. For example http://api.macrometa.io/_fabric/myfabric/_api/redis/SET/foo/bar. Query params can also be used along with suffixes, for example http://api.macrometa.io/_fabric/myfabric/_api/redis/SET/foo/bar?ex=100.
+
+
+        Currently supported Redis commands :
+
+
+        * **String:** - **APPEND** - **DECR** - **DECRBY** - **GET** - **GETDEL** - **GETEX** - **GETRANGE** - **GETSET** - **INCR** - **INCRBY** - **INCRBYFLOAT** - **MGET** - **MSET** - **MSETNX** - **PSETEX** - **SET** - **SETBIT** - **SETEX** - **SETNX** - **SETRANGE** - **STRLEN** - **BITCOUNT** - **BITOP** - **BITPOS** - **GETBIT**
+
+
+        * **Hash:** - **HDEL** - **HEXISTS** - **HGET** - **HGETALL** - **HINCRBY** - **HINCRBYFLOAT** - **HKEYS** - **HLEN** - **HMGET** - **HMSET** - **HSCAN** - **HSET** - **HSETNX** - **HSTRLEN** - **HRANDFIELD** - **HVALS**
+
+
+        * **List:** - **LINDEX** - **LINSERT** - **LLEN** - **LMOVE** - **LPOP** - **LPOS** - **LPUSH** - **LPUSHX** - **LRANGE** - **LREM** - **LSET** - **LTRIM** - **RPOP** - **RPOPLPUSH** - **RPUSH** - **RPUSHX**
+
+
+        * **Set:** - **SADD** - **SCARD** - **SDIFF** - **SDIFFSTORE** - **SINTER** - **SINTERSTORE** - **SISMEMBER** - **SMEMBERS** - **SMISMEMBER** - **SMOVE** - **SPOP** - **SRANDMEMBER** - **SREM** - **SSCAN** - **SUNION** - **SUNIONSTORE**
+
+
+        * **SortedSet:** - **ZADD** - **ZCARD** - **ZCOUNT** - **ZDIFF** - **ZDIFFSTORE** - **ZINCRBY** - **ZINTER** - **ZINTERSTORE** - **ZLEXCOUNT** - **ZMSCORE** - **ZPOPMAX** - **ZPOPMIN** - **ZRANDMEMBER** - **ZRANGE** - **ZRANGEBYLEX** - **ZRANGEBYSCORE** - **ZRANGESTORE** - **ZRANK** - **ZREM** - **ZREMRANGEBYLEX** - **ZREMRANGEBYRANK** - **ZREMRANGEBYSCORE** - **ZREVRANGE** - **ZREVRANGEBYLEX** - **ZREVRANGEBYSCORE** - **ZREVRANK** - **ZSCAN** - **ZSCORE** - **ZUNION** - **ZUNIONSTORE**
+
+
+        * **Generic:** - **COPY** - **DEL** - **EXISTS** - **EXPIRE** - **EXPIREAT** - **PERSIST** - **PEXPIRE** - **PEXPIREAT** - **PTTL** - **RANDOMKEY** - **RENAME** - **RENAMENX** - **SCAN** - **TTL** - **TYPE** - **UNLINK**
+
+
+        * **Server:** - **ECHO** - **PING** - **PIPELINE** - **DBSIZE** - **FLUSHDB** - **TIME**'
       operationId: RedisGet
       parameters:
       - in: path
@@ -220,11 +274,11 @@ paths:
 components:
   schemas:
     headers:
-      x-gdn-requestid:
-        description: A unique request ID for each API request.
-        type: string
       x-gdn-region:
         description: The federation's region hostname that served the request.
+        type: string
+      x-gdn-requestid:
+        description: A unique request ID for each API request.
         type: string
   securitySchemes:
     ApiKeyAuth:

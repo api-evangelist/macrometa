@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Macrometa API Reference Activity Metrics API Keys API
+  title: Macrometa API Reference API Keys API
   version: 0.17.17
   description: API reference for the Macrometa Global Data Network.
   license:
@@ -17,7 +17,15 @@ tags:
 paths:
   /_api/key/validate:
     post:
-      description: "Requires a JSON object with these properties:\n\n  - **apikey**: The API key as a string.\n  - **jwt**: The JWT token as a string.\n\n**Note**: Requires *administrator* permissions."
+      description: 'Requires a JSON object with these properties:
+
+
+        - **apikey**: The API key as a string.
+
+        - **jwt**: The JWT token as a string.
+
+
+        **Note**: Requires *administrator* permissions.'
       operationId: ValidateApiKey
       requestBody:
         content:
@@ -310,7 +318,7 @@ paths:
             x-gdn-requestid:
               schema:
                 $ref: '#/components/schemas/headers/x-gdn-requestid'
-      summary: Get available API key.
+      summary: Get available API key
       tags:
       - API Keys
     delete:
@@ -377,7 +385,7 @@ paths:
             x-gdn-requestid:
               schema:
                 $ref: '#/components/schemas/headers/x-gdn-requestid'
-      summary: Remove API Key.
+      summary: Remove API Key
       tags:
       - API Keys
   /_api/key/{keyid}/database:
@@ -726,7 +734,10 @@ paths:
       - API Keys
   /_api/key/{keyid}/database/{dbname}/collection:
     get:
-      description: "Fetch the list of collections access level for a specific *user*\n\n If access level for collection is not set default(\"&#42;\") access level is used. If default(\"&#42;\") access level is also not set database access level is used."
+      description: 'Fetch the list of collections access level for a specific *user*
+
+
+        If access level for collection is not set default("*") access level is used. If default("*") access level is also not set database access level is used.'
       operationId: GetTheApiKeyCollectionsAccessLevel
       parameters:
       - description: The id of the API key.
@@ -822,7 +833,10 @@ paths:
       - API Keys
   /_api/key/{keyid}/database/{dbname}/collection/{collection}:
     get:
-      description: "Fetch the access level for a specific collection.\n\n If access level for collection is not set default(\"&#42;\") access level is used. If default(\"&#42;\") access level is also not set database access level is used."
+      description: 'Fetch the access level for a specific collection.
+
+
+        If access level for collection is not set default("*") access level is used. If default("*") access level is also not set database access level is used.'
       operationId: GetTheSpecificCollectionAccessLevelForApiKey
       parameters:
       - description: The id of the API key.
@@ -985,11 +999,26 @@ paths:
             x-gdn-requestid:
               schema:
                 $ref: '#/components/schemas/headers/x-gdn-requestid'
-      summary: Clear the collection access level.
+      summary: Clear the collection access level
       tags:
       - API Keys
     put:
-      description: "Sets the collection access level for the *collection* in the database *dbname* for API key with *keyid*.\n\nRequires a JSON object with these properties:\n\n  - **grant**: Use \"rw\" to set the collection level access to *Read/Write*. Use \"ro\" to set the collection level access to  *Read Only*. Use \"none\" to set the collection level access to *No access*.\n\n - **collection**: Use \"&#42;\" to set default access level for all collections.\n\nIf access level for collection is not set default(\"&#42;\") access level is used. If default(\"&#42;\") access level is also not set database access level is used.\n\n**Note**: Requires *administrator* permissions."
+      description: 'Sets the collection access level for the *collection* in the database *dbname* for API key with *keyid*.
+
+
+        Requires a JSON object with these properties:
+
+
+        - **grant**: Use "rw" to set the collection level access to *Read/Write*. Use "ro" to set the collection level access to *Read Only*. Use "none" to set the collection level access to *No access*.
+
+
+        - **collection**: Use "*" to set default access level for all collections.
+
+
+        If access level for collection is not set default("*") access level is used. If default("*") access level is also not set database access level is used.
+
+
+        **Note**: Requires *administrator* permissions.'
       operationId: SetTheCollectionAccessLevelForApiKey
       parameters:
       - description: The id of the API key.
@@ -1088,7 +1117,16 @@ paths:
       - API Keys
   /_api/key/{keyid}/database/{dbname}/stream:
     get:
-      description: "Fetch the list of streams available to the specified *keyid*.\n\nThe call returns per-stream access privileges for the specified keyid. The *result* object contains the stream names as object keys and the associated privileges for the stream as values.\n\n If access level for stream is not set the default(\"&#42;\") access level is used. If default(\"&#42;\") access level is also not set the database access level is used.\n\n**Note**: Requires *administrator* permissions."
+      description: 'Fetch the list of streams available to the specified *keyid*.
+
+
+        The call returns per-stream access privileges for the specified keyid. The *result* object contains the stream names as object keys and the associated privileges for the stream as values.
+
+
+        If access level for stream is not set the default("*") access level is used. If default("*") access level is also not set the database access level is used.
+
+
+        **Note**: Requires *administrator* permissions.'
       operationId: ListTheAccessibleStreamsForApiKey
       parameters:
       - description: The name of the database.
@@ -1348,7 +1386,28 @@ paths:
       tags:
       - API Keys
     put:
-      description: "Sets the stream access levels for the *stream* of API key with *keyid*.\n\nRequires a JSON object with these properties:\n\n  - **grant**: Use \"ro\" to set the stream access level to Subscribe.\n   Use \"wo\" to set the stream access level to Publish.\n Use \"rw\" to set the stream access level to Publish and Subscribe.\n  Use \"none\" to set the stream access level to *No access*.\n\n - **stream**: Use \"&#42;\" to set default access level for all streams.\n\nIf access level for stream is not set default(\"&#42;\") access level is used. If default(\"&#42;\") access level is also not set database access level is used.\n\n**Note**: Requires *administrator* permissions."
+      description: 'Sets the stream access levels for the *stream* of API key with *keyid*.
+
+
+        Requires a JSON object with these properties:
+
+
+        - **grant**: Use "ro" to set the stream access level to Subscribe.
+
+        Use "wo" to set the stream access level to Publish.
+
+        Use "rw" to set the stream access level to Publish and Subscribe.
+
+        Use "none" to set the stream access level to *No access*.
+
+
+        - **stream**: Use "*" to set default access level for all streams.
+
+
+        If access level for stream is not set default("*") access level is used. If default("*") access level is also not set database access level is used.
+
+
+        **Note**: Requires *administrator* permissions.'
       operationId: SetTheStreamAccessLevelForApiKey
       parameters:
       - description: The id of the API key.
@@ -1447,7 +1506,10 @@ paths:
       - API Keys
   /_api/key/{keyid}/database/{geofabric}/restql:
     get:
-      description: "Fetch the list of query workers access level for a specific *keyid*.\n\n If access level for a query worker is not set, then the default(\"&#42;\") access level is used. If the default(\"&#42;\") access level is also not set, then the GeoFabric access level is used."
+      description: 'Fetch the list of query workers access level for a specific *keyid*.
+
+
+        If access level for a query worker is not set, then the default("*") access level is used. If the default("*") access level is also not set, then the GeoFabric access level is used.'
       operationId: GetApiKeyQueryWorkerAccessLevel
       parameters:
       - description: The ID of the API key querying the GeoFabric.
@@ -1543,7 +1605,10 @@ paths:
       - API Keys
   /_api/key/{keyid}/database/{geofabric}/restql/{query-worker}:
     get:
-      description: "Fetch the access level for a specific query worker.\n\n If access level for the query worker is not set, then the default(\"&#42;\") access level is used. If the default(\"&#42;\") access level is also not set, then the GeoFabric access level is used."
+      description: 'Fetch the access level for a specific query worker.
+
+
+        If access level for the query worker is not set, then the default("*") access level is used. If the default("*") access level is also not set, then the GeoFabric access level is used.'
       operationId: GetSpecificQueryWorkerAccessLevelForApiKey
       parameters:
       - description: The ID of the API key querying the GeoFabric.
@@ -1706,11 +1771,26 @@ paths:
             x-gdn-requestid:
               schema:
                 $ref: '#/components/schemas/headers/x-gdn-requestid'
-      summary: Clear the query worker access level.
+      summary: Clear the query worker access level
       tags:
       - API Keys
     put:
-      description: "Sets the access level for the *query worker* in the GeoFabric *geofabric* for an API key with *keyid*.\n\nRequires a JSON object with these properties:\n\n  - **grant**: Use \"rw\" to set the query worker level access to *Read/Write*. Use \"ro\" to set the query worker level access to  *Read Only*. Use \"none\" to set the query worker level access to *No access*.\n\n - **query worker**: Use \"&#42;\" to set default access level for all query workers.\n\nIf access level for a query worker is not set, then the default(\"&#42;\") access level is used. If the default(\"&#42;\") access level is also not set, then the GeoFabric access level is used.\n\n**Note**: Requires *administrator* permissions."
+      description: 'Sets the access level for the *query worker* in the GeoFabric *geofabric* for an API key with *keyid*.
+
+
+        Requires a JSON object with these properties:
+
+
+        - **grant**: Use "rw" to set the query worker level access to *Read/Write*. Use "ro" to set the query worker level access to *Read Only*. Use "none" to set the query worker level access to *No access*.
+
+
+        - **query worker**: Use "*" to set default access level for all query workers.
+
+
+        If access level for a query worker is not set, then the default("*") access level is used. If the default("*") access level is also not set, then the GeoFabric access level is used.
+
+
+        **Note**: Requires *administrator* permissions.'
       operationId: SetQueryWorkerAccessLevelForApiKey
       parameters:
       - description: The ID of the API key querying the GeoFabric.
@@ -1812,7 +1892,10 @@ paths:
       - API Keys
   /_api/key/{keyid}/database/{geofabric}/managedkey:
     get:
-      description: "Fetch the list of managed keys access level for a specific *keyid*.\n\n If access level for a managed key is not set, then the default(\"&#42;\") access level is used. If the default(\"&#42;\") access level is also not set, then the GeoFabric access level is used."
+      description: 'Fetch the list of managed keys access level for a specific *keyid*.
+
+
+        If access level for a managed key is not set, then the default("*") access level is used. If the default("*") access level is also not set, then the GeoFabric access level is used.'
       operationId: GetApiKeyManagedKeyAccessLevel
       parameters:
       - description: The ID of the API key querying the GeoFabric.
@@ -1908,7 +1991,10 @@ paths:
       - API Keys
   /_api/key/{keyid}/database/{geofabric}/managedkey/{managed-key-name}:
     get:
-      description: "Fetch the access level for a specific managed key.\n\n If the access level for the managed key is not set, then the default(\"&#42;\") access level is used. If the default(\"&#42;\") access level is also not set, then the GeoFabric access level is used."
+      description: 'Fetch the access level for a specific managed key.
+
+
+        If the access level for the managed key is not set, then the default("*") access level is used. If the default("*") access level is also not set, then the GeoFabric access level is used.'
       operationId: GetSpecificManagedKeyAccessLevelForApiKey
       parameters:
       - description: The ID of the API key querying the GeoFabric.
@@ -2075,7 +2161,22 @@ paths:
       tags:
       - API Keys
     put:
-      description: "Sets the access level for the *managed key name* in the GeoFabric *geofabric* for an API key with *keyid*.\n\nRequires a JSON object with these properties:\n\n  - **grant**: Use \"rw\" to set the managed key level access to *Read/Write*. Use \"ro\" to set the managed key level access to  *Read Only*. Use \"none\" to set the managed key worker level access to *No access*.\n\n - **managed keyr**: Use \"&#42;\" to set default access level for all managed keys.\n\nIf access level for the managed key is not set, then the default(\"&#42;\") access level is used. If the default(\"&#42;\") access level is also not set, then the GeoFabric access level is used.\n\n**Note**: Requires *administrator* permissions."
+      description: 'Sets the access level for the *managed key name* in the GeoFabric *geofabric* for an API key with *keyid*.
+
+
+        Requires a JSON object with these properties:
+
+
+        - **grant**: Use "rw" to set the managed key level access to *Read/Write*. Use "ro" to set the managed key level access to *Read Only*. Use "none" to set the managed key worker level access to *No access*.
+
+
+        - **managed keyr**: Use "*" to set default access level for all managed keys.
+
+
+        If access level for the managed key is not set, then the default("*") access level is used. If the default("*") access level is also not set, then the GeoFabric access level is used.
+
+
+        **Note**: Requires *administrator* permissions.'
       operationId: SetManagedKeyAccessLevelForApiKey
       parameters:
       - description: The ID of the API key querying the GeoFabric.
@@ -2680,99 +2781,38 @@ paths:
       tags:
       - API Keys
 components:
-  schemas:
+  requestBodies:
+    user_grant_collection:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/user_grant_collection'
+      required: true
+    attribute_values:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/attribute_values'
+      required: true
     user_grant_database:
-      properties:
-        grant:
-          description: '- Use "rw" to set the GeoFabric access level to *Administrate*.
-
-            - Use "ro" to set the GeoFabric access level to *Access*.
-
-            - Use "none" to set the database access level to *No access*.'
-          type: string
-          example: rw
-      required:
-      - grant
-      type: object
-    api_key_http_examples_rc_200_billing:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 200
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        result:
-          description: Billing tag with billing access level present.
-          properties:
-            billing:
-              type: string
-              example: rw
-      required:
-      - error
-      type: object
-    api_key_put_dbname_examples_rc_200:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 200
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        result:
-          type: string
-          example: rw
-      required:
-      - error
-      type: object
-    apikey_create:
-      properties:
-        keyid:
-          description: The id of the API key.
-          type: string
-          example: test1
-        user:
-          description: The user that owns the API key. The 'user' option should be used only when creating an API key that belongs to another user, and can be used only by service or _mm.root.
-          type: string
-          example: tenant1.user1
-        isSystem:
-          description: Indicates whether the key is a system API key.
-          type: boolean
-          example: 'false'
-      required:
-      - keyid
-      type: object
-    api_key_database_stream_get_http_examples_rc_200:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 200
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        result:
-          properties:
-            c8locals.streamTest:
-              type: string
-              example: rw
-      required:
-      - error
-      type: object
-    apikey_validate:
-      properties:
-        apikey:
-          description: The id of the API key.
-          type: string
-          example: test1
-      required:
-      - apikey
-      type: object
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/user_grant_database'
+      required: true
+    user_grant_queryworker:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/user_grant_queryworker'
+      required: true
+    user_grant_managedkey:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/user_grant_managedkey'
+      required: true
+  schemas:
     api_key_http_examples_rc_202:
       properties:
         code:
@@ -2783,215 +2823,6 @@ components:
           description: Flag if there is an error in response. *False* for this response.
           type: boolean
           example: false
-      required:
-      - error
-      type: object
-    api_key_database_collection_get_http_examples_rc_200:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 200
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        result:
-          description: List of collections and the access level.
-          type: object
-          properties:
-            test1:
-              type: string
-              example: rw
-      required:
-      - error
-      type: object
-    headers:
-      x-gdn-region:
-        description: The federation's region hostname that served the request.
-        type: string
-      x-gdn-requestid:
-        description: A unique request ID for each API request.
-        type: string
-    api_key_get_http_examples_rc_200:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 200
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        result:
-          items:
-            properties:
-              _system:
-                description: Access level of system is described.
-                type: string
-                example: rw
-      required:
-      - error
-      type: object
-    apikey200_help:
-      properties:
-        keyid:
-          description: Keyid of the API key.
-          type: string
-          example: test1
-        user:
-          description: Name of the user.
-          type: string
-          example: root
-        tenant:
-          description: Name of the tenant.
-          type: string
-          example: _mm
-        isSystem:
-          description: Indicates whether the key is a system API key.
-          type: boolean
-          example: 'false'
-    api_key_http_examples_rc_200:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 200
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        result:
-          description: An array of API keys with details as keyid, user name and tenant name.
-          items:
-            $ref: '#/components/schemas/apikey200_help'
-          type: array
-      required:
-      - error
-      type: object
-    api_key_dbname_collection_put_examples_rc_200:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 200
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        _system/test1:
-          type: string
-          example: rw
-    user_grant_queryworker:
-      properties:
-        grant:
-          description: '- Use "rw" to set the query worker level access to *Read/Write*.
-
-            - Use "ro" to set the query worker level access to *Read Only*.
-
-            - Use "none" to set the query worker level access to *No access*.'
-          type: string
-          example: rw
-      required:
-      - grant
-      type: object
-    http_examples_rc_200_attributes:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 200
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        result:
-          $ref: '#/components/schemas/attribute_values'
-    user_grant_collection:
-      properties:
-        grant:
-          description: '- Use "rw" to set the collection level access to *Read/Write*.
-
-            - Use "ro" to set the collection level access to *Read Only*.
-
-            - Use "none" to set the collection level access to *No access*.'
-          type: string
-          example: rw
-      required:
-      - grant
-      type: object
-    error_example_rc_404:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 404
-        error:
-          description: Flag if there is an error in response. *True* for this response.
-          type: boolean
-          example: true
-        errorMessage:
-          description: A message created for this error.
-          type: string
-          example: Error message
-        errorNum:
-          description: Error number returned from the database.
-          type: integer
-          example: 581
-      required:
-      - error
-      type: object
-    api_key_database_managedkey_get_http_examples_rc_200:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 200
-        error:
-          description: Flag if there is an error in the response. *False* for this response.
-          type: boolean
-          example: false
-        result:
-          description: Lists managed keys and the permissions assigned to that API key for each managed key.
-          type: object
-          properties:
-            test1:
-              type: string
-              example: rw
-      required:
-      - error
-      type: object
-    api_key_dbname_examples_rc_200:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 200
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        result:
-          type: string
-          example: rw
-    error_example_rc_400:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 400
-        error:
-          description: Flag if there is an error in response. *True* for this response.
-          type: boolean
-          example: true
-        errorMessage:
-          description: A message created for this error.
-          type: string
-          example: Error message
-        errorNum:
-          description: Error number returned from the database.
-          type: integer
-          example: 102020
       required:
       - error
       type: object
@@ -3016,7 +2847,20 @@ components:
       required:
       - error
       type: object
-    api_key_database_queryworker_get_http_examples_rc_200:
+    user_grant_managedkey:
+      properties:
+        grant:
+          description: '- Use "rw" to set the managed key level access to *Read/Write*.
+
+            - Use "ro" to set the managed key level access to *Read Only*.
+
+            - Use "none" to set the managed key level access to *No access*.'
+          type: string
+          example: rw
+      required:
+      - grant
+      type: object
+    api_key_database_managedkey_get_http_examples_rc_200:
       properties:
         code:
           description: HTTP response code.
@@ -3027,7 +2871,7 @@ components:
           type: boolean
           example: false
         result:
-          description: Lists query workers and the permissions assigned to that API key for each query worker.
+          description: Lists managed keys and the permissions assigned to that API key for each managed key.
           type: object
           properties:
             test1:
@@ -3057,6 +2901,279 @@ components:
       required:
       - error
       type: object
+    api_key_dbname_collection_put_examples_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        _system/test1:
+          type: string
+          example: rw
+    api_key_database_stream_get_http_examples_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          properties:
+            c8locals.streamTest:
+              type: string
+              example: rw
+      required:
+      - error
+      type: object
+    user_grant_queryworker:
+      properties:
+        grant:
+          description: '- Use "rw" to set the query worker level access to *Read/Write*.
+
+            - Use "ro" to set the query worker level access to *Read Only*.
+
+            - Use "none" to set the query worker level access to *No access*.'
+          type: string
+          example: rw
+      required:
+      - grant
+      type: object
+    api_key_get_http_examples_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          items:
+            properties:
+              _system:
+                description: Access level of system is described.
+                type: string
+                example: rw
+      required:
+      - error
+      type: object
+    api_key_http_examples_rc_201:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 201
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        key:
+          description: The generated key.
+          type: string
+          example: test1.KqEsCra56Nr6qiBvDhIUr7Fiey9gxUHCdg8dLuY75rOSAQtMUdeh6Hf851kd6atM3ccf69
+        keyid:
+          description: keyid of the key.
+          type: string
+          example: test1
+        tenant:
+          description: Name of the tenant.
+          type: string
+          example: _mm
+        user:
+          description: Name of the user.
+          type: string
+          example: root
+      required:
+      - error
+      type: object
+    error_example_rc_400:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 400
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 102020
+      required:
+      - error
+      type: object
+    api_key_database_collection_get_http_examples_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          description: List of collections and the access level.
+          type: object
+          properties:
+            test1:
+              type: string
+              example: rw
+      required:
+      - error
+      type: object
+    api_key_http_examples_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          description: An array of API keys with details as keyid, user name and tenant name.
+          items:
+            $ref: '#/components/schemas/apikey200_help'
+          type: array
+      required:
+      - error
+      type: object
+    apikey_validate:
+      properties:
+        apikey:
+          description: The id of the API key.
+          type: string
+          example: test1
+      required:
+      - apikey
+      type: object
+    apikey_create:
+      properties:
+        keyid:
+          description: The id of the API key.
+          type: string
+          example: test1
+        user:
+          description: The user that owns the API key. The 'user' option should be used only when creating an API key that belongs to another user, and can be used only by service or _mm.root.
+          type: string
+          example: tenant1.user1
+        isSystem:
+          description: Indicates whether the key is a system API key.
+          type: boolean
+          example: 'false'
+      required:
+      - keyid
+      type: object
+    error_example_rc_403:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 403
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
+      type: object
+    http_examples_rc_200_attributes:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          $ref: '#/components/schemas/attribute_values'
+    api_key_put_dbname_examples_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          type: string
+          example: rw
+      required:
+      - error
+      type: object
+    user_grant_collection:
+      properties:
+        grant:
+          description: '- Use "rw" to set the collection level access to *Read/Write*.
+
+            - Use "ro" to set the collection level access to *Read Only*.
+
+            - Use "none" to set the collection level access to *No access*.'
+          type: string
+          example: rw
+      required:
+      - grant
+      type: object
+    api_key_database_queryworker_get_http_examples_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in the response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          description: Lists query workers and the permissions assigned to that API key for each query worker.
+          type: object
+          properties:
+            test1:
+              type: string
+              example: rw
+      required:
+      - error
+      type: object
+    api_key_dbname_examples_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          type: string
+          example: rw
     api_key_get_response_http_examples_rc_200_0:
       properties:
         code:
@@ -3095,12 +3212,32 @@ components:
               description: Indicates whether the key is a system API key.
               type: boolean
               example: 'false'
-    error_example_rc_403:
+    user_grant_database:
+      properties:
+        grant:
+          description: '- Use "rw" to set the GeoFabric access level to *Administrate*.
+
+            - Use "ro" to set the GeoFabric access level to *Access*.
+
+            - Use "none" to set the database access level to *No access*.'
+          type: string
+          example: rw
+      required:
+      - grant
+      type: object
+    headers:
+      x-gdn-region:
+        description: The federation's region hostname that served the request.
+        type: string
+      x-gdn-requestid:
+        description: A unique request ID for each API request.
+        type: string
+    error_example_rc_404:
       properties:
         code:
           description: HTTP response code.
           type: integer
-          example: 403
+          example: 404
         error:
           description: Flag if there is an error in response. *True* for this response.
           type: boolean
@@ -3116,6 +3253,24 @@ components:
       required:
       - error
       type: object
+    apikey200_help:
+      properties:
+        keyid:
+          description: Keyid of the API key.
+          type: string
+          example: test1
+        user:
+          description: Name of the user.
+          type: string
+          example: root
+        tenant:
+          description: Name of the tenant.
+          type: string
+          example: _mm
+        isSystem:
+          description: Indicates whether the key is a system API key.
+          type: boolean
+          example: 'false'
     attribute_values:
       properties:
         key1:
@@ -3128,79 +3283,25 @@ components:
           format: string
           type: string
           example: value2
-    api_key_http_examples_rc_201:
+    api_key_http_examples_rc_200_billing:
       properties:
         code:
           description: HTTP response code.
           type: integer
-          example: 201
+          example: 200
         error:
           description: Flag if there is an error in response. *False* for this response.
           type: boolean
           example: false
-        key:
-          description: The generated key.
-          type: string
-          example: test1.KqEsCra56Nr6qiBvDhIUr7Fiey9gxUHCdg8dLuY75rOSAQtMUdeh6Hf851kd6atM3ccf69
-        keyid:
-          description: keyid of the key.
-          type: string
-          example: test1
-        tenant:
-          description: Name of the tenant.
-          type: string
-          example: _mm
-        user:
-          description: Name of the user.
-          type: string
-          example: root
+        result:
+          description: Billing tag with billing access level present.
+          properties:
+            billing:
+              type: string
+              example: rw
       required:
       - error
       type: object
-    user_grant_managedkey:
-      properties:
-        grant:
-          description: '- Use "rw" to set the managed key level access to *Read/Write*.
-
-            - Use "ro" to set the managed key level access to *Read Only*.
-
-            - Use "none" to set the managed key level access to *No access*.'
-          type: string
-          example: rw
-      required:
-      - grant
-      type: object
-  requestBodies:
-    user_grant_queryworker:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/user_grant_queryworker'
-      required: true
-    user_grant_collection:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/user_grant_collection'
-      required: true
-    attribute_values:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/attribute_values'
-      required: true
-    user_grant_managedkey:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/user_grant_managedkey'
-      required: true
-    user_grant_database:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/user_grant_database'
-      required: true
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

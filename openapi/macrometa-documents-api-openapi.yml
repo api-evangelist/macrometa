@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Macrometa API Reference Activity Metrics Documents API
+  title: Macrometa API Reference Documents API
   version: 0.17.17
   description: API reference for the Macrometa Global Data Network.
   license:
@@ -130,7 +130,37 @@ paths:
       tags:
       - Documents
     patch:
-      description: "Partially update documents. The *_key* attributes in the body specify which documents should be updated. The body of the request must contain a JSON array of document updates with the attributes to patch (the patch documents). All attributes from the patch documents are added to the existing documents if they do not yet exist and overwritten in the existing documents if they do exist.\n\nSetting an attribute value to *null* in the patch documents causees a value of *null* to be saved for the attribute.\n\nIf *ignoreRevs* is *false* and there is a *_rev* attribute in a document in the body and its value does not match the revision of the corresponding document in the database, the precondition is violated.\n\nIf the document exists and can be updated, a *HTTP 201* or a *HTTP 202* is returned (depending on *waitForSync*, see below).\n\nThe body of the response contains a JSON array of the same length as the input array with the information about the handle and the revision of the updated documents. In each entry:\n - *_id* contains the known *document-handle* of each updated document.\n - *_key* contains the key that uniquely identifies a document.\n - *_rev* contains the new document revision.\n\nIn case of an error or violated precondition, an error object with the attribute *error* set to *true* and the attribute *errorCode* set to the error code is built.\n\nIf the query parameter *returnOld* is *true*, then, for each generated document, the previous revision of the document is returned under the *old* attribute in the result.\n\nIf the query parameter *returnNew* is *true*, then, for each generated document, the new document is returned under the *new* attribute in the result.\n\nNote that if any precondition is violated or an error occurred with some of the documents, the return code is still 201 or 202, but the additional HTTP header *X-C8-Error-Codes* is set, which contains a map of the error codes that occurred together with their multiplicities, as in: *1200:17,1205:10* which means that in 17 cases the error 1200 \"revision conflict\" and in 10 cases the error 1205 \"illegal document handle\" has happened."
+      description: 'Partially update documents. The *_key* attributes in the body specify which documents should be updated. The body of the request must contain a JSON array of document updates with the attributes to patch (the patch documents). All attributes from the patch documents are added to the existing documents if they do not yet exist and overwritten in the existing documents if they do exist.
+
+
+        Setting an attribute value to *null* in the patch documents causees a value of *null* to be saved for the attribute.
+
+
+        If *ignoreRevs* is *false* and there is a *_rev* attribute in a document in the body and its value does not match the revision of the corresponding document in the database, the precondition is violated.
+
+
+        If the document exists and can be updated, a *HTTP 201* or a *HTTP 202* is returned (depending on *waitForSync*, see below).
+
+
+        The body of the response contains a JSON array of the same length as the input array with the information about the handle and the revision of the updated documents. In each entry:
+
+        - *_id* contains the known *document-handle* of each updated document.
+
+        - *_key* contains the key that uniquely identifies a document.
+
+        - *_rev* contains the new document revision.
+
+
+        In case of an error or violated precondition, an error object with the attribute *error* set to *true* and the attribute *errorCode* set to the error code is built.
+
+
+        If the query parameter *returnOld* is *true*, then, for each generated document, the previous revision of the document is returned under the *old* attribute in the result.
+
+
+        If the query parameter *returnNew* is *true*, then, for each generated document, the new document is returned under the *new* attribute in the result.
+
+
+        Note that if any precondition is violated or an error occurred with some of the documents, the return code is still 201 or 202, but the additional HTTP header *X-C8-Error-Codes* is set, which contains a map of the error codes that occurred together with their multiplicities, as in: *1200:17,1205:10* which means that in 17 cases the error 1200 "revision conflict" and in 10 cases the error 1205 "illegal document handle" has happened.'
       operationId: updateDocument
       parameters:
       - in: path
@@ -265,7 +295,29 @@ paths:
       tags:
       - Documents
     post:
-      description: "Create a new document from the document given in the body, unless there is already a document with the *_key* given. If no *_key* is given, a new unique *_key* is generated automatically.\n\nThe body can be an array of documents, in which case all documents in the array are inserted with the same semantics as for a single document. The result body contains a JSON array of the same length as the input array, and each entry contains the result of the operation for the corresponding input. In case of an error the entry is a document with attributes *error* set to *true* and errorCode set to the error code that has happened.\n\nPossibly given *_id* and *_rev* attributes in the body are always ignored, the URL part or the query parameter collection respectively counts.\n\nIf the document is created successfully, the *Location* header contains the path to the newly created document. The *Etag* header field contains the revision of the document. Both are only set in the single document case.\n\nIf *silent* is not set to *true*, the body of the response contains a JSON object (single document case) with the following attributes:\n\n - *_id* contains the document handle of the newly created document.\n - *_key* contains the document key.\n - *_rev* contains the document revision.\n\nIn the multi case the body is an array of such objects. If the query parameter *returnNew* is *true*, then, for each generated document, the new document is returned under the *new* attribute in the result."
+      description: 'Create a new document from the document given in the body, unless there is already a document with the *_key* given. If no *_key* is given, a new unique *_key* is generated automatically.
+
+
+        The body can be an array of documents, in which case all documents in the array are inserted with the same semantics as for a single document. The result body contains a JSON array of the same length as the input array, and each entry contains the result of the operation for the corresponding input. In case of an error the entry is a document with attributes *error* set to *true* and errorCode set to the error code that has happened.
+
+
+        Possibly given *_id* and *_rev* attributes in the body are always ignored, the URL part or the query parameter collection respectively counts.
+
+
+        If the document is created successfully, the *Location* header contains the path to the newly created document. The *Etag* header field contains the revision of the document. Both are only set in the single document case.
+
+
+        If *silent* is not set to *true*, the body of the response contains a JSON object (single document case) with the following attributes:
+
+
+        - *_id* contains the document handle of the newly created document.
+
+        - *_key* contains the document key.
+
+        - *_rev* contains the document revision.
+
+
+        In the multi case the body is an array of such objects. If the query parameter *returnNew* is *true*, then, for each generated document, the new document is returned under the *new* attribute in the result.'
       operationId: insertDocument
       parameters:
       - in: path
@@ -414,7 +466,34 @@ paths:
       tags:
       - Documents
     put:
-      description: "Replaces multiple documents in the specified collection with the ones in the body. The replaced documents are specified by the *_key* attributes in the body documents.\n\nIf *ignoreRevs* is *false*,, a *_rev* attribute in each document body must match the revision of the corresponding document in the database. Otherwise, the call fails\n\nIf the document exists and can be updated, a *HTTP 201* or a *HTTP 202* is returned (depending on *waitForSync*, see below).\n\nThe body of the response contains a JSON array of the same length as the input array with the information about the handle and the revision of the replaced documents. In each entry:\n - *_id* contains the known *document-handle* of each updated document.\n - *_key* contains the key which uniquely identifies a document.\n - *_rev* contains the new document revision.\n\nIn case of an error or violated precondition, an error object with the attribute *error* set to *true* and the attribute *errorCode* set to the error code.\n\nIf the query parameter *returnOld* is *true*, for each generated document the previous revision of the document is returned under the *old* attribute in the result.\n\nIf the query parameter *returnNew* is *true*, for each generated document the new document is returned under the *new* attribute in the result.\n\nNote that if any precondition is violated or an error occurred with some of the documents, the return code is still 201 or 202, but the additional HTTP header *X-C8-Error-Codes* is set, that contains a map of the error codes that occurred together with their multiplicities, as in: *1200:17,1205:10* which means that in 17 cases the error 1200 \"revision conflict\" and in 10 cases the error 1205 \"illegal document handle\" has happened."
+      description: 'Replaces multiple documents in the specified collection with the ones in the body. The replaced documents are specified by the *_key* attributes in the body documents.
+
+
+        If *ignoreRevs* is *false*,, a *_rev* attribute in each document body must match the revision of the corresponding document in the database. Otherwise, the call fails
+
+
+        If the document exists and can be updated, a *HTTP 201* or a *HTTP 202* is returned (depending on *waitForSync*, see below).
+
+
+        The body of the response contains a JSON array of the same length as the input array with the information about the handle and the revision of the replaced documents. In each entry:
+
+        - *_id* contains the known *document-handle* of each updated document.
+
+        - *_key* contains the key which uniquely identifies a document.
+
+        - *_rev* contains the new document revision.
+
+
+        In case of an error or violated precondition, an error object with the attribute *error* set to *true* and the attribute *errorCode* set to the error code.
+
+
+        If the query parameter *returnOld* is *true*, for each generated document the previous revision of the document is returned under the *old* attribute in the result.
+
+
+        If the query parameter *returnNew* is *true*, for each generated document the new document is returned under the *new* attribute in the result.
+
+
+        Note that if any precondition is violated or an error occurred with some of the documents, the return code is still 201 or 202, but the additional HTTP header *X-C8-Error-Codes* is set, that contains a map of the error codes that occurred together with their multiplicities, as in: *1200:17,1205:10* which means that in 17 cases the error 1200 "revision conflict" and in 10 cases the error 1205 "illegal document handle" has happened.'
       operationId: replaceDocument:multiple
       parameters:
       - in: path
@@ -536,7 +615,17 @@ paths:
       - Documents
   /_fabric/{fabric}/_api/document/{collection}/{key}:
     delete:
-      description: "If *silent* is set to *false*, the body of the response contains a JSON object with the information about the handle and the revision.\n\n - *_id* contains the known *key* of the removed document.\n - *_key* contains the key which uniquely identifies a document.\n - *_rev* contains the document revision.\n\nIf the query parameter *returnOld* is *true*, the previous revision of the document is returned under the *old* attribute in the result."
+      description: 'If *silent* is set to *false*, the body of the response contains a JSON object with the information about the handle and the revision.
+
+
+        - *_id* contains the known *key* of the removed document.
+
+        - *_key* contains the key which uniquely identifies a document.
+
+        - *_rev* contains the document revision.
+
+
+        If the query parameter *returnOld* is *true*, the previous revision of the document is returned under the *old* attribute in the result.'
       operationId: removeDocument2
       parameters:
       - in: path
@@ -644,7 +733,13 @@ paths:
       tags:
       - Documents
     get:
-      description: "Fetch the document identified by *key*. The returned document contains three special attributes:\n - *_id* containing the document handle.\n - *_key* containing key which uniquely identifies a document.\n - *_rev* containing the revision."
+      description: 'Fetch the document identified by *key*. The returned document contains three special attributes:
+
+        - *_id* containing the document handle.
+
+        - *_key* containing key which uniquely identifies a document.
+
+        - *_rev* containing the revision.'
       operationId: readDocument
       parameters:
       - in: path
@@ -830,7 +925,40 @@ paths:
       tags:
       - Documents
     patch:
-      description: "Partially updates the document identified by *key*. The body of the request must contain a JSON document with the attributes to patch (the patch document). All attributes from the patch document are added to the existing document if they do not yet exist, and overwritten in the existing document if they do exist there.\n\nSetting an attribute value to *null* in the patch document causes a value of *null* to be saved for the attribute by default.\n\nIf the *If-Match* header is specified and the revision of the document in the database is unequal to the given revision, the precondition is violated.\n\nIf *If-Match* is not given and *ignoreRevs* is *false*, a *_rev* attribute in each document bodymust match the revision of the corresponding document in the database. Otherwise, the call fails.\n\nIf a precondition is violated, a *HTTP 412* is returned.\n\nIf the document exists and can be updated, a *HTTP 201* or a *HTTP 202* is returned, the *ETag* header field contains the new revision of the document (in double quotes) and the *Location* header contains a URL under which the document can be queried.\n\nIf *silent* is set to *false*, the body of the response contains a JSON object with the information about the handle and the revision.\n - *_id* contains the known *document-handle* of the updated document.\n - *_key* contains the key that uniquely identifies a document.\n - *_rev* contains the new document revision.\n\nIf the query parameter *returnOld* is *true*, the previous revision of the document is returned under the *old* attribute in the result.\n\nIf the query parameter *returnNew* is *true*, the new document is returned under the *new* attribute in the result.\n\nIf the document does not exist, a *HTTP 404* is returned and the body of the response contains an error document."
+      description: 'Partially updates the document identified by *key*. The body of the request must contain a JSON document with the attributes to patch (the patch document). All attributes from the patch document are added to the existing document if they do not yet exist, and overwritten in the existing document if they do exist there.
+
+
+        Setting an attribute value to *null* in the patch document causes a value of *null* to be saved for the attribute by default.
+
+
+        If the *If-Match* header is specified and the revision of the document in the database is unequal to the given revision, the precondition is violated.
+
+
+        If *If-Match* is not given and *ignoreRevs* is *false*, a *_rev* attribute in each document bodymust match the revision of the corresponding document in the database. Otherwise, the call fails.
+
+
+        If a precondition is violated, a *HTTP 412* is returned.
+
+
+        If the document exists and can be updated, a *HTTP 201* or a *HTTP 202* is returned, the *ETag* header field contains the new revision of the document (in double quotes) and the *Location* header contains a URL under which the document can be queried.
+
+
+        If *silent* is set to *false*, the body of the response contains a JSON object with the information about the handle and the revision.
+
+        - *_id* contains the known *document-handle* of the updated document.
+
+        - *_key* contains the key that uniquely identifies a document.
+
+        - *_rev* contains the new document revision.
+
+
+        If the query parameter *returnOld* is *true*, the previous revision of the document is returned under the *old* attribute in the result.
+
+
+        If the query parameter *returnNew* is *true*, the new document is returned under the *new* attribute in the result.
+
+
+        If the document does not exist, a *HTTP 404* is returned and the body of the response contains an error document.'
       operationId: updateDocument2
       parameters:
       - in: path
@@ -989,7 +1117,37 @@ paths:
       tags:
       - Documents
     put:
-      description: "Replaces the document with key <key> with the one in the body, provided there is such a document and no precondition is violated.\n\nIf the *If-Match* header is specified and the revision of the document in the database is unequal to the given revision, the precondition is violated.\n\nIf *If-Match* is not given and *ignoreRevs* is *false*, a *_rev* attribute in each document body must match the revision of the corresponding document in the database. Otherwise, the call fails.\n\nIf a precondition is violated, a *HTTP 412* is returned.\n\nIf the document exists and can be updated, a *HTTP 201* or a *HTTP 202* is returned (depending on *waitForSync*, see below), the *ETag* header field contains the new revision of the document and the *Location* header contains a URL under which the document can be queried.\n\nIf *silent* is set to *false*, the body of the response contains a JSON object with the information about the handle and the revision.\n - *_id* contains the known *document-handle* of each document.\n - *_key* contains the key that uniquely identifies a document.\n - *_rev* contains the new document revision.\n\nIf the query parameter *returnOld* is *true*, the previous revision of the document is returned under the *old* attribute in the result.\n\nIf the query parameter *returnNew* is *true*, the new document is returned under the *new* attribute in the result.\n\nIf the document does not exist, a *HTTP 404* is returned and the body of the response contains an error document."
+      description: 'Replaces the document with key with the one in the body, provided there is such a document and no precondition is violated.
+
+
+        If the *If-Match* header is specified and the revision of the document in the database is unequal to the given revision, the precondition is violated.
+
+
+        If *If-Match* is not given and *ignoreRevs* is *false*, a *_rev* attribute in each document body must match the revision of the corresponding document in the database. Otherwise, the call fails.
+
+
+        If a precondition is violated, a *HTTP 412* is returned.
+
+
+        If the document exists and can be updated, a *HTTP 201* or a *HTTP 202* is returned (depending on *waitForSync*, see below), the *ETag* header field contains the new revision of the document and the *Location* header contains a URL under which the document can be queried.
+
+
+        If *silent* is set to *false*, the body of the response contains a JSON object with the information about the handle and the revision.
+
+        - *_id* contains the known *document-handle* of each document.
+
+        - *_key* contains the key that uniquely identifies a document.
+
+        - *_rev* contains the new document revision.
+
+
+        If the query parameter *returnOld* is *true*, the previous revision of the document is returned under the *old* attribute in the result.
+
+
+        If the query parameter *returnNew* is *true*, the new document is returned under the *new* attribute in the result.
+
+
+        If the document does not exist, a *HTTP 404* is returned and the body of the response contains an error document.'
       operationId: replaceDocument
       parameters:
       - in: path
@@ -1134,31 +1292,21 @@ paths:
       - Documents
 components:
   schemas:
-    error_example_rc_404:
+    examples_id_key_rev:
       properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 404
-        error:
-          description: Flag if there is an error in response. *True* for this response.
-          type: boolean
-          example: true
-        errorMessage:
-          description: A message created for this error.
+        _id:
+          description: ID of the collection.
           type: string
-          example: Error message
-        errorNum:
-          description: Error number returned from the database.
-          type: integer
-          example: 581
-      required:
-      - error
+          example: test/foo
+        _key:
+          description: _key details of collection.
+          type: string
+          example: foo
+        _rev:
+          description: _rev details of collection.
+          type: string
+          example: _dPRuHxe--_
       type: object
-    examples_id_key_rev_array:
-      type: array
-      items:
-        $ref: '#/components/schemas/examples_id_key_rev'
     examples_id_key_rev_oldrev:
       properties:
         _id:
@@ -1178,20 +1326,47 @@ components:
           type: string
           example: _dP34awxe--_
       type: object
-    examples_id_key_rev:
+    error_example_rc_409:
       properties:
-        _id:
-          description: ID of the collection.
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 409
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
           type: string
-          example: test/foo
-        _key:
-          description: _key details of collection.
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
+      type: object
+    error_example_rc_400:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 400
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
           type: string
-          example: foo
-        _rev:
-          description: _rev details of collection.
-          type: string
-          example: _dPRuHxe--_
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 102020
+      required:
+      - error
       type: object
     document_get_412:
       properties:
@@ -1220,6 +1395,31 @@ components:
       x-gdn-requestid:
         description: A unique request ID for each API request.
         type: string
+    examples_id_key_rev_array:
+      type: array
+      items:
+        $ref: '#/components/schemas/examples_id_key_rev'
+    error_example_rc_404:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 404
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
+      type: object
     examples_id_key_rev_data:
       properties:
         _id:
@@ -1238,48 +1438,6 @@ components:
           description: data in record.
           type: string
           example: data1
-      type: object
-    error_example_rc_400:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 400
-        error:
-          description: Flag if there is an error in response. *True* for this response.
-          type: boolean
-          example: true
-        errorMessage:
-          description: A message created for this error.
-          type: string
-          example: Error message
-        errorNum:
-          description: Error number returned from the database.
-          type: integer
-          example: 102020
-      required:
-      - error
-      type: object
-    error_example_rc_409:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 409
-        error:
-          description: Flag if there is an error in response. *True* for this response.
-          type: boolean
-          example: true
-        errorMessage:
-          description: A message created for this error.
-          type: string
-          example: Error message
-        errorNum:
-          description: Error number returned from the database.
-          type: integer
-          example: 581
-      required:
-      - error
       type: object
   securitySchemes:
     ApiKeyAuth:

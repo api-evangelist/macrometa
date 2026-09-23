@@ -1,17 +1,13 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Macrometa API Reference Activity Metrics Logs API
-  version: 0.17.17
-  description: API reference for the Macrometa Global Data Network.
-  license:
-    name: Macrometa License, Version 2.0
+  title: Macrometa Logs API
+  version: '1.0'
+  description: 'Operations tagged Logs across 2 of this provider''s published API definitions: macrometa-photoniq-faas-openapi-original.json, macrometa-photoniq-vwrs-openapi-original.json. Each path carries the servers of the definition it was published in.'
 servers:
-- url: https://api-play.paas.macrometa.io
-  description: GDN API
+- url: https://demofaas.paas.macrometa.io
+- url: https://api-demo-vwr.paas.macrometa.io
+  description: PhotonIQ Virtual Waiting Rooms API
 host: api-play.paas.macrometa.io
-security:
-- ApiKeyAuth: []
-- BearerAuth: []
 tags:
 - name: Logs
 paths:
@@ -102,6 +98,8 @@ paths:
           description: Service unavailable.
       security:
       - apikey: []
+    servers:
+    - url: https://demofaas.paas.macrometa.io
   /api/vwr/v1/log/level:
     get:
       summary: Get the current log level
@@ -110,9 +108,7 @@ paths:
       description: 'Gets the current log level of the service.
 
 
-        This API requires _admin_ permissions to run.
-
-        '
+        This API requires _admin_ permissions to run.'
       operationId: getLogLevel
       security:
       - APIKeyAuth: []
@@ -139,9 +135,7 @@ paths:
         Valid values are ''DEBUG'', ''INFO'', ''WARNING'', and ''ERROR''.
 
 
-        This API requires _admin_ permissions to run.
-
-        '
+        This API requires _admin_ permissions to run.'
       operationId: setLogLevel
       security:
       - APIKeyAuth: []
@@ -158,6 +152,9 @@ paths:
           description: Either the API key doesn't have permissions or it is deactivated.
         '500':
           description: Internal server error.
+    servers:
+    - url: https://api-demo-vwr.paas.macrometa.io
+      description: PhotonIQ Virtual Waiting Rooms API
 components:
   schemas:
     LogLevel:
@@ -167,19 +164,14 @@ components:
           type: string
           description: The log level of the service.
   securitySchemes:
-    ApiKeyAuth:
+    apikey:
       type: apiKey
       in: header
       name: Authorization
-      description: 'Provide an API Key to the `Authorization` header, prefixed with "apikey".
-
-
-        Example: `Authorization: apikey <key>`'
-    BearerAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
-      description: 'Provide a JSON Web Token (JWT) to the `Authorization` header, prefixed with "bearer".
-
-
-        Example: `Authorization: bearer <jwt>`'
+    APIKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+x-refined-from:
+- macrometa-photoniq-faas-openapi-original.json
+- macrometa-photoniq-vwrs-openapi-original.json

@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Macrometa API Reference Activity Metrics Authentication API
+  title: Macrometa API Reference Authentication API
   version: 0.17.17
   description: API reference for the Macrometa Global Data Network.
   license:
@@ -84,9 +84,11 @@ paths:
             x-gdn-requestid:
               schema:
                 $ref: '#/components/schemas/headers/x-gdn-requestid'
-      summary: Obtain JWT Authentication token for user.
+      summary: Obtain JWT Authentication token for user
       tags:
       - Authentication
+      operationId: postOpenAuth
+      x-operation-id-source: derived
 components:
   schemas:
     authentication_examples_rc_200:
@@ -103,6 +105,27 @@ components:
           description: Username of the tenant.
           type: string
           example: joe
+      type: object
+    error_example_rc_401:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 401
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: '102020'
+      required:
+      - error
       type: object
     headers:
       x-gdn-region:
@@ -131,27 +154,6 @@ components:
           example: joe
       required:
       - password
-      type: object
-    error_example_rc_401:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 401
-        error:
-          description: Flag if there is an error in response. *True* for this response.
-          type: boolean
-          example: true
-        errorMessage:
-          description: A message created for this error.
-          type: string
-          example: Error message
-        errorNum:
-          description: Error number returned from the database.
-          type: integer
-          example: '102020'
-      required:
-      - error
       type: object
   securitySchemes:
     ApiKeyAuth:

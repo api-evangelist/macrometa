@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Macrometa API Reference Activity Metrics Collections API
+  title: Macrometa API Reference Collections API
   version: 0.17.17
   description: API reference for the Macrometa Global Data Network.
   license:
@@ -908,341 +908,50 @@ paths:
       tags:
       - Collections
 components:
+  parameters:
+    Collection:
+      name: collection-name
+      in: path
+      required: true
+      description: Collection name.
+      schema:
+        type: string
+    Workflow:
+      name: workflow-name
+      in: path
+      required: true
+      description: Name of the workflow.
+      schema:
+        type: string
+    Fabric:
+      name: fabric
+      in: path
+      required: true
+      description: Fabric name of the resource.
+      schema:
+        type: string
   schemas:
-    fabric_collection_validate_keyoption:
-      description: 'Additional options for key generation. If specified, *keyOptions* should be a JSON array containing the following attributes:'
-      properties:
-        allowUserKeys:
-          description: If set to *true*, you can supply a key value in the *_key* attribute of a document. If set to *false*, the key generator creates keys and an error occurs if you add a *_key* value
-          type: boolean
-          example: false
-        increment:
-          description: Increment value for *autoincrement* key generator. Not used for other key generator types.
-          type: integer
-          example: 1
-        offset:
-          description: Initial offset value for *autoincrement* key generator. Not used for other key generator types.
-          type: integer
-          example: 1
-        type:
-          description: 'Specifies the type of the key generator.
-
-            - *traditional*: generates numerical keys in ascending order.
-
-            - *autoincrement:* generates numerical keys in ascending order with configurable initial offset and spacing.
-
-            - *padded:* generates keys of a fixed length (16 bytes) in ascending lexicographical sort order.
-
-            - *uuid64*: generates universally unique keys.'
-          type: string
-          example: autoincrement
-    api_collection_post_http_examples_rc_200:
+    error_example_rc_401:
       properties:
         code:
           description: HTTP response code.
           type: integer
-          example: 200
+          example: 401
         error:
-          description: Flag if there is an error in response. *False* for this response.
+          description: Flag if there is an error in response. *True* for this response.
           type: boolean
-          example: false
-        id:
-          description: Removed collection identifier.
+          example: true
+        errorMessage:
+          description: A message created for this error.
           type: string
-          example: '61862387'
-    fabric_collection_validate:
-      properties:
-        isLocal:
-          description: If *true*, create a local collection. For a local collection data is not replicated across regions.
-          type: boolean
-          default: false
-        keyOptions:
-          $ref: '#/components/schemas/fabric_collection_validate_keyoption'
-        name:
-          description: The name of the collection.
-          type: string
-          example: Test
-        cacheEnabled:
-          description: '*True* if collection has cache enabled'
-          type: boolean
-          default: false
-        waitForSync:
-          description: '*True* if all data must be synced to storage before operation returns.'
-          type: boolean
-          default: false
-        enableShards:
-          description: If *true*, enable sharding for the collection.
-          type: boolean
-          default: false
-        type:
-          description: 'The type of the collection to create.
-
-            - *2*: document collection
-
-            - *3*: edge collection.'
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
           type: integer
-          default: 2
-        stream:
-          description: If *true*, create a local stream for collection.
-          type: boolean
-          default: false
-      required:
-      - name
-      type: object
-    WorkflowMetadataEntity:
-      type: object
-      title: WorkflowMetadataEntity
-      properties:
-        uuid:
-          type: string
-          description: Unique identifier of the workflow. This is represented as a UUID.
-          example: connectorse83a79c296f748b18fd9
-        sourceConnection:
-          $ref: '#/components/schemas/WorkflowConnectionEntity'
-        targetConnection:
-          $ref: '#/components/schemas/WorkflowConnectionEntity'
-        transformation:
-          type: string
-          description: Complete stream worker for the transformation.
-          example: '@App:name(connectorse83a79c296f748b18fd9...'
-    CollectionMetadataEntity:
-      type: object
-      properties:
-        _key:
-          type: string
-          description: Key of the entity.
-          example: '1'
-          x-field-extra-annotation: '@com.c8db.entity.DocumentField(com.c8db.entity.DocumentField.Type.KEY)'
-        tenant:
-          type: string
-          description: Tenant that owns the collection of this metadata.
-          example: demo
-        fabric:
-          type: string
-          description: Fabric of the collection.
-          example: _system
-        name:
-          type: string
-          description: Name of the collection linked with this metadata entity.
-          example: MyCollection
-        workflows:
-          type: array
-          description: Details of workflows assigned to the collection.
-          items:
-            $ref: '#/components/schemas/WorkflowMetadataEntity'
-    ResponseBase:
-      type: object
-      properties:
-        error:
-          type: boolean
-          default: false
-        code:
-          type: integer
-          default: 200
+          example: '102020'
       required:
       - error
-    get_api_collection_figures_rc_200:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 200
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        id:
-          description: ID of the the collection.
-          type: string
-          example: '89218'
-        objectId:
-          description: Object ID of the the collection.
-          type: string
-          example: '6966663'
-        name:
-          description: Name of the collection.
-          type: string
-          example: colltest0127133421258ogefv
-        statusString:
-          description: Status of the collection.
-          type: string
-          enum:
-          - unloaded
-          - loading
-          - loaded
-          - unloading
-          - deleted
-          - unknown
-        collectionModel:
-          description: 'Type of collection model.
-
-            - *0*: document model
-
-            - *1*: key/value model
-
-            - *2*: dynamo model'
-          type: number
-          example: 0
-        isSpot:
-          description: '*True* if the collection is a spot collection.'
-          type: boolean
-          example: false
-        isLocal:
-          description: '*True* if the collection is a local collection.'
-          type: boolean
-          example: false
-        cacheEnabled:
-          description: '*True* if the collection has cache enabled.'
-          type: boolean
-          example: false
-        hasStream:
-          description: '*True* if the collection has a stream.'
-          type: boolean
-          example: true
-        waitForSync:
-          description: '*True* if all data must be synced to storage before operation returns.'
-          type: boolean
-          example: false
-        keyOptions:
-          $ref: '#/components/schemas/fabric_collection_validate_keyoption'
-        isSystem:
-          description: '*True* if collection is a system collection.'
-          type: boolean
-          example: false
-        globallyUniqueId:
-          description: Collection's global unique ID.
-          type: string
-          example: h2C627F3DCC8E/89218
-        searchEnabled:
-          description: '*True* if collection is searchable.'
-          type: boolean
-          example: false
-        figures:
-          $ref: '#/components/schemas/collection_figures'
       type: object
-    api_collection_get_http_examples_rc_200:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 200
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        result:
-          description: An array of API keys with details as
-          type: array
-          items:
-            $ref: '#/components/schemas/api_collection_http_200_help'
-    api_collection_put_properties_http_examples_rc_200:
-      properties:
-        hasStream:
-          description: '*True* if a local stream is associated with the collection.'
-          type: boolean
-        waitForSync:
-          description: '*True* if all data must be synced to storage before operation returns.'
-          type: boolean
-        cacheEnabled:
-          description: '*True* if collection has cache enabled'
-          type: boolean
-          default: false
-      required:
-      - hasStream
-      type: object
-    headers:
-      x-gdn-region:
-        description: The federation's region hostname that served the request.
-        type: string
-      x-gdn-requestid:
-        description: A unique request ID for each API request.
-        type: string
-    api_collection_http_200_help:
-      properties:
-        id:
-          description: Id of the the collection.
-          type: string
-          example: '89218'
-        name:
-          description: Name of the collection.
-          type: string
-          example: colltest0127133421258ogefv
-        status:
-          description: Status of the collection.
-          type: number
-          example: 3
-        type:
-          description: 'Type of the collection.
-
-            - *2*: document collection
-
-            - *3*: edge collection'
-          type: number
-          example: 2
-        collectionModel:
-          description: 'Type of collection model.
-
-            - *DOC*: document model
-
-            - *KV*: key/value model
-
-            - *DYNAMO*: dynamo model'
-          type: string
-          example: DOC
-        isSpot:
-          description: '*True* if collection is a spot collection.'
-          type: boolean
-          example: false
-        isLocal:
-          description: '*True* if collection is a local collection, *False* if collection is a global collection'
-          type: boolean
-          example: false
-        hasStream:
-          description: '*True* if collection has a stream.'
-          type: boolean
-          example: true
-        waitForSync:
-          description: '**True* if all data must be synced to storage before operation returns.'
-          type: boolean
-          example: false
-        isSystem:
-          description: '*True* if collection is a system collection.'
-          type: boolean
-          example: false
-        globallyUniqueId:
-          description: Collection's global unique Id.
-          type: string
-          example: h2C627F3DCC8E/89218
-        searchEnabled:
-          description: '*True* if collection is searchable.'
-          type: boolean
-          example: false
-    WorkflowConnectionEntity:
-      type: object
-      title: WorkflowConnectionEntity
-      properties:
-        name:
-          type: string
-          description: Connection name for the workflow.
-          example: FromPostgres
-        dynamicConfigs:
-          type: object
-          description: Dynamic configurations of the connection.
-          additionalProperties: true
-        connector:
-          type: object
-          description: Connector configured by this connection definition.
-          $ref: '#/components/schemas/ConnectorBase'
-        isEditable:
-          type: boolean
-          description: Whether this connection is editable or not.
-          default: false
-          example: false
-        isInternal:
-          type: boolean
-          description: Whether this connection is internal or not.
-          default: false
-          example: false
     api_collection_get_collection_name_http_examples_rc_200:
       properties:
         code:
@@ -1329,20 +1038,78 @@ components:
           description: '*True* if collection is a blob-only collection.'
           type: boolean
           example: false
-    CollectionMetadataResponse:
-      allOf:
-      - $ref: '#/components/schemas/ResponseBase'
-      - type: object
-        properties:
-          result:
-            type: object
-            $ref: '#/components/schemas/CollectionMetadataEntity'
-    error_example_rc_404:
+    ConnectorBase:
+      type: object
+      description: Lightweight connector definition.
+      properties:
+        name:
+          type: string
+          example: macrometa-source-oracle
+          description: Name of the connector. This is used as the ID of the connector.
+        displayName:
+          type: string
+          example: OracleDB
+          description: Name that can be used by GUI clients to display the connector.
+        description:
+          type: string
+          example: Source for loading data from a GDN collection.
+        type:
+          type: string
+          example: source
+          description: Specifies whether the connector serves as a source or a target.
+        version:
+          type: string
+          description: Version of the connector.
+          example: 1.0.0
+    WorkflowMetadataEntity:
+      type: object
+      title: WorkflowMetadataEntity
+      properties:
+        uuid:
+          type: string
+          description: Unique identifier of the workflow. This is represented as a UUID.
+          example: connectorse83a79c296f748b18fd9
+        sourceConnection:
+          $ref: '#/components/schemas/WorkflowConnectionEntity'
+        targetConnection:
+          $ref: '#/components/schemas/WorkflowConnectionEntity'
+        transformation:
+          type: string
+          description: Complete stream worker for the transformation.
+          example: '@App:name(connectorse83a79c296f748b18fd9...'
+    fabric_collection_validate_keyoption:
+      description: 'Additional options for key generation. If specified, *keyOptions* should be a JSON array containing the following attributes:'
+      properties:
+        allowUserKeys:
+          description: If set to *true*, you can supply a key value in the *_key* attribute of a document. If set to *false*, the key generator creates keys and an error occurs if you add a *_key* value
+          type: boolean
+          example: false
+        increment:
+          description: Increment value for *autoincrement* key generator. Not used for other key generator types.
+          type: integer
+          example: 1
+        offset:
+          description: Initial offset value for *autoincrement* key generator. Not used for other key generator types.
+          type: integer
+          example: 1
+        type:
+          description: 'Specifies the type of the key generator.
+
+            - *traditional*: generates numerical keys in ascending order.
+
+            - *autoincrement:* generates numerical keys in ascending order with configurable initial offset and spacing.
+
+            - *padded:* generates keys of a fixed length (16 bytes) in ascending lexicographical sort order.
+
+            - *uuid64*: generates universally unique keys.'
+          type: string
+          example: autoincrement
+    error_example_rc_400:
       properties:
         code:
           description: HTTP response code.
           type: integer
-          example: 404
+          example: 400
         error:
           description: Flag if there is an error in response. *True* for this response.
           type: boolean
@@ -1354,10 +1121,119 @@ components:
         errorNum:
           description: Error number returned from the database.
           type: integer
-          example: 581
+          example: 102020
       required:
       - error
       type: object
+    fabric_collection_validate:
+      properties:
+        isLocal:
+          description: If *true*, create a local collection. For a local collection data is not replicated across regions.
+          type: boolean
+          default: false
+        keyOptions:
+          $ref: '#/components/schemas/fabric_collection_validate_keyoption'
+        name:
+          description: The name of the collection.
+          type: string
+          example: Test
+        cacheEnabled:
+          description: '*True* if collection has cache enabled'
+          type: boolean
+          default: false
+        waitForSync:
+          description: '*True* if all data must be synced to storage before operation returns.'
+          type: boolean
+          default: false
+        enableShards:
+          description: If *true*, enable sharding for the collection.
+          type: boolean
+          default: false
+        type:
+          description: 'The type of the collection to create.
+
+            - *2*: document collection
+
+            - *3*: edge collection.'
+          type: integer
+          default: 2
+        stream:
+          description: If *true*, create a local stream for collection.
+          type: boolean
+          default: false
+      required:
+      - name
+      type: object
+    WorkflowConnectionEntity:
+      type: object
+      title: WorkflowConnectionEntity
+      properties:
+        name:
+          type: string
+          description: Connection name for the workflow.
+          example: FromPostgres
+        dynamicConfigs:
+          type: object
+          description: Dynamic configurations of the connection.
+          additionalProperties: true
+        connector:
+          type: object
+          description: Connector configured by this connection definition.
+          $ref: '#/components/schemas/ConnectorBase'
+        isEditable:
+          type: boolean
+          description: Whether this connection is editable or not.
+          default: false
+          example: false
+        isInternal:
+          type: boolean
+          description: Whether this connection is internal or not.
+          default: false
+          example: false
+    WorkflowEntity:
+      type: object
+      properties:
+        uuid:
+          type: string
+          description: UUID of the workflow.
+          example: connectorse83a79c296f748b18fd9
+        name:
+          type: string
+          description: Name of the workflow.
+          example: ToPostgres
+        connector:
+          type: object
+          description: Connector used in this workflow.
+          $ref: '#/components/schemas/ConnectorBase'
+        isEditable:
+          type: boolean
+          description: Indicates whether the connection used in this workflow is editable or not.
+          default: false
+          example: false
+        isInternal:
+          type: boolean
+          description: Specifies whether the connection used in this workflow is internal or not.
+          default: false
+          example: false
+        status:
+          type: string
+          description: Status of the workflow.
+          example: Succeeded
+    api_collection_get_http_examples_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          description: An array of API keys with details as
+          type: array
+          items:
+            $ref: '#/components/schemas/api_collection_http_200_help'
     collection_figures:
       properties:
         indexes:
@@ -1376,14 +1252,174 @@ components:
           format: int64
           type: integer
       type: object
-    DeletedResponse:
+    error_example_rc_403:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 403
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
+      type: object
+    api_collection_http_200_help:
+      properties:
+        id:
+          description: Id of the the collection.
+          type: string
+          example: '89218'
+        name:
+          description: Name of the collection.
+          type: string
+          example: colltest0127133421258ogefv
+        status:
+          description: Status of the collection.
+          type: number
+          example: 3
+        type:
+          description: 'Type of the collection.
+
+            - *2*: document collection
+
+            - *3*: edge collection'
+          type: number
+          example: 2
+        collectionModel:
+          description: 'Type of collection model.
+
+            - *DOC*: document model
+
+            - *KV*: key/value model
+
+            - *DYNAMO*: dynamo model'
+          type: string
+          example: DOC
+        isSpot:
+          description: '*True* if collection is a spot collection.'
+          type: boolean
+          example: false
+        isLocal:
+          description: '*True* if collection is a local collection, *False* if collection is a global collection'
+          type: boolean
+          example: false
+        hasStream:
+          description: '*True* if collection has a stream.'
+          type: boolean
+          example: true
+        waitForSync:
+          description: '**True* if all data must be synced to storage before operation returns.'
+          type: boolean
+          example: false
+        isSystem:
+          description: '*True* if collection is a system collection.'
+          type: boolean
+          example: false
+        globallyUniqueId:
+          description: Collection's global unique Id.
+          type: string
+          example: h2C627F3DCC8E/89218
+        searchEnabled:
+          description: '*True* if collection is searchable.'
+          type: boolean
+          example: false
+    get_api_collection_figures_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        id:
+          description: ID of the the collection.
+          type: string
+          example: '89218'
+        objectId:
+          description: Object ID of the the collection.
+          type: string
+          example: '6966663'
+        name:
+          description: Name of the collection.
+          type: string
+          example: colltest0127133421258ogefv
+        statusString:
+          description: Status of the collection.
+          type: string
+          enum:
+          - unloaded
+          - loading
+          - loaded
+          - unloading
+          - deleted
+          - unknown
+        collectionModel:
+          description: 'Type of collection model.
+
+            - *0*: document model
+
+            - *1*: key/value model
+
+            - *2*: dynamo model'
+          type: number
+          example: 0
+        isSpot:
+          description: '*True* if the collection is a spot collection.'
+          type: boolean
+          example: false
+        isLocal:
+          description: '*True* if the collection is a local collection.'
+          type: boolean
+          example: false
+        cacheEnabled:
+          description: '*True* if the collection has cache enabled.'
+          type: boolean
+          example: false
+        hasStream:
+          description: '*True* if the collection has a stream.'
+          type: boolean
+          example: true
+        waitForSync:
+          description: '*True* if all data must be synced to storage before operation returns.'
+          type: boolean
+          example: false
+        keyOptions:
+          $ref: '#/components/schemas/fabric_collection_validate_keyoption'
+        isSystem:
+          description: '*True* if collection is a system collection.'
+          type: boolean
+          example: false
+        globallyUniqueId:
+          description: Collection's global unique ID.
+          type: string
+          example: h2C627F3DCC8E/89218
+        searchEnabled:
+          description: '*True* if collection is searchable.'
+          type: boolean
+          example: false
+        figures:
+          $ref: '#/components/schemas/collection_figures'
+      type: object
+    CollectionMetadataResponse:
       allOf:
       - $ref: '#/components/schemas/ResponseBase'
       - type: object
         properties:
-          id:
-            type: string
-            example: '123'
+          result:
+            type: object
+            $ref: '#/components/schemas/CollectionMetadataEntity'
     api_collection_get_count_examples_rc_200:
       properties:
         code:
@@ -1418,6 +1454,138 @@ components:
           description: Global unique identifier.
           type: string
           example: h83A7584E8AA9
+    DeletedResponse:
+      allOf:
+      - $ref: '#/components/schemas/ResponseBase'
+      - type: object
+        properties:
+          id:
+            type: string
+            example: '123'
+    headers:
+      x-gdn-region:
+        description: The federation's region hostname that served the request.
+        type: string
+      x-gdn-requestid:
+        description: A unique request ID for each API request.
+        type: string
+    ResponseBase:
+      type: object
+      properties:
+        error:
+          type: boolean
+          default: false
+        code:
+          type: integer
+          default: 200
+      required:
+      - error
+    collection_figures_view_indexes:
+      properties:
+        count:
+          description: The total number of views defined for the collection.
+          format: int64
+          type: integer
+          example: 0
+        size:
+          description: The total memory allocated for views in bytes.
+          format: int64
+          type: integer
+          example: 0
+      type: object
+    api_collection_put_properties_http_examples_rc_200:
+      properties:
+        hasStream:
+          description: '*True* if a local stream is associated with the collection.'
+          type: boolean
+        waitForSync:
+          description: '*True* if all data must be synced to storage before operation returns.'
+          type: boolean
+        cacheEnabled:
+          description: '*True* if collection has cache enabled'
+          type: boolean
+          default: false
+      required:
+      - hasStream
+      type: object
+    CollectionMetadataEntity:
+      type: object
+      properties:
+        _key:
+          type: string
+          description: Key of the entity.
+          example: '1'
+          x-field-extra-annotation: '@com.c8db.entity.DocumentField(com.c8db.entity.DocumentField.Type.KEY)'
+        tenant:
+          type: string
+          description: Tenant that owns the collection of this metadata.
+          example: demo
+        fabric:
+          type: string
+          description: Fabric of the collection.
+          example: _system
+        name:
+          type: string
+          description: Name of the collection linked with this metadata entity.
+          example: MyCollection
+        workflows:
+          type: array
+          description: Details of workflows assigned to the collection.
+          items:
+            $ref: '#/components/schemas/WorkflowMetadataEntity'
+    api_collection_post_http_examples_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        id:
+          description: Removed collection identifier.
+          type: string
+          example: '61862387'
+    error_example_rc_404:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 404
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
+      type: object
+    collection_figures_indexes:
+      properties:
+        count:
+          description: 'The total number of indexes defined for the collection, including the pre-defined
+
+            indexes (e.g. primary index).
+
+
+            '
+          format: int64
+          type: integer
+          example: 1
+        size:
+          description: The total memory allocated for indexes in bytes.
+          format: int64
+          type: integer
+          example: 2070
+      type: object
     api_collection_put_collection_property_http_examples_rc_200:
       properties:
         code:
@@ -1520,174 +1688,6 @@ components:
           - 4
           - 5
           - 6
-    error_example_rc_400:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 400
-        error:
-          description: Flag if there is an error in response. *True* for this response.
-          type: boolean
-          example: true
-        errorMessage:
-          description: A message created for this error.
-          type: string
-          example: Error message
-        errorNum:
-          description: Error number returned from the database.
-          type: integer
-          example: 102020
-      required:
-      - error
-      type: object
-    WorkflowEntity:
-      type: object
-      properties:
-        uuid:
-          type: string
-          description: UUID of the workflow.
-          example: connectorse83a79c296f748b18fd9
-        name:
-          type: string
-          description: Name of the workflow.
-          example: ToPostgres
-        connector:
-          type: object
-          description: Connector used in this workflow.
-          $ref: '#/components/schemas/ConnectorBase'
-        isEditable:
-          type: boolean
-          description: Indicates whether the connection used in this workflow is editable or not.
-          default: false
-          example: false
-        isInternal:
-          type: boolean
-          description: Specifies whether the connection used in this workflow is internal or not.
-          default: false
-          example: false
-        status:
-          type: string
-          description: Status of the workflow.
-          example: Succeeded
-    error_example_rc_401:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 401
-        error:
-          description: Flag if there is an error in response. *True* for this response.
-          type: boolean
-          example: true
-        errorMessage:
-          description: A message created for this error.
-          type: string
-          example: Error message
-        errorNum:
-          description: Error number returned from the database.
-          type: integer
-          example: '102020'
-      required:
-      - error
-      type: object
-    error_example_rc_403:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 403
-        error:
-          description: Flag if there is an error in response. *True* for this response.
-          type: boolean
-          example: true
-        errorMessage:
-          description: A message created for this error.
-          type: string
-          example: Error message
-        errorNum:
-          description: Error number returned from the database.
-          type: integer
-          example: 581
-      required:
-      - error
-      type: object
-    ConnectorBase:
-      type: object
-      description: Lightweight connector definition.
-      properties:
-        name:
-          type: string
-          example: macrometa-source-oracle
-          description: Name of the connector. This is used as the ID of the connector.
-        displayName:
-          type: string
-          example: OracleDB
-          description: Name that can be used by GUI clients to display the connector.
-        description:
-          type: string
-          example: Source for loading data from a GDN collection.
-        type:
-          type: string
-          example: source
-          description: Specifies whether the connector serves as a source or a target.
-        version:
-          type: string
-          description: Version of the connector.
-          example: 1.0.0
-    collection_figures_indexes:
-      properties:
-        count:
-          description: 'The total number of indexes defined for the collection, including the pre-defined
-
-            indexes (e.g. primary index).
-
-
-            '
-          format: int64
-          type: integer
-          example: 1
-        size:
-          description: The total memory allocated for indexes in bytes.
-          format: int64
-          type: integer
-          example: 2070
-      type: object
-    collection_figures_view_indexes:
-      properties:
-        count:
-          description: The total number of views defined for the collection.
-          format: int64
-          type: integer
-          example: 0
-        size:
-          description: The total memory allocated for views in bytes.
-          format: int64
-          type: integer
-          example: 0
-      type: object
-  parameters:
-    Workflow:
-      name: workflow-name
-      in: path
-      required: true
-      description: Name of the workflow.
-      schema:
-        type: string
-    Collection:
-      name: collection-name
-      in: path
-      required: true
-      description: Collection name.
-      schema:
-        type: string
-    Fabric:
-      name: fabric
-      in: path
-      required: true
-      description: Fabric name of the resource.
-      schema:
-        type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
