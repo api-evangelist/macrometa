@@ -209,13 +209,6 @@ paths:
       - Dynamo
 components:
   schemas:
-    headers:
-      x-gdn-region:
-        description: The federation's region hostname that served the request.
-        type: string
-      x-gdn-requestid:
-        description: A unique request ID for each API request.
-        type: string
     error_example_rc_400:
       properties:
         code:
@@ -237,6 +230,13 @@ components:
       required:
       - error
       type: object
+    headers:
+      x-gdn-region:
+        description: The federation's region hostname that served the request.
+        type: string
+      x-gdn-requestid:
+        description: A unique request ID for each API request.
+        type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

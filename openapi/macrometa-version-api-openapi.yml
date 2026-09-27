@@ -142,7 +142,7 @@ paths:
       tags:
       - Version
       description: Gets the current version of the service.
-      operationId: getVersion
+      operationId: getApiVwrV1Version
       security:
       - APIKeyAuth: []
       responses:
@@ -158,6 +158,8 @@ paths:
           description: Either the API key doesn't have permissions or it is deactivated.
         '500':
           description: Internal server error.
+      x-operation-id-source: normalized
+      x-operation-id-original: getVersion
     servers:
     - url: https://api-demo-vwr.paas.macrometa.io
       description: PhotonIQ Virtual Waiting Rooms API

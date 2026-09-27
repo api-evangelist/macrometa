@@ -84,11 +84,6 @@ paths:
           description: Authorization failure due to invalid authentication credentials.
 components:
   schemas:
-    Confidence:
-      type: object
-      properties:
-        matchScore:
-          type: number
     RecordVisitInformation:
       type: object
       properties:
@@ -108,6 +103,11 @@ components:
                 description: Any value in string format
         version:
           type: string
+    Confidence:
+      type: object
+      properties:
+        matchScore:
+          type: number
     VisitDetails:
       type: object
       properties:

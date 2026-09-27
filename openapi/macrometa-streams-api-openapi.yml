@@ -1048,52 +1048,6 @@ paths:
       - Streams
 components:
   schemas:
-    set_stream_ttl_example_rc_200:
-      properties:
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        code:
-          description: The generated response code.
-          type: integer
-          example: 200
-        result:
-          type: string
-    get_stream_backlog_example_rc_200:
-      properties:
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        code:
-          description: The generated response code.
-          type: integer
-          example: 200
-        result:
-          type: string
-          description: Stringified JSON object with backlog details
-    error_example_rc_409:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 409
-        error:
-          description: Flag if there is an error in response. *True* for this response.
-          type: boolean
-          example: true
-        errorMessage:
-          description: A message created for this error.
-          type: string
-          example: Error message
-        errorNum:
-          description: Error number returned from the database.
-          type: integer
-          example: 581
-      required:
-      - error
-      type: object
     error_example_rc_401:
       properties:
         code:
@@ -1115,48 +1069,6 @@ components:
       required:
       - error
       type: object
-    error_example_rc_400:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 400
-        error:
-          description: Flag if there is an error in response. *True* for this response.
-          type: boolean
-          example: true
-        errorMessage:
-          description: A message created for this error.
-          type: string
-          example: Error message
-        errorNum:
-          description: Error number returned from the database.
-          type: integer
-          example: 102020
-      required:
-      - error
-      type: object
-    error_example_rc_412:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 412
-        error:
-          description: Flag if there is an error in response. *True* for this response.
-          type: boolean
-          example: true
-        errorMessage:
-          description: A message created for this error.
-          type: string
-          example: Error message
-        errorNum:
-          description: Error number returned from the database.
-          type: integer
-          example: 581
-      required:
-      - error
-      type: object
     get_stream_ttl_example_rc_200:
       properties:
         error:
@@ -1171,6 +1083,19 @@ components:
           type: string
           example: '21600'
           description: TTL in seconds.
+    get_stream_subs_example_rc_200:
+      properties:
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        code:
+          description: The generated response code.
+          type: integer
+          example: 200
+        result:
+          type: string
+          description: Stringified JSON object with a list of subscriptions for the stream.
     get_all_streams_examples_rc_200:
       properties:
         error:
@@ -1217,19 +1142,27 @@ components:
       x-gdn-requestid:
         description: A unique request ID for each API request.
         type: string
-    get_stream_stats_example_rc_200:
+    error_example_rc_412:
       properties:
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
         code:
-          description: The generated response code.
+          description: HTTP response code.
           type: integer
-          example: 200
-        result:
+          example: 412
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
           type: string
-          description: Stringified JSON object with statistics for the stream.
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
+      type: object
     delete_stream_example_rc_202:
       type: object
       properties:
@@ -1243,6 +1176,19 @@ components:
           example: 202
         result:
           type: object
+    get_stream_stats_example_rc_200:
+      properties:
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        code:
+          description: The generated response code.
+          type: integer
+          example: 200
+        result:
+          type: string
+          description: Stringified JSON object with statistics for the stream.
     create_stream_example_rc_202:
       properties:
         error:
@@ -1258,6 +1204,18 @@ components:
             stream-id:
               type: string
               example: c8locals.stream1
+    set_stream_ttl_example_rc_200:
+      properties:
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        code:
+          description: The generated response code.
+          type: integer
+          example: 200
+        result:
+          type: string
     error_example_rc_404:
       properties:
         code:
@@ -1292,7 +1250,49 @@ components:
           example: 200
         result:
           type: object
-    get_stream_subs_example_rc_200:
+    error_example_rc_409:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 409
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
+      type: object
+    error_example_rc_400:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 400
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 102020
+      required:
+      - error
+      type: object
+    get_stream_backlog_example_rc_200:
       properties:
         error:
           description: Flag if there is an error in response. *False* for this response.
@@ -1304,7 +1304,7 @@ components:
           example: 200
         result:
           type: string
-          description: Stringified JSON object with a list of subscriptions for the stream.
+          description: Stringified JSON object with backlog details
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

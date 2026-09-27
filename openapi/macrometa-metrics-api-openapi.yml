@@ -1168,6 +1168,19 @@ paths:
       description: PhotonIQ Virtual Waiting Rooms API
 components:
   schemas:
+    StreamDetailedResponse:
+      type: object
+      properties:
+        conn:
+          type: integer
+        evntdlvrt:
+          type: number
+        evnterrrt:
+          type: number
+        evntszrt:
+          type: number
+        qry:
+          type: integer
     MetricsResponse:
       type: object
       properties:
@@ -1226,6 +1239,11 @@ components:
         wssub:
           type: integer
           description: number of active ws conn
+    StreamResponse:
+      type: object
+      properties:
+        stream_name:
+          $ref: '#/components/schemas/StreamDetailedResponse'
     GetErrorResponse:
       type: object
       required:
@@ -1239,70 +1257,18 @@ components:
         error:
           type: string
           example: message
-    StreamResponse:
-      type: object
-      properties:
-        stream_name:
-          $ref: '#/components/schemas/StreamDetailedResponse'
-    StreamDetailedResponse:
-      type: object
-      properties:
-        conn:
-          type: integer
-        evntdlvrt:
-          type: number
-        evnterrrt:
-          type: number
-        evntszrt:
-          type: number
-        qry:
-          type: integer
-    MetricsResponse_2:
-      type: array
-      items:
-        $ref: '#/components/schemas/MetricDetails'
-    MetricDetails:
-      type: object
-      properties:
-        _key:
-          type: string
-        name:
-          type: string
-        value:
-          type: number
-        start:
-          type: number
-          format: date-time
-        end:
-          type: number
-          format: date-time
-    TopNVisitsResponse:
-      type: array
-      items:
-        $ref: '#/components/schemas/TopNVisitorsDetails'
-    TopNVisitorsDetails:
-      type: object
-      properties:
-        visitorId:
-          type: string
-        visitorCount:
-          type: number
-        firstVisit:
-          type: number
-          format: date-time
-        lastVisit:
-          type: number
-          format: date-time
-        start:
-          type: number
-          format: date-time
-        end:
-          type: number
-          format: date-time
     TrafficResponse:
       type: array
       items:
         $ref: '#/components/schemas/TrafficDetails'
+    MetricsResponse_2:
+      type: array
+      items:
+        $ref: '#/components/schemas/MetricDetails'
+    TopNVisitsResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/TopNVisitorsDetails'
     DeviceTypeResponse:
       type: array
       items:
@@ -1347,6 +1313,40 @@ components:
           type: number
           format: date-time
           example: 1696965300
+    MetricDetails:
+      type: object
+      properties:
+        _key:
+          type: string
+        name:
+          type: string
+        value:
+          type: number
+        start:
+          type: number
+          format: date-time
+        end:
+          type: number
+          format: date-time
+    TopNVisitorsDetails:
+      type: object
+      properties:
+        visitorId:
+          type: string
+        visitorCount:
+          type: number
+        firstVisit:
+          type: number
+          format: date-time
+        lastVisit:
+          type: number
+          format: date-time
+        start:
+          type: number
+          format: date-time
+        end:
+          type: number
+          format: date-time
     RequestMetricsResponse:
       type: object
       properties:
@@ -1385,24 +1385,6 @@ components:
           format: number
           description: The total number of users currently waiting in the virtual waiting room.
   parameters:
-    offset:
-      name: offset
-      in: query
-      description: This denotes the initial number of metrics to skip in the response.
-      required: false
-      schema:
-        type:
-        - integer
-        - 'null'
-        example: 0
-    end:
-      name: end
-      in: query
-      description: The end date used for querying metrics data. Must be provided in RFC3339 date-time format.
-      required: true
-      schema:
-        type: string
-        example: YYYY-MM-DDTHH:MM:SSZ
     sort:
       name: sort
       in: query
@@ -1422,41 +1404,14 @@ components:
         type:
         - string
         - 'null'
-    x-customer-id:
-      name: x-customer-id
-      in: header
-      description: 'ID of the customer to identify the user making the request. '
-      required: true
-      schema:
-        type: string
-    order:
-      name: order
+    end:
+      name: end
       in: query
-      description: To arrange the metrics in ASC or DESC order.
-      required: false
-      schema:
-        type:
-        - string
-        - 'null'
-        example: DESC
-    start:
-      name: start
-      in: query
-      description: The start date used for querying metrics data. Must be provided in RFC3339 date-time format.
+      description: The end date used for querying metrics data. Must be provided in RFC3339 date-time format.
       required: true
       schema:
         type: string
         example: YYYY-MM-DDTHH:MM:SSZ
-    type:
-      name: type
-      in: query
-      description: The type of the metrics data points. Supported types - sec, min, hr, day, month.
-      required: false
-      schema:
-        type:
-        - string
-        - 'null'
-        example: sec
     limit:
       name: limit
       in: query
@@ -1467,6 +1422,51 @@ components:
         - integer
         - 'null'
         example: 100
+    order:
+      name: order
+      in: query
+      description: To arrange the metrics in ASC or DESC order.
+      required: false
+      schema:
+        type:
+        - string
+        - 'null'
+        example: DESC
+    type:
+      name: type
+      in: query
+      description: The type of the metrics data points. Supported types - sec, min, hr, day, month.
+      required: false
+      schema:
+        type:
+        - string
+        - 'null'
+        example: sec
+    offset:
+      name: offset
+      in: query
+      description: This denotes the initial number of metrics to skip in the response.
+      required: false
+      schema:
+        type:
+        - integer
+        - 'null'
+        example: 0
+    start:
+      name: start
+      in: query
+      description: The start date used for querying metrics data. Must be provided in RFC3339 date-time format.
+      required: true
+      schema:
+        type: string
+        example: YYYY-MM-DDTHH:MM:SSZ
+    x-customer-id:
+      name: x-customer-id
+      in: header
+      description: 'ID of the customer to identify the user making the request. '
+      required: true
+      schema:
+        type: string
   securitySchemes:
     api_key:
       type: apiKey

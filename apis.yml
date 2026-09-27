@@ -217,9 +217,10 @@ apis:
   humanURL: https://www.macrometa.com/docs/api
   baseURL: https://api-play.paas.macrometa.io
   tags:
-  - Data-Center
+  - Data Center
   tags_raw:
   - Data Centers
+  - Data-Center
   properties:
   - type: OpenAPI
     url: openapi/macrometa-data-centers-api-openapi.yml
@@ -375,9 +376,10 @@ apis:
   humanURL: https://www.macrometa.com/docs/api
   baseURL: https://api-play.paas.macrometa.io
   tags:
-  - Key-Value
+  - Key-Value Store
   tags_raw:
   - Key Value
+  - Key-Value
   properties:
   - type: OpenAPI
     url: openapi/macrometa-key-value-api-openapi.yml

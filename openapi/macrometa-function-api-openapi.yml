@@ -1537,6 +1537,47 @@ paths:
     - url: https://demofaas.paas.macrometa.io
 components:
   schemas:
+    generate_edge_worker_from_query_worker_rc_200:
+      type: object
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 202
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          items:
+            properties:
+              message:
+                type: string
+                example: The edge worker will be generated and activated shortly.
+                description: Success message.
+            type: object
+          type: array
+    error_example_rc_401:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 401
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: '102020'
+      required:
+      - error
+      type: object
     function_worker_metadata:
       properties:
         type:
@@ -1584,13 +1625,39 @@ components:
       - groupId
       - hostName
       type: object
-    list_edge_worker_rc_200:
-      $ref: '#/components/schemas/edge_worker_rc_200'
     invoke_function_worker_rc_200:
       description: Array of key value pairs.
       example:
       - key: value
       type: object
+    error_example_rc_403:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 403
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
+      type: object
+    headers:
+      x-gdn-region:
+        description: The federation's region hostname that served the request.
+        type: string
+      x-gdn-requestid:
+        description: A unique request ID for each API request.
+        type: string
     modify_function_worker_metadata:
       properties:
         type:
@@ -1629,33 +1696,12 @@ components:
           description: Edge function hostname.
           example: macrometa-akamai-ew.macrometa.io
       type: object
-    error_example_rc_401:
+    error_example_rc_404:
       properties:
         code:
           description: HTTP response code.
           type: integer
-          example: 401
-        error:
-          description: Flag if there is an error in response. *True* for this response.
-          type: boolean
-          example: true
-        errorMessage:
-          description: A message created for this error.
-          type: string
-          example: Error message
-        errorNum:
-          description: Error number returned from the database.
-          type: integer
-          example: '102020'
-      required:
-      - error
-      type: object
-    error_example_rc_403:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 403
+          example: 404
         error:
           description: Flag if there is an error in response. *True* for this response.
           type: boolean
@@ -1668,27 +1714,6 @@ components:
           description: Error number returned from the database.
           type: integer
           example: 581
-      required:
-      - error
-      type: object
-    error_example_rc_400:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 400
-        error:
-          description: Flag if there is an error in response. *True* for this response.
-          type: boolean
-          example: true
-        errorMessage:
-          description: A message created for this error.
-          type: string
-          example: Error message
-        errorNum:
-          description: Error number returned from the database.
-          type: integer
-          example: 102020
       required:
       - error
       type: object
@@ -1750,6 +1775,22 @@ components:
                 example: macrometa-akamai-ew.macrometa.io
             type: object
           type: array
+    set_function_metadata_example_rc_201:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 201
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          description: Flag for if the metadata for edge function is set successfully.
+          type: boolean
+          example: true
+    list_edge_worker_rc_200:
+      $ref: '#/components/schemas/edge_worker_rc_200'
     edge_worker_rc_200:
       type: object
       properties:
@@ -1819,53 +1860,12 @@ components:
                 example: 'No'
                 description: If yes, then pending activation.
           type: array
-    set_function_metadata_example_rc_201:
+    error_example_rc_400:
       properties:
         code:
           description: HTTP response code.
           type: integer
-          example: 201
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        result:
-          description: Flag for if the metadata for edge function is set successfully.
-          type: boolean
-          example: true
-    headers:
-      x-gdn-region:
-        description: The federation's region hostname that served the request.
-        type: string
-      x-gdn-requestid:
-        description: A unique request ID for each API request.
-        type: string
-    generate_edge_worker_from_query_worker_rc_200:
-      type: object
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 202
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        result:
-          items:
-            properties:
-              message:
-                type: string
-                example: The edge worker will be generated and activated shortly.
-                description: Success message.
-            type: object
-          type: array
-    error_example_rc_404:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 404
+          example: 400
         error:
           description: Flag if there is an error in response. *True* for this response.
           type: boolean
@@ -1877,7 +1877,7 @@ components:
         errorNum:
           description: Error number returned from the database.
           type: integer
-          example: 581
+          example: 102020
       required:
       - error
       type: object

@@ -91,21 +91,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    authentication_examples_rc_200:
-      properties:
-        jwt:
-          description: JWT authentication token.
-          type: string
-          example: IsInR5cCI6IkpXVCJ9.pvaG4gRG9lIiwiaWF0IjoyfQ.SflKxwRJSMeV_adQssw5c
-        tenant:
-          description: Name of the tenant.
-          type: string
-          example: foo
-        username:
-          description: Username of the tenant.
-          type: string
-          example: joe
-      type: object
     error_example_rc_401:
       properties:
         code:
@@ -127,13 +112,6 @@ components:
       required:
       - error
       type: object
-    headers:
-      x-gdn-region:
-        description: The federation's region hostname that served the request.
-        type: string
-      x-gdn-requestid:
-        description: A unique request ID for each API request.
-        type: string
     auth_token:
       properties:
         email:
@@ -154,6 +132,28 @@ components:
           example: joe
       required:
       - password
+      type: object
+    headers:
+      x-gdn-region:
+        description: The federation's region hostname that served the request.
+        type: string
+      x-gdn-requestid:
+        description: A unique request ID for each API request.
+        type: string
+    authentication_examples_rc_200:
+      properties:
+        jwt:
+          description: JWT authentication token.
+          type: string
+          example: IsInR5cCI6IkpXVCJ9.pvaG4gRG9lIiwiaWF0IjoyfQ.SflKxwRJSMeV_adQssw5c
+        tenant:
+          description: Name of the tenant.
+          type: string
+          example: foo
+        username:
+          description: Username of the tenant.
+          type: string
+          example: joe
       type: object
   securitySchemes:
     ApiKeyAuth:

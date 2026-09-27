@@ -1307,6 +1307,45 @@ components:
           type: string
           example: _dPRuHxe--_
       type: object
+    document_get_412:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 412
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorNum:
+          example: 1200
+        errorMessage:
+          example: precondition failed
+        _id:
+          example: xxx/8753101
+        _key:
+          example: '8753101'
+        _rev:
+          example: _dpDlw6W--_
+    examples_id_key_rev_data:
+      properties:
+        _id:
+          description: ID of the collection.
+          type: string
+          example: test/foo
+        _key:
+          description: _key details of collection.
+          type: string
+          example: foo
+        _rev:
+          description: _rev details of collection.
+          type: string
+          example: _dPRuHxe--_
+        data:
+          description: data in record.
+          type: string
+          example: data1
+      type: object
     examples_id_key_rev_oldrev:
       properties:
         _id:
@@ -1325,6 +1364,34 @@ components:
           description: previous revision of collection.
           type: string
           example: _dP34awxe--_
+      type: object
+    headers:
+      x-gdn-region:
+        description: The federation's region hostname that served the request.
+        type: string
+      x-gdn-requestid:
+        description: A unique request ID for each API request.
+        type: string
+    error_example_rc_404:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 404
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
       type: object
     error_example_rc_409:
       properties:
@@ -1368,77 +1435,10 @@ components:
       required:
       - error
       type: object
-    document_get_412:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 412
-        error:
-          description: Flag if there is an error in response. *True* for this response.
-          type: boolean
-          example: true
-        errorNum:
-          example: 1200
-        errorMessage:
-          example: precondition failed
-        _id:
-          example: xxx/8753101
-        _key:
-          example: '8753101'
-        _rev:
-          example: _dpDlw6W--_
-    headers:
-      x-gdn-region:
-        description: The federation's region hostname that served the request.
-        type: string
-      x-gdn-requestid:
-        description: A unique request ID for each API request.
-        type: string
     examples_id_key_rev_array:
       type: array
       items:
         $ref: '#/components/schemas/examples_id_key_rev'
-    error_example_rc_404:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 404
-        error:
-          description: Flag if there is an error in response. *True* for this response.
-          type: boolean
-          example: true
-        errorMessage:
-          description: A message created for this error.
-          type: string
-          example: Error message
-        errorNum:
-          description: Error number returned from the database.
-          type: integer
-          example: 581
-      required:
-      - error
-      type: object
-    examples_id_key_rev_data:
-      properties:
-        _id:
-          description: ID of the collection.
-          type: string
-          example: test/foo
-        _key:
-          description: _key details of collection.
-          type: string
-          example: foo
-        _rev:
-          description: _rev details of collection.
-          type: string
-          example: _dPRuHxe--_
-        data:
-          description: data in record.
-          type: string
-          example: data1
-      type: object
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

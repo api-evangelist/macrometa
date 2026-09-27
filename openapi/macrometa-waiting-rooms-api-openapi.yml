@@ -250,6 +250,24 @@ paths:
           description: Internal server error.
 components:
   schemas:
+    WaitingRoomPutResponse:
+      type: object
+      properties:
+        waitingroom_key:
+          type: string
+        updated_at:
+          type: number
+          format: number
+          example: 1694757010
+    WaitingRoomPostResponse:
+      type: object
+      properties:
+        waitingroom_key:
+          type: string
+        created_at:
+          type: number
+          format: number
+          example: 1694757000
     WaitingRoomObject:
       type: object
       required:
@@ -333,10 +351,6 @@ components:
         custom_attributes:
           type: object
           description: A JSON object containing custom attributes Any valid JSON can be stored here. It is not used by the waiting room at this time.
-    GetWaitingRoomsResponse:
-      type: array
-      items:
-        $ref: '#/components/schemas/WaitingRoomObject'
     WaitingRoomDeleteResponse:
       type: object
       properties:
@@ -346,24 +360,6 @@ components:
           type: number
           format: number
           example: 1694757100
-    WaitingRoomPostResponse:
-      type: object
-      properties:
-        waitingroom_key:
-          type: string
-        created_at:
-          type: number
-          format: number
-          example: 1694757000
-    WaitingRoomPutResponse:
-      type: object
-      properties:
-        waitingroom_key:
-          type: string
-        updated_at:
-          type: number
-          format: number
-          example: 1694757010
     WaitingRoom:
       allOf:
       - type: object
@@ -374,6 +370,10 @@ components:
             type: string
             description: The unique key of the waiting room.
       - $ref: '#/components/schemas/WaitingRoomObject'
+    GetWaitingRoomsResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/WaitingRoomObject'
   securitySchemes:
     APIKeyAuth:
       type: apiKey

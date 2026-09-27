@@ -122,7 +122,7 @@ paths:
       tags:
       - Telemetry
       description: Provides telemetry data in Prometheus format. Useful for monitoring services to monitor the health of the Virtual Waiting Rooms.
-      operationId: getTelemetry
+      operationId: getApiVwrV1Telemetry
       security:
       - APIKeyAuth: []
       responses:
@@ -157,6 +157,8 @@ paths:
           description: Either the API key doesn't have permissions or it is deactivated.
         '500':
           description: Internal server error.
+      x-operation-id-source: normalized
+      x-operation-id-original: getTelemetry
     servers:
     - url: https://api-demo-vwr.paas.macrometa.io
       description: PhotonIQ Virtual Waiting Rooms API

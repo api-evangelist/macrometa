@@ -289,65 +289,32 @@ paths:
       - Import Export
 components:
   schemas:
-    api_export:
+    api_import:
       properties:
-        bindVars:
-          additionalProperties: {}
-          description: Key-value pairs representing the bind parameters. Optional if bind parameters are not used in query.
-          type: object
-          example: {}
-        query:
-          description: 'C8QL query. Default: returns all documents.'
-          format: string
-          type: string
-          default: for u in testCollection return u
-      type: object
-    export_http_examples_rc_200:
-      type: object
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 200
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        result:
+        data:
+          description: An array of JSON documents. Each document is interpreted separately. If the `primaryKey` property (see below) is not set or equals `auto`, then the `_key` attribute values of the documents must be strings. The maximum number of documents that can be imported is limited by the `Max Documents Imported Per API Call` limit.
           type: array
           items:
             type: object
-            properties:
-              _key:
-                type: string
-                example: '1634556'
-              name:
-                type: string
-                example: test1
-    import_http_examples_rc_200:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 200
-        error:
-          description: Flag if there is an error in response. *False* for this response.
+            example:
+              _key: '1634556'
+              name: test1
+        details:
+          description: If *true* extra information for errors and unprocessed documents are returned in the result.
+          format: boolean
           type: boolean
-          example: false
-        result:
-          properties:
-            created:
-              description: Number of records created.
-              type: integer
-              example: 3
-            errors:
-              description: Number of records with errors.
-              type: integer
-              example: 0
-            unprocessed:
-              description: Number of records not processed.
-              type: integer
-              example: 0
+          default: false
+        primaryKey:
+          description: 'If used, this attribute becomes the *_key* for the new document. If the values in the attribute are not strings, they are convert to strings before import. Any existing *_key* value is renamed to *old_key*. Use the following naming convention: https://macrometa.dev/documents/naming-conventions/#document-keys'
+          format: string
+          type: string
+          default: name
+        replace:
+          description: If *true*, existing document having same *_key* in the colletion, shall be replaced.
+          format: boolean
+          type: boolean
+          default: false
+      type: object
     error_example_rc_401:
       properties:
         code:
@@ -390,27 +357,6 @@ components:
       required:
       - error
       type: object
-    error_example_rc_400:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 400
-        error:
-          description: Flag if there is an error in response. *True* for this response.
-          type: boolean
-          example: true
-        errorMessage:
-          description: A message created for this error.
-          type: string
-          example: Error message
-        errorNum:
-          description: Error number returned from the database.
-          type: integer
-          example: 102020
-      required:
-      - error
-      type: object
     headers:
       x-gdn-region:
         description: The federation's region hostname that served the request.
@@ -418,6 +364,30 @@ components:
       x-gdn-requestid:
         description: A unique request ID for each API request.
         type: string
+    import_http_examples_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          properties:
+            created:
+              description: Number of records created.
+              type: integer
+              example: 3
+            errors:
+              description: Number of records with errors.
+              type: integer
+              example: 0
+            unprocessed:
+              description: Number of records not processed.
+              type: integer
+              example: 0
     error_example_rc_404:
       properties:
         code:
@@ -439,32 +409,62 @@ components:
       required:
       - error
       type: object
-    api_import:
+    api_export:
       properties:
-        data:
-          description: An array of JSON documents. Each document is interpreted separately. If the `primaryKey` property (see below) is not set or equals `auto`, then the `_key` attribute values of the documents must be strings. The maximum number of documents that can be imported is limited by the `Max Documents Imported Per API Call` limit.
+        bindVars:
+          additionalProperties: {}
+          description: Key-value pairs representing the bind parameters. Optional if bind parameters are not used in query.
+          type: object
+          example: {}
+        query:
+          description: 'C8QL query. Default: returns all documents.'
+          format: string
+          type: string
+          default: for u in testCollection return u
+      type: object
+    error_example_rc_400:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 400
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 102020
+      required:
+      - error
+      type: object
+    export_http_examples_rc_200:
+      type: object
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        result:
           type: array
           items:
             type: object
-            example:
-              _key: '1634556'
-              name: test1
-        details:
-          description: If *true* extra information for errors and unprocessed documents are returned in the result.
-          format: boolean
-          type: boolean
-          default: false
-        primaryKey:
-          description: 'If used, this attribute becomes the *_key* for the new document. If the values in the attribute are not strings, they are convert to strings before import. Any existing *_key* value is renamed to *old_key*. Use the following naming convention: https://macrometa.dev/documents/naming-conventions/#document-keys'
-          format: string
-          type: string
-          default: name
-        replace:
-          description: If *true*, existing document having same *_key* in the colletion, shall be replaced.
-          format: boolean
-          type: boolean
-          default: false
-      type: object
+            properties:
+              _key:
+                type: string
+                example: '1634556'
+              name:
+                type: string
+                example: test1
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

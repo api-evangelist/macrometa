@@ -696,6 +696,19 @@ paths:
       description: PhotonIQ Virtual Waiting Rooms API
 components:
   schemas:
+    AggregateUsageGetResponse:
+      type: object
+      properties:
+        waitingroom_key:
+          type: string
+          description: A unique identifier for the waiting room.
+        requests:
+          type: number
+          format: number
+          description: Total REST API requests for the specified time period.
+        max_rps:
+          type: string
+          description: Maximum request per second for the specified time period.
     UsageGetResponse:
       type: object
       properties:
@@ -714,19 +727,6 @@ components:
           type: number
           description: Unix timestamp, in milliseconds, of the usage bucket.
           example: 1694757100000
-    AggregateUsageGetResponse:
-      type: object
-      properties:
-        waitingroom_key:
-          type: string
-          description: A unique identifier for the waiting room.
-        requests:
-          type: number
-          format: number
-          description: Total REST API requests for the specified time period.
-        max_rps:
-          type: string
-          description: Maximum request per second for the specified time period.
   securitySchemes:
     APIKeyAuth:
       type: apiKey

@@ -43,11 +43,6 @@ paths:
           description: Authorization failure due to invalid authentication credentials.
 components:
   schemas:
-    Confidence:
-      type: object
-      properties:
-        matchScore:
-          type: number
     PlatformDetails:
       type: object
       properties:
@@ -83,6 +78,21 @@ components:
               type: string
         ua:
           type: string
+    AllVisitsResponse:
+      type: object
+      properties:
+        visitorId:
+          type: string
+        firstSeenAt:
+          type: string
+          format: date-time
+        lastSeenAt:
+          type: string
+          format: date-time
+        visits:
+          type: array
+          items:
+            $ref: '#/components/schemas/VisitDetail'
     VisitDetail:
       type: object
       properties:
@@ -103,21 +113,11 @@ components:
           type: string
         confidence:
           $ref: '#/components/schemas/Confidence'
-    AllVisitsResponse:
+    Confidence:
       type: object
       properties:
-        visitorId:
-          type: string
-        firstSeenAt:
-          type: string
-          format: date-time
-        lastSeenAt:
-          type: string
-          format: date-time
-        visits:
-          type: array
-          items:
-            $ref: '#/components/schemas/VisitDetail'
+        matchScore:
+          type: number
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

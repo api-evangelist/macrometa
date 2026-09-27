@@ -145,6 +145,17 @@ components:
         totalBytes:
           type: number
           description: Number of total bytes used between from and to time.
+    MetricsResponse:
+      type: object
+      properties:
+        activityMetrics:
+          type: array
+          items:
+            $ref: '#/components/schemas/ActivityMetrics'
+        type:
+          type: array
+          items:
+            $ref: '#/components/schemas/TotalMetrics'
     ActivityMetrics:
       type: object
       properties:
@@ -163,14 +174,3 @@ components:
         count:
           type: number
           description: Number of events.
-    MetricsResponse:
-      type: object
-      properties:
-        activityMetrics:
-          type: array
-          items:
-            $ref: '#/components/schemas/ActivityMetrics'
-        type:
-          type: array
-          items:
-            $ref: '#/components/schemas/TotalMetrics'

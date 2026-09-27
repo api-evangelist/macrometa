@@ -197,6 +197,46 @@ paths:
       - APIKeyHeader: []
 components:
   schemas:
+    ImageEmbeddingRequest:
+      properties:
+        urls:
+          items:
+            type: string
+          type: array
+          title: Urls
+          description: The urls of images for which to generate embeddings.
+          examples:
+          - - http://images.cocodataset.org/val2017/000000039769.jpg
+        model_name:
+          type: string
+          title: Model Name
+          description: The name of the model to use for generating embeddings.
+          examples:
+          - laion/CLIP-ViT-B-32-laion2B-s34B-b79K
+      type: object
+      required:
+      - urls
+      - model_name
+      title: ImageEmbeddingRequest
+    MultiModalEmbeddingRequest:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/MultiModalRequestData'
+          type: array
+          title: Data
+          description: Multi model input definition.
+        model_name:
+          type: string
+          title: Model Name
+          description: The name of the model to use for generating embeddings.
+          examples:
+          - open_clip/ViT-L-14/laion2b_s32b_b82k
+      type: object
+      required:
+      - data
+      - model_name
+      title: MultiModalEmbeddingRequest
     TextEmbeddingRequest:
       properties:
         strings:
@@ -238,46 +278,6 @@ components:
       - text
       - image_url
       title: MultiModalRequestData
-    MultiModalEmbeddingRequest:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/MultiModalRequestData'
-          type: array
-          title: Data
-          description: Multi model input definition.
-        model_name:
-          type: string
-          title: Model Name
-          description: The name of the model to use for generating embeddings.
-          examples:
-          - open_clip/ViT-L-14/laion2b_s32b_b82k
-      type: object
-      required:
-      - data
-      - model_name
-      title: MultiModalEmbeddingRequest
-    ImageEmbeddingRequest:
-      properties:
-        urls:
-          items:
-            type: string
-          type: array
-          title: Urls
-          description: The urls of images for which to generate embeddings.
-          examples:
-          - - http://images.cocodataset.org/val2017/000000039769.jpg
-        model_name:
-          type: string
-          title: Model Name
-          description: The name of the model to use for generating embeddings.
-          examples:
-          - laion/CLIP-ViT-B-32-laion2B-s34B-b79K
-      type: object
-      required:
-      - urls
-      - model_name
-      title: ImageEmbeddingRequest
   securitySchemes:
     APIKeyHeader:
       type: apiKey

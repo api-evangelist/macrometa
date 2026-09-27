@@ -234,10 +234,15 @@ paths:
           description: Internal server error.
 components:
   schemas:
-    GetAPIKeysResponse:
-      type: array
-      items:
-        $ref: '#/components/schemas/GetAPIKeyResponse'
+    AuthDeleteResponse:
+      type: object
+      properties:
+        _key:
+          type: string
+        deleted_at:
+          type: number
+          format: number
+          example: 1694757000
     PatchAPIKey:
       type: object
       required:
@@ -280,47 +285,6 @@ components:
           description: Duration in days from creation that the API key stays valid.
           format: number
           example: 180
-    APIKey:
-      type: object
-      required:
-      - key_id
-      properties:
-        key_id:
-          type: string
-          description: A unique identifier for the API key.
-        role:
-          type: string
-          description: The role of the API key. Supported Roles:[admin, editor, and viewer].
-          default: editor
-        ttl:
-          type: number
-          description: Time for which the API key will remain valid (in days).
-          minimum: 1
-          maximum: 180
-          default: 180
-        activated:
-          type: boolean
-          description: The activation status of the API key.
-          default: true
-    AuthDeleteResponse:
-      type: object
-      properties:
-        _key:
-          type: string
-        deleted_at:
-          type: number
-          format: number
-          example: 1694757000
-    PatchAPIKeyResponse:
-      type: object
-      properties:
-        key_id:
-          type: string
-          description: A unique identifier for the API key.
-        updated_at:
-          type: number
-          format: number
-          example: 1694757010
     PostAPIKeyResponse:
       type: object
       properties:
@@ -347,6 +311,42 @@ components:
           type: number
           format: number
           example: 1694767000
+    GetAPIKeysResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/GetAPIKeyResponse'
+    APIKey:
+      type: object
+      required:
+      - key_id
+      properties:
+        key_id:
+          type: string
+          description: A unique identifier for the API key.
+        role:
+          type: string
+          description: The role of the API key. Supported Roles:[admin, editor, and viewer].
+          default: editor
+        ttl:
+          type: number
+          description: Time for which the API key will remain valid (in days).
+          minimum: 1
+          maximum: 180
+          default: 180
+        activated:
+          type: boolean
+          description: The activation status of the API key.
+          default: true
+    PatchAPIKeyResponse:
+      type: object
+      properties:
+        key_id:
+          type: string
+          description: A unique identifier for the API key.
+        updated_at:
+          type: number
+          format: number
+          example: 1694757010
   securitySchemes:
     APIKeyAuth:
       type: apiKey

@@ -5102,267 +5102,57 @@ paths:
       tags:
       - Administration
 components:
-  schemas:
-    administration_tenants_helper:
-      properties:
-        tenant:
-          type: string
-          description: The tenant name.
-          example: __system
-        dcList:
-          description: The array of data center names on which this tenant is created.
-          example:
-          - sol1-ap-west
-        status:
-          type: string
-          description: The tenant status.
-          example: available
-      type: object
-    tenant_modify:
-      properties:
-        active:
-          description: '*True* if the tenant is active.'
-          type: boolean
-          example: true
-        status:
-          description: 'Status of the tenant. Possible values: **active | expired | delinquent | inactive**'
-          type: string
-          example: active
-        displayName:
-          description: Name of the tenant.
-          type: string
-        metadata:
-          description: Object with metadata key-value pairs.
-          type: object
-          example:
-            key: value
-    tenant_limits_value:
-      type: object
-      properties:
-        apiServer:
-          $ref: '#/components/schemas/api_server_limits_example'
-        cep:
-          $ref: '#/components/schemas/cep_limits_example'
-        database:
-          $ref: '#/components/schemas/database_limits_example'
-        eventhub:
-          $ref: '#/components/schemas/eventhub_limits_example'
-        streamsGlobal:
-          $ref: '#/components/schemas/streams_limits_example'
-        streamsLocal:
-          $ref: '#/components/schemas/streams_limits_example'
-        dataMeshIntegration:
-          $ref: '#/components/schemas/dmi_limits_example'
-    error_example_rc_409:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 409
-        error:
-          description: Flag if there is an error in response. *True* for this response.
-          type: boolean
-          example: true
-        errorMessage:
-          description: A message created for this error.
-          type: string
-          example: Error message
-        errorNum:
-          description: Error number returned from the database.
-          type: integer
-          example: 581
-      required:
-      - error
-      type: object
-    administration_get_events_rc_200:
-      type: array
-      description: Array of event details
-      items:
-        properties:
-          _id:
-            description: ID of the event.
-            type: string
-            example: test/foo
-          _key:
-            description: _key details of event.
-            type: string
-            example: foo
-          _rev:
-            description: _rev details of event.
-            type: string
-            example: _dPRuHxe--_
-          action:
-            description: The activity of the event (CREATE/UPDATE/DELETE/EXECUTE/LOGIN).
-            type: string
-            example: CREATE
-          attributes:
-            $ref: '#/components/schemas/event_attributes'
-          clusterID:
-            description: Cluster id
-            type: string
-            example: sol1-ap-west
-          email:
-            description: The email id.
-            type: string
-            example: test@foo.com
-          entityName:
-            description: The entity name of the event.
-            type: string
-            example: Test
-          entityType:
-            description: The entity type of the event (COLLECTION/GRAPH/CEP/AUTH/STREAM/GEOFABRIC).
-            type: string
-            example: COLLECTION
-          fabric:
-            type: string
-            description: Fabric the event runs on.
-            example: _system
-          status:
-            description: The activity status (OK/WARN/ERROR).
-            type: string
-            example: OK
-          tenant:
-            type: string
-            description: The tenant name.
-            example: __system
-          timestamp:
-            type: number
-            description: Timestamp of event creted at.
-            example: 1643991111
-          user:
-            description: The Id of the user.
-            type: string
-            example: root
-          version:
-            description: The version string.
-            type: string
-            example: '0.1'
-    streams_limits_example:
-      type: object
-      properties:
-        maxStreamsCount:
-          description: Max streams count.
-          type: integer
-          example: 25
-        maxProducersCount:
-          description: Max streams producer count.
-          type: integer
-          example: 14
-        maxConsumersCount:
-          description: Max streams consumer count.
-          type: integer
-          example: 14
-        maxSubscriptionsCount:
-          description: Max streams subscriptions count.
-          type: integer
-          example: 14
-        maxBacklogMessageTTLMin:
-          description: Max streams backlog messagaes TTL in minute.
-          type: integer
-          example: 240
-        maxBacklogStorageSizeMB:
-          description: Max streams backlog storage size in MB.
-          type: integer
-          example: 100
-        maxDispatchThrottlingRateInByte:
-          description: Max streams byte dispatch rate per minute.
-          type: integer
-          example: 4096
-    eventhub_limits_example:
-      description: The limits values for eventhub feature
-      type: object
-      format: object
-      properties:
-        maxEventhubProducersCount:
-          description: Max eventhub producers count.
-          type: integer
-          example: 0
-        maxEventhubConsumersCount:
-          description: Max eventhub consumers count
-          type: integer
-          example: 0
+  requestBodies:
+    features_list_with_availability_flag_example:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/features_list_with_availability_flag_example'
+      description: The features to update (each value must be either *true* or *false*).
+      required: true
     billing_usage_create:
-      properties:
-        tenant:
-          description: (Optional) The ID of the tenant.
-          format: string
-          type: string
-          example: Test
-        start:
-          description: Start date-time in 'YYYY-MM-DD HH:MM:SS' format.
-          format: string
-          type: string
-          example: '2022-05-01 00:00:00'
-        end:
-          description: End date-time in 'YYYY-MM-DD HH:MM:SS' format.
-          format: string
-          type: string
-          example: '2022-05-03 00:00:00'
-        overwrite:
-          description: (Optional) Overwrite existing usage data.
-          default: false
-          type: boolean
-      type: object
-    database_limits_example:
-      type: object
-      properties:
-        maxDocumentSize:
-          description: The maximum document size in bytes.
-          type: integer
-          example: 524288
-        maxDocumentsReturnedByQuery:
-          description: The maximum documents returned by a query, or 0 to disable this limit. The page size for the query is equal to this value (if set), preventing c8db from creating a persistent cursor for queries.
-          format: int64
-          type: integer
-          example: 1000
-        maxQueryExecutionTimeInMs:
-          description: The maximum time allowed for a query to complete processing.
-          type: integer
-          example: 100000
-        maxQueryMemoryBytes:
-          description: The maximum bytes of memory allowed to be used by a query during processing.
-          type: integer
-          example: 527958016
-        maxGeoFabricsPerTenant:
-          description: The maximum number of fabric a tenant can create. Use 0 to disable.
-          type: integer
-          example: 2
-        maxCollectionsPerFabric:
-          description: The maximum number of collections per fabric a tenant can create. Use 0 to disable.
-          type: integer
-          example: 10
-        maxGraphsPerFabric:
-          description: The maximum number of graph collections per fabric a tenant can create. Use 0 to disable.
-          type: integer
-          example: 2
-        maxIndexes:
-          description: The maximum number of indexes per fabric a tenant can create. Use 0 to disable.
-          type: integer
-          example: 10
-        maxViewsPerFabric:
-          description: The maximum number of views per fabric a tenant can create. Use 0 to disable.
-          type: integer
-          example: 2
-        maxRequestsPerDay:
-          description: The maximum number of API requests per day for a tenant, including UI requests to the APIs. Use 0 to disable. This only applies for tenants with the 'tenant.trial' property in _tenants set to *true*.
-          type: integer
-          example: 20000
-        maxStoragePerRegion:
-          description: 'The maximum storage (in bytes) allowed to be used by a tenant in a region. Use 0 to disable. This only applies for tenants with the ''FREE'' billing plan. **Note**: As the metadata is also get counted in storage size calculation, the required storage size could be more than the total documents size stored in database.'
-          type: integer
-          example: 412467200
-        maxRestQLUsagePerFabric:
-          description: The maximum number of RestQL queries per fabric a tenant can run in a day. Use 0 to disable.
-          type: integer
-          example: 1000
-        maxRestQLUsagePerDay:
-          description: The maximum number of RestQL requests can be ran by a tenant in a day. Use 0 to disable.
-          type: integer
-          example: 1000
-        maxDocumentsImportedPerAPICall:
-          description: The maximum number of documents a tenant can import in a single API call. Use 0 to disable.
-          type: integer
-          example: 10000
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/billing_usage_create'
+      required: true
+    tenant_limits_value2:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/tenant_limits_value'
+      description: The new default values with billing plan information
+      required: true
+    tenant_limits_value:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/tenant_limits_value'
+      description: The new default values.
+      required: true
+    repairCheckCollectionsJsonRequestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - collection
+            properties:
+              tenant:
+                type: string
+                example: _mm
+                description: The name of the tenant.
+              fabric:
+                type: string
+                example: _system
+                description: The name of the fabric.
+              collection:
+                type: string
+                example: '[]'
+                description: The names of the collection.
+      description: Collection in which to search.
+      required: true
+  schemas:
     error_example_rc_401:
       properties:
         code:
@@ -5384,68 +5174,6 @@ components:
       required:
       - error
       type: object
-    billing_hourly_usage_create:
-      properties:
-        tenant:
-          description: (Optional) The ID of the tenant.
-          format: string
-          type: string
-          example: Test
-        overwrite:
-          description: (Optional) Overwrite existing hourly usage data.
-          default: false
-          type: boolean
-      type: object
-    cep_limits_example:
-      description: The limits values for CEP feature
-      type: object
-      format: object
-      properties:
-        maxPublishedWorkers:
-          description: Max number of published workers.
-          type: integer
-          example: 30
-        maxWorkersMemoryMB:
-          description: Max total memory size in MB of all the stream workers for the tenant.
-          type: integer
-          example: 500
-        maxMemoryMBPerWorker:
-          description: Max memory size in MB per stream worker for the tenant.
-          type: integer
-          example: 100
-        maxWorkersCpuSecondsPerMinute:
-          description: Max CPU seconds per minute for stream worker
-          type: integer
-          example: 60
-        maxWorkersThroughputInMBPerMinute:
-          description: Max IN throughput per minute in MB for stream workers.
-          type: integer
-          example: 10
-        maxWorkersThroughputOutMBPerMinute:
-          description: Max OUT throughput per minute in MB for stream workers.
-          type: integer
-          example: 10
-        maxLogsLengthKBPerMinutePerWorker:
-          description: Max logs length per minute in KB for each stream worker.
-          type: integer
-          example: 10
-        maxCpuSecondsPerMinutePerWorker:
-          description: Max CPU seconds per minute for each stream worker.54
-          type: integer
-          example: 20
-    get_tenant_metadata_object_example:
-      properties:
-        key1:
-          description: Name of metadata key 1.
-          format: string
-          type: string
-          example: value1
-        key2:
-          description: Name of metadata key 2.
-          format: string
-          type: string
-          example: value2
-      default: {}
     api_server_limits_example:
       type: object
       properties:
@@ -5454,418 +5182,6 @@ components:
           format: int64
           type: integer
           example: 60
-    fabric_sync_get_status_example:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 200
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        result:
-          description: Fabric sync information
-          type: object
-          properties:
-            collections:
-              type: array
-              items:
-                type: object
-                properties:
-                  name:
-                    type: string
-                    description: Collection name
-                  status:
-                    type: string
-                    description: Collection sync status
-                    example: 50%
-            fabric:
-              type: string
-              description: The fabric name.
-              example: _system
-            status:
-              type: string
-              description: The fabric sync status.
-              example: 50%
-    api_plan_list_rc_200:
-      type: array
-      description: Array of billing plans details.
-      items:
-        $ref: '#/components/schemas/plan_201_billing'
-    create_tenant_contact_object_example:
-      properties:
-        firstname:
-          description: First name of user.
-          type: string
-          example: demo
-        lastname:
-          description: Last name of user.
-          type: string
-          example: marometa
-        email:
-          description: Email address of user.
-          type: string
-          example: demo@macrometa.com
-        phone:
-          description: Phone number of user.
-          type: string
-          example: +1 (650) 555-9144
-        line1:
-          description: First line of address of user.
-          type: string
-          example: 646 Waverley Street
-        line2:
-          description: Second line of address of user.
-          type: string
-          example: Palo Alto, California 94301
-        city:
-          description: Name of the city.
-          type: string
-          example: Palo Alto
-        state:
-          description: Name of state.
-          type: string
-          example: 'California '
-        country:
-          description: Name of country.
-          type: string
-          example: United States of America
-        zipcode:
-          description: Zip code of user.
-          type: string
-          example: '94301'
-    tenant_modify_result_value:
-      properties:
-        tenant:
-          description: Name of the tenant.
-          type: string
-          example: Test
-        active:
-          description: Active state of tenant.
-          format: boolean
-          type: boolean
-          example: true
-        status:
-          description: Availability of tenant.
-          format: string
-          type: string
-          example: available
-        metadata:
-          description: Object with metadata key-value pairs.
-          type: object
-          example:
-            key: value
-      type: object
-    plan_modify:
-      properties:
-        name:
-          description: Name and unique identifier of the of the billing plan.
-          type: string
-          example: Test
-        planId:
-          description: ID of the billing plan.
-          type: string
-          example: '1'
-        description:
-          description: Description of the billing plan.
-          type: string
-          example: New billing plan.
-        featureGates:
-          description: List of the billing plan feature gates.
-          type: array
-          items:
-            type: string
-            example: KV
-        attribution:
-          description: Attribution of the billing plan. Combination of attribution and label must be unique for the plan.
-          type: string
-          example: Macrometa
-        label:
-          description: Display label of the billing plan. Combination of attribution and label must be unique for the plan.
-          type: string
-          example: Enterprise
-        pricing:
-          description: Pricing details of the billing plan.
-          type: string
-          example: Custom pricing
-        isBundle:
-          description: Bundle.
-          type: boolean
-          example: true
-        metadata:
-          description: Metadata of the plan, having set of key-value pairs.
-          type: object
-          example:
-            key: value
-        metrics:
-          description: List of metrics applicable for billing plan.
-          type: array
-          items:
-            $ref: '#/components/schemas/plan_metrics_example'
-        active:
-          description: A mandatory flag that specifies whether the billing plan is active.
-          type: boolean
-          example: true
-        demo:
-          description: An flag that specifies whether the billing plan is demo or not.
-          type: boolean
-          default: false
-      type: object
-    Response_Billing_Code_400:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 400
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-        message:
-          description: Message from server
-          type: string
-    post_metrics_query:
-      properties:
-        GeoFabric:
-          description: GeoFabric name
-          type: string
-          example: _system
-        limit:
-          description: Number of results we want to receive.
-          type: integer
-          example: 10
-        metrics:
-          description: Array of strings containing the metric names we want to receive.
-          items:
-            type: string
-            example: c8cep_app_cpu_tenant_total
-          type: array
-        querytype:
-          description: '- *list*: Returns a list of all available metrics
-
-            - *get*: Returns all the requested metrics
-
-            - *sum*: Returns sum of all records for each of the requested metrics.'
-          type: string
-          example: list
-        since:
-          description: Unix timestamp in milliseconds of oldest entry we want to receive.
-          type: integer
-          example: 1646157317
-      required:
-      - querytype
-      type: object
-    Payment_Update:
-      properties:
-        payment_method_id:
-          description: Payment Method ID
-          format: string
-          type: string
-    error_example_rc_400:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 400
-        error:
-          description: Flag if there is an error in response. *True* for this response.
-          type: boolean
-          example: true
-        errorMessage:
-          description: A message created for this error.
-          type: string
-          example: Error message
-        errorNum:
-          description: Error number returned from the database.
-          type: integer
-          example: 102020
-      required:
-      - error
-      type: object
-    plan_metrics_example:
-      properties:
-        name:
-          description: Name of the metrics. e.g. reads, writes etc.
-          type: string
-          example: kv-reads
-        value:
-          description: Value of the metrics. e.g. c8db_service_read_requests_count, c8db_service_write_requests_count etc.
-          type: string
-          example: c8db_service_kv_read_requests_count
-        metricType:
-          description: Name of the metrics. e.g. counter, gauge, histogram.
-          type: string
-          example: counter
-    administration_get_event_rc_201:
-      type: array
-      description: Array of delted events information.
-      items:
-        properties:
-          _id:
-            description: ID of the event.
-            type: string
-            example: test/foo
-          _key:
-            description: _key details of event.
-            type: string
-            example: foo
-          _rev:
-            description: _rev details of event.
-            type: string
-            example: _dPRuHxe--_
-    dmi_limits_example:
-      description: The limits values for Data Mesh Integrations feature.
-      type: object
-      properties:
-        maxConnections:
-          description: Max number of connections.
-          type: integer
-          example: 100
-        maxWorkflows:
-          description: Max number of workflows.
-          type: integer
-          example: 1000
-    administration_tenant_create_rc_201:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 200
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        result:
-          type: object
-          properties:
-            displayName:
-              description: The name of the tenant.
-              type: string
-              example: Test
-            email:
-              description: Email address of tenant.
-              type: string
-              example: demo@macrometa.com
-            attribution:
-              description: The attribution.
-              type: string
-              example: Macrometa
-            plan:
-              description: The billing plan name.
-              type: string
-              example: ENTERPRISE
-            dcList:
-              description: A comma-separated string containing the data center names on which this tenant is to be created. If an empty string is passed in, the tenant is assumed to be global to the federation and is created on all current data centers in the federation.
-              type: string
-            tenant:
-              description: The tenant name.
-              type: string
-              example: Test
-            metadata:
-              $ref: '#/components/schemas/get_tenant_metadata_object_example'
-    tenant_create:
-      properties:
-        email:
-          description: Email address of tenant.
-          type: string
-          example: demo@macrometa.com
-        displayName:
-          description: The name of the tenant.
-          type: string
-          example: Test
-        passwd:
-          description: The user password.
-          type: string
-          example: XXXX
-        plan:
-          description: The billing plan name.
-          type: string
-          example: ENTERPRISE
-        attribution:
-          description: The attribution.
-          type: string
-          example: Macrometa
-        dcList:
-          description: A comma-separated string containing the data center names on which this tenant is to be created. If an empty string is passed in, the tenant is assumed to be global to the federation and is created on all current data centers in the federation.
-          type: string
-          example: datacenter1, datacenter2
-        metadata:
-          $ref: '#/components/schemas/get_tenant_metadata_object_example'
-        contact:
-          $ref: '#/components/schemas/create_tenant_contact_object_example'
-      required:
-      - email
-      - dcList
-      type: object
-    dns_info_response:
-      properties:
-        global_url:
-          type: string
-          description: The global URL for the tenant and fabric pair.
-          example: global-url.mydomain.io
-        regional_urls:
-          type: object
-          description: Populates the regional URLs.
-          properties:
-            region-name-1:
-              type: string
-              description: The regional URL for the tenant and fabric pair for data center 1.
-              example: regional-url-1.mydomain.io
-            region-name-2:
-              type: string
-              description: The regional URL for the tenant and fabric pair for data center 2.
-              example: regional-url-2.mydomain.io
-        status:
-          type: object
-          description: Status of the regional URLs.
-          properties:
-            region-name-1:
-              type: string
-              description: Status of the regional URL for data center 1. Available status - enabled, disabled, pending, error
-              example: enabled
-            region-name-2:
-              type: string
-              description: Status of the regional URL for data center 2. Available status - enabled, disabled, pending, error
-              example: enabled
-        err_msg:
-          type: string
-          description: The error message for the failure during the DNS record CRUD operations.
-          example: Error message string
-    administration_create_event_rc_201:
-      properties:
-        _id:
-          description: ID of the event.
-          type: string
-          example: test/foo
-        _key:
-          description: _key details of event.
-          type: string
-          example: foo
-        _rev:
-          description: _rev details of event.
-          type: string
-          example: _dPRuHxe--_
-    error_example_rc_403:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 403
-        error:
-          description: Flag if there is an error in response. *True* for this response.
-          type: boolean
-          example: true
-        errorMessage:
-          description: A message created for this error.
-          type: string
-          example: Error message
-        errorNum:
-          description: Error number returned from the database.
-          type: integer
-          example: 581
-      required:
-      - error
-      type: object
     get_tenant_result_value:
       properties:
         limits:
@@ -5926,54 +5242,20 @@ components:
             key: value
         dnsInfo:
           $ref: '#/components/schemas/dns_info_response'
-    features_list_with_availability_flag_example:
-      type: object
+    get_tenant_metadata_object_example:
       properties:
-        CEP:
-          description: Name of the CEP feature.
-          type: boolean
-          example: false
-        DOCS:
-          description: Name of the Docs feature.
-          type: boolean
-          example: false
-        DYNAMO:
-          description: Name of the Dynamo feature.
-          type: boolean
-          example: false
-        REDIS:
-          description: Name of the Redis feature.
-          type: boolean
-          example: false
-        GEO_FABRICS:
-          description: Name of the Geo Fabrics feature.
-          type: boolean
-          example: false
-        GRAPHS:
-          description: Name of the Graphs feature.
-          type: boolean
-          example: false
-        KV:
-          description: Name of the KV feature.
-          type: boolean
-          example: true
-        LOCAL_COLLECTIONS:
-          description: Name of the Local Collections feature.
-          type: boolean
-          example: false
-        STREAMS:
-          description: Name of the streams feature.
-          type: boolean
-          example: false
-        USERS:
-          description: Name of the Users feature.
-          type: boolean
-          example: false
-        EVENT_HUB:
-          description: Name of the EventHub feature.
-          type: boolean
-          example: false
-    tenant_modify_example_rc_200:
+        key1:
+          description: Name of metadata key 1.
+          format: string
+          type: string
+          example: value1
+        key2:
+          description: Name of metadata key 2.
+          format: string
+          type: string
+          example: value2
+      default: {}
+    administration_api_query_metrics_rc_200:
       properties:
         code:
           description: HTTP response code.
@@ -5984,42 +5266,217 @@ components:
           type: boolean
           example: false
         result:
-          description: Attributes of tenant after patch operation.
-          type: array
-          items:
-            $ref: '#/components/schemas/tenant_modify_result_value'
-      type: object
-    event_create:
+          description: Returns metrics details.
+          type: string
+          example: '{"c8cep_app_cpu_tenant_total":[]}'
+    administration_tenant_delete_rc_200:
       properties:
-        action:
-          description: The activity of the event (CREATE/UPDATE/DELETE/EXECUTE/LOGIN).
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          description: '*True* if tenant removed successfully.'
+          type: boolean
+          example: true
+    plan_metrics_example:
+      properties:
+        name:
+          description: Name of the metrics. e.g. reads, writes etc.
           type: string
-          example: CREATE
-        attributes:
-          $ref: '#/components/schemas/event_attributes'
-        description:
-          description: Event description.
+          example: kv-reads
+        value:
+          description: Value of the metrics. e.g. c8db_service_read_requests_count, c8db_service_write_requests_count etc.
           type: string
-          example: Test event
-        details:
-          description: Additional activity info.
+          example: c8db_service_kv_read_requests_count
+        metricType:
+          description: Name of the metrics. e.g. counter, gauge, histogram.
           type: string
-          example: Error message
-        entityName:
-          description: The entity name of the event.
+          example: counter
+    create_tenant_contact_object_example:
+      properties:
+        firstname:
+          description: First name of user.
+          type: string
+          example: demo
+        lastname:
+          description: Last name of user.
+          type: string
+          example: marometa
+        email:
+          description: Email address of user.
+          type: string
+          example: demo@macrometa.com
+        phone:
+          description: Phone number of user.
+          type: string
+          example: +1 (650) 555-9144
+        line1:
+          description: First line of address of user.
+          type: string
+          example: 646 Waverley Street
+        line2:
+          description: Second line of address of user.
+          type: string
+          example: Palo Alto, California 94301
+        city:
+          description: Name of the city.
+          type: string
+          example: Palo Alto
+        state:
+          description: Name of state.
+          type: string
+          example: 'California '
+        country:
+          description: Name of country.
+          type: string
+          example: United States of America
+        zipcode:
+          description: Zip code of user.
+          type: string
+          example: '94301'
+    Response_Billing_Code_400:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 400
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+        message:
+          description: Message from server
+          type: string
+    plan_create:
+      properties:
+        name:
+          description: Name and unique identifier of the of the billing plan.
           type: string
           example: Test
-        entityType:
-          description: The entity type of the event (COLLECTION/GRAPH/CEP/AUTH/STREAM/GEOFABRIC).
+        planId:
+          description: ID of the billing plan.
           type: string
-          example: COLLECTION
-        status:
-          description: The activity status (OK/WARN/ERROR).
+          example: '1'
+        description:
+          description: Description of the billing plan.
           type: string
-          example: OK
+          example: New billing plan.
+        featureGates:
+          description: List of the billing plan feature gates.
+          type: array
+          items:
+            type: string
+            example: KV
+        attribution:
+          description: Attribution of the billing plan. Combination of attribution and label must be unique for the plan.
+          type: string
+          example: Macrometa
+        label:
+          description: Display label of the billing plan. Combination of attribution and label must be unique for the plan.
+          type: string
+          example: Enterprise
+        pricing:
+          description: Pricing details of the billing plan.
+          type: string
+          example: Custom pricing
+        isBundle:
+          description: Bundle.
+          type: boolean
+          example: true
+        metadata:
+          description: Metadata of the plan, having set of key-value pairs.
+          type: object
+          example:
+            key: value
+        metrics:
+          description: List of metrics applicable for billing plan.
+          type: array
+          items:
+            $ref: '#/components/schemas/plan_metrics_example'
+        active:
+          description: A mandatory flag that specifies whether the billing plan is active.
+          type: boolean
+          example: true
+        demo:
+          description: An flag that specifies whether the billing plan is demo or not.
+          type: boolean
+          default: false
       required:
-      - entityName
+      - name
+      - featureGates
+      - attribution
+      - label
+      - active
       type: object
+    plan_201_billing:
+      type: object
+      properties:
+        active:
+          description: Active status of the billing plan.
+          type: boolean
+          example: true
+        attribution:
+          description: Attribution name of the billing plan.
+          type: string
+          example: null
+        demo:
+          description: Flag about demo status of the billing plan.
+          type: boolean
+          example: true
+        description:
+          description: Information of the billing plan.
+          type: string
+          example: Information of the plan
+        featureGates:
+          description: List of featureGates associated with billing plan.
+          type: array
+          items:
+            type: string
+            example: KV
+        isBundle:
+          type: boolean
+          example: false
+        label:
+          description: Label of the billing plan.
+          type: string
+          example: Free
+        metadata:
+          description: Metadata about the billing plan.
+          type: object
+          properties: {}
+          example:
+            key: value
+        metrics:
+          description: Metric values displayed along with name.
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                example: kv-reads
+              value:
+                type: string
+                example: c8db_service_kv_read_requests_count
+              metricType:
+                type: string
+                example: counter
+          type: array
+        name:
+          description: Name of the billing plan.
+          type: string
+          example: enterprise
+        planID:
+          description: ID associated with the billing plan.
+          type: string
+          example: aa2da2sd3s2ed3ssd3sd
+        pricing:
+          description: Pricing details of the billing plan.
+          type: string
+          example: Custom pricing
     api_collection_put_collection_compact_http_example_rc_200:
       properties:
         code:
@@ -6113,49 +5570,61 @@ components:
           description: '*True* if collection is searchable.'
           type: boolean
           example: false
-    tenant_update_plan_example_rc_200:
+    error_example_rc_400:
       properties:
         code:
           description: HTTP response code.
           type: integer
-          example: 200
+          example: 400
         error:
-          description: Flag if there is an error in response. *False* for this response.
+          description: Flag if there is an error in response. *True* for this response.
           type: boolean
-          example: false
-        result:
-          description: The information about what are the new attribution, billing plan and features attributes for tenant after billing plan is updated.
-          type: object
-          properties:
-            attribution:
-              description: Attribution of the tenant.
-              type: string
-              example: Macrometa
-            plan:
-              description: Name of the billing plan.
-              format: string
-              type: string
-              example: Enterprise
-            features:
-              description: List of features with boolean value indicating that those features are enabled or not.
-              type: array
-              items:
-                $ref: '#/components/schemas/features_list_with_availability_flag_example'
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 102020
       required:
       - error
       type: object
-    administration_tenants_get_rc_200:
+    tenant_create:
       properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 200
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        result:
-          $ref: '#/components/schemas/administration_tenants_helper'
+        email:
+          description: Email address of tenant.
+          type: string
+          example: demo@macrometa.com
+        displayName:
+          description: The name of the tenant.
+          type: string
+          example: Test
+        passwd:
+          description: The user password.
+          type: string
+          example: XXXX
+        plan:
+          description: The billing plan name.
+          type: string
+          example: ENTERPRISE
+        attribution:
+          description: The attribution.
+          type: string
+          example: Macrometa
+        dcList:
+          description: A comma-separated string containing the data center names on which this tenant is to be created. If an empty string is passed in, the tenant is assumed to be global to the federation and is created on all current data centers in the federation.
+          type: string
+          example: datacenter1, datacenter2
+        metadata:
+          $ref: '#/components/schemas/get_tenant_metadata_object_example'
+        contact:
+          $ref: '#/components/schemas/create_tenant_contact_object_example'
+      required:
+      - email
+      - dcList
+      type: object
     response_missing_usage_record_get:
       properties:
         code:
@@ -6191,6 +5660,271 @@ components:
                         items:
                           type: string
                           example: tenantxyz-22062022T2359
+    administration_tenant_create_rc_201:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          type: object
+          properties:
+            displayName:
+              description: The name of the tenant.
+              type: string
+              example: Test
+            email:
+              description: Email address of tenant.
+              type: string
+              example: demo@macrometa.com
+            attribution:
+              description: The attribution.
+              type: string
+              example: Macrometa
+            plan:
+              description: The billing plan name.
+              type: string
+              example: ENTERPRISE
+            dcList:
+              description: A comma-separated string containing the data center names on which this tenant is to be created. If an empty string is passed in, the tenant is assumed to be global to the federation and is created on all current data centers in the federation.
+              type: string
+            tenant:
+              description: The tenant name.
+              type: string
+              example: Test
+            metadata:
+              $ref: '#/components/schemas/get_tenant_metadata_object_example'
+    dmi_limits_example:
+      description: The limits values for Data Mesh Integrations feature.
+      type: object
+      properties:
+        maxConnections:
+          description: Max number of connections.
+          type: integer
+          example: 100
+        maxWorkflows:
+          description: Max number of workflows.
+          type: integer
+          example: 1000
+    eventhub_limits_example:
+      description: The limits values for eventhub feature
+      type: object
+      format: object
+      properties:
+        maxEventhubProducersCount:
+          description: Max eventhub producers count.
+          type: integer
+          example: 0
+        maxEventhubConsumersCount:
+          description: Max eventhub consumers count
+          type: integer
+          example: 0
+    billing_hourly_usage_create:
+      properties:
+        tenant:
+          description: (Optional) The ID of the tenant.
+          format: string
+          type: string
+          example: Test
+        overwrite:
+          description: (Optional) Overwrite existing hourly usage data.
+          default: false
+          type: boolean
+      type: object
+    tenant_modify_result_value:
+      properties:
+        tenant:
+          description: Name of the tenant.
+          type: string
+          example: Test
+        active:
+          description: Active state of tenant.
+          format: boolean
+          type: boolean
+          example: true
+        status:
+          description: Availability of tenant.
+          format: string
+          type: string
+          example: available
+        metadata:
+          description: Object with metadata key-value pairs.
+          type: object
+          example:
+            key: value
+      type: object
+    features_list_with_availability_flag_example:
+      type: object
+      properties:
+        CEP:
+          description: Name of the CEP feature.
+          type: boolean
+          example: false
+        DOCS:
+          description: Name of the Docs feature.
+          type: boolean
+          example: false
+        DYNAMO:
+          description: Name of the Dynamo feature.
+          type: boolean
+          example: false
+        REDIS:
+          description: Name of the Redis feature.
+          type: boolean
+          example: false
+        GEO_FABRICS:
+          description: Name of the Geo Fabrics feature.
+          type: boolean
+          example: false
+        GRAPHS:
+          description: Name of the Graphs feature.
+          type: boolean
+          example: false
+        KV:
+          description: Name of the KV feature.
+          type: boolean
+          example: true
+        LOCAL_COLLECTIONS:
+          description: Name of the Local Collections feature.
+          type: boolean
+          example: false
+        STREAMS:
+          description: Name of the streams feature.
+          type: boolean
+          example: false
+        USERS:
+          description: Name of the Users feature.
+          type: boolean
+          example: false
+        EVENT_HUB:
+          description: Name of the EventHub feature.
+          type: boolean
+          example: false
+    administration_tenants_helper:
+      properties:
+        tenant:
+          type: string
+          description: The tenant name.
+          example: __system
+        dcList:
+          description: The array of data center names on which this tenant is created.
+          example:
+          - sol1-ap-west
+        status:
+          type: string
+          description: The tenant status.
+          example: available
+      type: object
+    api_plan_list_rc_200:
+      type: array
+      description: Array of billing plans details.
+      items:
+        $ref: '#/components/schemas/plan_201_billing'
+    error_example_rc_429:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 429
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
+      type: object
+    tenant_modify_example_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          description: Attributes of tenant after patch operation.
+          type: array
+          items:
+            $ref: '#/components/schemas/tenant_modify_result_value'
+      type: object
+    administration_tenants_get_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          $ref: '#/components/schemas/administration_tenants_helper'
+    post_metrics_query:
+      properties:
+        GeoFabric:
+          description: GeoFabric name
+          type: string
+          example: _system
+        limit:
+          description: Number of results we want to receive.
+          type: integer
+          example: 10
+        metrics:
+          description: Array of strings containing the metric names we want to receive.
+          items:
+            type: string
+            example: c8cep_app_cpu_tenant_total
+          type: array
+        querytype:
+          description: '- *list*: Returns a list of all available metrics
+
+            - *get*: Returns all the requested metrics
+
+            - *sum*: Returns sum of all records for each of the requested metrics.'
+          type: string
+          example: list
+        since:
+          description: Unix timestamp in milliseconds of oldest entry we want to receive.
+          type: integer
+          example: 1646157317
+      required:
+      - querytype
+      type: object
+    error_example_rc_403:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 403
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
+      type: object
     set_enable_limits_flag:
       type: object
       properties:
@@ -6211,7 +5945,7 @@ components:
         message:
           description: Message from server
           type: string
-    get_tenant_example_rc_200:
+    fabric_sync_get_status_example:
       properties:
         code:
           description: HTTP response code.
@@ -6222,72 +5956,215 @@ components:
           type: boolean
           example: false
         result:
-          $ref: '#/components/schemas/get_tenant_result_value'
-    plan_201_billing:
+          description: Fabric sync information
+          type: object
+          properties:
+            collections:
+              type: array
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    description: Collection name
+                  status:
+                    type: string
+                    description: Collection sync status
+                    example: 50%
+            fabric:
+              type: string
+              description: The fabric name.
+              example: _system
+            status:
+              type: string
+              description: The fabric sync status.
+              example: 50%
+    administration_create_event_rc_201:
+      properties:
+        _id:
+          description: ID of the event.
+          type: string
+          example: test/foo
+        _key:
+          description: _key details of event.
+          type: string
+          example: foo
+        _rev:
+          description: _rev details of event.
+          type: string
+          example: _dPRuHxe--_
+    error_example_rc_409:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 409
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
+      type: object
+    tenant_limits_value:
       type: object
       properties:
+        apiServer:
+          $ref: '#/components/schemas/api_server_limits_example'
+        cep:
+          $ref: '#/components/schemas/cep_limits_example'
+        database:
+          $ref: '#/components/schemas/database_limits_example'
+        eventhub:
+          $ref: '#/components/schemas/eventhub_limits_example'
+        streamsGlobal:
+          $ref: '#/components/schemas/streams_limits_example'
+        streamsLocal:
+          $ref: '#/components/schemas/streams_limits_example'
+        dataMeshIntegration:
+          $ref: '#/components/schemas/dmi_limits_example'
+    tenant_modify:
+      properties:
         active:
-          description: Active status of the billing plan.
+          description: '*True* if the tenant is active.'
           type: boolean
           example: true
-        attribution:
-          description: Attribution name of the billing plan.
+        status:
+          description: 'Status of the tenant. Possible values: **active | expired | delinquent | inactive**'
           type: string
-          example: null
-        demo:
-          description: Flag about demo status of the billing plan.
-          type: boolean
-          example: true
-        description:
-          description: Information of the billing plan.
+          example: active
+        displayName:
+          description: Name of the tenant.
           type: string
-          example: Information of the plan
-        featureGates:
-          description: List of featureGates associated with billing plan.
-          type: array
-          items:
-            type: string
-            example: KV
-        isBundle:
-          type: boolean
-          example: false
-        label:
-          description: Label of the billing plan.
-          type: string
-          example: Free
         metadata:
-          description: Metadata about the billing plan.
+          description: Object with metadata key-value pairs.
           type: object
-          properties: {}
           example:
             key: value
-        metrics:
-          description: Metric values displayed along with name.
-          items:
-            type: object
-            properties:
-              name:
-                type: string
-                example: kv-reads
-              value:
-                type: string
-                example: c8db_service_kv_read_requests_count
-              metricType:
-                type: string
-                example: counter
-          type: array
-        name:
-          description: Name of the billing plan.
+    event_create:
+      properties:
+        action:
+          description: The activity of the event (CREATE/UPDATE/DELETE/EXECUTE/LOGIN).
           type: string
-          example: enterprise
-        planID:
-          description: ID associated with the billing plan.
+          example: CREATE
+        attributes:
+          $ref: '#/components/schemas/event_attributes'
+        description:
+          description: Event description.
           type: string
-          example: aa2da2sd3s2ed3ssd3sd
-        pricing:
-          description: Pricing details of the billing plan.
+          example: Test event
+        details:
+          description: Additional activity info.
           type: string
-          example: Custom pricing
+          example: Error message
+        entityName:
+          description: The entity name of the event.
+          type: string
+          example: Test
+        entityType:
+          description: The entity type of the event (COLLECTION/GRAPH/CEP/AUTH/STREAM/GEOFABRIC).
+          type: string
+          example: COLLECTION
+        status:
+          description: The activity status (OK/WARN/ERROR).
+          type: string
+          example: OK
+      required:
+      - entityName
+      type: object
+    billing_usage_create:
+      properties:
+        tenant:
+          description: (Optional) The ID of the tenant.
+          format: string
+          type: string
+          example: Test
+        start:
+          description: Start date-time in 'YYYY-MM-DD HH:MM:SS' format.
+          format: string
+          type: string
+          example: '2022-05-01 00:00:00'
+        end:
+          description: End date-time in 'YYYY-MM-DD HH:MM:SS' format.
+          format: string
+          type: string
+          example: '2022-05-03 00:00:00'
+        overwrite:
+          description: (Optional) Overwrite existing usage data.
+          default: false
+          type: boolean
+      type: object
+    administration_get_events_rc_200:
+      type: array
+      description: Array of event details
+      items:
+        properties:
+          _id:
+            description: ID of the event.
+            type: string
+            example: test/foo
+          _key:
+            description: _key details of event.
+            type: string
+            example: foo
+          _rev:
+            description: _rev details of event.
+            type: string
+            example: _dPRuHxe--_
+          action:
+            description: The activity of the event (CREATE/UPDATE/DELETE/EXECUTE/LOGIN).
+            type: string
+            example: CREATE
+          attributes:
+            $ref: '#/components/schemas/event_attributes'
+          clusterID:
+            description: Cluster id
+            type: string
+            example: sol1-ap-west
+          email:
+            description: The email id.
+            type: string
+            example: test@foo.com
+          entityName:
+            description: The entity name of the event.
+            type: string
+            example: Test
+          entityType:
+            description: The entity type of the event (COLLECTION/GRAPH/CEP/AUTH/STREAM/GEOFABRIC).
+            type: string
+            example: COLLECTION
+          fabric:
+            type: string
+            description: Fabric the event runs on.
+            example: _system
+          status:
+            description: The activity status (OK/WARN/ERROR).
+            type: string
+            example: OK
+          tenant:
+            type: string
+            description: The tenant name.
+            example: __system
+          timestamp:
+            type: number
+            description: Timestamp of event creted at.
+            example: 1643991111
+          user:
+            description: The Id of the user.
+            type: string
+            example: root
+          version:
+            description: The version string.
+            type: string
+            example: '0.1'
     event_attributes:
       description: Additional event attributes. If specified, *attributes* should be a JSON array containing key-value attributes
       type: object
@@ -6296,7 +6173,173 @@ components:
         HasStream: 1
         IsLocal: 0
         IsOrigin: 1
-    plan_create:
+    cep_limits_example:
+      description: The limits values for CEP feature
+      type: object
+      format: object
+      properties:
+        maxPublishedWorkers:
+          description: Max number of published workers.
+          type: integer
+          example: 30
+        maxWorkersMemoryMB:
+          description: Max total memory size in MB of all the stream workers for the tenant.
+          type: integer
+          example: 500
+        maxMemoryMBPerWorker:
+          description: Max memory size in MB per stream worker for the tenant.
+          type: integer
+          example: 100
+        maxWorkersCpuSecondsPerMinute:
+          description: Max CPU seconds per minute for stream worker
+          type: integer
+          example: 60
+        maxWorkersThroughputInMBPerMinute:
+          description: Max IN throughput per minute in MB for stream workers.
+          type: integer
+          example: 10
+        maxWorkersThroughputOutMBPerMinute:
+          description: Max OUT throughput per minute in MB for stream workers.
+          type: integer
+          example: 10
+        maxLogsLengthKBPerMinutePerWorker:
+          description: Max logs length per minute in KB for each stream worker.
+          type: integer
+          example: 10
+        maxCpuSecondsPerMinutePerWorker:
+          description: Max CPU seconds per minute for each stream worker.54
+          type: integer
+          example: 20
+    tenant_update_plan_example_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          description: The information about what are the new attribution, billing plan and features attributes for tenant after billing plan is updated.
+          type: object
+          properties:
+            attribution:
+              description: Attribution of the tenant.
+              type: string
+              example: Macrometa
+            plan:
+              description: Name of the billing plan.
+              format: string
+              type: string
+              example: Enterprise
+            features:
+              description: List of features with boolean value indicating that those features are enabled or not.
+              type: array
+              items:
+                $ref: '#/components/schemas/features_list_with_availability_flag_example'
+      required:
+      - error
+      type: object
+    streams_limits_example:
+      type: object
+      properties:
+        maxStreamsCount:
+          description: Max streams count.
+          type: integer
+          example: 25
+        maxProducersCount:
+          description: Max streams producer count.
+          type: integer
+          example: 14
+        maxConsumersCount:
+          description: Max streams consumer count.
+          type: integer
+          example: 14
+        maxSubscriptionsCount:
+          description: Max streams subscriptions count.
+          type: integer
+          example: 14
+        maxBacklogMessageTTLMin:
+          description: Max streams backlog messagaes TTL in minute.
+          type: integer
+          example: 240
+        maxBacklogStorageSizeMB:
+          description: Max streams backlog storage size in MB.
+          type: integer
+          example: 100
+        maxDispatchThrottlingRateInByte:
+          description: Max streams byte dispatch rate per minute.
+          type: integer
+          example: 4096
+    headers:
+      x-gdn-region:
+        description: The federation's region hostname that served the request.
+        type: string
+      x-gdn-requestid:
+        description: A unique request ID for each API request.
+        type: string
+    database_limits_example:
+      type: object
+      properties:
+        maxDocumentSize:
+          description: The maximum document size in bytes.
+          type: integer
+          example: 524288
+        maxDocumentsReturnedByQuery:
+          description: The maximum documents returned by a query, or 0 to disable this limit. The page size for the query is equal to this value (if set), preventing c8db from creating a persistent cursor for queries.
+          format: int64
+          type: integer
+          example: 1000
+        maxQueryExecutionTimeInMs:
+          description: The maximum time allowed for a query to complete processing.
+          type: integer
+          example: 100000
+        maxQueryMemoryBytes:
+          description: The maximum bytes of memory allowed to be used by a query during processing.
+          type: integer
+          example: 527958016
+        maxGeoFabricsPerTenant:
+          description: The maximum number of fabric a tenant can create. Use 0 to disable.
+          type: integer
+          example: 2
+        maxCollectionsPerFabric:
+          description: The maximum number of collections per fabric a tenant can create. Use 0 to disable.
+          type: integer
+          example: 10
+        maxGraphsPerFabric:
+          description: The maximum number of graph collections per fabric a tenant can create. Use 0 to disable.
+          type: integer
+          example: 2
+        maxIndexes:
+          description: The maximum number of indexes per fabric a tenant can create. Use 0 to disable.
+          type: integer
+          example: 10
+        maxViewsPerFabric:
+          description: The maximum number of views per fabric a tenant can create. Use 0 to disable.
+          type: integer
+          example: 2
+        maxRequestsPerDay:
+          description: The maximum number of API requests per day for a tenant, including UI requests to the APIs. Use 0 to disable. This only applies for tenants with the 'tenant.trial' property in _tenants set to *true*.
+          type: integer
+          example: 20000
+        maxStoragePerRegion:
+          description: 'The maximum storage (in bytes) allowed to be used by a tenant in a region. Use 0 to disable. This only applies for tenants with the ''FREE'' billing plan. **Note**: As the metadata is also get counted in storage size calculation, the required storage size could be more than the total documents size stored in database.'
+          type: integer
+          example: 412467200
+        maxRestQLUsagePerFabric:
+          description: The maximum number of RestQL queries per fabric a tenant can run in a day. Use 0 to disable.
+          type: integer
+          example: 1000
+        maxRestQLUsagePerDay:
+          description: The maximum number of RestQL requests can be ran by a tenant in a day. Use 0 to disable.
+          type: integer
+          example: 1000
+        maxDocumentsImportedPerAPICall:
+          description: The maximum number of documents a tenant can import in a single API call. Use 0 to disable.
+          type: integer
+          example: 10000
+    plan_modify:
       properties:
         name:
           description: Name and unique identifier of the of the billing plan.
@@ -6350,55 +6393,53 @@ components:
           description: An flag that specifies whether the billing plan is demo or not.
           type: boolean
           default: false
-      required:
-      - name
-      - featureGates
-      - attribution
-      - label
-      - active
       type: object
-    error_example_rc_429:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 429
-        error:
-          description: Flag if there is an error in response. *True* for this response.
-          type: boolean
-          example: true
-        errorMessage:
-          description: A message created for this error.
-          type: string
-          example: Error message
-        errorNum:
-          description: Error number returned from the database.
-          type: integer
-          example: 581
-      required:
-      - error
-      type: object
-    headers:
-      x-gdn-region:
-        description: The federation's region hostname that served the request.
-        type: string
-      x-gdn-requestid:
-        description: A unique request ID for each API request.
-        type: string
-    administration_api_get_metrics_rc_200:
+    get_tenant_example_rc_200:
       properties:
         code:
           description: HTTP response code.
           type: integer
           example: 200
         error:
-          description: Flag if there is an error in response.*False*for this response.
+          description: Flag if there is an error in response. *False* for this response.
           type: boolean
           example: false
         result:
-          description: Returns array of metrics details.
+          $ref: '#/components/schemas/get_tenant_result_value'
+    dns_info_response:
+      properties:
+        global_url:
           type: string
-          example: '{"result":[{"name":"c8cep_app_cpu_tenant_total","type":"counter","help":""}]}'
+          description: The global URL for the tenant and fabric pair.
+          example: global-url.mydomain.io
+        regional_urls:
+          type: object
+          description: Populates the regional URLs.
+          properties:
+            region-name-1:
+              type: string
+              description: The regional URL for the tenant and fabric pair for data center 1.
+              example: regional-url-1.mydomain.io
+            region-name-2:
+              type: string
+              description: The regional URL for the tenant and fabric pair for data center 2.
+              example: regional-url-2.mydomain.io
+        status:
+          type: object
+          description: Status of the regional URLs.
+          properties:
+            region-name-1:
+              type: string
+              description: Status of the regional URL for data center 1. Available status - enabled, disabled, pending, error
+              example: enabled
+            region-name-2:
+              type: string
+              description: Status of the regional URL for data center 2. Available status - enabled, disabled, pending, error
+              example: enabled
+        err_msg:
+          type: string
+          description: The error message for the failure during the DNS record CRUD operations.
+          example: Error message string
     update_tenant_plan:
       properties:
         attribution:
@@ -6442,84 +6483,43 @@ components:
       required:
       - error
       type: object
-    administration_tenant_delete_rc_200:
+    Payment_Update:
       properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 200
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        result:
-          description: '*True* if tenant removed successfully.'
-          type: boolean
-          example: true
-    administration_api_query_metrics_rc_200:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 200
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        result:
-          description: Returns metrics details.
+        payment_method_id:
+          description: Payment Method ID
+          format: string
           type: string
-          example: '{"c8cep_app_cpu_tenant_total":[]}'
-  requestBodies:
-    tenant_limits_value2:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/tenant_limits_value'
-      description: The new default values with billing plan information
-      required: true
-    repairCheckCollectionsJsonRequestBody:
-      content:
-        application/json:
-          schema:
-            type: object
-            required:
-            - collection
-            properties:
-              tenant:
-                type: string
-                example: _mm
-                description: The name of the tenant.
-              fabric:
-                type: string
-                example: _system
-                description: The name of the fabric.
-              collection:
-                type: string
-                example: '[]'
-                description: The names of the collection.
-      description: Collection in which to search.
-      required: true
-    billing_usage_create:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/billing_usage_create'
-      required: true
-    features_list_with_availability_flag_example:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/features_list_with_availability_flag_example'
-      description: The features to update (each value must be either *true* or *false*).
-      required: true
-    tenant_limits_value:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/tenant_limits_value'
-      description: The new default values.
-      required: true
+    administration_api_get_metrics_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response.*False*for this response.
+          type: boolean
+          example: false
+        result:
+          description: Returns array of metrics details.
+          type: string
+          example: '{"result":[{"name":"c8cep_app_cpu_tenant_total","type":"counter","help":""}]}'
+    administration_get_event_rc_201:
+      type: array
+      description: Array of delted events information.
+      items:
+        properties:
+          _id:
+            description: ID of the event.
+            type: string
+            example: test/foo
+          _key:
+            description: _key details of event.
+            type: string
+            example: foo
+          _rev:
+            description: _rev details of event.
+            type: string
+            example: _dPRuHxe--_
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

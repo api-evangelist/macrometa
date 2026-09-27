@@ -511,6 +511,77 @@ paths:
       - Query
 components:
   schemas:
+    api_cursor_rc_200:
+      type: object
+      properties:
+        code:
+          description: HTTP response code.
+          format: integer
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        count:
+          description: Total number of result documents available if the *count* attribute was used.
+          format: int64
+          type: integer
+          example: 1
+        extra:
+          description: (Optional) A JSON object with extra information about the query result contained in the *stats* sub-attribute. For data-modification queries, the *extra.stats* sub-attribute contains the number of modified documents. If the *ignoreErrors* query option was specified, *extra.stats* also includes the number of documents that could not be modified due to an error.
+          type: object
+          example:
+            stats:
+              writesExecuted: 0
+              writesIgnored: 0
+              scannedFull: 7
+              scannedIndex: 0
+              filtered: 0
+              httpRequests: 0
+              executionTime: 0.0006868839263916016
+              peakMemoryUsage: 18396
+            warnings: []
+        hasMore:
+          description: '*True* indicates there are more results available for the cursor on the server. *False* indicates there are no more results available.'
+          type: boolean
+          example: false
+        id:
+          description: (Optional) ID of temporary cursor created on the server.
+          type: string
+          example: '11176313'
+        cached:
+          description: '*True* indicates results are cached. *False* indicates results are not cached.'
+          type: boolean
+          example: false
+        result:
+          description: An array of result documents (might be empty if query has no results).
+          type: array
+          example:
+          - _id: xxx/8753330
+            _key: '8753330'
+            _rev: _dpDmoaa--_
+            item1: data2
+          items: {}
+      required:
+      - error
+    explain_options:
+      description: Options for the query.
+      properties:
+        allPlans:
+          description: If set to *true*, all possible execution are returned. The default is *false*, meaning only the optimal plan is be returned.
+          type: boolean
+        maxNumberOfPlans:
+          description: An optional maximum number of plans that the optimizer is allowed to generate. Setting this attribute to a low value allows to put a cap on the amount of work the optimizer does.
+          format: int64
+          type: integer
+        optimizer.rules:
+          description: An array of to-be-included or to-be-excluded optimizer rules can be put into this attribute, telling the optimizer to include or exclude specific rules. To disable a rule, prefix its name with a `-`, to enable a rule, prefix it with a `+`. There is also a pseudo-rule `all`, which matches all optimizer rules.
+          format: string
+          items:
+            type: string
+          type: array
+      type: object
     sql_api_cursor:
       properties:
         batchSize:
@@ -568,66 +639,6 @@ components:
       required:
       - query
       type: object
-    api_explain:
-      properties:
-        bindVars:
-          description: Key/value pairs representing the bind parameters.
-          items:
-            type: object
-          type: array
-        options:
-          $ref: '#/components/schemas/explain_options'
-        query:
-          description: The query which you want explained. If the query references any bind variables, these must also be passed in the attribute *bindVars*. Additional options for the query can be passed in the *options* attribute.
-          type: string
-      required:
-      - query
-      type: object
-      example: for u in testCollection return u
-    api_cursor_rc_404:
-      properties:
-        code:
-          description: HTTP response code.
-          format: int64
-          type: integer
-          example: 404
-        error:
-          description: Flag if there is an error in response. *True* for this response.
-          type: boolean
-          example: true
-        errorMessage:
-          description: A descriptive error message
-          type: string
-          example: error message
-        errorNum:
-          description: The server error number.
-          format: int64
-          type: integer
-          example: 58322
-      required:
-      - error
-      type: object
-    error_example_rc_400:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 400
-        error:
-          description: Flag if there is an error in response. *True* for this response.
-          type: boolean
-          example: true
-        errorMessage:
-          description: A message created for this error.
-          type: string
-          example: Error message
-        errorNum:
-          description: Error number returned from the database.
-          type: integer
-          example: 102020
-      required:
-      - error
-      type: object
     api_cursor_rc_400:
       description: The JSON representation is malformed.
       properties:
@@ -652,23 +663,52 @@ components:
       required:
       - error
       type: object
-    explain_options:
-      description: Options for the query.
+    api_cursor_rc_404:
       properties:
-        allPlans:
-          description: If set to *true*, all possible execution are returned. The default is *false*, meaning only the optimal plan is be returned.
-          type: boolean
-        maxNumberOfPlans:
-          description: An optional maximum number of plans that the optimizer is allowed to generate. Setting this attribute to a low value allows to put a cap on the amount of work the optimizer does.
+        code:
+          description: HTTP response code.
           format: int64
           type: integer
-        optimizer.rules:
-          description: An array of to-be-included or to-be-excluded optimizer rules can be put into this attribute, telling the optimizer to include or exclude specific rules. To disable a rule, prefix its name with a `-`, to enable a rule, prefix it with a `+`. There is also a pseudo-rule `all`, which matches all optimizer rules.
-          format: string
-          items:
-            type: string
-          type: array
+          example: 404
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A descriptive error message
+          type: string
+          example: error message
+        errorNum:
+          description: The server error number.
+          format: int64
+          type: integer
+          example: 58322
+      required:
+      - error
       type: object
+    api_explain:
+      properties:
+        bindVars:
+          description: Key/value pairs representing the bind parameters.
+          items:
+            type: object
+          type: array
+        options:
+          $ref: '#/components/schemas/explain_options'
+        query:
+          description: The query which you want explained. If the query references any bind variables, these must also be passed in the attribute *bindVars*. Additional options for the query can be passed in the *options* attribute.
+          type: string
+      required:
+      - query
+      type: object
+      example: for u in testCollection return u
+    headers:
+      x-gdn-region:
+        description: The federation's region hostname that served the request.
+        type: string
+      x-gdn-requestid:
+        description: A unique request ID for each API request.
+        type: string
     api_cursor_opts:
       description: Key/value object with extra options for the query.
       properties:
@@ -715,13 +755,27 @@ components:
             type: string
           type: array
       type: object
-    headers:
-      x-gdn-region:
-        description: The federation's region hostname that served the request.
-        type: string
-      x-gdn-requestid:
-        description: A unique request ID for each API request.
-        type: string
+    error_example_rc_404:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 404
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
+      type: object
     api_cursor_rc_201:
       type: object
       properties:
@@ -776,66 +830,12 @@ components:
           items: {}
       required:
       - error
-    api_cursor_rc_200:
-      type: object
-      properties:
-        code:
-          description: HTTP response code.
-          format: integer
-          type: integer
-          example: 200
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        count:
-          description: Total number of result documents available if the *count* attribute was used.
-          format: int64
-          type: integer
-          example: 1
-        extra:
-          description: (Optional) A JSON object with extra information about the query result contained in the *stats* sub-attribute. For data-modification queries, the *extra.stats* sub-attribute contains the number of modified documents. If the *ignoreErrors* query option was specified, *extra.stats* also includes the number of documents that could not be modified due to an error.
-          type: object
-          example:
-            stats:
-              writesExecuted: 0
-              writesIgnored: 0
-              scannedFull: 7
-              scannedIndex: 0
-              filtered: 0
-              httpRequests: 0
-              executionTime: 0.0006868839263916016
-              peakMemoryUsage: 18396
-            warnings: []
-        hasMore:
-          description: '*True* indicates there are more results available for the cursor on the server. *False* indicates there are no more results available.'
-          type: boolean
-          example: false
-        id:
-          description: (Optional) ID of temporary cursor created on the server.
-          type: string
-          example: '11176313'
-        cached:
-          description: '*True* indicates results are cached. *False* indicates results are not cached.'
-          type: boolean
-          example: false
-        result:
-          description: An array of result documents (might be empty if query has no results).
-          type: array
-          example:
-          - _id: xxx/8753330
-            _key: '8753330'
-            _rev: _dpDmoaa--_
-            item1: data2
-          items: {}
-      required:
-      - error
-    error_example_rc_404:
+    error_example_rc_400:
       properties:
         code:
           description: HTTP response code.
           type: integer
-          example: 404
+          example: 400
         error:
           description: Flag if there is an error in response. *True* for this response.
           type: boolean
@@ -847,7 +847,7 @@ components:
         errorNum:
           description: Error number returned from the database.
           type: integer
-          example: 581
+          example: 102020
       required:
       - error
       type: object

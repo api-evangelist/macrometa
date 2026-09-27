@@ -53,13 +53,6 @@ paths:
       - Support
 components:
   schemas:
-    headers:
-      x-gdn-region:
-        description: The federation's region hostname that served the request.
-        type: string
-      x-gdn-requestid:
-        description: A unique request ID for each API request.
-        type: string
     support_trigger_zendesk_post_rc_400:
       properties:
         code:
@@ -82,6 +75,13 @@ components:
           description: The serverId generated for the support ticket request.
           type: string
           example: C8Apid 0.1.39
+    headers:
+      x-gdn-region:
+        description: The federation's region hostname that served the request.
+        type: string
+      x-gdn-requestid:
+        description: A unique request ID for each API request.
+        type: string
     post_zendesk_api:
       properties:
         operation:
