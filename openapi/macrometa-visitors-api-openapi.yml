@@ -78,6 +78,11 @@ components:
               type: string
         ua:
           type: string
+    Confidence:
+      type: object
+      properties:
+        matchScore:
+          type: number
     AllVisitsResponse:
       type: object
       properties:
@@ -113,11 +118,6 @@ components:
           type: string
         confidence:
           $ref: '#/components/schemas/Confidence'
-    Confidence:
-      type: object
-      properties:
-        matchScore:
-          type: number
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

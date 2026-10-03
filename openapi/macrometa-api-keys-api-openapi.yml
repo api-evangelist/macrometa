@@ -2782,16 +2782,29 @@ paths:
       - API Keys
 components:
   schemas:
-    api_key_http_examples_rc_202:
+    headers:
+      x-gdn-region:
+        description: The federation's region hostname that served the request.
+        type: string
+      x-gdn-requestid:
+        description: A unique request ID for each API request.
+        type: string
+    api_key_http_examples_rc_200_billing:
       properties:
         code:
           description: HTTP response code.
           type: integer
-          example: 202
+          example: 200
         error:
           description: Flag if there is an error in response. *False* for this response.
           type: boolean
           example: false
+        result:
+          description: Billing tag with billing access level present.
+          properties:
+            billing:
+              type: string
+              example: rw
       required:
       - error
       type: object
@@ -2816,6 +2829,115 @@ components:
       required:
       - error
       type: object
+    api_key_database_stream_get_http_examples_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          properties:
+            c8locals.streamTest:
+              type: string
+              example: rw
+      required:
+      - error
+      type: object
+    apikey_validate:
+      properties:
+        apikey:
+          description: The id of the API key.
+          type: string
+          example: test1
+      required:
+      - apikey
+      type: object
+    api_key_dbname_examples_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          type: string
+          example: rw
+    user_grant_managedkey:
+      properties:
+        grant:
+          description: '- Use "rw" to set the managed key level access to *Read/Write*.
+
+            - Use "ro" to set the managed key level access to *Read Only*.
+
+            - Use "none" to set the managed key level access to *No access*.'
+          type: string
+          example: rw
+      required:
+      - grant
+      type: object
+    error_example_rc_404:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 404
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
+      type: object
+    api_key_http_examples_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          description: An array of API keys with details as keyid, user name and tenant name.
+          items:
+            $ref: '#/components/schemas/apikey200_help'
+          type: array
+      required:
+      - error
+      type: object
+    apikey_create:
+      properties:
+        keyid:
+          description: The id of the API key.
+          type: string
+          example: test1
+        user:
+          description: The user that owns the API key. The 'user' option should be used only when creating an API key that belongs to another user, and can be used only by service or _mm.root.
+          type: string
+          example: tenant1.user1
+        isSystem:
+          description: Indicates whether the key is a system API key.
+          type: boolean
+          example: 'false'
+      required:
+      - keyid
+      type: object
     apikey200_help:
       properties:
         keyid:
@@ -2834,52 +2956,6 @@ components:
           description: Indicates whether the key is a system API key.
           type: boolean
           example: 'false'
-    api_key_database_queryworker_get_http_examples_rc_200:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 200
-        error:
-          description: Flag if there is an error in the response. *False* for this response.
-          type: boolean
-          example: false
-        result:
-          description: Lists query workers and the permissions assigned to that API key for each query worker.
-          type: object
-          properties:
-            test1:
-              type: string
-              example: rw
-      required:
-      - error
-      type: object
-    user_grant_collection:
-      properties:
-        grant:
-          description: '- Use "rw" to set the collection level access to *Read/Write*.
-
-            - Use "ro" to set the collection level access to *Read Only*.
-
-            - Use "none" to set the collection level access to *No access*.'
-          type: string
-          example: rw
-      required:
-      - grant
-      type: object
-    user_grant_queryworker:
-      properties:
-        grant:
-          description: '- Use "rw" to set the query worker level access to *Read/Write*.
-
-            - Use "ro" to set the query worker level access to *Read Only*.
-
-            - Use "none" to set the query worker level access to *No access*.'
-          type: string
-          example: rw
-      required:
-      - grant
-      type: object
     api_key_dbname_collection_put_examples_rc_200:
       properties:
         code:
@@ -2913,7 +2989,7 @@ components:
       required:
       - error
       type: object
-    api_key_database_stream_get_http_examples_rc_200:
+    api_key_get_http_examples_rc_200:
       properties:
         code:
           description: HTTP response code.
@@ -2924,14 +3000,63 @@ components:
           type: boolean
           example: false
         result:
-          properties:
-            c8locals.streamTest:
-              type: string
-              example: rw
+          items:
+            properties:
+              _system:
+                description: Access level of system is described.
+                type: string
+                example: rw
       required:
       - error
       type: object
-    api_key_database_collection_get_http_examples_rc_200:
+    error_example_rc_409:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 409
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
+      type: object
+    api_key_http_examples_rc_202:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 202
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+      required:
+      - error
+      type: object
+    user_grant_database:
+      properties:
+        grant:
+          description: '- Use "rw" to set the GeoFabric access level to *Administrate*.
+
+            - Use "ro" to set the GeoFabric access level to *Access*.
+
+            - Use "none" to set the database access level to *No access*.'
+          type: string
+          example: rw
+      required:
+      - grant
+      type: object
+    api_key_put_dbname_examples_rc_200:
       properties:
         code:
           description: HTTP response code.
@@ -2942,7 +3067,35 @@ components:
           type: boolean
           example: false
         result:
-          description: List of collections and the access level.
+          type: string
+          example: rw
+      required:
+      - error
+      type: object
+    attribute_values:
+      properties:
+        key1:
+          description: Attribute key-value.
+          format: string
+          type: string
+          example: value1
+        key2:
+          description: Attribute key-value.
+          format: string
+          type: string
+          example: value2
+    api_key_database_queryworker_get_http_examples_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in the response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          description: Lists query workers and the permissions assigned to that API key for each query worker.
           type: object
           properties:
             test1:
@@ -2963,18 +3116,68 @@ components:
           example: false
         result:
           $ref: '#/components/schemas/attribute_values'
-    user_grant_managedkey:
+    error_example_rc_403:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 403
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
+      type: object
+    user_grant_queryworker:
       properties:
         grant:
-          description: '- Use "rw" to set the managed key level access to *Read/Write*.
+          description: '- Use "rw" to set the query worker level access to *Read/Write*.
 
-            - Use "ro" to set the managed key level access to *Read Only*.
+            - Use "ro" to set the query worker level access to *Read Only*.
 
-            - Use "none" to set the managed key level access to *No access*.'
+            - Use "none" to set the query worker level access to *No access*.'
           type: string
           example: rw
       required:
       - grant
+      type: object
+    api_key_http_examples_rc_201:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 201
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        key:
+          description: The generated key.
+          type: string
+          example: test1.KqEsCra56Nr6qiBvDhIUr7Fiey9gxUHCdg8dLuY75rOSAQtMUdeh6Hf851kd6atM3ccf69
+        keyid:
+          description: keyid of the key.
+          type: string
+          example: test1
+        tenant:
+          description: Name of the tenant.
+          type: string
+          example: _mm
+        user:
+          description: Name of the user.
+          type: string
+          example: root
+      required:
+      - error
       type: object
     api_key_get_response_http_examples_rc_200_0:
       properties:
@@ -3014,6 +3217,19 @@ components:
               description: Indicates whether the key is a system API key.
               type: boolean
               example: 'false'
+    user_grant_collection:
+      properties:
+        grant:
+          description: '- Use "rw" to set the collection level access to *Read/Write*.
+
+            - Use "ro" to set the collection level access to *Read Only*.
+
+            - Use "none" to set the collection level access to *No access*.'
+          type: string
+          example: rw
+      required:
+      - grant
+      type: object
     error_example_rc_400:
       properties:
         code:
@@ -3035,7 +3251,7 @@ components:
       required:
       - error
       type: object
-    api_key_http_examples_rc_200_billing:
+    api_key_database_collection_get_http_examples_rc_200:
       properties:
         code:
           description: HTTP response code.
@@ -3046,232 +3262,28 @@ components:
           type: boolean
           example: false
         result:
-          description: Billing tag with billing access level present.
+          description: List of collections and the access level.
+          type: object
           properties:
-            billing:
+            test1:
               type: string
               example: rw
       required:
       - error
       type: object
-    api_key_put_dbname_examples_rc_200:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 200
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        result:
-          type: string
-          example: rw
-      required:
-      - error
-      type: object
-    error_example_rc_403:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 403
-        error:
-          description: Flag if there is an error in response. *True* for this response.
-          type: boolean
-          example: true
-        errorMessage:
-          description: A message created for this error.
-          type: string
-          example: Error message
-        errorNum:
-          description: Error number returned from the database.
-          type: integer
-          example: 581
-      required:
-      - error
-      type: object
-    apikey_validate:
-      properties:
-        apikey:
-          description: The id of the API key.
-          type: string
-          example: test1
-      required:
-      - apikey
-      type: object
-    error_example_rc_409:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 409
-        error:
-          description: Flag if there is an error in response. *True* for this response.
-          type: boolean
-          example: true
-        errorMessage:
-          description: A message created for this error.
-          type: string
-          example: Error message
-        errorNum:
-          description: Error number returned from the database.
-          type: integer
-          example: 581
-      required:
-      - error
-      type: object
-    api_key_dbname_examples_rc_200:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 200
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        result:
-          type: string
-          example: rw
-    apikey_create:
-      properties:
-        keyid:
-          description: The id of the API key.
-          type: string
-          example: test1
-        user:
-          description: The user that owns the API key. The 'user' option should be used only when creating an API key that belongs to another user, and can be used only by service or _mm.root.
-          type: string
-          example: tenant1.user1
-        isSystem:
-          description: Indicates whether the key is a system API key.
-          type: boolean
-          example: 'false'
-      required:
-      - keyid
-      type: object
-    api_key_get_http_examples_rc_200:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 200
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        result:
-          items:
-            properties:
-              _system:
-                description: Access level of system is described.
-                type: string
-                example: rw
-      required:
-      - error
-      type: object
-    api_key_http_examples_rc_201:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 201
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        key:
-          description: The generated key.
-          type: string
-          example: test1.KqEsCra56Nr6qiBvDhIUr7Fiey9gxUHCdg8dLuY75rOSAQtMUdeh6Hf851kd6atM3ccf69
-        keyid:
-          description: keyid of the key.
-          type: string
-          example: test1
-        tenant:
-          description: Name of the tenant.
-          type: string
-          example: _mm
-        user:
-          description: Name of the user.
-          type: string
-          example: root
-      required:
-      - error
-      type: object
-    headers:
-      x-gdn-region:
-        description: The federation's region hostname that served the request.
-        type: string
-      x-gdn-requestid:
-        description: A unique request ID for each API request.
-        type: string
-    api_key_http_examples_rc_200:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 200
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        result:
-          description: An array of API keys with details as keyid, user name and tenant name.
-          items:
-            $ref: '#/components/schemas/apikey200_help'
-          type: array
-      required:
-      - error
-      type: object
-    user_grant_database:
-      properties:
-        grant:
-          description: '- Use "rw" to set the GeoFabric access level to *Administrate*.
-
-            - Use "ro" to set the GeoFabric access level to *Access*.
-
-            - Use "none" to set the database access level to *No access*.'
-          type: string
-          example: rw
-      required:
-      - grant
-      type: object
-    error_example_rc_404:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 404
-        error:
-          description: Flag if there is an error in response. *True* for this response.
-          type: boolean
-          example: true
-        errorMessage:
-          description: A message created for this error.
-          type: string
-          example: Error message
-        errorNum:
-          description: Error number returned from the database.
-          type: integer
-          example: 581
-      required:
-      - error
-      type: object
-    attribute_values:
-      properties:
-        key1:
-          description: Attribute key-value.
-          format: string
-          type: string
-          example: value1
-        key2:
-          description: Attribute key-value.
-          format: string
-          type: string
-          example: value2
   requestBodies:
+    user_grant_collection:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/user_grant_collection'
+      required: true
+    user_grant_database:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/user_grant_database'
+      required: true
     attribute_values:
       content:
         application/json:
@@ -3289,18 +3301,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/user_grant_queryworker'
-      required: true
-    user_grant_database:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/user_grant_database'
-      required: true
-    user_grant_collection:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/user_grant_collection'
       required: true
   securitySchemes:
     ApiKeyAuth:

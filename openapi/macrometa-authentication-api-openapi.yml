@@ -91,26 +91,27 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    error_example_rc_401:
+    headers:
+      x-gdn-region:
+        description: The federation's region hostname that served the request.
+        type: string
+      x-gdn-requestid:
+        description: A unique request ID for each API request.
+        type: string
+    authentication_examples_rc_200:
       properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 401
-        error:
-          description: Flag if there is an error in response. *True* for this response.
-          type: boolean
-          example: true
-        errorMessage:
-          description: A message created for this error.
+        jwt:
+          description: JWT authentication token.
           type: string
-          example: Error message
-        errorNum:
-          description: Error number returned from the database.
-          type: integer
-          example: '102020'
-      required:
-      - error
+          example: IsInR5cCI6IkpXVCJ9.pvaG4gRG9lIiwiaWF0IjoyfQ.SflKxwRJSMeV_adQssw5c
+        tenant:
+          description: Name of the tenant.
+          type: string
+          example: foo
+        username:
+          description: Username of the tenant.
+          type: string
+          example: joe
       type: object
     auth_token:
       properties:
@@ -133,27 +134,26 @@ components:
       required:
       - password
       type: object
-    headers:
-      x-gdn-region:
-        description: The federation's region hostname that served the request.
-        type: string
-      x-gdn-requestid:
-        description: A unique request ID for each API request.
-        type: string
-    authentication_examples_rc_200:
+    error_example_rc_401:
       properties:
-        jwt:
-          description: JWT authentication token.
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 401
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
           type: string
-          example: IsInR5cCI6IkpXVCJ9.pvaG4gRG9lIiwiaWF0IjoyfQ.SflKxwRJSMeV_adQssw5c
-        tenant:
-          description: Name of the tenant.
-          type: string
-          example: foo
-        username:
-          description: Username of the tenant.
-          type: string
-          example: joe
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: '102020'
+      required:
+      - error
       type: object
   securitySchemes:
     ApiKeyAuth:

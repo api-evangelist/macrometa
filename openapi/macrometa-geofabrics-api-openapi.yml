@@ -469,54 +469,6 @@ paths:
       - GeoFabrics
 components:
   schemas:
-    create_GeoFabric_examples_rc_201:
-      type: object
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 201
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        result:
-          description: Whether the GeoFabric was created successfully
-          type: boolean
-          example: true
-    set_GeoFabric_example_rc_201:
-      type: object
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 201
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        result:
-          description: Whether the GeoFabric metadata was successfully set
-          type: boolean
-          example: true
-    get_all_GeoFabrics_examples_rc_200:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 200
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        result:
-          description: An array of GeoFabric names
-          type: array
-          items:
-            type: string
-          example:
-          - _system
-          - demo._system
     create_database:
       properties:
         name:
@@ -539,6 +491,31 @@ components:
       required:
       - name
       type: object
+    get_user_GeoFabrics_examples_rc_200:
+      type: object
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                example: _system
+              options:
+                $ref: '#/components/schemas/get_user_GeoFabrics_options_examples_rc_200'
+              isSystem:
+                description: Whether or not the current GeoFabric is the _system fabric
+                type: boolean
+                example: true
     headers:
       x-gdn-region:
         description: The federation's region hostname that served the request.
@@ -546,21 +523,6 @@ components:
       x-gdn-requestid:
         description: A unique request ID for each API request.
         type: string
-    patch_GeoFabric_example_rc_201:
-      type: object
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 201
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        result:
-          description: Whether the GeoFabric metadata was modified successfully
-          type: boolean
-          example: true
     create_database_options:
       description: 'Has to be a dictionary of GeoFabric options. If this is not specified or one of the dictionary members are not specified, defaults are used.
 
@@ -580,6 +542,67 @@ components:
           type: object
           example:
             key: value
+      type: object
+    get_all_GeoFabrics_examples_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          description: An array of GeoFabric names
+          type: array
+          items:
+            type: string
+          example:
+          - _system
+          - demo._system
+    database_metadata:
+      properties:
+        metadata:
+          description: Object with user defined key-value pairs.
+          type: object
+          example:
+            key: value
+    dropped_GeoFabrics_example_rc_200:
+      type: object
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          description: Whether GeoFabric was successfully removed.
+          type: boolean
+          example: true
+    error_example_rc_409:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 409
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
       type: object
     error_example_rc_403:
       properties:
@@ -602,13 +625,72 @@ components:
       required:
       - error
       type: object
-    database_metadata:
+    set_GeoFabric_example_rc_201:
+      type: object
       properties:
-        metadata:
-          description: Object with user defined key-value pairs.
-          type: object
-          example:
-            key: value
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 201
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          description: Whether the GeoFabric metadata was successfully set
+          type: boolean
+          example: true
+    patch_GeoFabric_example_rc_201:
+      type: object
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 201
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          description: Whether the GeoFabric metadata was modified successfully
+          type: boolean
+          example: true
+    create_GeoFabric_examples_rc_201:
+      type: object
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 201
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          description: Whether the GeoFabric was created successfully
+          type: boolean
+          example: true
+    error_example_rc_404:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 404
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
+      type: object
     get_GeoFabric_info_rc_200:
       type: object
       properties:
@@ -683,88 +765,6 @@ components:
           description: Tenant name
           type: string
           example: _mm
-    error_example_rc_404:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 404
-        error:
-          description: Flag if there is an error in response. *True* for this response.
-          type: boolean
-          example: true
-        errorMessage:
-          description: A message created for this error.
-          type: string
-          example: Error message
-        errorNum:
-          description: Error number returned from the database.
-          type: integer
-          example: 581
-      required:
-      - error
-      type: object
-    error_example_rc_409:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 409
-        error:
-          description: Flag if there is an error in response. *True* for this response.
-          type: boolean
-          example: true
-        errorMessage:
-          description: A message created for this error.
-          type: string
-          example: Error message
-        errorNum:
-          description: Error number returned from the database.
-          type: integer
-          example: 581
-      required:
-      - error
-      type: object
-    get_user_GeoFabrics_examples_rc_200:
-      type: object
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 200
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        result:
-          type: array
-          items:
-            type: object
-            properties:
-              name:
-                type: string
-                example: _system
-              options:
-                $ref: '#/components/schemas/get_user_GeoFabrics_options_examples_rc_200'
-              isSystem:
-                description: Whether or not the current GeoFabric is the _system fabric
-                type: boolean
-                example: true
-    dropped_GeoFabrics_example_rc_200:
-      type: object
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 200
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        result:
-          description: Whether GeoFabric was successfully removed.
-          type: boolean
-          example: true
     error_example_rc_400:
       properties:
         code:

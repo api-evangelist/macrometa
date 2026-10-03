@@ -234,15 +234,32 @@ paths:
           description: Internal server error.
 components:
   schemas:
-    AuthDeleteResponse:
+    PostAPIKeyResponse:
       type: object
       properties:
-        _key:
+        key_id:
           type: string
-        deleted_at:
+          description: A unique identifier for the API key.
+        api_key:
+          type: string
+          description: API key to authenticate with.
+        role:
+          description: The role of the API key.
+          type: string
+          enum:
+          - editor
+          - admin
+          - viewer
+          default: editor
+          example: editor
+        created_at:
           type: number
           format: number
           example: 1694757000
+        expire_at:
+          type: number
+          format: number
+          example: 1694767000
     PatchAPIKey:
       type: object
       required:
@@ -285,36 +302,20 @@ components:
           description: Duration in days from creation that the API key stays valid.
           format: number
           example: 180
-    PostAPIKeyResponse:
+    GetAPIKeysResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/GetAPIKeyResponse'
+    PatchAPIKeyResponse:
       type: object
       properties:
         key_id:
           type: string
           description: A unique identifier for the API key.
-        api_key:
-          type: string
-          description: API key to authenticate with.
-        role:
-          description: The role of the API key.
-          type: string
-          enum:
-          - editor
-          - admin
-          - viewer
-          default: editor
-          example: editor
-        created_at:
+        updated_at:
           type: number
           format: number
-          example: 1694757000
-        expire_at:
-          type: number
-          format: number
-          example: 1694767000
-    GetAPIKeysResponse:
-      type: array
-      items:
-        $ref: '#/components/schemas/GetAPIKeyResponse'
+          example: 1694757010
     APIKey:
       type: object
       required:
@@ -337,16 +338,15 @@ components:
           type: boolean
           description: The activation status of the API key.
           default: true
-    PatchAPIKeyResponse:
+    AuthDeleteResponse:
       type: object
       properties:
-        key_id:
+        _key:
           type: string
-          description: A unique identifier for the API key.
-        updated_at:
+        deleted_at:
           type: number
           format: number
-          example: 1694757010
+          example: 1694757000
   securitySchemes:
     APIKeyAuth:
       type: apiKey

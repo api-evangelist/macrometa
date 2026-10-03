@@ -493,14 +493,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/headers/x-gdn-requestid'
 components:
-  requestBodies:
-    create_managed_key_request:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/create_managed_key_request'
-      description: JSON for a new managed key.
-      required: true
   schemas:
     get_all_managedkeys_examples_rc_200:
       properties:
@@ -569,27 +561,6 @@ components:
                   description:
                     type: string
                     example: Customer's key.
-    error_example_rc_401:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 401
-        error:
-          description: Flag if there is an error in response. *True* for this response.
-          type: boolean
-          example: true
-        errorMessage:
-          description: A message created for this error.
-          type: string
-          example: Error message
-        errorNum:
-          description: Error number returned from the database.
-          type: integer
-          example: '102020'
-      required:
-      - error
-      type: object
     create_managed_key_request:
       type: object
       properties:
@@ -611,27 +582,6 @@ components:
         masterKeyIds:
           type: object
           example: null
-    error_example_rc_403:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 403
-        error:
-          description: Flag if there is an error in response. *True* for this response.
-          type: boolean
-          example: true
-        errorMessage:
-          description: A message created for this error.
-          type: string
-          example: Error message
-        errorNum:
-          description: Error number returned from the database.
-          type: integer
-          example: 581
-      required:
-      - error
-      type: object
     error_example_rc_422:
       properties:
         code:
@@ -656,12 +606,12 @@ components:
       x-gdn-requestid:
         description: A unique request ID for each API request.
         type: string
-    error_example_rc_404:
+    error_example_rc_412:
       properties:
         code:
           description: HTTP response code.
           type: integer
-          example: 404
+          example: 412
         error:
           description: Flag if there is an error in response. *True* for this response.
           type: boolean
@@ -677,60 +627,12 @@ components:
       required:
       - error
       type: object
-    get_managedkey_examples_rc_200:
-      properties:
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        code:
-          description: The generated response code.
-          type: integer
-          example: 200
-        result:
-          type: object
-          properties:
-            id:
-              type: string
-              example: lPz8KjI2_yzYBgjkk2jlWA.IqXfBlY
-            name:
-              type: string
-              example: managed_key_1
-            keyOptions:
-              type: object
-              properties:
-                masterKeyIds:
-                  type: array
-            managedKeyType:
-              type: string
-              example: CMK
-            keyProvider:
-              type: string
-              example: AWS
-            tenant:
-              type: string
-              example: _mm
-            fabric:
-              type: string
-              example: _system
-            createdAt:
-              type: number
-              example: 1689020889736
-            updatedAt:
-              type: number
-              example: 1689020889736
-            status:
-              type: string
-              example: ENABLED
-            description:
-              type: string
-              example: Customer's key.
-    error_example_rc_412:
+    error_example_rc_403:
       properties:
         code:
           description: HTTP response code.
           type: integer
-          example: 412
+          example: 403
         error:
           description: Flag if there is an error in response. *True* for this response.
           type: boolean
@@ -792,6 +694,104 @@ components:
             description:
               type: string
               example: Customer's key.
+    get_managedkey_examples_rc_200:
+      properties:
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        code:
+          description: The generated response code.
+          type: integer
+          example: 200
+        result:
+          type: object
+          properties:
+            id:
+              type: string
+              example: lPz8KjI2_yzYBgjkk2jlWA.IqXfBlY
+            name:
+              type: string
+              example: managed_key_1
+            keyOptions:
+              type: object
+              properties:
+                masterKeyIds:
+                  type: array
+            managedKeyType:
+              type: string
+              example: CMK
+            keyProvider:
+              type: string
+              example: AWS
+            tenant:
+              type: string
+              example: _mm
+            fabric:
+              type: string
+              example: _system
+            createdAt:
+              type: number
+              example: 1689020889736
+            updatedAt:
+              type: number
+              example: 1689020889736
+            status:
+              type: string
+              example: ENABLED
+            description:
+              type: string
+              example: Customer's key.
+    error_example_rc_404:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 404
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
+      type: object
+    error_example_rc_401:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 401
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: '102020'
+      required:
+      - error
+      type: object
+  requestBodies:
+    create_managed_key_request:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/create_managed_key_request'
+      description: JSON for a new managed key.
+      required: true
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

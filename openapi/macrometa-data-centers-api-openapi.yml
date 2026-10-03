@@ -399,6 +399,8 @@ paths:
       - Data Centers
 components:
   schemas:
+    get_regional_datacenter_response_200:
+      $ref: '#/components/schemas/datacenter_response_fields'
     datacenter_members_get_rc_200:
       type: array
       items:
@@ -439,27 +441,6 @@ components:
             description: URL for the data center.
             type: string
             example: gdn-us-west.paas.macrometa.io
-    error_example_rc_401:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 401
-        error:
-          description: Flag if there is an error in response. *True* for this response.
-          type: boolean
-          example: true
-        errorMessage:
-          description: A message created for this error.
-          type: string
-          example: Error message
-        errorNum:
-          description: Error number returned from the database.
-          type: integer
-          example: '102020'
-      required:
-      - error
-      type: object
     datacenter_response_tags:
       description: Tag values associated with data center.
       properties:
@@ -471,6 +452,35 @@ components:
           description: URL for the data center
           type: string
           example: gdn-us-west.paas.macrometa.io
+    headers:
+      x-gdn-region:
+        description: The federation's region hostname that served the request.
+        type: string
+      x-gdn-requestid:
+        description: A unique request ID for each API request.
+        type: string
+    get_datacenter_response_200:
+      type: array
+      items:
+        $ref: '#/components/schemas/datacenter_response_fields'
+    datacenter_get_rc_200:
+      properties:
+        name:
+          description: Name of the data center.
+          type: string
+          example: gdn-us-west
+        local:
+          description: If *true*, the data center is a regional data center for the request else *false*.
+          type: boolean
+          example: true
+        status:
+          description: If *0*, the data center is online else data center is having connectivity problem.
+          type: integer
+          example: 0
+        tags:
+          $ref: '#/components/schemas/datacenter_response_tags'
+        locationInfo:
+          $ref: '#/components/schemas/datacenter_response_location_info'
     error_example_rc_403:
       properties:
         code:
@@ -492,13 +502,6 @@ components:
       required:
       - error
       type: object
-    headers:
-      x-gdn-region:
-        description: The federation's region hostname that served the request.
-        type: string
-      x-gdn-requestid:
-        description: A unique request ID for each API request.
-        type: string
     datacenter_response_fields:
       properties:
         _key:
@@ -542,6 +545,48 @@ components:
         result:
           type: boolean
           example: true
+    error_example_rc_404:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 404
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
+      type: object
+    error_example_rc_401:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 401
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: '102020'
+      required:
+      - error
+      type: object
     federation_member_peerip:
       properties:
         peer:
@@ -641,29 +686,6 @@ components:
                       type: string
                       example: gdn-us-west.paas.macrometa.io
       type: array
-    error_example_rc_404:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 404
-        error:
-          description: Flag if there is an error in response. *True* for this response.
-          type: boolean
-          example: true
-        errorMessage:
-          description: A message created for this error.
-          type: string
-          example: Error message
-        errorNum:
-          description: Error number returned from the database.
-          type: integer
-          example: 581
-      required:
-      - error
-      type: object
-    get_regional_datacenter_response_200:
-      $ref: '#/components/schemas/datacenter_response_fields'
     error_example_rc_400:
       properties:
         code:
@@ -685,10 +707,6 @@ components:
       required:
       - error
       type: object
-    get_datacenter_response_200:
-      type: array
-      items:
-        $ref: '#/components/schemas/datacenter_response_fields'
     datacenter_response_location_info:
       description: Complete information about the location of data center.
       properties:
@@ -716,24 +734,6 @@ components:
           description: URL for the data center.
           type: string
           example: gdn-us-west.paas.macrometa.io
-    datacenter_get_rc_200:
-      properties:
-        name:
-          description: Name of the data center.
-          type: string
-          example: gdn-us-west
-        local:
-          description: If *true*, the data center is a regional data center for the request else *false*.
-          type: boolean
-          example: true
-        status:
-          description: If *0*, the data center is online else data center is having connectivity problem.
-          type: integer
-          example: 0
-        tags:
-          $ref: '#/components/schemas/datacenter_response_tags'
-        locationInfo:
-          $ref: '#/components/schemas/datacenter_response_location_info'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

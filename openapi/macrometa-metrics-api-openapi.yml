@@ -1168,6 +1168,11 @@ paths:
       description: PhotonIQ Virtual Waiting Rooms API
 components:
   schemas:
+    StreamResponse:
+      type: object
+      properties:
+        stream_name:
+          $ref: '#/components/schemas/StreamDetailedResponse'
     StreamDetailedResponse:
       type: object
       properties:
@@ -1239,11 +1244,6 @@ components:
         wssub:
           type: integer
           description: number of active ws conn
-    StreamResponse:
-      type: object
-      properties:
-        stream_name:
-          $ref: '#/components/schemas/StreamDetailedResponse'
     GetErrorResponse:
       type: object
       required:
@@ -1257,62 +1257,10 @@ components:
         error:
           type: string
           example: message
-    TrafficResponse:
-      type: array
-      items:
-        $ref: '#/components/schemas/TrafficDetails'
-    MetricsResponse_2:
-      type: array
-      items:
-        $ref: '#/components/schemas/MetricDetails'
     TopNVisitsResponse:
       type: array
       items:
         $ref: '#/components/schemas/TopNVisitorsDetails'
-    DeviceTypeResponse:
-      type: array
-      items:
-        $ref: '#/components/schemas/DeviceTypeDetails'
-    TrafficDetails:
-      type: object
-      properties:
-        human:
-          type: number
-          example: 1018
-        goodbot:
-          type: number
-          example: 4
-        badbot:
-          type: number
-          example: 10
-        unknown:
-          type: number
-          example: 1
-        start:
-          type: number
-          format: date-time
-          example: 1696965000
-        end:
-          type: number
-          format: date-time
-          example: 1696965300
-    DeviceTypeDetails:
-      type: object
-      properties:
-        type:
-          type: string
-          example: Desktop
-        count:
-          type: number
-          example: 50
-        start:
-          type: number
-          format: date-time
-          example: 1696965000
-        end:
-          type: number
-          format: date-time
-          example: 1696965300
     MetricDetails:
       type: object
       properties:
@@ -1347,6 +1295,58 @@ components:
         end:
           type: number
           format: date-time
+    DeviceTypeDetails:
+      type: object
+      properties:
+        type:
+          type: string
+          example: Desktop
+        count:
+          type: number
+          example: 50
+        start:
+          type: number
+          format: date-time
+          example: 1696965000
+        end:
+          type: number
+          format: date-time
+          example: 1696965300
+    TrafficDetails:
+      type: object
+      properties:
+        human:
+          type: number
+          example: 1018
+        goodbot:
+          type: number
+          example: 4
+        badbot:
+          type: number
+          example: 10
+        unknown:
+          type: number
+          example: 1
+        start:
+          type: number
+          format: date-time
+          example: 1696965000
+        end:
+          type: number
+          format: date-time
+          example: 1696965300
+    TrafficResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/TrafficDetails'
+    MetricsResponse_2:
+      type: array
+      items:
+        $ref: '#/components/schemas/MetricDetails'
+    DeviceTypeResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/DeviceTypeDetails'
     RequestMetricsResponse:
       type: object
       properties:
@@ -1385,25 +1385,14 @@ components:
           format: number
           description: The total number of users currently waiting in the virtual waiting room.
   parameters:
-    sort:
-      name: sort
+    start:
+      name: start
       in: query
-      description: The sort on metrics field.
-      required: false
+      description: The start date used for querying metrics data. Must be provided in RFC3339 date-time format.
+      required: true
       schema:
-        type:
-        - string
-        - 'null'
-        example: ts
-    name:
-      name: name
-      in: query
-      description: The name of the metrics data to retrieve.
-      required: false
-      schema:
-        type:
-        - string
-        - 'null'
+        type: string
+        example: YYYY-MM-DDTHH:MM:SSZ
     end:
       name: end
       in: query
@@ -1422,6 +1411,32 @@ components:
         - integer
         - 'null'
         example: 100
+    x-customer-id:
+      name: x-customer-id
+      in: header
+      description: 'ID of the customer to identify the user making the request. '
+      required: true
+      schema:
+        type: string
+    name:
+      name: name
+      in: query
+      description: The name of the metrics data to retrieve.
+      required: false
+      schema:
+        type:
+        - string
+        - 'null'
+    sort:
+      name: sort
+      in: query
+      description: The sort on metrics field.
+      required: false
+      schema:
+        type:
+        - string
+        - 'null'
+        example: ts
     order:
       name: order
       in: query
@@ -1432,16 +1447,6 @@ components:
         - string
         - 'null'
         example: DESC
-    type:
-      name: type
-      in: query
-      description: The type of the metrics data points. Supported types - sec, min, hr, day, month.
-      required: false
-      schema:
-        type:
-        - string
-        - 'null'
-        example: sec
     offset:
       name: offset
       in: query
@@ -1452,21 +1457,16 @@ components:
         - integer
         - 'null'
         example: 0
-    start:
-      name: start
+    type:
+      name: type
       in: query
-      description: The start date used for querying metrics data. Must be provided in RFC3339 date-time format.
-      required: true
+      description: The type of the metrics data points. Supported types - sec, min, hr, day, month.
+      required: false
       schema:
-        type: string
-        example: YYYY-MM-DDTHH:MM:SSZ
-    x-customer-id:
-      name: x-customer-id
-      in: header
-      description: 'ID of the customer to identify the user making the request. '
-      required: true
-      schema:
-        type: string
+        type:
+        - string
+        - 'null'
+        example: sec
   securitySchemes:
     api_key:
       type: apiKey

@@ -1229,14 +1229,59 @@ paths:
       - APIKeyHeader: []
 components:
   schemas:
-    DeletedResponse:
+    ConnectorSample:
+      type: object
+      description: Model to encapsulate properties of a sample from a connector.
+      properties:
+        schema:
+          $ref: '#/components/schemas/ConnectorSchema'
+          description: Schema of the stream.
+        data:
+          description: Sample records for the connector.
+          type: array
+          items:
+            type: object
+    headers:
+      x-gdn-region:
+        description: The federation's region hostname that served the request.
+        type: string
+      x-gdn-requestid:
+        description: A unique request ID for each API request.
+        type: string
+    ConnectorEntity:
       allOf:
-      - $ref: '#/components/schemas/ResponseBase'
-      - type: object
-        properties:
-          id:
+      - $ref: '#/components/schemas/ConnectorBase'
+      type: object
+      properties:
+        logo:
+          type: string
+          description: The mime type and base64 logo image associated with the connector.
+          example: data:image/png;base64,iVBORw0KGgoAAAA...
+        reservedKeys:
+          type: array
+          items:
             type: string
-            example: '123'
+          description: The reserved keys of the connector.
+          example:
+          - _key
+          - _id
+          - _rev
+        config:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConnectorConfig'
+    SchemaAttribute:
+      type: object
+      description: Model to encapsulate properties of a schema attribute from a connector.
+      properties:
+        name:
+          type: string
+          description: Name of the attribute.
+          example: Name
+        type:
+          type: string
+          description: Type of the attribute.
+          example: string
     error_example_rc_401:
       properties:
         code:
@@ -1255,6 +1300,91 @@ components:
           description: Error number returned from the database.
           type: integer
           example: '102020'
+      required:
+      - error
+      type: object
+    ConnectorSchema:
+      type: object
+      description: Model to encapsulate properties of a schema from a connector.
+      properties:
+        name:
+          type: string
+          description: Name of the schema.
+        attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/SchemaAttribute'
+          description: Attributes of the schema.
+    ConnectorEntityResponse:
+      allOf:
+      - $ref: '#/components/schemas/ResponseBase'
+      - type: object
+        properties:
+          result:
+            type: array
+            items:
+              $ref: '#/components/schemas/ConnectorEntity'
+    ConnectionsResponse:
+      allOf:
+      - $ref: '#/components/schemas/ResponseBase'
+      - type: object
+        properties:
+          result:
+            type: array
+            items:
+              $ref: '#/components/schemas/ConnectionBase'
+    ValidationResponse:
+      allOf:
+      - $ref: '#/components/schemas/ResponseBase'
+      - type: object
+        properties:
+          reason:
+            type: string
+            description: If invalid, reason for marking resource as invalid.
+            example: Incorrect username/password
+    ConnectorEntitiesResponse:
+      allOf:
+      - $ref: '#/components/schemas/ResponseBase'
+      - type: object
+        properties:
+          result:
+            type: array
+            items:
+              $ref: '#/components/schemas/ConnectorBase'
+    ConnectorSampleRequest:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Connector type. source or target.
+          example: source
+        config:
+          type: object
+          description: Contains the connector configurations. Key-value pairs should be provided to configure the connection to the respective data source or target.
+          example:
+            host: db.postgres.com
+            port: 5432
+            username: postgres
+            password: password
+          additionalProperties: true
+    error_example_rc_404:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 404
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
       required:
       - error
       type: object
@@ -1324,72 +1454,6 @@ components:
           title: Placeholder Value
           type: string
           description: Serves as a placeholder for the configuration value. In GUI clients, this value can be displayed as a placeholder within input fields.
-    ResponseBase:
-      type: object
-      properties:
-        error:
-          type: boolean
-          default: false
-        code:
-          type: integer
-          default: 200
-      required:
-      - error
-    ConnectorSampleRequest:
-      type: object
-      properties:
-        type:
-          type: string
-          description: Connector type. source or target.
-          example: source
-        config:
-          type: object
-          description: Contains the connector configurations. Key-value pairs should be provided to configure the connection to the respective data source or target.
-          example:
-            host: db.postgres.com
-            port: 5432
-            username: postgres
-            password: password
-          additionalProperties: true
-    ConnectionsResponse:
-      allOf:
-      - $ref: '#/components/schemas/ResponseBase'
-      - type: object
-        properties:
-          result:
-            type: array
-            items:
-              $ref: '#/components/schemas/ConnectionBase'
-    error_example_rc_400:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 400
-        error:
-          description: Flag if there is an error in response. *True* for this response.
-          type: boolean
-          example: true
-        errorMessage:
-          description: A message created for this error.
-          type: string
-          example: Error message
-        errorNum:
-          description: Error number returned from the database.
-          type: integer
-          example: 102020
-      required:
-      - error
-      type: object
-    ConnectorEntityResponse:
-      allOf:
-      - $ref: '#/components/schemas/ResponseBase'
-      - type: object
-        properties:
-          result:
-            type: array
-            items:
-              $ref: '#/components/schemas/ConnectorEntity'
     ConnectionBase:
       type: object
       properties:
@@ -1415,6 +1479,63 @@ components:
           description: Specifies whether this connection is internal or not.
           default: false
           example: false
+    ConnectorBase:
+      type: object
+      description: Lightweight connector definition.
+      properties:
+        name:
+          type: string
+          example: macrometa-source-oracle
+          description: Name of the connector. This is used as the ID of the connector.
+        displayName:
+          type: string
+          example: OracleDB
+          description: Name that can be used by GUI clients to display the connector.
+        description:
+          type: string
+          example: Source for loading data from a GDN collection.
+        type:
+          type: string
+          example: source
+          description: Specifies whether the connector serves as a source or a target.
+        version:
+          type: string
+          description: Version of the connector.
+          example: 1.0.0
+    ResponseBase:
+      type: object
+      properties:
+        error:
+          type: boolean
+          default: false
+        code:
+          type: integer
+          default: 200
+      required:
+      - error
+    Connection:
+      allOf:
+      - $ref: '#/components/schemas/ConnectionBase'
+      - type: object
+        properties:
+          metadata:
+            description: Contains the metadata of the connection. Configurations for the connector, which are set up through this connection, must be provided as key-value pairs.
+            example:
+              host: 127.0.0.1
+              port: '5432'
+              user: postgres
+              password: abcdef
+            type: object
+            additionalProperties:
+              type: object
+    DeletedResponse:
+      allOf:
+      - $ref: '#/components/schemas/ResponseBase'
+      - type: object
+        properties:
+          id:
+            type: string
+            example: '123'
     TransformationValidationResponse:
       allOf:
       - $ref: '#/components/schemas/ValidationResponse'
@@ -1444,124 +1565,12 @@ components:
           result:
             type: object
             $ref: '#/components/schemas/Connection'
-    Connection:
-      allOf:
-      - $ref: '#/components/schemas/ConnectionBase'
-      - type: object
-        properties:
-          metadata:
-            description: Contains the metadata of the connection. Configurations for the connector, which are set up through this connection, must be provided as key-value pairs.
-            example:
-              host: 127.0.0.1
-              port: '5432'
-              user: postgres
-              password: abcdef
-            type: object
-            additionalProperties:
-              type: object
-    ConnectorEntitiesResponse:
-      allOf:
-      - $ref: '#/components/schemas/ResponseBase'
-      - type: object
-        properties:
-          result:
-            type: array
-            items:
-              $ref: '#/components/schemas/ConnectorBase'
-    ConnectorSample:
-      type: object
-      description: Model to encapsulate properties of a sample from a connector.
-      properties:
-        schema:
-          $ref: '#/components/schemas/ConnectorSchema'
-          description: Schema of the stream.
-        data:
-          description: Sample records for the connector.
-          type: array
-          items:
-            type: object
-    ConnectorSchema:
-      type: object
-      description: Model to encapsulate properties of a schema from a connector.
-      properties:
-        name:
-          type: string
-          description: Name of the schema.
-        attributes:
-          type: array
-          items:
-            $ref: '#/components/schemas/SchemaAttribute'
-          description: Attributes of the schema.
-    ConnectorBase:
-      type: object
-      description: Lightweight connector definition.
-      properties:
-        name:
-          type: string
-          example: macrometa-source-oracle
-          description: Name of the connector. This is used as the ID of the connector.
-        displayName:
-          type: string
-          example: OracleDB
-          description: Name that can be used by GUI clients to display the connector.
-        description:
-          type: string
-          example: Source for loading data from a GDN collection.
-        type:
-          type: string
-          example: source
-          description: Specifies whether the connector serves as a source or a target.
-        version:
-          type: string
-          description: Version of the connector.
-          example: 1.0.0
-    headers:
-      x-gdn-region:
-        description: The federation's region hostname that served the request.
-        type: string
-      x-gdn-requestid:
-        description: A unique request ID for each API request.
-        type: string
-    SchemaAttribute:
-      type: object
-      description: Model to encapsulate properties of a schema attribute from a connector.
-      properties:
-        name:
-          type: string
-          description: Name of the attribute.
-          example: Name
-        type:
-          type: string
-          description: Type of the attribute.
-          example: string
-    ConnectorEntity:
-      allOf:
-      - $ref: '#/components/schemas/ConnectorBase'
-      type: object
-      properties:
-        logo:
-          type: string
-          description: The mime type and base64 logo image associated with the connector.
-          example: data:image/png;base64,iVBORw0KGgoAAAA...
-        reservedKeys:
-          type: array
-          items:
-            type: string
-          description: The reserved keys of the connector.
-          example:
-          - _key
-          - _id
-          - _rev
-        config:
-          type: array
-          items:
-            $ref: '#/components/schemas/ConnectorConfig'
-    error_example_rc_404:
+    error_example_rc_400:
       properties:
         code:
           description: HTTP response code.
           type: integer
-          example: 404
+          example: 400
         error:
           description: Flag if there is an error in response. *True* for this response.
           type: boolean
@@ -1573,19 +1582,10 @@ components:
         errorNum:
           description: Error number returned from the database.
           type: integer
-          example: 581
+          example: 102020
       required:
       - error
       type: object
-    ValidationResponse:
-      allOf:
-      - $ref: '#/components/schemas/ResponseBase'
-      - type: object
-        properties:
-          reason:
-            type: string
-            description: If invalid, reason for marking resource as invalid.
-            example: Incorrect username/password
     ConnectionDTO:
       properties:
         name:
@@ -1624,6 +1624,15 @@ components:
           default: ''
       type: object
       title: ConnectionValidateResponse
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     ValidationError:
       properties:
         loc:
@@ -1645,29 +1654,15 @@ components:
       - msg
       - type
       title: ValidationError
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-  parameters:
+  requestBodies:
     Connection:
-      name: connection-name
-      in: path
+      description: Connection definition.
       required: true
-      description: Name of the connection.
-      schema:
-        type: string
-    ConnectionType:
-      name: type
-      description: Connection type.
-      in: query
-      schema:
-        type: string
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Connection'
+  parameters:
     Fabric:
       name: fabric
       in: path
@@ -1683,14 +1678,19 @@ components:
       example: postgres
       schema:
         type: string
-  requestBodies:
     Connection:
-      description: Connection definition.
+      name: connection-name
+      in: path
       required: true
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Connection'
+      description: Name of the connection.
+      schema:
+        type: string
+    ConnectionType:
+      name: type
+      description: Connection type.
+      in: query
+      schema:
+        type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

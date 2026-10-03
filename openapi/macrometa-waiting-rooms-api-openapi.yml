@@ -250,24 +250,6 @@ paths:
           description: Internal server error.
 components:
   schemas:
-    WaitingRoomPutResponse:
-      type: object
-      properties:
-        waitingroom_key:
-          type: string
-        updated_at:
-          type: number
-          format: number
-          example: 1694757010
-    WaitingRoomPostResponse:
-      type: object
-      properties:
-        waitingroom_key:
-          type: string
-        created_at:
-          type: number
-          format: number
-          example: 1694757000
     WaitingRoomObject:
       type: object
       required:
@@ -374,6 +356,24 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/WaitingRoomObject'
+    WaitingRoomPostResponse:
+      type: object
+      properties:
+        waitingroom_key:
+          type: string
+        created_at:
+          type: number
+          format: number
+          example: 1694757000
+    WaitingRoomPutResponse:
+      type: object
+      properties:
+        waitingroom_key:
+          type: string
+        updated_at:
+          type: number
+          format: number
+          example: 1694757010
   securitySchemes:
     APIKeyAuth:
       type: apiKey

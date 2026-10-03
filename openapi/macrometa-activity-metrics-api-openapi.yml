@@ -136,15 +136,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    TotalMetrics:
-      type: object
-      properties:
-        totalRequests:
-          type: number
-          description: Number of total requests between from and to time.
-        totalBytes:
-          type: number
-          description: Number of total bytes used between from and to time.
     MetricsResponse:
       type: object
       properties:
@@ -174,3 +165,12 @@ components:
         count:
           type: number
           description: Number of events.
+    TotalMetrics:
+      type: object
+      properties:
+        totalRequests:
+          type: number
+          description: Number of total requests between from and to time.
+        totalBytes:
+          type: number
+          description: Number of total bytes used between from and to time.
