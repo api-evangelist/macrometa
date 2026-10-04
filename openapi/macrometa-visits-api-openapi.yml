@@ -84,41 +84,40 @@ paths:
           description: Authorization failure due to invalid authentication credentials.
 components:
   schemas:
-    VisitResponse:
+    RecordVisitInformation:
       type: object
       properties:
+        signals:
+          type: object
+          description: Each property (referred to as [signalName]) represents a unique signal.
+          additionalProperties:
+            type: object
+            properties:
+              duration:
+                type: number
+                description: Duration, expected to be a number.
+              error:
+                type: string
+              value:
+                type: string
+                description: Any value in string format
+        version:
+          type: string
+    VisitDetails:
+      type: object
+      properties:
+        _key:
+          type: string
         visitorId:
           type: string
         signature:
           type: string
-        visit:
-          type: object
-          properties:
-            visitId:
-              type: string
-            platformDetails:
-              $ref: '#/components/schemas/PlatformDetails'
-            incognito:
-              type: boolean
-            ip:
-              type: string
-            url:
-              type: string
-            visitorFound:
-              type: boolean
-            confidence:
-              type: object
-              properties:
-                matchScore:
-                  type: number
-            timestamp:
-              type: number
-              format: date-time
-              description: Visit timestamp
-            firstSeenAt:
-              type: number
-              format: date-time
-              description: Visitor createdAt
+        url:
+          type: string
+        createdAt:
+          type: number
+        confidence:
+          $ref: '#/components/schemas/Confidence'
     PlatformDetails:
       type: object
       properties:
@@ -154,40 +153,41 @@ components:
               type: string
         ua:
           type: string
-    RecordVisitInformation:
+    VisitResponse:
       type: object
       properties:
-        signals:
-          type: object
-          description: Each property (referred to as [signalName]) represents a unique signal.
-          additionalProperties:
-            type: object
-            properties:
-              duration:
-                type: number
-                description: Duration, expected to be a number.
-              error:
-                type: string
-              value:
-                type: string
-                description: Any value in string format
-        version:
-          type: string
-    VisitDetails:
-      type: object
-      properties:
-        _key:
-          type: string
         visitorId:
           type: string
         signature:
           type: string
-        url:
-          type: string
-        createdAt:
-          type: number
-        confidence:
-          $ref: '#/components/schemas/Confidence'
+        visit:
+          type: object
+          properties:
+            visitId:
+              type: string
+            platformDetails:
+              $ref: '#/components/schemas/PlatformDetails'
+            incognito:
+              type: boolean
+            ip:
+              type: string
+            url:
+              type: string
+            visitorFound:
+              type: boolean
+            confidence:
+              type: object
+              properties:
+                matchScore:
+                  type: number
+            timestamp:
+              type: number
+              format: date-time
+              description: Visit timestamp
+            firstSeenAt:
+              type: number
+              format: date-time
+              description: Visitor createdAt
     Confidence:
       type: object
       properties:

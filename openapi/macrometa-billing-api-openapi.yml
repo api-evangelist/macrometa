@@ -598,6 +598,50 @@ paths:
       - Billing
 components:
   schemas:
+    error_example_rc_403:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 403
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
+      type: object
+    stripe_200_invoice_upcoming:
+      properties:
+        object:
+          type: string
+          example: invoice
+        account_country:
+          type: string
+          example: US
+        account_name:
+          type: string
+          example: Stripe.com
+        account_tax_ids:
+          type: object
+          example: null
+        amount_due:
+          type: integer
+          example: 40298
+        amount_paid:
+          type: integer
+          example: 0
+        amount_remaining:
+          type: integer
+          example: 40298
     headers:
       x-gdn-region:
         description: The federation's region hostname that served the request.
@@ -605,6 +649,92 @@ components:
       x-gdn-requestid:
         description: A unique request ID for each API request.
         type: string
+    stripe_200_invoice_month_year:
+      properties:
+        id:
+          type: string
+          example: ID
+        object:
+          type: string
+          example: invoice
+        account_country:
+          type: string
+          example: US
+        account_name:
+          type: string
+          example: Stripe.com
+        account_tax_ids:
+          type: object
+          example: null
+        amount_due:
+          type: integer
+          example: 40298
+        amount_paid:
+          type: integer
+          example: 0
+        amount_remaining:
+          type: integer
+          example: 40298
+    stripe_200_invoice_list:
+      properties:
+        object:
+          type: string
+          example: list
+        url:
+          type: string
+          example: /v1/payment_intents
+        has_more:
+          type: boolean
+          example: false
+        data:
+          type: array
+          items:
+            properties:
+              id:
+                type: string
+                example: pi_1DpxME2eZvKYlo2CdLPnXZPO
+              object:
+                type: string
+                example: invoice
+              account_country:
+                type: string
+                example: US
+              account_name:
+                type: string
+                example: Stripe.com
+              account_tax_ids:
+                type: object
+                example: null
+              amount_due:
+                type: integer
+                example: 498
+              amount_paid:
+                type: integer
+                example: 0
+              amount_remaining:
+                type: integer
+                example: 498
+    error_example_rc_409:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 409
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
+      type: object
     Response_Billing_Account_Get:
       properties:
         code:
@@ -678,6 +808,106 @@ components:
                 zipcode:
                   type: string
                   example: Address zip code.
+    Response_Billing_Code_400:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 400
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+        message:
+          description: Message from server
+          type: string
+    stripe_200_intent_list:
+      properties:
+        object:
+          type: string
+          example: list
+        url:
+          type: string
+          example: /v1/payment_intents
+        has_more:
+          type: boolean
+          example: false
+        data:
+          type: array
+          items:
+            properties:
+              id:
+                type: string
+                example: pi_1DpxME2eZvKYlo2CdLPnXZPO
+              object:
+                type: string
+                example: payment_intent
+              amount:
+                type: integer
+                example: 1099
+    Contact_Update:
+      properties:
+        firstname:
+          description: First Name
+          type: string
+          example: John
+        lastname:
+          description: Last Name
+          type: string
+          example: Doe
+        email:
+          description: Email address
+          type: string
+          example: john@acme.com
+        phone:
+          description: Phone number
+          type: string
+          example: 404-555-8726
+        line1:
+          description: Address line 1
+          type: string
+          example: 1388 Villa Drive
+        line2:
+          description: Address line 2
+          type: string
+          example: Suite 240C
+        city:
+          description: City
+          type: string
+          example: South Bend
+        state:
+          description: State
+          type: string
+          example: IN
+        country:
+          description: Two-letter country code (ISO 3166-1 alpha-2).
+          type: string
+          example: US
+        zipcode:
+          description: Zip code
+          type: string
+          example: '46601'
+      type: object
+    error_example_rc_401:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 401
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: '102020'
+      required:
+      - error
+      type: object
     Response_Usage_Get:
       properties:
         code:
@@ -722,197 +952,6 @@ components:
                       type: integer
                     value:
                       type: string
-    stripe_200_invoice_month_year:
-      properties:
-        id:
-          type: string
-          example: ID
-        object:
-          type: string
-          example: invoice
-        account_country:
-          type: string
-          example: US
-        account_name:
-          type: string
-          example: Stripe.com
-        account_tax_ids:
-          type: object
-          example: null
-        amount_due:
-          type: integer
-          example: 40298
-        amount_paid:
-          type: integer
-          example: 0
-        amount_remaining:
-          type: integer
-          example: 40298
-    error_example_rc_403:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 403
-        error:
-          description: Flag if there is an error in response. *True* for this response.
-          type: boolean
-          example: true
-        errorMessage:
-          description: A message created for this error.
-          type: string
-          example: Error message
-        errorNum:
-          description: Error number returned from the database.
-          type: integer
-          example: 581
-      required:
-      - error
-      type: object
-    error_example_rc_409:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 409
-        error:
-          description: Flag if there is an error in response. *True* for this response.
-          type: boolean
-          example: true
-        errorMessage:
-          description: A message created for this error.
-          type: string
-          example: Error message
-        errorNum:
-          description: Error number returned from the database.
-          type: integer
-          example: 581
-      required:
-      - error
-      type: object
-    Contact_Update:
-      properties:
-        firstname:
-          description: First Name
-          type: string
-          example: John
-        lastname:
-          description: Last Name
-          type: string
-          example: Doe
-        email:
-          description: Email address
-          type: string
-          example: john@acme.com
-        phone:
-          description: Phone number
-          type: string
-          example: 404-555-8726
-        line1:
-          description: Address line 1
-          type: string
-          example: 1388 Villa Drive
-        line2:
-          description: Address line 2
-          type: string
-          example: Suite 240C
-        city:
-          description: City
-          type: string
-          example: South Bend
-        state:
-          description: State
-          type: string
-          example: IN
-        country:
-          description: Two-letter country code (ISO 3166-1 alpha-2).
-          type: string
-          example: US
-        zipcode:
-          description: Zip code
-          type: string
-          example: '46601'
-      type: object
-    stripe_200_intent_list:
-      properties:
-        object:
-          type: string
-          example: list
-        url:
-          type: string
-          example: /v1/payment_intents
-        has_more:
-          type: boolean
-          example: false
-        data:
-          type: array
-          items:
-            properties:
-              id:
-                type: string
-                example: pi_1DpxME2eZvKYlo2CdLPnXZPO
-              object:
-                type: string
-                example: payment_intent
-              amount:
-                type: integer
-                example: 1099
-    Response_Billing_Code_400:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 400
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-        message:
-          description: Message from server
-          type: string
-    stripe_200_invoice_upcoming:
-      properties:
-        object:
-          type: string
-          example: invoice
-        account_country:
-          type: string
-          example: US
-        account_name:
-          type: string
-          example: Stripe.com
-        account_tax_ids:
-          type: object
-          example: null
-        amount_due:
-          type: integer
-          example: 40298
-        amount_paid:
-          type: integer
-          example: 0
-        amount_remaining:
-          type: integer
-          example: 40298
-    error_example_rc_401:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 401
-        error:
-          description: Flag if there is an error in response. *True* for this response.
-          type: boolean
-          example: true
-        errorMessage:
-          description: A message created for this error.
-          type: string
-          example: Error message
-        errorNum:
-          description: Error number returned from the database.
-          type: integer
-          example: '102020'
-      required:
-      - error
-      type: object
     Response_Billing_Code_200:
       properties:
         code:
@@ -926,45 +965,6 @@ components:
         message:
           description: Message from server
           type: string
-    stripe_200_invoice_list:
-      properties:
-        object:
-          type: string
-          example: list
-        url:
-          type: string
-          example: /v1/payment_intents
-        has_more:
-          type: boolean
-          example: false
-        data:
-          type: array
-          items:
-            properties:
-              id:
-                type: string
-                example: pi_1DpxME2eZvKYlo2CdLPnXZPO
-              object:
-                type: string
-                example: invoice
-              account_country:
-                type: string
-                example: US
-              account_name:
-                type: string
-                example: Stripe.com
-              account_tax_ids:
-                type: object
-                example: null
-              amount_due:
-                type: integer
-                example: 498
-              amount_paid:
-                type: integer
-                example: 0
-              amount_remaining:
-                type: integer
-                example: 498
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

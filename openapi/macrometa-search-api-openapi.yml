@@ -1038,59 +1038,7 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    post_api_view_semantic:
-      properties:
-        name:
-          description: The name of the semantic search view. This field is immutable.
-          type: string
-          example: new_collection_view
-        links:
-          $ref: '#/components/schemas/post_api_view_link_semantic_props'
-        type:
-          description: The type of the search view. Must be equal to *semantic_search*.
-          type: string
-          default: semantic_search
-      required:
-      - name
-      - type
-      type: object
-    headers:
-      x-gdn-region:
-        description: The federation's region hostname that served the request.
-        type: string
-      x-gdn-requestid:
-        description: A unique request ID for each API request.
-        type: string
-    post_api_view_semantic_fields:
-      description: 'The link properties. If specified, *properties* should be a JSON object containing the following attributes:'
-      properties:
-        fields:
-          $ref: '#/components/schemas/post_api_view_semantic_field_def'
-      type: object
-    api_search_view_search:
-      properties:
-        collection:
-          type: string
-          example: my_collection
-          description: Collection in which to search.
-        search:
-          type: string
-          example: filter doc.URL== @URL Return doc
-          description: C8QL search query, specifying search criteria for the documents in the collection.
-        bindVars:
-          type: object
-          example:
-            URL: https://www.macrometa.com/
-          description: Bind variables for the search query.
-        ttl:
-          type: integer
-          example: 60
-          description: How long search results should be preserved by the server (in seconds).
-      required:
-      - collection
-      - search
-      type: object
-    api_search_get_analyzer_det_http_examples_rc_200:
+    api_search_get_views_http_examples_rc_200:
       properties:
         code:
           description: HTTP response code.
@@ -1100,6 +1048,48 @@ components:
           description: Flag if there is an error in response. *False* for this response.
           type: boolean
           example: false
+        result:
+          $ref: '#/components/schemas/api_search_post_view_http_examples_rc_201'
+    post_api_view_iresearch:
+      properties:
+        name:
+          description: The name of the search view. This field is immutable.
+          type: string
+          example: new_collection_view
+        primarySort:
+          description: Specify default sorting order. This field is immutable.
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                description: The name of the field.
+                type: string
+                example: attribute1
+              direction:
+                description: The sorting direction.
+                type: string
+                example: asc
+            default: {}
+          default: []
+        links:
+          $ref: '#/components/schemas/post_api_view_links'
+        type:
+          description: The type of the search view. Must be equal to *search*.
+          type: string
+          default: search
+      required:
+      - name
+      - type
+      type: object
+    post_api_view_link_semantic_props:
+      description: 'The link properties. If specified, *properties* should be a JSON object containing the following attributes:'
+      properties:
+        '[collection-name]':
+          $ref: '#/components/schemas/post_api_view_semantic_fields'
+      type: object
+    api_search_get_analyzer_http_examples_rc_200:
+      properties:
         name:
           description: The name of analyzer.
           type: string
@@ -1133,24 +1123,11 @@ components:
           type: object
         features:
           description: The array of properties of analyzer.
+          type: array
           example:
           - position
           - norm
-      type: object
-    api_search_get_analyzers_http_examples_rc_200:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 200
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        result:
-          items:
-            $ref: '#/components/schemas/api_search_get_analyzer_http_examples_rc_200'
-          type: array
+          items: {}
       type: object
     api_search_post_view_http_examples_rc_201:
       properties:
@@ -1188,44 +1165,6 @@ components:
           description: The type of the search view. must be equal to *search*.
           type: string
           default: search
-    search_get_semantic_view_properties_rc_200_example:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 200
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        result:
-          description: Semantic search view information
-          type: object
-          properties:
-            globallyUniqueId:
-              description: Global Unique identifier of the semantic search view.
-              type: string
-              example: h83A7584E8AA9/81730851
-            id:
-              description: Unique identifier of the semantic search view.
-              type: string
-              example: '81730851'
-            name:
-              description: The name of the semantic search view. This field is immutable.
-              type: string
-              example: new_collection_view
-            links:
-              $ref: '#/components/schemas/post_api_view_link_semantic_props'
-            type:
-              description: The type of the search view. Must be equal to *semantic_search*.
-              type: string
-              default: semantic_search
-    post_api_view_links:
-      description: The set of collection names associated with the properties.
-      properties:
-        '[collection-name]':
-          $ref: '#/components/schemas/post_api_view_link_props'
-      type: object
     error_example_rc_404:
       properties:
         code:
@@ -1247,205 +1186,6 @@ components:
       required:
       - error
       type: object
-    example_operation_success_rc_200:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 200
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        result:
-          description: Return *true* flag if operation is successfully completed.
-          type: boolean
-          example: true
-    api_search_get_views_http_examples_rc_200:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 200
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        result:
-          $ref: '#/components/schemas/api_search_post_view_http_examples_rc_201'
-    post_api_view_link_props:
-      description: 'The link properties. If specified, *properties* should be a JSON object containing the following attributes:'
-      properties:
-        analyzers:
-          description: The list of analyzers to be used for indexing of string values.
-          format: string
-          items:
-            type: string
-            default: identity
-          type: array
-        fields:
-          $ref: '#/components/schemas/post_api_view_fields'
-        includeAllFields:
-          description: The flag determines whether or not to index all fields on a particular level of depth.
-          type: boolean
-          default: false
-        storeValues:
-          description: 'How should the search view track the attribute values, this setting allows for additional value retrieval optimizations, one of:
-
-            - *none*: Do not store values by the search view
-
-            - *id*: Store only information about value presence, to allow use of the EXISTS() function.'
-          type: string
-          default: none
-        trackListPositions:
-          description: The flag determines whether or not values in a lists should be treated separate.
-          type: boolean
-          default: false
-      type: object
-    post_api_view_link_semantic_props:
-      description: 'The link properties. If specified, *properties* should be a JSON object containing the following attributes:'
-      properties:
-        '[collection-name]':
-          $ref: '#/components/schemas/post_api_view_semantic_fields'
-      type: object
-    error_example_rc_409:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 409
-        error:
-          description: Flag if there is an error in response. *True* for this response.
-          type: boolean
-          example: true
-        errorMessage:
-          description: A message created for this error.
-          type: string
-          example: Error message
-        errorNum:
-          description: Error number returned from the database.
-          type: integer
-          example: 581
-      required:
-      - error
-      type: object
-    post_api_view_iresearch:
-      properties:
-        name:
-          description: The name of the search view. This field is immutable.
-          type: string
-          example: new_collection_view
-        primarySort:
-          description: Specify default sorting order. This field is immutable.
-          type: array
-          items:
-            type: object
-            properties:
-              field:
-                description: The name of the field.
-                type: string
-                example: attribute1
-              direction:
-                description: The sorting direction.
-                type: string
-                example: asc
-            default: {}
-          default: []
-        links:
-          $ref: '#/components/schemas/post_api_view_links'
-        type:
-          description: The type of the search view. Must be equal to *search*.
-          type: string
-          default: search
-      required:
-      - name
-      - type
-      type: object
-    rename_view:
-      properties:
-        name:
-          description: The new name of the search view.
-          type: string
-          example: new_view_name
-      type: object
-    search_get_view_properties_rc_200_example:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 200
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        result:
-          description: Search view information
-          type: object
-          properties:
-            globallyUniqueId:
-              description: Global unique identifier (GUID) of the semantic search view.
-              type: string
-              example: h83A7584E8AA9/81730851
-            id:
-              description: Unique identifier of the search view.
-              type: string
-              example: '81730851'
-            name:
-              description: The name of the search view. This field is immutable.
-              type: string
-              example: new_collection_view
-            primarySort:
-              description: Specify default sorting order. This field is immutable.
-              type: array
-              items:
-                type: object
-                properties:
-                  field:
-                    description: The name of the field.
-                    type: string
-                    example: attribute1
-                  direction:
-                    description: The sorting direction.
-                    type: string
-                    example: asc
-                default: {}
-              default: []
-            links:
-              $ref: '#/components/schemas/post_api_view_links'
-            type:
-              description: The type of the search view. Must be equal to *search*.
-              type: string
-              default: search
-    search_get_view_rc_200_example:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 200
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        result:
-          description: Search view information
-          type: object
-          properties:
-            globallyUniqueId:
-              description: Unique identifier of the collection
-              type: string
-              example: h83A7584E8AA9/81730851
-            id:
-              description: Unique identifier of the search view
-              type: string
-              example: '81730851'
-            name:
-              description: Name of the search view
-              type: string
-              example: c8search_view_server_list
-            type:
-              description: '*search* as type of search view'
-              type: string
-              example: search
     api_search_get_view_http_examples_rc_200:
       type: object
       properties:
@@ -1478,6 +1218,13 @@ components:
             _key: '62487646'
             _rev: _dcf-QQO--_
           items: {}
+    rename_view:
+      properties:
+        name:
+          description: The new name of the search view.
+          type: string
+          example: new_view_name
+      type: object
     error_example_rc_403:
       properties:
         code:
@@ -1499,16 +1246,67 @@ components:
       required:
       - error
       type: object
-    post_api_view_fields:
-      description: A list of link properties that are applied at each document level with each key specifying a document attribute.
+    search_get_semantic_view_properties_rc_200_example:
       properties:
-        '[field-name]':
-          description: 'This is a recursive structure for the specific attribute path, potentially containing any of the following attributes: *analyzers*, *includeAllFields*, *trackListPositions*, *storeValues*. Any attributes not specified are inherited from the parent.'
-          items:
-            type: object
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          description: Semantic search view information
           type: object
+          properties:
+            globallyUniqueId:
+              description: Global Unique identifier of the semantic search view.
+              type: string
+              example: h83A7584E8AA9/81730851
+            id:
+              description: Unique identifier of the semantic search view.
+              type: string
+              example: '81730851'
+            name:
+              description: The name of the semantic search view. This field is immutable.
+              type: string
+              example: new_collection_view
+            links:
+              $ref: '#/components/schemas/post_api_view_link_semantic_props'
+            type:
+              description: The type of the search view. Must be equal to *semantic_search*.
+              type: string
+              default: semantic_search
+    headers:
+      x-gdn-region:
+        description: The federation's region hostname that served the request.
+        type: string
+      x-gdn-requestid:
+        description: A unique request ID for each API request.
+        type: string
+    post_api_view_semantic_fields:
+      description: 'The link properties. If specified, *properties* should be a JSON object containing the following attributes:'
+      properties:
+        fields:
+          $ref: '#/components/schemas/post_api_view_semantic_field_def'
       type: object
-      default: {}
+    post_api_view_semantic:
+      properties:
+        name:
+          description: The name of the semantic search view. This field is immutable.
+          type: string
+          example: new_collection_view
+        links:
+          $ref: '#/components/schemas/post_api_view_link_semantic_props'
+        type:
+          description: The type of the search view. Must be equal to *semantic_search*.
+          type: string
+          default: semantic_search
+      required:
+      - name
+      - type
+      type: object
     post_api_view_semantic_field_def:
       description: A list of link properties that are applied at each document level with each key specifying a document attribute
       properties:
@@ -1589,29 +1387,69 @@ components:
       required:
       - '[field-name]'
       type: object
-    error_example_rc_400:
+    search_get_view_rc_200_example:
       properties:
         code:
           description: HTTP response code.
           type: integer
-          example: 400
+          example: 200
         error:
-          description: Flag if there is an error in response. *True* for this response.
+          description: Flag if there is an error in response. *False* for this response.
           type: boolean
-          example: true
-        errorMessage:
-          description: A message created for this error.
-          type: string
-          example: Error message
-        errorNum:
-          description: Error number returned from the database.
-          type: integer
-          example: 102020
-      required:
-      - error
-      type: object
-    api_search_get_analyzer_http_examples_rc_200:
+          example: false
+        result:
+          description: Search view information
+          type: object
+          properties:
+            globallyUniqueId:
+              description: Unique identifier of the collection
+              type: string
+              example: h83A7584E8AA9/81730851
+            id:
+              description: Unique identifier of the search view
+              type: string
+              example: '81730851'
+            name:
+              description: Name of the search view
+              type: string
+              example: c8search_view_server_list
+            type:
+              description: '*search* as type of search view'
+              type: string
+              example: search
+    api_search_view_search:
       properties:
+        collection:
+          type: string
+          example: my_collection
+          description: Collection in which to search.
+        search:
+          type: string
+          example: filter doc.URL== @URL Return doc
+          description: C8QL search query, specifying search criteria for the documents in the collection.
+        bindVars:
+          type: object
+          example:
+            URL: https://www.macrometa.com/
+          description: Bind variables for the search query.
+        ttl:
+          type: integer
+          example: 60
+          description: How long search results should be preserved by the server (in seconds).
+      required:
+      - collection
+      - search
+      type: object
+    api_search_get_analyzer_det_http_examples_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
         name:
           description: The name of analyzer.
           type: string
@@ -1645,42 +1483,174 @@ components:
           type: object
         features:
           description: The array of properties of analyzer.
-          type: array
           example:
           - position
           - norm
-          items: {}
       type: object
-    HTTPValidationError:
+    post_api_view_fields:
+      description: A list of link properties that are applied at each document level with each key specifying a document attribute.
       properties:
-        detail:
+        '[field-name]':
+          description: 'This is a recursive structure for the specific attribute path, potentially containing any of the following attributes: *analyzers*, *includeAllFields*, *trackListPositions*, *storeValues*. Any attributes not specified are inherited from the parent.'
           items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
+            type: object
+          type: object
       type: object
-      title: HTTPValidationError
-    ValidationError:
+      default: {}
+    post_api_view_link_props:
+      description: 'The link properties. If specified, *properties* should be a JSON object containing the following attributes:'
       properties:
-        loc:
+        analyzers:
+          description: The list of analyzers to be used for indexing of string values.
+          format: string
           items:
-            anyOf:
-            - type: string
-            - type: integer
+            type: string
+            default: identity
           type: array
-          title: Location
-        msg:
+        fields:
+          $ref: '#/components/schemas/post_api_view_fields'
+        includeAllFields:
+          description: The flag determines whether or not to index all fields on a particular level of depth.
+          type: boolean
+          default: false
+        storeValues:
+          description: 'How should the search view track the attribute values, this setting allows for additional value retrieval optimizations, one of:
+
+            - *none*: Do not store values by the search view
+
+            - *id*: Store only information about value presence, to allow use of the EXISTS() function.'
           type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
+          default: none
+        trackListPositions:
+          description: The flag determines whether or not values in a lists should be treated separate.
+          type: boolean
+          default: false
       type: object
+    example_operation_success_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          description: Return *true* flag if operation is successfully completed.
+          type: boolean
+          example: true
+    search_get_view_properties_rc_200_example:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          description: Search view information
+          type: object
+          properties:
+            globallyUniqueId:
+              description: Global unique identifier (GUID) of the semantic search view.
+              type: string
+              example: h83A7584E8AA9/81730851
+            id:
+              description: Unique identifier of the search view.
+              type: string
+              example: '81730851'
+            name:
+              description: The name of the search view. This field is immutable.
+              type: string
+              example: new_collection_view
+            primarySort:
+              description: Specify default sorting order. This field is immutable.
+              type: array
+              items:
+                type: object
+                properties:
+                  field:
+                    description: The name of the field.
+                    type: string
+                    example: attribute1
+                  direction:
+                    description: The sorting direction.
+                    type: string
+                    example: asc
+                default: {}
+              default: []
+            links:
+              $ref: '#/components/schemas/post_api_view_links'
+            type:
+              description: The type of the search view. Must be equal to *search*.
+              type: string
+              default: search
+    error_example_rc_409:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 409
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
       required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
+      - error
+      type: object
+    error_example_rc_400:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 400
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 102020
+      required:
+      - error
+      type: object
+    post_api_view_links:
+      description: The set of collection names associated with the properties.
+      properties:
+        '[collection-name]':
+          $ref: '#/components/schemas/post_api_view_link_props'
+      type: object
+    api_search_get_analyzers_http_examples_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          items:
+            $ref: '#/components/schemas/api_search_get_analyzer_http_examples_rc_200'
+          type: array
+      type: object
     FilterOperation:
       type: string
       enum:
@@ -1696,12 +1666,6 @@ components:
       - =~
       - '!~'
       title: FilterOperation
-    FilterCondition:
-      type: string
-      enum:
-      - AND
-      - OR
-      title: FilterCondition
     SearchQuery:
       properties:
         query:
@@ -1780,6 +1744,33 @@ components:
           - 20
       type: object
       title: SearchQuery
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    FilterCondition:
+      type: string
+      enum:
+      - AND
+      - OR
+      title: FilterCondition
     SearchFilter:
       properties:
         field:
@@ -1821,6 +1812,15 @@ components:
       - operator
       - value
       title: SearchFilter
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
   requestBodies:
     post_api_view_iresearch:
       content:

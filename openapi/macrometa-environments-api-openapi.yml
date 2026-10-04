@@ -448,17 +448,8 @@ paths:
       tags:
       - Environments
 components:
-  requestBodies:
-    database_metadata:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/database_metadata'
-      description: A JSON object with user defined key-value pairs.
-      required: true
   schemas:
-    get_user_environments_examples_rc_200:
-      type: object
+    get_environment_info_rc_200:
       properties:
         code:
           description: HTTP response code.
@@ -469,18 +460,47 @@ components:
           type: boolean
           example: false
         result:
-          type: array
-          items:
-            type: object
-            properties:
-              name:
-                type: string
-                example: _system
-              options:
-                $ref: '#/components/schemas/get_user_GeoFabrics_options_examples_rc_200'
-              isSystem:
-                type: boolean
-                example: true
+          description: Information about the current environment.
+          type: object
+          properties:
+            name:
+              type: string
+              example: _system
+            options:
+              $ref: '#/components/schemas/get_user_GeoFabrics_options_examples_rc_200'
+            isSystem:
+              description: Whether or not the current GeoFabric is the *_system* fabric
+              type: boolean
+              example: true
+    dropped_environment_example_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          description: Whether environment was successfully removed.
+          type: boolean
+          example: true
+    create_environment_examples_rc_201:
+      type: object
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 201
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          description: Whether the environment was created successfully.
+          type: boolean
+          example: true
     headers:
       x-gdn-region:
         description: The federation's region hostname that served the request.
@@ -488,73 +508,24 @@ components:
       x-gdn-requestid:
         description: A unique request ID for each API request.
         type: string
-    database_metadata:
+    get_all_environment_examples_rc_200:
       properties:
-        metadata:
-          description: Object with user defined key-value pairs.
-          type: object
-          example:
-            key: value
-    create_environment_database:
-      properties:
-        name:
-          description: Has to contain a valid environment name.
-          type: string
-        tenant:
-          description: Name of the tenant to associate with environment. This option is applicable and optional when system tenant *_mm* invokes the API. Other tenants should not specify this option as the tenant invoking API shall be associated with environment.
-          type: string
-        options:
-          $ref: '#/components/schemas/create_environment_database_options'
-        users:
-          description: Enter an array of user ids that has admin access to the new environment. If this field is left blank, the default user *root* has admin access.
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          description: An array of environment names
+          type: array
           items:
             type: string
-          type: array
-      required:
-      - name
-      type: object
-    error_example_rc_404:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 404
-        error:
-          description: Flag if there is an error in response. *True* for this response.
-          type: boolean
-          example: true
-        errorMessage:
-          description: A message created for this error.
-          type: string
-          example: Error message
-        errorNum:
-          description: Error number returned from the database.
-          type: integer
-          example: 581
-      required:
-      - error
-      type: object
-    error_example_rc_409:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 409
-        error:
-          description: Flag if there is an error in response. *True* for this response.
-          type: boolean
-          example: true
-        errorMessage:
-          description: A message created for this error.
-          type: string
-          example: Error message
-        errorNum:
-          description: Error number returned from the database.
-          type: integer
-          example: 581
-      required:
-      - error
-      type: object
+          example:
+          - _system
+          - demo._system
     error_example_rc_403:
       properties:
         code:
@@ -575,95 +546,6 @@ components:
           example: 581
       required:
       - error
-      type: object
-    create_environment_examples_rc_201:
-      type: object
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 201
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        result:
-          description: Whether the environment was created successfully.
-          type: boolean
-          example: true
-    set_environment_example_rc_201:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 201
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        result:
-          description: Flag for if the environment was set successfully.
-          type: boolean
-          example: true
-    get_all_environment_examples_rc_200:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 200
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        result:
-          description: An array of environment names
-          type: array
-          items:
-            type: string
-          example:
-          - _system
-          - demo._system
-    patch_environment_example_rc_201:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 201
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        result:
-          type: boolean
-          description: Flag for if the environment was updated successfully.
-          example: true
-    dropped_environment_example_rc_200:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 200
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        result:
-          description: Whether environment was successfully removed.
-          type: boolean
-          example: true
-    create_environment_database_options:
-      description: 'Has to be a dictionary of Database options used when creating the environment. If this is not specified, default options are used. If one of the dict members is not specified, defaults is used for that dict member.
-
-        The members of the *options* dictionary are as follows:'
-      properties:
-        spotDc:
-          description: The Edge Location (data center) where on-spot operations for the given environment is performed. By default, a random data center is chosen from those which are capable.
-          type: string
-        metadata:
-          description: Object with user defined key-value pairs.
-          type: object
-          example:
-            key: value
       type: object
     get_user_GeoFabrics_options_examples_rc_200:
       type: object
@@ -716,29 +598,38 @@ components:
           description: Tenant name
           type: string
           example: _mm
-    get_environment_info_rc_200:
+    create_environment_database_options:
+      description: 'Has to be a dictionary of Database options used when creating the environment. If this is not specified, default options are used. If one of the dict members is not specified, defaults is used for that dict member.
+
+        The members of the *options* dictionary are as follows:'
       properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 200
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        result:
-          description: Information about the current environment.
+        spotDc:
+          description: The Edge Location (data center) where on-spot operations for the given environment is performed. By default, a random data center is chosen from those which are capable.
+          type: string
+        metadata:
+          description: Object with user defined key-value pairs.
           type: object
-          properties:
-            name:
-              type: string
-              example: _system
-            options:
-              $ref: '#/components/schemas/get_user_GeoFabrics_options_examples_rc_200'
-            isSystem:
-              description: Whether or not the current GeoFabric is the *_system* fabric
-              type: boolean
-              example: true
+          example:
+            key: value
+      type: object
+    create_environment_database:
+      properties:
+        name:
+          description: Has to contain a valid environment name.
+          type: string
+        tenant:
+          description: Name of the tenant to associate with environment. This option is applicable and optional when system tenant *_mm* invokes the API. Other tenants should not specify this option as the tenant invoking API shall be associated with environment.
+          type: string
+        options:
+          $ref: '#/components/schemas/create_environment_database_options'
+        users:
+          description: Enter an array of user ids that has admin access to the new environment. If this field is left blank, the default user *root* has admin access.
+          items:
+            type: string
+          type: array
+      required:
+      - name
+      type: object
     error_example_rc_400:
       properties:
         code:
@@ -760,6 +651,115 @@ components:
       required:
       - error
       type: object
+    get_user_environments_examples_rc_200:
+      type: object
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                example: _system
+              options:
+                $ref: '#/components/schemas/get_user_GeoFabrics_options_examples_rc_200'
+              isSystem:
+                type: boolean
+                example: true
+    database_metadata:
+      properties:
+        metadata:
+          description: Object with user defined key-value pairs.
+          type: object
+          example:
+            key: value
+    error_example_rc_404:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 404
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
+      type: object
+    error_example_rc_409:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 409
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
+      type: object
+    patch_environment_example_rc_201:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 201
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          type: boolean
+          description: Flag for if the environment was updated successfully.
+          example: true
+    set_environment_example_rc_201:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 201
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          description: Flag for if the environment was set successfully.
+          type: boolean
+          example: true
+  requestBodies:
+    database_metadata:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/database_metadata'
+      description: A JSON object with user defined key-value pairs.
+      required: true
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

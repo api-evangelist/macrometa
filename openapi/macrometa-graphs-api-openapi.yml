@@ -2221,82 +2221,7 @@ paths:
       - Graphs
 components:
   schemas:
-    headers:
-      x-gdn-region:
-        description: The federation's region hostname that served the request.
-        type: string
-      x-gdn-requestid:
-        description: A unique request ID for each API request.
-        type: string
-    error_example_rc_412:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 412
-        error:
-          description: Flag if there is an error in response. *True* for this response.
-          type: boolean
-          example: true
-        errorMessage:
-          description: A message created for this error.
-          type: string
-          example: Error message
-        errorNum:
-          description: Error number returned from the database.
-          type: integer
-          example: 581
-      required:
-      - error
-      type: object
-    graph_edge_create_http_examples_rc_202:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 202
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        edge:
-          $ref: '#/components/schemas/edge_representation'
-        new:
-          $ref: '#/components/schemas/edge_representation_new'
-      required:
-      - error
-      type: object
-    graph_vertex_collection_add_http_examples_rc_202:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 202
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        graph:
-          $ref: '#/components/schemas/graph_representation'
-      required:
-      - error
-      type: object
-    graph_vertex_collection_add_http_examples_rc_201:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 201
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        graph:
-          $ref: '#/components/schemas/graph_representation'
-      required:
-      - error
-      type: object
-    graph_vertex_collection_remove_http_examples_rc_200:
+    graph_edge_modify_http_examples_rc_200:
       properties:
         code:
           description: HTTP response code.
@@ -2306,42 +2231,16 @@ components:
           description: Flag if there is an error in response. *False* for this response.
           type: boolean
           example: false
-        graph:
-          $ref: '#/components/schemas/graph_representation'
+        edge:
+          $ref: '#/components/schemas/edge_representation'
+        new:
+          $ref: '#/components/schemas/edge_representation_new'
+        old:
+          $ref: '#/components/schemas/edge_representation'
       required:
       - error
       type: object
-    graph_edge_definition_modify_http_examples_rc_202:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 202
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        graph:
-          $ref: '#/components/schemas/graph_representation'
-      required:
-      - error
-      type: object
-    graph_create_http_examples_rc_202:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 202
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        graph:
-          $ref: '#/components/schemas/graph_representation'
-      required:
-      - error
-      type: object
-    graph_edge_definition_add_http_examples:
+    graph_edge_definition_modify_http_examples:
       properties:
         collection:
           description: The name of the edge collection to be used.
@@ -2377,48 +2276,32 @@ components:
       required:
       - error
       type: object
-    graph_vertex_collection_remove_http_examples_rc_202:
+    graph_edge_get_http_examples_rc_200:
       properties:
         code:
           description: HTTP response code.
           type: integer
-          example: 202
+          example: 200
         error:
           description: Flag if there is an error in response. *False* for this response.
           type: boolean
           example: false
+        edge:
+          $ref: '#/components/schemas/edge_representation'
+      required:
+      - error
+      type: object
+    graph_list:
+      properties:
         graph:
           $ref: '#/components/schemas/graph_representation'
-      required:
-      - error
       type: object
-    error_example_rc_401:
+    graph_edge_replace_http_examples_rc_201:
       properties:
         code:
           description: HTTP response code.
           type: integer
-          example: 401
-        error:
-          description: Flag if there is an error in response. *True* for this response.
-          type: boolean
-          example: true
-        errorMessage:
-          description: A message created for this error.
-          type: string
-          example: Error message
-        errorNum:
-          description: Error number returned from the database.
-          type: integer
-          example: '102020'
-      required:
-      - error
-      type: object
-    graph_edge_replace_http_examples_rc_202:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 202
+          example: 201
         error:
           description: Flag if there is an error in response. *False* for this response.
           type: boolean
@@ -2432,12 +2315,28 @@ components:
       required:
       - error
       type: object
-    graph_list:
+    error_example_rc_404:
       properties:
-        graph:
-          $ref: '#/components/schemas/graph_representation'
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 404
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
       type: object
-    graph_edge_definition_remove_http_examples_rc_201:
+    graph_create_http_examples_rc_201:
       properties:
         code:
           description: HTTP response code.
@@ -2449,59 +2348,6 @@ components:
           example: false
         graph:
           $ref: '#/components/schemas/graph_representation'
-      required:
-      - error
-      type: object
-    graph_edge_definition_modify_http_examples:
-      properties:
-        collection:
-          description: The name of the edge collection to be used.
-          type: string
-          example: edgeCollectionTest
-        from:
-          description: One or many vertex collections that can contain source vertices.
-          items:
-            type: string
-            example: sourceVertex
-          type: array
-        to:
-          description: One or many vertex collections that can contain target vertices.
-          items:
-            type: string
-            example: destinationVertex
-          type: array
-      required:
-      - collection
-      type: object
-    graph_vertex_get_http_examples_rc_200:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 200
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        vertex:
-          $ref: '#/components/schemas/example_id_key_rev'
-      required:
-      - error
-      type: object
-    graph_list_http_examples_rc_200:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 200
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        graphs:
-          items:
-            $ref: '#/components/schemas/graph_list'
-          type: array
       required:
       - error
       type: object
@@ -2524,40 +2370,6 @@ components:
       required:
       - error
       type: object
-    example_id_key_rev:
-      properties:
-        _id:
-          description: ID of the collection.
-          type: string
-          example: test/foo
-        _key:
-          description: _key details of collection.
-          type: string
-          example: foo
-        _rev:
-          description: _rev details of collection.
-          type: string
-          example: _dPRuHxe--_
-      type: object
-    graph_vertex_modify_http_examples_rc_200:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 200
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        new:
-          $ref: '#/components/schemas/example_id_key_rev'
-        old:
-          $ref: '#/components/schemas/example_old_id_key_rev'
-        vertex:
-          $ref: '#/components/schemas/example_id_key_rev'
-      required:
-      - error
-      type: object
     graph_edge_modify_http_examples_rc_202:
       properties:
         code:
@@ -2574,6 +2386,82 @@ components:
           $ref: '#/components/schemas/edge_representation_new'
         old:
           $ref: '#/components/schemas/edge_representation'
+      required:
+      - error
+      type: object
+    graph_create_http_examples:
+      properties:
+        edgeDefinitions:
+          description: 'An array of definitions for the relations of the graph. Each has the following type:'
+          items:
+            $ref: '#/components/schemas/graph_edge_definition'
+          type: array
+        name:
+          description: Name of the graph.
+          type: string
+          example: exampleGraph
+        options:
+          $ref: '#/components/schemas/api_gharial_create_opts'
+      required:
+      - name
+      type: object
+    error_example_rc_403:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 403
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
+      type: object
+    headers:
+      x-gdn-region:
+        description: The federation's region hostname that served the request.
+        type: string
+      x-gdn-requestid:
+        description: A unique request ID for each API request.
+        type: string
+    graph_edge_definition_add_http_examples_rc_202:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 202
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        graph:
+          $ref: '#/components/schemas/graph_representation'
+      required:
+      - error
+      type: object
+    graph_vertex_create_http_examples_rc_202:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 202
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        new:
+          $ref: '#/components/schemas/example_id_key_rev'
+        vertex:
+          $ref: '#/components/schemas/example_id_key_rev'
       required:
       - error
       type: object
@@ -2594,28 +2482,12 @@ components:
       required:
       - error
       type: object
-    graph_create_http_examples:
-      properties:
-        edgeDefinitions:
-          description: 'An array of definitions for the relations of the graph. Each has the following type:'
-          items:
-            $ref: '#/components/schemas/graph_edge_definition'
-          type: array
-        name:
-          description: Name of the graph.
-          type: string
-          example: exampleGraph
-        options:
-          $ref: '#/components/schemas/api_gharial_create_opts'
-      required:
-      - name
-      type: object
-    graph_vertex_replace_http_examples_rc_200:
+    graph_vertex_modify_http_examples_rc_202:
       properties:
         code:
           description: HTTP response code.
           type: integer
-          example: 200
+          example: 202
         error:
           description: Flag if there is an error in response. *False* for this response.
           type: boolean
@@ -2626,6 +2498,42 @@ components:
           $ref: '#/components/schemas/example_old_id_key_rev'
         vertex:
           $ref: '#/components/schemas/example_id_key_rev'
+      required:
+      - error
+      type: object
+    example_id_key_rev:
+      properties:
+        _id:
+          description: ID of the collection.
+          type: string
+          example: test/foo
+        _key:
+          description: _key details of collection.
+          type: string
+          example: foo
+        _rev:
+          description: _rev details of collection.
+          type: string
+          example: _dPRuHxe--_
+      type: object
+    graph_vertex_get_http_examples_rc_304:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 304
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Database error number for the error that occurred.
+          type: integer
+          example: 581
       required:
       - error
       type: object
@@ -2653,7 +2561,31 @@ components:
           type: string
           example: colltest020905135195vdbps/cccc
       type: object
-    graph_vertex_create_http_examples_rc_202:
+    graph_vertex_replace_http_examples_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        new:
+          $ref: '#/components/schemas/example_id_key_rev'
+        old:
+          $ref: '#/components/schemas/example_old_id_key_rev'
+        vertex:
+          $ref: '#/components/schemas/example_id_key_rev'
+      required:
+      - error
+      type: object
+    api_gharial_create_opts:
+      description: 'A JSON object to define options for creating collections within this graph.
+
+        It can contain the following attributes:'
+      type: object
+    graph_edge_definition_modify_http_examples_rc_202:
       properties:
         code:
           description: HTTP response code.
@@ -2663,32 +2595,17 @@ components:
           description: Flag if there is an error in response. *False* for this response.
           type: boolean
           example: false
-        new:
-          $ref: '#/components/schemas/example_id_key_rev'
-        vertex:
-          $ref: '#/components/schemas/example_id_key_rev'
+        graph:
+          $ref: '#/components/schemas/graph_representation'
       required:
       - error
       type: object
-    graph_edge_create_http_examples:
-      properties:
-        _from:
-          description: The source vertex of this edge. Has to be valid within the used edge definition.
-          type: string
-          example: sourceVertex
-        _to:
-          description: The target vertex of this edge. Has to be valid within the used edge definition.
-          type: string
-          example: destinationVertex
-      required:
-      - _from
-      type: object
-    error_example_rc_404:
+    error_example_rc_412:
       properties:
         code:
           description: HTTP response code.
           type: integer
-          example: 404
+          example: 412
         error:
           description: Flag if there is an error in response. *True* for this response.
           type: boolean
@@ -2704,31 +2621,62 @@ components:
       required:
       - error
       type: object
-    edge_representation_new:
-      description: The edge document.
+    redirect_example_rc_304:
       properties:
-        _id:
-          description: The _id value of the stored data.
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 304
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
           type: string
-          example: edgeColltest020905135194uxprm/7050517
-        _key:
-          description: The _key-value of the stored data.
-          type: string
-          example: '7050517'
-        _rev:
-          description: The _rev value of the stored data.
-          type: string
-          example: _dsRmNZG--
-        _from:
-          description: The _from value of the stored data.
-          type: string
-          example: colltest020905135195vdbps/bbbb
-        _to:
-          description: The _to value of the stored data.
-          type: string
-          example: colltest020905135195vdbps/eeee
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 102020
+      required:
+      - error
       type: object
-    graph_edge_replace_http_examples_rc_201:
+    graph_vertex_modify_http_examples_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        new:
+          $ref: '#/components/schemas/example_id_key_rev'
+        old:
+          $ref: '#/components/schemas/example_old_id_key_rev'
+        vertex:
+          $ref: '#/components/schemas/example_id_key_rev'
+      required:
+      - error
+      type: object
+    graph_vertex_collection_add_http_examples_rc_202:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 202
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        graph:
+          $ref: '#/components/schemas/graph_representation'
+      required:
+      - error
+      type: object
+    graph_edge_definition_modify_http_examples_rc_201:
       properties:
         code:
           description: HTTP response code.
@@ -2738,12 +2686,173 @@ components:
           description: Flag if there is an error in response. *False* for this response.
           type: boolean
           example: false
+        graph:
+          $ref: '#/components/schemas/graph_representation'
+      required:
+      - error
+      type: object
+    graph_edge_definition_remove_http_examples_rc_201:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 201
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        graph:
+          $ref: '#/components/schemas/graph_representation'
+      required:
+      - error
+      type: object
+    graph_vertex_get_http_examples_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        vertex:
+          $ref: '#/components/schemas/example_id_key_rev'
+      required:
+      - error
+      type: object
+    graph_edge_create_http_examples_rc_201:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 201
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
         edge:
           $ref: '#/components/schemas/edge_representation'
         new:
           $ref: '#/components/schemas/edge_representation_new'
+      required:
+      - error
+      type: object
+    example_old_id_key_rev:
+      properties:
+        _id:
+          description: ID of the collection.
+          type: string
+          example: test/foo
+        _key:
+          description: _key details of collection.
+          type: string
+          example: foo
+        _rev:
+          description: _rev details of collection.
+          type: string
+          example: _zPad4Hxd--_
+      type: object
+    graph_vertex_replace_http_examples_rc_202:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 202
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        new:
+          $ref: '#/components/schemas/example_id_key_rev'
         old:
-          $ref: '#/components/schemas/edge_representation'
+          $ref: '#/components/schemas/example_old_id_key_rev'
+        vertex:
+          $ref: '#/components/schemas/example_id_key_rev'
+      required:
+      - error
+      type: object
+    graph_edge_replace_http_examples:
+      properties:
+        _from:
+          description: The source vertex of this edge. Has to be valid within the used edge definition.
+          type: string
+          example: sourceVertex
+        _to:
+          description: The target vertex of this edge. Has to be valid within the used edge definition.
+          type: string
+          example: destinationVertex
+      required:
+      - _from
+      type: object
+    graph_list_http_examples_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        graphs:
+          items:
+            $ref: '#/components/schemas/graph_list'
+          type: array
+      required:
+      - error
+      type: object
+    error_example_rc_401:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 401
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: '102020'
+      required:
+      - error
+      type: object
+    graph_get_http_examples_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        graph:
+          $ref: '#/components/schemas/graph_representation'
+      required:
+      - error
+      type: object
+    graph_list_vertex_http_examples_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        collections:
+          description: The list of all vertex collections within this graph. Includes collections in edge definitions as well as orphans.
+          items:
+            type: string
+            example: vertex1
+          type: array
       required:
       - error
       type: object
@@ -2766,79 +2875,54 @@ components:
       required:
       - error
       type: object
-    graph_edge_modify_http_examples_rc_200:
+    graph_edge_definition_add_http_examples:
       properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 200
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        edge:
-          $ref: '#/components/schemas/edge_representation'
-        new:
-          $ref: '#/components/schemas/edge_representation_new'
-        old:
-          $ref: '#/components/schemas/edge_representation'
-      required:
-      - error
-      type: object
-    graph_edge_replace_http_examples:
-      properties:
-        _from:
-          description: The source vertex of this edge. Has to be valid within the used edge definition.
+        collection:
+          description: The name of the edge collection to be used.
           type: string
-          example: sourceVertex
-        _to:
-          description: The target vertex of this edge. Has to be valid within the used edge definition.
-          type: string
-          example: destinationVertex
-      required:
-      - _from
-      type: object
-    graph_list_vertex_http_examples_rc_200:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 200
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        collections:
-          description: The list of all vertex collections within this graph. Includes collections in edge definitions as well as orphans.
+          example: edgeCollectionTest
+        from:
+          description: One or many vertex collections that can contain source vertices.
           items:
             type: string
-            example: vertex1
+            example: sourceVertex
+          type: array
+        to:
+          description: One or many vertex collections that can contain target vertices.
+          items:
+            type: string
+            example: destinationVertex
           type: array
       required:
-      - error
+      - collection
       type: object
-    graph_vertex_get_http_examples_rc_304:
+    graph_edge_definition:
+      description: An array of definitions for the relations of the graph.
       properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 304
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: true
-        errorMessage:
-          description: A message created for this error.
+        collection:
+          description: Name of the edge collection, where the edge are stored in.
           type: string
-          example: Error message
-        errorNum:
-          description: Database error number for the error that occurred.
-          type: integer
-          example: 581
-      required:
-      - error
+          example: edgeName
+        from:
+          description: 'List of vertex collection names.
+
+            Edges in collection can only be inserted if their _from is in any of the collections here.'
+          format: string
+          items:
+            type: string
+            example: sourceNode
+          type: array
+        to:
+          description: 'List of vertex collection names.
+
+            Edges in collection can only be inserted if their _to is in any of the collections here.'
+          format: string
+          items:
+            type: string
+            example: destinationNode
+          type: array
       type: object
-    graph_get_http_examples_rc_200:
+    graph_vertex_collection_remove_http_examples_rc_200:
       properties:
         code:
           description: HTTP response code.
@@ -2853,28 +2937,7 @@ components:
       required:
       - error
       type: object
-    error_example_rc_409:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 409
-        error:
-          description: Flag if there is an error in response. *True* for this response.
-          type: boolean
-          example: true
-        errorMessage:
-          description: A message created for this error.
-          type: string
-          example: Error message
-        errorNum:
-          description: Error number returned from the database.
-          type: integer
-          example: 581
-      required:
-      - error
-      type: object
-    graph_edge_delete_http_examples_rc_202:
+    graph_create_http_examples_rc_202:
       properties:
         code:
           description: HTTP response code.
@@ -2884,12 +2947,8 @@ components:
           description: Flag if there is an error in response. *False* for this response.
           type: boolean
           example: false
-        old:
-          $ref: '#/components/schemas/edge_representation'
-        removed:
-          description: Is set to *true* if the remove was successful.
-          type: boolean
-          example: true
+        graph:
+          $ref: '#/components/schemas/graph_representation'
       required:
       - error
       type: object
@@ -2926,33 +2985,39 @@ components:
             example: emptyNode
           type: array
       type: object
-    graph_edge_definition:
-      description: An array of definitions for the relations of the graph.
+    graph_edge_create_http_examples_rc_202:
       properties:
-        collection:
-          description: Name of the edge collection, where the edge are stored in.
-          type: string
-          example: edgeName
-        from:
-          description: 'List of vertex collection names.
-
-            Edges in collection can only be inserted if their _from is in any of the collections here.'
-          format: string
-          items:
-            type: string
-            example: sourceNode
-          type: array
-        to:
-          description: 'List of vertex collection names.
-
-            Edges in collection can only be inserted if their _to is in any of the collections here.'
-          format: string
-          items:
-            type: string
-            example: destinationNode
-          type: array
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 202
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        edge:
+          $ref: '#/components/schemas/edge_representation'
+        new:
+          $ref: '#/components/schemas/edge_representation_new'
+      required:
+      - error
       type: object
-    graph_create_http_examples_rc_201:
+    graph_vertex_collection_remove_http_examples_rc_202:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 202
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        graph:
+          $ref: '#/components/schemas/graph_representation'
+      required:
+      - error
+      type: object
+    graph_vertex_collection_add_http_examples_rc_201:
       properties:
         code:
           description: HTTP response code.
@@ -2967,7 +3032,7 @@ components:
       required:
       - error
       type: object
-    graph_vertex_replace_http_examples_rc_202:
+    graph_edge_delete_http_examples_rc_202:
       properties:
         code:
           description: HTTP response code.
@@ -2977,81 +3042,31 @@ components:
           description: Flag if there is an error in response. *False* for this response.
           type: boolean
           example: false
-        new:
-          $ref: '#/components/schemas/example_id_key_rev'
         old:
-          $ref: '#/components/schemas/example_old_id_key_rev'
-        vertex:
-          $ref: '#/components/schemas/example_id_key_rev'
-      required:
-      - error
-      type: object
-    graph_edge_definition_remove_http_examples_rc_202:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 202
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        graph:
-          $ref: '#/components/schemas/graph_representation'
-      required:
-      - error
-      type: object
-    redirect_example_rc_304:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 304
-        error:
-          description: Flag if there is an error in response. *True* for this response.
+          $ref: '#/components/schemas/edge_representation'
+        removed:
+          description: Is set to *true* if the remove was successful.
           type: boolean
           example: true
-        errorMessage:
-          description: A message created for this error.
-          type: string
-          example: Error message
-        errorNum:
-          description: Error number returned from the database.
-          type: integer
-          example: 102020
       required:
       - error
       type: object
-    example_old_id_key_rev:
-      properties:
-        _id:
-          description: ID of the collection.
-          type: string
-          example: test/foo
-        _key:
-          description: _key details of collection.
-          type: string
-          example: foo
-        _rev:
-          description: _rev details of collection.
-          type: string
-          example: _zPad4Hxd--_
-      type: object
-    graph_list_edge_http_examples_rc_200:
+    graph_edge_replace_http_examples_rc_202:
       properties:
         code:
           description: HTTP response code.
           type: integer
-          example: 200
+          example: 202
         error:
           description: Flag if there is an error in response. *False* for this response.
           type: boolean
-        collections:
-          description: The list of all vertex collections within this graph. Includes collections in edge definitions as well as orphans.
-          items:
-            type: string
-            example: edgeCollectionTest
-          type: array
+          example: false
+        edge:
+          $ref: '#/components/schemas/edge_representation'
+        new:
+          $ref: '#/components/schemas/edge_representation_new'
+        old:
+          $ref: '#/components/schemas/edge_representation'
       required:
       - error
       type: object
@@ -3074,27 +3089,51 @@ components:
       required:
       - error
       type: object
-    graph_edge_get_http_examples_rc_200:
+    edge_representation_new:
+      description: The edge document.
+      properties:
+        _id:
+          description: The _id value of the stored data.
+          type: string
+          example: edgeColltest020905135194uxprm/7050517
+        _key:
+          description: The _key-value of the stored data.
+          type: string
+          example: '7050517'
+        _rev:
+          description: The _rev value of the stored data.
+          type: string
+          example: _dsRmNZG--
+        _from:
+          description: The _from value of the stored data.
+          type: string
+          example: colltest020905135195vdbps/bbbb
+        _to:
+          description: The _to value of the stored data.
+          type: string
+          example: colltest020905135195vdbps/eeee
+      type: object
+    graph_edge_definition_remove_http_examples_rc_202:
       properties:
         code:
           description: HTTP response code.
           type: integer
-          example: 200
+          example: 202
         error:
           description: Flag if there is an error in response. *False* for this response.
           type: boolean
           example: false
-        edge:
-          $ref: '#/components/schemas/edge_representation'
+        graph:
+          $ref: '#/components/schemas/graph_representation'
       required:
       - error
       type: object
-    error_example_rc_403:
+    error_example_rc_409:
       properties:
         code:
           description: HTTP response code.
           type: integer
-          example: 403
+          example: 409
         error:
           description: Flag if there is an error in response. *True* for this response.
           type: boolean
@@ -3107,76 +3146,6 @@ components:
           description: Error number returned from the database.
           type: integer
           example: 581
-      required:
-      - error
-      type: object
-    graph_vertex_modify_http_examples_rc_202:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 202
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        new:
-          $ref: '#/components/schemas/example_id_key_rev'
-        old:
-          $ref: '#/components/schemas/example_old_id_key_rev'
-        vertex:
-          $ref: '#/components/schemas/example_id_key_rev'
-      required:
-      - error
-      type: object
-    graph_edge_create_http_examples_rc_201:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 201
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-        edge:
-          $ref: '#/components/schemas/edge_representation'
-        new:
-          $ref: '#/components/schemas/edge_representation_new'
-      required:
-      - error
-      type: object
-    graph_edge_definition_add_http_examples_rc_202:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 202
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        graph:
-          $ref: '#/components/schemas/graph_representation'
-      required:
-      - error
-      type: object
-    api_gharial_create_opts:
-      description: 'A JSON object to define options for creating collections within this graph.
-
-        It can contain the following attributes:'
-      type: object
-    graph_edge_definition_modify_http_examples_rc_201:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 201
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        graph:
-          $ref: '#/components/schemas/graph_representation'
       required:
       - error
       type: object
@@ -3198,6 +3167,37 @@ components:
           description: Error number returned from the database.
           type: integer
           example: 102020
+      required:
+      - error
+      type: object
+    graph_edge_create_http_examples:
+      properties:
+        _from:
+          description: The source vertex of this edge. Has to be valid within the used edge definition.
+          type: string
+          example: sourceVertex
+        _to:
+          description: The target vertex of this edge. Has to be valid within the used edge definition.
+          type: string
+          example: destinationVertex
+      required:
+      - _from
+      type: object
+    graph_list_edge_http_examples_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+        collections:
+          description: The list of all vertex collections within this graph. Includes collections in edge definitions as well as orphans.
+          items:
+            type: string
+            example: edgeCollectionTest
+          type: array
       required:
       - error
       type: object

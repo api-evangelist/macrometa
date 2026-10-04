@@ -2910,51 +2910,6 @@ paths:
       - Users
 components:
   schemas:
-    headers:
-      x-gdn-region:
-        description: The federation's region hostname that served the request.
-        type: string
-      x-gdn-requestid:
-        description: A unique request ID for each API request.
-        type: string
-    get_api_return_rc_200:
-      properties:
-        server:
-          description: Server type
-          type: string
-          example: C8DB
-        license:
-          description: Licene
-          type: string
-          example: Macrometa
-        version:
-          description: The server version string. The string has the format "*major*.*minor*.*sub*". *major* and *minor* are numeric, and *sub* may contain a number or a textual version.
-          type: string
-          example: 99.15.0-release
-      required:
-      - server
-      type: object
-    error_example_rc_401:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 401
-        error:
-          description: Flag if there is an error in response. *True* for this response.
-          type: boolean
-          example: true
-        errorMessage:
-          description: A message created for this error.
-          type: string
-          example: Error message
-        errorNum:
-          description: Error number returned from the database.
-          type: integer
-          example: '102020'
-      required:
-      - error
-      type: object
     user_grant_managedkey:
       properties:
         grant:
@@ -2968,26 +2923,18 @@ components:
       required:
       - grant
       type: object
-    error_example_rc_404:
+    user_grant_collection:
       properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 404
-        error:
-          description: Flag if there is an error in response. *True* for this response.
-          type: boolean
-          example: true
-        errorMessage:
-          description: A message created for this error.
+        grant:
+          description: '- Use "rw" to set the collection level access to *Read/Write*.
+
+            - Use "ro" to set the collection level access to *Read Only*.
+
+            - Use "none" to set the collection level access to *No access*.'
           type: string
-          example: Error message
-        errorNum:
-          description: Error number returned from the database.
-          type: integer
-          example: 581
+          example: rw
       required:
-      - error
+      - grant
       type: object
     user_modify:
       properties:
@@ -3019,12 +2966,12 @@ components:
           - isVerified
           type: object
       type: object
-    error_example_rc_409:
+    error_example_rc_404:
       properties:
         code:
           description: HTTP response code.
           type: integer
-          example: 409
+          example: 404
         error:
           description: Flag if there is an error in response. *True* for this response.
           type: boolean
@@ -3040,19 +2987,57 @@ components:
       required:
       - error
       type: object
-    user_grant_database:
+    user_create:
       properties:
-        grant:
-          description: '- Use "rw" to set the GeoFabric access level to *Administrate*.
-
-            - Use "ro" to set the GeoFabric access level to *Access*.
-
-            - Use "none" to set the database access level to *No access*.'
+        active:
+          description: If set to *true*, the user is active.
+          format: boolean
+          type: boolean
+          default: true
+        email:
+          description: The email of the user.
           type: string
-          example: rw
+          example: test@bar.com
+        passwd:
+          description: The user password. The password must have at least 8 characters, one uppercase letter, one lowercase letter, one number, and one special character (!@#$%^&*).
+          type: string
+          example: P@55w0rd
+        displayName:
+          description: The display name of the user.
+          type: string
+          example: Jhon Doe
       required:
-      - grant
+      - email
+      - passwd
       type: object
+    error_example_rc_403:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 403
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
+      type: object
+    headers:
+      x-gdn-region:
+        description: The federation's region hostname that served the request.
+        type: string
+      x-gdn-requestid:
+        description: A unique request ID for each API request.
+        type: string
     api_key_http_examples_rc_200_0:
       properties:
         code:
@@ -3099,41 +3084,6 @@ components:
           description: A JSON object with extra user information.
           type: object
           example: {}
-    attribute_values:
-      properties:
-        key1:
-          description: Attribute key-value.
-          format: string
-          type: string
-          example: value1
-        key2:
-          description: Attribute key-value.
-          format: string
-          type: string
-          example: value2
-    user_create:
-      properties:
-        active:
-          description: If set to *true*, the user is active.
-          format: boolean
-          type: boolean
-          default: true
-        email:
-          description: The email of the user.
-          type: string
-          example: test@bar.com
-        passwd:
-          description: The user password. The password must have at least 8 characters, one uppercase letter, one lowercase letter, one number, and one special character (!@#$%^&*).
-          type: string
-          example: P@55w0rd
-        displayName:
-          description: The display name of the user.
-          type: string
-          example: Jhon Doe
-      required:
-      - email
-      - passwd
-      type: object
     http_examples_rc_200_attributes:
       properties:
         code:
@@ -3146,6 +3096,19 @@ components:
           example: false
         result:
           $ref: '#/components/schemas/attribute_values'
+    user_grant_database:
+      properties:
+        grant:
+          description: '- Use "rw" to set the GeoFabric access level to *Administrate*.
+
+            - Use "ro" to set the GeoFabric access level to *Access*.
+
+            - Use "none" to set the database access level to *No access*.'
+          type: string
+          example: rw
+      required:
+      - grant
+      type: object
     user_grant_queryworker:
       properties:
         grant:
@@ -3159,12 +3122,62 @@ components:
       required:
       - grant
       type: object
-    error_example_rc_403:
+    error_example_rc_401:
       properties:
         code:
           description: HTTP response code.
           type: integer
-          example: 403
+          example: 401
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: '102020'
+      required:
+      - error
+      type: object
+    get_api_return_rc_200:
+      properties:
+        server:
+          description: Server type
+          type: string
+          example: C8DB
+        license:
+          description: Licene
+          type: string
+          example: Macrometa
+        version:
+          description: The server version string. The string has the format "*major*.*minor*.*sub*". *major* and *minor* are numeric, and *sub* may contain a number or a textual version.
+          type: string
+          example: 99.15.0-release
+      required:
+      - server
+      type: object
+    attribute_values:
+      properties:
+        key1:
+          description: Attribute key-value.
+          format: string
+          type: string
+          example: value1
+        key2:
+          description: Attribute key-value.
+          format: string
+          type: string
+          example: value2
+    error_example_rc_409:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 409
         error:
           description: Flag if there is an error in response. *True* for this response.
           type: boolean
@@ -3179,19 +3192,6 @@ components:
           example: 581
       required:
       - error
-      type: object
-    user_grant_collection:
-      properties:
-        grant:
-          description: '- Use "rw" to set the collection level access to *Read/Write*.
-
-            - Use "ro" to set the collection level access to *Read Only*.
-
-            - Use "none" to set the collection level access to *No access*.'
-          type: string
-          example: rw
-      required:
-      - grant
       type: object
     error_example_rc_400:
       properties:
@@ -3215,17 +3215,11 @@ components:
       - error
       type: object
   requestBodies:
-    user_grant_collection:
+    user_grant_queryworker:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/user_grant_collection'
-      required: true
-    user_grant_database:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/user_grant_database'
+            $ref: '#/components/schemas/user_grant_queryworker'
       required: true
     attribute_values:
       content:
@@ -3233,17 +3227,23 @@ components:
           schema:
             $ref: '#/components/schemas/attribute_values'
       required: true
+    user_grant_database:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/user_grant_database'
+      required: true
+    user_grant_collection:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/user_grant_collection'
+      required: true
     user_grant_managedkey:
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/user_grant_managedkey'
-      required: true
-    user_grant_queryworker:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/user_grant_queryworker'
       required: true
   securitySchemes:
     ApiKeyAuth:

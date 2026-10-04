@@ -98,21 +98,6 @@ components:
       x-gdn-requestid:
         description: A unique request ID for each API request.
         type: string
-    authentication_examples_rc_200:
-      properties:
-        jwt:
-          description: JWT authentication token.
-          type: string
-          example: IsInR5cCI6IkpXVCJ9.pvaG4gRG9lIiwiaWF0IjoyfQ.SflKxwRJSMeV_adQssw5c
-        tenant:
-          description: Name of the tenant.
-          type: string
-          example: foo
-        username:
-          description: Username of the tenant.
-          type: string
-          example: joe
-      type: object
     auth_token:
       properties:
         email:
@@ -154,6 +139,21 @@ components:
           example: '102020'
       required:
       - error
+      type: object
+    authentication_examples_rc_200:
+      properties:
+        jwt:
+          description: JWT authentication token.
+          type: string
+          example: IsInR5cCI6IkpXVCJ9.pvaG4gRG9lIiwiaWF0IjoyfQ.SflKxwRJSMeV_adQssw5c
+        tenant:
+          description: Name of the tenant.
+          type: string
+          example: foo
+        username:
+          description: Username of the tenant.
+          type: string
+          example: joe
       type: object
   securitySchemes:
     ApiKeyAuth:

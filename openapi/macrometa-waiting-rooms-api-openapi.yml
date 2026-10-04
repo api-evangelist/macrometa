@@ -250,6 +250,47 @@ paths:
           description: Internal server error.
 components:
   schemas:
+    WaitingRoomPostResponse:
+      type: object
+      properties:
+        waitingroom_key:
+          type: string
+        created_at:
+          type: number
+          format: number
+          example: 1694757000
+    WaitingRoomDeleteResponse:
+      type: object
+      properties:
+        waitingroom_key:
+          type: string
+        deleted_at:
+          type: number
+          format: number
+          example: 1694757100
+    GetWaitingRoomsResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/WaitingRoomObject'
+    WaitingRoom:
+      allOf:
+      - type: object
+        required:
+        - waitingroom_key
+        properties:
+          waitingroom_key:
+            type: string
+            description: The unique key of the waiting room.
+      - $ref: '#/components/schemas/WaitingRoomObject'
+    WaitingRoomPutResponse:
+      type: object
+      properties:
+        waitingroom_key:
+          type: string
+        updated_at:
+          type: number
+          format: number
+          example: 1694757010
     WaitingRoomObject:
       type: object
       required:
@@ -333,47 +374,6 @@ components:
         custom_attributes:
           type: object
           description: A JSON object containing custom attributes Any valid JSON can be stored here. It is not used by the waiting room at this time.
-    WaitingRoomDeleteResponse:
-      type: object
-      properties:
-        waitingroom_key:
-          type: string
-        deleted_at:
-          type: number
-          format: number
-          example: 1694757100
-    WaitingRoom:
-      allOf:
-      - type: object
-        required:
-        - waitingroom_key
-        properties:
-          waitingroom_key:
-            type: string
-            description: The unique key of the waiting room.
-      - $ref: '#/components/schemas/WaitingRoomObject'
-    GetWaitingRoomsResponse:
-      type: array
-      items:
-        $ref: '#/components/schemas/WaitingRoomObject'
-    WaitingRoomPostResponse:
-      type: object
-      properties:
-        waitingroom_key:
-          type: string
-        created_at:
-          type: number
-          format: number
-          example: 1694757000
-    WaitingRoomPutResponse:
-      type: object
-      properties:
-        waitingroom_key:
-          type: string
-        updated_at:
-          type: number
-          format: number
-          example: 1694757010
   securitySchemes:
     APIKeyAuth:
       type: apiKey

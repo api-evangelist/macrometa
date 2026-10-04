@@ -580,13 +580,6 @@ paths:
                 $ref: '#/components/schemas/headers/x-gdn-requestid'
 components:
   schemas:
-    headers:
-      x-gdn-region:
-        description: The federation's region hostname that served the request.
-        type: string
-      x-gdn-requestid:
-        description: A unique request ID for each API request.
-        type: string
     example_operation_success_rc_204_delete_stream_worker:
       properties:
         code:
@@ -601,23 +594,7 @@ components:
           description: A message created for this error.
           type: string
           example: Successfully removed stream application
-    stream_app_query_request:
-      type: object
-      properties:
-        query:
-          type: string
-          example: for d in testCollection return d
-    stream_app_request:
-      type: object
-      properties:
-        definition:
-          type: string
-        regions:
-          type: array
-          uniqueItems: true
-          items:
-            type: string
-    stream_app_response_container:
+    get_all_stream_apps_response:
       type: object
       properties:
         code:
@@ -631,24 +608,12 @@ components:
         streamApps:
           type: array
           items:
-            $ref: '#/components/schemas/stream_app_response'
-    error_example_rc_422:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 422
-        error:
-          description: Flag if there is an error in response. *True* for this response.
-          type: boolean
-          example: true
-        errorMessage:
-          description: A message created for this error.
-          type: string
-          example: Error message
-      required:
-      - error
+            $ref: '#/components/schemas/stream_app_information'
+    stream_app_validate_request:
       type: object
+      properties:
+        definition:
+          type: string
     error_example_rc_404:
       properties:
         code:
@@ -670,17 +635,7 @@ components:
       required:
       - error
       type: object
-    sample_stream_app_information:
-      type: object
-      properties:
-        name:
-          type: string
-          example: stream_app1
-        definition:
-          type: string
-        description:
-          type: string
-    get_all_stream_apps_response:
+    stream_app_response_container:
       type: object
       properties:
         code:
@@ -694,22 +649,14 @@ components:
         streamApps:
           type: array
           items:
-            $ref: '#/components/schemas/stream_app_information'
-    stream_app_http_source_request:
-      type: object
-      properties:
-        param1:
-          type: string
-          example: string
-    stream_app_query_response:
-      type: object
-      properties:
-        records:
-          type: array
-          items:
-            type: array
-            items:
-              type: object
+            $ref: '#/components/schemas/stream_app_response'
+    headers:
+      x-gdn-region:
+        description: The federation's region hostname that served the request.
+        type: string
+      x-gdn-requestid:
+        description: A unique request ID for each API request.
+        type: string
     stream_app_information:
       type: object
       properties:
@@ -727,6 +674,23 @@ components:
         isActive:
           type: boolean
           example: false
+    error_example_rc_422:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 422
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+      required:
+      - error
+      type: object
     stream_app_response:
       type: object
       properties:
@@ -744,6 +708,82 @@ components:
         isActive:
           type: boolean
           example: false
+    publish_http_source_example_rc_202:
+      properties:
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        code:
+          description: The generated response code.
+          type: integer
+          example: 202
+        result:
+          type: object
+    stream_app_response_container_201:
+      type: object
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 201
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        streamApps:
+          type: array
+          items:
+            $ref: '#/components/schemas/stream_app_response'
+    stream_app_request:
+      type: object
+      properties:
+        definition:
+          type: string
+        regions:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+    example_operation_success_rc_200_validate_stream_worker:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Successfully validated stream application
+    sample_stream_app_information:
+      type: object
+      properties:
+        name:
+          type: string
+          example: stream_app1
+        definition:
+          type: string
+        description:
+          type: string
+    get_all_sample_stream_apps_response:
+      type: object
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        streamAppSamples:
+          type: array
+          items:
+            $ref: '#/components/schemas/sample_stream_app_information'
     error_example_rc_409:
       properties:
         code:
@@ -765,67 +805,6 @@ components:
       required:
       - error
       type: object
-    stream_app_response_container_201:
-      type: object
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 201
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        streamApps:
-          type: array
-          items:
-            $ref: '#/components/schemas/stream_app_response'
-    stream_app_validate_request:
-      type: object
-      properties:
-        definition:
-          type: string
-    publish_http_source_example_rc_202:
-      properties:
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        code:
-          description: The generated response code.
-          type: integer
-          example: 202
-        result:
-          type: object
-    example_operation_success_rc_200_validate_stream_worker:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 200
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        errorMessage:
-          description: A message created for this error.
-          type: string
-          example: Successfully validated stream application
-    get_all_sample_stream_apps_response:
-      type: object
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 200
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        streamAppSamples:
-          type: array
-          items:
-            $ref: '#/components/schemas/sample_stream_app_information'
     error_example_rc_400:
       properties:
         code:
@@ -847,6 +826,27 @@ components:
       required:
       - error
       type: object
+    stream_app_http_source_request:
+      type: object
+      properties:
+        param1:
+          type: string
+          example: string
+    stream_app_query_response:
+      type: object
+      properties:
+        records:
+          type: array
+          items:
+            type: array
+            items:
+              type: object
+    stream_app_query_request:
+      type: object
+      properties:
+        query:
+          type: string
+          example: for d in testCollection return d
   requestBodies:
     stream_app_request:
       content:

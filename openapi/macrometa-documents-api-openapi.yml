@@ -1292,6 +1292,28 @@ paths:
       - Documents
 components:
   schemas:
+    examples_id_key_rev:
+      properties:
+        _id:
+          description: ID of the collection.
+          type: string
+          example: test/foo
+        _key:
+          description: _key details of collection.
+          type: string
+          example: foo
+        _rev:
+          description: _rev details of collection.
+          type: string
+          example: _dPRuHxe--_
+      type: object
+    headers:
+      x-gdn-region:
+        description: The federation's region hostname that served the request.
+        type: string
+      x-gdn-requestid:
+        description: A unique request ID for each API request.
+        type: string
     document_get_412:
       properties:
         code:
@@ -1312,7 +1334,7 @@ components:
           example: '8753101'
         _rev:
           example: _dpDlw6W--_
-    examples_id_key_rev_data:
+    examples_id_key_rev_oldrev:
       properties:
         _id:
           description: ID of the collection.
@@ -1326,43 +1348,21 @@ components:
           description: _rev details of collection.
           type: string
           example: _dPRuHxe--_
-        data:
-          description: data in record.
+        _oldRev:
+          description: previous revision of collection.
           type: string
-          example: data1
+          example: _dP34awxe--_
       type: object
     examples_id_key_rev_array:
       type: array
       items:
         $ref: '#/components/schemas/examples_id_key_rev'
-    headers:
-      x-gdn-region:
-        description: The federation's region hostname that served the request.
-        type: string
-      x-gdn-requestid:
-        description: A unique request ID for each API request.
-        type: string
-    examples_id_key_rev:
-      properties:
-        _id:
-          description: ID of the collection.
-          type: string
-          example: test/foo
-        _key:
-          description: _key details of collection.
-          type: string
-          example: foo
-        _rev:
-          description: _rev details of collection.
-          type: string
-          example: _dPRuHxe--_
-      type: object
-    error_example_rc_409:
+    error_example_rc_400:
       properties:
         code:
           description: HTTP response code.
           type: integer
-          example: 409
+          example: 400
         error:
           description: Flag if there is an error in response. *True* for this response.
           type: boolean
@@ -1374,7 +1374,7 @@ components:
         errorNum:
           description: Error number returned from the database.
           type: integer
-          example: 581
+          example: 102020
       required:
       - error
       type: object
@@ -1399,7 +1399,28 @@ components:
       required:
       - error
       type: object
-    examples_id_key_rev_oldrev:
+    error_example_rc_409:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 409
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
+      type: object
+    examples_id_key_rev_data:
       properties:
         _id:
           description: ID of the collection.
@@ -1413,31 +1434,10 @@ components:
           description: _rev details of collection.
           type: string
           example: _dPRuHxe--_
-        _oldRev:
-          description: previous revision of collection.
+        data:
+          description: data in record.
           type: string
-          example: _dP34awxe--_
-      type: object
-    error_example_rc_400:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 400
-        error:
-          description: Flag if there is an error in response. *True* for this response.
-          type: boolean
-          example: true
-        errorMessage:
-          description: A message created for this error.
-          type: string
-          example: Error message
-        errorNum:
-          description: Error number returned from the database.
-          type: integer
-          example: 102020
-      required:
-      - error
+          example: data1
       type: object
   securitySchemes:
     ApiKeyAuth:

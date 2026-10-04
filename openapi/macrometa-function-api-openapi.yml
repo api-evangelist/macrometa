@@ -1537,115 +1537,6 @@ paths:
     - url: https://demofaas.paas.macrometa.io
 components:
   schemas:
-    error_example_rc_400:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 400
-        error:
-          description: Flag if there is an error in response. *True* for this response.
-          type: boolean
-          example: true
-        errorMessage:
-          description: A message created for this error.
-          type: string
-          example: Error message
-        errorNum:
-          description: Error number returned from the database.
-          type: integer
-          example: 102020
-      required:
-      - error
-      type: object
-    set_function_metadata_example_rc_201:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 201
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        result:
-          description: Flag for if the metadata for edge function is set successfully.
-          type: boolean
-          example: true
-    headers:
-      x-gdn-region:
-        description: The federation's region hostname that served the request.
-        type: string
-      x-gdn-requestid:
-        description: A unique request ID for each API request.
-        type: string
-    function_worker_metadata:
-      properties:
-        type:
-          type: string
-          example: akamai
-          description: Type of the edge function.
-          enum:
-          - akamai
-          - macrometa
-        accessToken:
-          type: string
-          example: 66c6c8a1d7112066cbd1905cb909bbe1e29ae730f7873b4ff35afe286
-          description: Akamai access token.
-        baseUri:
-          type: string
-          example: something.akamai.com
-          description: Host name of the Akamai edge worker.
-        clientSecret:
-          type: string
-          example: 86c6c8a1d7112066cbd1905cb909bbe1e29ae730f7873b4ff35afe286
-          description: Akamai client secret.
-        clientToken:
-          type: string
-          example: 96c6c8a1d7112066cbd1905cb909bbe1e29ae730f7873b4ff35afe286
-          description: Akamai client token.
-        resourceTierId:
-          type: string
-          description: Resource tier identifier.
-          example: '201'
-        groupId:
-          type: string
-          description: Group identifier.
-          example: '221222'
-        hostName:
-          type: string
-          description: Edge function hostname.
-          example: macrometa-akamai-ew.macrometa.io
-      required:
-      - type
-      - accessToken
-      - clientSecret
-      - baseUri
-      - clientToken
-      - resourceTierId
-      - groupId
-      - hostName
-      type: object
-    generate_edge_worker_from_query_worker_rc_200:
-      type: object
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 202
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        result:
-          items:
-            properties:
-              message:
-                type: string
-                example: The edge worker will be generated and activated shortly.
-                description: Success message.
-            type: object
-          type: array
     error_example_rc_403:
       properties:
         code:
@@ -1666,44 +1557,6 @@ components:
           example: 581
       required:
       - error
-      type: object
-    modify_function_worker_metadata:
-      properties:
-        type:
-          type: string
-          example: akamai
-          description: Type of the edge function.
-          enum:
-          - akamai
-          - macrometa
-        accessToken:
-          type: string
-          example: 66c6c8a1d7112066cbd1905cb909bbe1e29ae730f7873b4ff35afe286
-          description: Akamai access token.
-        baseUri:
-          type: string
-          example: something.akamai.com
-          description: Host name of the Akamai edge worker.
-        clientSecret:
-          type: string
-          example: 86c6c8a1d7112066cbd1905cb909bbe1e29ae730f7873b4ff35afe286
-          description: Akamai client secret.
-        clientToken:
-          type: string
-          example: 96c6c8a1d7112066cbd1905cb909bbe1e29ae730f7873b4ff35afe286
-          description: Akamai client token.
-        resourceTierId:
-          type: string
-          description: Resource tier identifier.
-          example: '201'
-        groupId:
-          type: string
-          description: Group identifier.
-          example: '221222'
-        hostName:
-          type: string
-          description: Edge function hostname.
-          example: macrometa-akamai-ew.macrometa.io
       type: object
     edge_worker_rc_200:
       type: object
@@ -1774,11 +1627,61 @@ components:
                 example: 'No'
                 description: If yes, then pending activation.
           type: array
+    headers:
+      x-gdn-region:
+        description: The federation's region hostname that served the request.
+        type: string
+      x-gdn-requestid:
+        description: A unique request ID for each API request.
+        type: string
     invoke_function_worker_rc_200:
       description: Array of key value pairs.
       example:
       - key: value
       type: object
+    generate_edge_worker_from_query_worker_rc_200:
+      type: object
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 202
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          items:
+            properties:
+              message:
+                type: string
+                example: The edge worker will be generated and activated shortly.
+                description: Success message.
+            type: object
+          type: array
+    error_example_rc_400:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 400
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 102020
+      required:
+      - error
+      type: object
+    list_edge_worker_rc_200:
+      $ref: '#/components/schemas/edge_worker_rc_200'
     error_example_rc_404:
       properties:
         code:
@@ -1800,6 +1703,20 @@ components:
       required:
       - error
       type: object
+    set_function_metadata_example_rc_201:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 201
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          description: Flag for if the metadata for edge function is set successfully.
+          type: boolean
+          example: true
     error_example_rc_401:
       properties:
         code:
@@ -1821,8 +1738,53 @@ components:
       required:
       - error
       type: object
-    list_edge_worker_rc_200:
-      $ref: '#/components/schemas/edge_worker_rc_200'
+    function_worker_metadata:
+      properties:
+        type:
+          type: string
+          example: akamai
+          description: Type of the edge function.
+          enum:
+          - akamai
+          - macrometa
+        accessToken:
+          type: string
+          example: 66c6c8a1d7112066cbd1905cb909bbe1e29ae730f7873b4ff35afe286
+          description: Akamai access token.
+        baseUri:
+          type: string
+          example: something.akamai.com
+          description: Host name of the Akamai edge worker.
+        clientSecret:
+          type: string
+          example: 86c6c8a1d7112066cbd1905cb909bbe1e29ae730f7873b4ff35afe286
+          description: Akamai client secret.
+        clientToken:
+          type: string
+          example: 96c6c8a1d7112066cbd1905cb909bbe1e29ae730f7873b4ff35afe286
+          description: Akamai client token.
+        resourceTierId:
+          type: string
+          description: Resource tier identifier.
+          example: '201'
+        groupId:
+          type: string
+          description: Group identifier.
+          example: '221222'
+        hostName:
+          type: string
+          description: Edge function hostname.
+          example: macrometa-akamai-ew.macrometa.io
+      required:
+      - type
+      - accessToken
+      - clientSecret
+      - baseUri
+      - clientToken
+      - resourceTierId
+      - groupId
+      - hostName
+      type: object
     function_worker_metadata_rc_200:
       properties:
         code:
@@ -1881,6 +1843,44 @@ components:
                 example: macrometa-akamai-ew.macrometa.io
             type: object
           type: array
+    modify_function_worker_metadata:
+      properties:
+        type:
+          type: string
+          example: akamai
+          description: Type of the edge function.
+          enum:
+          - akamai
+          - macrometa
+        accessToken:
+          type: string
+          example: 66c6c8a1d7112066cbd1905cb909bbe1e29ae730f7873b4ff35afe286
+          description: Akamai access token.
+        baseUri:
+          type: string
+          example: something.akamai.com
+          description: Host name of the Akamai edge worker.
+        clientSecret:
+          type: string
+          example: 86c6c8a1d7112066cbd1905cb909bbe1e29ae730f7873b4ff35afe286
+          description: Akamai client secret.
+        clientToken:
+          type: string
+          example: 96c6c8a1d7112066cbd1905cb909bbe1e29ae730f7873b4ff35afe286
+          description: Akamai client token.
+        resourceTierId:
+          type: string
+          description: Resource tier identifier.
+          example: '201'
+        groupId:
+          type: string
+          description: Group identifier.
+          example: '221222'
+        hostName:
+          type: string
+          description: Edge function hostname.
+          example: macrometa-akamai-ew.macrometa.io
+      type: object
     FunctionDataForm:
       type: object
       required:

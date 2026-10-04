@@ -133,17 +133,6 @@ paths:
       - api_key: []
 components:
   schemas:
-    SubscribeRequest:
-      type: object
-      required:
-      - type
-      - filters
-      properties:
-        filters:
-          $ref: '#/components/schemas/FiltersRequest'
-        type:
-          type: string
-          description: The type of events to subscribe to. It can be local, global or collection
     FiltersRequest:
       type: object
       description: Define the event data to be recieved via the stream based on a specific criteria. Refer to [**Event delivery filters guide**](https://www.macrometa.com/docs/photoniq/event-delivery/event-delivery-filters) for more details.
@@ -164,6 +153,17 @@ components:
           example: 'FALSE'
         queries:
           type: string
+    SubscribeRequest:
+      type: object
+      required:
+      - type
+      - filters
+      properties:
+        filters:
+          $ref: '#/components/schemas/FiltersRequest'
+        type:
+          type: string
+          description: The type of events to subscribe to. It can be local, global or collection
   securitySchemes:
     api_key:
       type: apiKey
