@@ -24,3 +24,16 @@ plans:
   period: none
   included_quota: Complete access to the Global Data Network - deploy to over 175+ locations around the
     world
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models: []
+  units: []
+  plans:
+  - name: Enterprise
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods:
+    - none
