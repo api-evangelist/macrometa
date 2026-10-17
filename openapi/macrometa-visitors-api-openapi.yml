@@ -43,6 +43,46 @@ paths:
           description: Authorization failure due to invalid authentication credentials.
 components:
   schemas:
+    AllVisitsResponse:
+      type: object
+      properties:
+        visitorId:
+          type: string
+        firstSeenAt:
+          type: string
+          format: date-time
+        lastSeenAt:
+          type: string
+          format: date-time
+        visits:
+          type: array
+          items:
+            $ref: '#/components/schemas/VisitDetail'
+    Confidence:
+      type: object
+      properties:
+        matchScore:
+          type: number
+    VisitDetail:
+      type: object
+      properties:
+        signature:
+          type: string
+        visitId:
+          type: string
+        timestamp:
+          type: number
+          format: date-time
+        platformDetails:
+          $ref: '#/components/schemas/PlatformDetails'
+        incognito:
+          type: boolean
+        ip:
+          type: string
+        url:
+          type: string
+        confidence:
+          $ref: '#/components/schemas/Confidence'
     PlatformDetails:
       type: object
       properties:
@@ -78,46 +118,6 @@ components:
               type: string
         ua:
           type: string
-    VisitDetail:
-      type: object
-      properties:
-        signature:
-          type: string
-        visitId:
-          type: string
-        timestamp:
-          type: number
-          format: date-time
-        platformDetails:
-          $ref: '#/components/schemas/PlatformDetails'
-        incognito:
-          type: boolean
-        ip:
-          type: string
-        url:
-          type: string
-        confidence:
-          $ref: '#/components/schemas/Confidence'
-    AllVisitsResponse:
-      type: object
-      properties:
-        visitorId:
-          type: string
-        firstSeenAt:
-          type: string
-          format: date-time
-        lastSeenAt:
-          type: string
-          format: date-time
-        visits:
-          type: array
-          items:
-            $ref: '#/components/schemas/VisitDetail'
-    Confidence:
-      type: object
-      properties:
-        matchScore:
-          type: number
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

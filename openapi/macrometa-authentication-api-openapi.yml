@@ -98,27 +98,6 @@ components:
       x-gdn-requestid:
         description: A unique request ID for each API request.
         type: string
-    auth_token:
-      properties:
-        email:
-          description: The email of the user for whom we want the auth token.
-          type: string
-          example: joe@foo.com
-        password:
-          description: The user password.
-          type: string
-          example: xxxxx
-        tenant:
-          description: The name of the tenant for whose user we want the auth token.
-          type: string
-          example: foo
-        username:
-          description: The id of the user for whom we want the auth token.
-          type: string
-          example: joe
-      required:
-      - password
-      type: object
     error_example_rc_401:
       properties:
         code:
@@ -139,6 +118,27 @@ components:
           example: '102020'
       required:
       - error
+      type: object
+    auth_token:
+      properties:
+        email:
+          description: The email of the user for whom we want the auth token.
+          type: string
+          example: joe@foo.com
+        password:
+          description: The user password.
+          type: string
+          example: xxxxx
+        tenant:
+          description: The name of the tenant for whose user we want the auth token.
+          type: string
+          example: foo
+        username:
+          description: The id of the user for whom we want the auth token.
+          type: string
+          example: joe
+      required:
+      - password
       type: object
     authentication_examples_rc_200:
       properties:

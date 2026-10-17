@@ -512,70 +512,62 @@ paths:
       - Query Workers
 components:
   schemas:
-    error_example_rc_404:
+    user_queries_update_data_format:
+      description: Specify the query parameters.
       properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 404
-        error:
-          description: Flag if there is an error in response. *True* for this response.
-          type: boolean
-          example: true
-        errorMessage:
-          description: A message created for this error.
-          type: string
-          example: Error message
-        errorNum:
-          description: Error number returned from the database.
-          type: integer
-          example: 581
-      required:
-      - error
-      type: object
-    query_workers_post_restql_execute_rc_200:
-      type: object
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 200
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        hasMore:
-          type: boolean
-          example: true
-        id:
-          type: integer
-          example: 11894969
-        cached:
-          type: boolean
-          example: false
-        extra:
+        parameter:
+          additionalProperties: {}
+          description: bindVars for the query.
           type: object
-          properties:
-            stats:
-              type: array
-              example: []
-              items: {}
-            warnings:
-              type: array
-              example: []
-              items: {}
-        result:
+          example: {}
+        value:
+          description: Value for the query.
+          type: string
+          example: for u in testCollection return u
+        type:
+          $ref: '#/components/schemas/user_queries_data_format_type'
+      required:
+      - value
+      type: object
+    user_queries_import_custom_queries:
+      properties:
+        queries:
+          description: JSON documents embedded into a list.
           type: array
           items:
-            $ref: '#/components/schemas/examples_id_key_rev_data'
-    user_queries_data_format_type:
-      description: Query language.
-      type: string
-      enum:
-      - c8ql
-      - sql
-      default: c8ql
-      example: c8ql
+            type: object
+            properties:
+              name:
+                description: Name for the query.
+                type: string
+                example: testQueryName
+              value:
+                description: Value of the query.
+                type: string
+                example: for u in testCollection return u
+              parameter:
+                additionalProperties: {}
+                description: Query bind parameters as JSON Object.
+                type: object
+                example: {}
+              type:
+                $ref: '#/components/schemas/user_queries_data_format_type'
+            required:
+            - name
+            - value
+        details:
+          description: If *true* extra information for errors will be returned in the result.
+          format: boolean
+          type: boolean
+          default: false
+      type: object
+    headers:
+      x-gdn-region:
+        description: The federation's region hostname that served the request.
+        type: string
+      x-gdn-requestid:
+        description: A unique request ID for each API request.
+        type: string
     error_example_rc_403:
       properties:
         code:
@@ -597,27 +589,27 @@ components:
       required:
       - error
       type: object
-    user_queries_execute_saved_queries:
+    user_queries_create_data_format:
+      description: Specify the query parameters.
       properties:
-        bindVars:
+        name:
+          description: Name for the query.
+          type: string
+          example: workerName
+        parameter:
           additionalProperties: {}
-          description: Specify the bindVars of the query.
+          description: bindVars for the query.
           type: object
           example: {}
-        batchSize:
-          description: The maximum number of documents returned when fetching data from the query.
-          format: int64
-          type: integer
-          default: 100
-          maximum: 1000
+        value:
+          description: Value of the query.
+          type: string
+          example: for u in testCollection return u
+        type:
+          $ref: '#/components/schemas/user_queries_data_format_type'
+      required:
+      - name
       type: object
-    headers:
-      x-gdn-region:
-        description: The federation's region hostname that served the request.
-        type: string
-      x-gdn-requestid:
-        description: A unique request ID for each API request.
-        type: string
     example_import_custom_query_200:
       properties:
         error:
@@ -647,6 +639,139 @@ components:
                   type: array
                   items:
                     $ref: '#/components/schemas/import_query_error_details'
+    user_queries_execute_saved_queries:
+      properties:
+        bindVars:
+          additionalProperties: {}
+          description: Specify the bindVars of the query.
+          type: object
+          example: {}
+        batchSize:
+          description: The maximum number of documents returned when fetching data from the query.
+          format: int64
+          type: integer
+          default: 100
+          maximum: 1000
+      type: object
+    error_example_rc_404:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 404
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 581
+      required:
+      - error
+      type: object
+    user_queries_create_user_queries:
+      properties:
+        query:
+          $ref: '#/components/schemas/user_queries_create_data_format'
+      type: object
+    query_workers_post_restql_rc_200:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 200
+        error:
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        result:
+          properties:
+            userid:
+              description: The userid
+              type: string
+              example: testuser
+            tenant:
+              description: The tenant
+              type: string
+              example: _mm
+            fabric:
+              description: The fabric
+              type: string
+              example: _system
+            name:
+              description: Query name
+              type: string
+              example: testQueryName
+            value:
+              description: The query being saved
+              type: string
+              example: for u in testCollection return u
+            _key:
+              description: The key for this record
+              type: string
+              example: testuser._system.testQueryName
+            type:
+              description: Record Type
+              type: string
+              example: c8ql
+    examples_id_key_rev_data:
+      properties:
+        _id:
+          description: ID of the collection.
+          type: string
+          example: test/foo
+        _key:
+          description: _key details of collection.
+          type: string
+          example: foo
+        _rev:
+          description: _rev details of collection.
+          type: string
+          example: _dPRuHxe--_
+        data:
+          description: data in record.
+          type: string
+          example: data1
+      type: object
+    user_queries_data_format_type:
+      description: Query language.
+      type: string
+      enum:
+      - c8ql
+      - sql
+      default: c8ql
+      example: c8ql
+    user_queries_update_user_queries:
+      properties:
+        query:
+          $ref: '#/components/schemas/user_queries_update_data_format'
+      type: object
+    error_example_rc_400:
+      properties:
+        code:
+          description: HTTP response code.
+          type: integer
+          example: 400
+        error:
+          description: Flag if there is an error in response. *True* for this response.
+          type: boolean
+          example: true
+        errorMessage:
+          description: A message created for this error.
+          type: string
+          example: Error message
+        errorNum:
+          description: Error number returned from the database.
+          type: integer
+          example: 102020
+      required:
+      - error
+      type: object
     query_workers_post_restql_execute_rc_201:
       type: object
       properties:
@@ -691,67 +816,6 @@ components:
           description: The error message
           type: string
           example: The error message
-    user_queries_create_data_format:
-      description: Specify the query parameters.
-      properties:
-        name:
-          description: Name for the query.
-          type: string
-          example: workerName
-        parameter:
-          additionalProperties: {}
-          description: bindVars for the query.
-          type: object
-          example: {}
-        value:
-          description: Value of the query.
-          type: string
-          example: for u in testCollection return u
-        type:
-          $ref: '#/components/schemas/user_queries_data_format_type'
-      required:
-      - name
-      type: object
-    query_workers_post_restql_rc_200:
-      properties:
-        code:
-          description: HTTP response code.
-          type: integer
-          example: 200
-        error:
-          description: Flag if there is an error in response. *False* for this response.
-          type: boolean
-          example: false
-        result:
-          properties:
-            userid:
-              description: The userid
-              type: string
-              example: testuser
-            tenant:
-              description: The tenant
-              type: string
-              example: _mm
-            fabric:
-              description: The fabric
-              type: string
-              example: _system
-            name:
-              description: Query name
-              type: string
-              example: testQueryName
-            value:
-              description: The query being saved
-              type: string
-              example: for u in testCollection return u
-            _key:
-              description: The key for this record
-              type: string
-              example: testuser._system.testQueryName
-            type:
-              description: Record Type
-              type: string
-              example: c8ql
     query_workers_get_restql_user_rc_200:
       type: object
       properties:
@@ -767,105 +831,41 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/examples_id_key_rev_data'
-    user_queries_create_user_queries:
-      properties:
-        query:
-          $ref: '#/components/schemas/user_queries_create_data_format'
+    query_workers_post_restql_execute_rc_200:
       type: object
-    user_queries_update_data_format:
-      description: Specify the query parameters.
-      properties:
-        parameter:
-          additionalProperties: {}
-          description: bindVars for the query.
-          type: object
-          example: {}
-        value:
-          description: Value for the query.
-          type: string
-          example: for u in testCollection return u
-        type:
-          $ref: '#/components/schemas/user_queries_data_format_type'
-      required:
-      - value
-      type: object
-    user_queries_update_user_queries:
-      properties:
-        query:
-          $ref: '#/components/schemas/user_queries_update_data_format'
-      type: object
-    user_queries_import_custom_queries:
-      properties:
-        queries:
-          description: JSON documents embedded into a list.
-          type: array
-          items:
-            type: object
-            properties:
-              name:
-                description: Name for the query.
-                type: string
-                example: testQueryName
-              value:
-                description: Value of the query.
-                type: string
-                example: for u in testCollection return u
-              parameter:
-                additionalProperties: {}
-                description: Query bind parameters as JSON Object.
-                type: object
-                example: {}
-              type:
-                $ref: '#/components/schemas/user_queries_data_format_type'
-            required:
-            - name
-            - value
-        details:
-          description: If *true* extra information for errors will be returned in the result.
-          format: boolean
-          type: boolean
-          default: false
-      type: object
-    error_example_rc_400:
       properties:
         code:
           description: HTTP response code.
           type: integer
-          example: 400
+          example: 200
         error:
-          description: Flag if there is an error in response. *True* for this response.
+          description: Flag if there is an error in response. *False* for this response.
+          type: boolean
+          example: false
+        hasMore:
           type: boolean
           example: true
-        errorMessage:
-          description: A message created for this error.
-          type: string
-          example: Error message
-        errorNum:
-          description: Error number returned from the database.
+        id:
           type: integer
-          example: 102020
-      required:
-      - error
-      type: object
-    examples_id_key_rev_data:
-      properties:
-        _id:
-          description: ID of the collection.
-          type: string
-          example: test/foo
-        _key:
-          description: _key details of collection.
-          type: string
-          example: foo
-        _rev:
-          description: _rev details of collection.
-          type: string
-          example: _dPRuHxe--_
-        data:
-          description: data in record.
-          type: string
-          example: data1
-      type: object
+          example: 11894969
+        cached:
+          type: boolean
+          example: false
+        extra:
+          type: object
+          properties:
+            stats:
+              type: array
+              example: []
+              items: {}
+            warnings:
+              type: array
+              example: []
+              items: {}
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/examples_id_key_rev_data'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
